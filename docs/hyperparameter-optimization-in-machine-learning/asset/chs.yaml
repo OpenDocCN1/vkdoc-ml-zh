@@ -1,0 +1,3146 @@
+- '
+
+
+  ![](img/978-1-4842-6579-6_CoverFigure.jpg)
+
+
+  ISBN 978-1-4842-6578-9e-ISBN 978-1-4842-6579-6 [`doi.org/10.1007/978-1-4842-6579-6`](https://doi.org/10.1007/978-1-4842-6579-6)
+  © Tanay Agrawal 2021 Apress Standard 本出版物中使用的通用描述性名称、注册商标名称、商标、服务标志等，即使没有明确声明，也不意味着这些名称不受相关保护性法律和法规的约束，因此可自由使用。出版商、作者和编辑假定本书在出版之日所提供的信息和建议是真实准确的。出版商、作者或编辑均不对本书所含材料或可能存在的任何错误或遗漏提供明示或暗示的担保。出版商对已出版地图中的管辖权主张和机构归属保持中立。本书通过
+  Springer Science+Business Media New York 在全球图书贸易中发行，地址：1 New York Plaza, Suite 4600,
+  New York, NY 10004-1562, USA。电话：1-800-SPRINGER，传真：(201) 348-4505，电子邮件：orders-ny@springer-sbm.com，或访问
+  https://www.springeronline.com。Apress Media, LLC 是一家加利福尼亚有限责任公司，其唯一成员（所有者）是 Springer
+  Science + Business Media Finance Inc (SSBM Finance Inc)。SSBM Finance Inc 是一家特拉华州公司。
+
+
+  *谨以此书献给我的父母和祖父母。*
+
+
+  序言 1
+
+
+  我必须承认，在我训练第一个机器学习模型时，手动调整参数是我真正享受的事情。我会更改一个参数，运行训练脚本，然后等待评估分数是否有所提升。这是一种小小的罪恶快感。
+
+
+  但随着我在机器学习领域投入更多时间，我意识到还有其他更有影响力的领域可以投入精力。我意识到我可以（也应该）将参数调整工作外包出去。
+
+
+  我了解了随机搜索，并开始在项目中使用它。在某个时候，我觉得自己可以做得比随机搜索更好，于是开始阅读关于更高级的超参数优化算法和库的资料。
+
+
+  我找到的许多文章都相当肤浅和基础，但我记得读过一篇关于 Hyperopt（最流行的超参数优化库之一）的深入、实践性强且易于理解的文章。它是由 Tanay Agrawal
+  撰写的。那篇文章可能仍然是我读过关于这个主题最有价值的文章之一。我在一篇博客文章中提到了它，我们就是这样认识的。
+
+
+  当 Tanay 告诉我他正在写一本关于超参数优化的书时，我毫不犹豫地提出审阅。说实话，我真的很想比别人先读到它！令我惊讶的是，Tanay 同意了，我也得以在这里那里提了一些意见。
+
+
+  这本书真正深入探讨了超参数优化的理论与实践。我非常喜欢它如何深入解释理论，但又不过于复杂。实践示例围绕当今广泛使用的库和框架展开，这使得这本书与时俱进，最重要的是，非常实用。
+
+
+  我向任何希望超越基础知识、学习超参数优化的“为什么”、“怎么做”和“是什么”的机器学习从业者推荐这本书。
+
+
+  > Jakub Czakon
+
+
+  > 高级数据科学家
+
+
+  > Neptune.ai
+
+
+  序言 2
+
+
+  在这本书中，Tanay 带你踏上一段互动之旅——从最字面的意义上说，因为每一行代码都可以在笔记本中运行——深入探索超参数的奥秘。它帮助任何人快速上手，使用他们选择的任何库来调整和改进他们的深度学习项目。
+
+
+  作者以透彻且易于理解的方式，精心涵盖了机器学习模型中超参数的内部工作原理，这将使你能够理解并使用不同的库在此基础上进行构建。这本书还揭开了最黑的黑匣子：自动化机器学习中的超参数优化。
+
+
+  这是一本关于复杂主题的友好指南，同时充满了即使是高级从业者也会喜欢的尖端精华内容。
+
+
+  > Akruti Acharya
+
+
+  > 数据科学家
+
+
+  > Curl HG
+
+
+  引言
+
+
+  在构建机器学习模型时，选择正确的超参数是数据科学从业者面临的最大问题之一。本书是一本超参数优化（HPO）指南。它从*超参数*最基本的定义开始，一直带你到使用先进的
+  HPO 技术构建你自己的 AutoML 脚本。本书面向学生和数据科学专业人士。
+
+
+  本书共五章。第 1 章帮助你理解超参数如何影响模型构建的整体过程。它阐述了 HPO 的重要性。第 2 章介绍了基本且易于实现的 HPO 方法。第 3 章带你了解应对时间和内存限制的各种技术。第
+  4 章和第 5 章讨论了贝叶斯优化、相关库和 AutoML。
+
+
+  本书旨在让读者以直观且实用的方式理解 HPO 概念，并为每个部分提供代码实现。希望你喜欢。
+
+
+  致谢
+
+
+  我要感谢 Kailash Ahirwar（MateLabs 首席技术官）作为我的优秀导师。非常感谢 MateLabs 和 Curl HG 团队的持续支持。我感谢
+  Akruti Acharya 和 Jakub Czakon 在撰写本书时提供的富有洞察力的意见。我还要感谢 Paankhi Agrawal、Sahil Sharma、H.-Y.
+  Amanieu 博士、Anubhav Kesari、Abhishek Kumar、Amog Chandrashekar 等人。没有家人的爱与鼓励，这本书是不可能完成的。
+
+
+  关于作者 关于技术审校
+
+
+  '
+- "# 1. 超参数简介\n\n人工智能（AI）突然无处不在，从商业分析、医疗保健、汽车工业到你在日常生活中可能享受的各种平台，如社交媒体、游戏和广泛的娱乐产业，都在发生变革。计划在视频流应用上看部电影，但决定不了看哪部？在\
+  \ AI 的帮助下，你最终可能会观看基于你过去电影选择推荐的一部。\n\n机器学习是 AI 的一个子集，涉及算法从以往经验中学习。在某些情况下，机器学习已经达到了人类水平的准确性。例如，最先进的深度神经网络（DNN）在某些任务（如图像分类、目标检测等）上表现与人类一样好，尽管这与模拟人类智能不同（但这是一步）。\n\
+  \n在机器学习算法中，调整超参数是构建高效模型的重要方面之一。在本章中，你将了解*超参数*一词的含义，并学习超参数如何影响构建机器学习模型的整体过程。\n\n\n\
+  \n## 机器学习简介\n\n*机器学习*是研究无需明确定义执行代码，而是利用数据进行学习的算法。机器学习使算法能够在无需人工干预的情况下自主学习。\n\n计算机科学家、时任卡内基梅隆大学教授的汤姆·M·米切尔对机器学习定义如下：“如果计算机程序在任务*T*中的性能（由性能度量*P*衡量）随着经验*E*而提升，则称该程序从经验*E*中学习。”\n\
+  \n机器学习算法根据所需解决问题的类型可分为多个子类。在此我将介绍三种主要类型：\n\n![../images/494613_1_En_1_Chapter/494613_1_En_1_Fig1_HTML.jpg](img/494613_1_En_1_Fig1_HTML.jpg)\n\
+  \n图 1-1-1\n\n监督式机器学习（左）与无监督式机器学习（右）示例\n\n*   *监督式机器学习算法*：提供带标签的数据，我们基于这些数据构建模型，以根据变量预测此类标签。例如，假设你想购买一艘宇宙飞船。多个因素会帮助你决定购买哪艘飞船：成本、飞船尺寸、建造质量、是否配备超光速引擎、武器系统等等。现在我们拥有数百艘飞船的数据，包含这些特征信息及其价格，因此我们构建一个模型来预测价格。这属于回归问题。*回归问题*具有连续的目标值，如果目标值是离散的，我们则称之为*分类问题*。第三类问题涉及时间戳，即*时间序列预测*，其中下一个数据点在一定程度上依赖于先前信息，因此算法需要记住先前数据点的信息。图\
+  \ 1-1-1 左侧的图像是一个分类问题的示例。我们需要带标签的数据才能学习如何在它们之间画出分隔线。\n\n*   *无监督式机器学习算法*：这类问题没有目标值。假设你需要根据特征将假设的宇宙飞船进行聚类分组，你会使用*聚类算法*来完成。无监督式机器学习用于检测数据集中的模式。你不知道哪个簇对应什么，但你知道同一簇中的所有飞船彼此相似；图\
+  \ 1-1-1 右侧的图像展示了一个示例。\n\n*   *强化机器学习算法*：强化机器学习算法从环境中学习；如果表现良好，它会获得奖励，目标是最大化奖励。例如，考虑\
+  \ Chrome 浏览器中的“奔跑恐龙”游戏（访问 `chrome://dino/` 并按空格键）。恐龙不断向障碍物奔跑。为了提高分数，你必须在精确的时间按下空格键，让恐龙跳过障碍物。这里的分数就是奖励，跳跃则是需要在正确时机决定的变量。在类似问题中，我们使用强化机器学习算法。*Q-learning\
+  \ 算法*是强化机器学习算法的一个例子。强化机器学习最出色的应用之一是通过试错学习行走的机器人。\n\n机器学习远不止于此。在深入探讨超参数及其优化方法之前，你需要熟悉机器学习的基础知识。如果你是机器学习新手，或者想重温基本概念，请参考附录\
+  \ I 和附录 II。附录 I 涵盖了机器学习的实际应用及其一些基本方面。附录 II 简要介绍了全连接神经网络以及用于实现的 PyTorch 和 Keras 框架。\n\
+  \n\n\n## 理解超参数\n\n在处理机器学习算法时，存在两种变量，如图 1-2-1 所示：\n\n![../images/494613_1_En_1_Chapter/494613_1_En_1_Fig2_HTML.jpg](img/494613_1_En_1_Fig2_HTML.jpg)\n\
+  \n图 1-2-1\n\n内部的方框代表模型参数，机器学习算法在此处运行。外部的方框代表超参数，我们必须在算法开始训练之前设置好它们。\n\n*   ***参数***：这些是算法根据所提供的数据集进行调整的参数（你对此调整过程没有发言权）。\n\
+  *   ***超参数***：这些是你在开始训练之前手动设置的更高级别的参数，其设置依据包括数据特征以及算法的学习能力等属性。\n\n我将以一个机器学习算法为例，向你展示参数与超参数之间的区别。我们以一个非常基础的算法——线性回归为例。\n\
+  \n线性回归中的假设函数如下：\n\n![$$ f\\left(\\varTheta, {\\varTheta}_c\\right)=\\varTheta .x+{\\\
+  varTheta}_c $$](img/494613_1_En_1_Chapter_TeX_Equ1.png)\n\n（公式 1.2.1）\n\n这里，*x*\
+  \ 和 Θ 是向量，*x* 是特征向量，Θ 是分配给每个特征的权重，而 Θ[c] 是一个常数偏置。\n\n我们以经典的房价预测问题为例。房价取决于某些因素，包括房屋面积、卧室数量、卫生间数量、所在地区的犯罪率、与公共交通（公交站、机场、火车站）的距离、学区、与最近医院的距离等等。所有这些都可以视为特征；也就是公式\
+  \ 1.2.1 中假设函数里的 *x* 向量。例如，随着卧室数量增加和房屋面积增大，房价会上升；这些特征将具有正的权重（Θ）。而距离学校和医院越远、社区犯罪率越高，房价则会下降；这些特征将具有负的\
+  \ Θ。在公式 1.2.1 中，f(Θ, Θ[c]) 给出了房价。\n\n我们可以使用优化算法，根据先前的观测数据为每个特征找到最佳的 Θ 值。因此，Θ 向量由优化算法（例如梯度下降）控制和调整。这些权重就是***参数***。\n\
+  \n接下来，我们讨论一下优化函数——梯度下降，这将有助于你理解超参数。\n\n我们首先为参数分配一些随机数（即*权重*）。对于一个观测样本，如果我们有向量 *x*（每个特征都有数值）和向量\
+  \ Θ（每个权重都有随机数值），通过使用公式 1.2.1，我们得到 f(Θ, Θ[c]) 的值。这将是我们预测的值，由于权重是随机的，这个预测值将是一个随机值（p[1]′）。同时，我们拥有房价的真实值（p[1]）。\n\
+  \n我们可以计算差值 C[1]（对于第一个观测样本），即 |p[1]-p[1]′|。这是一个我们需要减小的损失。类似地，如果我们计算所有观测样本的损失（C）之和的平均值：\n\
+  \n![$$ C\\left(\\varTheta, \\varTheta c\\right)=\\left(1/n\\right)\\sum \\mid {p}_i-{p_i}^{'}\\\
+  mid $$](img/494613_1_En_1_Chapter_TeX_Equ2.png)\n\n（公式 1.2.2）\n\n公式 1.2.2 被称为损失函数，优化函数的目标是减小\
+  \ C 的值，这样我们就能给出更准确的预测。损失函数依赖于权重和偏置，如图 1-2-2 所示。\n\n![../images/494613_1_En_1_Chapter/494613_1_En_1_Fig3_HTML.jpg](img/494613_1_En_1_Fig3_HTML.jpg)\n\
+  \n图 1-2-2\n\n三维空间中的损失曲线，x 轴和 y 轴为权重，z 轴为损失\n\n图 1-2-2 中的三维曲线可能是损失函数的几种表现形式。请记住，我们是从随机值开始初始化权重和偏置的；现在我们需要改变这些值，使得损失趋向其最小值。根据微积分，C\
+  \ 的变化如下：\n\n![$$ \\varDelta C\\cong \\sum \\left(\\delta C/{\\delta \\varTheta}_i\\\
+  right)\\ast {\\varDelta \\varTheta}_i $$](img/494613_1_En_1_Chapter_TeX_Equ3.png)\n\
+  \n（公式 1.2.3）\n\n*i* = {0, *n*}，其中 Θ[0] 为 Θ[c]\n\n我们将 [(δC/δΘ[0]), (δC/δΘ[1])...]\
+  \ 表示为向量，将 [ΔΘ[0], ΔΘ[1]...] 表示为向量 ΔΘ；因此：\n\n![$$ \\varDelta C\\cong \\ddot{\\nabla}C\\\
+  ast \\varDelta \\Theta $$](img/494613_1_En_1_Chapter_TeX_Equ4.png)\n\n（公式 1.2.4）\n\
+  \n但假设如下：\n\n![$$ \\varDelta \\Theta =-\\alpha \\ddot{\\nabla}C $$](img/494613_1_En_1_Chapter_TeX_Equ5.png)\n\
+  \n（公式 1.2.5）\n\n将其代入公式 1.2.4，我们得到如下结果：\n\n![$$ \\varDelta C\\cong -\\alpha \\ast\
+  \ {\\left(\\ddot{\\nabla}C\\right)}² $$](img/494613_1_En_1_Chapter_TeX_Equa.png)\n\
+  \n这里，由于 α 是一个正数，损失的变化将始终为负，而我们希望损失始终为负。因此公式 1.2.5 成立。\n\n所以，根据公式 1.2.5，我们得到：\n\n\
+  ![$$ \\left({\\varTheta_i}^{'}-{\\varTheta}_i\\right)=-\\alpha \\ast \\delta C/{\\\
+  delta \\varTheta}_i $$](img/494613_1_En_1_Chapter_TeX_Equb.png)\n\n![$$ \\therefore\
+  \ {\\varTheta_i}^{'}=\\kern0.5em {\\varTheta}_i-\\alpha \\ast \\delta C/{\\delta\
+  \ \\varTheta}_i $$](img/494613_1_En_1_Chapter_TeX_Equ6.png)\n\n（公式 1.2.6）\n\n其中\
+  \ Θ[i]′ 是权重 Θ[i] 更新后的新值。在公式 1.2.6 中，权重 Θ[i]′ 的更新值依赖于权重的先前值（Θ[i]）、梯度（δC/δΘ[i]）以及一个正数\
+  \ α；这里的 α 是梯度下降的超参数之一。它控制着算法的性能。对于每个观测样本，我们运行这个更新方程，在改变权重值的同时减小损失，最终使损失函数达到最小值。\n\
+  \n\n\n## 超参数优化的必要性\n\n在上一节中，我们在公式 1.2.6 中使用了一个正数 \U0001D6FC 来控制算法。这个 \U0001D6FC\
+  \ 在梯度下降算法中被称为*学习率*。它控制着损失函数达到最小值时的速率。图 1-3-1、1-3-2 和 1-3-3 展示了如下所述的情况。\n\n![../images/494613_1_En_1_Chapter/494613_1_En_1_Fig6_HTML.jpg](img/494613_1_En_1_Fig6_HTML.jpg)\n\
+  \n图 1-3-3\n\n\U0001D6FC 的最优值\n\n![../images/494613_1_En_1_Chapter/494613_1_En_1_Fig5_HTML.jpg](img/494613_1_En_1_Fig5_HTML.jpg)\n\
+  \n图 1-3-2\n\n\U0001D6FC 的较大值\n\n![../images/494613_1_En_1_Chapter/494613_1_En_1_Fig4_HTML.jpg](img/494613_1_En_1_Fig4_HTML.jpg)\n\
+  \n图 1-3-1\n\n\U0001D6FC 的较小值\n\n在图 1-3-1 中，\U0001D6FC 的值很小；它最终会收敛，但 ΔΘ（即权重的变化）会非常小，以至于需要大量的迭代步数，从而增加了时间。较大的学习率（\U0001D6FC\
+  ）值会导致损失剧烈变化，从而产生过冲并导致发散，如图 1-3-2 所示。然而，如果我们找到 \U0001D6FC 的最优值，就能在更短的时间内收敛且不会过冲，如图\
+  \ 1-3-3 所示。这就是为什么我们需要将 \U0001D6FC 调整到其最高效的值，这个优化过程被称为*超参数调优*。\n\n在更高级的梯度下降算法变体中，我们从较大的步长（即较大的学习率值）开始以节省时间，当接近收敛点时，再减小该值以避免过冲。但此时，减小\
+  \ \U0001D6FC 的因子又成了另一个超参数。所以，现在你明白了调优这些超参数的重要性。\n\n要调优这些超参数，你必须对算法以及这些超参数如何影响性能有很好的理解。即使你打算使用超参数调优算法（将在后续章节介绍），设定一个好的起点和终点也非常重要。这将为你节省大量时间，并提升算法的性能。\n\
+  \n## 算法及其超参数\n\n在本节中，我将讨论一些基本的机器学习算法，以帮助你理解它们的超参数是如何工作的。我将使用 scikit-learn 的约定来讨论这些超参数，但由于它们是通用的，你也可以将它们用于其他实现，甚至是自行实现的算法。我不会深入数学细节，但会提供足够的信息，让你直观地了解它们如何影响算法。在第\
+  \ 2 章中，我们将看到一组糟糕的超参数如何导致模型性能不佳，而一组好的超参数如何创建出优秀的机器学习模型。\n\n### K-近邻算法\n\nK-近邻（KNN）算法既可用作监督学习算法，也可用作无监督学习算法，并可应用于分类、回归、聚类和异常值检测问题。KNN\
+  \ 假设相似的点在空间上更接近，如图 1-4-1 所示。\n\n![../images/494613_1_En_1_Chapter/494613_1_En_1_Fig7_HTML.jpg](img/494613_1_En_1_Fig7_HTML.jpg)\n\
+  \n图 1-4-1\n\n一个二维分类数据集在使用 KNN 时显示的决策边界\n\nK-近邻算法会找到与待预测点最接近的 K 个（最近邻点的数量）已标记样本。这个\
+  \ K 值可以由用户定义。而最近邻的距离可以通过不同的度量来计算，例如欧几里得距离、曼哈顿距离等。为了找到这些最近邻点，会使用诸如 kd-tree 和 ball\
+  \ tree 之类的索引算法。下面我们来讨论这些超参数。\n\n![../images/494613_1_En_1_Chapter/494613_1_En_1_Fig8_HTML.jpg](img/494613_1_En_1_Fig8_HTML.jpg)\n\
+  \n图 1-4-2\n\n上方图像 k=3，下方图像 k=15\n\n*   *K 值（最近邻数量）*：我们设定 K 的值，它是一个正整数，决定了在预测新数据点时，需要考虑的训练数据集中已标记样本的数量。图\
+  \ 1-4-2 展示了增加 K 值如何使边界变得更平滑。而当 k=3 时，边界则更为严格。\n\n*   *权重*：我们可以给予最近邻点相同的优先级，也可以根据它们与查询点的距离来决定其权重；距离越远，权重越小。\n\
+  \n*   *索引算法*：索引算法用于映射最近邻点。由于暴力搜索需要计算数据集中所有数据点对之间的距离，因此我们使用基于树的索引算法，如 kd-tree 和 ball\
+  \ tree。kd-tree 在笛卡尔坐标轴上划分数据，而 ball tree 在嵌套的超球面上划分数据。当维度较高时，ball tree 比 kd-tree\
+  \ 更高效。\n\n*   *距离度量*：需要使用一种度量来计算点之间的距离。它可以是欧几里得距离、曼哈顿距离，或者更高阶的闵可夫斯基距离。\n\n\n\n###\
+  \ 支持向量机\n\n*支持向量机（SVM）* 是一种强大的算法，它能找到一个将不同类别分开的超平面。图 1-4-3 展示了一个示例，其中有两个类别，分别用红色和蓝色表示。分隔它们的黑色直线就是我们的超平面（由于我们在二维空间中可视化，因此这里是一条直线）。SVM\
+  \ 会找到这样一个超平面，使得间隔（两条虚线之间的距离）最大化。\n\n位于虚线附近的数据点被称为*支持向量*。它们对超平面的形成起着至关重要的作用。我们使用拉格朗日乘数法的优化方法来寻找这个超平面。\n\
+  \n![../images/494613_1_En_1_Chapter/494613_1_En_1_Fig9_HTML.jpg](img/494613_1_En_1_Fig9_HTML.jpg)\n\
+  \n图 1-4-3\n\n被超平面分隔的类别\n\n但这是一个线性可分的问题。在现实生活中，数据集往往不是线性可分的。那么，让我们再举一个例子，看看 SVM 在图\
+  \ 1-4-4 所示的示例中会如何工作。\n\n![../images/494613_1_En_1_Chapter/494613_1_En_1_Fig10_HTML.jpg](img/494613_1_En_1_Fig10_HTML.jpg)\n\
+  \n图 1-4-4\n\n包含蓝色和红色两个类别的数据集\n\n图 1-4-4 中的数据不是线性可分的。因此，我们将其投影到更高维度（本例中是三维），如图 1-4-5\
+  \ 所示，现在我们可以应用 SVM 并找到分隔它的平面。\n\n![../images/494613_1_En_1_Chapter/494613_1_En_1_Fig11_HTML.jpg](img/494613_1_En_1_Fig11_HTML.jpg)\n\
+  \n图 1-4-5\n\n数据被投影到更高维度并被一个平面分隔\n\n我们需要找到正确的映射函数来将数据投影到更高维度。这就是不同核函数发挥作用的地方。正确的映射函数可以通过使用正确的核函数来实现，这是\
+  \ SVM 中最关键的超参数之一。\n\n现在让我们讨论不同的超参数：\n\n*   核函数：如前所述，核函数有助于实现正确的映射函数，这对于 SVM 高效运行至关重要。找到合适的核函数降低了寻找映射函数的复杂性；映射函数和核函数之间存在直接的数学关系。图\
+  \ 1-4-4 是一个可以使用径向基函数（RBF）核解决的示例问题。一些广泛使用的核函数包括多项式核、高斯核、Sigmoid 核，当然还有 RBF 核，其中大部分都在\
+  \ scikit-learn 的 SVM 实现中定义（sklearn 也允许你定义自己的核函数）。\n\n*   C：C 是一个正则化参数。它在训练精度和间隔宽度之间进行权衡。C\
+  \ 值减小会导致间隔变大和训练精度降低，反之亦然。\n\n*   Gamma：Gamma (\U0001D6FE) 定义了训练点的影响范围。\U0001D6FE\
+  \ 值越高，意味着训练点的影响范围越小；非常高的值将导致仅影响训练点本身。较低的值影响范围更大；训练点（即支持向量）将对更多的训练集产生影响，因此极低的值将无法有效捕捉数据集的复杂性，最终得到的超平面将等同于一个根据密度区域分隔两个类别的线性超平面。\n\
+  \n    这就在超参数 C 和 Gamma 之间建立了一种有趣的关系。通常，我们在 10^(-3) 到 10³ 的对数网格上搜索 Gamma 和 C 的值。\n\
+  \n*   度：此超参数仅用于多项式核；更高的度意味着更灵活的决策边界。度为 1 将产生一个线性核。\n\n### 决策树\n\n*决策树* 类似于一组 if-else\
+  \ 语句，是一种简单而优雅的算法，具有非常直观的可视化效果。与神经网络不同，它很容易理解内部发生的事情。此外，它几乎不需要或完全不需要数据预处理。\n\n顾名思义，它是一棵树，因此从一个根节点开始，根节点是其中一个特征。根据数据点在该特征上的值，我们选择树的下一个节点。这个过程一直持续到我们到达叶节点，从而得到预测值。\n\
+  \n创建这棵树有点复杂；需要使用各种不同的算法来选择哪个特征放在顶层，哪个放在第二层，等等。一些用于计算特征重要性的算法包括基尼指数、信息增益和卡方检验。选择哪种算法可以被视为决策树算法中重要的超参数之一。\n\
+  \n让我们以经典的鸢尾花数据集为例。这里的目标是根据四个特征（花萼长度、花萼宽度、花瓣长度和花瓣宽度）对三种鸢尾花（Setosa、Versicolor 和 Virginica）进行分类。\n\
+  \n正如我之前所说，决策树的可视化非常简单；sklearn 提供了一个函数 `tree.plot_tree()`，你只需输入训练好的分类器，它就会绘制出树（图\
+  \ 1-4-6）。\n\n![../images/494613_1_En_1_Chapter/494613_1_En_1_Fig12_HTML.jpg](img/494613_1_En_1_Fig12_HTML.jpg)\n\
+  \n图 1-4-6\n\n在鸢尾花数据集上训练的决策树分类器\n\n如图 1-4-6 所示，所有节点都有基尼指数，特征在树中的位置即基于此。随着我们沿着树向下移动，基尼指数的值会减小。在节点的顶部指定了一个条件；如果条件为真，数据点进入右子节点；如果为假，则进入左子节点。样本数（samples）的值告诉我们，在父节点的真和假条件下分别有多少样本。\n\
+  \n我们使用决策树时面临的一个问题是，当树变得复杂时，模型有很大几率会过拟合训练数据。一些超参数可以帮助降低这种复杂性。为了解决这个问题，我们可以对树进行剪枝，使用诸如树的最大深度和叶节点的最小样本数等超参数来帮助剪枝。\n\
+  \n以下是超参数：\n\n*   算法：如前所述，该算法决定了特征的优先级，从而决定了它们在树结构中的顺序。\n\n*   树的深度：这定义了树的层数深度。它肯定会影响树的结构复杂度和时间复杂度。我们可以移除不重要的节点并减少深度。\n\
+  \n*   最小样本分裂数：这是一个整数值，定义了分割内部节点所需的最小样本数。在图 1-4-6 中，如果我们选择 101，那么树将在第二层之后停止生长。\n\n\
+  *   最小叶节点样本数：这定义了叶节点上的最小样本数。这个超参数可以通过减少树的深度来帮助减少过拟合。\n\n\n\n### 神经网络\n\n一个基本的*神经网络*由节点和节点层构成，这些节点本质上就是前一层输出与权重相乘的结果（详见附录二）。我们将此处的权重和偏置称为*参数*（因为它们由基于数据集的建模算法决定），而将节点数、层数等称为*超参数*（因为我们需要人为干预来决定它们）。\n\
+  \n定义神经网络的架构是当今深度学习从业者面临的最具挑战性的任务之一。架构无法通过暴力搜索发现，因为神经网络的时间复杂度非常高，尝试所有超参数组合是不可能的。因此，创建神经网络架构更像是一门艺术，依赖于逻辑和更先进的超参数调优算法。\n\
+  \n神经网络中可能存在大量不同的超参数，这里我们讨论其中几种：\n\n*   **层数**：增加层数会提升神经网络的深度，同时也增强了学习更复杂特征的能力。\n\
+  \n*   **节点数**：节点数因层而异，但第一个隐藏层和最后一个隐藏层的节点数必须分别等于输入特征的数量和要预测的类别数量。对于隐藏层，按惯例我们使用 2\
+  \ 的幂次方作为节点数，即 2、4、8、16、32、64、128、256、512、1024 等。这是因为硬件在以 2 的幂次方存储数字时效率更高，尽管没有证据表明这是选择这类超参数的最优方式。\n\
+  \n*   **批量大小**：如果我们从数据集中抽取一个子样本，它应该能代表整个数据集的属性。这个批次可用于计算梯度并更新权重。我们遍历所有子样本，直到覆盖整个数据集。这样做的目的是节省内存空间。但你需要为子集大小选择最优值，因为批量大小过小会导致在接近最小值时波动更大，而过大则可能引发内存错误。\n\
+  \n*   **激活函数**：激活函数用于在每个节点上引入非线性。在决定激活函数时，我们需要确保几点：它们将被用于成千上万个节点，并且反向传播会使用它们的导数，因此函数及其导数的计算复杂度都应较低。一些广泛使用的激活函数包括\
+  \ ReLU、Sigmoid 和 Leaky ReLU。\n\n*   **损失函数**：损失函数的选择基于输出类型，例如是二分类、多分类、回归等。还有其他因素。例如，在最后一层使用\
+  \ sigmoid 激活函数并结合二次损失函数可能会导致学习速度减慢。因此，需要留意这类问题。此外，损失函数本身也有可以调优的内部超参数。\n\n*   **优化器**：在“理解超参数”部分，我们讨论了一种优化方法——梯度下降。还有其他更先进的优化方法，如\
+  \ Adagrad、Adam 优化器等，这些优化器也包含各种影响整体优化效果的超参数。\n\n神经网络中还有更多超参数，例如批量归一化、Dropout 等。随着技术的进步，这些变量每隔一段时间就会增加。\n\
+  \n本节旨在让你了解什么是超参数以及它们如何工作。随着我们继续深入，我们将在寻找最优值的过程中讨论更多这类算法及其超参数。\n\n## 可能超参数值的分布\n\n\
+  超参数的值可能因其功能而异。对于像网格搜索（在第 2 章讨论）这样的算法，我们会遍历超参数的某些排列组合。但大多数超参数优化算法是随机选取变量的。这些随机值可能属于某种特定类型的分布。例如，我们在“神经网络”部分看到，我们选择层中节点数的值为\
+  \ 2 的幂次方。因此，我们将集合{2, 4, 8, 16, 32, 64, 128, 256, 512...}视为一种分布。\n\n提示\n\nSeeing\
+  \ Theory ([`https://seeing-theory.brown.edu/`](https://seeing-theory.brown.edu/))\
+  \ 是一个很棒的网站，提供了概率和统计的交互式可视化。请查看该网站的第 3 章，了解概率分布的可视化。\n\n随机变量可能取值的可能性由概率分布定义。假设我们必须为超参数选择一个随机值；其底层分布可以是以下任何一种：\n\
+  \n*   离散概率分布\n\n*   连续概率分布\n\n对于离散变量和连续变量，存在不同类型的概率分布。但在深入探讨这些类型之前，我们先看看什么是离散变量和连续变量。\n\
+  \n### 离散变量\n\n一组值中，每个值与下一个值之间存在某个正有限距离，这称为*离散分布*。离散变量可以是有限值，也可以是无限值，具体取决于范围。图 1-5-1\
+  \ 展示了有限离散分布和无限离散分布。\n\n![../images/494613_1_En_1_Chapter/494613_1_En_1_Fig13_HTML.jpg](img/494613_1_En_1_Fig13_HTML.jpg)\n\
+  \n图 1-5-1\n\n两种分布，(a) 有限离散 和 (b) 无限离散\n\n有限离散值位于两个有限实数之间，如图 1-5-1(a)所示，其值位于区间[−0.4,\
+  \ 1.0]内，步长为 0.2。然而，无限离散值可以延伸到无穷大，每个值与下一个值和前一个值之间仍然保持一个正有限距离。在图 1-5-1(b)中，值位于区间−0.4,\
+  \ +∞)内，步长仍为 0.2。\n\n请注意，步长不一定必须相同。它可以是指数级的、递增的等等。图[1-5-2 中的示例展示了一个均匀分布。\n\n![../images/494613_1_En_1_Chapter/494613_1_En_1_Fig14_HTML.jpg](img/494613_1_En_1_Fig14_HTML.jpg)\n\
+  \n图 1-5-2\n\n一个有限分布的例子，*f*(*x*) = *x* + 2，其中 *x* ∈ [0, 5]，每个 *x* 值之间的差为 1\n\n回顾“支持向量机”部分，超参数\
+  \ *kernel* 的可能值可以是 *rbf*、*sigmoid*、*linear*、*polynomial* 等。*‘kernel’* 会有一个有限的值集。这可以被视为一个*有限离散值*的例子。我们可以将这些超参数表示如下：\n\
+  \n*   *rbf* ↔︎ 1\n\n*   *sigmoid* ↔︎ 2\n\n*   *linear* ↔︎ 3\n\n*   等等\n\n在同一个算法中，我们有另一个超参数\
+  \ *‘degree’*，其值可以是任何可能的整数。这是一个*无限离散值*的例子。然而，这并不意味着我们要从 −∞ 搜索到 +∞。结果会在极端值处饱和，而且在无限空间中搜索实际上也是不可能的。因此，我们将使用一个巨大的范围（“巨大”是相对的；在某些情况下\
+  \ 10 可能很大，而在其他情况下 10¹⁰⁰可能很大）来包含该分布。\n\n\n好的，作为一名高级文档工程师和翻译员，我将严格遵循您提供的注意事项和示例格式，将给定的英文文本翻译成中文。\n\
+  \n\n### 连续变量\n\n*连续分布* 是一组位于两个实数之间的无限可能值，如图 1-5-3 所示。\n\n![../images/494613_1_En_1_Chapter/494613_1_En_1_Fig15_HTML.jpg](img/494613_1_En_1_Fig15_HTML.jpg)\n\
+  \n图 1-5-3\n\n1.0 和 2.0 之间存在无限多个数字\n\n再次以“支持向量机”部分为例，SVM 中有像 ‘C’ 和 ‘gamma’ 这样的超参数，它们的值位于一个连续分布上；也就是说，在一个范围内我们可以有无限多个可能的值。\n\
+  \n### 概率分布\n\n有无限多种可能的连续和离散概率分布函数可以对随机值进行采样，因此我们将通过讨论实践中常用的几种分布来缩小范围。概率总是在一个范围内计算的，例如图\
+  \ 1-5-4 所示的高斯分布示例。\n\n![../images/494613_1_En_1_Chapter/494613_1_En_1_Fig16_HTML.jpg](img/494613_1_En_1_Fig16_HTML.jpg)\n\
+  \n图 1-5-4\n\n均值为 0、标准差为 1 的高斯分布\n\n在图 1-5-4 中，如果我们想为变量 *x* 采样一个值，*x* 可以取无限多个值。*p*(*x*)\
+  \ 为特定值的概率将为 0。因此，我们讨论的是*概率密度函数*，即一个范围内的概率。例如 *p*(*x* < 0) = 0.5。因为它占整个分布面积的一半。类似地，-1\
+  \ 到 0 范围内的概率密度可以通过计算面积来获得，而面积可以通过沿连续曲线进行积分来计算。\n\n这解释了为什么我们需要获取一个范围的概率密度而不是一个点的概率。接下来，我们将使用一个名为\
+  \ *scipy*.*stats* 的模块来为变量 *x* 采样值，以便讨论一些常用的分布。\n\n#### 均匀分布\n\n在*均匀分布*中，如果宽度相同，则不同范围内的概率密度保持不变。图\
+  \ 1-5-5 显示了一个示例。\n\n![../images/494613_1_En_1_Chapter/494613_1_En_1_Fig17_HTML.jpg](img/494613_1_En_1_Fig17_HTML.jpg)\n\
+  \n图 1-5-5\n\na 和 b 之间的均匀分布\n\n曲线下的面积为 1。因此，我们可以将高度计算为 1/(*b* − *a*)，其中 *b* 是上限，*a*\
+  \ 是下限。让我们使用 *scipy*.*stats* 从均匀分布中采样值：\n\n```\nfrom scipy.stats import uniform\n\
+  import seaborn as sns\nn = 10000\nstart = 10\nwidth = 10\ndata = uniform.rvs(size=n,\
+  \ loc = start, scale=width)\nax = sns.distplot(data,\nbins=100,\nhist_kws={'alpha':0.8})\n\
+  ax.set(xlabel='Uniform Distribution ', ylabel=\"Frequency\")\n```\n\n图 1-5-6 显示了均匀分布的直方图，其中\
+  \ a=10 且 b=20。我在这两个数字之间采样了 10,000 个随机值。\n\n![../images/494613_1_En_1_Chapter/494613_1_En_1_Fig18_HTML.jpg](img/494613_1_En_1_Fig18_HTML.jpg)\n\
+  \n图 1-5-6\n\n均匀分布的直方图\n\n#### 高斯分布\n\n*高斯分布*（或*正态分布*）是自然界中最常见的分布之一。大多数机器学习算法都假设数据集服从高斯分布；也就是说，异常值数量较少，大部分数据集中在簇中。极端值的频率较低，而均值附近的频率较高。\n\
+  \n对于均值为 0、标准差为 1 的分布，您可以在图 1-5-4 中看到一个高斯分布。请注意，在 *x* 轴上，如果您标记出 *μ* − *σ* 和 *μ* + *σ*，如图\
+  \ 1-5-7 所示，您会发现它覆盖了大约 68% 的面积。类似地，*μ* − 2*σ* 和 *μ* + 2*σ* 覆盖了大约 95% 的面积，而 *μ* − 3*σ*\
+  \ 和 *μ* + 3*σ* 覆盖了 99.7% 的面积。\n\n![../images/494613_1_En_1_Chapter/494613_1_En_1_Fig19_HTML.jpg](img/494613_1_En_1_Fig19_HTML.jpg)\n\
+  \n图 1-5-7\n\n均值为 0、标准差为 1 的高斯分布\n\n以下是从高斯数据中采样随机值的代码：\n\n```\nfrom scipy.stats import\
+  \ norm\nimport seaborn as sns\nmean = 0\nstd_dev = 1\ndata = norm.rvs(size=10000,loc=0,scale=1)\n\
+  ax = sns.distplot(data,\nbins=100,\nhist_kws={'alpha':0.8})\nax.set(xlabel='Gaussian\
+  \ Distribution ', ylabel=\"Frequency\")\n```\n\n图 1-5-8 显示了根据从高斯分布采样的随机值绘制的直方图。\n\
+  \n![../images/494613_1_En_1_Chapter/494613_1_En_1_Fig20_HTML.jpg](img/494613_1_En_1_Fig20_HTML.jpg)\n\
+  \n图 1-5-8\n\n高斯分布的直方图\n\n#### 指数分布\n\n另一个重要的分布是*指数分布*。顾名思义，值呈指数增长。有一个参数比率 (*λ*)\
+  \ 控制着分布的斜率。\n\n```\nfrom scipy.stats import expon\nimport seaborn as sns\nloc =\
+  \ 10\nlambda_inverse = 1\ndata = expon.rvs(size=10000,loc=loc,scale=lambda_inverse)\n\
+  ax = sns.distplot(data,\nbins=100,\nhist_kws={'alpha':0.8})\nax.set(xlabel='Exponential\
+  \ Distribution', ylabel=\"Frequency\")\n```\n\n图 1-5-9 显示了当从对数正态分布中选择随机值时的直方图，该分布可以使用上述代码绘制。\n\
+  \n![../images/494613_1_En_1_Chapter/494613_1_En_1_Fig21_HTML.jpg](img/494613_1_En_1_Fig21_HTML.jpg)\n\
+  \n图 1-5-9\n\n指数分布的直方图\n\n在后续章节中，随着我们使用更多的分布，我们将会遇到更多。我们将看到哪些超参数适合哪些分布以及原因。现在您已经了解了超参数，在第\
+  \ 2 章中，我们将探讨一些基本的超参数调优方法。\n\n"
+- '# 2. 使用 Scikit-Learn 进行超参数优化
+
+
+  在上一章中，您了解了什么是超参数以及它们如何影响算法的性能。既然您知道了调整超参数的重要性，本章将向您介绍一些简单但功能强大的算法使用方法，这些算法已在 scikit-learn
+  库中实现，用于超参数优化。Scikit-learn 是机器学习实践中使用最广泛的开源库之一。它易于使用，并且在预测分析中非常有效。
+
+
+  ## 更改超参数
+
+
+  您从第 1 章了解了支持向量机 (SVM) 的工作原理。现在您将看到，在泰坦尼克号数据集（数据集在附录 [I](https://doi.org/10.1007/978-1-4842-6579-6)
+  中解释）上，当核函数固定为 RBF 时，更改两个超参数——C（正则化因子）和 gamma（核系数）——如何影响结果。
+
+
+  图 2-1(a) 显示了 gamma 和 C 之间的比较；热图中较浅的颜色代表更高的准确率。我们看到，当 C 值较高 (10¹¹) 且 gamma 值较低 (10^-8)
+  时，我们获得更高的测试准确率；而当 C 值较低 (10⁴) 且 gamma 值相对较高 (10^-3) 时，我们获得相当的准确率。图 2-1(b) 中的图表显示，随着
+  gamma 值的增加，在保持 C 恒定为 1 的情况下，训练准确率（蓝线）和测试准确率（橙线）之间的差异在某个点之后持续增大，导致模型过拟合，这证明我们需要通过降低
+  C 来正则化模型。
+
+
+  ![../images/494613_1_En_2_Chapter/494613_1_En_2_Fig1_HTML.png](img/494613_1_En_2_Fig1_HTML.png)
+
+
+  图 2-1
+
+
+  (a) gamma 和 C 不同取值的热图。(b) 随着 gamma 增加而变化的准确率
+
+
+
+
+  ## 网格搜索
+
+
+  寻找最优超参数集最暴力的方法或许是在每一种可能的参数组合上训练数据集。这种方法被称为*网格搜索*，是找到最佳超参数集最确定的方式，但它也有其缺点。图 2-1-1
+  展示了一个遍历参数 1 和参数 2 所有可能组合的网格。
+
+
+  ![../images/494613_1_En_2_Chapter/494613_1_En_2_Fig2_HTML.jpg](img/494613_1_En_2_Fig2_HTML.jpg)
+
+
+  图 2-1-1
+
+
+  一个遍历两个超参数所有可能组合的网格搜索
+
+
+  假设你有十个算法，每个算法有五个超参数，每个超参数有四个可能的值，并且有一个庞大的数据集，在一组超参数上训练一个算法需要 1 分钟。这种情况下，大约需要一周时间才能找到最佳超参数。但对于超参数数量较少且训练时间较短的情况，我们可以采用网格搜索。现在，我们将用
+  Python 构建这个简单的算法，并在图 2-1-1 所示的示例上进行测试。
+
+
+  超参数的值可以分布在连续分布或离散分布上。如果值是离散的，那么在一个范围内可能值的数量是有限的。然而，在连续分布中，存在无限个可能的值，正如我们在第 1 章中所见。接下来，我们将调整
+  C 和 gamma，这两个参数在某个范围内都是连续分布。但为了构建网格，我们将在对数尺度上创建均匀分布。网格搜索不接受随机变量；要构建网格，它需要具体的值。
+
+
+  让我们创建一个超参数 C 和 gamma 的网格：
+
+
+  ```
+
+  c = 0.001
+
+  gamma = 1e-10
+
+  param_grid = {
+
+  "C": [c*(10**i) for i in range(1,14)],
+
+  "gamma": [gamma*(10**i) for i in range(1,14)]
+
+  }
+
+  ```
+
+
+  注意
+
+
+  我使用了预处理后的数据集（X_train, y_train, X_test, y_test），即泰坦尼克号数据集。请参考附录 I 查看所有预处理方法。
+
+
+  我们首先创建一个函数，将这个网格分解为所有可能的超参数集列表，即 `make_sets()`：
+
+
+  ```
+
+  from itertools import product
+
+  def make_sets(grid):
+
+  sets = list()
+
+  all_hps_vals = [lst for lst in param_grid.values()]
+
+  hp_keys = [hp for hp in param_grid.keys()]
+
+  val_sets = product(*all_hps_vals)
+
+  for val in val_sets:
+
+  hp_set = dict()
+
+  for idx, hp_key in enumerate(hp_keys):
+
+  hp_set[hp_key] = val[idx]
+
+  sets.append(hp_set)
+
+  return sets
+
+  >>> make_sets(param_grid)
+
+  [{''C'':0.01, ''gamma'':1e-09},
+
+  {''C'':0.01, ''gamma'':1e-08},
+
+  {''C'':0.01, ''gamma'':1e-07},
+
+  ...
+
+  ...
+
+  {''C'':10000000000.0, ''gamma'':1000.0}
+
+  ]
+
+  ```
+
+
+  现在，我们将创建另一个函数 `grid_search()`，用于将所有参数集拟合到机器学习算法上：
+
+
+  ```
+
+  def grid_search(clf, grid, X_train, y_train, X_test, y_test):
+
+  all_sets = make_sets(grid)
+
+  logs = list()
+
+  best_hp_set = {
+
+  "best_test_score": 0.0
+
+  }
+
+  for hp_set in all_sets:
+
+  log = dict()
+
+  model = clf(**hp_set)
+
+  model.fit(X_train, y_train)
+
+  train_score = model.score(X_train, y_train)
+
+  test_score = model.score(X_test, y_test)
+
+  log["hp"] = hp_set
+
+  log["train_score"] = train_score
+
+  log["test_score"] = test_score
+
+  if best_hp_set["best_test_score"]>> from sklearn.model_selection import train_test_split
+
+  >>> from sklearn.svm import SVC
+
+  # 训练测试分割数据集。
+
+  # X 和 y 分别是预处理后的特征和标签。
+
+  >>> X_train, y_train, X_test, y_test = train_test_split(X, y)
+
+  >>> logs, best = grid_search(SVC, param_grid, X_train, y_train, X_test, y_test)
+
+  ```
+
+
+  我们刚刚定义的 `grid_search()` 函数接收以下输入：分类器、参数网格和数据集。通过 `make_sets()` 函数，`grid_search()`
+  创建所有超参数组合，并在所有组合上训练模型。然后，我们将训练分数和测试分数保存在一个字典中，并搜索最佳结果。
+
+
+  请注意，为了代码的简洁性，我在训练时没有进行*交叉验证*。为了真正评估每一组超参数，我们必须使用一个验证集，并将测试集留待以后使用，这样我们才能在一个独立的集上评估模型。然而，我们并没有将训练集分割成训练集和验证集（因为在像泰坦尼克号这样的数据集中，我们只有大约
+  700 个数据点），而是进行交叉验证，从而保留宝贵的训练数据不变。交叉验证还可以防止在验证集上过拟合。
+
+
+  现在，我们将看到如何使用 scikit-learn 提供的 `GridSearchCV()` 函数，以 K 折交叉验证的方式分割训练集：
+
+
+  ```
+
+  >>> from sklearn.model_selection import GridSearchCV
+
+  >>> clf = GridSearchCV(SVC(), param_grid, cv=3)
+
+  >>> # X_train 和 y_train 是来自泰坦尼克号数据集的数据点。
+
+  >>> # 使用泰坦尼克号数据集是为了展示这个示例。
+
+  >>> clf.fit(X_train, y_train)
+
+  >>> clf.best_estimator_
+
+  SVC(C=100000.0, break_ties=False, cache_size=200, class_weight=None, coef0=0.0,
+
+  decision_function_shape=''ovr'', degree=3, gamma=0.0001, kernel="rbf",
+
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+
+  tol=0.001, verbose=False)
+
+  ```
+
+
+  在图 2-1-2 中，我们可以看到准确率分数随迭代次数（针对 169 种组合）而变化。
+
+
+  ![../images/494613_1_En_2_Chapter/494613_1_En_2_Fig3_HTML.jpg](img/494613_1_En_2_Fig3_HTML.jpg)
+
+
+  图 2-1-2
+
+
+  迭代次数与准确率分数的关系图
+
+
+  图 2-1-2 没有显示出明显的模式，因为这是一种穷举搜索方法；我们正在尝试所有可能的组合。你可以定义 `GridSearchCV()` 函数，并传入算法、参数网格以及交叉验证的折数。所有其他方法，如
+  `fit()`、`score()` 等，都是相同的。你可以使用 `best_estimator_` 方法来获取超参数的最佳值。我调整了 ''gamma'' 和
+  ''C''，与我们的手动实现相同，并保持其余超参数不变。
+
+
+
+
+  ## 随机搜索
+
+
+  网格搜索最终能找到接近最优的超参数组合，但其时间和资源消耗较高。另一种方法——*随机搜索*——消耗的时间和资源更少。它随机选取超参数，组成一个集合，并基于该集合训练模型。这种方法可能找不到最佳组合，但找到接近最佳组合的概率更高，同时能节省大量时间。
+
+
+  与网格搜索不同，随机搜索不会在无希望的候选参数上花费大量时间，而是跳转到随机超参数上。即使它不借鉴过去的结果，通常也能给出令人满意的结果。在随机搜索中，我们定义*试验次数*，即要尝试的超参数集合的数量。
+
+
+  让我们通过探索图 2-2-1 所示的示例，来看看随机搜索如何优于网格搜索。
+
+
+  ![../images/494613_1_En_2_Chapter/494613_1_En_2_Fig4_HTML.jpg](img/494613_1_En_2_Fig4_HTML.jpg)
+
+
+  图 2-2-1
+
+
+  比较网格搜索（左）与随机搜索（右）
+
+
+  在图 2-2-1 的两张图中，''x'' 轴和 ''y'' 轴代表两个超参数，背景颜色越浅代表准确率越高。在左侧所示的网格搜索中，如果我们从左上角开始沿网格搜索，需要花费相当长的时间才能到达高准确率区域。在右侧所示的随机搜索中，由于我们是随机搜索超参数，因此比网格搜索更有可能更早地达到高准确率。一旦定义的试验次数用完，我们将选择可用的最佳超参数集合，希望它至少接近最佳组合。
+
+
+  使用随机搜索而非网格搜索的两个主要优点如下：
+
+
+  *   试验次数是预先定义的，且与总组合数无关。
+
+  *   由于试验次数已定义，即使增加非贡献参数的数量，算法的时间效率也不会受到影响。
+
+
+  在随机搜索中，由于我们从搜索范围内随机选择超参数，我们可以使用 Python 的 `random` 库：对于离散超参数，使用 `random.randint(a,
+  b)`（返回整数 a 和 b 之间的随机整数）；对于连续超参数，使用 `random.random()`（返回 0 到 1 之间的随机浮点数，1 不包含在内），或者使用
+  numpy 或 scipy.stats 中能生成不同类型分布（如均匀分布、对数正态分布、指数分布等）的函数。
+
+
+  或者，如下所示，我们可以为具有连续分布的超参数创建一个更大的网格——比如非常大，因为它不会增加试验次数（我们将要定义的）——从而使算法能够从更大的样本中选择超参数。
+
+
+  ```
+
+  import random
+
+  import numpy as np
+
+  def loguniform(low=0, high=1, size=100, base=10):
+
+  # 函数创建一个对数均匀分布，包含随机值。
+
+  return np.power(base, np.random.uniform(low, high, size))
+
+  param_grid = {
+
+  "gamma": loguniform(low=-10, high=4, base=10),
+
+  "C": loguniform(low=-3, high=11, base=10)
+
+  }
+
+  def get_random_hp_set(grid):
+
+  # 函数从网格中为每个参数随机选择一个值
+
+  hp_set = dict()
+
+  for key, param in grid.items():
+
+  hp_set[key] = np.random.choice(param)
+
+  return hp_set
+
+  def random_search(clf, grid, n_iterations, X_train, y_train, X_test, y_test):
+
+  # 定义随机搜索函数
+
+  logs = list()
+
+  best_hp_set = {
+
+  "best_test_score": 0.0
+
+  }
+
+  for iteration in range(n_iterations):
+
+  log = dict()
+
+  # 从为随机搜索定义的函数中选择超参数集合
+
+  hp_set = get_random_hp_set(grid)
+
+  # print(hp_set)
+
+  model = clf(**hp_set)
+
+  model.fit(X_train, y_train)
+
+  train_score = model.score(X_train, y_train)
+
+  test_score = model.score(X_test, y_test)
+
+  log["hp"] = hp_set
+
+  log["train_score"] = train_score
+
+  log["test_score"] = test_score
+
+  if best_hp_set["best_test_score"] < test_score:
+
+  best_hp_set["best_test_score"] = test_score
+
+  best_hp_set["best_hp_set"] = hp_set
+
+  logs.append(log)
+
+  return logs, best_hp_set
+
+  ```
+
+
+  现在，让我们使用这个函数：
+
+
+  ```
+
+  >>> from sklearn.svm import SVC
+
+  >>> from sklearn.model_selection import train_test_split
+
+  >>> X_train, y_train, X_test, y_test = train_test_split(X, y)
+
+  >>> logs, best = random_search(SVC, param_grid, 20, X_train, y_train, X_test, y_test)
+
+  ```
+
+
+  因此，我们可以在更少的迭代次数内，通过随机搜索至少获得接近最佳的超参数集合。
+
+
+  同样，scikit-learn 为我们提供了一个交叉验证函数 `RandomizedSearchCV()`。让我们看看它是如何工作的：
+
+
+  ```
+
+  >>> from sklearn.model_selection import RandomizedSearchCV
+
+  >>> # 就像我们的函数一样，RandomizedSearchCV 也有参数 ''n_iter''
+
+  >>> clf = RandomizedSearchCV(SVC(), param_grid, n_iter=20, cv=3)
+
+  >>> clf.fit(X_train, y_train)
+
+  >>> clf.best_estimator_
+
+  SVC(C=1000000000.0, break_ties=False, cache_size=200, class_weight=None,
+
+  coef0=0.0, decision_function_shape="ovr", degree=3, gamma=1e-05,
+
+  kernel=''rbf'', max_iter=-1, probability=False, random_state=None,
+
+  shrinking=True, tol=0.001, verbose=False)
+
+  ```
+
+
+  如图 2-2-2 所示，随机搜索仅用 20 次迭代就达到了可比的准确率。
+
+
+  ![../images/494613_1_En_2_Chapter/494613_1_En_2_Fig5_HTML.jpg](img/494613_1_En_2_Fig5_HTML.jpg)
+
+
+  图 2-2-2
+
+
+  随机搜索的迭代次数与准确率关系图
+
+
+  `GridSearchCV` 和 `RandomizedSearchCV` 都有另一个有用的参数 `scoring`；如果设置为默认值，则使用机器学习算法的评分方法，通常是
+  `''accuracy''`。然而，我们可以将其设置为任何我们认为适合工作的评分方法，例如 `''roc_auc''`、`''f1''`、`''precision''`、`''recall''`
+  等。
+
+
+
+
+  ## 并行超参数优化
+
+
+  网格搜索和随机搜索都是暴力方法；它们不依赖先前的结果来选择下一组超参数。我们可以利用这一点，并行处理这些试验。scikit-learn 对这些算法的实现提供了一个参数
+  `n_job`，可以将其设置为 `-1`，以指定使用本地机器的所有核心。
+
+
+  在本节中，我们将了解如何在高性能计算（HPC）集群上分布诸如网格搜索之类的算法。HPC 集群只是一组高端计算机（称为*节点*），这些计算机经过配置，可以通过快速互连实现持续通信，提供类似于超级计算机的计算能力。HPC
+  集群由以下组件组成，如图 2-3-1 所示：
+
+
+  ![../images/494613_1_En_2_Chapter/494613_1_En_2_Fig6_HTML.jpg](img/494613_1_En_2_Fig6_HTML.jpg)
+
+
+  图 2-3-1
+
+
+  HPC 集群
+
+
+  *   *登录节点*：我们可以从这里通过安全协议（如安全外壳协议 (SSH)）使用自己的机器远程访问集群。它用于上传和执行代码。
+
+
+  *   *数据传输节点*：同样，使用诸如 `scp` 和 `rsync` 等命令的安全协议（如 SSH）将大量数据从我们的机器传输到 HPC 集群。传输通过加密隧道进行保护。
+
+
+  *   *计算节点*：有不同类型的计算节点，包括硬件规格与我们个人机器相似的常规节点、具有海量数据存储（以 TB 计）的“胖”计算节点，以及由 GPU 和 CPU
+  组成的高端节点。这些节点共同协助计算。
+
+
+  *   *无限带宽 (IB) 交换机*：该交换机可实现节点间的快速通信，具有高吞吐量和极低延迟。
+
+
+  *   *存储*：此处可以存储大文件，并可通过数据传输节点进行传输。
+
+
+  然而，使用高性能计算集群并不像设置 `n_job = -1` 那么简单，而且最大限度地利用集群的潜力甚至更加困难。我们将使用 Slurm 工作负载管理器（一个用于计算机集群队列的开源作业调度器）和
+  ipyparallel（用于多线程并行计算）。
+
+
+  你可以使用以下代码用于 HPC 和 Amazon EC2 集群，并根据各自的要求进行少量修改。
+
+
+  现在，我们将再次在 MNIST 数据集上优化 SVM 的超参数 C 和 gamma（有关 MNIST 的更多信息，请参阅附录 [II](https://doi.org/10.1007/978-1-4842-6579-6)）。
+
+
+  以下代码的灵感来源于 Leclanché 公司生产工程数据科学家 Hugues-Yanis Amanieu 博士的工作^(¹)。
+
+
+  首先，我们将使用 SSH 登录到登录节点：
+
+
+  ```
+
+  $ ssh username@ip
+
+  ```
+
+
+  现在我们已经登录到 HPC 集群，我们将创建一个虚拟环境：
+
+
+  ```
+
+  $ virtualenv hpc_tuning
+
+  $ source hpc_tuning/bin/activate
+
+  ```
+
+
+  并在你的虚拟环境 ''tuning'' 中安装所有依赖项：slurm、slurm-client、ipyparallel、joblib、ipython，当然还有
+  scikit-learn。我们也可以通过 Anaconda 下载并安装它们（在 conda 虚拟环境中）。
+
+
+  接下来，我们将编写一个 shell 脚本（''launch.sh''），在其中使用 Slurm 来调度作业：
+
+
+  ```
+
+  #这将激活虚拟环境
+
+  source hpc_tuning/bin/activate
+
+  #为 ipython 创建一个新的作业配置文件名称，slurm 将使用它
+
+  profile=job_${JOB_NAME}
+
+  #为 ipython 创建一个配置文件
+
+  ipython profile create ${profile}
+
+  #启动 ip 控制器
+
+  ipcontroller --ip="*" --profile=${profile} &
+
+  sleep 10
+
+  #srun 在所有核心上运行 ipengine
+
+  srun ipengine --profile=${profile} --location=$(hostname) &
+
+  sleep 25
+
+  #执行 python 文件，我们将在其中定义网格搜索以在集群上分布
+
+  python $1 -p ${profile}
+
+  ```
+
+
+  让我们详细探讨这段代码。
+
+
+  *   首先，我们激活一个虚拟环境，其中所有内容都是从零开始安装的，这样我们就不会遇到任何依赖性问题。
+
+
+  *   之后，我们分配一个变量 `profile`，在其中定义一个字符串，该字符串将作为我们作业的名称/标识。
+
+
+  *   创建 ID 后，我们使用 `ipython` 命令创建一个配置文件，该命令会初始化一个包含配置信息的文件夹。
+
+
+  *   现在我们有了一个控制器和引擎。控制器调度和排队作业，引擎计算数据并存储结果。我们使用 ipython 进行控制器和引擎之间的通信。
+
+
+  *   `ipcontroller` 命令启动控制器，`ipengine` 命令启动引擎。在启动 ''ipcontroller'' 时，我们需要控制器监听所有引擎，参数
+  `--ip="*"` 允许控制器在所有接口上监听。
+
+
+  *   为了让引擎与控制器连接，我们使用带有参数 `--location=="ip"` 的 `ipengine`，在其中提供控制器的 IP 地址。`ipcontroller`
+  会创建一个名为 ''ipcontroller-engine.json'' 的文件，该文件需要复制到所有引擎；但是，在我们的案例中，我们假设引擎和控制器共享相同的文件系统，在这种情况下，引擎会自动找到
+  ''json'' 文件的位置。
+
+
+  请注意，在前面的代码中，我们使用 `srun` 来运行 `ipengine`；`srun` 是一个 Slurm 命令，它在所有可用的核心上运行 `ipengine`。最后，我们运行包含
+  scikit-learn 代码的 Python 脚本，并传递一个参数配置文件名称。
+
+
+  让我们编写 Python 脚本（''python_script.py''）：
+
+
+  ```
+
+  import argparse
+
+  import os
+
+  import sys
+
+  import time
+
+  import pandas as pd
+
+  from sklearn.externals.joblib import parallel_backend
+
+  from sklearn.externals.joblib import register_parallel_backend
+
+  from sklearn.externals.joblib import cpu_count
+
+  from sklearn.datasets import load_digits
+
+  from sklearn.model_selection import GridSearchCV
+
+  from sklearn.model_selection import train_test_split
+
+  from sklearn.svm import SVC
+
+  from ipyparallel import Client
+
+  from ipyparallel.joblib import IPythonParallelBackend
+
+  # 将文件目录路径附加到系统路径，以便自定义函数的导入能够工作
+
+  FILE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+  sys.path.append(FILE_DIR)
+
+  # argparser 从我们的 shell 脚本中获取配置文件名称作为参数
+
+  parser = argparse.ArgumentParser()
+
+  parser.add_argument("-p", "--profile", default="job_hp_test",
+
+  help="要使用的 IPython 配置文件名称")
+
+  args = parser.parse_args()
+
+  profile = args.profile
+
+  # 计算可用核心总数
+
+  print(cpu_count())
+
+  # 创建一个 Client 实例，提供在 shell 脚本中创建的配置文件名称
+
+  c = Client(profile=profile)
+
+  # 确保所有引擎 (c) 都在工作目录中运行
+
+  c[:].map(os.chdir, [FILE_DIR]*len(c))
+
+  # 打印引擎 ID 列表
+
+  print(c.ids)
+
+  # 限制所有引擎
+
+  bview = c.load_balanced_view()
+
+  register_parallel_backend(''threading'',
+
+  lambda : IPythonParallelBackend(view=bview))
+
+  # 加载数据
+
+  digits = load_digits()
+
+  # 将数据拆分为训练集和测试集
+
+  X_train, X_test, y_train, y_test = train_test_split(digits.data,
+
+  digits.target,
+
+  test_size=0.3)
+
+  # 准备超参数网格
+
+  param_grid = {
+
+  "C": [c*(10**i) for i in range(1,14)],
+
+  "gamma": [gamma*(10**i) for i in range(1,14)]
+
+  }
+
+  # 使用默认超参数定义分类器
+
+  svc = SVC()
+
+  # 定义 GridSearchCV
+
+  search = GridSearchCV(svc,
+
+  param_grid,
+
+  return_train_score=True,
+
+  n_jobs=len(c))
+
+  # 启动计时器
+
+  since = time.time()
+
+  # 使用并行后端启动并行处理
+
+  with parallel_backend(''threading''):
+
+  search.fit(X_train, y_train)
+
+  # 结束计时器
+
+  time_taken = time.time() - since
+
+  # 将结果转换并保存到 .csv 文件
+
+  print(f"正在将结果保存到 {FILE_DIR}")
+
+  results = search.cv_results_
+
+  results = pd.DataFrame(results)
+
+  results.to_csv(os.path.join(FILE_DIR,''scores.csv''))
+
+  print(f"结果已保存！")
+
+  # 显示所用时间
+
+  print(f"调优时间: {time_taken}")
+
+  ```
+
+
+
+
+  让我们逐步分析上述 Python 脚本中发生的情况：
+
+
+  *   导入之前在我们的虚拟环境中安装的所有库。
+
+
+  *   由于我们需要使用创建 ipython 配置文件的配置文件名称，因此我们使用 argparser 并从 shell 脚本中获取该名称作为参数。
+
+
+  *   初始化客户端，为其提供集群的配置文件名称，以准备所有引擎。`c.ids` 用于获取所有引擎 ID 的列表。
+
+
+  *   限制所有引擎之间的负载均衡。
+
+
+  *   在并行运行算法之前，我们将后端名称定义为一个字符串（`''threading''`），为此我们使用函数 `register_parallel_backend`；稍后我们将在运行模型训练时使用
+  `''threading''`。
+
+
+  *   加载数据集，将其拆分为训练集和测试集，并定义 C 和 gamma 的网格。
+
+
+  *   初始化 `SVC()` 并定义 `GridSearchCV()`，其中 `n_jobs` 设置为 `-1`（使用所有可用核心）或 `len(total_engines)`（使用指定数量的核心）。
+
+
+  *   我们之前使用 `register_parallel_backend` 和 `''threading''` 定义了用于并行计算作业的后端名称。现在我们使用该名称运行
+  `parallel_backend` 和网格搜索，以寻找 SVM 的 ''C'' 和 ''gamma'' 参数。
+
+
+  *   保存结果。
+
+
+  *   执行命令 `sbatch launch.sh python_script.py`；`sbatch` 是一个 Slurm 命令，用于将编写的脚本提交给 Slurm。
+
+
+  *   使用 `scp` 命令传输结果文件。
+
+
+  这就是我们如何在充分利用计算机集群潜力的同时，优化大量超参数的方法。你也可以使用随机搜索来代替网格搜索。使用 HPC 将大幅减少你的时间消耗。
+
+
+  我们回顾了一些详尽且暴力的超参数优化方法，这些方法如果应用于神经网络架构搜索等问题，将耗费极长的时间，并且不可行。在后续章节中，我们将看到更多能够处理这些复杂任务的算法和库。然而，在超参数较少、搜索范围较窄的问题中，或者当数据科学家可以通过查看数据集来决定近似值或缩小搜索空间时，这些算法可能会很有效，并且将它们与
+  HPC 集群等机器结合使用，甚至可以提高其效率。
+
+
+  脚注 1
+
+
+  '
+- "# 3. 解决时间和内存限制\n\n在调整超参数时，我们面临两个主要问题：\n\n*   **内存限制**：有时我们必须处理数百 GB 的数据。我们无法在 RAM\
+  \ 中存储如此大量的数据。在训练神经网络时，我们会分批发送数据。一种可能的解决方案是使用更大的内存，但这并不总是可行的。\n\n*   **时间/计算限制**：假设我们的数据可以放入内存，但我们正在训练一个深度神经网络（DNN），或者超参数优化的搜索空间巨大。这可能会消耗大量时间。\n\
+  \n解决这两个问题的一个方法是使用更好的硬件。例如，在深度神经网络的情况下，可以使用图形处理单元（GPU）、张量处理单元（TPU）等来加速训练。尽管更好的硬件可以在一定程度上解决问题，但并非总是能在如此高端的机器上工作。在第\
+  \ 2 章中，我们将网格搜索分布到 HPC 集群上，这解决了时间限制问题，但 HPC 集群是一种昂贵的资源。还有一些更简单的方法，即使用不同类型的集群。在本章中，我们将讨论比\
+  \ HPC 更简单的替代方案，这些方案可以同时处理内存和时间限制。我们将主要关注训练的分发，以有效利用可用资源。\n\n我们将从 Dask 开始，它非常适合分发机器学习过程，并且与\
+  \ scikit-learn 配合得最好。然后，我们将看到使用 PyTorch Distributed 和 Horovod 等包来分发神经网络的简单方法。\n\n\
+  ## Dask\n\nDask ([`https://dask.org/`](https://dask.org/)) 是 Python 中用于并行计算的库。它使用*动态任务调度*，类似于我们在第\
+  \ 2 章中使用 ipyparallel 在 HPC 集群上所做的工作，这解决了计算限制的问题。然而，在分发方面，Dask 比 ipyparallel 灵活得多。使用动态任务调度，我们可以将训练分发到不同的机器上（而不仅仅是同一台机器上的多个核心）。\n\
+  \n但是，假设我们遇到内存限制，因为我们的数据太大，无法一次性加载到内存中。Dask 通过提供*并行集合*（如 Dask Dataframe、Dask array\
+  \ 等）来解决这个问题，这些集合将数据集分发给可以用于分布式环境或解决超内存问题的块。使用 Dask 执行的进程通常包含以下方面：\n\n*   *集合 → 任务图\
+  \ → 多线程/多处理或分发*\n\n首先，将 Dask 集合传递给任务图，该任务图是所有操作（如预处理、超参数优化、评估等）的完整流水线。在这里，任务可以并行化或以串行方式排列。最后，调度程序可以使用动态任务调度来执行任务图。如果使用单台机器，则可以使用多线程/多处理在核心上并行化；在集群上，任务图可以分发到节点上。在图\
+  \ 3-1-1 所示的任务图示例中，操作 (a) 和 (b) 是独立的，因此两者可以并行执行。(a) 中的任务 1、2 和 3 将串行执行。如果 (a) 在 (b)\
+  \ 之前完成，任务 7 将等待 (b) 完成。\n\n![../images/494613_1_En_3_Chapter/494613_1_En_3_Fig1_HTML.jpg](img/494613_1_En_3_Fig1_HTML.jpg)\n\
+  \n图 3-1-1\n\n任务图示例\n\n\n\n### Dask 分布式\n\n*dask*.*distributed* 是一个小型库，它扩展了 *dask*\
+  \ 以实现动态任务调度。在使用 dask 时，我们主要使用 `dask.distributed` 中的 *Client*()：\n\n```\n>>> from\
+  \ dask.distributed import Client\n>>> client = Client()\n```\n\n*Client*() 帮助你连接到分布式集群。一个\
+  \ Dask 集群会被传递给 *Client*()，具体取决于集群类型。Dask 支持多种不同的集群类型，例如：\n\n*   *SSH*：如果你有一个非托管集群，你需要使用\
+  \ SSH 协议连接到每台机器。在这种情况下，请使用以下代码：\n\n    ```\n    >>> from dask.distributed import\
+  \ Client, SSHCluster\n    >>> cluster = SSHCluster(\n    [\"localhost\", \"localhost\"\
+  , \"localhost\"],\n    connect_options={\"known_hosts\": None},\n    worker_options={\"\
+  nthreads\": 2},\n    scheduler_options={\"port\": 0,\n    \"dashboard_address\"\
+  : \":8797\"},\n    )\n    >>> client = Client(cluster)\n    ```\n\n这里我们为所有工作节点定义了\
+  \ IP 地址，`connect_options` 可以包含 SSH 连接的密码等信息。\n\n*   *Kubernetes*：使用 Kubernetes 集群是使用\
+  \ Dask 部署分布式应用程序的一种快速简便的方法：\n\n    ```\n    >>> from dask_kubernetes import KubeCluster\n\
+  \    >>> cluster = KubeCluster.from_yaml('worker-template.yaml')\n    >>> cluster.scale(40)\
+  \ #添加 40 个工作节点\n    >>> from dask.distributed import Client\n    >>> client = Client(cluster)\n\
+  \    ```\n\n你可以根据需要定义工作节点，甚至可以使用 *cluster*.*adapt*() 代替 *cluster*.*scale*() 来根据工作负载进行伸缩。\n\
+  \n除了这些集群类型，Dask 还支持在 HPC、YARN（一个 Apache Hadoop 集群）以及由 Amazon、Google 等提供的基于云的集群上进行分布式计算。\n\
+  \n通过向 *Client*() 传递 `'processes=False'`，将创建一个本地集群，并且试验将在多个核心上并行执行：\n\n```\n>>> from\
+  \ dask.distributed import Client\n>>> client = Client(processes=False)\n>>> print(client)\n\
+  Client\nScheduler: tcp://127.0.0.1:35053\nDashboard: http://127.0.0.1:8787/status\n\
+  Cluster\nWorkers: 1\nCores: 4\nMemory: 16.73 GB\n```\n\n这显示了客户端和集群的详细信息。在这个例子中，我使用单台机器同时作为调度器和工作节点。在实际集群中，你可以利用更多的核心、工作节点以及更大的内存。\n\
+  \nDask 提供的一个出色功能是在仪表盘上可视化分布式计算（注意客户端信息下的仪表盘地址）。在这里，一旦搜索执行，你可以实时查看核心的利用率。稍后我们将看一些示例。\n\
+  \n### 并行集合\n\n如图 3-1-2 所示，Dask 数据框的块由多个小的 Pandas 数据框组成。类似地，Dask 数组由更小的 NumPy 数组组成。你可以决定块的大小，使其能够放入内存。\n\
+  \n![../images/494613_1_En_3_Chapter/494613_1_En_3_Fig2_HTML.jpg](img/494613_1_En_3_Fig2_HTML.jpg)\n\
+  \n图 3-1-2\n\nDask 数据框（左）和 Dask 数组（右）\n\n此外，对 Dask 数据框的操作模仿了 Pandas 数据框的 API，数组也是如此。例如：\n\
+  \n```\n#pandas\nimport pandas as pd\ndf = pd.read_csv(\"./dataset/train.csv\")\n\
+  print(df.Age.mean())\n#dask\nimport dask.dataframe as dd\ndf = dd.read_csv(\"./dataset/train.csv\"\
+  )\nprint(df.Age.mean().compute())\n```\n\n唯一的区别是你需要使用 `.compute()` 来执行 Dask 中的操作。不过，并非所有\
+  \ NumPy 和 Pandas 的接口都受支持。\n\n由于 Dask 的并行集合可以帮助解决内存限制问题，让我们对一个原本无法放入内存的大型数据集进行建模，更不用说训练了。\n\
+  \n首先初始化客户端：\n\n```\n>>> from dask.distributed import Client\n>>> client = Client(processes=False)\n\
+  ```\n\n现在创建 Dask 集合：\n\n```\n>>> from dask_ml import datasets\n>>> from dask_ml.model_selection\
+  \ import train_test_split\n>>> import dask.array as da\n>>> X, y = datasets.make_classification(n_samples=100000000,\n\
+  n_features=7,\nrandom_state=0,\nchunks=100000)\n>>> classes = da.unique(y_train).compute()\n\
+  >>> X_train, X_test, y_train, y_test = train_test_split(X, y)\n```\n\n现在我们有了一个巨大的数据集，它有\
+  \ 1 亿行，每行有 7 个特征和 2 个类别。图 3-1-3 显示了一个 5.6 GB 的数据被分成 1000 个块，每个块有 100,000 行，大小为 5.6\
+  \ MB。\n\n![../images/494613_1_En_3_Chapter/494613_1_En_3_Fig3_HTML.jpg](img/494613_1_En_3_Fig3_HTML.jpg)\n\
+  \n图 3-1-3\n\n(a) 是变量 X 的表示，(b) 是变量 y 的表示\n\n创建块的意义在于不必将整个数据集加载到内存中；只有 scikit-learn\
+  \ 中带有 `partial_fit` 的算法支持这一点。我将使用 SGD 分类器对数据集进行建模：\n\n```\n>>> from sklearn.linear_model\
+  \ import SGDClassifier\n>>> clf = SGDClassifier(loss='log', penalty=\"l2\", tol=0.01)\n\
+  ```\n\n执行 `clf.fit(X_train, y_train)` 将对数据集进行一次迭代。为了进一步对分类器进行多次迭代训练，我们可以使用一个简单的\
+  \ `for` 循环。我们需要将 scikit-learn 的 SGD 分类器包装到 Dask 的 `Incremental` 函数中，该函数管理数据，以便模型能够分块进行训练。\n\
+  \n```\n>>> from dask_ml.wrappers import Incremental\n>>> clf = Incremental(clf,\
+  \ scoring=\"accuracy\")\n>>> clf.fit(X_train, y_train, classes=classes)\n```\n\n\
+  一旦你执行此操作，请查看 Dask 仪表盘，你可以在其中可视化正在进行的各种进程，如图 3-1-4 所示。\n\n![../images/494613_1_En_3_Chapter/494613_1_En_3_Fig4_HTML.jpg](img/494613_1_En_3_Fig4_HTML.jpg)\n\
+  \n图 3-1-4\n\nDask 仪表盘的“任务流”窗格显示了代表四个核心的四个条。\n\n\n\n### 动态任务调度\n\nscikit-learn 中实现的大多数算法都能够使用\
+  \ `joblib`，它提供了基于线程/进程的单机多核分发能力。通过使用 Dask，我们可以将这些算法分发到集群上，就像我们在第 2 章的 HPC 集群示例中使用\
+  \ ipyparallel 所做的那样。\n\nDask 更加灵活，为所有不同类型的分布式系统提供了并行支持，如图 3-1-5 所示。\n\n![../images/494613_1_En_3_Chapter/494613_1_En_3_Fig5_HTML.jpg](img/494613_1_En_3_Fig5_HTML.jpg)\n\
+  \n图 3-1-5\n\n(a) scikit-learn 借助 JobLib 可以将训练任务分发到单机多核上。 (b) 使用 Dask，同样的过程可以分发到单机多核甚至机器集群上。\n\
+  \n让我们以优化支持向量机的超参数为例，比较使用 scikit-learn 进行串行优化和使用 Dask 进行分布式调优的时间：\n\n```\nfrom sklearn.datasets\
+  \ import load_digits\nfrom sklearn.model_selection import GridSearchCV, train_test_split\n\
+  from sklearn.svm import SVC\nX, y = load_digits().data, load_digits().target\nX_train,\
+  \ X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, shuffle=True)\n\
+  c = 0.001\ngamma = 1e-10\nparam_grid = {\n\"C\": [c*(10**i) for i in range(1,14)],\n\
+  \"gamma\": [gamma*(10**i) for i in range(1,14)]\n}\nclf = SVC(kernel='rbf')\nsearch\
+  \ = GridSearchCV(clf, param_grid, cv=3)\n```\n\n在上面的代码中，我们加载了 `digits` 数据集，并将使用\
+  \ `GridSearchCV()` 优化 `C` 和 `gamma`。首先，让我们使用一个没有 Joblib 的纯 ScikitLearn 示例。\n\n```\n\
+  >>> import time\n>>> since = time.time()\n>>> model = search.fit(X_train, y_train)\n\
+  >>> print(time.time()-since)\n```\n\n在超参数网格上总共会进行 169 次试验，耗时 75.01 秒。请注意，我们是在串行运行网格搜索。\n\
+  \n现在，让我们使用 Dask 将试验并行化到多个核心上：\n\n```\n>>> import joblib\n>>> import time\n>>> from\
+  \ dask.distributed import Client\n>>> client = Client(processes=False)\n>>> since\
+  \ = time.time()\n>>> with joblib.parallel_backend('dask', scatter=[X_train, y_train]):\n\
+  model = search.fit(X_train, y_train)\n>>> print(time.time()-since)\n```\n\n现在 JobLib\
+  \ 将使用 Dask 的客户端，在本例中是一个本地集群，用于将 169 种可能的组合分发到多个核心上。完成相同任务所需的时间为 34.73 秒。这仅使用四个核心就有了巨大的改进，因此在真正的机器集群上还有很大的改进空间。查看\
+  \ Dask 仪表盘以可视化核心使用情况，如图 3-1-6 所示。\n\n![../images/494613_1_En_3_Chapter/494613_1_En_3_Fig6_HTML.jpg](img/494613_1_En_3_Fig6_HTML.jpg)\n\
+  \n图 3-1-6\n\n任务流窗格显示四个水平条，代表四个核心\n\n注意\n\n以上所有实验均在本地机器上执行，调度器和集群是同一个。在“动态任务调度”部分给出的示例中，我们可以单独使用\
+  \ scikit-learn 将任务分发到单机多核上，而无需使用 Dask。\n\n### 使用 Dask 进行超参数优化\n\n正如我们在前几个示例中看到的，我们可以使用\
+  \ Dask 进行超参数优化，以解决时间和内存限制。让我们回顾一下 scikit-learn 中的超参数优化算法及其分发方式：\n\n*   我们可以使用简单直接的\
+  \ scikit-learn 的随机搜索和网格搜索，并传递参数 `'n_jobs'=-1` 以使用单机上的所有核心。这解决了计算/时间限制。\n*   我们可以使用\
+  \ scikit-learn 并将其代码包裹在 `with parallel_backend('dask'):` 中，就像我们在“动态任务调度”部分的示例中所做的那样，无论是随机搜索、网格搜索还是任何其他使用\
+  \ `*joblib*` 实现的算法。我们可以使用单机上的所有核心，或者将它们分发到集群上，这取决于 `dask.distributed` 的 `client()`\
+  \ 是如何定义的。如果使用集群，这可以进一步减少时间。\n\n现在让我们看看 Dask 还为我们提供了哪些用于超参数优化的功能。\n\n#### Dask 随机搜索和网格搜索\n\
+  \n我们不能使用 scikit-learn 提供的随机搜索或网格搜索来训练大型数据集，因为它们不支持 `partial_fit`。然而，Dask 为这两种算法提供了即插即用的替代方案：`dask_ml.model_selection.GridSearchCV`\
+  \ 和 `dask_ml.model_selection.RandomizedSearchCV`。Dask 和 Scikit-Learn 中各自算法的接口是相似的，但\
+  \ Dask 的版本实现了 `partial_fit`，这样我们就可以将 scikit-learn 的机器学习算法包装在 `Incremental` 中，并将其传递给这些超参数优化算法。\n\
+  \n这种设置不仅可以分块训练模型，还可以将其分发到集群上，从而同时解决时间和内存问题。步骤基本上是一个直接的脚本，与我们之前所做的相同：\n\n1.  定义一个客户端。\n\
+  2.  定义搜索空间。\n3.  创建一个大型数据集来测试我们的分布式模型。\n4.  训练测试分割。\n5.  定义使用部分拟合的机器学习算法，例如 SGD\
+  \ 分类器。\n6.  将机器学习算法包装在 `Incremental` 中，以便在将其分发到核心/集群时可以分块管理和训练数据。\n7.  在此基础上使用从\
+  \ Dask 导入的网格搜索，因为它实现了 `partial_fit`。\n8.  在 `joblib.parallel_backend` 下训练模型，以便可以进一步分发。\n\
+  \n然而，在遵循这些步骤时，我遇到了一个有趣的问题。当我执行代码时，我检查了 Dask 仪表盘。内存开始被填满。问题出在准确率评分上。在我使用了 `dask_ml`\
+  \ 中的准确率指标后，问题得到了解决。\n\n让我们看一个示例：\n\n```\nfrom dask_ml import datasets\nfrom dask_ml.wrappers\
+  \ import Incremental\nfrom dask_ml.model_selection import train_test_split, GridSearchCV\n\
+  from dask_ml.metrics import accuracy_score\nfrom sklearn.metrics import make_scorer\n\
+  from sklearn.linear_model import SGDClassifier\nimport joblib\nimport dask.array\
+  \ as da\nfrom dask.distributed import Client\nclient = Client(processes=False)\n\
+  print(client.dashboard_link)\nparam_grid = {\n\"penalty\": ['l1', 'l2'],\n\"tol\"\
+  : [1e-2, 1e-3, 1e-4]\n}\nX, y = datasets.make_classification(n_samples=100000000,\n\
+  n_features=7,\nrandom_state=0,\nchunks=100000)\n# 提供来自 'dask_ml' 的准确率指标\nscorer\
+  \ = make_scorer(accuracy_score)\nX_train, X_test, y_train, y_test = train_test_split(X,\
+  \ y)\nclf = SGDClassifier(loss='log')\nclf_wrap = Incremental(clf, scoring=scorer)\n\
+  searh_clf = GridSearchCV(clf_wrap, param_grid, cv=3)\nwith joblib.parallel_backend('dask'):\n\
+  model = searh_clf.fit(X_train, y_train)\n```\n\n注意\n\n经过一番摸索，我发现默认情况下使用的是 `SGDClassifier.score`\
+  \ 进行评分计算，它会将 `dask arrays` 的块转换为 `ndarray`，从而导致内存使用过高。当我使用 `dask_ml` 中的评分器时，问题就解决了。\n\
+  \n因此，你需要注意确保数据的块不会被转换为 `numpy array`；否则会导致内存被填满。这里使用 Dask 数据框和 Dask 数组的目的就是为了不填满内存。\n\
+  \n\n\n#### 增量搜索\n\n这是另一种非常优秀的超参数搜索方法。我们知道，Dask 可以将数据分块，而使用 `partial_fit` 的算法可以一次性训练小批量数据。增量搜索算法正是利用了这一点。它在较小的数据集块上，针对多组不同的超参数训练多个模型。然后，它只继续训练表现最佳的那组超参数。然而，这种方法有一个缺点：如果某个超参数在后期才开始表现更好怎么办？例如，在图\
+  \ 3-1-7 中，我们有两个超参数 h1 和 h2，并且我们训练模型直到第九个数据块。最初 h1 表现更好，但后来 h2 开始表现更好。但是，如果我们在第二个数据块时就停止训练，我们就不会知道这一点，并且会丢弃\
+  \ h2。\n\n![../images/494613_1_En_3_Chapter/494613_1_En_3_Fig7_HTML.jpg](img/494613_1_En_3_Fig7_HTML.jpg)\n\
+  \n图 3-1-7\n\n随着更多数据块被用于训练，损失值逐渐降低\n\n使用增量搜索非常简单，如下所示。其接口与 GridSearchCV 或 RandomSearchCV\
+  \ 类似。\n\n```\nfrom dask_ml.model_selection import IncrementalSearchCV\nfrom sklearn.linear_model\
+  \ import SGDClassifier\nparam_grid = {\n\"penalty\": ['l1', 'l2'],\n\"tol\": [1e-1,\
+  \ 1e-2, 1e-3, 1e-4, 1e-5, 1e-6]\n}\nclf = IncrementalSearchCV(SGDClassifier(), param_grid)\n\
+  #fit the data to train\n```\n\n图 3-1-8 展示了一个比较随机搜索和增量搜索的试验次数与准确率关系图。\n\n![../images/494613_1_En_3_Chapter/494613_1_En_3_Fig8_HTML.jpg](img/494613_1_En_3_Fig8_HTML.jpg)\n\
+  \n图 3-1-8\n\n随机搜索与增量搜索的比较。使用了 sklearn 中的 Digits 数据集，在 SGD 分类器上进行训练。结果基于前五次试验进行比较\n\
+  \n#### 连续减半搜索\n\n连续减半搜索与增量搜索有些相似。一个时间预算 (B) 被均匀分配给所有超参数组合。我们开始在有限的数据量上训练模型，并使用所有超参数组合。一旦所有模型训练完毕，表现最差的一半组合将被丢弃。在下一次迭代中，剩余的一半模型将在比之前更多的数据上进行训练、评估，然后再丢弃前一半中的一半。\n\
+  \n这个过程一直持续到只剩下一组最佳组合，从而将更多资源分配给表现更好的超参数。使用 Dask 实现的连续减半搜索如下：\n\n```\nfrom dask_ml.model_selection\
+  \ import SuccessiveHalvingSearchCV\nfrom sklearn.linear_model import SGDClassifier\n\
+  clf = SuccessiveHalvingSearchCV(SGDClassifier(), param_grid, n_initial_iter=2)\n\
+  #call fit to train data\n```\n\n这里，我们必须向搜索函数传递 `n_initial_iter`，它定义了最初调用 `partial_fit`\
+  \ 的次数。\n\n不过，与增量搜索类似，同样的问题也可能存在：如果我们过早停止，可能会选错超参数组合。\n\n#### Hyperband 搜索\n\nHyperband^(²)\
+  \ 是一种基于赌博机算法的方法，用于解决超参数优化问题。这种基于赌博机算法的方法完美地解决了我们这里的问题：我们资源有限，但需要高效地将它们分配给所有的试验。我们再次将更多时间花在表现更好的模型上，而不是将资源和时间浪费在糟糕的超参数配置上。\n\
+  \nHyperband 是连续减半搜索的扩展版本。在连续减半搜索中，我们为超参数组合 (n) 设定一个固定预算 (B)，并且将 'B/n' 的资源均匀分配给 'n'\
+  \ 中的所有组合。但是，如何选择 'n' 仍然是一个问题。有两种可能性：\n\n*   我们应该考虑较小的 'n' 值，这样每个配置获得的资源更多，训练时间更长。但这样覆盖的搜索空间会更小。当准确率分数更多地依赖于训练数据而非超参数时，这种情况可能更有利。\n\
+  \n*   我们应该考虑较大的 'n' 值，这样可以用较少的训练量覆盖更多的搜索空间。如果超参数的变化会导致准确率/损失分数发生巨大变化，那么较大的 'n' 值会更好，这与图\
+  \ 3-1-7 中的情况不同，在图 3-1-7 中，我们在后期需要更长时间的训练才能使损失分数趋于饱和。\n\nHyperband 通过保持 B 值恒定并改变\
+  \ 'n' 的值来解决“n 与 B/n”的权衡问题。因此，较大的 'n' 值会导致更激进的早停策略，因为每个超参数组合的预算减少了。在 Hyperband 中，每次进行连续减半迭代时，我们都会改变\
+  \ 'n' 的值。这里有一个嵌套循环；内层循环执行连续搜索，外层循环则遍历不同的 'n' 值。这提供了大量的并行化可能性，Dask 实现的 Hyperband\
+  \ 就利用了这一点：\n\n```\nfrom dask_ml.model_selection import HyperbandSearchCV\nfrom sklearn.linear_model\
+  \ import SGDClassifier\nclf = HyperbandSearchCV(SGDClassifier(), param_grid)\n#call\
+  \ fit to train data\n```\n\n传递给 Hyperband 的两个重要参数是 `max_iter`，它定义了调用 `partial_fit`\
+  \ 的次数，以及 `partial_fit` 的块大小。这两个参数通常根据经验法则确定，其中 `max_iter` 等于超参数组合的数量 (n_param)，而块大小等于\
+  \ n_param / n_examples，其中 n_examples 是模型训练所用的样本数量；例如，如果 X_train 分五次迭代训练，则 n_examples\
+  \ = 5 * len(X_train)。\n\n注意\n\n当使用这些优化算法（增量搜索、连续减半搜索、增量搜索）时，你只能使用那些实现了 `partial_fit`\
+  \ 的建模算法，因为其核心思想是提前停止训练，而这在其他算法中是无法做到的。虽然你可以使用 RandomSearchCV 和 GridSearchCV 将试验分布到集群上，但当数据是分块训练（数据量大于内存的情况）时，你不能使用它们；在这种情况下，你仍然需要\
+  \ `partial_fit`。这些方法在处理神经网络时非常有用，因为神经网络是基于批次进行训练的。\n\nDask 会序列化多个对象以便进行分发。scikit-learn\
+  \ 和 PyTorch 与这些算法的配合效果更好，因为它们都基于 pickle 协议，而 TensorFlow 和 Keras 则不同。但是，在使用 Keras\
+  \ 和 TensorFlow 时，你可以应用其他算法，如 GridSearchCV、RandomSearchCV 等。我们将在下一节讨论这个问题。\n\n##\
+  \ 分布式深度学习模型\n\n深度学习模型的训练成本相当高。将神经网络训练分布到集群上，并在此基础上应用超参数优化，可以帮助我们节省大量时间。深度学习框架提供了用于分布式的模块；例如，TensorFlow\
+  \ Distributed（可扩展到 TensorFlow 和 Keras）、PyTorch Distributed（可扩展到 PyTorch）、Horovod\
+  \ 等。使用 TensorFlow Distributed 进行分布式训练非常麻烦。你必须创建参数服务器并修改大量代码。在本节中，我们将讨论使用 PyTorch\
+  \ Distributed 和 Horovod 来分布式训练深度神经网络，以训练 MNIST 数据集为例。如果你需要快速回顾 PyTorch API 的使用，请参考附录\
+  \ II。\n\n\n\n### PyTorch 分布式\n\n在单台机器和集群上进行分布式的主要区别在于，在集群中我们需要一个后端通信 API 来在节点之间进行通信。这是\
+  \ PyTorch 的强大之处之一。PyTorch 支持所有三种主要的后端通信 API：NCCL（NVIDIA 集体通信库，发音为“Nickel”）、Gloo\
+  \ 和 MPI（消息传递接口）。以下示例主要基于一个 GitHub 仓库（[`https://github.com/seba-1511/dist_tuto.pth`](https://github.com/seba-1511/dist_tuto.pth)）：\n\
+  \n```\nimport torch\nimport torch.nn as nn\nimport torch.nn.functional as F\nimport\
+  \ torch.optim as optim\nimport torch.distributed as dist\nfrom torch.autograd import\
+  \ Variable\nfrom torch.multiprocessing import Process\nimport os\nfrom math import\
+  \ ceil\nfrom random import Random\nfrom torchvision import datasets, transforms\n\
+  def init_processes(rank, size, fn, backend=\"gloo\"):\nos.environ['MASTER_ADDR']\
+  \ = '127.0.0.1'\nos.environ['MASTER_PORT'] = '29500'\ndist.init_process_group(backend,\
+  \ rank=rank, world_size=size)\nfn(rank, size)\n```\n\n我们首先定义通信后端；这里将使用 'gloo'。接着定义主节点地址和主节点端口，以便所有节点都向一个中心主节点报告。每次执行\
+  \ `init_processes` 函数时，都会创建一个新的进程组，并执行函数 `fn()`。在我们的例子中，`fn` 将是一个训练神经网络的函数，因此我们稍后会编写一个函数，用于在子样本上训练模型，然后对梯度进行平均。\n\
+  \n注意\n\nPyTorch 文档建议，作为经验法则，在使用 CPU 时使用 'gloo'，在 GPU 上训练时使用 'nccl'。\n\n```\nclass\
+  \ Net(nn.Module):\ndef __init__(self):\nsuper(Net, self).__init__()\nself.conv1\
+  \ = nn.Conv2d(1, 10, kernel_size=5)\nself.conv2 = nn.Conv2d(10, 20, kernel_size=5)\n\
+  self.conv2_drop = nn.Dropout2d()\nself.fc1 = nn.Linear(320, 50)\nself.fc2 = nn.Linear(50,\
+  \ 10)\ndef forward(self, x):\nx = F.relu(F.max_pool2d(self.conv1(x), 2))\nx = F.relu(F.max_pool2d(self.conv2_drop(self.conv2(x)),\
+  \ 2))\nx = x.view(-1, 320)\nx = F.relu(self.fc1(x))\nx = F.dropout(x, training=self.training)\n\
+  x = self.fc2(x)\nreturn F.log_softmax(x)\n```\n\n我们需要创建一个神经网络来构建模型，因此这里定义了一个简单的卷积网络：\n\
+  \n```\nclass Partition(object):\ndef __init__(self, data, index):\nself.data = data\n\
+  self.index = index\ndef __len__(self):\nreturn len(self.index)\ndef __getitem__(self,\
+  \ index):\ndata_idx = self.index[index]\nreturn self.data[data_idx]\nclass DataPartitioner(object):\n\
+  def __init__(self, data, sizes=[0.7, 0.2, 0.1], seed=1234):\nself.data = data\n\
+  self.partitions = []\nrng = Random()\nrng.seed(seed)\ndata_len = len(data)\nindexes\
+  \ = [x for x in range(0, data_len)]\nrng.shuffle(indexes)\nfor frac in sizes:\n\
+  part_len = int(frac * data_len)\nself.partitions.append(indexes[0:part_len])\nindexes\
+  \ = indexes[part_len:]\ndef use(self, partition):\nreturn Partition(self.data, self.partitions[partition])\n\
+  ```\n\n我们的模型是并行训练的，因此一旦在一批数据上训练完成，就需要更新所有梯度。所以，当一批数据训练完成后，我们收集所有梯度并取其平均值。数据以相等的比例发送到所有节点，以便每个模型的收敛保持一致。数据划分基于正在运行的进程数量。我们可以使用前面代码中定义的类来获取一定比例的数据。\n\
+  \n```\ndef partition_dataset():\ntransformations = [transforms.ToTensor(),\ntransforms.Normalize((0.1307,\
+  \ ), (0.3081, ))\n]\ndataset = datasets.MNIST('./data',\ntrain=True,\ndownload=True,\n\
+  transform=transforms.Compose(transformations)\n)\nsize = dist.get_world_size()\n\
+  bsz = int(8 / float(size))\npartition_sizes = [1.0 / size for _ in range(size)]\n\
+  partition = DataPartitioner(dataset, partition_sizes)\npartition = partition.use(dist.get_rank())\n\
+  train_set = torch.utils.data.DataLoader(\npartition, batch_size=bsz, shuffle=True)\n\
+  return train_set, bsz\n```\n\n此函数加载 MNIST 数据集，并使用 `DataPartitioner()` 对数据进行划分。`dist.get_world_size()`\
+  \ 返回当前进程组中的进程数量。因此，如果运行三个进程，我们将有三个分区大小，每个占 0.33 的比例。类似地，对于批次大小，我们将所需的批次大小除以进程数：\n\
+  \n```\ndef average_gradients(model):\nsize = float(dist.get_world_size())\nfor param\
+  \ in model.parameters():\ndist.all_reduce(param.grad.data, op=dist.reduce_op.SUM)\n\
+  param.grad.data /= size\n```\n\n这里我们对梯度进行平均。`all_reduce` 会更新所有分布式模型中的参数。现在，我们定义将优化模型的函数，并将其传递给\
+  \ `init_processes()`。\n\n```\ndef run(rank, size):\ntorch.manual_seed(1234)\ntrain_set,\
+  \ bsz = partition_dataset()\nmodel = Net()\nmodel = model\noptimizer = optim.SGD(model.parameters(),\
+  \ lr=0.01, momentum=0.5)\nnum_batches = ceil(len(train_set.dataset) / float(bsz))\n\
+  for epoch in range(10):\nepoch_loss = 0.0\nfor data, target in train_set:\ndata,\
+  \ target = Variable(data), Variable(target)\noptimizer.zero_grad()\noutput = model(data)\n\
+  loss = F.nll_loss(output, target)\nepoch_loss += loss.item()\nloss.backward()\n\
+  average_gradients(model)\noptimizer.step()\nprint(f'Rank: {dist.get_rank()}, \\\n\
+  Epoch: {epoch}, \\\nLoss: {epoch_loss / num_batches}')\n```\n\n每个 rank 代表正在并行训练的模型。我们调用\
+  \ `partition_dataset()` 来获取训练集。在迭代过程中，我们使用函数 `average_gradients()` 来平均梯度。现在，最后，我们可以通过将函数\
+  \ `run()` 传递给 `init_processes()` 来启动分布式训练：\n\n```\nsize = 3\nprocesses = []\nfor\
+  \ rank in range(size):\np = Process(target=init_processes, args=(rank, size, run))\n\
+  p.start()\nprocesses.append(p)\nfor p in processes:\np.join()\n```\n\n这将启动你的分布式训练。通过根据网络和用例进行少量修改，我们可以使用此方法在计算机集群上训练深度学习模型。\n\
+  \n\n\n### Horovod\n\nHorovod 是一个开源的分布式深度学习训练库，可与 PyTorch 和 TensorFlow/Keras 配合使用。如果你已有非分布式训练的代码，只需添加几行代码即可通过\
+  \ Horovod 实现分布式训练。（关于如何在不同的集群上进行分布式部署，请参考相关文档。）与 PyTorch Distributed 类似，Horovod\
+  \ 能够使用 Gloo、MPI 以及其他后端通信方式。在本节中，我们将探讨需要进行哪些修改，以及这些修改与上一节中 PyTorch 实现的相似之处。\n\n首先，在\
+  \ PyTorch 中编写一个简单的单机神经网络训练代码。你可以参考附录 II 的 PyTorch 部分。创建以下函数：\n\n*   `Network()`：一个继承自\
+  \ `torch.nn.Module` 的类，用于创建神经网络架构\n*   `train_epoch()`：一个用于在单机上训练神经网络的函数\n\n同时定义以下全局变量：`batch_size`、`learning_rate`、`momentum`\
+  \ 和 `epochs`。下面的代码展示了如何使用 horovod 进行分布式模型训练：\n\n```\nimport horovod.torch as hvd\n\
+  from sparkdl import HorovodRunner\nfrom torch.utils.data.distributed import DistributedSampler\n\
+  def train_hvd():\nhvd.init()\ndevice = torch.device('cuda' if torch.cuda.is_available()\
+  \ else 'cpu')\nif device.type == 'cuda':\ntorch.cuda.set_device(hvd.local_rank())\n\
+  transformation = [transforms.ToTensor(),\ntransforms.Normalize((0.1307,), (0.3081,))]\n\
+  train_dataset = datasets.MNIST(\nroot=f'data-{hvd.rank()}',\ntrain=True,\ndownload=True,\n\
+  transform=transforms.Compose(transformation)\n)\ntrain_sampler = DistributedSampler(train_dataset,\n\
+  num_replicas=hvd.size(),\nrank=hvd.rank())\ntrain_loader = torch.utils.data.DataLoader(train_dataset,\n\
+  batch_size=int(batch_size/hvd.size()),\nsampler=train_sampler)\nmodel = Network().to(device)\n\
+  optimizer = optim.SGD(model.parameters(),\nlr=learning_rate,\nmomentum=momentum)\n\
+  optimizer = hvd.DistributedOptimizer(optimizer,\nnamed_parameters=model.named_parameters())\n\
+  hvd.broadcast_parameters(model.state_dict(), root_rank=0)\nfor epoch in range(1,\
+  \ epochs + 1):\ntrain_epoch(train_loader)\n```\n\n`train_hvd()` 函数与我们使用 PyTorch\
+  \ Distributed 时的做法非常相似。`hvd.rank()` 用于获取工作节点 ID，因此我们为集群中的每个工作节点（rank）创建一个独立的根文件夹。\n\
+  \n与上一节中使用 `partition_dataset()` 在工作节点间创建和划分数据类似，这里我们使用 `DistributedSampler()` 根据工作节点数量创建数据集的分区，并将该对象传递给\
+  \ `Dataloader()` 以生成数据集。同样，有效的批量大小会根据工作节点数量进行缩放。\n\n定义 `optimizer` 后，我们将其包装在 `hvd.DistributedOptimizer()`\
+  \ 中，这类似于我们之前使用的 `all_reduce()`。梯度会在不同节点上运行的模型之间进行平均。`hvd.broadcast_parameters()`\
+  \ 使用新的梯度更新所有梯度，确保所有 rank 上的模型都以相同的参数启动。\n\n现在，为了在集群间进行分布式训练，我们将使用 `HorovodRunner`\
+  \ 提供的简单接口：\n\n```\nhr = HorovodRunner(np=2)\nhr.run(train_hvd)\n```\n\n这里，`np` 定义了工作节点的数量，`hr.run()`\
+  \ 启动分布式训练。\n\n当你在成百上千维度的空间中优化超参数时，这些分布式方法会非常有用。在优化超参数时，时间效率和资源利用率都是重要的考量因素。\n\n\
+  在下一章中，你将看到更先进的基于贝叶斯的优化方法，这些方法实际上会从之前的试验中学习。\n\n脚注 1\n\n"
+- '# 4. 贝叶斯优化
+
+
+  在第 2 章和第 3 章中，我们探讨了几种超参数调优方法。网格搜索和随机搜索非常直接，我们还讨论了如何将它们分布式化以节省内存和时间。我们也深入研究了一些更复杂的算法，例如
+  HyperBand。但我们回顾的所有算法都没有从它们的历史记录中学习。假设一个算法可以记录所有之前的观测结果并从中学习。例如，假设它可以观察到我们的模型正在超参数的某些值附近被优化，并且可以利用这个宝贵的信息，继续探索那些接近表现良好的超参数，从而从历史中学习。通过这样做，该算法在达到最佳性能超参数的过程中，就不会在表现不佳的超参数上浪费时间。在本章中，我们将探讨具备这种能力的算法。
+
+
+  让我们从一个例子开始。图 4-1-1 展示了两个超参数之间的关系图。将其与第 2 章中的图 2-2-1 进行比较，后者表示网格搜索（我们在选定的参数网格中进行遍历）和随机搜索（随机命中一组超参数）。
+
+
+  ![../images/494613_1_En_4_Chapter/494613_1_En_4_Fig1_HTML.jpg](img/494613_1_En_4_Fig1_HTML.jpg)
+
+
+  图 4-1-1
+
+
+  两个超参数之间的关系图，其中颜色较深的区域表示准确率较低，颜色较浅的区域表示准确率较高
+
+
+  在图 4-1-1 中，标有数字 1 的圆圈是随机选择的超参数。观察到一些位于最深色和最浅色区域之间的中间区域的 1 号点生成了更好的模型。因此，我们不再在其余的
+  1 号试验点上浪费时间，而是关注表现更好的 1 号试验点周围的区域，并用 2 号点训练模型，依此类推。最终，我们到达了 4 号点，其中一个 4 号点位于中间区域，另一个几乎位于最浅色区域的中心。因此，我们选择位于最浅色区域的
+  4 号试验点作为我们最佳的超参数集。直观地说，这个过程似乎比你之前学过的穷举方法更好。
+
+
+
+
+  ## 基于序列模型的全局优化
+
+
+  值得注意的是，在机器学习中，函数训练和评估的成本高昂且速度缓慢。在本节中，我们将探讨基于序列模型的全局优化（SMBO）来解决超参数优化问题。SMBO 采用贝叶斯优化的方法，该方法用于跟踪先前的评估结果，并基于概率模型选择下一组超参数。
+
+
+  ![$$ p\left(y|x\right) $$](img/494613_1_En_4_Chapter_TeX_Equa.png)
+
+
+  我们的目标函数（机器学习算法）记为 *f*，*y* 是通过在超参数集 *x* 上评估 *f* 计算得到的分数。在贝叶斯优化中，本质上包含四个重要方面（在以下步骤列表之后定义）：搜索空间、目标函数、概率回归模型和采集函数。
+
+
+  整个贝叶斯优化过程可总结为以下步骤：
+
+
+  1.  构建一个回归模型。
+
+  2.  初始化一些随机的超参数集（在首次试验的情况下，因为我们需要从某处提供初始超参数）。
+
+  3.  在采集函数建议的超参数集上评估模型（如果是首次试验，则从步骤 2 中选择超参数），并计算目标函数上的分数。
+
+  4.  根据新建议的超参数和分数更新代理模型。
+
+  5.  重复步骤 3 和 4，进行指定次数的迭代。
+
+
+  *搜索空间*（*X*），正如你在第 1 章所学到的，是一个定义好的范围，我们为超参数优化算法提供一个可供选择的范围。根据超参数的不同，范围可以是连续的或离散的。例如，在
+  SVM 中选择核函数是一个离散超参数，但 gamma 是从连续分布中选择的。搜索空间可能非常复杂。例如，在神经网络中，选择每个隐藏层的节点数取决于隐藏层的数量。
+
+
+  *目标函数*（*f*）是一个函数，它在给定的超参数集上训练机器学习模型，其输出是根据采集函数返回的准确率分数或损失分数。在下面的示例中，我们计算准确率分数，如果返回的值需要最小化，我们将通过最小化其负值来最大化准确率分数。
+
+
+  ```
+
+  X, y = load_data()  # X 和 y 是一些预处理过的数据
+
+  X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3)
+
+  def objective_function(hyperparameters):
+
+  C = hyperparameters["C"]
+
+  gamma = hyperparameters["gamma"]
+
+  model = SVC(C=C, gamma=gamma)
+
+  model.fit(X_train, y_train)
+
+  score = model.score(X_test, y_test)
+
+  # 因为我们想要最大化分数，所以取其负值
+
+  return -score
+
+  ```
+
+
+  *概率回归模型*（*p*(*y*| *x*) 或 *M*），也称为代理函数，是利用先前的评估结果构建的，是对目标函数的概率建模。因此，每次迭代都会通过在目标函数上评估超参数来更新代理模型。与目标函数相比，代理函数的*评估成本更低*，并且代理函数决定下一组将由目标函数评估的超参数，从而降低了优化成本。代理函数可以通过不同的方法构建，例如高斯过程（GP）、随机森林或树形结构
+  Parzen 估计器（TPE）。以下是这些代理函数如何形成的简要概述：
+
+
+  *   在高斯过程中，函数 *f* 被假定为高斯分布的一个实现，其预测遵循正态分布。GP 直接对 *p*(*y*| *x*) 进行建模。
+
+  *   在 TPE 中，*p*(*y*| *x*) 是基于 *p*(*x*| *y*) 和 *p*(*y*) 两者进行建模的。我们将在本章后面更详细地讨论 TPE。
+
+
+  *采集函数*（*S*）使用代理模型以及先前超参数集上的预测损失分数来选择下一组超参数。有几种采集函数，例如改进概率、期望改进、最小化器的条件熵和基于赌博机的准则。最常用的是期望改进：
+
+
+  ![$$ {EI}_{y\ast }(x):= {\int}_{-\infty}^{y\ast}\mathit{\max}\left({y}^{\ast }-y,0\right).p\left(y|x\right).
+  dy $$](img/494613_1_En_4_Chapter_TeX_Equb.png)
+
+
+  这里，*EI* 由代理函数和损失分数建模。*y** 是某个阈值，而 *y* = *f* (*x*) 是在建议的超参数集 *x* 上从目标函数获得的分数。*p*(*y*|
+  *x*) 是代理模型。上述积分的正值意味着所建议的超参数很有可能产生更好的结果。在建议集 *x* 上，如果 *y* 负向增加，EI 将为正值，从而表明这是一个更好的超参数选择。
+
+
+  以下是 SMBO 方法工作原理的通用伪代码模板：
+
+
+  ![../images/494613_1_En_4_Chapter/494613_1_En_4_Figa_HTML.jpg](img/494613_1_En_4_Figa_HTML.jpg)
+
+
+  在此伪代码中，*f* 是目标函数，*X* 是超参数的搜索空间，*S* 是采集函数，*M* 是回归模型（代理函数）。
+
+
+  首先，我们用搜索空间中的一些随机样本初始化 *D*；*D* 以 (*x*[i,] *y*[i]) 的形式存储评估历史，其中 *x*[i] 表示后续的超参数集，*y*[i]
+  表示损失分数。
+
+
+  现在，我们针对指定次数的试验 *T* 运行循环。首先，使用历史记录 *D* 更新代理函数。然后，*S* 建议一组超参数 *x*i。*x*i 被发送给 *f*，并计算损失分数。历史记录现在保存在
+  *D* 中，将再次用于更新代理函数。
+
+
+  经过 *T* 次试验后，我们将得到最佳的超参数集。
+
+
+  你无需自己实现这些方法，因为所有概率回归模型都可以在不同的库中找到实现。例如，Hyperopt^(³) 实现了 TPE，Spearmint^(⁴) 和 MOE^(⁵)
+  实现了高斯过程，而 SMAC^(⁶) 实现了基于随机森林的代理函数。
+
+
+  接下来，我们将详细讨论树形结构 Parzen 估计器以及期望改进采集函数的工作原理。
+
+
+
+
+  ## 树结构帕森估计器
+
+
+  树结构帕森估计器（Tree-structured Parzen estimator）是一种流行的贝叶斯优化方法，它使用期望改进采集函数^(⁷)。在 TPE 中，*p*(*y*|
+  *x*) 是通过 *p*(*x*| *y*) 和 *p*(*y*) 依据贝叶斯定理建模的，这与直接建模 *p*(*y*| *x*) 的高斯过程（GP）不同。
+
+
+  ![$$ p\left(y|x\right)=\frac{\left(p\left(x|y\right)\ast p(y)\right)}{p(x)} $$](img/494613_1_En_4_Chapter_TeX_Equ1.png)
+
+
+  （公式 4.2.1）
+
+
+  *p*(*x*| *y*) 表示为：
+
+
+  *p*(*x*| *y*) = *l*(*x*) *如果* *y* < *y** （公式 4.2.2）
+
+
+  以及
+
+
+  *p*(*x*| *y*) = *g*(*x*) *如果* *y* >= *y** （公式 4.2.3）
+
+
+  这里，*y** 是一个分位数，被称为*阈值损失分数*。*l*(*x*) 和 *g*(*x*) 是超参数分布。因此，对于某些超参数集 (*x*[i])，如果预测的损失分数
+  (*y*) 小于 *y**，则意味着这些集合位于分布 *l*(*x*) 中；如果 *y* 大于 *y**，则它们位于分布 *g*(*x*) 中。我们可以通过图
+  4-2-1 清楚地理解这一点。
+
+
+  ![../images/494613_1_En_4_Chapter/494613_1_En_4_Fig2_HTML.jpg](img/494613_1_En_4_Fig2_HTML.jpg)
+
+
+  图 4-2-1
+
+
+  在超参数 *x*[*i*0] 上，低于 *y*^* 的点来自分布 *l*(*x*)，高于 *y*^* 的点来自分布 *g*(*x*)
+
+
+  选择 *y** 的值，使其大于 *f* (*x*) 的最佳观测值，即 *y* < *y**，因此我们必须找到位于 *l*(*x*) 分布中的超参数集，以便预测的损失分数小于
+  *y**。
+
+
+  设
+
+
+  *p*(*y* < *y*^∗) = *γ* （公式 4.2.4）
+
+
+  并且连续边际概率为
+
+
+  ![$$ p(x)={\int}_Rp\left(x|y\right).p(y). dy $$](img/494613_1_En_4_Chapter_TeX_Equ2.png)
+
+
+  （公式 4.2.5）
+
+
+  现在我们优化 EI：
+
+
+  ![$$ {EI}_{y\ast }(x)={\int}_{-\infty}^{y^{\ast }}\left({y}^{\ast }-y\right).p\left(y|x\right).
+  dy $$](img/494613_1_En_4_Chapter_TeX_IEq1.png) = ![$$ {\int}_{-\infty}^{y^{\ast
+  }}\left({y}^{\ast }-y\right)\frac{p\left(x|y\right).p(y)}{p(x)}. dy $$](img/494613_1_En_4_Chapter_TeX_IEq2.png)
+      （公式 4.2.6）
+
+
+  利用公式 4.2.2、4.2.3 和 4.2.4，公式 4.2.5 可以写成如下形式：
+
+
+  ![$$ p(x)={\int}_Rp\left(x|y\right).p(y). dy=\gamma .l(x)+\left(1-\gamma \right).g(x)
+  $$](img/494613_1_En_4_Chapter_TeX_Equ3.png)
+
+
+  （公式 4.2.7）
+
+
+  现在，公式 4.2.6 中的分母项被简化为公式 4.2.7，它不依赖于 *y*。让我们简化分子：
+
+
+  ![$$ {\int}_{-\infty}^{y^{\ast }}\left({y}^{\ast }-y\right).p\left(x|y\right).p(y).
+  dy=l(x){\int}_{-\infty}^{y^{\ast }}\left({y}^{\ast }-y\right).p(y). dy=\gamma .{y}^{\ast
+  }.l(x)-l(x){\int}_{-\infty}^{y^{\ast }}p(y). dy $$](img/494613_1_En_4_Chapter_TeX_Equ4.png)
+
+
+  （公式 4.2.8）
+
+
+  将公式 4.2.7 和 4.2.8 结合起来，我们得到期望改进的值：
+
+
+  ![$$ {EI}_{y\ast }(x)=\frac{\gamma .{y}^{\ast }.l(x)-l(x){\int}_{-\infty}^{y^{\ast
+  }}p(y). dy}{\gamma .l(x)+\left(1-\gamma \right).g(x)} $$](img/494613_1_En_4_Chapter_TeX_Equc.png)
+
+
+  进一步简化，我们得到：
+
+
+  ![$$ {EI}_{y\ast }(x)=\frac{\ l(x)\left[\gamma .{y}^{\ast }-{\int}_{-\infty}^{y^{\ast
+  }}p(y). dy\right]}{\gamma .l(x)+\left(1-\gamma \right).g(x)} $$](images/494613_1_En_4_Chapter/494613_1_En_4_Chapter_TeX_Equd.png)
+
+
+  因此：
+
+
+  ![$$ {EI}_{y\ast }(x)\propto {\left[\gamma +\frac{g(x)}{l(x)}.\left(1-\gamma \right)\right]}^{-1}
+  $$](images/494613_1_En_4_Chapter/494613_1_En_4_Chapter_TeX_Equ5.png)
+
+
+  （公式 4.2.9）
+
+
+  公式 4.2.9 明确告诉我们，期望改进与比率 *g*(*x*)/*l*(*x*) 成反比。这意味着我们更希望我们的超参数 (*x*) 位于分布 *l*(*x*)
+  中，而不是 *g*(*x*) 中，以增加 EI。
+
+
+  因此，在每次迭代中，从 *l*(*x*) 中抽取候选值，并返回损失分数最小的那个，从而选择最佳超参数。
+
+
+  现在你已经基本了解了在贝叶斯方法中我们如何对代理函数和采集函数进行建模，接下来我们将介绍一个实现了 TPE 的开源库：Hyperopt。
+
+
+  ## Hyperopt
+
+
+  Hyperopt 是一个出色的开源库，用于分布式异步超参数优化，它实现了诸如随机搜索、TPE 和自适应 TPE 等算法。在本节中，我们将重点介绍如何使用 Hyperopt
+  库来优化超参数。
+
+
+  Hyperopt 可以处理复杂的搜索空间，包括对离散值和连续值的搜索。我们可以使用该库在算法之间进行搜索，并为这些算法找到最佳的超参数集。在处理深度学习问题时，我们面对的是数百维度的空间，为了充分利用深度网络的潜力，我们需要超参数设置达到最优。使用网格搜索或随机搜索并不可行，因为每次训练网络的成本相当高。在这种情况下，使用贝叶斯优化可能是最佳选择。
+
+
+  要使用 Hyperopt，我们需要一个搜索空间和一个目标函数。让我们看一个简单的例子：
+
+
+  ![$$ f\left(a,b\right)={a}²-{b}² $$](img/494613_1_En_4_Chapter_TeX_Eque.png)
+
+
+  这里，我们最小化 *f* (*a*, *b*)，其中 *a* ∈ [−2, 3] 且 *b* ∈ [−1, 2]。
+
+
+  让我们使用 Hyperopt 来优化这个问题：
+
+
+  ```
+
+  from hyperopt import tpe, fmin, hp
+
+  def objective_func(args):
+
+  a = args[''a'']
+
+  b = args[''b'']
+
+  f = a**2 - b**2
+
+  return f
+
+  range_a = hp.uniform(''a'', -2, 3)
+
+  range_b = hp.uniform(''b'', -1, 2)
+
+  space = {''a'': range_a,
+
+  ''b'': range_b}
+
+  best = fmin(objective_func, space, algo=tpe.suggest, max_evals=100)
+
+  ```
+
+
+  上述代码使用 TPE 来找到使 *f* (*a*, *b*) 最小的 *a* 和 *b* 的最佳值。我们可以看到，函数在 *a* = 0 和 *b* = 2 时取得最小值，最小值为
+  *f*[*min*] = −4。让我们看看 Hyperopt 在 1000 次试验中是如何逼近这个问题的。
+
+
+  图 4-3-1 显示，*a* 和 *b* 的值分别趋近于 0 和 2，而 *f* 的值在早期试验中就趋近于 −4。这是一个简单的函数，其最优值是整数。对于更复杂的函数，其值必须从连续分布中选取，TPE
+  被证明是高效的。
+
+
+  ![../images/494613_1_En_4_Chapter/494613_1_En_4_Fig3_HTML.jpg](img/494613_1_En_4_Fig3_HTML.jpg)
+
+
+  图 4-3-1
+
+
+  使用 TPE 在 1000 次迭代中绘制 *f*、*a* 和 *b* 的值
+
+
+  如前所述，要使用 Hyperopt，我们必须定义一个目标函数和搜索空间。在前面的代码中，我们的目标函数将超参数作为输入，并输出一个我们希望最小化的分数。为了创建搜索空间，对于每个超参数，我们必须使用
+  Hyperopt 对象形式的分布。我们有多种选择，例如均匀分布、正态分布、对数均匀分布、对数正态分布等，我们将在下一节中更详细地讨论这些。最后，我们将目标函数和搜索空间都传递给
+  `fmin()` 函数，同时使用 TPE 算法进行优化。我们还需要决定试验次数，就像我们在使用随机搜索时那样。该函数返回一个字典，其中包含了所有迭代中的最佳试验结果。
+
+
+
+
+  ### 搜索空间
+
+
+  `fmin()` 只向目标函数传递一个参数，因此我们需要将所有超参数范围塞入字典、列表或元组中的某一个。与 scikit-learn 的网格搜索和随机搜索不同，`fmin()`
+  并不支持任意可迭代的分布；所有超参数都必须是 Hyperopt 的 `hp` 模块中的对象。请参考图 4-3-2 来可视化不同的分布。
+
+
+  以下是一些用于从不同类型的分布中获取特定值的函数，用于我们的超参数搜索：
+
+
+  ![../images/494613_1_En_4_Chapter/494613_1_En_4_Fig4_HTML.jpg](img/494613_1_En_4_Fig4_HTML.jpg)
+
+
+  图 4-3-2
+
+
+  这些图形是使用 Hyperopt 分布绘制的。图 (a) 显示了 -1 到 1 之间的均匀分布。图 (b) 显示了 -3 到 4 之间的对数均匀分布。图 (c)
+  显示了均值为 1、标准差为 0.5 的正态分布。图 (d) 显示了均值和标准差均为 1 的对数正态分布。
+
+
+  *   `hp.choice()`：从给定的列表中选择一个选项
+
+  *   `hp.randint()`：从一个整数范围内随机选择一个整数
+
+  *   `hp.uniform()`：返回一个在指定范围内的值，该分布在两个给定数字之间是均匀的
+
+  *   `hp.loguniform()`：返回一个值，其对数在两个给定数字之间均匀分布
+
+  *   `hp.normal()`：根据均值和标准差，从高斯分布中返回一个值
+
+  *   `hp.lognormal()`：返回值的对数根据均值和标准差呈正态分布
+
+
+  提示
+
+
+  `loguniform(label, a, b)` 可以写成 `exp(uniform(label, a, b))`，其中 `a` 和 `b` 分别是下限和上限。分布范围在
+  `e^a` 和 `e^b` 之间，但如果你希望它在 `10^a` 和 `10^b` 之间，你可以通过类似这样的操作轻松实现：`loguniform(label,
+  a * loge, b * loge)`。
+
+
+  我们可以使用这些函数来创建非常复杂的搜索空间。让我们看一个创建搜索空间的例子：
+
+
+  ```
+
+  from hyperopt import tpe, fmin, hp
+
+  space = hp.choice(''classifier'',[
+
+  {''model'': ''KNeighborsClassifier'',
+
+  ''param'': {''n_neighbors'':
+
+  hp.choice(''n_neighbors'',range(3,11)),
+
+  ''algorithm'':hp.choice(''algorithm'', [''ball_tree'', ''kd_tree'']),
+
+  ''leaf_size'':hp.choice(''leaf_size'', range(1,50)),
+
+  ''metric'':hp.choice(''metric'', ["euclidean", "manhattan",
+
+  "chebyshev", "minkowski"
+
+  ])}
+
+  },
+
+  {''model'': ''SVC'',
+
+  ''param'':{''C'':hp.loguniform(''C'', -2*m.log(10), 11*m.log(10)),
+
+  ''kernel'':hp.choice(''kernel'',[''rbf'', ''poly'', ''sigmoid'']),
+
+  ''degree'':hp.choice(''degree'', range(1,15)),
+
+  ''gamma'':hp.loguniform(''gamma'', -9*m.log(10), 3*m.log(10))}
+
+  }
+
+  ])
+
+  ```
+
+
+  我们首先使用 `hp.choice()` 为模型选择一个分类器，KNN 或 SVM 中的一个会被选中。一旦我们选择了分类器，就可以创建分布。在前面的例子中，我选择对离散分布使用
+  `hp.choice()`，对 SVM 中的 `C` 和 `gamma` 使用 `hp.lognormal()`。如前所述，我们可以操作 `hp.loguniform()`
+  函数来使用 `10^x` 而不是 `e^x`。
+
+
+  注意
+
+
+  我们需要为这些 hp 函数提供标签。在前面的代码中，我直接使用了超参数本身的名称来标记分布。
+
+
+  现在我们有了搜索空间，接下来将处理目标函数：
+
+
+  ```
+
+  from sklearn.datasets import load_digits
+
+  from sklearn.model_selection import train_test_split
+
+  from sklearn.neighbors import KNeighborsClassifier
+
+  from sklearn.svm import SVC
+
+  from hyperopt import tpe, fmin, hp
+
+  import math as m
+
+  digits = load_digits()
+
+  X_train, X_test, y_train, y_test = train_test_split(digits.data,
+
+  digits.target,
+
+  test_size=0.3)
+
+  logs = {''args'':list(),
+
+  ''train_score'': list(),
+
+  ''val_score'': list()}
+
+  def objective_func(args):
+
+  clf_func = args["model"]
+
+  params = args["param"]
+
+  clf = eval(clf_func)(**params)
+
+  clf.fit(X_train, y_train)
+
+  val_score = clf.score(X_test, y_test)
+
+  train_score = clf.score(X_train, y_train)
+
+  logs[''args''].append(args)
+
+  logs[''train_score''].append(train_score)
+
+  logs[''val_score''].append(val_score)
+
+  return -val_score
+
+  best = fmin(objective_func, space, algo=tpe.suggest, max_evals=100)
+
+  ```
+
+
+  创建目标函数很简单。我们提取超参数并将它们传递给分类器。然而，在这种情况下，由于我们的分类器也是一个变量，我们也需要提取它。我还创建了一个日志字典来保存历史记录。运行
+  `fmin()`，算法将开始调优。请参考图 4-3-3，即准确率与试验次数的散点图。
+
+
+  ![../images/494613_1_En_4_Chapter/494613_1_En_4_Fig5_HTML.jpg](img/494613_1_En_4_Fig5_HTML.jpg)
+
+
+  图 4-3-3
+
+
+  图 4-3-3 显示了在 digits 数据集上优化支持向量分类器的超参数 `C`、`kernel`、`degree` 和 `gamma` 的结果。我们可以看到，在大约
+  30 次试验后，得分稳定在 0.99。因此，模型对于在哪里寻找最佳超参数更加确定。
+
+
+  使用 Hyperopt 搜索空间定义神经网络架构可能有点棘手，因为某些超参数（如“层数”）的变化会改变超参数的总数，因为这样我们就必须决定每一层的节点数，或者各层是否使用批归一化/丢弃等方法。那么，让我们来看另一个有趣的例子，它展示了如何定义这类棘手的搜索空间：
+
+
+
+
+  ```
+
+  from hyperopt import hp, tpe, fmin
+
+  from keras.datasets import mnist
+
+  from keras.layers.core import Dense, Dropout, Activation
+
+  from keras.models import Sequential
+
+  from keras.utils import np_utils
+
+  import numpy as np
+
+  # 加载并预处理数据
+
+  (x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+  x_train = x_train.reshape(60000, 784)
+
+  x_test = x_test.reshape(10000, 784)
+
+  x_train = x_train.astype(''float32'')
+
+  x_test = x_test.astype(''float32'')
+
+  x_train /= 255
+
+  x_test /= 255
+
+  classes = 10
+
+  input_shape = 784
+
+  y_train = np_utils.to_categorical(y_train, classes)
+
+  y_test = np_utils.to_categorical(y_test, classes)
+
+  # 日志
+
+  logs = {''model_summary'':list(),
+
+  ''val_acc'': list()}
+
+  def obj_func(args):
+
+  # 初始化 Keras 模型
+
+  model = Sequential()
+
+  # 定义第一个隐藏层
+
+  model.add(Dense(units=args[''units''][''layer_units_1''],
+
+  input_shape=(input_shape, ),
+
+  name=''layer_units_1''))
+
+  # 定义剩余隐藏层的数量
+
+  number_of_layers = len(args[''units''])
+
+  for layer in range(2, number_of_layers):
+
+  model.add(Dense(units=args[''units''][f''layer_units_{layer}''],
+
+  name=f''layer_units_{layer}''))
+
+  model.add(Dropout(args[''dropout''][f''dropout_p_{layer}''],
+
+  name=f''dropout_p_{layer}''))
+
+  model.add(Activation(
+
+  activation=args[''activation''][f''activation_{layer}''],
+
+  name=f''activation_{layer}''))
+
+  # 添加最后一层
+
+  model.add(Dense(classes, name=f''layer_unit_{layer+1}''))
+
+  model.add(Activation(activation=''softmax'',
+
+  name=f''activation_{layer+1}''))
+
+  model.compile(loss=''categorical_crossentropy'', metrics=[''accuracy''], optimizer="adam")
+
+  result = model.fit(x_train, y_train,
+
+  batch_size=2,
+
+  epochs=1,
+
+  verbose=3,
+
+  validation_split=0.2)
+
+  validation_acc = np.amax(result.history[''val_accuracy''])
+
+  print(validation_acc)
+
+  logs[''model_summary''].append(model.summary())
+
+  logs[''val_acc''].append(validation_acc)
+
+  return -validation_acc
+
+  def each_layer(number_of_layers):
+
+  params = {''units'': dict(),
+
+  ''dropout'': dict(),
+
+  ''activation'': dict()}
+
+  number_of_nodes = [16,36,64,128,256,512]
+
+  for layer in range(number_of_layers):
+
+  params[''units''][f''layer_units_{layer}''] = hp.choice(
+
+  f''layer_{number_of_layers}_{layer}'',
+
+  number_of_nodes)
+
+  params[''dropout''][f''dropout_p_{layer}''] = hp.uniform(
+
+  f''dropout_{number_of_layers}_{layer}'',
+
+  0, 0.8)
+
+  params[''activation''][f''activation_{layer}''] = hp.choice(
+
+  f''activation_{number_of_layers}_{layer}'',
+
+  [''relu'', ''elu''])
+
+  return params
+
+  # 选择层数
+
+  number_of_layers = [3, 5, 7, 9]
+
+  space = hp.choice(''layers'', [each_layer(n) for n in number_of_layers])
+
+  best = fmin(obj_func, space, algo=tpe.suggest, max_evals=10)
+
+  ```
+
+
+  在这个特定案例中，我首先确定了层数，然后使用了一个函数 ![$$ \mathtt{each}\_\mathtt{layer}\left(\right), $$](img/494613_1_En_4_Chapter_TeX_IEq3.png)，这样我就可以遍历各层，决定每层的节点数、丢弃率以及激活函数的选择。请注意，我使用了带有
+  `number_of_layers` 和 `layer` 的标签，因为我希望标签是唯一的，类似于丢弃层和激活函数。现在搜索空间已经创建，我们需要在目标函数中构建神经网络，这相当直接。现在我们可以为复杂的搜索优化超参数了。
+
+
+  ### 在 TPE 中并行化试验
+
+
+  我们可以通过并行化试验来进一步利用 TPE。可以一次性从分布 *l*(*x*) 中抽取多个候选值，并并行评估它们。默认情况下，*fmin* 是串行执行的，并使用参数
+  *trials* = *Trials*()，该参数使用一个列表。然而，我们可以改用 *MongoTrials*() 来并行评估这些试验。
+
+
+  首先，显然需要安装 MongoDB。之后，只需四个简单步骤即可启动异步优化：
+
+
+  *   使用 *fmin* 时，将 trials 参数设为 `MongoTrials()`。
+
+  *   启动一个可见的 MongoDB 服务器。
+
+  *   执行 Python 文件。
+
+  *   运行 *hyperopt* − *mongo* − *worker*，这是安装 Hyperopt 时放置在 Python 环境 bin 目录下的一个工作脚本。
+
+
+  让我们对之前的简单示例 *f* (*a*, *b*) = *a*² − *b*² 使用 MongoTrials()：
+
+
+  ```
+
+  from hyperopt import tpe, fmin, hp
+
+  from hyperopt.mongoexp import MongoTrials
+
+  def objective_func(args):
+
+  a = args[''a'']
+
+  b = args[''b'']
+
+  f = a**2 - b**2
+
+  return f
+
+  range_a = hp.uniform(''a'', -2, 3)
+
+  range_b = hp.uniform(''b'', -1, 2)
+
+  space = {''a'': range_a,
+
+  ''b'': range_b}
+
+  m_trials = MongoTrials("mongo://localhost:27017/foo_db/jobs", exp_key="exp2")
+
+  best = fmin(objective_func, space, algo=tpe.suggest, trials=m_trials, max_evals=1000)
+
+  ```
+
+
+  在上述代码中，我们使用了 MongoTrials()。第一步是启动 MongoDB 服务器：
+
+
+  ```
+
+  $ mongod --dbpath . --port 27017
+
+  ```
+
+
+  默认端口是 27017，但你可以根据需要进行更改。
+
+
+  现在执行之前的 Python 脚本。在 MongoTrials() 中，我们需要定义端口和一个 `exp_key`，如果你使用同一个数据库，在不同运行中需要更改这个键。
+
+
+  当你执行脚本时，它会等待 mongo 工作进程启动，你可以使用以下命令启动它们：
+
+
+  ```
+
+  $ hyperopt-mongo-worker --mongo=localhost:1234/foo_db --poll-interval=0.1
+
+  ```
+
+
+  如前所述，*hyperopt* − *mongo* − *worker* 是一个存储在 $PATH 中的文件（即你正在使用的 Python 环境的 bin 目录）。这里你需要提供
+  <*host* > < *port* > / < *db* − *name* >，而轮询间隔会在每个定义的间隔内检查任务；如果找到任务，就会开始计算。
+
+
+  一旦你启动了 mongo 工作进程，之前由 EI 建议的超参数集将被传递给目标函数，过程随即开始。
+
+
+  请注意，工作进程是在 $PATH 中执行的，并且工作进程需要一个目标函数，因此定义目标函数的 Python 脚本必须导出到 $PATH 中。
+
+
+  现在你将获得异步更新，而不是串行更新。或者，你也可以使用 Apache Spark 进行并行化。
+
+
+  Hyperopt 旨在容纳其他代理函数，如高斯过程和随机森林回归，但它们尚未实现。但由于 Hyperopt 是一个开源库，我相信作者们肯定会欢迎这些实现。所以，为了社区的更大利益，请继续为这个出色的库做出贡献吧。
+
+
+
+
+  ## Hyperopt-Sklearn
+
+
+  Hyperopt-sklearn ^(⁸) 是一个基于 Hyperopt 的库^(⁹)，它利用 Hyperopt 对 scikit-learn 算法进行算法选择和超参数调优。
+
+
+  该库可以真正节省时间，因为它为 scikit-learn 中提供的算法创建了自己的搜索空间。你可以进行端到端的建模，因为它还为数据预处理提供了算法选择和调优选项（尽管并非所有
+  scikit-learn 算法都已实现）。
+
+
+  hpsklearn 的使用方式与 sklearn 风格一致，实现了诸如 `fit()`、`.score()` 和 `.predict()` 等方法，就像 scikit-learn
+  的 Grid/Random Search 一样。不过，提供搜索空间是可选的。让我们看几个例子来更好地理解它。
+
+
+  ```
+
+  from sklearn.datasets import load_boston
+
+  from sklearn.model_selection import train_test_split
+
+  from hpsklearn import HyperoptEstimator, any_regressor,
+
+  any_preprocessing, svr
+
+  from hyperopt import tpe, hp
+
+  import math as m
+
+  X, y = load_boston().data, load_boston().target
+
+  X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.2)
+
+  model = HyperoptEstimator(regressor=any_regressor(''test1_reg''),
+
+  preprocessing=any_preprocessing(''test1_preprocessing''),
+
+  algo=tpe.suggest,
+
+  verbose=True,
+
+  max_evals=100)
+
+  model.fit(X_train, y_train, n_folds=3, cv_shuffle=True)
+
+  print(model.score(X_test, y_test))
+
+  print(mdoel.best_model())
+
+  ```
+
+
+  就像 scikit-learn 中的任何其他分类器/回归器一样，我们可以使用 *HyperoptEstimator*，这意味着即使在你现有的代码中，也只需更改一行代码即可引入这个超参数调优库。在上述代码中，我们赋予了
+  hpsklearn 自由选择任何算法、超参数集以及任何预处理（归一化/标准化等）的能力。然而，我们也可以限制特定算法的调优和预处理选择。例如：
+
+
+  ```
+
+  model = HyperoptEstimator(regressor=svr(''test_svr''),
+
+  preprocessing=[],
+
+  algo=tpe.suggest,
+
+  verbose=True,
+
+  max_evals=100)
+
+  ```
+
+
+  你可以将前面代码中的模型初始化替换为这一行，以便仅对支持向量回归器进行调优，并且不使用任何预处理。或者，你可以像这样更改一个或多个超参数的搜索空间：
+
+
+  ```
+
+  space = {''C'':hp.loguniform(''C'',-2*m.log(10),11*m.log(10)),
+
+  ''gamma'':hp.loguniform(''gamma'',-9*m.log(10),3*m.log(10))
+
+  }
+
+  model = HyperoptEstimator(regressor=svr(''test_svr'', **space[''param'']),
+
+  preprocessing=[],
+
+  algo=tpe.suggest,
+
+  verbose=True,
+
+  max_evals=100)
+
+  ```
+
+
+  在这里，已定义超参数（C 和 gamma）的默认搜索空间将被自定义搜索空间覆盖。对于预处理，你也可以进行同样的操作。
+
+
+  由于该库支持 SVM、决策树、KNN 等算法，你可以使用 hpsklearn 获取基线准确率，然后使用自定义搜索空间并尝试不同的模型来进一步调优模型。
+
+
+  ## Hyperas
+
+
+  另一个极其有用的开源超参数优化库是 Hyperas ^(¹⁰)，它是 Hyperopt 的一个封装，用于优化 Keras 神经网络的架构。这个库的编写方式使你无需为神经网络创建复杂的搜索空间；相反，你可以使用简单的
+  Keras 代码，只需添加一些范围即可。下面是一个帮助你理解 Hyperas 概念的示例：
+
+
+  ```
+
+  from hyperopt import Trials, STATUS_OK, tpe
+
+  from keras.datasets import mnist
+
+  from keras.layers.core import Dense, Dropout, Activation
+
+  from keras.models import Sequential
+
+  from keras.utils import np_utils
+
+  import numpy as np
+
+  from hyperas import optim
+
+  from hyperas.distributions import choice, uniform
+
+  def data():
+
+  # MNIST
+
+  (x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+  x_train = x_train.reshape(60000, 784)
+
+  x_test = x_test.reshape(10000, 784)
+
+  x_train = x_train.astype(''float32'')
+
+  x_test = x_test.astype(''float32'')
+
+  x_train /= 255
+
+  x_test /= 255
+
+  classes = 10
+
+  input_shape = 784
+
+  y_train = np_utils.to_categorical(y_train, classes)
+
+  y_test = np_utils.to_categorical(y_test, classes)
+
+  return x_train, y_train, x_test, y_test, input_shape, classes
+
+  def create_model(x_train, y_train, x_test, y_test, input_shape, classes):
+
+  model = Sequential()
+
+  model.add(Dense(units={{choice([8, 16])}},
+
+  input_shape=(input_shape,),name=''dense1''))
+
+  layers = {{choice([2, 3, 4, 5, 6, 7, 8, 9, 10])}}
+
+  for i in range(layers):
+
+  model.add(Dense(units={{choice([32, 64, 256, 512, 1024])}}))
+
+  model.add(Dropout({{choice([0, 0.33])}}))
+
+  model.add(Activation(activation={{choice([''relu'', ''elu''])}}))
+
+  model.add(Dense(classes))
+
+  model.add(Activation(activation=''softmax''))
+
+  model.compile(loss=''categorical_crossentropy'',
+
+  metrics=[''accuracy''],
+
+  optimizer={{choice([''rmsprop'', ''adam'', ''sgd''])}})
+
+  result = model.fit(x_train, y_train ,
+
+  batch_size={{choice([4, 8, 16])}},
+
+  epochs=10,
+
+  verbose=3,
+
+  validation_split=0.2)
+
+  validation_acc = np.amax(result.history[''val_accuracy''])
+
+  print(''Test accuracy:'', validation_acc)
+
+  return {''loss'': -validation_acc, ''status'': STATUS_OK, ''model'':
+
+  model}
+
+  best_run, best_model = optim.minimize(model=create_model,
+
+  data=data,
+
+  algo=tpe.suggest,
+
+  max_evals=10,
+
+  trials=Trials())
+
+  X_train, Y_train, X_test, Y_test, _, _ = data()
+
+  print("Test Score on Best Model:")
+
+  print(best_model.evaluate(X_test, Y_test))
+
+  print("Hyperparameter Set for best Model:")
+
+  print(best_run)
+
+  ```
+
+
+  在使用 Hyperas 时，我们需要创建两个函数。一个函数用于数据加载。另一个函数类似于目标函数，它包含一个神经网络并返回一个损失分数，唯一的区别在于搜索空间不是一个参数，而是将数据作为参数传递。搜索空间是在我们编写网络中的每个超参数时定义的。而
+  Hyperas 中的 *optim*.*minimize*() 函数则启动优化过程。
+
+
+  在第一个函数 *data*() 中，我们加载数据集（这里是 MNIST）；由于目标函数会进行迭代，我们不希望反复加载数据。从 *data*() 返回的所有内容都将传递给
+  *create*[─]*model*()。
+
+
+  接下来我们定义目标函数，在其中使用 Keras 定义神经网络。在初始化 `Sequential()` 之后，我们逐层添加层。在超参数的位置，我们可以使用这种格式给出一个范围：{{^′*range*^′}}。^′*range*^′
+  是 Hyperas 中的分布函数，其命名规则与 Hyperopt 相同。在 Hyperas 中，我们不需要给出标签，因为它会将分配给它们的变量作为标签。然而，如果我们像后续代码那样对某个超参数范围进行迭代，
+
+
+  ```
+
+  for i in range(layers):
+
+  model.add(Dense(units={{choice([32, 64, 256, 512, 1024])}}))
+
+  ```
+
+
+
+
+  例如，如果有三层，所有三层都会选择相同的超参数，因为 Hyperas 会生成 Python 代码模板并将分布发送给 Hyperopt，而由于该参数只编写一次，Hyperopt
+  会将其视为一个超参数。你有两种方法来解决这个问题：要么像我们在“搜索空间”一节的最后一个示例中那样，回头直接使用 Hyperopt；要么使用 *if*…*else*
+  语句来添加层：
+
+
+  ```
+
+  model.add(Dense({{choice([32, 64, 256, 512, 1024])}}))
+
+  model.add(Dropout({{uniform(0, 0.8)}}))
+
+  model.add(Activation({{choice([''relu'', ''elu''])}}))
+
+  if {{choice([''one'', ''two''])}} == ''two'':
+
+  model.add(Dense({{choice([32, 64, 256, 512, 1024])}}))
+
+  model.add(Dropout({{uniform(0, 0.8)}}))
+
+  model.add(Activation({{choice([''relu'', ''elu''])}}))
+
+  ```
+
+
+  只有当选择的层数为二时，才会创建另一层。
+
+
+  Hyperas 是 Hyperopt 的一个非常简单易用的封装器，你可以用它快速调整模型，但如果你想要更大的灵活性，请使用 Hyperopt，即使面对最复杂的搜索空间，它也能发挥奇效。
+
+
+  在本章中，你学习了贝叶斯超参数优化的工作原理，以及如何在你的问题中使用 Hyperopt。这些技术可以轻松提高你的时间效率并优化资源利用率。
+
+
+  脚注 1   2   3   4   5   6   7   8
+
+
+  '
+- '# 5. Optuna 与 AutoML
+
+
+  现在，我们可以使用前几章讨论的技术来创建高效的模型。贝叶斯优化在寻找最优超参数方面大有可为。本章概述了 Optuna 框架，并进一步讨论了超参数优化在自动化机器学习中的作用。我们将使用
+  Optuna 创建我们自己的小型 AutoML 脚本。然后，我们将探索基于树的流水线优化工具（TPOT），这是一个使用遗传编程来优化机器学习流水线的 AutoML
+  工具。
+
+
+  ## Optuna
+
+
+  与第 4 章讨论的 Hyperopt 类似，Optuna^(¹¹) 是一个使用贝叶斯优化的开源库。Optuna 使用的底层算法与 Hyperopt 相同，但 Optuna
+  框架更加灵活。Optuna 可以轻松地与 PyTorch、Keras、scikit-learn、Apache MXNet 以及其他库一起使用。其 API 与 Hyperopt
+  的 API 非常相似，只有一些变化。让我们看一个示例：
+
+
+  ```
+
+  from sklearn.datasets import load_digits
+
+  from sklearn.model_selection import train_test_split, cross_val_score
+
+  from sklearn.neighbors import KNeighborsClassifier
+
+  from sklearn.svm import SVC
+
+  import optuna
+
+  from optuna.samplers import TPESampler
+
+  digits = load_digits()
+
+  X_train, X_test, y_train, y_test = train_test_split(digits.data,
+
+  digits.target,
+
+  test_size=0.3)
+
+  def objective_func(trial):
+
+  classifier_name = trial.suggest_categorical("classifier",
+
+  ["SVC", "RandomForest"])
+
+  if classifier_name == "SVC":
+
+  c = trial.suggest_loguniform("svc_c", 1e-2, 1e+11)
+
+  gamma = trial.suggest_loguniform("svc_gamma", 1e-9, 1e+3)
+
+  kernel = trial.suggest_categorical("svc_kernel",
+
+  [''rbf'',''poly'',''rbf'',''sigmoid''])
+
+  degree = trial.suggest_categorical("svc_degree", range(1,15))
+
+  clf = SVC(C=c, gamma=gamma, kernel=kernel, degree=degree)
+
+  else:
+
+  algorithm = trial.suggest_categorical("algorithm",
+
+  [''ball_tree'', "kd_tree"])
+
+  leaf_size = trial.suggest_categorical("leaf_size",
+
+  range(1,50))
+
+  metric = trial.suggest_categorical("metric",
+
+  ["euclidean","manhattan",
+
+  "chebyshev","minkowski"])
+
+  clf = KNeighborsClassifier(algorithm=algorithm,
+
+  leaf_size=leaf_size,
+
+  metric=metric)
+
+  clf.fit(X_train, y_train)
+
+  val_acc = clf.score(X_test, y_test)
+
+  return val_acc
+
+  study = optuna.create_study(direction=''maximize'', sampler=TPESampler())
+
+  study.optimize(objective_func, n_trials=100)
+
+  best_trial = study.best_trial.value
+
+  print(f"Best trial  accuracy: {best_trial}")
+
+  print("parameters for best trail are :")
+
+  for key, value in study.best_trial.params.items():
+
+  print(f"{key}: {value}")
+
+  ```
+
+
+  在图 5-1-1 中，我们可以看到曲线在 1 附近趋于饱和。请注意，这里的目标值是验证准确率。
+
+
+  ![../images/494613_1_En_5_Chapter/494613_1_En_5_Fig1_HTML.jpg](img/494613_1_En_5_Fig1_HTML.jpg)
+
+
+  图 5-1-1
+
+
+  显示前面代码示例前 50 次试验中准确率与试验次数的关系图
+
+
+  如果这个示例看起来很眼熟，那是因为我们在第 4 章中处理过相同的问题。Optuna 的用户界面与 Hyperopt 非常相似。我们必须定义一个目标函数，该函数应返回一个分数（损失/准确率），该分数将被最小化/最大化。
+
+
+  我们实例化 `create_study()` 函数并对其进行优化，而不是使用 `fmin()` 函数。但 Optuna 提供的最佳特性之一是能够动态定义超参数搜索范围。与
+  Hyperopt 必须预先定义搜索空间不同，在 Optuna 中，我们在目标函数本身中定义搜索空间（类似于我们在 Hyperas 中所做的）。让我们讨论一下 Optuna
+  的一些关键方面。
+
+
+  ### 搜索空间
+
+
+  在 Hyperopt 和许多其他算法中，我们使用字典来定义搜索空间。如前所述，在 Optuna 中，我们动态定义搜索空间。正如你在第 4 章中所见，使用 Hyperopt
+  和 Hyperas 在神经网络中创建搜索空间很困难。对于依赖于层数的节点数等超参数，Hyperas 会使用 *if*…*else*。如果使用循环，Hyperas
+  会为所有层选择相同数量的节点。在 Optuna 中，我们可以在循环中为每个超参数提供唯一的标签。例如：
+
+
+  ```
+
+  n_layers = trial.suggest_int(''n_layers'', 1, 3)
+
+  layers = []
+
+  in_features = 28 * 28
+
+  for i in range(n_layers):
+
+  out_features = trial.suggest_int(''n_units_{}''.format(i), 4, 128)
+
+  layers.append(Linear(in_features, out_features))
+
+  layers.append(ReLU())
+
+  in_features = out_features
+
+  ```
+
+
+  Optuna 使处理这个问题变得容易得多。并且 Optuna 提供了与 Hyperopt 相同的分布。以下是一些常用的分布：
+
+
+  *   *分类分布*：`trial.suggest_categorical()` 用于从列表中选择离散值，这与 Hyperopt 中的 `hp.choice()`
+  相同。
+
+
+  *   *均匀分布*：`trial.suggest_uniform()` 用于在均匀尺度上进行随机分布，类似于 `hp.uniform()`。
+
+
+  *   *对数均匀分布*：`trial.suggest_loguniform(label, low, high)` 用于对数均匀尺度。然而，在 Hyperopt
+  中，`hp.loguniform(label, low, high)` 返回 *exp*(*low*) 和 *exp*(*high*) 之间的分布。在 Optuna
+  中，返回的是 *low* 和 *high* 之间的对数均匀分布。
+
+
+  我们还可以根据需要使用的其他分布。
+
+
+  ### 底层算法
+
+
+  除了树结构 Parzen 估计器和随机搜索之外，Optuna 还提供了连续减半和 HyperBand，这是相对于 Hyperopt 的优势。我们已经在第 3 章中讨论过
+  HyperBand。以下是使用方法：
+
+
+  ```
+
+  import optuna
+
+  # define the objective function
+
+  study = optuna.create_study(pruner=optuna.pruners.HyperbandPruner())
+
+  study.optimize(objective, n_trials=20)
+
+  ```
+
+
+
+
+  ### 可视化
+
+
+  Optuna 提供了优雅的可视化功能。图 5-1-1 是由 Optuna 通过 `optuna.visualization.plot_optimization_history(study)`
+  生成的。你可以传入 `study` 对象，它就会创建一个图表。你可以点击每个散点，观察所使用的不同超参数。此外，还有更多的可视化选项。
+
+
+  回调函数（Callbacks）是 `study.optimize()` 中的一个参数，它会在每次试验后调用回调。利用这一点，你可以在像 *tensorboardX*
+  这样的仪表盘上实时查看进度。
+
+
+  回调函数的工作方式如下：
+
+
+  ```
+
+  import optuna
+
+  from optuna.samplers import TPESampler
+
+  def log(study, trial):
+
+  print(f"Trial No.={trial.number}, HP_Set={trial.params}, \
+
+  Score={trial.value}")
+
+  print(f"Best Value ={study.best_value}")
+
+  # def objective_func()
+
+  study = optuna.create_study(sampler=TPESampler())
+
+  study.optimize(objective_func, n_trials=100, callbacks=[log])
+
+  ```
+
+
+  使用起来非常简单。你可以将这些结果写入仪表盘，每次试验后它们都会更新。
+
+
+  ### 分布式优化
+
+
+  与 Hyperopt 一样，Optuna 也支持分布式优化，但 Optuna 的实现比 Hyperopt 更容易使用。让我们看看如何配置它：
+
+
+  ```
+
+  study = optuna.create_study(study_name=''distributed_test'',
+
+  storage=''database_url'',
+
+  load_if_exists=True)
+
+  ```
+
+
+  在实例化 `create_study()` 时定义数据库 URL。并将 `load_if_exits=True` 设置为 `True`，这样它就不会创建新的 study，而是查找名为
+  “distributed_test” 的先前 study。这样一来，每次工作节点启动时，都不会创建新的 study，而是查找现有的 study，从而避免从头开始训练。
+
+
+  有关 Hyperopt 和 Optuna 的全面比较，请参阅 Neptune.ai 高级数据科学家 Jakub Czakon 撰写的以下文章：“Optuna vs
+  Hyperopt：你应该选择哪个超参数优化库？”^(¹²)。
+
+
+  现在，让我们探索一个如何使用 Optuna 优化神经网络超参数的示例。我们将使用 MNIST 数据集和 Keras。首先，导入库并将数据拆分为训练集和测试集。
+
+
+  ```
+
+  from keras.datasets import mnist
+
+  from keras.layers.core import Dense, Dropout, Activation
+
+  from keras.models import Sequential
+
+  from keras.utils import np_utils
+
+  import numpy as np
+
+  import optuna
+
+  from optuna.samplers import TPESampler
+
+  (x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+  x_train = x_train.reshape(60000, 784)
+
+  x_test = x_test.reshape(10000, 784)
+
+  x_train = x_train.astype(''float32'')
+
+  x_test = x_test.astype(''float32'')
+
+  x_train /= 255
+
+  x_test /= 255
+
+  classes = 10
+
+  input_shape = 784
+
+  y_train = np_utils.to_categorical(y_train, classes)
+
+  y_test = np_utils.to_categorical(y_test, classes)
+
+  x_train, y_train, x_test, y_test, input_shape, classes
+
+  ```
+
+
+  ```
+
+  def log(study, trial):
+
+  print(f"Trial No.={trial.number}, HP_Set={trial.params}, \
+
+  Score={trial.value}")
+
+  print(f"Best Value ={study.best_value}")
+
+  def objective_func(trial):
+
+  model = Sequential()
+
+  hidden_layer_unit_choice = [32, 64, 256, 512, 1024]
+
+  hidden_layers = trial.suggest_int(''hidden_layers'', 1, 6)
+
+  model.add(Dense(units=trial.suggest_categorical(''layer1'', [8, 16]),
+
+  input_shape=(input_shape, ),
+
+  name=''dense1''))
+
+  model.add(Activation(activation=trial.suggest_categorical(
+
+  f''activation1'',
+
+  [''relu'',
+
+  ''elu''])))
+
+  for i in range(1, hidden_layers):
+
+  model.add(Dense(units=trial.suggest_categorical(
+
+  f''layer{i+1}'',
+
+  hidden_layer_unit_choice)))
+
+  model.add(Dropout(trial.suggest_uniform(
+
+  f''dropout{i+1}'', 0, 0.8)))
+
+  model.add(Activation(
+
+  activation=trial.suggest_categorical(
+
+  f''activation{i+1}'',
+
+  [''relu'',
+
+  ''elu''])))
+
+  model.add(Dense(classes))
+
+  model.add(Activation(activation=''softmax''))
+
+  model.compile(loss=''categorical_crossentropy'',
+
+  metrics=[''accuracy''],
+
+  optimizer=trial.suggest_categorical(''optimizer'',
+
+  [''rmsprop'', ''adam'', ''sgd'']))
+
+  result = model.fit(x_train, y_train,
+
+  batch_size=4,
+
+  epochs=1,
+
+  verbose=3,
+
+  validation_split=0.2)
+
+  validation_acc = np.amax(result.history[''val_accuracy''])
+
+  print(''Validation accuracy:'', validation_acc)
+
+  return validation_acc
+
+  ```
+
+
+  定义目标函数。在上述代码中，我们看到超参数是动态地为每一层选择的，只需为标签指定唯一的名称即可。
+
+
+  最后，我们开始优化：
+
+
+  ```
+
+  study = optuna.create_study(direction=''maximize'', sampler=TPESampler())
+
+  study.optimize(objective_func, n_trials=50, callbacks=[log])
+
+  best_trial = study.best_trial.value
+
+  print(f"Best trial  accuracy: {best_trial}")
+
+  print("parameters for best trail are :")
+
+  for key, value in study.best_trial.params.items():
+
+  print(f"{key}: {value}")
+
+  ```
+
+
+  此示例仅优化了 50 次试验，图 5-1-2 显示了准确率曲线。
+
+
+  ![../images/494613_1_En_5_Chapter/494613_1_En_5_Fig2_HTML.jpg](img/494613_1_En_5_Fig2_HTML.jpg)
+
+
+  图 5-1-2
+
+
+  上述代码示例的准确率与试验次数关系图
+
+
+  在如此庞大的搜索空间中，50 次试验是较少的（为了获得更好的结果，请增加试验次数），但我们可以看到训练分数在上升。请注意，测试分数是独立的，目标函数使用验证准确率来优化超参数。
+
+
+  Optuna 是一个年轻的库，仍有许多工作在进行中，但它很有前景。
+
+
+  ## 自动化机器学习
+
+
+  机器学习的高度复杂性要求只有机器学习专家才能构建模型。机器学习模型是任务特定的，每个模型都需要大量的工作。为了向大众提供机器学习，机器学习专家需要一种方法来创建开箱即用的模型。这就是自动化机器学习（AutoML）的用武之地。
+
+
+  当机器学习自行创建完整的流水线并为我们提供一个可部署的模型时，它就实现了自动化。要创建完整的流水线，我们需要使用多种算法，从预处理到创建机器学习模型。所有这些算法都有其需要优化的超参数。在这里，超参数优化发挥着巨大的作用。预处理的步骤和算法在附录
+  I 中描述。
+
+
+  现在，我们将在后续章节中使用 Optuna 和 TPOT 快速构建我们自己的 AutoML 模块，这些模块将能够处理几乎任何类型的分类数据集。
+
+
+
+
+  ### 构建你自己的 AutoML 模块
+
+
+  本示例提供了构建一个基础模块的说明，你可以随后对其进行实验并添加更多算法。对于实际应用场景，有许多经过优化的 AutoML 库，我们将在后面讨论。我们将使用泰坦尼克号数据集，该数据集虽然杂乱，但我们的代码将处理所有清洗和预处理工作。
+
+
+  首先，我们导入所有必要的库并加载数据集^(¹³)：
+
+
+  ```
+
+  import pandas as pd
+
+  import numpy as np
+
+  import impyute as impy
+
+  import optuna
+
+  from optuna.samplers import TPESampler
+
+  from sklearn.model_selection import train_test_split
+
+  from sklearn.preprocessing import LabelEncoder, MinMaxScaler, \
+
+  StandardScaler
+
+  from sklearn.impute import SimpleImputer
+
+  from sklearn.feature_selection import SelectKBest, \
+
+  chi2, f_classif, mutual_info_classif
+
+  from sklearn.svm import SVC
+
+  from sklearn.neighbors import KNeighborsClassifier
+
+  data = pd.read_csv("./titanic/train.csv")
+
+  y = data[''Survived'']
+
+  X = data.drop(''Survived'', axis=1)
+
+  ```
+
+
+  现在，我们来处理不需要优化超参数的部分。我们将定义外部目标函数，因为重复迭代那些无需优化的过程是没有意义的。
+
+
+  ```
+
+  def label_encode_column(col):
+
+  nans = col.isnull()
+
+  nan_lst = []
+
+  nan_idx_lst = []
+
+  label_lst = []
+
+  label_idx_lst = []
+
+  for idx, nan in enumerate(nans):
+
+  if nan:
+
+  nan_lst.append(col[idx])
+
+  nan_idx_lst.append(idx)
+
+  else:
+
+  label_lst.append(col[idx])
+
+  label_idx_lst.append(idx)
+
+  nan_df = pd.DataFrame(nan_lst, index=nan_idx_lst)
+
+  label_df = pd.DataFrame(label_lst, index=label_idx_lst)
+
+  label_encoder = LabelEncoder()
+
+  label_df = label_encoder.fit_transform(label_df.astype(str))
+
+  label_df = pd.DataFrame(label_df, index=label_idx_lst)
+
+  final_col = pd.concat([label_df, nan_df])
+
+  return final_col.sort_index()
+
+  for column_name in X.columns:
+
+  if str(X[column_name].dtype) == ''object'':
+
+  X[column_name] = label_encode_column(X[column_name])
+
+  if len(X[column_name].unique()) > len(X)/3:
+
+  X = X.drop(column_name, axis=1)
+
+  ```
+
+
+  我们使用了 `label_encode_column()` 函数，但直接使用 `LabelEncoding()` 有什么问题呢？`LabelEncoding()`
+  也会对 NaN 值进行编码，但我们希望稍后对这些值进行插补。因此，该函数会逐列处理，将 NaN 值与其他值分离，并在保存其索引位置的同时进行编码。它返回一个排序后的数据框，如图
+  5-2-1 所示。
+
+
+  ![../images/494613_1_En_5_Chapter/494613_1_En_5_Fig3_HTML.jpg](img/494613_1_En_5_Fig3_HTML.jpg)
+
+
+  图 5-2-1
+
+
+  标签编码器对除 NaN 之外的所有值进行编码
+
+
+  因此，在对所有列进行标签编码后，我们会删除那些唯一值数量过多的列。如果你希望将独热编码作为一个选项，也可以将标签编码包含在目标函数中。接下来，我们将定义一些在目标函数中使用的函数：
+
+
+  ```
+
+  def mice_imputer(data):
+
+  data = data.to_numpy()
+
+  imputed_data = impy.mice(data)
+
+  imputed_data = pd.DataFrame(imputed_data)
+
+  return imputed_data
+
+  def mean_imputer(data):
+
+  imputer = SimpleImputer(strategy=''mean'')
+
+  imputed_data = imputer.fit_transform(data)
+
+  imputed_data = pd.DataFrame(imputed_data)
+
+  return imputed_data
+
+  ```
+
+
+  上述代码参数化了两个插补器：均值插补和 MICE 插补。关于如何包含更多选项的说明，请参考附录 I。
+
+
+  ```
+
+  def feature_selector(X, y, k, algo="f_classif"):
+
+  kbest = SelectKBest(eval(algo), k)
+
+  X = kbest.fit_transform(X, y)
+
+  X = pd.DataFrame(X)
+
+  return X
+
+  ```
+
+
+  我们将选择 ''k'' 个最佳特征，这本身也是一个超参数。另一个超参数是选择特征选择算法。我们有 `''f_classif''`、`''chi2''` 和 `''mutual_info_classif''`。预处理步骤的最后一步是缩放。我们在归一化和标准化之间进行选择。
+
+
+  ```
+
+  def scaling(data, scaler="min_max"):
+
+  if scaler==''min_max'':
+
+  scaled_data = MinMaxScaler().fit_transform(data)
+
+  else:
+
+  scaled_data = StandardScaler().fit_transform(data)
+
+  scaled_data = pd.DataFrame(scaled_data)
+
+  return scaled_data
+
+  ```
+
+
+  现在，我们定义目标函数：
+
+
+  ```
+
+  def objective_func(trial):
+
+  try:
+
+  # 插补
+
+  imputer = trial.suggest_categorical(''impyter'', [''mice'', ''mean''])
+
+  if imputer==''mice'':
+
+  imputed_X = mice_imputer(X)
+
+  else:
+
+  imputed_X = mean_imputer(X)
+
+  # 特征选择
+
+  fea_slct = trial.suggest_categorical(''fea_slct'',
+
+  [''chi2'', ''f_classif'',
+
+  ''mutual_info_classif''])
+
+  no_feature_cols = trial.suggest_int(''k'', 3, len(X.columns))
+
+  selected_features = feature_selector(imputed_X, y,
+
+  no_feature_cols, fea_slct)
+
+  # 缩放
+
+  scaler = trial.suggest_categorical(''scaler'',
+
+  [''min_max'', ''standard''])
+
+  scaled_X = scaling(selected_features)
+
+  except:
+
+  return 0.0
+
+  # 实例化机器学习算法
+
+  classifier_name = trial.suggest_categorical("classifier",
+
+  ["SVC", "RandomForest"])
+
+  if classifier_name == "SVC":
+
+  c = trial.suggest_loguniform("svc_c", 1e-2, 1e+11)
+
+  gamma = trial.suggest_loguniform("svc_gamma", 1e-9, 1e+3)
+
+  kernel = trial.suggest_categorical("svc_kernel",
+
+  [''rbf'',''poly'',''rbf'',''sigmoid''])
+
+  degree = trial.suggest_categorical("svc_degree", range(1,15))
+
+  clf = SVC(C=c, gamma=gamma, kernel=kernel, degree=degree)
+
+  else :
+
+  algorithm = trial.suggest_categorical("algorithm",
+
+  [''ball_tree'', "kd_tree"])
+
+  leaf_size = trial.suggest_categorical("leaf_size", range(1,50))
+
+  metric = trial.suggest_categorical("metic",
+
+  ["euclidean","manhattan",
+
+  "chebyshev","minkowski"])
+
+  clf = KNeighborsClassifier(algorithm=algorithm,
+
+  leaf_size=leaf_size, metric=metric)
+
+  # 拟合模型
+
+  clf.fit(scaled_X, y)
+
+  val_acc = clf.score(scaled_X, y)
+
+  return val_acc
+
+  study = optuna.create_study(direction=''maximize'', sampler=TPESampler())
+
+  study.optimize(objective_func, n_trials=100)
+
+  best_trial = study.best_trial.value
+
+  print(f"最佳试验准确率: {best_trial}")
+
+  print("最佳试验的参数为：")
+
+  for key, value in study.best_trial.params.items():
+
+  print(f"{key}: {value}")
+
+  ```
+
+
+  目标函数的第一部分包含所有预处理步骤，我们使用了 `try`...`except`。我们使用了之前定义的函数。在某些情况下，当算法和超参数不匹配，或者上一步处理后的数据无法被下一步接受时，你可能会遇到错误。例如，某些特征选择算法不适用于负值，但即使你对数据集很小心，插补器也可能用某个负值来插补
+  NaN。在这种情况下，只需返回零，即可能的最低准确率值。
+
+
+  然后，我们像之前一样定义分类器的选择（你可以添加更多分类器）。AutoML 的理念是创建一个通用代码，为你提供针对数据集的最佳可能流水线。你可以训练任何表格数据集进行分类，从而在无需编写额外代码的情况下，获得针对上述步骤和算法选择的最佳可能流水线。
+
+
+  随着搜索空间复杂度的增加，我们需要对数据集进行更多次试验。试验次数越多，我们获得的结果就越好。为了减少时间，你可以像下面描述的那样，将优化过程分布化。
+
+
+
+
+  ### TPOT
+
+
+  基于树的流水线优化工具（TPOT）是一个 AutoML 框架，它使用遗传编程来优化机器学习流水线。
+
+
+  正如我们之前讨论的，数据预处理通常包括数据清洗（标签编码、删除不重要的列和缩放），这是我们必须事先处理好的事情。更复杂的任务，如特征选择、特征降维和特征构建，则由
+  TPOT 处理。它进一步选择具有最佳超参数集的最佳模型。图 5-2-2 展示了由 TPOT 自动化的功能。
+
+
+  遗传算法速度较慢，但擅长为给定的数据集找到最佳路径。我们需要训练很长时间才能达到最佳的超参数集。
+
+
+  理解 TPOT 首先需要理解什么是遗传算法。顾名思义，遗传算法的概念源于达尔文的自然选择理论。遗传算法通过选择最佳算法来不断进化。对于最佳算法，它会对其子代进行一些随机的超参数修改，并评估模型以找到最佳拟合。
+
+
+  ![../images/494613_1_En_5_Chapter/494613_1_En_5_Fig4_HTML.jpg](img/494613_1_En_5_Fig4_HTML.jpg)
+
+
+  图 5-2-2
+
+
+  TPOT 覆盖了大约 80% 的工作
+
+
+  现在，我们将看一个 TPOT 如何工作的示例，使用 TPOT 处理鸢尾花数据集，因为它已经是一个干净的数据集：
+
+
+  ```
+
+  from tpot import TPOTClassifier
+
+  from sklearn.datasets import load_iris
+
+  from sklearn.model_selection import train_test_split
+
+  import numpy as np
+
+  iris = load_iris()
+
+  X_train, X_test, y_train, y_test = train_test_split(
+
+  iris.data.astype(np.float64),
+
+  iris.target.astype(np.float64),
+
+  test_size=0.25
+
+  )
+
+  ```
+
+
+  '
+- '# 加载数据集并将其分割为训练集和测试集。
+
+
+  ```
+
+  tpot = TPOTClassifier(generations=5, population_size=50, verbosity=2)
+
+  tpot.fit(X_train, y_train)
+
+  ```
+
+
+  我们训练 TPOT 五个世代；默认是 100 个世代。这个框架的接口与 scikit-learn 非常相似。
+
+
+  瞧！我在训练好的模型上对测试集达到了 100% 的准确率。
+
+
+  为了让事情更简单，我们可以将选定的流水线导出到一个 Python 脚本中，然后可以轻松部署。
+
+
+  ```
+
+  tpot.export(''tpot_iris_pipeline.py'')
+
+  ```
+
+
+  上面的代码行自动生成了以下 `tpot_iris_pipeline.py` 文件：
+
+
+  ```
+
+  import numpy as np
+
+  import pandas as pd
+
+  from sklearn.model_selection import train_test_split
+
+  from sklearn.neural_network import MLPClassifier
+
+  # NOTE: Make sure that the outcome column is labeled ''target'' in the data # file
+
+  tpot_data = pd.read_csv(''PATH/TO/DATA/FILE'', sep="COLUMN_SEPARATOR",
+
+  dtype=np.float64)
+
+  features = tpot_data.drop(''target'', axis=1)
+
+  training_features, testing_features, training_target, testing_target = \
+
+  train_test_split(features, tpot_data[''target''],
+
+  random_state=None)
+
+  # Average CV score on the training set was: 0.9913043478260869
+
+  exported_pipeline = MLPClassifier(alpha=0.1, learning_rate_init=0.1)
+
+  exported_pipeline.fit(training_features, training_target)
+
+  results = exported_pipeline.predict(testing_features)
+
+  ```
+
+
+  我们优化的时间越长，得到的结果就越好。
+
+
+  还有许多其他的 AutoML 库，例如 auto-sklearn、H2O AutoML 和 AutoKeras。AutoML 不仅有利于数据科学家加速流程，也让没有编程知识的人能够使用机器学习。AutoML
+  在人工智能的未来无疑占有重要地位。
+
+
+  正如你在本章中所见，超参数优化在 AutoML 中扮演着巨大的角色，使我们能够在最短的时间内生成最佳的机器学习模型。
+
+
+  作为本书的结尾，我祝愿你在使用更高级的方法（如贝叶斯优化和剪枝算法，而不是手动调优或网格搜索）优化超参数时取得成功。优化愉快！
+
+
+  脚注 1   2   3  索引 A 激活函数 自动化机器学习（AutoML） 构建模块 定义 TPOT B 反向传播 贝叶斯优化 超参数 SMBO 树结构帕尔森估计器
+  C 连续变量 create_study() 函数 交叉验证函数 D Dask 分布式 网格搜索 超参数优化 随机搜索 Dask 并行集合 数据清洗与预处理 特征选择
+  F 检验 互信息 递归 缺失值 链式方程 删除行 均值/中位数 回归/分类 ML 算法 模型评估方法 非数值列 标签编码 独热编码 异常值检测 DBSCAN z-score
+  技术 决策树 基于密度的噪声应用空间聚类（DBSCAN） 离散变量 距离度量 动态任务调度 E 指数分布 F fmin() 函数 F 检验 全连接神经网络 隐藏层
+  PyTorch G 高斯分布 高斯过程（GP） 生成对抗网络（GAN） 遗传算法 图形处理器（GPU） grid_search() 函数 网格搜索 GridSearchCV
+  函数 H 高性能计算（HPC） Horovod Hyperas Hyperopt 定义 示例 hyperas 并行化试验 TPE 搜索空间 Sklearn TPE
+  Hyperopt-sklearn 超参数优化 Dask 仪表盘 减半搜索 超带搜索 增量搜索 超参数 连续变量 决策树 离散变量 kd-tree KNN 神经网络
+  概率分布 参见概率分布函数 SVM 超参数调优库 I, J 增量函数 索引算法 迭代 *vs*. 准确率图 迭代 *vs*. 准确率分数 K K 近邻（KNN）
+  L 标签编码 学习率 Log Softmax 函数 损失函数 M 机器学习（ML） 内存约束 MNIST 数据集 keras PyTorch 互信息（MI） N
+  神经网络 激活函数 批量大小 离散变量 损失函数 层数 节点数 优化器 O 独热编码 Optuna 算法 定义 分布式优化 示例 搜索空间 可视化 P, Q 参数
+  partition_dataset() 概率分布函数 指数 高斯 均匀 PyTorch 分布式 R 随机搜索 随机搜索 *vs*. 网格搜索 递归特征选择 强化学习算法
+  S Scikit-learn 库 基于序列模型的全局优化（SMBO） Slurm 命令 监督机器学习算法 支持向量机（SVM） T 三维曲线 时间/计算约束 基于树的流水线优化工具（TPOT）
+  树结构帕尔森估计器（TPE） U, V 均匀分布 无监督机器学习算法 W, X, Y, Z 权重 脚注 1   2   3   4
+
+  '

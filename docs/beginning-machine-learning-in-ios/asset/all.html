@@ -1,0 +1,5114 @@
+<p><img src="images/978-1-4842-4297-1_CoverFigure.jpg"/></p>
+<p></p>
+
+
+
+
+
+<aside class="ArticleNote ArticleNoteESMHint BookFrontmatterArticleNote">
+<p>Any source code or other supplementary material referenced by the
+author in this book is available to readers on GitHub via the book’s
+product page, located at <a href="http://www.apress.com/978-1-4842-4296-4">www.​apress.​com/​978-1-4842-4296-4</a> .
+For more detailed information, please visit <a href="http://www.apress.com/source-code">www.​apress.​com/​source-code</a> .</p>
+</aside>
+
+ ISBN 978-1-4842-4296-4e-ISBN 978-1-4842-4297-1
+
+
+<a href="https://doi.org/10.1007/978-1-4842-4297-1">https://doi.org/10.1007/978-1-4842-4297-1</a>
+
+
+Library of Congress Control Number: 2019932985
+
+
+© Mohit Thakkar 2019
+
+
+This work is subject to copyright. All rights are reserved by the
+Publisher, whether the whole or part of the material is concerned,
+specifically the rights of translation, reprinting, reuse of
+illustrations, recitation, broadcasting, reproduction on microfilms or
+in any other physical way, and transmission or information storage and
+retrieval, electronic adaptation, computer software, or by similar or
+dissimilar methodology now known or hereafter developed.
+
+
+Trademarked names, logos, and images may appear in this book. Rather
+than use a trademark symbol with every occurrence of a trademarked name,
+logo, or image we use the names, logos, and images only in an editorial
+fashion and to the benefit of the trademark owner, with no intention of
+infringement of the trademark. The use in this publication of trade
+names, trademarks, service marks, and similar terms, even if they are
+not identified as such, is not to be taken as an expression of opinion
+as to whether or not they are subject to proprietary rights.
+
+
+While the advice and information in this book are believed to be true
+and accurate at the date of publication, neither the authors nor the
+editors nor the publisher can accept any legal responsibility for any
+errors or omissions that may be made. The publisher makes no warranty,
+express or implied, with respect to the material contained herein.
+
+
+Distributed to the book trade worldwide by Springer Science+Business
+Media New York, 233 Spring Street, 6th Floor, New York, NY 10013. Phone
+1-800-SPRINGER, fax (201) 348-4505, e-mail orders-ny@springer-sbm.com,
+or visit www.springeronline.com. Apress Media, LLC is a California LLC
+and the sole member (owner) is Springer Science + Business Media Finance
+Inc (SSBM Finance Inc). SSBM Finance Inc is a Delaware corporation.
+
+
+
+<p><em>In loving memory of Steven Paul Jobs (1955 to 2011) - the man who
+was crazy enough to change the world.</em></p>
+<p><em>Dedicated to all the tech enthusiasts out there trying to make a
+dent in the universe. It is you guys who make this world a better place
+for the people inhabiting it.</em></p>
+<p><em>Cheers to you!</em></p>
+<p><em>Love,</em></p>
+<p><em>Mohit</em></p>
+
+
+
+Acknowledgments
+
+
+<p>I’d like to take this opportunity to gratefully thank the people who
+have contributed toward the development of this book:</p>
+<p>Aaron Black, Senior Editor at Apress, and James Markham, Development
+Editor at Apress who saw potential in the idea behind the book. They
+helped kick-start the book with their intuitive suggestions and made
+sure that the content quality of the book remains uncompromised.</p>
+<p>Felipe Laso, Technical Reviewer of the book who made sure that the
+practical aspects of the book are up to the mark. His insightful
+comments have been of great help in refinement of the book.</p>
+<p>Jessica Vakili, Coordinating Editor at Apress who made sure that the
+process from penning to publishing the book remained smooth and hassle
+free.</p>
+<p>Mom, dad, and my sweet little sister, all of whom were nothing but
+supportive about the entire idea of writing a book. They have always
+been there for me, encouraging me to achieve my aspirations.</p>
+<p>Countless number of mentors and friends who have guided me at every
+little step of life.</p>
+<p>You who wish to refine your skills by reading this book so that you
+can make a difference in the lives of those around you. You encourage me
+to contribute toward collaborative education.</p>
+<p>Thanks!</p>
+
+
+
+
+<h3 class="Heading">About the Author and About the Technical
+Reviewer</h3>
+
+
+
+
+<h3 class="Heading">About the Author</h3>
+
+
+
+
+
+<h3 class="Heading">About the Technical Reviewer</h3>
+
+
+
+
+
+
+<p></p>
+
+<!--Begin Abstract-->
+
+<h1 class="ChapterTitle" lang="en">1. Introduction to Machine
+Learning</h1>
+
+
+<!--End Abstract-->
+
+<p>This chapter provides a basic explanation of the concept of machine
+learning (ML) along with information about its applications, types of
+ML, how it works, and why we need it. Even if you are a novice to the
+concept, this chapter should help you with the information you need to
+get started with ML. It is a fun chapter, with lots of pictures and
+examples to help you understand the text.</p>
+
+<h2 class="Heading">What Is Machine Learning?</h2>
+<p>
+In the past few years, ML, also referred to as automated learning, has
+been one of the fastest growing areas in the field of computer science
+and information technology. As the term suggests, machine learning is a process
+during which a machine learns about significant patterns in a given set
+of input data. Now you might be wondering what the word “pattern” means
+in this context. Consider Figure <a href="#474993_1_En_1_Chapter.xhtml#Fig1">1-1</a> to get a clearer
+idea.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_1_Chapter/474993_1_En_1_Fig1_HTML.jpg" style="height:14.8em" alt="../images/474993_1_En_1_Chapter/474993_1_En_1_Fig1_HTML.jpg"/>
+</p>
+
+<p>Figure 1-1</p>
+<p>Data
+patterns</p>
+
+
+<p>This figure demonstrates a mapping of four sets of data points on
+their corresponding graphs. As we do that, the data points in the data
+set form a unique pattern. The patterns observed in the figure are
+Stable, Ascending, Descending, and Variable. Learning about such data
+patterns can be used to develop an algorithm that helps the machine to
+adapt and react appropriately when it encounters alien data. The goal of
+ML is to make a machine react automatically to alien data based on the
+learning. For instance, if the machine observes that the given data set
+forms a stable pattern where data points deviate from -1 to +1, it can
+predict the value of the next data point that will be added to the data
+set.</p>
+<p>
+To sum it up, ML is the process of creating programs that learn from
+data and make predictions. Some of the well-known ML models are as follows:
+
+
+
+
+
+
+
+
+</p>
+
+<p>
+<img src="images/474993_1_En_1_Chapter/474993_1_En_1_Fig5_HTML.jpg" style="height:19.6em" alt="../images/474993_1_En_1_Chapter/474993_1_En_1_Fig5_HTML.jpg"/>
+</p>
+
+<p>Figure 1-5</p>
+<p>Decision tree</p>
+
+
+
+<ul>
+<li><p><em>Decision tree</em>: It uses a tree-like graph that predicts the
+item’s target value based on observations about the
+item. Figure <a href="#474993_1_En_1_Chapter.xhtml#Fig5">1-5</a> demonstrates a
+decision tree that helps you make the decision of accepting or rejecting
+a job offer.</p></li>
+</ul>
+
+
+<p>
+<img src="images/474993_1_En_1_Chapter/474993_1_En_1_Fig4_HTML.png" style="height:20.62em" alt="../images/474993_1_En_1_Chapter/474993_1_En_1_Fig4_HTML.png"/>
+</p>
+
+<p>Figure 1-4</p>
+<p>Artificial neural network</p>
+
+
+
+<ul>
+<li><p><em>Artificial neural network (ANN)</em>: It is an interconnected
+network of nodes
+that is designed to process information in the same way as a human brain does it. The
+information is stored in an ANN in the form of interconnections between
+nodes. It takes in the input, processes the input based on the stored
+information, and generates the output. Figure <a href="#474993_1_En_1_Chapter.xhtml#Fig4">1-4</a> shows the
+interconnections between nodes in an ANN.</p></li>
+</ul>
+
+
+<p>
+<img src="images/474993_1_En_1_Chapter/474993_1_En_1_Fig3_HTML.png" style="height:14.38em" alt="../images/474993_1_En_1_Chapter/474993_1_En_1_Fig3_HTML.png"/>
+</p>
+
+<p>Figure 1-3</p>
+<p>Support vector machine </p>
+
+
+
+<ul>
+<li><p><em>Support vector machine (SVM)</em>: It is a classifier that is
+formally defined by a separating hyperplane. Given some labeled training
+data, the SVM algorithm outputs an optimal hyperplane that categorizes
+new examples. In two-dimensional space, this hyperplane is a line
+dividing a plane in two parts. Consider Figure <a href="#474993_1_En_1_Chapter.xhtml#Fig3">1-3</a> to get a better
+idea.</p></li>
+</ul>
+
+
+<p>
+<img src="images/474993_1_En_1_Chapter/474993_1_En_1_Fig2_HTML.png" style="height:15.95em" alt="../images/474993_1_En_1_Chapter/474993_1_En_1_Fig2_HTML.png"/>
+</p>
+
+<p>Figure 1-2</p>
+<p>Ensemble
+learning</p>
+
+
+
+<ul>
+<li><p><em>Ensemble learning</em>: Combination of several ML
+algorithms (classifiers) to obtain a better predictive performance as
+compared with any one ML algorithm alone. Figure <a href="#474993_1_En_1_Chapter.xhtml#Fig2">1-2</a> shows the flow
+of control in ensemble learning.</p></li>
+</ul>
+
+
+
+<h2 class="Heading">What Are the Applications of Machine Learning?</h2>
+<p>
+ML is a tool that we knowingly or unknowingly use in many of our day to
+day activities. Following are some of the familiar ML applications:
+
+</p>
+
+<ul>
+<li><p>An e-mail service filters spam e-mail.</p></li>
+<li><p>A digital camera detects human faces.</p></li>
+<li><p>Personal digital
+assistants (PDAs) detect voice commands.</p></li>
+<li><p>Optical character
+recognition (OCR) software recognizes characters from an
+image.</p></li>
+<li><p>Online payment gateways detect credit card fraud.</p></li>
+<li><p>Websites display personalized advertisements to a user.</p></li>
+</ul>
+
+<p>Apart from the aforementioned applications, ML is also used in
+various other domains such as medical diagnosis, space exploration,
+wildlife preservation, sentiment analysis, and so on.</p>
+
+
+<h2 class="Heading">Why Do We Need Machine Learning?</h2>
+<p>
+Let’s say we want to display all the images of roses in our application
+from the user’s photo library. This seems like a simple task, so we can
+do some programming. Perhaps, we’ll start with the color. If the
+dominant color in the picture is red, maybe it’s a rose.
+
+</p>
+<pre>// Use Color
+If color == "reddish"</pre>
+<p>
+Figure <a href="#474993_1_En_1_Chapter.xhtml#Fig6">1-6</a> shows different
+types of roses. Looking at the figure, you will notice that there are
+many roses that are white or yellow in color. So, we’ll go forward and
+start describing the shape. And soon we’ll realize that it’s very
+difficult to write even such a simple program programmatically. Hence,
+this is where we turn to ML for our help. Rather than describing how a
+rose looks programmatically, we will describe a rose empirically.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_1_Chapter/474993_1_En_1_Fig6_HTML.jpg" style="height:35.62em" alt="../images/474993_1_En_1_Chapter/474993_1_En_1_Fig6_HTML.jpg"/>
+</p>
+
+<p>Figure 1-6</p>
+<p>Different types of roses</p>
+
+
+<p>
+ML has two steps. In the first step, you collect images of roses,
+lilies, sunflowers, and other flowers and label them. You will run them
+through a learning algorithm and you will get what we call a model. This
+model is an empirical representation of what a rose looks like. This
+step is known as learning. In the second step, you do the following:
+
+</p>
+
+<ul>
+<li><p>Take a picture of a rose.</p></li>
+<li><p>Embed the model generated in step one in your app.</p></li>
+<li><p>Run the picture of a rose through the model.</p></li>
+</ul>
+
+<p>
+You will get a label for the picture and the confidence level. See
+Figure <a href="#474993_1_En_1_Chapter.xhtml#Fig7">1-7</a>. This step is
+known as inference.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_1_Chapter/474993_1_En_1_Fig7_HTML.jpg" style="height:8.1em" alt="../images/474993_1_En_1_Chapter/474993_1_En_1_Fig7_HTML.jpg"/>
+</p>
+
+<p>Figure 1-7</p>
+<p>Inference</p>
+
+
+<p>This is how we harness the potential of ML to simplify our tasks.</p>
+
+
+<h2 class="Heading">How Does Machine Learning Work?</h2>
+<p>In layman terms, ML can be thought of as converting past experiences
+into expertise. Let us consider the task of recognizing spam e-mails
+and labelling them. To perform this task, the machine will create a set
+of all the e-mails that were previously labeled as spam e-mails by a
+human user; the machine will then identify all the terms whose
+appearance in the e-mail is an indication of spam e-mail. Now when a new
+e-mail appears, the machine scans it for suspicious words identified
+from the set of previous spam e-mails to identify if the new e-mail is a
+spam. This way, the machine will be able to label new e-mails correctly
+and automatically.</p>
+<p>
+Let us consider another task that involves ML, that is, the detection of
+human faces by
+camera application. This functionality helps the camera to make sure
+that all the faces are in focus before the picture gets captured. See
+Figure <a href="#474993_1_En_1_Chapter.xhtml#Fig8">1-8</a>. To
+automatically detect a human face, the camera needs to know the
+structure of a human face. For this purpose, a learning algorithm is
+applied in the camera application, during which it works with a training
+data set consisting of a variety of human faces. By analyzing all the
+human faces in the training data set, the camera observes the common
+pattern in all the data members of the training data set. For instance,
+it may observe that all the human faces consist of two eyes, one nose,
+and a pair of lips. Along with that it might also observe the
+positioning of these elements. By learning this, the camera will now be
+able to detect human faces automatically.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_1_Chapter/474993_1_En_1_Fig8_HTML.jpg" style="height:18.15em" alt="../images/474993_1_En_1_Chapter/474993_1_En_1_Fig8_HTML.jpg"/>
+</p>
+
+<p>Figure 1-8</p>
+<p>Facial
+recognition</p>
+
+
+<p>There are many algorithms that are used for ML. One such algorithm is
+the Perceptron Learning Algorithm. The following section discusses this
+algorithm to get a clearer idea about ML.</p>
+
+
+<h2 class="Heading">Perceptron Learning Algorithm</h2>
+<p>
+The Perceptron is a classic example of a neural network that gives a
+binary output based on the input it receives. We can use a Perceptron
+for a classification task where we need to classify the input in one of
+two output categories. For instance, consider Figure <a href="#474993_1_En_1_Chapter.xhtml#Fig9">1-9</a>, which presents
+a linearly separable
+problem. Here, the goal is to create a Perceptron that separates
+red dots from blue dots. To do this, the Perceptron must first analyze
+the training data set and determine a straight line on the graph that
+separates the blue dots from the red ones. Once that is done, the
+Perceptron will be able to classify new input vectors as blue dots or
+red dots by determining their position on the graph in relation to the
+line.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_1_Chapter/474993_1_En_1_Fig9_HTML.png" style="height:14.38em" alt="../images/474993_1_En_1_Chapter/474993_1_En_1_Fig9_HTML.png"/>
+</p>
+
+<p>Figure 1-9</p>
+<p>Linearly separable
+problem</p>
+
+
+<p>
+Following is the learning
+process for the Perceptron to determine the line that separates
+the two categories of input vectors:
+
+</p>
+
+<ul>
+<li><p>The goal is to obtain a straight line based on the training data
+set that separates the red dots from the blue dots. So, let us consider
+the equation of a straight line:</p>
+<p>ax + by + c = 0</p>
+<p>x = - <img src="images/474993_1_En_1_Chapter/474993_1_En_1_Chapter_TeX_IEq1.png" style="height:1.9em" alt="$$ \frac{c}{a} $$"/> <code>-</code> <img src="images/474993_1_En_1_Chapter/474993_1_En_1_Chapter_TeX_IEq2.png" style="height:2.25em" alt="$$ \frac{b}{a} $$"/> y</p></li>
+<li><p>We now get an equation of the straight line. The position of the
+line completely depends on the values of a, b, and c. So, we can adjust
+the value of weights (a, b and c) as per our requirements.</p></li>
+<li><p>Now, initialize the weights (a, b and c) to random real
+values.</p></li>
+<li><p>Iterate through the training data set, collecting all data
+members misclassified by the current set of weights. If all the data
+members are classified correctly, substitute the values of the weights
+in the equation of the line. You’ve found the line that separates the
+red dots from the blue ones.</p></li>
+<li><p>Or else, modify the weights (a, b and c) depending on the
+misclassified data members and iterate again through the training data
+set. Repeat the process until all the data members are classified
+correctly.</p></li>
+</ul>
+
+
+
+<h2 class="Heading">Types of Machine Learning</h2>
+<p>
+There are broadly three types of ML algorithms:
+
+</p>
+
+<ol>
+<li>
+
+<p><em>Supervised learning</em>: This type of learning algorithm  consists of a training
+data set that has pairs consisting of input values and desired output
+values. Such data is known as labeled training data. In such algorithms,
+a mapping function is generated that maps the input values in the
+training data set to their corresponding output values. Supervised
+learning represents the concept of humans teaching the computer. It is
+mainly used to perform classification tasks.</p>
+
+
+ 
+</li>
+<li>
+
+<p><em>Unsupervised learning</em>: This type of learning algorithm  consists of a training
+data set that has only input values, no output values. Such data is
+known as unlabeled training data. In such learning algorithms, learning
+occurs purely based on the structure of the data. Unsupervised learning
+represents the concept of computers teaching themselves. It is mainly
+used to solve clustering tasks.</p>
+
+
+ 
+</li>
+<li>
+
+<p><em>Reinforcement learning</em>: This type of learning algorithm  interacts with the
+environment by producing actions and discovering error or success. This
+type of learning allows machines to automatically determine the ideal
+behavior within a specific environment. Simple feedback is required for
+the machine to learn which action is best; this is known as the
+reinforcement signal.</p>
+
+
+ 
+</li>
+</ol>
+
+<p>Now that you are aware of the basics of ML, we will discuss the core
+ML framework provided by Apple to implement pretrained ML models into
+iOS applications.</p>
+
+
+<h2 class="Heading">Summary</h2>
+<p>
+
+</p>
+
+<ul>
+<li><p>Machine Learning is a process during which a machine learns about
+significant patterns in a given set of data so that it can make
+predictions.</p></li>
+<li><p>Ensemble learning, SVMs, ANNs, and decision trees are some of the
+well-known ML models.</p></li>
+<li><p>Spam e-mail filtering, face detection, voice recognition, OCR,
+credit card fraud detection, and personalized advertisements are common
+examples of ML.</p></li>
+<li><p>Advanced applications of ML include medical diagnosis, space
+exploration, wildlife preservation, and sentiment analysis.</p></li>
+<li><p>ML identifies patterns in historical data and uses this knowledge
+to react appropriately to any alien data that it might encounter in the
+future.</p></li>
+<li><p>Perceptron is a classic example of ML that gives a binary output
+based on the input it receives. It can be used to solve a linearly
+separable problem.</p></li>
+<li><p>ML algorithms are broadly classified into three types:
+supervised, unsupervised, and reinforcement learning.</p></li>
+</ul>
+
+
+
+<p></p>
+
+<!--Begin Abstract-->
+
+<h1 class="ChapterTitle" lang="en">2. Introduction to Core ML
+Framework</h1>
+
+
+<!--End Abstract-->
+
+<p>In Chapter <a href="#474993_1_En_1_Chapter.xhtml">1</a>, you learned the basic definition
+of machine learning (ML), how it works, where it is used, and what is
+required to use it. This chapter will introduce you to the Core ML
+framework that was introduced by Apple Inc. in 2017 to allow application
+developers to implement ML in their iOS applications. You will also
+learn the concepts of training and inference, which will give you a
+clearer picture of how ML works.</p>
+<p>This chapter also provides a step-by-step guide for creating an ML
+application for an iOS device. You need not to worry if you have not
+created an iOS application previously, because this chapter will guide
+you through the entire process of creating an application from
+scratch.</p>
+
+<h2 class="Heading">Core ML at a Glance</h2>
+<p>Core ML is a groundbreaking application development framework
+released by Apple. It allows you to use pretrained ML models in your iOS
+applications.</p>
+<p>
+Traditionally, ML applications had to rely on cloud services to run
+third-party ML algorithms. This caused the application to run very slow
+on mobile devices. But with the launch of Core ML, ML applications can
+now locally run optimized and trained ML algorithms on the device,
+leading to faster processing speed (Figure <a href="#474993_1_En_2_Chapter.xhtml#Fig1">2-1</a>).
+
+</p>
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig1_HTML.jpg" style="height:9.52em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig1_HTML.jpg"/>
+</p>
+
+<p>Figure 2-1</p>
+<p>Core ML applications lead to faster processing time</p>
+
+
+<p>
+Core ML is huge, and it can be used to implement a multitude of
+functionalities. However, there are two direct applications of Core
+ML:
+
+</p>
+
+<ul>
+<li><p>First, the developers can use the pretrained models that already
+exist in the Core ML.</p></li>
+<li><p>Second, they can they can build their own custom ML model using
+frameworks like Caffe, Turi, and Keras, and then convert it into a Core
+ML model to use it in their iOS application.</p></li>
+</ul>
+
+<p>Some well-known applications that use the functionality provided by
+Core ML are
+Pinterest (image-based search), iPhone Photo Library (groups photos
+together), and Nude App (recognizes pictures with nudity).</p>
+<p>
+Figure <a href="#474993_1_En_2_Chapter.xhtml#Fig2">2-2</a> shows the
+process of converting an ML model created using third-party frameworks
+into the Core ML format so that you can use it in your application.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig2_HTML.jpg" style="height:9.98em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig2_HTML.jpg"/>
+</p>
+
+<p>Figure 2-2</p>
+<p>Converting to Core ML</p>
+
+
+<p>Core ML offers support for a wide range of ML algorithms such as
+ensemble learning, support vector machines (SVMs),
+artificial neural networks (ANNs), linear
+models, and so on. However, Core ML will only run models that are
+trained with labeled data. It does not provide support for unsupervised
+models.</p>
+
+
+<h2 class="Heading">Core ML Components</h2>
+<p>
+Core ML is Apple’s ML
+framework 
+available for macOS, iOS, watchOS, and tvOS. It acts as a foundation for
+Apple’s previous ML frameworks—Accelerate and Metal Performance Shaders (MPS)—which are
+commonly used as performance primitives. Accelerate uses CPUs for
+memory-heavy tasks, while MPS uses GPU for compute-heavy tasks. Core ML
+decides which underlying framework to use based on the requirement of
+the application. Figure <a href="#474993_1_En_2_Chapter.xhtml#Fig3">2-3</a> shows various
+components of the Core Ml framework. In addition to
+Accelerate and MPS, Core ML provides support for the following domain-specific
+frameworks:
+
+
+</p>
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig3_HTML.png" style="height:17.1em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig3_HTML.png"/>
+</p>
+
+<p>Figure 2-3</p>
+<p>Core ML components</p>
+
+
+
+<ul>
+<li><p><em>Vision</em>: Vision is Apple’s one-stop shop to do all the
+things related to computer vision and images. It is a framework that is
+comprised of computer vision algorithms that help in performing tasks
+such as detection and classification of images and videos. It can be
+used to do things like object tracking or deep learning-based face
+detection.</p></li>
+<li><p><em>Natural Language</em>: This is Apple’s one-stop shop to do
+text processing. It is a framework that can be used to analyze natural
+language and deduce some metadata from it. It is helpful for performing
+tasks like named entity
+recognition (NER), text prediction, language identification, and
+sentiment analysis.</p></li>
+<li><p><em>GameplayKit</em>: It is a framework that helps to incorporate
+common gameplay behavior such as pseudorandom number generation, object
+motion, and path finding in your application. It is an object-oriented
+framework that
+contains reusable components that help you build games.</p></li>
+</ul>
+
+<p>You can think of Core ML as a set of tools that helps you in bringing
+multiple ML models together and wrap them in one interface so that you
+can easily use them in your application code.</p>
+
+
+<h2 class="Heading">Training and Inference</h2>
+<p>
+In Chapter <a href="#474993_1_En_1_Chapter.xhtml">1</a> you learned that ML is a process
+of discovering patterns in a given data set to make predictions. To do
+so, we need the following entities :
+
+</p>
+
+<ul>
+<li><p><em>Input data points</em>: Let’s say we want to classify a
+student as Pass/Fail. In this case, the input data points will be
+comprised of the marks of various students.</p></li>
+<li><p><em>Expected outputs for the given input points</em>: Continuing
+our previous example of classification, the expected outputs would
+consist of Pass or Fail.</p></li>
+<li><p><em>A learning algorithm</em>: This is the algorithm that learns
+how to map input to the output and create rules that can be used to deal
+with new inputs (inference). These rules are created by the process
+called training.</p></li>
+</ul>
+
+<p>Let us consider some examples to understand this more clearly.</p>
+<p><em>Example 1 (image recognition)</em>: A model that is learning
+to identify strollers on a street is trained with millions of images of
+streets. These images are known as a training data set. Some of the
+images contain no pedestrians at all, while others have up to 50.
+Multiple learning algorithms are trained on the data (street images),
+with each having access to the correct answers. Each algorithm develops
+a variety of models to identify strollers on streets. This process is
+known as training. After this, when a new image is fed as an input to
+the algorithm, it will apply the appropriate model and determine the
+number of strollers in the image. This process is known as
+inference.</p>
+<p><em>Example 2 (sorting)</em>: A model is learning to sort items using
+visual identification. It picks
+out recyclable items from the lot as it passes on a conveyor belt. It
+places items such as glass, plastic, paper, and metal into their
+respective bins. This process is known as inference. Each item is
+labeled with an identification number. Once a day, human experts examine
+the bins and inform the robot about the items that were incorrectly
+sorted. The robot uses this feedback to improve. This process is known
+as training.</p>
+<p><em>Example 3 (decision making)</em>: A model is learning to
+make an estimate of risk associated with financial investment. The model
+is fed a large amount of data on the transactions that investors made in
+the past, along with the outcomes of those transactions. Based on this
+training data, the model calculates the risk-to-reward ratio. This is
+known as training. Now, when the model is fed with certain parameters
+about an investment, it can predict the risk associated with that
+investment. This is known as inference.</p>
+
+
+<h2 class="Heading">Machine Learning Models</h2>
+<p>A model, in terms of machine learning, is nothing but a function that
+takes in some input and returns some output. It is generated by the
+process of training and inference, that is, applying a training data set
+to a learning algorithm. The learning algorithm finds patterns in
+training data that maps the input data points in the data set to their
+corresponding output data points. The algorithm then returns an ML model
+that captures these data patterns.</p>
+<p>
+Most of the models that you might want to use in your application have
+some key function at their core. Some of the usual functionalities
+offered by ML models (see Figure <a href="#474993_1_En_2_Chapter.xhtml#Fig4">2-4</a>) are sentiment
+analysis, handwriting recognition, language translation, image
+classification, style transfer, music tagging, and text prediction.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig4_HTML.jpg" style="height:15.2em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig4_HTML.jpg"/>
+</p>
+
+<p>Figure 2-4</p>
+<p>Key functionalities of ML models</p>
+
+
+<p>Core ML supports a variety of models, including neural networks, tree
+ensembles, support vector machines, and linear models. It requires the
+ML models to be in Core ML format, that is, files with a .mlmodel file
+extension. Apple provides several open source ML models that are already
+built in the Core ML framework. However, you can create your own custom
+ML model, convert
+it into Core ML format, and use it in your application.</p>
+<p>In the following part of this chapter, we will learn how to create a
+simple iOS application, and implement an open source ML model in that
+application.</p>
+
+
+<h2 class="Heading">Beginning with Xcode</h2>
+<p>Tightly integrated with the Core ML framework, Xcode is an incredibly
+productive IDE (integrated development environment) by Apple that’s used
+to build applications for MacBook, iPhone, iPad, Apple Watch, and Apple
+TV.</p>
+<p>
+Following are the configurations that we’ll be using as a general
+development practice for this chapter:
+
+</p>
+
+<ul>
+<li><p><em>Xcode</em>: version 9.4.1 or later</p></li>
+<li><p><em>Deploy SDK</em>: version 11.4 or later</p></li>
+<li><p><em>Programming language</em>: Swift 4 or later</p></li>
+<li><p><em>Simulator</em>: iPhone 8 Plus or later</p></li>
+</ul>
+
+<p>Assuming that you are familiar with the Mac environment and you have
+Xcode installed on your MacBook, let us begin building our first iOS
+application.</p>
+<p>
+<em>Step 1</em>: Launch Xcode. It should display
+a welcome dialog (Figure <a href="#474993_1_En_2_Chapter.xhtml#Fig5">2-5</a>). From here,
+choose “Create a new Xcode project” to start a new project.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig5_HTML.jpg" style="height:22.15em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig5_HTML.jpg"/>
+</p>
+
+<p>Figure 2-5</p>
+<p>Xcode welcome dialog</p>
+
+
+<p>
+<em>Step 2</em>: Xcode shows you various devices and project templates for your
+application (Figure <a href="#474993_1_En_2_Chapter.xhtml#Fig6">2-6</a>). Choose your
+target device and appropriate template (Single View App). Then click
+“Next.”
+
+</p>
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig6_HTML.jpg" style="height:25.6em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig6_HTML.jpg"/>
+</p>
+
+<p>Figure 2-6</p>
+<p>Xcode template selection</p>
+
+
+<p>
+<em>Step 3</em>: This brings you to another screen to fill in all the
+necessary options for your project (Figure <a href="#474993_1_En_2_Chapter.xhtml#Fig7">2-7</a>). The options
+include the following:
+
+
+</p>
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig7_HTML.jpg" style="height:25.28em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig7_HTML.jpg"/>
+</p>
+
+<p>Figure 2-7</p>
+<p>Xcode project
+options</p>
+
+
+
+<ul>
+<li><p><em>Product Name</em>: The name of your application.</p></li>
+<li><p><em>Organization Name</em>: You can fill in this box with your
+company’s name.</p></li>
+<li><p><em>Organization Identifier</em>: This is the domain name written
+in reverse order. If you have a domain, you can use your own domain
+name.</p></li>
+<li><p><em>Class Prefix</em>: Xcode uses the class prefix to name the
+class automatically. You can choose your own prefix or leave it
+blank.</p></li>
+<li><p><em>Devices</em>: Select the device on which you want your
+application to run.</p></li>
+</ul>
+
+<p>
+<em>Step 4</em>: Xcode then asks you where you want to save your project
+(Figure <a href="#474993_1_En_2_Chapter.xhtml#Fig8">2-8</a>). Pick any folder (e.g., Desktop)
+on your Mac and click “Create.”
+
+</p>
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig8_HTML.jpg" style="height:21.32em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig8_HTML.jpg"/>
+</p>
+
+<p>Figure 2-8</p>
+<p>Xcode folder
+picker</p>
+
+
+<p>
+<em>Step 5</em>: As you confirm, Xcode automatically creates your
+project based on all the options you provided. The next screen will look
+similar to Figure <a href="#474993_1_En_2_Chapter.xhtml#Fig9">2-9</a>.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig9_HTML.jpg" style="height:25.8em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig9_HTML.jpg"/>
+</p>
+
+<p>Figure 2-9</p>
+<p>Xcode main window</p>
+
+
+<p>
+Before moving on to the code segment, let us familiarize ourselves with
+the Xcode workspace (Figure <a href="#474993_1_En_2_Chapter.xhtml#Fig10">2-10</a>).
+
+
+</p>
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig10_HTML.jpg" style="height:21.95em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig10_HTML.jpg"/>
+</p>
+
+<p>Figure 2-10</p>
+<p>Xcode workspace</p>
+
+
+
+<ul>
+<li><p>On the left pane, it’s the project navigator. You can find all
+your files under this area.</p></li>
+<li><p>The center part of the workspace is the editor area.</p></li>
+<li><p>The rightmost pane is the utility area. This area displays the
+properties of the file and allows you to access Quick Help.</p></li>
+<li><p>There’s a toolbar at the top that provides various functions for
+you to run your app, switch editor, and so on.</p></li>
+</ul>
+
+<p>
+<em>Step 6</em>: In the project navigator area, you will find a file
+that goes by the name ‘MainStoryboard.storyboard’. Select this file and
+you will notice that the editor area changes to an
+interface builder (Figure <a href="#474993_1_En_2_Chapter.xhtml#Fig11">2-11</a>) that shows an
+empty screen for your application.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig11_HTML.jpg" style="height:25.78em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig11_HTML.jpg"/>
+</p>
+
+<p>Figure 2-11</p>
+<p>Xcode interface
+builder</p>
+
+
+<p><em>Step 7</em>: In the lower part of the utility area, you’ll find
+the object library. From here, you can choose any of the UI controls and
+drag-and-drop it into the view. Let us pick “Label” and drag it into the
+view. You can change the text of the label from the object attributes in
+the utility area. You can also add positioning constraints as per your
+requirements for proper structuring of the UI elements.</p>
+<p><em>Step 8</em>: Now it’s time to test your app. You can run it
+using the run icon on the toolbar. Xcode automatically builds the app
+and runs it in the simulator. If everything is fine, your app should run
+properly in the simulator.</p>
+<p>That’s it! We just created our first iOS application. In the
+following section we’ll learn to integrate an open-source ML model in
+this application.</p>
+
+
+<h2 class="Heading">Photos Application Using Xcode</h2>
+<p>Let us now create an application that allows the user to select an
+image from the photo library and displays the selected image on the
+screen. We will later modify this application to include an ML model in
+it.</p>
+<p><em>Step 1</em>: Launch Xcode and open the application “Machine
+Learning Demo” that we created previously.</p>
+<p><em>Step 2</em>: Open the interface builder by opening the file that
+goes by the name “MainStoryboard.storyboard” from the navigator
+area.</p>
+<p>
+<em>Step 3</em>: Delete the label that we created previously. Now, add a
+Button followed by an Image View to the interface by dragging the
+controls from the object library in the utility area to the interface
+builder. See Figure <a href="#474993_1_En_2_Chapter.xhtml#Fig12">2-12</a> for reference.
+You can change the color and text of the button from the object
+attributes in the utility area.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig12_HTML.jpg" style="height:25.78em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig12_HTML.jpg"/>
+</p>
+
+<p>Figure 2-12</p>
+<p>Photos application interface</p>
+
+
+<p>
+<em>Step 4</em>: Now that we’ve created the interface, we’ll focus on
+the logic of our application. Open the assistant editor by clicking its
+icon on the right end of the toolbar. Load the file called
+“ViewController.swift” in the assistant editor. You’ll simultaneously
+see the interface
+builder on the left part of the window and your code
+(“ViewController.swift”) on the right part of the window. See Figure
+<a href="#474993_1_En_2_Chapter.xhtml#Fig13">2-13</a> for reference.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig13_HTML.jpg" style="height:25.78em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig13_HTML.jpg"/>
+</p>
+
+<p>Figure 2-13</p>
+<p>Assistant
+editor</p>
+
+
+<p>
+<em>Step 5</em>: To connect interface elements to the code, we need to
+create outlets and actions. Outlets are used to modify properties of the
+UI elements, while the actions are used to handle events related to the
+UI elements. We will create outlets for Button and Image View. In order
+to do so, control and drag from the Button/Image View to the code
+(“ViewController.swift”) and create an IBOutlet. In the connection
+field, we will choose Outlet; as Name we will use btn or imageView; and
+as Type we will select UIButton or UIImageView. That should create the
+following IBOutlet code in your ViewController class:
+
+</p>
+<pre>@IBOutlet weak var btn: UIButton!
+@IBOutlet weak var imageView: UIImageView!</pre>
+<p>
+<em>Step 6</em>: At the tap of the button, the app should open an image
+picker that allows the user to select an image from the photo library and return the
+selected image. Let us now create an action that will handle the click
+event for the button. To do so, again control and drag from the button
+to the code. You should see a popup similar to Figure <a href="#474993_1_En_2_Chapter.xhtml#Fig14">2-14</a>. In the
+connection field we will choose Action; as Name we will use
+pickImageBtnClick; the Event that fires the action is “Touch Up Inside”;
+and the argument passed to the method is Sender.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig14_HTML.jpg" style="height:12.58em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig14_HTML.jpg"/>
+</p>
+
+<p>Figure 2-14</p>
+<p>IBAction</p>
+
+
+<p>
+That should create the following IBAction code in your ViewController
+class:
+
+</p>
+<pre>@IBAction func pickImageBtnClick(_ sender: Any) {
+//code
+}</pre>
+<p>
+<em>Step 7</em>: Now let us add the code that will handle the button
+click. First of all, since we need the user to interact with the photo
+library, we have to conform to the UIImagePickerControllerDelegate
+protocol as well as UINavigationControllerDelegate
+protocol. Add both controllers to your class definition in the
+ViewControllor.swift file:
+
+</p>
+<pre>class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+//code
+}</pre>
+<p>
+<em>Step 8</em>: When the user clicks the button, we need to create an
+instance of UIImagePickerController
+and set its delegate to our current class. We also need to specify the
+source for the image picker as the photo library. Once the picker is
+created, we need to present it modally using the present method. To do
+so, add the following code to the pickImageBtnClick method in
+ViewControllor.swift file:
+
+</p>
+<pre>@IBAction func pickImageBtnClick(_ sender: Any) {
+let imagePicker = UIImagePickerController()
+imagePicker.delegate = self
+imagePicker.allowsEditing = false
+imagePicker.sourceType = .photoLibrary
+present(imagePicker, animated: true, completion: nil)
+}</pre>
+<p>
+<em>Step 9</em>: Since we are confirming to
+UIImagePickerControllerDelegate, we need to implement two delegate methods:
+imagePickerController and imagePickerControllerDidCancel. The
+imagePickerController method is called when the user is finished
+selecting the image from the library. Hence, we will use this method to
+set the selected image in the Image View of our application. The imagePickerControllerDidCancel
+method is called when the user cancels the image picker. Hence,
+in this method, we will simply dismiss the picker. Add the following
+code to the ViewController class in
+the ViewControllor.swift file:
+
+</p>
+<pre>func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+let pickedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+imageView.image = pickedImage
+self.dismiss(animated: true, completion: nil)
+}
+func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+self.dismiss(animated: true, completion: nil)
+}</pre>
+<p>
+Note that if you are using Swift 4.2, the preceding code might not work for you,
+since it is written in Swift 4.0. Following is the code that you will
+use instead:
+
+</p>
+<pre>func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+let pickedImage = info[UIImagePickerController.InfoKey.originalIm    age] as! UIImage
+imageView.image = pickedImage
+picker.dismiss(animated: true)
+}
+func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+self.dismiss(animated: true, completion: nil)
+}</pre>
+<p>
+If everything is alright, your final swift code (Swift 4.0) should be as
+follows:
+
+</p>
+<pre>import UIKit
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+@IBOutlet var btn: UIButton!
+@IBOutlet var imageView: UIImageView!
+override func viewDidLoad() {
+super.viewDidLoad()
+btn.layer.cornerRadius = 8
+}
+@IBAction func pickImageBtnClick(_ sender: Any) {
+let imagePicker = UIImagePickerController()
+imagePicker.delegate = self
+imagePicker.allowsEditing = false
+imagePicker.sourceType = .photoLibrary
+present(imagePicker, animated: true, completion: nil)
+}
+//UIImagePickerControllerDelegate Methods
+func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+let pickedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+imageView.image = pickedImage
+self.dismiss(animated: true, completion: nil)
+}
+func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+self.dismiss(animated: true, completion: nil)
+}
+}</pre>
+<p>
+<em>Step 10</em>: Since our application needs to
+access the photo library of the user’s device, we need to ask the user
+to grant access for the same. Otherwise, our application might terminate
+unexpectedly. To avoid that, we need to add the following property in
+the “Info.plist” file (Figure <a href="#474993_1_En_2_Chapter.xhtml#Fig15">2-15</a>) of our
+application:
+
+
+</p>
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig15_HTML.jpg" style="height:25.78em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig15_HTML.jpg"/>
+</p>
+
+<p>Figure 2-15</p>
+<p>Information property
+list</p>
+
+
+
+<ul>
+<li><p><em>Key</em>: Privacy – Photo Library Usage Description</p></li>
+<li><p><em>Value</em>: $(PRODUCT_NAME) photo use</p></li>
+</ul>
+
+<p>
+That’s it! We just created an iPhone application that allows the user to
+pick an image from the photo library and displays the selected image on
+the screen. It’s time to test our application. You can run the
+application using the run icon on the toolbar. Xcode automatically
+builds the app and runs it in the simulator (Figure <a href="#474993_1_En_2_Chapter.xhtml#Fig16">2-16</a>). If
+everything is fine, your app should run properly in the simulator.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig16_HTML.jpg" style="height:16.45em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig16_HTML.jpg"/>
+</p>
+
+<p>Figure 2-16</p>
+<p>Photos application using Xcode</p>
+
+
+
+
+<h2 class="Heading">Using a Core ML Model in Your Application</h2>
+<p>The most wonderful part about Core ML is that it lets you integrate pretrained
+models in your application. And this can be done even if you do
+not have an extensive knowledge about neural networks or ML. The only
+constraint is that the model should be in Core ML format to integrate it
+in your application. In this part of the book, we will use a model that
+is already in Core ML format and is available on Apple’s website.</p>
+<p>
+The application that we built in the previous section of this chapter
+lets the user select a picture from their device’s photo library. We
+will now integrate a Core ML model in this application, which will try
+to predict the label for the object in the selected picture. To do so,
+we will need to first download the model. Go to Apple’s Developer
+website on ML (<a href="https://developer.apple.com/machine-learning/build-run-models/"> <code>https://developer.apple.com/machine-learning/build-run-models/</code>
+</a>) and scroll to the bottom of the page. You will see a
+section listing all the pretrained Core ML models that are available to
+download for free (Figure <a href="#474993_1_En_2_Chapter.xhtml#Fig17">2-17</a>).
+
+</p>
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig17_HTML.jpg" style="height:35.18em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig17_HTML.jpg"/>
+</p>
+
+<p>Figure 2-17</p>
+<p>Apple Core ML models</p>
+
+
+<p>The model that we will be using for our application is Inceptionv3. This model
+is originally built using Keras and is converted to Core ML format using
+Python tools. It detects presiding objects in an image from more than
+1,000 categories such as trees, animals, food, vehicles, people,
+flowers, and so on. Please feel free to use any other model from the
+list instead of Inceptionv3, as the process is almost similar for all
+the Core ML Models. Let us see a step-by-step procedure to integrate
+this model in our application.</p>
+<p>
+<em>Step 1</em>: First, we will need to add a label to the application
+interface to display the prediction for the selected image. To do so, go
+to the interface builder and decrease the height of the imageView to
+make space for the label at the bottom. Now drag and drop a label from
+the object library into the interface. See Figure <a href="#474993_1_En_2_Chapter.xhtml#Fig18">2-18</a> for reference.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig18_HTML.jpg" style="height:23.55em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig18_HTML.jpg"/>
+</p>
+
+<p>Figure 2-18</p>
+<p>Photos application updated interface</p>
+
+
+<p>
+<em>Step 2</em>: Add an outlet for the newly created label so that we
+can change its text later.
+
+</p>
+<pre>@IBOutlet weak var classifier: UILabel!</pre>
+<p><em>Step 3</em>: Now that we have prepared the interface for the
+prediction, let us put the model to work. You will have the Inceptionv3.mlmodel file
+that you downloaded from the Apple website previously. Drag and drop
+that file under your project folder in the Xcode project navigator. This
+will add the Core ML model in your application.</p>
+<p>
+<em>Step 4</em>: Select the model file from the navigator and you will
+notice that the Xcode automatically recognizes the file as an ML model.
+It displays information about the model such as type of the model (which
+in our case is Neural Network Classifier), the author details, model
+description, and so on (Figure <a href="#474993_1_En_2_Chapter.xhtml#Fig19">2-19</a>).
+
+</p>
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig19_HTML.jpg" style="height:23.47em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig19_HTML.jpg"/>
+</p>
+
+<p>Figure 2-19</p>
+<p>Core ML model
+(Inceptionv3)</p>
+
+
+<p>It also displays the Model Class, which is automatically generated
+from the ML model and can be directly used in our application. Click the
+arrow next to the class name and you will be able to see the
+implementation code of the model class.</p>
+<p>Other important information that the Xcode displays is the Model
+Evaluation Parameters. This is the information about the input that the
+model takes in and the output that it returns. In our case, the model
+takes in a colored image of size 299×299 as an input and it returns a
+string as output.</p>
+<p>
+<em>Step 5</em>: Now let us use the model class in our application
+to make predictions. Go to the ViewController.swift
+file and import the Core ML framework in the very beginning.
+
+</p>
+<pre>import CoreML</pre>
+<p>
+<em>Step 6</em>: Declare a model variable in the ViewController class
+that will represent the Core ML model.
+
+</p>
+<pre>var model:Inceptionv3!</pre>
+<p>
+<em>Step 7</em>: Override the viewWillAppear() method
+of the ViewController class and initialize the model in that method.
+
+</p>
+<pre>override func viewWillAppear(_ animated: Bool) {
+model = Inceptionv3()
+}</pre>
+<p><em>Step 8</em>: The input that our model takes in is an image of
+size 299×299. Thus, we will need to resize the image after the user is
+done selecting the image. We will write the code for this in the
+delegate method
+imagePickerController(). The following code will do the job for us:</p>
+
+<h3 class="Heading">Note</h3>
+<p>The numbering in the following lines of code is just added for the
+explanation that follows.</p>
+
+<p>
+
+</p>
+<pre>//resize image
+1. UIGraphicsBeginImageContextWithOptions (CGSize(width: 299, height: 299), true, 2.0)
+2. pickedImage.draw(in: CGRect(x: 0, y: 0, width: 299, height: 299))
+3. let newImage = UIGraphicsGetImageFromCurrentImageContext()!
+4. UIGraphicsEndImageContext()
+5. let attrs = [kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue, kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue] as CFDictionary
+6. var pixelBuffer : CVPixelBuffer?
+7. let status = CVPixelBufferCreate(kCFAllocatorDefault, Int(newImage.size.width), Int(newImage.size.height), kCVPixelFormatType_32ARGB, attrs, &amp;pixelBuffer)
+8. guard (status == kCVReturnSuccess) else {
+9. return
+10. }
+11. CVPixelBufferLockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
+12. let pixelData = CVPixelBufferGetBaseAddress(pixelBuffer!)
+13. let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
+14. let context = CGContext(data: pixelData, width: Int(newImage.size.width), height: Int(newImage.size.height), bitsPerComponent: 8, bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer!), space: rgbColorSpace, bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue)
+15. context?.translateBy(x: 0, y: newImage.size.height)
+16. context?.scaleBy(x: 1.0, y: -1.0)
+17. UIGraphicsPushContext(context!)
+18. newImage.draw(in: CGRect(x: 0, y: 0, width: newImage.size.width, height: newImage.size.height))
+19. UIGraphicsPopContext()
+20. CVPixelBufferUnlockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))</pre>
+<p>Now, let us understand what is happening in the preceding code. Since
+our model accepts an input image of size 299×299, lines 1-4 convert the
+selected image to that size and assign it to a new variable called
+newImage.</p>
+<p>It is important to know that the model accepts an input image in form
+of pixels. Hence, lines 5-10 store the newImage in the form of a pixel
+buffer, which basically holds the image in the form of pixels in the
+memory. This buffer will be supplied as an input for prediction.</p>
+<p>Then, all the pixels present in the image are converted into
+device-dependent RGB color space. Lines 11-13 do that. In line 14, we
+store the pixel data in CGContext so that we can easily modify some
+properties of the image pixels. We then scale the image as per our
+requirement in lines 15-16. Lines 17-20 update the final image
+buffer.</p>
+<p>Note that it’s okay if you do not understand most parts of this code.
+The only thing you need to know is that we took the picture that the
+user selected from the photo library and converted it into a form that
+the model accepts for prediction.</p>
+<p>
+<em>Step 9</em>: Finally, it’s time to call the prediction method of the
+model that will do the image prediction for us. Add the following code
+in the delegate method imagePickerController()
+right after the image resizing code.
+
+</p>
+<pre>//predict image label
+guard let prediction = try? model.prediction(image: pixelBuffer!) else {
+classifier.text = "Can't Predict!"
+return
+}
+classifier.text = "This is probably \(prediction.classLabel)."</pre>
+<p>The prediction
+method is supplied with the pixel buffer as a parameter. If the
+prediction is successful, the method returns an object that gives us the
+output label. We set this output label text to the classifier label that
+we added to the interface earlier. If the prediction is not successful,
+we manually set the classifier label text to let the user know that the
+model was unable to predict the label for the selected image.</p>
+<p>
+<em>Step 10</em>: It is finally time to build and run the application.
+Let us find out how well our first ML application does. Figures <a href="#474993_1_En_2_Chapter.xhtml#Fig20">2-20</a> to Figure
+<a href="#474993_1_En_2_Chapter.xhtml#Fig24">2-24</a> show different
+screens that you should see while playing around with your application.
+
+
+
+
+
+</p>
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig24_HTML.jpg" style="height:33.8em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig24_HTML.jpg"/>
+</p>
+
+<p>Figure 2-24</p>
+<p>Photos application
+prediction (E)</p>
+
+
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig23_HTML.jpg" style="height:33.8em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig23_HTML.jpg"/>
+</p>
+
+<p>Figure 2-23</p>
+<p>Photos application
+prediction (D)</p>
+
+
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig22_HTML.jpg" style="height:33.8em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig22_HTML.jpg"/>
+</p>
+
+<p>Figure 2-22</p>
+<p>Photos application prediction (C)</p>
+
+
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig21_HTML.jpg" style="height:33.8em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig21_HTML.jpg"/>
+</p>
+
+<p>Figure 2-21</p>
+<p>Photos application
+prediction (B)</p>
+
+
+
+<p>
+<img src="images/474993_1_En_2_Chapter/474993_1_En_2_Fig20_HTML.jpg" style="height:32.07em" alt="../images/474993_1_En_2_Chapter/474993_1_En_2_Fig20_HTML.jpg"/>
+</p>
+
+<p>Figure 2-20</p>
+<p>Photos application
+prediction (A)</p>
+
+
+
+
+<h2 class="Heading">Summary</h2>
+<p>
+
+</p>
+
+<ul>
+<li><p>Core ML is a framework by Apple that can be used to develop
+machine learning applications for Apple products such as iPhone, iPad,
+MacBook, Apple TV, and Apple Watch.</p></li>
+<li><p>Core ML allows developers to use pretrained ML models, which are
+already in Core ML format, to implement ML functionalities in their
+applications.</p></li>
+<li><p>Core ML also allows developers to convert custom ML models into
+Core ML format to use it their applications.</p></li>
+<li><p>Core ML integrates the model within the application package so
+that the ML algorithms can run locally instead of remotely. This results
+in faster processing speeds.</p></li>
+<li><p>Core ML is based on Apple’s previous frameworks—Accelerate and
+Metal Performance Shaders (MPS)—that act as performance
+primitives.</p></li>
+<li>
+The major components of Core ML are:
+
+
+<ul>
+<li><p><em>Vision</em>: Classification of images and videos</p></li>
+<li><p><em>Natural Language</em>: Text-based prediction and sentiment
+analysis</p></li>
+<li><p><em>GameplayKit</em>: Implements gameplay behavior</p></li>
+</ul>
+
+</li>
+<li><p>An ML model can be trained using input data points, output for
+each input data point, and a learning algorithm that maps the input data
+points to their corresponding output. Once trained, a model can be used
+for inference.</p></li>
+<li><p>The usual functionalities offered by ML models are sentiment
+analysis, handwriting recognition, language translation, image
+classification, text prediction, and so on.</p></li>
+</ul>
+
+
+
+<p></p>
+
+<!--Begin Abstract-->
+
+<h1 class="ChapterTitle" lang="en">3. Custom Core ML Models Using Turi
+Create</h1>
+
+
+<!--End Abstract-->
+
+<p>In Chapter <a href="#474993_1_En_2_Chapter.xhtml">2</a>, you learned how to use pretrained
+machine learning models in your application. In this chapter, you will
+learn how to train your own model with a third-party framework using
+Turi Create. You will also find a step-by-step guide on how to convert
+this trained model into the Core ML format and use it in your
+application.</p>
+
+<h2 class="Heading">Necessity for a Custom Model</h2>
+<p>
+An ML model can be thought of as a piece of code that we use to add
+intelligent user experiences in our application. As we
+learned in Chapter <a href="#474993_1_En_2_Chapter.xhtml">2</a>, an ML model can be used to
+perform a variety of tasks; and just like any other piece of code, there
+is no single model that can be used to carry out all the intelligent
+tasks. For instance, consider the following tasks that you might want to
+implement in your application:
+
+</p>
+
+<ul>
+<li><p>Ability to take a picture of your food and know how many calories
+you are consuming</p></li>
+<li><p>Changing the presentation slides on a TV screen with a simple
+gesture on your iPhone</p></li>
+<li><p>Tracking an object in real time</p></li>
+<li><p>Trying out artistic filters on photographs</p></li>
+<li><p>Categorizing the music files as per their genres</p></li>
+</ul>
+
+<p>This is just a small list; there are an endless number of intelligent
+tasks that you might want your application to perform. All these tasks
+demonstrate very different user experiences; hence there is no single ML
+model that can accommodate all of these tasks. This is where the need
+for a custom model arises. All these tasks have some things in
+common—the fact that they all use ML and they all require very little
+data to implement
+them in our application. Hence, we can create a custom ML model for each
+of the tasks that we want to perform.</p>
+
+
+<h2 class="Heading">Life Cycle of a Custom Model Creation</h2>
+<p>In order to create a custom Core ML model, the first thing
+you will need to do is to identify the problem you are trying to solve
+and collect data that will help you solve the problem. For instance, if
+you are trying to create a model that will predict your next month’s
+electricity bill, the data you will need to collect are your historical
+electricity bills and your electricity consumption statistics for the
+corresponding time period.</p>
+<p>Once you have the dataset, the next step is to train the model using
+an appropriate algorithm. Once the training is done, you can check the
+accuracy by evaluating the model. Finally, if you are satisfied with the
+evaluation results, you can build the model. If not satisfied, you can
+pass the model through another iteration of the training process. You
+can repeat the process for as long as you are unsatisfied with the
+results. Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig1">3-1</a> shows the life
+cycle of custom
+model creation.</p>
+
+<h3 class="Heading">Note</h3>
+<p>Apple has introduced a standardized file format called ML Model
+(.mlmodel) that allows developers to use machine learning in their
+application. All the machine learning models need to be eventually
+converted into the Core ML format (.mlmodel) in order to use them in
+Apple products.</p>
+
+<p>
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig1_HTML.jpg" style="height:14.45em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig1_HTML.jpg"/>
+</p>
+
+<p>Figure 3-1</p>
+<p>Life cycle of custom model creation</p>
+
+
+<p>
+Following are the steps involved in creation of a custom Core ML model:
+
+</p>
+
+<ol>
+<li>
+
+
+<em>Problem</em>: The first step of custom model creation involves
+identifying the problem that we are trying to solve and understanding it
+in terms of ML. Consider the tasks in Table <a href="#474993_1_En_3_Chapter.xhtml#Tab3">3-1</a> and their
+corresponding ML category.
+
+
+
+
+
+<p>Table 3-1</p>
+<p>Machine Learning Tasks</p>
+
+
+<table style="border-collapse: collapse;border-top: 0.5pt solid ; border-bottom: 0.5pt solid ; border-left: 0.5pt solid ; border-right: 0.5pt solid ; ">
+<thead>
+<tr class="header">
+<th style="text-align: left; border-right: 0.5pt solid; border-bottom: 0.5pt solid;"><p><strong>Task
+You Want to Do</strong></p></th>
+<th style="text-align: left; border-bottom: 0.5pt solid;"><p><strong>Machine
+Learning Terminology</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; border-right: 0.5pt solid; border-bottom: 0.5pt solid;"><p>Label
+images</p></td>
+<td style="text-align: left; border-bottom: 0.5pt solid;"><p>Image
+Classification</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; border-right: 0.5pt solid; border-bottom: 0.5pt solid;"><p>Recognize
+objects within images</p></td>
+<td style="text-align: left; border-bottom: 0.5pt solid;"><p>Object
+Detection</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; border-right: 0.5pt solid; border-bottom: 0.5pt solid;"><p>Find
+similar images</p></td>
+<td style="text-align: left; border-bottom: 0.5pt solid;"><p>Image
+Similarity</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; border-right: 0.5pt solid; border-bottom: 0.5pt solid;"><p>Create
+custom styled avatars</p></td>
+<td style="text-align: left; border-bottom: 0.5pt solid;"><p>Style
+Transfer</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; border-right: 0.5pt solid; border-bottom: 0.5pt solid;"><p>Personalize
+user choices</p></td>
+<td style="text-align: left; border-bottom: 0.5pt solid;"><p>Recommender</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; border-right: 0.5pt solid; border-bottom: 0.5pt solid;"><p>Detect
+activity using sensors</p></td>
+<td style="text-align: left; border-bottom: 0.5pt solid;"><p>Activity
+Classification</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; border-right: 0.5pt solid; border-bottom: 0.5pt solid;"><p>Analyze
+sentiment from message</p></td>
+<td style="text-align: left; border-bottom: 0.5pt solid;"><p>Text
+Classifier</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; border-right: 0.5pt solid; border-bottom: 0.5pt solid;"><p>Predict
+a label</p></td>
+<td style="text-align: left; border-bottom: 0.5pt solid;"><p>Classifier</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; border-right: 0.5pt solid; border-bottom: 0.5pt solid;"><p>Predict
+a numeric value</p></td>
+<td style="text-align: left; border-bottom: 0.5pt solid;"><p>Regression</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; border-right: 0.5pt solid;"><p>Group
+similar data together</p></td>
+<td style="text-align: left;"><p>Clustering</p></td>
+</tr>
+</tbody>
+</table>
+
+
+
+ 
+</li>
+<li>
+
+<p> <em>Data</em> :
+Once we identify the problem, the next step is to identify the type of
+data and the
+amount of data that we will need to accomplish this task. For supervised
+learning, the data will consist of pairs of input and the corresponding
+output. Data can be in any form such as pictures, text files, CSV files,
+or tables. Finally, we collect relevant data that we will use to train
+our model.</p>
+
+
+ 
+</li>
+<li>
+
+<p><em>Train</em>: Once we’ve collected the required data, we can start
+training our model
+on the data.</p>
+
+
+ 
+</li>
+<li>
+
+<p><em>Evaluate</em>: Once the model is ready, we can determine its
+quality by evaluating the model’s
+success ratio against a test dataset. If the results are not up to the
+mark and the model is not ready for production, we can reiterate the
+training process until the model becomes more accurate.</p>
+
+
+ 
+</li>
+<li>
+
+<p><em>Model</em>: If the results of the training process are
+satisfactory, we can generate the .mlmodel that can be used in our
+applications.</p>
+
+
+ 
+</li>
+</ol>
+
+<p>Training and evaluating a model from scratch can be a complicated
+task. To simplify
+this complexity, Apple has introduced Turi Create. Using Turi Create in
+collaboration with Python will allow us to train our custom model based
+on existing ML models using very few lines of code, but more on that
+later.</p>
+
+
+<h2 class="Heading">Assembling Data</h2>
+<p>Before learning about assembling data, let us
+understand the basic types of tasks that we can accomplish using ML. If
+you have lots of images, you might be interested in categorizing those
+images on the basis of their content; if your application shows
+advertisement to the users, you might want to customize those
+advertisements as per the user preference; or you might want to prompt
+users about the duplicate contacts in their phonebook.</p>
+<p>All these tasks require different types of data. For understanding, let us
+consider the following problem statement that we will try to solve:</p>
+
+<h3 class="Heading">Problem</h3>
+<p>Given a picture of a dog, the application should be able to predict
+the breed of the dog.</p>
+
+<p>
+To create a model that can do this task, we will need lots of images of
+dogs from different breeds. We will then create a dataset from these
+images. Don’t worry; it’s not as complicated as it sounds. First, create
+a folder called Dataset on your MacBook. Inside the Dataset folder,
+create subfolders for each breed of dog you want to classify. Then
+inside each subfolder, place some images of dogs of that breed. Note
+that the name of the subfolder should be the name of
+the dog breed. Refer to Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig2">3-2</a> for reference.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig2_HTML.jpg" style="height:31.88em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig2_HTML.jpg"/>
+</p>
+
+<p>Figure 3-2</p>
+<p>Dataset for
+custom ML model</p>
+
+
+<p>That’s it. We now have the dataset required to train our model to perform the
+classification task. In the following section of this chapter, we will
+learn how to train an ML model using the dataset.</p>
+
+
+<h2 class="Heading">Introduction to Turi Create</h2>
+<p>Turi Create is a Python-based framework that helps you create Core ML
+models directly from the dataset. It is an
+open-source framework available at <a href="https://github.com/apple/turicreate">
+<code>https://github.com/apple/turicreate</code>
+</a>. It is also cross-platform, which means that you can
+use it on both MacOS and Linux.</p>
+<p>The major benefit of using Turi
+Create is that rather than training a model from scratch, it allows us
+to train our model on the top of the ML model that already exists in the
+OS. This is commonly known as transfer learning. This
+is important because training a model from scratch requires millions of
+images, huge computing power, and lots of patience. Instead, using Turi
+Create, we can use existing ML models such as ResNet (residual networks)
+and train the last few layers of this model to our specific data. This
+way we can create a sufficiently good ML model using the amount of data
+that we have and in time. Using transfer learning also results in
+smaller model size.</p>
+
+<h3 class="Heading">Note</h3>
+<p>We will be using Mac OS Mojave 10.14 and Xcode 10 for all the
+development that we do here onward.</p>
+
+<p>Let us learn how to install Turi Create on our Mac.</p>
+<p>
+<em>Step 1</em>: To install Turi Create, we will need Python installed
+on our Mac. By default, we have Python 2.7 installed on Mac systems.
+This would be sufficient for installing Turi Create. You can manually
+download Python from <a href="https://www.python.org"> <code>https://www.python.org</code>
+</a> and install it on your Mac if you wish to. But note
+that Turi Create does not support the latest version of Python (i.e.,
+version 3.7); hence we will use the default version of Python that is
+installed on our systems. To check the Python version on your system,
+you can open the terminal window and run the “python” command. See
+Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig3">3-3</a>.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig3_HTML.jpg" style="height:14.55em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig3_HTML.jpg"/>
+</p>
+
+<p>Figure 3-3</p>
+<p>Checking Python
+version on Mac</p>
+
+
+<p>
+<em>Step 2</em>: Now, in order to install packages using Python, you
+need to install the Python package manager (commonly known
+as pip) on your system. To do so, open the terminal window and run the
+“sudo easy_install pip” command. See Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig4">3-4</a>. Sit back and
+wait while the package manager gets installed on your system.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig4_HTML.jpg" style="height:14.55em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig4_HTML.jpg"/>
+</p>
+
+<p>Figure 3-4</p>
+<p>Installing pip on
+Mac</p>
+
+
+<p>
+<em>Step 3</em>: Open the terminal window again and run the “pip”
+command to check if the Python package manager is successfully installed
+on your system. If it is installed, then you will see a list of commands offered by the
+package manager (Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig5">3-5</a>). If not, please
+try reinstalling pip on your Mac before proceeding to the next step.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig5_HTML.jpg" style="height:21.83em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig5_HTML.jpg"/>
+</p>
+
+<p>Figure 3-5</p>
+<p>Python commands</p>
+
+
+<p>
+<em>Step 4</em>: Now that pip is successfully installed on your Mac, you can use it to
+install Turi Create. Open the terminal window and run the following
+command to install the latest version of Turi Create on your machine
+(see Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig6">3-6</a> for the output):
+
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig6_HTML.jpg" style="height:22.85em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig6_HTML.jpg"/>
+</p>
+
+<p>Figure 3-6</p>
+<p>Installing Turi
+Create</p>
+
+
+<pre>pip install turicreate</pre>
+<p>You have now successfully installed Turi Create on your machine. In
+the following section, we will learn how to use it to create a custom ML
+model.</p>
+
+
+<h2 class="Heading">Training and Evaluating a Custom Model</h2>
+<p>Following are the steps to create a custom ML model using Turi
+Create:</p>
+<p>
+<em>Step 1</em>: Open Xcode; select
+<strong>File ➤ New ➤ File</strong> in the menu (Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig7">3-7</a>).
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig7_HTML.jpg" style="height:26.7em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig7_HTML.jpg"/>
+</p>
+
+<p>Figure 3-7</p>
+<p>New file in Xcode</p>
+
+
+<p>
+<em>Step 2</em>: Select Blank file from template
+selection menu (Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig8">3-8</a>).
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig8_HTML.jpg" style="height:27.3em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig8_HTML.jpg"/>
+</p>
+
+<p>Figure 3-8</p>
+<p>Xcode template selection</p>
+
+
+<p><em>Step 3</em>: Name the file <strong>MyCustomModel.py</strong></p>
+<p><em>Step 4</em>: Save it to desktop.</p>
+<p>
+<em>Step 5</em>: Import Turi Create by adding the following line of
+code:
+
+</p>
+<pre>import turicreate as tc</pre>
+<p>
+<em>Step 6</em>: Define the path for the training dataset by adding the
+following code:
+
+</p>
+<pre>url = "dataset/"</pre>
+<p>
+<em>Step 7</em>: Add the following code to search and load images from
+the dataset folder:
+
+</p>
+<pre>data = tc.load_images(url)</pre>
+<p>
+<em>Step 8</em>: Now we will define the image category and save it in
+the <strong>“dogBreed”</strong> property. We will fetch the folder name
+from the path of the image to determine the image category. To do so,
+add the following code:
+
+</p>
+<pre>data["dogBreed"] = data["path"].apply(lambda path: path.split('/')[1])</pre>
+<p>This will create a labeled dataset where each image in our training
+dataset will have a path and a property called
+<strong>“dogBreed”</strong>.</p>
+<p>
+<em>Step 9</em>: Now, we will save the new labeled dataset as an
+SFrame . This
+SFrame will be used to train the data. Add the following code to save
+the dataset as an SFrame:
+
+</p>
+<pre>data.save("dogBreed.sframe")</pre>
+<p>
+<em>Step 10</em>: Let us preview the new labeled data on Turi Create. To
+do so, add the following code:
+
+</p>
+<pre>data.explore()</pre>
+<p>
+<em>Step 11</em>: To load the SFrame for training purposes, write the
+following code:
+
+</p>
+<pre>dataBuffer = tc.SFrame("dogBreed.sframe")</pre>
+<p>
+<em>Step 12</em>: Now we will train the model using 90% of the data and
+test the model using the remaining 10% of the data. To do so, write the
+following code:
+
+</p>
+<pre>trainingBuffers, testingBuffers = dataBuffer.random_split(0.9)
+model = tc.image_classifier.create(trainingBuffers, target="dogBreed", model="squeezenet_v1.1")</pre>
+<p>Here, we are training our model on top of the
+<strong>“Squeezenet”</strong> model that already exists. You can use
+other models like <strong>“ResNet-50”</strong> for more accuracy.</p>
+<p>
+<em>Step 13</em>: It is now time to evaluate the test data to determine
+the accuracy of the model. To do so, add the following code:
+
+</p>
+<pre>evaluations = model.evaluate(testingBuffers)
+print evaluations["accuracy"]</pre>
+<p>
+<em>Step 14</em>: Finally, add the following code to save the model and
+export it to the Core ML format:
+
+</p>
+<pre>model.save("dogBreed.model")
+model.export_CoreML("dogBreed.mlmodel")</pre>
+<p>
+Your final code
+for MyCustomModel.py should be as in Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig9">3-9</a>.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig9_HTML.jpg" style="height:23.55em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig9_HTML.jpg"/>
+</p>
+
+<p>Figure 3-9</p>
+<p>MyCustomModel Python
+code</p>
+
+
+<p>
+To execute this code, open the Terminal app on your Mac and change the
+current directory to the location of your Python file. Then execute the
+code using the following command:
+
+</p>
+<pre>python MyCustomModel.py</pre>
+<p>
+It might take several minutes while the Python code is executing. First, the
+code will load the images from the dataset into the memory, then the
+images will be labeled based on the folder they reside in, and then they
+will be converted to an SFrame that will be used
+for training. Note that you do not need to explicitly do anything; the
+process will automatically start once you have executed the Python code
+in the terminal window. All you need to do is sit back and wait for the
+code to give you a Core
+ML model. The terminal screen in Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig10">3-10</a> shows the
+process.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig10_HTML.jpg" style="height:21.95em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig10_HTML.jpg"/>
+</p>
+
+<p>Figure 3-10</p>
+<p>Loading images and creating an SFrame</p>
+
+
+<p>
+Now, the explore()
+method that we used in step 10, to preview the labeled images,
+will open the Turi Create Visualization window (see Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig11">3-11</a>) that will
+preview the images.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig11_HTML.jpg" style="height:28.33em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig11_HTML.jpg"/>
+</p>
+
+<p>Figure 3-11</p>
+<p>Turi Create Visualization</p>
+
+
+<p>
+You can see the labeled training data here. Meanwhile, the code will
+continue executing in the terminal window. The code will now load the
+SFrame that we
+created previously, download the base ML model (Squeezenet in this
+case), and start training the SFrame on the top of the
+base model. The terminal screen in Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig12">3-12</a> shows the
+process.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig12_HTML.jpg" style="height:23.4em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig12_HTML.jpg"/>
+</p>
+
+<p>Figure 3-12</p>
+<p>Training the dataset</p>
+
+
+<p>
+After the training process, the code will evaluate the model to see if
+it is accurate enough. This evaluation will be done on the testing data
+that we randomly picked from the dataset. This random pick will be done
+as a result of the one-line code we wrote for (0.9, 0.1) split on the
+dataset, for using 90% of the dataset for training and 10% of the
+dataset for testing. There will be
+multiple iterations for the evaluation process, and the code will also
+print the accuracy for each iteration. The terminal screen in Figure
+<a href="#474993_1_En_3_Chapter.xhtml#Fig13">3-13</a> shows the
+process.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig13_HTML.jpg" style="height:23.38em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig13_HTML.jpg"/>
+</p>
+
+<p>Figure 3-13</p>
+<p>Evaluating the model</p>
+
+
+<p>
+Once the evaluation is done, the code will save the model and convert it
+to the Core ML
+format. You will see some new items generated on your Mac (Figure
+<a href="#474993_1_En_3_Chapter.xhtml#Fig14">3-14</a>).
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig14_HTML.jpg" style="height:26.72em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig14_HTML.jpg"/>
+</p>
+
+<p>Figure 3-14</p>
+<p>Custom model files</p>
+
+
+<p>That’s it. You just created a Core ML model using Turi Create. This model can
+now be used in your iOS applications to classify the breed of a dog,
+given its picture.</p>
+
+
+<h2 class="Heading">Converting a Custom Model into Core ML</h2>
+<p>If you are using Turi Create to generate a
+model from scratch, you do not need to worry about conversion because it
+already creates a model in the Core ML format; but if you are using
+other tools like Caffe, TensorFlow, or Keras, you might be wondering how
+to convert models built using those tools to the Core ML format. To do
+that, Apple has introduced Core ML Tools alongside Core ML.
+It is an open-source Python package that takes ML models in a variety of
+formats and converts them into the Core ML format.</p>
+<p>Let us learn how to use Core ML Tools to convert models into the Core
+ML format. To do so, you will need Python installed on your machine. If
+you do not have it, please install the recent version of Python from
+<a href="https://www.python.org"> <code>https://www.python.org</code>
+</a>. We will take a Caffe model and convert it into the
+Core ML format. To do so, consider the following steps:</p>
+<p>
+<em>Step 1</em>: Open the Terminal application on your Mac and install
+Core ML Tools using the Python package manager. To do so, type in the
+following command:
+
+</p>
+<pre>pip install CoreMLtools</pre>
+<p>
+<em>Step 2</em>: Open Xcode; select
+<strong>File ➤ New ➤ File</strong> in the menu (Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig15">3-15</a>).
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig15_HTML.jpg" style="height:26.72em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig15_HTML.jpg"/>
+</p>
+
+<p>Figure 3-15</p>
+<p>New file in Xcode</p>
+
+
+<p>
+<em>Step 3</em>: Select Blank file from template selection menu (Figure
+<a href="#474993_1_En_3_Chapter.xhtml#Fig16">3-16</a>).
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig16_HTML.jpg" style="height:27.33em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig16_HTML.jpg"/>
+</p>
+
+<p>Figure 3-16</p>
+<p>Xcode template
+selection</p>
+
+
+<p><em>Step 4</em>: Name the file <strong>MyConverter.py</strong></p>
+<p><em>Step 5</em>: Save it to desktop.</p>
+<p>
+<em>Step 6</em>: Download the Caffe model that you want to convert to
+the Core ML format. Note that when you download a Caffe model, you will
+have three different files:
+
+</p>
+
+<ul>
+<li><p><strong>modelName.caffemodel</strong> – The model file</p></li>
+<li><p><strong>deploy.prototxt</strong> – The file that contains the
+network structure</p></li>
+<li><p><strong>labels.txt</strong> – The file that contains the output
+values for the prediction</p></li>
+</ul>
+
+<p>
+<em>Step 7</em>: Open the MyConverter.py file and add the following code
+to import Core MLtools:
+
+</p>
+<pre>import CoreMLtools</pre>
+<p>
+<em>Step 8</em>: Our Caffe model is defined
+by two files: “.caffemodel” and “.prototxt”. So, let us add it into the
+code by adding the following lines of code:
+
+</p>
+<pre>caffe_model = ('oxford102.caffemodel', 'deploy.prototxt')</pre>
+<p>
+<em>Step 9</em>: Next, we will define our class labels file by adding
+the following code:
+
+</p>
+<pre>labels = 'class_labels.txt'</pre>
+<p>
+<em>Step 10</em>: Now to convert the Caffe model into the Core ML
+format, add the following line of code:
+
+</p>
+<pre>CoreML_model = Core MLtools.converters.caffe.convert
+(caffe_model, class_labels = labels)</pre>
+<p>
+<em>Step 11</em>: Finally, we can save the converted model by adding the
+following code to our file:
+
+</p>
+<pre>CoreML_model.save('MyCustomModel.mlmodel')</pre>
+<p>
+Your final code
+should be as in Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig17">3-17</a>.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig17_HTML.jpg" style="height:22.53em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig17_HTML.jpg"/>
+</p>
+
+<p>Figure 3-17</p>
+<p>Converting from Caffe to Core ML
+(code)</p>
+
+
+<p>
+<em>Step 12</em>: To execute the code, open the Terminal app on your
+Mac, change the current directory to the location of your Python file, and type the
+following command (see Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig18">3-18</a> for output).
+
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig18_HTML.jpg" style="height:23.28em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig18_HTML.jpg"/>
+</p>
+
+<p>Figure 3-18</p>
+<p>Converting from Caffe to Core ML
+(execution)</p>
+
+
+<pre>python MyConverter.py</pre>
+<p>
+When the code execution is finished, you will see the output model file
+(Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig19">3-19</a>) in the Core
+ML format.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig19_HTML.jpg" style="height:20.18em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig19_HTML.jpg"/>
+</p>
+
+<p>Figure 3-19</p>
+<p>Converting from Caffe to Core ML
+(output)</p>
+
+
+<p>That’s the process for converting a Caffe model into the Core ML
+format using Core ML Tools.</p>
+
+
+<h2 class="Heading">Using a Custom Model in Your Application</h2>
+<p>Once a model is created or converted to the Core ML format, you can
+use it in your applications in the same way as you would use one of the
+Apple-provided Core ML
+models. Let us use in our application the model that we created
+using Turi Create to predict the breed of the dog, given its image. For
+this, we will create an application using Xcode 10 that will allow users
+to pick an image of a dog from the photo library of their device. The
+application will then display the image along with the breed of the dog
+that is displayed in the image. Follow these steps:</p>
+<p>
+<em>Step 1</em>: Launch Xcode 10. It should display a welcome dialog.
+From here, choose “Create a new Xcode project” to start a new project
+(Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig20">3-20</a>).
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig20_HTML.jpg" style="height:20.9em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig20_HTML.jpg"/>
+</p>
+
+<p>Figure 3-20</p>
+<p>Welcome to Xcode</p>
+
+
+<p>
+<em>Step 2</em>: Xcode shows you various devices and project templates for your
+application (Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig21">3-21</a>). Choose your
+target device and appropriate template (Single View Application). Then
+click “Next.”
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig21_HTML.jpg" style="height:25.68em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig21_HTML.jpg"/>
+</p>
+
+<p>Figure 3-21</p>
+<p>Xcode template
+selection</p>
+
+
+<p>
+<em>Step 3</em>: This brings you to another screen to fill in all the
+necessary options for your project (Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig22">3-22</a>). The options
+include Product Name, Organization Name, Organization Identifier, Class
+Prefix, Devices  ,
+and so on. Fill in the details and go to the next step.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig22_HTML.jpg" style="height:25.68em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig22_HTML.jpg"/>
+</p>
+
+<p>Figure 3-22</p>
+<p>Xcode project
+options</p>
+
+
+<p>
+<em>Step 4</em>: Xcode then asks you where you want to save your project (Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig23">3-23</a>). Pick any
+folder (e.g., Desktop) on your Mac and click “Create.”
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig23_HTML.jpg" style="height:19.62em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig23_HTML.jpg"/>
+</p>
+
+<p>Figure 3-23</p>
+<p>Xcode folder
+picker</p>
+
+
+<p>
+<em>Step 5</em>: As you confirm, Xcode automatically creates your project based on all the
+options you provided. From the navigator pane, select the
+<strong>“Main.storyboard”</strong> file to open the interface builder
+for your application. See Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig24">3-24</a> for reference.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig24_HTML.jpg" style="height:23.58em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig24_HTML.jpg"/>
+</p>
+
+<p>Figure 3-24</p>
+<p>Xcode interface
+builder</p>
+
+
+<p>
+<em>Step 6</em>: Add a Button followed by an Image View to the interface
+by dragging the controls from the object library in the utility area to
+the interface builder. You can change
+the color and text of the button from the object attributes in the
+utility area. Also add a label to the application interface to display
+the prediction for the selected image. See Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig25">3-25</a> for reference.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig25_HTML.jpg" style="height:23.45em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig25_HTML.jpg"/>
+</p>
+
+<p>Figure 3-25</p>
+<p>Dog breed predictor
+application interface</p>
+
+
+<p>
+<em>Step 7</em>: Open the assistant editor by
+clicking its icon on the right end of the toolbar. Load the file called
+<strong>“ViewController.swift”</strong> in the assistant editor. You’ll
+simultaneously see the interface builder on the left part of the window
+and your code <strong>(‘ViewController.swift’)</strong> on the right
+part of the window. See Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig26">3-26</a> for reference.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig26_HTML.jpg" style="height:23.55em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig26_HTML.jpg"/>
+</p>
+
+<p>Figure 3-26</p>
+<p>Assistant
+editor</p>
+
+
+<p>
+<em>Step 8</em>: To connect interface elements to the code, we need to
+create outlets and
+actions. Create an outlet for Button, ImageView, and Label. Also
+create an action for the button. To do so, control and drag from the
+Button/Image View/Label to the code (“ViewController.swift”). If you are
+successful in creating outlets and actions for the UI
+elements, the following code will be added to your ViewController class:
+
+</p>
+<pre>@IBOutlet weak var predictionText: UILabel!
+@IBOutlet weak var imageView: UIImageView!
+@IBOutlet weak var btn: UIButton!
+@IBAction func btnClick(_ sender: Any) {
+}</pre>
+<p>
+<em>Step 9</em>: Now let us add the code that will handle the button
+click. First, since we need the user to interact with the photo library,
+we must conform to the UIImagePickerControllerDelegate protocol as well
+as UINavigationControllerDelegate protocol. Add both the
+controllers to you class definition in the ViewControllor.swift file:
+
+</p>
+<pre>class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+//code
+}</pre>
+<p>
+<em>Step 10</em>: When the user clicks the button, we need to create an
+instance of UIImagePickerController
+and set its delegate to our current class. We also need to specify the
+source for the image picker as the photo library. Once the picker is
+created, we need to present it modally using the present method. To do
+so, add the following code to the pickImageBtnClick method in the
+ViewControllor.swift file:
+
+</p>
+<pre>@IBAction func btnClick(_ sender: Any) {
+let imagePicker = UIImagePickerController()
+imagePicker.delegate = self
+imagePicker.allowsEditing = false
+imagePicker.sourceType = .photoLibrary
+present(imagePicker, animated: true, completion: nil)
+}</pre>
+<p>
+<em>Step 11</em>: Since we are confirming to the delegate for the image
+picker, we need to implement two delegate methods: imagePickerController
+and imagePickerControllerDidCancel.
+The imagePickerController method is called when the user is finished
+selecting the image from the library. Hence, we will use this method to
+set the selected image in the Image View of our application. The
+imagePickerControllerDidCancel method is called when the user cancels
+the image picker. Hence, in this method, we will simply dismiss the
+picker. Add the following code to the ViewController class in the
+ViewControllor.swift file:
+
+</p>
+<pre>func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+let pickedImage = info[.originalImage]  as! UIImage
+imageView.image = pickedImage
+self.dismiss(animated: true, completion: nil)
+}
+func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+self.dismiss(animated: true, completion: nil)
+}</pre>
+<p><em>Step 12</em>: Since our application needs to access the photo
+library of the user’s device, we need to ask
+the user to grant access for the same. Otherwise our application might
+terminate unexpectedly. To avoid that, we need to add the following
+property in the <strong>“Info.plist”</strong> file (Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig27">3-27</a>) of our
+application:</p>
+<p><em>Key</em>: Privacy – Photo Library Usage Description</p>
+<p>
+<em>Value</em>: (PRODUCT_NAME) photo use
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig27_HTML.jpg" style="height:23.55em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig27_HTML.jpg"/>
+</p>
+
+<p>Figure 3-27</p>
+<p>Information property
+list</p>
+
+
+<p><em>Step 13</em>: Now that we have created the application interface,
+let us add our custom model to the project. To do so, drag and drop the
+model file under your project folder in the Xcode project navigator.
+This will add the Core ML
+model in your application.</p>
+<p>
+<em>Step 14</em>: Select the model file from the navigator and you will
+notice that the Xcode automatically recognizes the file as an ML model.
+It displays information about the model such as type of the model (which
+in our case is Neural Network Classifier), the size of the model, model
+description, and so on. See Figure <a href="#474993_1_En_3_Chapter.xhtml#Fig28">3-28</a> for reference.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig28_HTML.jpg" style="height:23.6em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig28_HTML.jpg"/>
+</p>
+
+<p>Figure 3-28</p>
+<p>Custom Core ML
+model (Dog_Breed_Predictor)</p>
+
+
+<p>It also displays the Model Class, which is
+automatically generated from the ML model and can be directly used in
+our application. Click the arrow next to the class name and you will be
+able to see the implementation code of the model class.</p>
+<p>Other important information that the Xcode displays is the Model
+Evaluation Parameters. This is the information about the input that the
+model takes in and the output that it returns. In our case, the model
+takes in a colored image of size 227×227 as an input and it returns a
+string as output.</p>
+<p>
+<em>Step 15</em>: Now let us use the model class in our
+application in order to make predictions. Go to the ViewController.swift
+file and import the Core ML framework in the very beginning.
+
+</p>
+<pre>import CoreML</pre>
+<p>
+<em>Step 16</em>: Declare a model variable in the ViewController class
+that will represent the Core ML model.
+
+</p>
+<pre>var model:dogBreed!</pre>
+<p>
+<em>Step 17</em>: Override the viewWillAppear() method
+of the ViewController class and initialize the model in that method.
+
+</p>
+<pre>override func viewWillAppear(_ animated: Bool) {
+model = dogBreed()
+}</pre>
+<p><em>Step 18</em>: The input that our model takes in is an image of
+size 227×227. Thus, we will need to resize the image after the user is
+done selecting the image. We will write the code for this in the
+delegate method
+imagePickerController(). The following code will do the job for us:</p>
+
+<h3 class="Heading">Note</h3>
+<p>The numbering in the following lines of code is just added for the
+explanation that follows, and the numbers are not a part of the
+code.</p>
+
+<p>
+
+</p>
+<pre>//resize image
+1.  UIGraphicsBeginImageContextWithOptions (CGSize(width: 277, height: 277), true, 2.0)
+2.  pickedImage.draw(in: CGRect(x: 0, y: 0, width: 277, height: 277))
+3.  let newImage = UIGraphicsGetImageFromCurrentImageContext()!
+4.  UIGraphicsEndImageContext()
+5.  let attrs = [kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue, kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue] as CFDictionary
+6.  var pixelBuffer : CVPixelBuffer?
+7.  let status = CVPixelBufferCreate(kCFAllocatorDefault, Int(newImage.size.width), Int(newImage.size.height), kCVPixelFormatType_32ARGB, attrs, &amp;pixelBuffer)
+8.  guard (status == kCVReturnSuccess) else {
+9.     return
+10.  }
+11.  CVPixelBufferLockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
+12.  let pixelData = CVPixelBufferGetBaseAddress(pixelBuffer!)
+13.  let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
+14.  let context = CGContext(data: pixelData, width: Int(newImage.size.width), height: Int(newImage.size.height), bitsPerComponent: 8, bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer!), space: rgbColorSpace, bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue)
+15.  context?.translateBy(x: 0, y: newImage.size.height)
+16.  context?.scaleBy(x: 1.0, y: -1.0)
+17.  UIGraphicsPushContext(context!)
+18.  newImage.draw(in: CGRect(x: 0, y: 0, width: newImage.size.width, height: newImage.size.height))
+19.  UIGraphicsPopContext()
+20.  CVPixelBufferUnlockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))</pre>
+<p>Now, let us understand what is happening in the preceding code. Since
+our model accepts an input image of size 227×227, lines 1-4 convert the
+selected image to that size and assign it to a new variable called
+newImage.</p>
+<p>It is important to know that the model accepts an input image in the
+form of pixels.
+Hence, lines 5-10 store the newImage in the form of a pixel buffer,
+which basically holds the image in the form of pixels in the memory.
+This buffer will be supplied as an input for prediction.</p>
+<p>Then, all the pixels present in the image are converted in to device
+dependent RGB color space. Lines 11-13 do
+that. In line 14, we store the pixel data in CGContext so that we
+can easily modify some properties of the image pixels. We then scale the
+image as per our requirement in lines 15-16. Lines 17-20 update the
+final image
+buffer.</p>
+<p>Note that it’s okay if you do not understand most parts of this code.
+The only thing you need to know is that we took the picture that the
+user selected from the photo library and converted it into a form that
+the model accepts for prediction.</p>
+<p>
+<em>Step 19</em>: Finally, it’s time to call the prediction method of
+the model that will do the image prediction for us. Add the following
+code in the delegate method
+imagePickerController() right after the image resizing code.
+
+</p>
+<pre>//predict image label
+guard let prediction = try? model.prediction(image: pixelBuffer!) else {
+predictionText.text = "Can't Predict!"
+return
+}
+predictionText.text = "Dog Breed:  \(prediction.dogBreed)."</pre>
+<p>The prediction method is supplied with
+the pixel buffer as a parameter. If the prediction is successful, the
+method returns an object that gives us the output label. We set this
+output label text to the classifier label that we added to the interface
+earlier. If the prediction is not successful, we manually set the
+classifier label text to let the user know that the model was unable to
+predict the label for the selected image.</p>
+<p>
+<em>Step 20</em>: It is finally time to build and run the application. Let us
+find out how well our first ML application does. Figures <a href="#474993_1_En_3_Chapter.xhtml#Fig29">3-29</a> to Figure
+<a href="#474993_1_En_3_Chapter.xhtml#Fig33">3-33</a> show different
+screens that you should see while playing around with your application.
+
+
+
+
+
+</p>
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig33_HTML.jpg" style="height:33.95em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig33_HTML.jpg"/>
+</p>
+
+<p>Figure 3-33</p>
+<p>Dog breed prediction (E)</p>
+
+
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig32_HTML.jpg" style="height:33.95em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig32_HTML.jpg"/>
+</p>
+
+<p>Figure 3-32</p>
+<p>Dog breed prediction (D)</p>
+
+
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig31_HTML.jpg" style="height:33.95em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig31_HTML.jpg"/>
+</p>
+
+<p>Figure 3-31</p>
+<p>Dog breed prediction (C)</p>
+
+
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig30_HTML.jpg" style="height:33.95em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig30_HTML.jpg"/>
+</p>
+
+<p>Figure 3-30</p>
+<p>Dog breed prediction (B)</p>
+
+
+
+<p>
+<img src="images/474993_1_En_3_Chapter/474993_1_En_3_Fig29_HTML.jpg" style="height:33.95em" alt="../images/474993_1_En_3_Chapter/474993_1_En_3_Fig29_HTML.jpg"/>
+</p>
+
+<p>Figure 3-29</p>
+<p>Dog breed prediction (A)</p>
+
+
+
+
+<h2 class="Heading">Summary</h2>
+<p>
+
+</p>
+
+<ul>
+<li><p>There is no single model that can be used to perform all the
+intelligent tasks. Hence, we need different custom models for different
+tasks.</p></li>
+<li>
+The custom machine learning model can be created in five simple steps:
+
+
+<ul>
+<li><p>Define the problem</p></li>
+<li><p>Collect data</p></li>
+<li><p>Train the learning algorithm</p></li>
+<li><p>Evaluate the learning algorithm</p></li>
+<li><p>Build the model</p></li>
+</ul>
+
+</li>
+<li><p>Apple introduced a Python-based package called Turi Create that
+helps us in creating custom ML models directly from the
+dataset.</p></li>
+<li><p>Turi Create uses a technique called transfer learning, that is,
+we can train our model on top of an already existing model. The learning
+of the existing model is transferred to our model; therefore we only
+need to train the last few layers of our model. This significantly
+reduces the training time as well as the size of our model.</p></li>
+<li><p>Apple also introduced Core ML Tools, which is a Python package
+that can be used to convert models from various formats to the Core ML
+format using very few lines of code.</p></li>
+<li><p>Once you convert an ML model to the Core ML format, it can be
+easily used in your application, just like any of the Apple-provided
+models.</p></li>
+</ul>
+
+
+
+<p></p>
+
+<!--Begin Abstract-->
+
+<h1 class="ChapterTitle" lang="en">4. Custom Core ML Models Using Create
+ML</h1>
+
+
+<!--End Abstract-->
+
+<p>In Chapter <a href="#474993_1_En_3_Chapter.xhtml">3</a>, you learned how to train custom
+machine learning models using a third-party framework called Turi
+Create. This chapter introduces you to the Create ML framework
+introduced by Apple Inc. in 2018 to allow developers to train custom ML
+models for iOS applications. In addition to the image classification
+model that you trained in Chapter <a href="#474993_1_En_3_Chapter.xhtml">3</a>, this chapter introduces two more
+types of models: one trained using text-based data and the other trained
+using tabular data.</p>
+
+<h2 class="Heading">Introduction to Create ML</h2>
+<p>While Core ML takes care of integrating an ML model in your
+application, Create ML is used to build those ML models. Though it is
+possible to create custom ML models using Core ML Tools (just like we
+learned in Chapter <a href="#474993_1_En_3_Chapter.xhtml">3</a>), Apple introduced Create ML in
+2018 to make things even simpler. Create ML is Apple’s very own ML
+framework. The idea is to build your custom ML model using
+Create ML and then use it in your application using Core ML.</p>
+<p>
+Rather than training your model in some other language and then using
+Swift to integrate it with your iOS application, Create ML allows a
+programmer to implement end-to-end ML in Swift.
+Moreover, you can use Create ML directly in your Xcode Playgrounds.
+Following are the types of data that can be trained into a model using Create ML.
+Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig1">4-1</a> shows them as
+well.
+
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig1_HTML.jpg" style="height:18.08em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig1_HTML.jpg"/>
+</p>
+
+<p>Figure 4-1</p>
+<p>Data types trained into a model
+using Create ML</p>
+
+
+
+<ul>
+<li><p><em>Images</em>: This kind of data can be used to train a custom
+image classifier model that can recognize an object in the
+images.</p></li>
+<li><p><em>Text</em>: This kind of data can be used to train a custom
+text classifier model that can be used to perform tasks like sentiment
+analysis, topic analysis, and domain analysis.</p></li>
+<li><p><em>Tabular data</em>: This kind of data can be used to train a
+custom regression model that can be used to perform predictions of
+multiple kinds.</p></li>
+</ul>
+
+<p>The workflow of a custom model creation
+using Create ML is same as the life cycle of custom model creation that
+we learned in Chapter <a href="#474993_1_En_3_Chapter.xhtml">3</a>. The steps include: problem
+identification, data gathering, training the model, evaluating the
+model, and generating the model. For more details, kindly refer to the
+relevant topics in Chapter <a href="#474993_1_En_3_Chapter.xhtml">3</a>.</p>
+<p>In the following sections of this chapter, we will learn how to
+create an image classification model, text classification model, as well
+as a regression model using Create ML.</p>
+
+<h3 class="Heading">Image Classification</h3>
+<p>Image
+classification is a problem of determining what label you would
+like to apply to a given image. We will try to solve the same problem
+that we solved in the previous chapter, that is, dog breed
+identification, but this time using Create ML. The following is our
+problem statement:</p>
+
+<h3 class="Heading">Problem</h3>
+<p><em>Given a picture of a dog, the model should be able to identify
+the breed of the dog.</em></p>
+
+<p>
+Now, you might already have the dataset that you created in Chapter
+<a href="#474993_1_En_3_Chapter.xhtml">3</a>. We will use the same dataset for
+this example. If you do not have the dataset, here is what you
+need to do:
+
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig2_HTML.jpg" style="height:31.88em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig2_HTML.jpg"/>
+</p>
+
+<p>Figure 4-2</p>
+<p>Dataset for
+image classifier</p>
+
+
+
+<ul>
+<li><p>First, create a folder called Dataset on your MacBook.</p></li>
+<li><p>Inside the Dataset folder, create subfolders for each breed of
+dog you want to classify.</p></li>
+<li><p>Then inside each subfolder, place some images of dogs of that
+breed.</p></li>
+<li><p>Note that the name of the subfolder should be the breed of the
+dogs whose images that folder contains. Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig2">4-2</a> shows the folder
+structure for the dataset.</p></li>
+</ul>
+
+<p>That’s it; you now have your dataset. The next step is to train your
+model using this data. Note that Create ML uses the same transfer
+learning technique that we learned about in Chapter <a href="#474993_1_En_3_Chapter.xhtml">3</a> while learning about Turi Create. It means,
+using Create ML, we can train our model on top of an ML model that
+already exists in the OS. This results in faster training and smaller
+model size. Following are the steps to train an image classifier model
+using Create ML:</p>
+<p>
+<em>Step 1</em>: Open Xcode; select <strong>File ➤ New ➤
+Playground</strong> in the menu (Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig3">4-3</a>).
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig3_HTML.jpg" style="height:26.72em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig3_HTML.jpg"/>
+</p>
+
+<p>Figure 4-3</p>
+<p>New Playground in
+Xcode</p>
+
+
+<p>
+<em>Step 2</em>: Select the Blank file from the template selection menu
+(Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig4">4-4</a>). Note that you
+need to select a blank file under MacOS and not iOS, because the Create
+ML framework isn’t supported for iOS Playgrounds.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig4_HTML.jpg" style="height:25.68em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig4_HTML.jpg"/>
+</p>
+
+<p>Figure 4-4</p>
+<p>Playground template
+selection</p>
+
+
+<p><em>Step 3</em>: Name it <strong>“DogBreedPredictor”</strong> and
+save it to desktop.</p>
+<p>
+<em>Step 4</em>: Now import Create MLUI by adding the following code to
+the Playground:
+
+</p>
+<pre>import CreateMLUI</pre>
+<p>Create MLUI is a framework similar to Create ML; the only difference
+is that unlike Create ML, it has a UI to it.</p>
+<p>
+<em>Step 5</em>: Next, we will create a builder that will help us in
+training our model. To do so, add the following code:
+
+</p>
+<pre>let builder = MLImageClassifierBuilder()</pre>
+<p>
+<em>Step 6</em>: To work with the builder using the Live Demo feature of
+Create MLUI, we will use the following method in our code:
+
+</p>
+<pre>builder.showInLiveView()</pre>
+<p>
+Enable the Live Demo feature of Xcode by switching on the assistant
+editor from the toolbar. You will see a play button on the last line of
+your code. See Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig5">4-5</a> for reference.
+Click that button to view the builder interface in the Live Demo.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig5_HTML.jpg" style="height:25.12em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig5_HTML.jpg"/>
+</p>
+
+<p>Figure 4-5</p>
+<p>Live demo in Xcode
+Playground</p>
+
+
+<p>
+<em>Step 7</em>: You will notice that we need to drop images into the
+builder UI to begin training. This is quite simple. Select the Dataset
+folder, and drop the entire folder into the builder UI. As soon as you
+do this, the Playground will start training the model. The console at
+the bottom will show you the number of images processed, elapsed time,
+and the percentage of job done. See Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig6">4-6</a> for reference.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig6_HTML.jpg" style="height:25.32em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig6_HTML.jpg"/>
+</p>
+
+<p>Figure 4-6</p>
+<p>Training image
+classifier
+  using
+Create ML (A)</p>
+
+
+<p>
+When the training is done, the builder UI will show you three labels:
+Training, Validation, and Evaluation. See Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig7">4-7</a> for reference.
+
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig7_HTML.jpg" style="height:25.12em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig7_HTML.jpg"/>
+</p>
+
+<p>Figure 4-7</p>
+<p>Training image classifier   using Create ML
+(B)</p>
+
+
+
+<ul>
+<li><p>The training displays the amount of data Playground was
+successfully able to train. This should be 100%.</p></li>
+<li><p>Before training, Xcode puts aside some images from the training
+dataset, which it later uses for evaluating the model once it’s trained.
+Validation displays the result of such evaluation.</p></li>
+<li><p>Evaluation should be blank because we are not explicitly testing
+the model on any data.</p></li>
+</ul>
+
+<p>
+<em>Step 8</em>: Let us see how good our model performs in determining
+the breed from unseen dog images. To do so, create a folder containing
+some unseen dog images (keep the folder structure the same as the
+training dataset) and drop it into the builder UI. The Playground will
+start testing the model. See Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig8">4-8</a> for reference.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig8_HTML.jpg" style="height:25.12em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig8_HTML.jpg"/>
+</p>
+
+<p>Figure 4-8</p>
+<p>Testing image
+classifier  using Create ML
+(A)</p>
+
+
+<p>
+When testing is done, you will see a value for the Evaluation label.
+100% means that the model classified all the images correctly. See
+Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig9">4-9</a> for reference.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig9_HTML.jpg" style="height:25.15em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig9_HTML.jpg"/>
+</p>
+
+<p>Figure 4-9</p>
+<p>Testing image
+classifier  using Create ML
+(B)</p>
+
+
+<p>
+<em>Step 9</em>: If you are satisfied with the results, the next thing
+to do is to save the model. To do so, click the arrow next to the Image
+Classifier title in the Live Demo. A drop-down menu will appear,
+displaying all the metadata about the model, as shown in Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig10">4-10</a>. Change the
+metadata as per your preference and click Save.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig10_HTML.jpg" style="height:23.6em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig10_HTML.jpg"/>
+</p>
+
+<p>Figure 4-10</p>
+<p>Saving the image classifier</p>
+
+
+<p>That’s how we build an ML Model using Create ML
+UI. If you do not want to use the builder UI and want to do this
+programmatically, following are the steps to do so:</p>
+<p><em>Step 1</em>: Open Xcode; select File ➤ New ➤ Playground in the
+menu.</p>
+<p><em>Step 2</em>: Select the Blank file from the template selection
+menu. Note that you need to select a blank file under MacOS and not iOS,
+because the Create ML framework isn’t supported for iOS Playgrounds.</p>
+<p><em>Step 3</em>: Name it <strong>“DogBreedPredictor”</strong> and
+save it to desktop.</p>
+<p>
+<em>Step 4</em>: Now import Create ML and Foundation by adding the
+following code to the Playground:
+
+</p>
+<pre>import CreateML
+import Foundation</pre>
+<p>
+<em>Step 5</em>: Define the location of training dataset and test
+dataset by adding the following code:
+
+</p>
+<pre>let trainingLoc = URL(fileURLWithPath: "/Users/yourusername/Desktop/MyDataset" )
+let testLoc = URL(fileURLWithPath: "/Users/yourusername/Desktop/MyTestData")</pre>
+<p>
+<em>Step 6</em>: Define the model by adding the following
+code:
+
+</p>
+<pre>let model = try MLImageClassifier(trainingData: .labledDirectories(at: trainingLoc))</pre>
+<p>
+To begin training, press Shift+Enter. The console at the bottom will
+show you the number of images processed, elapsed time, and the
+percentage of job done. See Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig11">4-11</a> for reference.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig11_HTML.jpg" style="height:25.12em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig11_HTML.jpg"/>
+</p>
+
+<p>Figure 4-11</p>
+<p>Training image
+classifier using Create ML (C)</p>
+
+
+<p>
+<em>Step 7</em>: Now that training is done, you
+might want to evaluate the model based on the test data. To do so, add
+the following code:
+
+</p>
+<pre>let evaluation = model.evaluation(on:     .labledDirectories(at: testLoc))</pre>
+<p>
+To begin testing, press Shift+Enter. The console at the bottom will show
+you the evaluation output. See Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig12">4-12</a> for reference.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig12_HTML.jpg" style="height:23.55em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig12_HTML.jpg"/>
+</p>
+
+<p>Figure 4-12</p>
+<p>Testing image
+classifier using Create ML (C)</p>
+
+
+<p>
+<em>Step 8</em>: If you are happy with the
+evaluation results, it is time to save the model. To do so, add the
+following code:
+
+</p>
+<pre>try model.write(to: URL(fileURLWithPath: "/Users/yourusername/Desktop/DogBreedPredictor"))</pre>
+<p>
+Press Shift+Enter and the model will be saved at the path you provided.
+Your final code should be as shown in Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig13">4-13</a>.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig13_HTML.jpg" style="height:23.55em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig13_HTML.jpg"/>
+</p>
+
+<p>Figure 4-13</p>
+<p>Image classifier using Create ML</p>
+
+
+<p>That’s it. We just created an image classifier using Create ML that
+can predict the breed of a dog, given its picture. You can import this
+model into your iOS application and see how it performs.</p>
+
+
+<h3 class="Heading">Text Classification</h3>
+<p>Now that you know how to work with
+images, you might want to implement some ML tasks based on
+textual data (natural language). Such tasks include sentiment analysis,
+spam filtering, topic analysis, and so on. These tasks are commonly
+known as text classification tasks and the ML model that performs these
+tasks is known as a text classifier. Here, we will learn how to create
+an ML model that can perform sentiment analysis by
+classifying a piece of text.</p>
+<p>
+To do so, we will first need some data on the basis of which we can
+train our model. Such data can be provided in the following forms:
+
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig14_HTML.jpg" style="height:22.42em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig14_HTML.jpg"/>
+</p>
+
+<p>Figure 4-14</p>
+<p>Textual data for training </p>
+
+
+
+<ul>
+<li><p> <em>Raw text
+files</em> : You can create labeled directories just like you did
+for the image classifier example. Each of these labeled directories will
+contain raw text files containing text that justifies the label.
+Consider the example in Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig14">4-14</a>.</p></li>
+</ul>
+
+<p>
+Here, we have two labeled directories: one for positive data and one for
+negative data. The one with the “plus” label contains raw text articles
+containing positive texts, while the one with the “minus” label contains
+raw text articles containing negative texts.
+
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig15_HTML.jpg" style="height:7.38em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig15_HTML.jpg"/>
+</p>
+
+<p>Figure 4-15</p>
+<p>CSV data for
+training</p>
+
+
+
+<ul>
+<li><p> <em>CSV file</em>
+: Another way to organize your training data is to create a CSV
+(comma-separated values) file. Here, instead of separate files, all the
+data will be contained in one single file. Consider the example in
+Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig15">4-15</a>.</p></li>
+</ul>
+
+<p>
+Here, we have a single file that contains entries for raw text and their
+respective truth label separated by a comma. This file can be used
+independently to train our ML model.
+
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig16_HTML.jpg" style="height:29em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig16_HTML.jpg"/>
+</p>
+
+<p>Figure 4-16</p>
+<p>JSON data for
+training</p>
+
+
+
+<ul>
+<li><p> <em>JSON
+file</em> : JSON stands for JavaScript Object Notation. It is an
+alternative data format to CSV. Just like a CSV file, a JSON file also
+contains all the data in one single file. It contains Key–Value pairs
+for representing the labeled data. Consider the example in Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig16">4-16</a> to get a
+clearer idea.</p></li>
+</ul>
+
+<p>Here, we have two keys for each piece of data: “Text” representing
+the data and “Label”’ representing the truth label for the corresponding
+data. This file can also be used independently to train our ML
+model.</p>
+<p>
+Now that we are aware of the types of data that we can use to train a
+text classification model, let us learn about the typical steps involved
+in the training process. Following are the typical workflow steps for
+training a text classifier (they are also shown in Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig17">4-17</a>):
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig17_HTML.jpg" style="height:9.08em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig17_HTML.jpg"/>
+</p>
+
+<p>Figure 4-17</p>
+<p>Typical workflow for
+training a text classifier</p>
+
+
+<p>
+
+</p>
+
+<ul>
+<li><p><em>Raw data</em>: First, we collect the raw data that will be
+used for the training.</p></li>
+<li><p><em>Language identification</em>: Then we identify the language
+from the raw text.</p></li>
+<li><p><em>Token Generation</em>: Then we need to generate tokens from
+the text, which will be mapped against some labels by the learning
+algorithm.</p></li>
+<li><p><em>Apply learning algorithm</em>: The learning algorithm will
+take the tokens as input and do some processing on them.</p></li>
+<li><p><em>Get predictive label</em>: The learning algorithm will then
+give us the predicted label for the input tokens.</p></li>
+<li><p><em>Compare it with truth label</em>: We will now compare the
+predicted label with the actual label for the raw text.</p></li>
+<li><p><em>Reiterate</em>: If the prediction is not accurate enough, we
+will reiterate the training process.</p></li>
+<li><p><em>Model generation</em>: If the prediction is accurate enough, we will generate
+the model.</p></li>
+</ul>
+
+<p>However, using Create ML, all the complexities involved in the
+process can be reduced to very few, simple steps. Let us learn how to
+create, using Create ML, a text classifier that returns “Positive” if
+the input text is optimistic and returns “Negative” if the input text is
+pessimistic. To do so, we will first collect and organize our data.</p>
+<p><em>Step 1</em>: Create two folders: <strong>“MyDataset”</strong> and
+<strong>“MyTestDataset”</strong> on your Macbook.</p>
+<p><em>Step 2</em>: Create two subfolders: <strong>“Positive”</strong>
+and <strong>“Negative”</strong> for each of the two folders created in
+the previous step.</p>
+<p>
+<em>Step 3</em>: Inside the folders named <strong>“Positive,”</strong>
+put some text files that contain sample positive comments. Inside
+folders named <strong>“Negative,”</strong> put some text files that
+contain sample negative comments. Refer to Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig18">4-18</a> for the folder
+structure.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig18_HTML.jpg" style="height:21.08em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig18_HTML.jpg"/>
+</p>
+
+<p>Figure 4-18</p>
+<p>Dataset for
+text classifier</p>
+
+
+<p>That’s it. We now have the dataset required to train our model to
+perform the text classification task. Let us now train the model using
+the assembled data.</p>
+<p>
+<em>Step 1</em>: Open Xcode; select <strong>File ➤ New ➤
+Playground</strong> in the menu (Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig19">4-19</a>).
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig19_HTML.jpg" style="height:26.72em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig19_HTML.jpg"/>
+</p>
+
+<p>Figure 4-19</p>
+<p>New Playground in
+Xcode</p>
+
+
+<p>
+<em>Step 2</em>: Select the Blank file from the template selection menu
+(Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig20">4-20</a>). Note that
+you need to select a blank file under MacOS and not iOS because Create
+ML framework isn’t supported for iOS Playgrounds.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig20_HTML.jpg" style="height:25.68em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig20_HTML.jpg"/>
+</p>
+
+<p>Figure 4-20</p>
+<p>Playground template
+selection</p>
+
+
+<p><em>Step 3</em>: Name it <strong>“SentimentAnalyzer”</strong> and
+save it to desktop.</p>
+<p>
+<em>Step 4</em>: Note that as of now, Create MLUI is only available for
+an Image Classifier and not for any other type of ML Model. So, we will
+have to use Create ML instead of Create MLUI. Add the following code to
+the Playground to import Create ML and Foundation:
+
+</p>
+<pre>import CreateML
+import Foundation</pre>
+<p>
+<em>Step 5</em>: Define the location of the training dataset and test
+dataset by adding the following code:
+
+</p>
+<pre>let trainingLoc = URL(fileURLWithPath: "/Users/yourusername/Desktop/MyDataset" )
+let testLoc = URL(fileURLWithPath: "/Users/yourusername/Desktop/MyTestDataset")</pre>
+<p>
+<em>Step 6</em>: Define the model by adding the following code:
+
+</p>
+<pre>let model = try MLTextClassifier(trainingData: .labledDirectories(at: trainingLoc))</pre>
+<p>
+To begin training, press Shift+Enter. The console at the bottom will
+show you the number of training iterations and the accuracy for each
+iteration. See Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig21">4-21</a> for reference.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig21_HTML.jpg" style="height:23.55em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig21_HTML.jpg"/>
+</p>
+
+<p>Figure 4-21</p>
+<p>Training text
+classifier  using Create ML</p>
+
+
+<p>
+<em>Step 7</em>: Now that training is done, you might want to evaluate
+the model based on the test data. To do so, add the following code:
+
+</p>
+<pre>let evaluation = model.evaluation(on: .labledDirectories(at: testLoc))</pre>
+<p>To begin testing, press Shift+Enter.</p>
+<p>
+<em>Step 8</em>: Once the evaluation is done, it is time to save the
+model. To do so, add the following code:
+
+</p>
+<pre>try model.write(to: URL(fileURLWithPath: "/Users/yourusername/Desktop/SentimentAnalyzer.mlmodel"))</pre>
+<p>
+Press Shift+Enter and the model will be saved at the path you provided.
+Your final code should be as in Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig22">4-22</a>.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig22_HTML.jpg" style="height:25.12em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig22_HTML.jpg"/>
+</p>
+
+<p>Figure 4-22</p>
+<p>Text classifier using Create ML</p>
+
+
+<p>
+If you have successfully executed the code, you will find an ML model
+named <strong>“SentimentAnalyzer”</strong> on your desktop (Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig23">4-23</a>).
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig23_HTML.jpg" style="height:26.72em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig23_HTML.jpg"/>
+</p>
+
+<p>Figure 4-23</p>
+<p>Sentiment analysis model </p>
+
+
+<p>That’s it. We just created a text classifier using Create ML that can
+predict the sentiment of the user on the basis of textual input. Let us
+now create an application to test this model. We will create an
+application that will allow the user to enter some text and, on the
+basis of the text entered, we will predict the emotional state of the
+user. If it is positive, we will enable the button that can be used to
+post the text on some social website. If it is negative, we will disable
+the button so that the user won’t be able to post the negative content
+on the website.</p>
+<p><em>Step 1</em>: Open Xcode and create an iOS application project by
+following the steps that you’ve learned previously in this book.</p>
+<p>
+<em>Step 2</em>: Open the <strong>“Main.storyboard”</strong> file to
+access the application interface. Add a Text View, a label, and a
+button. See Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig24">4-24</a> for reference.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig24_HTML.jpg" style="height:25.12em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig24_HTML.jpg"/>
+</p>
+
+<p>Figure 4-24</p>
+<p>Sentiment analysis
+application interface  </p>
+
+
+<p><em>Step 3</em>: Create necessary outlets for UI elements to help us
+access them in our code.</p>
+<p>
+<em>Step 4</em>: Now, to capture the text change event of the text view,
+we will need our ViewController class to conform to the TextViewDelegate
+protocol. We also need to set the delegate for Text View in the
+viewDidLoad method. To do so, add the following code to the ViewController.swift
+file:
+
+</p>
+<pre>class ViewController: UIViewController, UITextViewDelegate {
+@IBOutlet weak var textView: UITextView!
+override func viewDidLoad() {
+super.viewDidLoad()
+textView.delegate = self;
+}
+}</pre>
+<p>
+<em>Step 5</em>: Now to perform some action when the text in the
+textView is changed, we need to implement the textViewDidChange method
+of UITextViewDelegate
+protocol. To do so, add the following code to the ViewController class:
+
+</p>
+<pre>func textViewDidChange(_ textView: UITextView){
+}</pre>
+<p>
+<em>Step 6</em>: It is now time to add our ML model to the app.
+Drag-and-drop the model file into your project folder in the navigation
+pane of Xcode. On selecting the model file, you will see various
+information such as Name, Type, Size, Author, and Description of the
+model. You can see the Swift code for the model by clicking the model
+name under the Model Class section. Under Model Evaluation
+Parameters, you will also see that the model takes in a string as
+input text and returns a string as an output label. Before using this
+model in our app, make sure that the target membership in the right pane
+is checked for your project. See Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig25">4-25</a> for reference.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig25_HTML.jpg" style="height:23.55em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig25_HTML.jpg"/>
+</p>
+
+<p>Figure 4-25</p>
+<p>Text classifier in
+Xcode</p>
+
+
+<p>
+<em>Step 7</em>: Now to use the model in our code, we will need to
+import the Core ML framework and declare a model variable in the ViewController class,
+which will represent the model. To do so, add the following code to the
+ViewController.swift
+file:
+
+</p>
+<pre>import CoreML
+...
+class ViewController: UIViewController, UITextViewDelegate {
+...
+let model = SentimentAnalyzer()
+...
+}
+...</pre>
+<p>
+<em>Step 8</em>: Now, to analyze the user sentiment we will call the
+prediction method every time the text in the TextView is changed. To do
+so, add the following code to the ViewController
+class :
+
+</p>
+<pre>func textViewDidChange(_ textView: UITextView) {
+if let prediction = try? model.prediction(text: textView.text){
+if (prediction.label.contains("Positive")){
+btn.isEnabled = true
+btn.backgroundColor = UIColor.green
+lbl.text = "Good to go!"
+}
+else{
+btn.isEnabled = false
+btn.backgroundColor = UIColor.red
+lbl.text = "Please Enter Positive Text!"
+}
+}
+else{
+btn.isEnabled = true
+btn.backgroundColor = UIColor.blue
+lbl.text = "Neutral Sentiment!"
+}
+}</pre>
+<p>
+<em>Step 9</em>: It is finally time to build and run the application.
+Let us find out how well our ML model predicts the sentiment of the
+user. Figures <a href="#474993_1_En_4_Chapter.xhtml#Fig26">4-26</a> to Figure
+<a href="#474993_1_En_4_Chapter.xhtml#Fig28">4-28</a> show different
+screens that you should see while playing around with the application.
+
+
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig28_HTML.jpg" style="height:35.22em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig28_HTML.jpg"/>
+</p>
+
+<p>Figure 4-28</p>
+<p>Sentiment analysis
+application
+ (C)</p>
+
+
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig27_HTML.jpg" style="height:35em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig27_HTML.jpg"/>
+</p>
+
+<p>Figure 4-27</p>
+<p>Sentiment analysis
+application
+ (B)</p>
+
+
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig26_HTML.jpg" style="height:35.22em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig26_HTML.jpg"/>
+</p>
+
+<p>Figure 4-26</p>
+<p>Sentiment analysis
+application
+ (A)</p>
+
+
+
+
+<h3 class="Heading">Regression Model</h3>
+<p>Now that you know how to work with images as well
+as text, you might want to implement some ML tasks based on
+tabular data. Such data is normally used when you want to do some
+prediction based on multiple parameters. For instance, it can be used to
+predict the price for a house based on parameters such as neighborhood,
+total area of the house, number of bedrooms and baths, type of garage,
+number of levels the house has, and so on. Let us learn how to do this
+task using Create ML.</p>
+<p>
+First of all, we will need the training data in tabular format. I have
+collected some tabular data that gives me the prices for houses in
+various neighborhoods in the United States. Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig29">4-29</a> shows what the
+data looks like.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig29_HTML.jpg" style="height:17.1em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig29_HTML.jpg"/>
+</p>
+
+<p>Figure 4-29</p>
+<p>Tabular data  for regression</p>
+
+
+<p>As you can see, the data describes houses in various neighborhoods
+along with their sale price. We will train our model on this data to
+predict the price of a house given the parameters. You can select a
+different dataset based on your preference and requirements. Let us go
+through the steps to train a regression model.</p>
+<p><em>Step 1</em>: Create a folder called <strong>“Dataset”</strong> on
+your Macbook.</p>
+<p>
+<em>Step 2</em>: Store the tabular training data in a CSV file called
+<strong>“train.csv.”</strong> Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig30">4-30</a> shows the
+folder structure.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig30_HTML.jpg" style="height:19.5em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig30_HTML.jpg"/>
+</p>
+
+<p>Figure 4-30</p>
+<p>Dataset for
+regression model</p>
+
+
+<p>
+<em>Step 3</em>: Open Xcode; select <strong>File ➤ New ➤
+Playground</strong> in the menu (Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig31">4-31</a>).
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig31_HTML.jpg" style="height:26.72em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig31_HTML.jpg"/>
+</p>
+
+<p>Figure 4-31</p>
+<p>New Playground in
+Xcode</p>
+
+
+<p>
+<em>Step 4</em>: Select the Blank file from the template selection menu
+(Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig32">4-32</a>). Note that
+you need to select a blank file under MacOS and not iOS because Create
+ML framework isn’t supported for iOS Playgrounds.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig32_HTML.jpg" style="height:25.68em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig32_HTML.jpg"/>
+</p>
+
+<p>Figure 4-32</p>
+<p>Playground template
+selection</p>
+
+
+<p><em>Step 5</em>: Name it <strong>“HousePricePredictor”</strong> and
+save it to desktop.</p>
+<p>
+<em>Step 6</em>: Note that as of now, Create MLUI is only available for
+an Image Classifier and not for any other type of ML Model. So, we will
+have to use Create ML instead of Create MLUI. Add the following code to
+the Playground to import Create ML and Foundation:
+
+</p>
+<pre>import CreateML
+import Foundation</pre>
+<p>
+<em>Step 7</em>: Define the location of the training dataset by
+adding the following code:
+
+</p>
+<pre>let trainingLoc = URL(fileURLWithPath: "/Users/yourusername/Desktop/Dataset/train.csv"     )</pre>
+<p>
+<em>Step 8</em>: Note that Create ML contains a special data structure
+called MLDataTable
+that makes it easy to deal with tabular data. We will have to create
+MLDataTables for our training data. To do so, add the following code to
+the Playground:
+
+</p>
+<pre>let houseData = try MLDataTable(contentsOf: trainingLoc)</pre>
+<p>
+<em>Step 9</em>: Split some test data from the training data so that we
+can test the model once it is trained. To do so, add the following code:
+
+</p>
+<pre>let (trainingData, testData) = houseData.randomSplit(by:0.8, seed: 0)</pre>
+<p>
+<em>Step 10</em>: Define the model by adding the following code:
+
+</p>
+<pre>let model = try MLRegressor(trainingData: trainingData, targetColumn: "SalePrice")</pre>
+<p>
+To begin training, press Shift+Enter. The console at the bottom will
+show you the data for each iteration of training. See Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig33">4-33</a> for reference.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig33_HTML.jpg" style="height:23.55em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig33_HTML.jpg"/>
+</p>
+
+<p>Figure 4-33</p>
+<p>Training
+regression model  using Create ML</p>
+
+
+<p>
+<strong>Step 11:</strong> Now that training is done, you might want to
+evaluate the model based on the test data. To do so, add the following
+code:
+
+</p>
+<pre>let evaluation =     model.testingMetrics(on:testData)</pre>
+<p>To begin testing, press Shift+Enter.</p>
+<p>
+<em>Step 12</em>: Once the evaluation is done, it is time to add some
+metadata and save the model. To do so, add the following code:
+
+</p>
+<pre>let modeldata = MLModelMetadata(author: "Mohit Thakkar", shortDescription: "Model that     predicts house prices", license: "Open Source",     version: "1.0")
+try model.write(to: URL(fileURLWithPath: "/Users/mohitthakkar/Desktop/HousePricePredictor.mlmodel"), metadata: modeldata)</pre>
+<p>
+Press Shift+Enter and the model will be saved at the path you provided.
+Your final code should be as shown in Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig34">4-34</a>.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig34_HTML.jpg" style="height:23.55em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig34_HTML.jpg"/>
+</p>
+
+<p>Figure 4-34</p>
+<p>Regression model using Create ML</p>
+
+
+<p>
+That’s it. Our model is now ready to predict house prices. If you open
+the MLModel file (Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig35">4-35</a>), you will
+notice that the model takes in various house parameters such as
+neighborhood, total area of the house, number of bedrooms and baths,
+type of garage, and number of levels the house has, and it returns the
+house price as an output.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig35_HTML.jpg" style="height:30.15em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig35_HTML.jpg"/>
+</p>
+
+<p>Figure 4-35</p>
+<p>House price
+predictor</p>
+
+
+<p>Now that we have created the regression model, let us create an iOS
+application to see if the model really works. We will create an
+application that allows users to enter the details about their dream
+house. And on the click of a button, we will fetch those details and use
+our model to predict the price. We will then display the house price to
+the user on the application interface.</p>
+<p>
+<em>Step 1</em>: Open Xcode and create an iOS application project by
+following the steps that you’ve learned previously in this book. You can
+use the interface shown in Figure <a href="#474993_1_En_4_Chapter.xhtml#Fig36">4-36</a> as a
+reference.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig36_HTML.jpg" style="height:23.55em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig36_HTML.jpg"/>
+</p>
+
+<p>Figure 4-36</p>
+<p>House price finder
+application interface</p>
+
+
+<p><em>Step 2</em>: Open the <strong>“Main.storyboard”</strong> file to
+access the application interface.</p>
+<p>
+<em>Step 3</em>: Create outlets for the fields that describe the house
+and also for the label that will display the predicted price for the
+house. Also create an action for the button click event. This will add
+the following code to your ViewController class:
+
+</p>
+<pre>@IBOutlet weak var area: UITextField!
+@IBOutlet weak var neighborhood: UITextField!
+@IBOutlet weak var houseStyle: UITextField!
+@IBOutlet weak var fullBaths: UITextField!
+@IBOutlet weak var halfBaths: UITextField!
+@IBOutlet weak var bedrooms: UITextField!
+@IBOutlet weak var kitchen: UITextField!
+@IBOutlet weak var garageType: UITextField!
+@IBOutlet weak var housePrice: UILabel!
+@IBAction func onDataSubmit(_ sender: Any) {
+}</pre>
+<p><em>Step 4</em>: Drag-and-drop the model file into your project
+folder in the navigation pane of Xcode. On selecting the model file, you
+will see various information such as Name, Type, Size, Author, and
+Description of the model. You can see the Swift code for the model by
+clicking the model name under the Model Class section. Under the Model
+Evaluation Parameters, you will also see the inputs that the model takes
+in and the output it returns. Before using this model in our app, make
+sure that the target membership in the right pane is checked for your
+project.</p>
+<p>
+<em>Step 5</em>: To use the model in our code, we will need to import
+the Core ML framework and declare a model variable in the ViewController
+class that will represent the model. To do so, add the following code to
+your ViewController.swift
+file:
+
+</p>
+<pre>import CoreML
+...
+class ViewController: UIViewController {
+...
+let model = SentimentAnalyzer()
+...
+}
+...</pre>
+<p>
+<em>Step 6</em>: Now to predict the house price, we will call the
+prediction method when the submit button is tapped. We will also set the
+value of the label to the predicted price that the model returns. To do
+so, add the following code to the ViewController class:
+
+</p>
+<pre>@IBAction func onDataSubmit(_ sender: Any) {
+let prediction = try? model.prediction(Area: Double(area.text!) ?? 0,
+Neighborhood: neighborhood.text!,
+HouseStyle: houseStyle.text!,
+FullBath: Double(fullBaths.text!) ?? 0,
+HalfBath: Double(halfBaths.text!) ?? 0,
+Bedroom: Double(bedrooms.text!) ?? 0,
+Kitchen: Double(kitchen.text!) ?? 0,
+GarageType: garageType.text!)
+housePrice.text = "\(String(describing: prediction!.SalePrice))"
+}</pre>
+<p>
+<em>Step 7</em>: It is finally time to build and run the application.
+Let us find out how well our ML model predicts the house price for the
+user’s dream house. Figures <a href="#474993_1_En_4_Chapter.xhtml#Fig37">4-37</a> and <a href="#474993_1_En_4_Chapter.xhtml#Fig38">4-38</a> show different
+screens that you should see while playing around with your application.
+
+
+</p>
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig38_HTML.jpg" style="height:37.38em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig38_HTML.jpg"/>
+</p>
+
+<p>Figure 4-38</p>
+<p>House price finder
+application
+ (B)</p>
+
+
+
+<p>
+<img src="images/474993_1_En_4_Chapter/474993_1_En_4_Fig37_HTML.jpg" style="height:37.38em" alt="../images/474993_1_En_4_Chapter/474993_1_En_4_Fig37_HTML.jpg"/>
+</p>
+
+<p>Figure 4-37</p>
+<p>House price finder
+application
+ (A)</p>
+
+
+
+
+
+<h2 class="Heading">Summary</h2>
+<p>
+
+</p>
+
+<ul>
+<li><p>Apple introduced Create ML in 2018 to provide developers with the
+capability to implement end-to-end machine learning in Swift.</p></li>
+<li><p>Though ML models can be created using previously launched Core ML
+tools, Create ML does the job even easier with its direct integration
+with Xcode Playgrounds.</p></li>
+<li><p>Major types of data that can be trained into a model using Create
+ML are images, text, and tabular data.</p></li>
+<li>
+The workflow of custom model creation using Create ML is the same as the
+life cycle of custom model creation that we learned in Chapter <a href="#474993_1_En_3_Chapter.xhtml">3</a>. It is as follows:
+
+
+<ul>
+<li><p>Define the problem</p></li>
+<li><p>Collect data</p></li>
+<li><p>Train the learning algorithm</p></li>
+<li><p>Evaluate the Learning Algorithm</p></li>
+<li><p>Build the model</p></li>
+</ul>
+
+</li>
+<li><p>Image classifier models can be built to accomplish tasks such as
+prediction of dog breed from its image.</p></li>
+<li><p>Text classifier models can be built to accomplish tasks such as
+predicting the sentiment of the users based on the text that they
+type.</p></li>
+<li><p>Regression models can be built to accomplish tasks such as
+predicting the price of a house based on its locality, net area, type of
+house, and multiple other factors.</p></li>
+</ul>
+
+
+
+<p></p>
+
+<!--Begin Abstract-->
+
+<h1 class="ChapterTitle" lang="en">5. Improving Computational
+Efficiency</h1>
+
+
+<!--End Abstract-->
+
+<p>This chapter shares with the reader’s information on some
+miscellaneous topics such as the difference between GPU and CPU
+processing, and things to consider while implementing machine
+learning.</p>
+<p>More importantly, this chapter covers two important frameworks that
+the Core ML framework is based on: Accelerate and Metal Performance Shaders
+(MPS). There are no practical examples of using these two
+frameworks in code because they are implicitly used while implementing
+ML using Core ML. However, the chapter covers abstract information on
+the libraries that these two frameworks comprise.</p>
+
+<h2 class="Heading">GPU vs. CPU Processing</h2>
+<p>The CPU (Central Processing Unit) is often called the
+brain of a machine. The majority of the software on the machine requires
+a CPU to function.
+However, there are several examples of software that requires heavy
+computation power. A CPU cannot efficiently support the functioning of
+such software. This is where a GPU (graphics processing
+unit) comes to the rescue.</p>
+<p>
+A GPU is a special kind of microprocessor that is designed for quick
+image rendering. GPUs were launched as a solution to graphically potent
+applications that consumes a lot of CPU power and degrades the overall
+machine performance. However, modern GPUs are even capable of handling
+applications that require powerful mathematical calculations. With the
+use of GPUs, whenever software needs heavy computation power, the
+process is transferred from CPU to GPU to preserve the overall
+performance quality of the machine. Figure <a href="#474993_1_En_5_Chapter.xhtml#Fig1">5-1</a> shows the
+abstract structure of CPUs and GPUs.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_5_Chapter/474993_1_En_5_Fig1_HTML.jpg" style="height:18em" alt="../images/474993_1_En_5_Chapter/474993_1_En_5_Fig1_HTML.jpg"/>
+</p>
+
+<p>Figure 5-1</p>
+<p>CPU vs. GPU</p>
+
+
+<p>Though a CPU  and GPU are both
+silicon-based microprocessors, they process tasks in very different
+ways. While a CPU is referred to as the brain of a machine, a GPU is
+referred to as the muscle of the machine. A CPU is good at performing
+multiple, diverse kinds of tasks but it can run only few tasks at a time
+due to its limited number of cores. Whereas a GPU focuses all its
+computation power in carrying out one specific kind of task, but it can
+run multiple instances of similar tasks due to its large number of cores. A CPU has up to 24
+cores, which are designed to optimize the performance of a single task
+within a job. On the other hand, a GPU has thousands of smaller cores,
+which are optimized for handling multiple tasks in a parallel
+architecture. Modern GPUs are used to address tasks such as ML and big
+data analysis  .</p>
+
+
+<h2 class="Heading">Key Considerations while Implementing Machine
+Learning</h2>
+<p>
+While implementing ML on a mobile device, we tend to lose some of the
+luxuries that we get while implementing it on a computer. Following are
+some of the points to consider while implementing ML in a mobile application:
+
+</p>
+
+<ul>
+<li><p><em>Model size</em>: In previous chapters we walked through the
+process of building some simple ML models, which are negligible in terms
+of memory requirements. But, as you dive into the world of ML, it’s
+common to find models hundreds of megabytes in size. For example, the
+VGG16 model is a 16-layer neural network architecture trained on the
+ImageNet dataset used for image classification. It is
+available on Apple’s site and is approximately 500 megabytes in size.
+Asking your user to download such a large file may intimidate
+them.</p></li>
+<li><p><em>Memory</em>: Along with the overall size of the model, you
+also need to be concerned about the amount of working memory that the
+model might require. It is not uncommon for desktop computers to have
+around 16 to 32 Gigabytes of memory, but the latest iPhone (iPhone XS
+Max) has merely 4 Gigabytes of RAM. This constraint should be kept in
+mind while selecting the ML model
+for your mobile application.</p></li>
+<li><p><em>Processing speed</em>: This is a factor that depends on
+multiple things. Loading the input data and making the inference is not
+the only part of the workflow. There is certain preprocessing as well as
+postprocessing associated with the functioning of the application. For
+instance, if the input text is in string format and your model only
+accepts an array input, you might want to convert the string into an
+array before making the inference.
+This is referred to as preprocessing. In the same way, if the model
+returns a string label as an output but you want to display an emoticon
+to the user, you might want to map the string to the corresponding
+emoticon before displaying it to the user. This is referred to as
+postprocessing. At times, you might have to trade off some processing
+speed against large model size.</p></li>
+</ul>
+
+
+
+<h2 class="Heading">Accelerate</h2>
+<p>
+Accelerate  is a
+framework that was first introduced by Apple in 2003 for Mac OS X v10.3
+Panther. It is a collection of high-performance vector-accelerated
+libraries that lets you perform vector-based operations in your
+application without explicitly using low-level vector
+instructions. You do not need to be concerned with the user’s
+machine because the Accelerate framework is written to automatically
+invoke the appropriate instruction set based on the architecture of the
+machine that the code is running on. Figure <a href="#474993_1_En_5_Chapter.xhtml#Fig2">5-2</a> shows the
+libraries that the Accelerate framework is comprised of.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_5_Chapter/474993_1_En_5_Fig2_HTML.png" style="height:10.72em" alt="../images/474993_1_En_5_Chapter/474993_1_En_5_Fig2_HTML.png"/>
+</p>
+
+<p>Figure 5-2</p>
+<p>Accelerate framework in Panther</p>
+
+
+
+<h3 class="Heading">vImage – Image Transformation</h3>
+<p>
+The vImage library
+contains routines to perform operations on graphics and images. These routines
+make the best use of available hardware. They can perform operations
+such as the following:
+
+</p>
+
+<ul>
+<li><p><em>Format conversion</em>: The vImage library primarily supports
+image formats such as Planar8, PlanarF, ARGB8888, and ARGBFFFF. It
+supports image conversion between these formats.</p></li>
+<li><p><em>Convolution</em>: This is a term that refers to the process
+of modifying pixel values based on the values of the pixels surrounding
+it. Convolution can be used to implement image effects such as blur,
+sharpening, embossing, and so on. The vImage library also supports deconvolution, which is
+a process of reversing the effect of convolution.</p></li>
+<li><p><em>Morphological</em>  <em>operations</em>:
+These are the operations that are used to modify the structure of an
+image. The vImage library supports two morphological operations:
+dilation, where the size of the pixels is gradually increased; and
+erosion, where the size of the pixels is gradually decreased.</p></li>
+<li><p><em>Histograms</em>: The histogram for an image is used to
+graphically describe the intensities of the image pixels. The vImage
+library supports the creation of image histograms. Moreover, one can
+also transform an image to have the same pixel intensities as a
+particular histogram.</p></li>
+<li><p><em>Geometric operations</em>: The vImage library provides
+subroutines that can geometrically transform images. The operations
+include Rotate, Flip, Warp, Mirror, Scale, and so on.</p></li>
+<li><p><em>Alpha compositing</em>: Each pixel in an image has an alpha
+value that determines the
+opaqueness of the pixel. Alpha compositing is the process of merging two
+images with different alpha values and producing an image that would
+give the effect as if one image is placed on top of another.</p></li>
+<li><p><em>Transformation</em>  <em>operations</em>:
+The vImage library also supports pixel transformation functions that do
+not depend upon the value of other pixels. The functions include matrix
+multiplication and gamma correction.</p></li>
+</ul>
+
+
+
+<h3 class="Heading">vDSP – Digital Signal Processing</h3>
+<p>The vDSP library is primarily focused on
+Fourier transforms, matrix arithmetic, and vector operations. The
+applications of the vDSP library includes speech processing, audio
+processing, digital image processing, cryptography, and other vector
+operations such as finding the absolute value of a vector, converting
+between a single precision vector and a double
+precision vector, compressing vector values, and so on. vDSP subroutines
+operate on basic C data types such as float, integer, double, short
+integer, and character.</p>
+
+
+<h3 class="Heading">BLAS and LAPACK</h3>
+<p>The Basic Linear Algebra Subprograms  (BLAS) and Linear Algebra Package
+(LAPACK) libraries contain subroutines to perform matrix-based
+linear algebra computations such as eigenvalue problems and matrix
+multiplication. BLAS acts as a base library for LAPACK that performs
+advanced algebraic computations.</p>
+
+
+<h3 class="Heading">vMathLib</h3>
+<p>The vMathLib is
+a vector-centric version of the standard math library libm. The
+difference between them is that vMathLib uses 128-bit hardware vectors
+to perform mathematical
+operations.</p>
+
+
+<h3 class="Heading">vBigNum</h3>
+<p>The vBigNum
+library performs operations such as integer addition,
+substraction, division, and multiplication using 1024-bit integer
+operands.</p>
+<p>
+To use the Accelerate libraries in your Xcode project, you will need to
+add the Accelerate header file in your project by adding the following
+code:
+
+</p>
+<pre>#include 
+OR
+import Accelerate</pre>
+<p>
+You will also need to add the framework to your project from the system
+frameworks folder:
+
+</p>
+<pre>.../System/Library/Frameworks/Accelerate.framework</pre>
+
+<h3 class="Heading">Note</h3>
+<p>Accelerate is a complex framework and is not a recommended way to
+begin machine learning in iOS. As a beginner, all you need to know is
+that Core ML, the
+latest framework for ML, is based on Accelerate and harnesses the
+computational capabilities of the Accelerate framework.</p>
+
+
+
+
+<h2 class="Heading">Metal Performance Shaders</h2>
+<p>
+MPS is a framework that was announced by Apple at
+WWDC 2015. It is a collection of optimized, high-performance image
+processing algorithms for iOS 9. MPS uses the device GPU for
+compute-heavy tasks. The functions in the MPS framework implement most
+of the common image processing tasks such as blur, convolution,
+histogram, resampling, and so on. These functions act as a black box to
+developers. The major benefit of this is that Apple can modify and
+improve the framework as per the availability of better hardware, while
+the developers do not need to worry about the framework code. Figure
+<a href="#474993_1_En_5_Chapter.xhtml#Fig3">5-3</a> shows the class
+hierarchy for the MPS framework.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_5_Chapter/474993_1_En_5_Fig3_HTML.png" style="height:10.72em" alt="../images/474993_1_En_5_Chapter/474993_1_En_5_Fig3_HTML.png"/>
+</p>
+
+<p>Figure 5-3</p>
+<p>MPS framework architecture</p>
+
+
+<p>All the classes in the MPS framework  are derived from a
+class called MPSKernel . A kernel in this
+context refers to a set of weights that are combined with the source
+image to produce an output image. MPSKernel, as a class, does nothing
+but create a copy of the kernel and gives it a name. The real job is
+done by the three subclasses of MPSKernel: MPSUnaryImageKernel,
+MPSBinaryImageKernel, and MPSImageHistogram.</p>
+<p>
+A unary image
+kernel 
+takes in a single texture as an input and produces a single output
+texture. There are several categories of unary operation that can be
+performed using MPSUnaryImageKernel. Every operation has its own class
+that inherits from MPSUnaryImageKernel. The naming convention for these
+subclasses is in a fashion such that the operation name is prefixed by
+MPSImage. For instance, if the operation to be performed is Gaussian
+Blur, the class name will be MPSImageGaussianBlur.
+Following are the operations supported by MPSUnaryImageKernel:
+
+
+
+
+</p>
+
+<p>
+<img src="images/474993_1_En_5_Chapter/474993_1_En_5_Fig6_HTML.jpg" style="height:13.42em" alt="../images/474993_1_En_5_Chapter/474993_1_En_5_Fig6_HTML.jpg"/>
+</p>
+
+<p>Figure 5-6</p>
+<p>Sobel edge detection using MPS</p>
+
+
+
+<p>
+<img src="images/474993_1_En_5_Chapter/474993_1_En_5_Fig5_HTML.jpg" style="height:13.42em" alt="../images/474993_1_En_5_Chapter/474993_1_En_5_Fig5_HTML.jpg"/>
+</p>
+
+<p>Figure 5-5</p>
+<p>Threshold to zero using MPS</p>
+
+
+
+<p>
+<img src="images/474993_1_En_5_Chapter/474993_1_En_5_Fig4_HTML.jpg" style="height:13.42em" alt="../images/474993_1_En_5_Chapter/474993_1_En_5_Fig4_HTML.jpg"/>
+</p>
+
+<p>Figure 5-4</p>
+<p>Gaussian blur using MPS</p>
+
+
+
+<ul>
+<li><p><em>Convolutional operations</em>: Box, Tent, GaussianBlur (Figure
+<a href="#474993_1_En_5_Chapter.xhtml#Fig4">5-4</a>), Sobel (Figure <a href="#474993_1_En_5_Chapter.xhtml#Fig6">5-6</a>), Convolution
+(general)</p></li>
+<li><p><em>Thresholding</em>: ThresholdBinary, ThresholdBinaryInverse,
+ThresholdToZero
+(Figure <a href="#474993_1_En_5_Chapter.xhtml#Fig5">5-5</a>),
+ThresholdToZeroInverse, ThresholdTruncate</p></li>
+<li><p><em>Lanczos resampling</em>: LanczosScale (down-scale, up-scale,
+squeeze, stretch)</p></li>
+<li><p><em>Morphological operations</em>: erode, dilute, min, max</p></li>
+<li><p><em>Sliding neighborhood operations</em>: Integral,
+IntegralOfSquares, AreaMax, AreaMin, Median, Threshold</p></li>
+</ul>
+
+<p>A binary image
+kernel ,
+unlike unary image kernels, takes in two textures as an input to produce
+a single output texture. Although there is a class called MPSBinaryImageKernel  dedicated for the
+processing of binary images, there are no concrete subclasses inheriting
+from this class. Hence, we can only assume that this class is for
+developers to inherit from and write some custom code for the binary
+image operations that they want to perform.</p>
+<p>
+MPSImageHistogram
+  is a
+class that is used to compute the histogram of an image. Just like
+UnaryImageKernel, MPSImageHistogram also works on single-input texture.
+Typically, the histogram of the image is subsequently passed on to the
+MPSImageHistogramEqualization or MPSImageHistogramSpecification. The
+equalization filter allows equalization of the color intensities in your
+image to a uniform set of values (Figure <a href="#474993_1_En_5_Chapter.xhtml#Fig7">5-7</a>), whereas the
+specification filter is used to modify your image histogram to match a
+histogram that you can specify.
+
+</p>
+
+<p>
+<img src="images/474993_1_En_5_Chapter/474993_1_En_5_Fig7_HTML.jpg" style="height:23.65em" alt="../images/474993_1_En_5_Chapter/474993_1_En_5_Fig7_HTML.jpg"/>
+</p>
+
+<p>Figure 5-7</p>
+<p>Histogram equalization using MPS</p>
+
+
+<p>As an ML beginner, all you need to know is that when you create an
+image classifier
+model using Create ML, or perform inference using Core ML, the
+MPS framework plays a vital role in the underlying processes.</p>
+
+
+<h2 class="Heading">Summary</h2>
+<p>
+
+</p>
+
+<ul>
+<li><p>A Central Processing Unit (CPU) is used for lightweight
+applications that do not require much computational power, whereas a
+Graphics Processing Unit (GPU) is used for applications that are
+graphically or mathematically potent and might degrades the overall
+machine performance if processed using a CPU.</p></li>
+<li><p>Model size, memory, and processing speed are three important
+factors to consider while implementing ML in mobile
+applications.</p></li>
+<li><p>The size for an ML model may be as big as 500 megabytes. It is a
+good practice to choose the model based on the computational power of
+the target machine.</p></li>
+<li><p>While selecting the ML model for your application, you also need
+to keep in mind that the working memory for computer devices might range
+from 16 to 32 gigabytes but the same for a mobile device might be
+limited to just 4 megabytes.</p></li>
+<li><p>Accelerate is a framework that was released by Apple in 2003 to
+provide libraries for vector computations, signal processing, and
+algebraic computations.</p></li>
+<li><p>The Accelerate framework comprises libraries such as vImage,
+vDSP, BLAS, LAPACK, vMathLib, and vBigNum.</p></li>
+<li><p>Metal Performance Shaders (MPS) is a framework that was released
+by Apple in 2015. It is a collection of optimized, high-performance
+image processing algorithms for iOS 9 that uses the device GPU for
+compute-heavy tasks.</p></li>
+<li><p>MPS provides classes for image processing tasks such as
+convolution, thresholding, resampling, morphological operations,
+histogram generation, equalization, and so on.</p></li>
+<li><p>Apple’s latest ML framework, Core ML, is based on both Accelerate
+and MPS.</p></li>
+</ul>
+
+
+
+<p></p>
+
+
+
+<h3 class="Heading">Index</h3>
+
+
+
+<h3 class="Heading">A</h3>
+
+
+
+Accelerate framework
+
+
+BLAS and LAPACK library
+
+
+libraries
+
+
+low-level vector instructions
+
+
+vBigNum library
+
+
+vDSP library
+
+
+vImage library
+
+
+vMathLib
+
+
+
+
+Apple’s ML framework
+
+
+
+
+Artificial neural networks (ANNs)
+
+
+
+
+Assembling data
+
+
+
+
+
+<h3 class="Heading">B</h3>
+
+
+
+Basic Linear Algebra Subprograms (BLAS)
+
+
+
+
+Binary image kernel
+
+
+
+
+
+<h3 class="Heading">C</h3>
+
+
+
+Central Processing Unit (CPU)
+
+
+
+
+Comma-separated values (CSV)
+
+
+
+
+Core Machine Learning (Core ML)
+
+
+applications
+
+
+cloud services
+
+
+components
+
+
+domain-specific frameworks
+
+
+Inceptionv3
+
+
+photos application prediction
+
+
+prediction method
+
+
+pretrained models, integrate
+
+
+updated interface
+
+
+viewWillAppear() method
+
+
+
+
+Core ML, conversion
+
+
+caffe model
+
+
+execution, caffe model
+
+
+scratch
+
+
+tools
+
+
+Xcode
+
+
+
+
+Create ML framework
+
+
+custom ML model
+
+
+custom model creation
+
+
+data types trained into model
+
+
+end-to-end ML, Swift
+
+
+image classification ( <em>see</em> Image classification model)
+
+
+regression model ( <em>see</em> Regression model)
+
+
+testing image classifier
+
+
+text classification ( <em>see</em> Text classification model)
+
+
+training image classifier
+
+
+training regression model
+
+
+training text classifier
+
+
+
+
+CSV data
+
+
+
+
+Custom model
+
+
+Apple-provided Core ML models
+
+
+assistant editor
+
+
+build and run application
+
+
+button click
+
+
+CGContext
+
+
+controllers
+
+
+core ML model
+
+
+dog breed predictor application interface
+
+
+image buffer
+
+
+imagePickerControllerDidCancel() method
+
+
+imagePickerController() method
+
+
+information property list
+
+
+life cycle
+
+
+ML tasks
+
+
+model class
+
+
+outlets and actions
+
+
+pickImageBtnClick() method
+
+
+pixel buffer
+
+
+task
+
+
+training and evaluating ( <em>see</em> Training and evaluating, custom
+model)
+
+
+UIImagePickerController
+
+
+viewWillAppear() method
+
+
+Xcode
+
+
+Xcode folder picker
+
+
+Xcode interface builder
+
+
+Xcode project options
+
+
+Xcode template selection
+
+
+
+
+
+<h3 class="Heading">D</h3>
+
+
+
+Decision tree
+
+
+
+
+Digital Signal Processing (vDSP)
+
+
+
+
+
+<h3 class="Heading">E, F</h3>
+
+
+
+Ensemble learning
+
+
+
+
+
+<h3 class="Heading">G</h3>
+
+
+
+GPU <em>vs</em> . CPU processing
+
+
+
+
+Graphics processing unit (GPU)
+
+
+
+
+
+<h3 class="Heading">H</h3>
+
+
+
+House price finder application
+
+
+
+
+
+<h3 class="Heading">I</h3>
+
+
+
+Image classification model
+
+
+Create ML
+
+
+dataset
+
+
+live demo, Xcode
+
+
+ML model, build
+
+
+Playground, Xcode
+
+
+Playground template selection
+
+
+saving, image classifier
+
+
+testing
+
+
+training
+
+
+
+
+imagePickerController() method
+
+
+
+
+imagePickerControllerDidCancel method
+
+
+
+
+Image transformation (vImage)
+
+
+
+
+Inference
+
+
+
+
+
+<h3 class="Heading">J, K</h3>
+
+
+
+JSON data
+
+
+
+
+
+<h3 class="Heading">L</h3>
+
+
+
+Linear Algebra Package (LAPACK)
+
+
+
+
+
+<h3 class="Heading">M</h3>
+
+
+
+Machine learning (ML)
+
+
+applications
+
+
+data patterns
+
+
+definition
+
+
+facial recognition
+
+
+human faces, detection
+
+
+mobile application
+
+
+models
+
+
+recognizing spam e-mails
+
+
+types
+
+
+reinforcement learning
+
+
+supervised learning
+
+
+unsupervised learning
+
+
+
+
+Metal Performance Shaders (MPS)
+
+
+architecture
+
+
+GaussianBlur
+
+
+MPSBinaryImageKernel class
+
+
+MPSImageHistogram class
+
+
+MPSKernel class
+
+
+operations
+
+
+Sobel edge detection
+
+
+ThresholdToZero
+
+
+unary image kernel
+
+
+
+
+ML model creation
+
+
+data
+
+
+evaluate
+
+
+problem
+
+
+training
+
+
+
+
+MPSBinaryImageKernel class
+
+
+
+
+MPS framework
+
+
+
+
+MPSImageHistogram class
+
+
+
+
+MPSKernel class
+
+
+
+
+
+<h3 class="Heading">N</h3>
+
+
+
+Named entity recognition (NER)
+
+
+
+
+
+<h3 class="Heading">O</h3>
+
+
+
+Optical character recognition (OCR)
+
+
+
+
+
+<h3 class="Heading">P, Q</h3>
+
+
+
+Perceptron
+
+
+learning process
+
+
+linearly separable problem
+
+
+
+
+Personal digital assistants (PDAs)
+
+
+
+
+Photos application, Xcode
+
+
+assistant editor
+
+
+creation
+
+
+delegate methods
+
+
+IBAction
+
+
+information property list
+
+
+interface builder
+
+
+
+
+
+<h3 class="Heading">R</h3>
+
+
+
+Regression model
+
+
+Create ML
+
+
+dataset
+
+
+house price finder application
+
+
+house price predictor
+
+
+MLDataTable
+
+
+ML tasks
+
+
+Playground, Xcode
+
+
+Playground template
+
+
+tabular data
+
+
+training dataset
+
+
+ViewController.swift file
+
+
+
+
+Reinforcement learning
+
+
+
+
+
+<h3 class="Heading">S</h3>
+
+
+
+Sentiment analysis application
+
+
+interface
+
+
+
+
+Sentiment analyzer model
+
+
+
+
+Supervised learning
+
+
+
+
+Support vector machine (SVM)
+
+
+
+
+
+<h3 class="Heading">T</h3>
+
+
+
+Tabular data, regression
+
+
+
+
+Testing image classifier
+
+
+
+
+Text classification model
+
+
+Create ML
+
+
+CSV file
+
+
+dataset
+
+
+JSON file
+
+
+ML tasks
+
+
+model evaluation parameters
+
+
+Playground, Xcode
+
+
+Playground template selection
+
+
+raw text files
+
+
+sentiment analysis application
+
+
+sentiment analyzer model
+
+
+textual data for training
+
+
+training
+
+
+trainingand test dataset
+
+
+ViewController class
+
+
+ViewController.swift file
+
+
+workflow, training
+
+
+in Xcode
+
+
+
+
+Textual data, training
+
+
+
+
+TextViewDelegate protocol
+
+
+
+
+Training and evaluating, custom model
+
+
+Core ML format
+
+
+Core ML model
+
+
+dataset training process
+
+
+explore() method
+
+
+iterations
+
+
+MyCustomModel Python code
+
+
+SFrame
+
+
+visualization
+
+
+Xcode
+
+
+
+
+Training and Inference
+
+
+decision making
+
+
+entities, ML
+
+
+image recognition
+
+
+sorting
+
+
+
+
+Training image classifier
+
+
+
+
+Training regression model
+
+
+
+
+Training text classifier
+
+
+
+
+Turi Create
+
+
+benefits
+
+
+dataset
+
+
+installation
+
+
+commands
+
+
+latest version
+
+
+pip on Mac
+
+
+Python version on Mac
+
+
+transfer learning
+
+
+
+
+
+<h3 class="Heading">U</h3>
+
+
+
+UIImagePickerController
+
+
+
+
+UINavigationControllerDelegate protocol
+
+
+
+
+UITextViewDelegate protocol
+
+
+
+
+Unary image kernel
+
+
+
+
+Unsupervised learning
+
+
+
+
+
+<h3 class="Heading">V, W</h3>
+
+
+
+ViewController class
+
+
+
+
+ViewController.swift file
+
+
+
+
+
+<h3 class="Heading">X, Y, Z</h3>
+
+
+
+Xcode
+
+
+creation
+
+
+folder picker
+
+
+interface builder
+
+
+project options
+
+
+templates selection
+
+
+testing application
+
+
+workspace
+
+
+
+
+

@@ -1,0 +1,8 @@
++   [MLOps 入门指南：MLFlow](README.md)
++   [1.  入门：数据分析](beginning-mlops-with-mlflow_1.md)
++   [2. 构建模型](beginning-mlops-with-mlflow_2.md)
++   [3. 什么是 MLOps？](beginning-mlops-with-mlflow_3.md)
++   [4. MLFlow 简介](beginning-mlops-with-mlflow_4.md)
++   [5. 在 AWS 中部署](beginning-mlops-with-mlflow_5.md)
++   [6. 在 Azure 中部署](beginning-mlops-with-mlflow_6.md)
++   [7. 在 Google 中部署](beginning-mlops-with-mlflow_7.md)

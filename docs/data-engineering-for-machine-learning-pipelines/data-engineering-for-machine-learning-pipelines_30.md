@@ -1,0 +1,3 @@
+# CONFIG
+config = configparser.ConfigParser()
+

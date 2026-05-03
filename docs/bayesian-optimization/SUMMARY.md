@@ -1,0 +1,8 @@
++   [贝叶斯优化](README.md)
++   [1. 贝叶斯优化概述](bayesian-optimization_1.md)
++   [2. 高斯过程](bayesian-optimization_2.md)
++   [3. 贝叶斯决策理论与期望提升](bayesian-optimization_3.md)
++   [4. 使用 GPyTorch 进行高斯过程回归](bayesian-optimization_4.md)
++   [5. 使用 Sobol 序列和随机重启的蒙特卡洛采集函数](bayesian-optimization_5.md)
++   [6. 知识梯度：嵌套优化 vs. 一次性学习](bayesian-optimization_6.md)
++   [7. 案例研究：使用 BoTorch 调优 CNN 学习率](bayesian-optimization_7.md)

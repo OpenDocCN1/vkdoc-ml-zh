@@ -1,0 +1,7 @@
++   [AI 开发者的集成学习](README.md)
++   [1. 为什么需要集成技术](ensemble-learning-for-ai-developers_1.md)
++   [2. 混合训练数据](ensemble-learning-for-ai-developers_2.md)
++   [3. 混合模型](ensemble-learning-for-ai-developers_3.md)
++   [4. 混合组合](ensemble-learning-for-ai-developers_4.md)
++   [5. 使用集成学习库](ensemble-learning-for-ai-developers_5.md)
++   [6. 技巧与最佳实践](ensemble-learning-for-ai-developers_6.md)
