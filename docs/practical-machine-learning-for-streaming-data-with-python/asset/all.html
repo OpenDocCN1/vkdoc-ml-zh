@@ -1,0 +1,4630 @@
+<p><img src="images/978-1-4842-6867-4_CoverFigure.jpg"/></p>
+<p></p>
+
+
+
+
+
+
+<aside aria-label="Article Note 1" class="ArticleNote ArticleNoteESMHint BookFrontmatterArticleNote">
+<p>Any source code or other supplementary material referenced by the
+author in this book is available to readers on GitHub via the book’s
+product page, located at <a href="http://www.apress.com/978-1-4842-6866-7">www.​apress.​com/​978-1-4842-6866-7</a>.
+For more detailed information, please visit <a href="http://www.apress.com/source-code">http://​www.​apress.​com/​source-code</a>.</p>
+</aside>
+
+ ISBN 978-1-4842-6866-7e-ISBN 978-1-4842-6867-4
+
+
+<a href="https://doi.org/10.1007/978-1-4842-6867-4">https://doi.org/10.1007/978-1-4842-6867-4</a>
+
+
+© Sayan Putatunda 2021
+
+
+Apress Standard
+
+
+The use of general descriptive names, registered names, trademarks,
+service marks, etc. in this publication does not imply, even in the
+absence of a specific statement, that such names are exempt from the
+relevant protective laws and regulations and therefore free for general
+use.
+
+
+The publisher, the authors and the editors are safe to assume that the
+advice and information in this book are believed to be true and accurate
+at the date of publication. Neither the publisher nor the authors or the
+editors give a warranty, expressed or implied, with respect to the
+material contained herein or for any errors or omissions that may have
+been made. The publisher remains neutral with regard to jurisdictional
+claims in published maps and institutional affiliations.
+
+
+Distributed to the book trade worldwide by Springer Science+Business
+Media LLC, 1 New York Plaza, Suite 4600, New York, NY 10004. Phone
+1-800-SPRINGER, fax (201) 348-4505, e-mail orders-ny@springer-sbm.com,
+or visit www.springeronline.com. Apress Media, LLC is a California LLC
+and the sole member (owner) is Springer Science + Business Media Finance
+Inc (SSBM Finance Inc). SSBM Finance Inc is a Delaware corporation.
+
+
+
+<p><em>To my family</em></p>
+<p><em>—Dr. Sayan Putatunda</em></p>
+
+
+
+Introduction
+
+
+<p>Advancements in technology have made the continuous collection of
+data possible. We are inundated with data in various daily transactions
+(e.g., POS transactions in retail outlets like Walmart, Target, etc.),
+sensor data, web data, social media data, stock prices, search queries,
+clickstream data, and so forth. This is all a source for high-velocity
+data; that is, streaming data.</p>
+<p>This book is a quick-start guide for beginners to learn, understand,
+and implement various machine learning models on streaming data to
+generate real-time insights using Python. Streaming data is defined and
+infinite and continuous inflow of data at a high pace. Most of the
+machine learning models that we deal with are in the batch context.
+However, batch learning models are not suitable for handling streaming
+data as multiple passes over the data are not possible. The batch models
+may soon become outdated due to <em>concept drift</em> (i.e., the data
+distribution changes over time). Other challenges of streaming data
+include memory limitations and the high speed of data accumulation,
+which led to the development of a different class of methods, known as
+<em>incremental</em> or <em>online learning methods</em>.</p>
+<p>The industry’s adoption of various online learning/incremental
+learning methods has been quite slow over the years, but things are now
+changing quickly due to the vast applications of real-time machine
+learning. So, these techniques should be a part of a data scientist’s
+repertoire!</p>
+<p>This book is suitable for data scientists, machine learning
+engineers, researchers, software engineers, academicians, and data
+science aspirants with basic programming skills in Python and keen on
+exploring machine learning with streaming data for a career move or an
+enterprise/academic project.</p>
+<p>This book focuses on an end-to-end accelerated track delving into a
+holistic approach to develop concept drift detection algorithms,
+supervised learning algorithms (for regression and classification
+tasks), and unsupervised learning algorithms implemented in Python.
+Overall, this book comprises four chapters.</p>
+<p>Chapter <a href="#499734_1_En_1_Chapter.xhtml">1</a> introduces the concept of
+streaming data, its various challenges, some of its real-world business
+applications, and various windowing techniques. This chapter also
+introduces the concepts of incremental and online learning algorithms
+and the scikit-multiflow framework in Python.</p>
+<p>Chapter <a href="#499734_1_En_2_Chapter.xhtml">2</a> covers the various change
+detection/concept drift detection algorithms and their implementation on
+various datasets using scikit-multiflow.</p>
+<p>Chapter <a href="#499734_1_En_3_Chapter.xhtml">3</a> discusses the various regression
+and classification algorithms for streaming data (including ensemble
+learning) and its implementation on various datasets.</p>
+<p>Finally, Chapter <a href="#499734_1_En_4_Chapter.xhtml">4</a> introduces unsupervised learning
+for streaming data. It also provides a brief overview of other open
+source tools for handling streaming data, such as Spark Streaming,
+Massive Online Analysis (MOA), and more.</p>
+
+
+
+
+Acknowledgements
+
+
+<p>I would like to thank all those who have contributed to bringing this
+book to publication for their help, support, and input. I would like to
+give a heartfelt dedication to my mother (Mrs. Mili Putatunda) and my
+father (Mr. Supriya Putatunda) for their lifelong love, support, and
+encouragement in all aspects of my life. My special thanks to my wife
+(Mrs. Srijani Putatunda) for her support and encouragement. I am
+indebted to my thesis adviser, Prof. Arnab Kumar Laha, for introducing
+me to this wonderful research topic (i.e., analysis of streaming data)
+during my PhD days at IIM Ahmedabad and for having countless captivating
+and patient conversations with me.</p>
+<p>I would also like to thank and appreciate the efforts of the editors
+of this book, Celestin John, James Markham, and Shrikant Vishwakarma, at
+Apress/Springer for their essential encouragement.</p>
+<p>
+<blockquote>
+<p>Dr. Sayan Putatunda</p>
+</blockquote>
+</p>
+<p>
+<blockquote>
+<p>Kolkata, India</p>
+</blockquote>
+</p>
+<p>
+<blockquote>
+<p>January 2021</p>
+</blockquote>
+</p>
+
+
+
+
+
+
+
+About the Author
+
+
+
+
+
+
+
+About the Technical Reviewer
+
+
+
+
+
+
+
+
+<p></p>
+
+
+<!--Begin Abstract-->
+
+<h1 class="ChapterTitle" lang="en">1. An Introduction to Streaming
+Data</h1>
+
+
+<!--End Abstract-->
+
+<p>This chapter introduces you to streaming data, its various
+challenges, some of its real-world business applications, various
+windowing techniques, and the concepts of incremental and online
+learning algorithms. The chapter also introduces the scikit-multiflow
+framework in Python and some streaming data generators.</p>
+<p>Please note that there are some other frameworks available in Python
+and for machine learning with streaming data. The scikit-multiflow
+framework is used in this book because I strongly believe that this
+package (given its wide range of implemented techniques and great
+documentation) is a good starting point for Python users to pick up
+online/incremental machine learning techniques for streaming data.</p>
+
+<h2 class="Heading">Streaming Data</h2>
+<p>The world has witnessed a data deluge in recent years. There has been
+a huge increase in the volume of data generated from various sources.
+The major data sources are the Internet, log data, sensor data, emails,
+RFID, POS transaction data, and so forth. The data gathered from these
+sources can be categorized into structured, semi-structured, and
+unstructured data. Recent technological advances are a major reason for
+this “data
+explosion,” making data storage cheaper and a continuous
+collection of data possible. Almost all companies in sectors such as
+retail, social media, and IT are facing a data explosion. They are
+trying to figure out ways to process and analyze the massive data that
+they are generating and gain actionable insights.</p>
+
+
+Big Data
+
+<p>Most of us have heard of the term <em>big data</em> . The
+McKinsey Global Institute define big data as “datasets whose size is
+beyond the ability of typical database software tools to capture, store,
+manage, and analyze” [<a href="#499734_1_En_1_Chapter.xhtml#Par102">1</a>]. Big data’s
+basic characteristics can be defined with four words that begin with the
+letter V: volume, velocity, variety, and veracity. The “big” in big data
+is not only about the size or volume of the data—the other “V”s also
+need to be considered.</p>
+<p>Advancements in technology have made the continuous collection of
+data possible. We are inundated with data in various daily transactions
+(e.g., POS transactions in retail outlets like Walmart, Target, etc.),
+sensor data, web data, social media data, stock prices, search queries,
+clickstream data, and so forth. This is all a source for high-velocity
+data; that is, streaming data. Other sources of continuous data streams
+include operational monitoring, online advertising, mobile data, and the
+Internet of Things
+(IoT).</p>
+<p>Streaming data, or data streams, are an infinite and continuous flow
+of data from a source that arrives at a very high speed. Thus, streaming
+data is a subset of big
+data that addresses the <em>velocity</em> aspect of big data.
+Some of the differentiating characteristics between
+streaming data and static data are the loosely structured, always on,
+and always flowing of data [<a href="#499734_1_En_1_Chapter.xhtml#Par103">2</a>]. Unlike static
+data, structure is not rigidly defined in streaming data. It is “always
+on;” that is, data is always available because new data is continuously
+generated.</p>
+<p>As an example of how streaming data is harnessed in business, let’s
+look at online advertising. Social media giants like
+Facebook collect user behavior data in real time. Facebook has more than
+two billion active users every month [<a href="#499734_1_En_1_Chapter.xhtml#Par105">4</a>], which gives
+you an idea of the scale of the data being collected.</p>
+<p>Facebook earns
+most of its revenue by showing ads to its users. Many advertisers are
+onboarded in the platform. Facebook uses user behavior data to select
+ads that are relevant to its users (i.e., ads that have the maximum
+chance of interaction in the form of clicks or purchase). They perform
+other important steps in online advertising (such as placing a “bid” in
+an “auction”). All of this happens in near real time (i.e., whenever you
+load your News Feed page in Facebook or interact with other apps, such
+as Messenger or Instagram).</p>
+
+
+<h3 class="Heading">The Need to Process and Analyze Streaming Data</h3>
+<p>Streaming data offers real time or near real-time analytics.
+Since it’s ever-producing and never-ending, storing this enormous data
+and then running analytics on it (as done in batch processing) is not
+feasible. Streaming data must be analyzed “on the fly” to gain insights
+in real time or near real time.</p>
+<p>
+Figure <a href="#499734_1_En_1_Chapter.xhtml#Fig1">1-1</a> shows the
+streaming data analytics
+process flow. High-velocity data from various sources (sensor
+data, stock-tick data, etc.) are ingested, processed, and analyzed by a
+streaming data analytics engine in real time or near real time. The
+output generated is displayed via dashboards, apps, or any other means.
+
+</p>
+
+<p>
+<img src="images/499734_1_En_1_Chapter/499734_1_En_1_Fig1_HTML.jpg" style="width:35.5em" alt="../images/499734_1_En_1_Chapter/499734_1_En_1_Fig1_HTML.jpg"/>
+</p>
+
+<p>Figure 1-1</p>
+<p>Streaming data analytics process flow</p>
+
+
+<p>Streaming data analytics and insights empower an organization’s
+decision-makers to make value-added decisions in real time. That is why
+many researchers in academia and industry are working on new methods for
+real-time analytics. Conventional machine learning algorithms do not
+work because streaming data provides a new set of challenges.</p>
+<p>The next section discusses the challenges of handling streaming
+data.</p>
+
+
+
+<h2 class="Heading">The Challenges of Streaming Data</h2>
+<p>
+The following are some of the major challenges of handling
+streaming data.
+
+</p>
+
+<ul>
+<li><p>Multiple passes on data are no longer possible. Data needs to be
+processed in one pass.</p></li>
+<li><p>Data streams may evolve over time, which is a behavior called
+<em>concept drift</em>
+. Mining algorithms for streaming data need to address this issue
+so that the model does quickly become outdated.</p></li>
+<li><p>The high speed needed to stream data.</p></li>
+<li><p>Higher memory requirements.</p></li>
+</ul>
+
+<p>New methodologies are needed for the machine learning and data mining
+algorithms used with streaming data. The batch processing algorithms for
+static data don’t work. Let’s look at a simple linear regression method.
+In batch processing, entire training datasets are available. Linear
+regression is applied to the whole dataset using OLS (ordinary least
+squares) to get beta coefficients to find the relation between the
+dependent and the independent variable (i.e., beta coefficients signify
+the amount of change in the dependent variable (<em>y</em>) on an
+average for a unit change in the independent variable (<em>x</em>)).</p>
+<p>In streaming
+data, however, this is not feasible. You never have access to all
+the data because it is continuously flowing in. Here you need online
+learning or incremental learning algorithms, which take each example or
+tuple of data as it comes and updates the parameters (in this case, the
+beta coefficients). One such implementation is linear regression with
+SGD (stochastic gradient descent). A deeper look at online
+learning/incremental learning techniques is provided in the upcoming
+chapters.</p>
+<p>Importantly, unlike typical big data analysis, streaming data doesn’t
+require more storage because older data is discarded after a while.
+Smarter and faster algorithms are needed to process and analyze the
+incoming fast-streaming data. Algorithms should be capable of generating
+output anytime it’s queried.</p>
+<p>You should now understand why machine learning with streaming data is
+different from that of batch data. The next section discusses some of
+the real-world applications of streaming data.</p>
+
+
+<h2 class="Heading">Applications of Streaming Data</h2>
+<p>
+Real-time analytics using streaming data is going
+to be a game-changer in this era of big data. The mantra for real-time
+analytics is to get good solutions quickly. The following are some
+applications or use-cases for streaming data real-time analytics .
+
+</p>
+
+<ul>
+<li><p><strong>Fraud detection in real time or near real time</strong>.
+Let’s look at Amazon as an example. There are approximately one billion
+daily transactions on Amazon.com, but not all the transactions are
+genuine.</p></li>
+<li><p><strong>Real-time recommendations</strong> can lead to impulsive
+customer purchases, which is a very important proposition for e-commerce
+firms.</p></li>
+<li><p><strong>Real-time weather detection</strong> is useful for
+disaster and warning systems.</p></li>
+<li><p><strong>Network management in real time</strong> involves
+monitoring and configuring network hardware and software to ensure
+smooth operation. Use-cases include real-time fault detection,
+monitoring link bandwidth usage in real time, improving network resource
+utilization, and more.</p></li>
+<li><p><strong>Real-time operations management</strong> include supply
+chain decision-making, such as when to refuel or reorder.</p></li>
+<li><p><strong>Algorithmic trading using stock tick data.</strong>
+Monitoring stock trends in real time helps trading-related
+decision-making.</p></li>
+<li><p><strong>Real-time sports analytics.</strong> Relevant use-cases
+include player-movement tracking and performance analytics using
+streaming data sources, such as video feeds and sensor data.</p></li>
+<li><p><strong>Precision agriculture.</strong> A simple use-case is
+collecting sensor-based data on farm equipment health and minimizing its
+downtime by predicting when and where equipment failure occurs and
+making alternative arrangements.</p></li>
+<li><p><strong>Security event monitoring</strong> includes real-time
+monitoring of log data, host systems, and security devices to flag
+incidents (e.g., send alerts) such as failed logins, malware activity,
+and other suspicious activities.</p></li>
+<li><p><strong>Real-time trends</strong> are a feature in Twitter and
+Google Trends.</p></li>
+<li><p><strong>Automated annotation</strong>. Real-time annotation of
+objects in a live video feed is a relevant use-case. The same is
+applicable for a stream of images or speech data.</p></li>
+</ul>
+
+<p>In the next section, you learn about the various Windowing techniques
+for analyzing streaming
+data.</p>
+
+
+<h2 class="Heading">Windowing Techniques</h2>
+<p>
+A window can be defined as a snapshot of data—either
+observation-count-based or time-based [<a href="#499734_1_En_1_Chapter.xhtml#Par104">3</a>]. This is a very
+useful technique in a streaming data context since at no point in time
+do you have the “entire data” available. A window can effectively handle
+<em>concept drift</em>
+ because more importance is given to recent data points; the
+older data points are periodically discarded. A batch learning method
+can be converted to an incremental method by using a <em>windowing
+technique</em> 
+[<a href="#499734_1_En_1_Chapter.xhtml#Par106">5</a>]. The types of
+windowing techniques include the sliding window model, the damped window
+model, and the landmark window model [<a href="#499734_1_En_1_Chapter.xhtml#Par107">6</a>]. The following
+explains each of these windowing techniques.
+
+</p>
+
+<ul>
+<li><p><em>Landmark
+window model</em> . Older data points are not discarded. All data
+points are accumulated in the window. Figure <a href="#499734_1_En_1_Chapter.xhtml#Fig2">1-2</a> depicts this
+model. The rectangle represents the window, and the blue circles are the
+data.</p></li>
+<li><p><em>Sliding window
+model</em> . This is a popular way to discard older data points
+and consider only the recent data points for analysis. Figure <a href="#499734_1_En_1_Chapter.xhtml#Fig3">1-3</a> depicts this
+model.</p></li>
+<li>
+<em>Damped window
+model</em> . The data points are weighted. Higher weight is given
+to recent data points. An <em>exponential fading strategy</em> is used
+to discard old data. An aging function <em>g</em>(<em>t</em>) is used.
+
+
+
+<p>
+<img src="images/499734_1_En_1_Chapter/499734_1_En_1_Chapter_TeX_Equa.png" style="width:7.16em" alt="$$ g(t)=1/{2}^{\uplambda \left({t}_x-{t}_o\right)} $$"/>
+</p>
+
+
+
+</li>
+</ul>
+
+<p>
+λ is the fading factor, <em>t</em><sub><em>x</em></sub> is the current
+timestamp, and <em>t</em><sub><em>o</em></sub> is the origin timestamp
+(i.e., the time that the window was created). You can influence
+discarding older data points by changing the value of λ [<a href="#499734_1_En_1_Chapter.xhtml#Par108">7</a>]. A higher λ
+value means less weight is given to older data points. Figure <a href="#499734_1_En_1_Chapter.xhtml#Fig4">1-4</a> shows the
+exponential fading of data points in a damped window model over time.
+
+
+
+</p>
+
+<p>
+<img src="images/499734_1_En_1_Chapter/499734_1_En_1_Fig4_HTML.jpg" style="width:19.22em" alt="../images/499734_1_En_1_Chapter/499734_1_En_1_Fig4_HTML.jpg"/>
+</p>
+
+<p>Figure 1-4</p>
+<p>Exponential fading of data points in a damped window model</p>
+
+
+
+<p>
+<img src="images/499734_1_En_1_Chapter/499734_1_En_1_Fig3_HTML.jpg" style="width:35.48em" alt="../images/499734_1_En_1_Chapter/499734_1_En_1_Fig3_HTML.jpg"/>
+</p>
+
+<p>Figure 1-3</p>
+<p>Sliding window
+model</p>
+
+
+
+<p>
+<img src="images/499734_1_En_1_Chapter/499734_1_En_1_Fig2_HTML.jpg" style="width:35.45em" alt="../images/499734_1_En_1_Chapter/499734_1_En_1_Fig2_HTML.jpg"/>
+</p>
+
+<p>Figure 1-2</p>
+<p>Landmark window
+model</p>
+
+
+<p>Figure <a href="#499734_1_En_1_Chapter.xhtml#Fig2">1-2</a> shows that a
+landmark window accumulates data points with over time. The window size
+increases as more data points arrive. This windowing technique requires
+large memory resources, especially when dealing with large data
+streams.</p>
+<p>In a sliding window model, as shown in Figure <a href="#499734_1_En_1_Chapter.xhtml#Fig3">1-3</a>, “time” is the x
+axis, and the observations (i.e., the blue dots) arrive sequentially
+from left to right. The leftmost observation is the oldest data, and the
+most recent observations are on the right.</p>
+<p>Figure <a href="#499734_1_En_1_Chapter.xhtml#Fig3">1-3</a> shows that the
+older points are continuously discarded; only the recent points are
+considered in the window. Figure <a href="#499734_1_En_1_Chapter.xhtml#Fig3">1-3</a> also shows a
+window of size = 8 (i.e., it contains eight data points in an instant of
+time). The window moves in step = 1 (i.e., the window slides in step 1,
+where the oldest data is discarded).</p>
+<p>Also in Figure <a href="#499734_1_En_1_Chapter.xhtml#Fig3">1-3</a>, window
+W<sub>1</sub> at time t<sub>1</sub> contains eight data points. When a
+new data point arrives at time t<sub>2</sub>, the oldest data point in
+W1 is discarded to form window W<sub>2</sub> with eight data points,
+including the most recent one. The sliding windows model only considers
+recent data points; it discards the older ones.</p>
+<p>
+A sliding window is implemented in Python 3, as shown in Listing <a href="#499734_1_En_1_Chapter.xhtml#PC1">1-1</a>. It creates a
+window of size = 4 and shifts in steps of 1. The input array (<code>y</code>) consists of ten
+integers from 0 to 9. The sliding window implementation output is shown
+in Listing <a href="#499734_1_En_1_Chapter.xhtml#PC2">1-2</a>. The sliding
+windows at the end have <code>None</code>, which indicates
+an empty value, as no new data point is arriving, but the window size is
+fixed to 4.
+
+
+</p>
+<pre>###############################################################
+[0, 1, 2, 3]
+[1, 2, 3, 4]
+[2, 3, 4, 5]
+[3, 4, 5, 6]
+[4, 5, 6, 7]
+[5, 6, 7, 8]
+[6, 7, 8, 9]
+[7, 8, 9, None]
+[8, 9, None, None]
+[9, None, None, None]
+###############################################################
+Listing 1-2
+Sliding Window Function Output</pre>
+<pre>###############################################################
+# Import the relevant libraries
+import itertools
+from itertools import tee
+from itertools import zip_longest as zip
+def window(iterations, size):
+n = tee(iterations, size)
+for i in range(1, size):
+for each in n[i:]:
+next(each, None)
+return zip(*n)
+y=range(10)
+for each in window(y, 4):
+print(list(each))
+###############################################################
+Listing 1-1
+Sliding Window Implementation</pre>
+<p>Unlike the sliding windowing technique, the damped window model gives
+recent data points a higher weight. The older data points are discarded
+using an exponential fading strategy, as shown in Figure <a href="#499734_1_En_1_Chapter.xhtml#Fig4">1-4</a>. The relatively
+older data points are discarded faster than the newer data points. This
+way, the window stores both older and newer data points. However, the
+sliding window technique is much more popular in a streaming data
+context. It is the primary windowing technique in this book.</p>
+<p>In the next section, you learn about incremental learning and online
+learning algorithms.</p>
+
+
+<h2 class="Heading">Incremental Learning and Online Learning</h2>
+<p>Most standard machine learning techniques (supervised or
+unsupervised) are <em>batch learning</em> methods. That is, they
+typically work on static/batch datasets (i.e., non-streaming datasets),
+where the entire data is available, and multiple passes for any
+algorithm are possible. However, these batch learning methods become
+outdated over time when applied to streaming data due to concept drift.
+There is a need for a different class of machine learning algorithms in
+the streaming data context that can address its challenges. This class
+of algorithms is known as <em>incremental</em> or <em>online learning
+algorithms</em> .</p>
+<p>Incremental learning
+algorithms work with limited resources and frequently update
+model parameters whenever a new batch/mini-batch of data arrives.
+Incremental learning algorithms can handle concept drift inherent in
+streaming data. Online learning algorithms differ from incremental
+learning algorithms in that the model parameters are updated whenever a
+new observation arrives. In online learning algorithms, you don’t wait
+for a mini-batch of the data to arrive to update the model
+parameters.</p>
+<p>An incremental learning algorithm can be approximated by using a
+batch learner with a sliding window [<a href="#499734_1_En_1_Chapter.xhtml#Par106">5</a>]. In this case,
+the model is retrained every time a new window (comprising data points)
+arrives. You can apply any batch learner, such as linear regression or
+logistic regression algorithms, with a sliding window on a data stream
+to approximate an incremental learning algorithm.</p>
+<p>
+Let’s look at a mini-batch gradient descent
+method and the <em>stochastic gradient descent</em> (SGD)
+method . The
+gradient descent method is a very popular technique for finding a
+function’s minimum, which in this context is the cost function. The
+following explains how to do a gradient descent
+algorithm.
+
+</p>
+
+<ol>
+<li>
+
+<p>Initialize the parameters with random values.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Compute the gradient of the objective function.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Update the parameters using the gradients.</p>
+
+
+ 
+</li>
+<li>
+
+<p>The step size calculation for each feature: step size= gradient *
+learning rate. The <em>learning rate</em> is a hyperparameter that
+directly impacts the convergence of the algorithm. A very small learning
+rate takes a very long time for the gradient descent algorithm to
+converge. A very high value of the learning rate makes the algorithm
+take large steps down the slope, such that it may miss the global
+minima.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Calculate the new parameters: new parameters = old parameters – step
+size.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Repeat steps 2–5 until the gradient is close to zero.</p>
+
+
+ 
+</li>
+</ol>
+
+<p>The gradient descent
+method is a batch
+learning method. The entire training data is considered before
+taking a step in the direction of the gradient. In large datasets, a
+single update of parameters takes a long time. However, a mini-batch
+gradient descent algorithm is an incremental learning algorithm where
+the parameters are changed each time a mini-batch is processed. But SGD
+algorithm always updates the model parameters for each training
+observation. The SGD
+technique is an example of an online learning algorithm.</p>
+<p>Let’s now look at the linear regression
+method, which is a linear model to understand the relationship
+between the target variable (Y) and the predictor variables (X) by
+computing the beta coefficients for each predictor variables using the
+<em>ordinary least square</em> (OLS) method.</p>
+<p>You can implement the linear regression method
+by using the gradient descent optimization technique. Linear regression
+is a batch learning technique in which the gradient descent algorithm is
+applied on the entire training to update the model parameters. However,
+you can convert this method into an incremental learner by using the
+mini-batch gradient descent algorithm.</p>
+<p>
+Listing <a href="#499734_1_En_1_Chapter.xhtml#PC3">1-3</a> implements the
+function for linear regression with the mini-batch gradient descent
+algorithm in Python [<a href="#499734_1_En_1_Chapter.xhtml#Par109">8</a>]. These
+functions are then applied to a simulated dataset.
+
+</p>
+<pre>###############################################################
+# Import the libraries
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+from pandas import read_csv
+np.random.seed(111)
+# creating data
+mean = np.array([6.0, 7.0])
+covariance = np.array([[1.0, 0.94], [0.95, 1.2]])
+df = np.random.multivariate_normal(mean, covariance, 500)
+df.shape
+# output- (10000, 2)
+df
+#Output-
+#array([[6.97833668, 8.30414776],
+#       [4.66509294, 5.31806407],
+#       [6.88804517, 7.71734893],
+#       ...,
+#       [5.75153443, 6.73145512],
+#       [4.93357924, 6.72570148],
+#       [7.31794626, 8.4076224 ]])
+X = df[:,:-1]
+Y = df[:,-1]
+# A column with all 1's is added
+X_new = np.c_[np.ones((500, 1)), X]
+# Random initialization of the estimate "reg_coef"
+np.random.seed(333)
+reg_coef = np.random.randn(2,1)
+# here, size_batch_mini= minibatch size
+# lr= learning rate
+#  max_iters= number of batches used
+lr=0.01
+num = 100
+max_iters = 100
+size_batch_mini = 50
+t0, t1 = 400, 1200
+def lrs(step):
+return t0 / (step + t1)
+reg_coef_all = []
+step = 0
+for j in range(max_iters):
+batches_index  = np.random.permutation(num)
+X_batches = X_new[batches_index]
+y_batches = Y[batches_index]
+for i in range(0, num, size_batch_mini):
+step += 1
+Yi = y_batches[i:i+size_batch_mini]
+Xi = X_batches[i:i+size_batch_mini]
+# compute the gradient
+gradient = 2/size_batch_mini * Xi.T.dot(Xi.dot(reg_coef) - Yi)
+lr = lrs(step)
+# update
+reg_coef = reg_coef - lr * gradient
+reg_coef_all.append(reg_coef)
+# Output
+reg_coef
+reg_coef_all
+###############################################################
+Listing 1-3
+Implementation of Linear Regression with Mini-Batch Gradient Descent</pre>
+<p>Similarly  , the linear regression
+method can be converted to an online learning method by using the SGD
+method. I urge you to implement the function for the linear regression
+method with SGD using the ideas discussed so far. You can refer to
+Listing <a href="#499734_1_En_1_Chapter.xhtml#PC3">1-3</a>, but make sure
+that the update step happens for each observation.</p>
+<p>
+The scikit-learn
+library has an SGDRegressor() function
+to apply linear regression with SGD. Listing <a href="#499734_1_En_1_Chapter.xhtml#PC4">1-4</a> is a code snippet
+for applying linear regression using SGD on a simulated dataset.
+
+</p>
+<pre>###############################################################
+# Import relevant libraries
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import SGDRegressor
+from sklearn.metrics import mean_squared_error, r2_score
+np.random.seed(111)
+# creating the dataset
+mean = np.array([6.0, 7.0])
+covariance = np.array([[1.0, 0.94], [0.95, 1.2]])
+df = np.random.multivariate_normal(mean, covariance, 10000)
+df.shape
+# output- (10000, 2)
+df
+#Output-
+#array([[6.97833668, 8.30414776],
+#       [4.66509294, 5.31806407],
+#       [6.88804517, 7.71734893],
+#       ...,
+#       [5.75153443, 6.73145512],
+#       [4.93357924, 6.72570148],
+#       [7.31794626, 8.4076224 ]])
+X = df[:,:-1]
+Y = df[:,-1]
+## Split into train and test
+train_X, test_X, train_y, test_y = train_test_split(X, Y, test_size=0.20, random_state=333)
+### Use the SGD regressor
+mod = SGDRegressor()
+### Fit the model
+mod.fit(train_X, train_y)
+#SGDRegressor(alpha=0.0001, average=False, early_stopping=False, epsilon=0.1,
+#             eta0=0.01, fit_intercept=True, l1_ratio=0.15,
+#             learning_rate='invscaling', loss="squared_loss", max_iter=1000,
+#             n_iter_no_change=5, penalty="l2", power_t=0.25, random_state=None,
+#             shuffle=True, tol=0.001, validation_fraction=0.1, verbose=0,
+#             warm_start=False)
+### Print the coefficient and intercept values
+print("Coefficients: \n", mod.coef_)
+#Coefficients: [0.95096598]
+print("Intercept", mod.intercept_)
+#Intercept [1.17712595]
+### Predict on the test data
+pred = mod.predict(test_X)
+# calculating the prediction error
+error = np.sum(np.abs(test_y - pred) / test_y.shape[0])
+print("Mean absolute error (MAE) = ", error)
+# Mean absolute error (MAE) =  0.4493164833335055 ###############################################################
+Listing 1-4
+Stochastic Gradient Descent Implementation Using scikit-learn</pre>
+<p>This section explained incremental learning and online learning
+algorithms and implemented a couple of these algorithms in a linear
+regression context using Python. In the next section, you are introduced
+to the scikit-multiflow.</p>
+
+
+<h2 class="Heading">Introduction to the Scikit-Multiflow Framework</h2>
+<p>scikit-multiflow is a framework for the
+analysis of streaming data in Python [<a href="#499734_1_En_1_Chapter.xhtml#Par110">9</a>]. It is an open
+source software distributed under the BSD license. There was a need for
+an open source machine learning library in Python for streaming data,
+similar to what the scikit-learn library [<a href="#499734_1_En_1_Chapter.xhtml#Par111">10</a>] has been doing
+for static/batch data for years. The scikit-multiflow framework is built
+upon other famous open source frameworks, such as scikit-learn, MOA
+[<a href="#499734_1_En_1_Chapter.xhtml#Par112">11</a>], and MEKA
+[<a href="#499734_1_En_1_Chapter.xhtml#Par113">12</a>].</p>
+<p>MOA is among the oldest and most popular open source software for
+data stream mining. It contains a collection of streaming data
+algorithms for supervised (classification, regression, etc.) and
+unsupervised learning (clustering, etc.). MOA is developed in Java.</p>
+<p>MEKA is an open source software for multilabel learning and
+evaluation. scikit-multiflow complements scikit-learn (whose primary
+focus is on batch learning) and helps with machine learning in streaming
+data research.</p>
+<p>The scikit-multiflow website (<a href="https://scikit-multiflow.github.io/"><code>https://scikit-multiflow.github.io/</code></a>)
+provides official documentation and the user guide.</p>
+<p>The API reference documentation is available at <a href="https://scikit-multiflow.readthedocs.io/en/stable/api/api.html"><code>https://scikit-multiflow.readthedocs.io/en/stable/api/api.html</code></a>.</p>
+<p>The scikit-multiflow package source code is publicly available at
+<a href="https://github.com/scikit-multiflow/scikit-multiflow"><code>https://github.com/scikit-multiflow/scikit-multiflow</code></a>.</p>
+<p>numpy and cython are two dependencies that need to be installed
+before you install scikit-multiflow.</p>
+<p>scikit-multiflow only works only on Python 3.5+ versions.</p>
+<p>
+To install scikit-multiflow from the Python Package Index (PyPI), use
+the following command in the command prompt/terminal.
+
+</p>
+<pre>$ pip install -U scikit-multiflow</pre>
+<p>
+scikit-multiflow 
+can also be installed from conda-forge using the following command.
+
+</p>
+<pre>$ conda install -c conda-forge scikit-multiflow</pre>
+<p>This book uses the version 0.5.3 package, released in June 2020.</p>
+<p>In the next section, you learn about the various streaming data
+generators available in the scikit-multiflow framework.</p>
+
+
+<h2 class="Heading">Streaming Data Generators</h2>
+<p>
+The scikit-multiflow framework contains many
+streaming data generators to create simulated data streams for
+experimental and research-related work. One of the popular streaming
+data generators is the hyperplane generator. A hyperplane in a
+<em>p</em>-dimensional space is the set of points (<em>x</em>) that
+satisfy the following.
+
+
+
+<p>
+<img src="images/499734_1_En_1_Chapter/499734_1_En_1_Chapter_TeX_Equb.png" style="width:7.22em" alt="$$ {\sum}_{j=1}^p{w}_j{x}_j={w}_0 $$"/>
+</p>
+
+
+
+</p>
+<p><em>x</em><sub><em>j</em></sub> is the <em>j</em> <sup>th</sup>
+coordinate of <em>x</em>. <em>w</em> is the weight [<a href="#499734_1_En_1_Chapter.xhtml#Par114">13</a>].</p>
+<p>
+For the target variable, the following types of observations are labeled
+as positive.
+
+
+
+<p>
+<img src="images/499734_1_En_1_Chapter/499734_1_En_1_Chapter_TeX_Equc.png" style="width:7.9em" alt="$$ {\sum}_{j=1}^p{w}_j{x}_j&amp;gt;={w}_0 $$"/>
+</p>
+
+
+
+</p>
+<p>
+The following types of observations are labeled as negative.
+
+
+
+<p>
+<img src="images/499734_1_En_1_Chapter/499734_1_En_1_Chapter_TeX_Equd.png" style="width:7.22em" alt="$$ {\sum}_{j=1}^p{w}_j{x}_j&amp;lt;{w}_0 $$"/>
+</p>
+
+
+
+</p>
+<p>
+Hyperplanes are useful for simulating time-changing concepts as the
+orientation. The position of the hyperplane can be changed by adjusting
+the relative size of the weight. Listing <a href="#499734_1_En_1_Chapter.xhtml#PC7">1-5</a> generates a data
+stream using scikit-multiflow comprising ten features and a target
+variable. It generates 10,000 observations before storing the simulated
+data in a CSV file. Figure <a href="#499734_1_En_1_Chapter.xhtml#Fig5">1-5</a> is a snapshot of
+the generated dataset.
+
+
+</p>
+
+<p>
+<img src="images/499734_1_En_1_Chapter/499734_1_En_1_Fig5_HTML.jpg" style="width:35.55em" alt="../images/499734_1_En_1_Chapter/499734_1_En_1_Fig5_HTML.jpg"/>
+</p>
+
+<p>Figure 1-5</p>
+<p>Snapshot of the dataset generated using the
+hyperplane
+generator</p>
+
+
+<pre>#############################################################
+# Import the relevant libraries
+from skmultiflow.data import HyperplaneGenerator
+import pandas as pd
+import numpy as np
+# Apply the HyperplaneGenerator() function
+create = HyperplaneGenerator(random_state = 888, n_features= 10, noise_percentage = 0)
+create.prepare_for_use()
+X , Y = create.next_sample(10000)
+data = pd.DataFrame(np.hstack((X, np.array([Y]).T)))
+data.shape
+# output- (10000, 11)
+print(data.head())
+# Output:
+#         0         1         2         3   ...        7         8         9    10
+#0  0.899478  0.248365  0.030172  0.072447  ...  0.633460  0.283253  0.365369  1.0
+#1  0.705171  0.648509  0.040909  0.211732  ...  0.026095  0.446087  0.239105  0.0
+#2  0.091587  0.977452  0.411501  0.458305  ...  0.181444  0.303406  0.174454  0.0
+#3  0.635272  0.496203  0.014126  0.627222  ...  0.517752  0.570683  0.546333  1.0
+#4  0.450078  0.876507  0.537356  0.495684  ...  0.606895  0.217841  0.912944  1.0
+#
+#[5 rows x 11 columns]
+# Store the data in csv
+data.to_csv('data_stream_hyperplane.csv', index=False)
+###############################################################
+Listing 1-5
+Streaming Data Generation Using the Hyperplane Generator</pre>
+<p>Another popular streaming data generator is the Agarwal generator.
+The Agarwal stream
+generator is one of the earliest data sources for training
+decision tree learners [<a href="#499734_1_En_1_Chapter.xhtml#Par115">14</a>].</p>
+<p>
+Listing <a href="#499734_1_En_1_Chapter.xhtml#PC8">1-6</a> generates a data
+stream using the Agarwal generator. A snapshot of this dataset is shown
+in Figure <a href="#499734_1_En_1_Chapter.xhtml#Fig6">1-6</a>. The dataset has
+ten columns. The rightmost column is the binary target variable (0 or
+1). There are nine features in the dataset. The target variable
+represents whether a loan should be approved or not. Some of the
+features or predictor variables in this dataset are age, salary,
+education level, loan amount, the value of the house, zip code,
+commission, the carmaker, and the number of years the house is owned.
+
+
+</p>
+
+<p>
+<img src="images/499734_1_En_1_Chapter/499734_1_En_1_Fig6_HTML.jpg" style="width:35.48em" alt="../images/499734_1_En_1_Chapter/499734_1_En_1_Fig6_HTML.jpg"/>
+</p>
+
+<p>Figure 1-6</p>
+<p>Snapshot of the dataset generated using the Agarwal generator</p>
+
+
+<pre>###############################################################
+# Import the relevant libraries
+from skmultiflow.data import HyperplaneGenerator
+import pandas as pd
+import numpy as np
+# Apply the HyperplaneGenerator() function
+create = HyperplaneGenerator(random_state = 888, n_features= 10, noise_percentage = 0)
+create.prepare_for_use()
+X , Y = create.next_sample(10000)
+data = pd.DataFrame(np.hstack((X, np.array([Y]).T)))
+data.shape
+# output- (10000, 11)
+print(data.head())
+# Output:
+#         0         1         2         3   ...        7         8         9    10
+#0  0.899478  0.248365  0.030172  0.072447  ...  0.633460  0.283253  0.365369  1.0
+#1  0.705171  0.648509  0.040909  0.211732  ...  0.026095  0.446087  0.239105  0.0
+#2  0.091587  0.977452  0.411501  0.458305  ...  0.181444  0.303406  0.174454  0.0
+#3  0.635272  0.496203  0.014126  0.627222  ...  0.517752  0.570683  0.546333  1.0
+#4  0.450078  0.876507  0.537356  0.495684  ...  0.606895  0.217841  0.912944  1.0
+#
+#[5 rows x 11 columns]
+# Store the data in csv
+data.to_csv('data_stream_hyperplane.csv', index=False)
+###############################################################
+Listing 1-6
+Agarwal Streaming Data Generation</pre>
+<p>
+The following are some of the many other streaming data generators
+available in the scikit-multiflow
+framework.
+
+</p>
+
+<ul>
+<li><p>LED stream generator and LED stream generator with concept
+drift</p></li>
+<li><p>Sine generator and anomaly sine generator</p></li>
+<li><p>Mixed data stream generator</p></li>
+<li><p>Random Radial Basis Function stream generator and Random Radial
+Basis Function stream generator with concept drift</p></li>
+<li><p>SEA stream generator</p></li>
+<li><p>Random tree stream generator</p></li>
+<li><p>STAGGER concepts stream generator</p></li>
+<li><p>Waveform stream generator</p></li>
+<li><p>Regression generator</p></li>
+</ul>
+
+<p>This section discussed the various streaming data generators. In the
+next section, you learn how to create a data stream from a CSV file.</p>
+
+
+<h2 class="Heading">Create a Data Stream from a CSV file</h2>
+<p>The FileStream
+method in a scikit-multiflow data module creates a data stream
+from a file source. As of September 2020, only CSV files were supported.
+You can take any static/batch dataset and convert it to streaming
+data.</p>
+<p>As a demonstration, let’s look at an absenteeism at the workplace
+dataset [<a href="#499734_1_En_1_Chapter.xhtml#Par116">15</a>] that is
+publicly available on the UCI Machine Learning Repository [<a href="#499734_1_En_1_Chapter.xhtml#Par117">16</a>]. The dataset
+is in CSV format. It contains various attributes: employee ID, the
+reason for absence, month/day/season of absence, employee age, average
+workload per day, education, body mass index, absenteeism time in hours,
+and more. This dataset has 21 attributes and 740 observations.</p>
+<p>
+Figure <a href="#499734_1_En_1_Chapter.xhtml#Fig7">1-7</a> is a snapshot of
+the dataset containing 19 rows and 11 columns. Listing <a href="#499734_1_En_1_Chapter.xhtml#PC9">1-7</a> uses the
+FileStream method to load the absenteeism-at-work CSV file and then
+convert it to a data stream. The next_sample() function retrieves the
+next sample. Also, the built-in functions, has_more_samples() and
+n_remaining_samples(), tell you if there are more samples and the number
+of remaining samples, respectively.
+
+</p>
+
+<p>
+<img src="images/499734_1_En_1_Chapter/499734_1_En_1_Fig7_HTML.jpg" style="width:35.52em" alt="../images/499734_1_En_1_Chapter/499734_1_En_1_Fig7_HTML.jpg"/>
+</p>
+
+<p>Figure 1-7</p>
+<p>Snapshot of the absenteeism at workplace dataset (all columns are not
+shown)</p>
+
+
+<p>
+
+</p>
+<pre>###############################################################
+# Import the relevant library
+from skmultiflow.data.file_stream import FileStream
+# Setup the data stream
+data_stream= FileStream('./Absenteeism_at_work.csv')
+# Retrieving one sample
+data_stream.next_sample()
+# Output-
+#(array([[ 11.  ,  26.  ,   7.   ,   3.  ,   1.  , 289.  ,  36.  ,
+#          13.  ,  33.  , 239.554,  97.  ,   0.  ,   1.  ,   2.  ,
+#           1.  ,   0.  ,   1.   ,  90.  , 172.  ,  30.  ]]), array([4]))
+# Retrieving 5 samples
+data_stream.next_sample(5)
+# Output-
+#(array([[ 36.  ,   0.  ,   7.   ,   3.  ,   1.  , 118.  ,  13.  ,
+#          18.  ,  50.  , 239.554,  97.  ,   1.  ,   1.  ,   1.  ,
+#           1.  ,   0.  ,   0.   ,  98.  , 178.  ,  31.  ],
+#        [  3.  ,  23.  ,   7.   ,   4.  ,   1.  , 179.  ,  51.  ,
+#          18.  ,  38.  , 239.554,  97.  ,   0.  ,   1.  ,   0.  ,
+#           1.  ,   0.  ,   0.   ,  89.  , 170.  ,  31.  ],
+#        [  7.  ,   7.  ,   7.   ,   5.  ,   1.  , 279.  ,   5.  ,
+#          14.  ,  39.  , 239.554,  97.  ,   0.  ,   1.  ,   2.  ,
+#           1.  ,   1.  ,   0.   ,  68.  , 168.  ,  24.  ],
+#        [ 11.  ,  23.  ,   7.   ,   5.  ,   1.  , 289.  ,  36.  ,
+#          13.  ,  33.  , 239.554,  97.  ,   0.  ,   1.  ,   2.  ,
+#           1.  ,   0.  ,   1.   ,  90.  , 172.  ,  30.  ],
+#        [  3.  ,  23.  ,   7.   ,   6.  ,   1.  , 179.  ,  51.  ,
+#          18.  ,  38.  , 239.554,  97.  ,   0.  ,   1.  ,   0.  ,
+#           1.  ,   0.  ,   0.   ,  89.  , 170.  ,  31.  ]]),
+# array([0, 2, 4, 2, 2]))
+data_stream.has_more_samples()
+# Output-
+# True
+data_stream.n_remaining_samples()
+# Output-
+# 734
+###############################################################
+Listing 1-7
+Creating data stream from a CSV file</pre>
+
+
+<h2 class="Heading">Summary</h2>
+<p>In this chapter, you learned about streaming data, the various
+challenges associated with it, real-world business applications,
+windowing techniques, and incremental and online learning algorithms.
+You were also introduced to the scikit-multiflow framework in
+Python.</p>
+<p>The next chapter discusses concept drift detection and anomaly
+detection algorithms and their implementation in various datasets using
+the scikit-multiflow framework.</p>
+
+
+<h2 class="Heading">References</h2>
+<p>
+
+</p>
+
+<ol>
+<li>
+
+<p>“Big data: The next frontier for innovation, competition, and
+productivity.” McKinsey Global Institute, 2011.</p>
+
+
+ 
+</li>
+<li>
+
+<p>B. Ellis. <em>Real-Time Analytics: Techniques to Analyze and
+Visualize Streaming Data</em>. Wiley, 2014.</p>
+
+
+ 
+</li>
+<li>
+
+<p>J. Gama. <em>Knowledge Discovery from Data Streams</em>. Chapman
+&amp; Hall/CRC, 2010.</p>
+
+
+ 
+</li>
+<li>
+
+<p>A. Hutchison. “Facebook Reaches 2.38 Billion Users, Beats Revenue
+Estimates in Latest Update.” <em>Social Media Today</em>, April 24,
+2019.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Stefan Büttcher, Charles L. A. Clarke, and Gordon V. Cormack.
+<em>Information Retrieval: Implementing and Evaluating Search
+Engines</em>. MIT Press, 2010.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Stratos Mansalis, Eirini Ntoutsi, Nikos Pelekis, and Yannis
+Theodoridis . “An evaluation of data stream clustering algorithms.”
+<em>Statistical Analysis and Data Mining</em>, June 25, 2018.</p>
+
+
+ 
+</li>
+<li>
+
+<p>A. Laha and S. Putatunda. “Real-time location prediction with
+taxi-gps data streams,” <em>Transportation Research Part C: Emerging
+Technologies</em>, July, 2018.</p>
+
+
+ 
+</li>
+<li>
+
+<p>A. Géron. <em>Hands-on Machine Learning with Scikit-Learn and
+TensorFlow: Concepts, Tools, and Techniques to Build Intelligent
+Systems</em>. O’Reilly Media, 2017.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Jacob Montiel, Jesse Read, Albert Bifet, and Talel Abdessalem.
+“Scikit-Multiflow: A Multi-Output Streaming Framework.” <em>The Journal
+of Machine Learning Research</em>, 2018.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Fabian Pedregosa, Gaël Varoquaux, Alexandre Gramfort, Vincent Michel,
+Bertrand Thirion, Olivier Grisel, Mathieu Blondel, Peter Prettenhofer,
+Ron Weiss, Vincent Dubourg, et al. “Scikit-learn: Machine Learning in
+Python.” <em>Journal of Machine Learning Research</em>. October 12,
+2011.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Albert Bifet, Ricard Gavalda, Geoff Holmes, and Bernhard Pfahringer.
+<em>Machine Learning for Data Streams with Practical Examples in
+MOA</em>. MIT Press, 2018.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Jesse Read, Peter Reutemann, Bernhard Pfahringer, and Geoff Holmes.
+“MEKA: A multi- label/multi-target extension to WEKA.” <em>Journal of
+Machine Learning Research</em>. January, 2016.</p>
+
+
+ 
+</li>
+<li>
+
+<p>G. Hulten, L. Spencer, and P. Domingos. <em>Mining Time-Changing Data
+Streams</em>. ACM Press, 2001.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Rakesh Agrawal, Tomasz Imielinksi, and Arun Swami. “Database Mining:
+A Performance Perspective”, IEEE Transactions on Knowledge and Data
+Engineering, December 1993.</p>
+
+
+ 
+</li>
+<li>
+
+<p>A. Martiniano, R. P. Ferreira, R. J. Sassi, and C. Affonso.
+“Application of a neuro fuzzy network in prediction of absenteeism at
+work.” IEEE Conference on Information Systems and Technologies (CISTI),
+2012.</p>
+
+
+ 
+</li>
+<li>
+
+<p>D. Dua and C. Graff. UCI Machine Learning Repository (<a href="http://archive.ics.uci.edu/ml"><code>http://archive.ics.uci.edu/ml</code></a>),
+2019.</p>
+
+
+ 
+</li>
+</ol>
+
+
+
+
+<p></p>
+
+
+<!--Begin Abstract-->
+
+<h1 class="ChapterTitle" lang="en">2. Concept Drift Detection in Data
+Streams</h1>
+
+
+<!--End Abstract-->
+
+<p>In the last chapter, you were introduced to streaming data, its
+applications, windowing techniques, and incremental and online learning
+algorithms. You were also introduced to the scikit-multiflow framework
+in Python and the various streaming data generators. This chapter
+discusses algorithms for concept drift detection in a streaming data
+context. It explores relevant techniques and how to implement them using
+the scikit-multiflow framework in Python.</p>
+
+
+Note
+
+<p>This chapter applies some of the scikit-multiflow framework’s
+(version 0.5.3) drift detection module functions. Also, I refer to the
+scikit-multiflow framework’s API reference document for the codes
+provided in this chapter (<a href="https://scikit-multiflow.readthedocs.io/en/stable/api/api.html"><code>https://scikit-multiflow.readthedocs.io/en/stable/api/api.html</code></a>).</p>
+
+
+<h2 class="Heading">Concept Drift</h2>
+<p>Chapter <a href="#499734_1_En_1_Chapter.xhtml">1</a> discussed streaming data’s various
+challenges. One of the major challenges is concept drift, in which the
+distribution of data streams may change over time. A particular pattern
+present in the past data may become a different kind of pattern in
+current data. So, any batch learner model trained on past data becomes
+outdated due to concept drift.</p>
+<p>In machine learning, <em>concept</em> refers to a variable or a
+quantity that a machine learning model is trying to predict. <em>Concept drift</em> 
+refers to the phenomenon in which the target concept’s statistical
+properties change over time [<a href="#499734_1_En_2_Chapter.xhtml#Par28">1</a>].</p>
+<p>The changes in data streams or concept drift patterns can be either
+gradual or abrupt [<a href="#499734_1_En_2_Chapter.xhtml#Par29">2</a>]. Abrupt changes
+in data streams, or abrupt concept drift, mean the sudden change in the
+characteristics of the data, such as a change in mean, change in
+variance, and so forth. It is important to detect these changes because
+they have many practical applications in quality control, systems
+monitoring, fault detection, and more. However, gradual changes in data
+streams or gradual concept drift are referred to as the <em>change in
+the data distribution</em> over a much longer time than that of the
+abrupt changes. Gradual changes are relatively more difficult to
+identify.</p>
+<p>The other types of data streams or concept drift changes are <em>incremental concept
+drift</em>  and <em>recurring concept drift</em>
+ [<a href="#499734_1_En_2_Chapter.xhtml#Par30">3</a>]. In incremental
+concept drift, the older patterns in data streams incrementally change
+to newer patterns over time; however, the time taken is much shorter
+than that of the gradual concept drift. In recurring concept drift, you
+see specific characteristics of older data streams reoccurring after a
+time.</p>
+<p>There are various types of concept drift detection
+algorithms. This chapter focuses on concept drift detection
+algorithms such as (a) the <em>adaptive windowing method</em> for
+concept drift detection (ADWIN), (b) the Drift Detection Method (DDM),
+(c) the Early Drift Detection Method (EDDM), (d) Drift Detection Method
+based on Hoeffding’s bound with moving average-test (HDDM_A), (e) Drift
+Detection Method based on Hoeffding’s bound with moving weighted
+average-test (HDDM_W), and (f) drift detection using the Page-Hinkley
+method.</p>
+
+
+<h2 class="Heading">Adaptive Windowing Method for Concept Drift
+Detection</h2>
+<p>In the adaptive
+windowing method for concept drift detection (ADWIN), a sliding
+window of dynamic size is used; that is, the window’s size is not fixed,
+but it is computed online based on the rate of change observed from the
+data in the window [<a href="#499734_1_En_2_Chapter.xhtml#Par31">4</a>]. I already
+discussed the idea of sliding windows in Chapter <a href="#499734_1_En_1_Chapter.xhtml">1</a>, where a window is maintained with
+the most recent data points in a data stream, and the older data points
+are continuously discarded. The data points within the window get the
+data stream’s updated statistics, detect concept drift, and update the
+model.</p>
+<p>It is generally recommended to use windows with a variable size. The
+idea is to keep data points or observations for as long as possible
+since the change time scale is unknown to the users [<a href="#499734_1_En_2_Chapter.xhtml#Par31">4</a>]. The ADWIN
+algorithm increases the window size if it doesn’t see any change in the
+data stream, and reduces the window size when a change is detected in
+the data stream. The idea is to track the mean of the data points in
+window W. The null hypothesis is that there is no change in the mean
+value inside window W. The older data points in the window are dropped
+when there is enough evidence that the mean value of the new data points
+differs from that of the rest of the window [<a href="#499734_1_En_2_Chapter.xhtml#Par32">5</a>].</p>
+<p>To dive further into the implementation of the ADWIN algorithm, a
+statistical test is performed to check if the mean value in two windows
+(W<sub>1</sub> and W<sub>2</sub>) differs by more than a threshold.
+W<sub>1</sub> and W<sub>2</sub> are the subwindows of the main window,
+W. If the subwindows’ means are significantly different, the older data
+points of window W are dropped. However, if the mean of subwindows are
+not significantly different, it is assumed that there is no change in
+the distribution of the data stream [<a href="#499734_1_En_2_Chapter.xhtml#Par31">4</a>].</p>
+<p>
+Listing <a href="#499734_1_En_2_Chapter.xhtml#PC1">2-1</a> illustrates
+concept drift detection using ADWIN on a simulated data stream. The
+drift_detection
+module  is
+used in the scikit-multiflow framework. Listing <a href="#499734_1_En_2_Chapter.xhtml#PC1">2-1</a> simulates a data
+stream of size 1000 from a standard normal distribution and then changes
+the data concept from index 599 onward (i.e., replaces values with
+integers between 5 and 8), as shown in Figure <a href="#499734_1_En_2_Chapter.xhtml#Fig1">2-1</a>. It then calls
+the ADWIN() object and uses the detected_change() function to identify
+concept drift in the data stream. The final output is shown in Listing
+<a href="#499734_1_En_2_Chapter.xhtml#PC2">2-2</a>.
+
+
+
+</p>
+
+<p>
+<img src="images/499734_1_En_2_Chapter/499734_1_En_2_Fig1_HTML.jpg" style="width:9.22em" alt="../images/499734_1_En_2_Chapter/499734_1_En_2_Fig1_HTML.jpg"/>
+</p>
+
+<p>Figure 2-1</p>
+<p>The data stream with changed concept from index 599 onward</p>
+
+
+<pre>###############################################################
+### Output:
+Concept Drift detected in data: 8.0 - at index: 607
+Concept Drift detected in data: 5.0 - at index: 639
+Concept Drift detected in data: 6.0 - at index: 671
+###############################################################
+Listing 2-2
+Output for Concept Drift Detection Using ADWIN</pre>
+<pre>###############################################################
+# Import the relevant libraries
+import numpy as np
+from skmultiflow.drift_detection.adwin import ADWIN
+# set seed for reproducibility
+np.random.seed(123)
+# Simulate a data stream of size 1000 from a Standard normal distribution
+stream = np.random.randn(1000)
+stream[:10]
+# Output:
+#array([-1.0856306 ,  0.99734545,  0.2829785 , -1.50629471, -0.57860025,
+#        1.65143654, -2.42667924, -0.42891263,  1.26593626, -0.8667404 ])
+# Data concept are changed from index 599 to 999
+for j in range(599, 1000):
+stream[j] = np.random.randint(5, high=9)
+# Initialize the ADWIN object
+A = ADWIN(delta=0.002)
+# Stream elements are added to ADWIN and checking whether drift occured
+for j in range(1000):
+A.add_element(stream[j])
+if A.detected_change():
+print('Concept Drift detected in data: ' + str(stream[j]) + ' - at index: ' + str(j))
+###############################################################
+Listing 2-1
+Illustration for Concept Drift Detection Using ADWIN in scikit-multiflow</pre>
+
+
+<h2 class="Heading">Drift Detection Method</h2>
+<p>The Drift Detection
+Method (DDM) was first proposed by Gama et al. [<a href="#499734_1_En_2_Chapter.xhtml#Par33">6</a>]. The DDM method
+can be applied with any learning algorithm; that is, with either
+incremental/online learning algorithms or batch learning algorithms. The
+idea is to keep track of the learning algorithm’s error rate. In a
+sample of <em>n</em> examples, the number of errors from the learning
+algorithm is a random variable from Bernoulli trials. You can use the
+binomial
+distribution to model the number of errors in <em>n</em>
+examples. At instant j, the error rate is denoted by p<sub>j</sub> with
+a standard deviation of σ<sub>j</sub> =
+sqrt(p<sub>j</sub>(1-p<sub>j</sub>)/j).</p>
+<p>The DDM method keeps a record of the p<sub>min</sub> and
+σ<sub>min</sub> while training the learning algorithm [<a href="#499734_1_En_2_Chapter.xhtml#Par33">6</a>]. If
+p<sub>j</sub> + σ<sub>j</sub> &gt;= p<sub>min</sub> + 2 *
+σ<sub>min</sub>, then a warning is declared, which means that there is a
+change in the data stream. But if p<sub>j</sub> + σ<sub>j</sub> &gt;=
+p<sub>min</sub> + 3 * σ<sub>min</sub>, a change in the data stream is
+declared [<a href="#499734_1_En_2_Chapter.xhtml#Par32">5</a>].</p>
+<p>
+Listing <a href="#499734_1_En_2_Chapter.xhtml#PC3">2-3</a> illustrates
+concept drift detection using DDM. It simulates a data stream of size
+1000 from a standard normal distribution and then changes the data
+concept from index 299 to 599 (i.e., replace values with integers
+between 5 and 9). It then calls the DDM() object and uses the
+detected_change() and detected_warning_zone() functions to identify
+concept drift in data streams and provide a warning about a change in
+the data streams, respectively. The final output is shown in Listing
+<a href="#499734_1_En_2_Chapter.xhtml#PC4">2-4</a>.
+
+
+</p>
+<pre>###############################################################
+### Output:
+Concept drift detected in data: 1.0693159694243486 - at index: 55
+Concept drift detected in data: 2.0871133595881854 - at index: 88
+Concept drift detected in data: 0.8123413299768204 - at index: 126
+Warning detected in data: 1.3772574828673068 - at index: 158
+Warning detected in data: -0.1431759743261871 - at index: 159
+Warning detected in data: 0.02031599823462459 - at index: 160
+Warning detected in data: -0.19396387055266243 - at index: 161
+Warning detected in data: 0.13402679274666512 - at index: 162
+Warning detected in data: 0.7044740740436035 - at index: 163
+Concept drift detected in data: 0.6656534379123312 - at index: 164
+Concept drift detected in data: 8.0 - at index: 302
+###############################################################
+Listing 2-4
+Output for Concept Drift and Warning Zones Detected Using DDM</pre>
+<pre>###############################################################
+# Import the relevant libraries
+import numpy as np
+from skmultiflow.drift_detection import DDM
+# set seed for reproducibility
+np.random.seed(123)
+# Simulate a data stream of size 1000 from a Standard normal distribution
+stream = np.random.randn(1000)
+stream[:10]
+## Output-
+#array([-1.0856306 ,  0.99734545,  0.2829785 , -1.50629471, -0.57860025,
+#        1.65143654, -2.42667924, -0.42891263,  1.26593626, -0.8667404 ])
+# Data concepts are changed from index 299 to 599
+for j in range(299, 600):
+stream[j] = np.random.randint(5, high=9)
+# Initialize the DDM object
+d2m = DDM()
+# Stream elements are added to DDM and checking whether drift occurred
+for j in range(1000):
+d2m.add_element(stream[j])
+if d2m.detected_change():
+print('Concept drift detected in data: ' + str(stream[j]) + ' - at index: ' + str(j))
+if d2m.detected_warning_zone():
+print('Warning detected in data: ' + str(stream[j]) + ' - at index: ' + str(j))
+###############################################################
+Listing 2-3
+Illustration for Concept Drift Detection Using DDM in scikit-multiflow</pre>
+
+
+<h2 class="Heading">Early Drift Detection Method</h2>
+<p>The Early Drift
+Detection Method (EDDM) is an improvement of the DDM method,
+especially for detecting slow, gradual changes in a data stream. In the
+DDM method discussed earlier, the idea was to keep track of the number
+of errors in the learning algorithms, whereas in EDDM, the mean distance
+of two errors is tracked [<a href="#499734_1_En_2_Chapter.xhtml#Par34">7</a>]. Thus, EDDM
+stores the average distance between two errors (p′<sub>j</sub> and its
+standard deviation σ′<sub>j</sub>) and the maximum values
+p′<sub>max</sub> and σ′<sub>max.</sub> Similar to that of DDM, based on
+certain thresholds, either a concept drift or a warning zone is
+declared. Please refer to Baena-Garcia et al. [<a href="#499734_1_En_2_Chapter.xhtml#Par34">7</a>] for a detailed
+review of the EDDM.</p>
+<p>Concept drift detection using EDDM can be implemented in the same way
+as in Listing <a href="#499734_1_En_2_Chapter.xhtml#PC3">2-3</a>. Instead of using
+the DDM() method, however, you need to apply the EDDM() method. You are
+encouraged to change the distribution of the data stream and note the
+output.</p>
+
+
+<h2 class="Heading">Drift Detection Using HDDM_A and HDDM_W</h2>
+<p>Drift detection using moving average-test
+(HDDM_A) is based on Hoeffding’s bound [<a href="#499734_1_En_2_Chapter.xhtml#Par37">10</a>]. Hoeffding’s inequality
+does not assume a probability function; it assumes independent and
+bounded random variables [<a href="#499734_1_En_2_Chapter.xhtml#Par35">8</a>]. HDDM_A performs
+an <em>A-test</em>, in which given a sequence of random variables,
+changes in the population mean can be detected by monitoring the
+difference between the moving averages [<a href="#499734_1_En_2_Chapter.xhtml#Par35">8</a>]. The HDDM_A
+method is implemented in scikit-multiflow. The implementation of HDDM_A
+is based on MOA [<a href="#499734_1_En_2_Chapter.xhtml#Par36">9</a>].</p>
+<p>
+Listing <a href="#499734_1_En_2_Chapter.xhtml#PC5">2-5</a> illustrates
+concept drift detection and warning zone detection using the HDDM_A
+method in scikit-multiflow. It simulates a data stream of size 1000 from
+a binomial distribution and changes the data concepts from index 299 to
+499. The final output is shown in Listing <a href="#499734_1_En_2_Chapter.xhtml#PC6">2-6</a>.
+
+
+</p>
+<pre>###############################################################
+### Output:
+Concept drift detected in data: 8 - at index: 13
+Warning detected in data: 7 - at index: 26
+Concept drift detected in data: 7 - at index: 27
+Concept drift detected in data: 8 - at index: 65
+Warning detected in data: 8 - at index: 70
+Concept drift detected in data: 9 - at index: 74
+Concept drift detected in data: 8 - at index: 78
+Concept drift detected in data: 7 - at index: 92
+Concept drift detected in data: 8 - at index: 96
+Concept drift detected in data: 8 - at index: 103
+Warning detected in data: 7 - at index: 111
+Concept drift detected in data: 7 - at index: 112
+Concept drift detected in data: 10 - at index: 118
+Concept drift detected in data: 7 - at index: 121
+Concept drift detected in data: 7 - at index: 126
+Concept drift detected in data: 8 - at index: 131
+Concept drift detected in data: 8 - at index: 147
+Concept drift detected in data: 8 - at index: 150
+Warning detected in data: 8 - at index: 163
+Concept drift detected in data: 8 - at index: 171
+Concept drift detected in data: 8 - at index: 175
+Concept drift detected in data: 7 - at index: 190
+Concept drift detected in data: 9 - at index: 194
+Concept drift detected in data: 9 - at index: 196
+Concept drift detected in data: 8 - at index: 199
+Concept drift detected in data: 8 - at index: 206
+Concept drift detected in data: 8 - at index: 209
+Concept drift detected in data: 8 - at index: 225
+Warning detected in data: 8 - at index: 231
+Concept drift detected in data: 10 - at index: 240
+Concept drift detected in data: 9 - at index: 258
+Concept drift detected in data: 10 - at index: 272
+Concept drift detected in data: 9 - at index: 279
+Concept drift detected in data: 9 - at index: 281
+Concept drift detected in data: 6 - at index: 290
+Concept drift detected in data: 7 - at index: 292
+Concept drift detected in data: 8 - at index: 294
+Concept drift detected in data: 8 - at index: 298
+Concept drift detected in data: 8 - at index: 365
+Warning detected in data: 8 - at index: 380
+Concept drift detected in data: 8 - at index: 381
+Concept drift detected in data: 8 - at index: 411
+Concept drift detected in data: 8 - at index: 417
+Concept drift detected in data: 8 - at index: 423
+Concept drift detected in data: 8 - at index: 445
+Warning detected in data: 8 - at index: 451
+Warning detected in data: 7 - at index: 452
+Concept drift detected in data: 8 - at index: 468
+Concept drift detected in data: 8 - at index: 497
+Warning detected in data: 8 - at index: 503
+Concept drift detected in data: 9 - at index: 547
+Warning detected in data: 9 - at index: 561
+Warning detected in data: 9 - at index: 566
+Warning detected in data: 8 - at index: 567
+Warning detected in data: 5 - at index: 568
+Warning detected in data: 6 - at index: 569
+Warning detected in data: 6 - at index: 570
+Warning detected in data: 7 - at index: 571
+Warning detected in data: 7 - at index: 572
+Concept drift detected in data: 9 - at index: 586
+Warning detected in data: 8 - at index: 593
+Concept drift detected in data: 9 - at index: 598
+Warning detected in data: 6 - at index: 604
+Concept drift detected in data: 6 - at index: 605
+Concept drift detected in data: 8 - at index: 619
+Concept drift detected in data: 6 - at index: 622
+Concept drift detected in data: 7 - at index: 628
+Concept drift detected in data: 8 - at index: 640
+Concept drift detected in data: 9 - at index: 644
+Concept drift detected in data: 8 - at index: 655
+Concept drift detected in data: 8 - at index: 660
+Concept drift detected in data: 7 - at index: 662
+Concept drift detected in data: 8 - at index: 670
+Concept drift detected in data: 8 - at index: 688
+Concept drift detected in data: 7 - at index: 697
+Concept drift detected in data: 7 - at index: 701
+Concept drift detected in data: 9 - at index: 703
+Concept drift detected in data: 8 - at index: 705
+Concept drift detected in data: 9 - at index: 716
+Concept drift detected in data: 9 - at index: 719
+Concept drift detected in data: 8 - at index: 723
+Concept drift detected in data: 7 - at index: 750
+Warning detected in data: 8 - at index: 756
+Concept drift detected in data: 7 - at index: 772
+Concept drift detected in data: 7 - at index: 775
+Concept drift detected in data: 8 - at index: 782
+Concept drift detected in data: 8 - at index: 788
+Concept drift detected in data: 9 - at index: 802
+Concept drift detected in data: 7 - at index: 806
+Concept drift detected in data: 6 - at index: 808
+Concept drift detected in data: 7 - at index: 824
+Concept drift detected in data: 8 - at index: 826
+Warning detected in data: 7 - at index: 830
+Warning detected in data: 7 - at index: 836
+Concept drift detected in data: 7 - at index: 837
+Concept drift detected in data: 6 - at index: 839
+Concept drift detected in data: 9 - at index: 847
+Concept drift detected in data: 8 - at index: 853
+Concept drift detected in data: 6 - at index: 855
+Concept drift detected in data: 9 - at index: 864
+Concept drift detected in data: 8 - at index: 867
+Concept drift detected in data: 8 - at index: 870
+Concept drift detected in data: 9 - at index: 874
+Concept drift detected in data: 8 - at index: 882
+Concept drift detected in data: 7 - at index: 894
+Concept drift detected in data: 7 - at index: 910
+Concept drift detected in data: 9 - at index: 921
+Concept drift detected in data: 8 - at index: 925
+Concept drift detected in data: 9 - at index: 927
+Concept drift detected in data: 7 - at index: 929
+Warning detected in data: 9 - at index: 933
+Concept drift detected in data: 9 - at index: 934
+Concept drift detected in data: 9 - at index: 938
+Concept drift detected in data: 7 - at index: 944
+Concept drift detected in data: 8 - at index: 950
+Concept drift detected in data: 9 - at index: 960
+Warning detected in data: 7 - at index: 983
+Warning detected in data: 7 - at index: 987
+Concept drift detected in data: 10 - at index: 998
+###############################################################
+Listing 2-6
+Output for Concept Drift and Warning Zones Detected Using HDDM_A</pre>
+<pre>###############################################################
+# Import the relevant libraries
+import numpy as np
+from skmultiflow.drift_detection.hddm_a import HDDM_A
+# Initialize the HDDM_A object
+HA = HDDM_A()
+# set seed for reproducibility
+np.random.seed(123)
+# Simulate a data stream of size 1000 from a binomial distribution
+# here, n= number of trials, p= probability of each trial
+n, p = 10, 0.6
+stream = np.random.binomial(n, p, 1000)
+stream[:10]
+# Output- array([5, 7, 7, 6, 5, 6, 3, 5, 6, 6])
+# Data concept are changed from index 299 to 499
+for j in range(299, 500):
+stream[j] = np.random.randint(5, high=9)
+# Stream elements are added to DDM and checking whether drift occured
+for j in range(1000):
+HA.add_element(stream[j])
+if HA.detected_change():
+print('Concept drift detected in data: ' + str(stream[j]) + ' - at index: ' + str(j))
+if HA.detected_warning_zone():
+print('Warning detected in data: ' + str(stream[j]) + ' - at index: ' + str(j))
+###############################################################
+Listing 2-5
+Illustration for Concept Drift Detection Using HDDM_A in scikit-multiflow</pre>
+<p>Drift detection using a moving weighted average-test
+(HDDM_W) 
+is based on McDiarmid’s bound [<a href="#499734_1_En_2_Chapter.xhtml#Par38">11</a>]. McDiarmid’s
+bound is a generalization of Hoeffding’s bound. The HDDM_W involves the
+<em>W-test</em>, which involves weighted moving averages [<a href="#499734_1_En_2_Chapter.xhtml#Par35">8</a>].</p>
+<p>
+Listing <a href="#499734_1_En_2_Chapter.xhtml#PC7">2-7</a> illustrates
+concept drift detection and warning zone detection using HDDM_W in
+scikit-multiflow. The experiment setup is the same as that of Listing
+<a href="#499734_1_En_2_Chapter.xhtml#PC5">2-5</a>. The only
+difference is that you are using the HDDM_W() method instead of
+HDDM_A(). The final output is shown in Listing <a href="#499734_1_En_2_Chapter.xhtml#PC8">2-8</a>.
+
+
+</p>
+<pre>###############################################################
+### Output:
+Concept drift detected in data: 8 - at index: 13
+Warning detected in data: 8 - at index: 30
+Warning detected in data: 6 - at index: 31
+Concept drift detected in data: 8 - at index: 41
+Warning detected in data: 8 - at index: 65
+Concept drift detected in data: 9 - at index: 74
+Concept drift detected in data: 8 - at index: 96
+Concept drift detected in data: 10 - at index: 118
+Warning detected in data: 7 - at index: 122
+Warning detected in data: 6 - at index: 123
+Warning detected in data: 4 - at index: 124
+Warning detected in data: 3 - at index: 125
+Concept drift detected in data: 7 - at index: 126
+Warning detected in data: 8 - at index: 135
+Warning detected in data: 8 - at index: 140
+Warning detected in data: 7 - at index: 141
+Concept drift detected in data: 8 - at index: 147
+Concept drift detected in data: 8 - at index: 150
+Concept drift detected in data: 8 - at index: 155
+Concept drift detected in data: 8 - at index: 163
+Warning detected in data: 8 - at index: 171
+Concept drift detected in data: 8 - at index: 175
+Concept drift detected in data: 9 - at index: 194
+Concept drift detected in data: 9 - at index: 196
+Concept drift detected in data: 8 - at index: 199
+Warning detected in data: 8 - at index: 206
+Warning detected in data: 8 - at index: 209
+Concept drift detected in data: 8 - at index: 225
+Concept drift detected in data: 9 - at index: 235
+Concept drift detected in data: 10 - at index: 240
+Concept drift detected in data: 9 - at index: 258
+Concept drift detected in data: 10 - at index: 272
+Warning detected in data: 9 - at index: 279
+Warning detected in data: 9 - at index: 281
+Warning detected in data: 8 - at index: 282
+Warning detected in data: 9 - at index: 284
+Warning detected in data: 8 - at index: 294
+Concept drift detected in data: 8 - at index: 298
+Warning detected in data: 8 - at index: 353
+Warning detected in data: 8 - at index: 355
+Warning detected in data: 8 - at index: 378
+Warning detected in data: 7 - at index: 379
+Warning detected in data: 8 - at index: 380
+Concept drift detected in data: 8 - at index: 381
+Warning detected in data: 8 - at index: 464
+Warning detected in data: 6 - at index: 465
+Warning detected in data: 8 - at index: 469
+Warning detected in data: 7 - at index: 470
+Concept drift detected in data: 8 - at index: 471
+Warning detected in data: 8 - at index: 486
+Warning detected in data: 8 - at index: 496
+Warning detected in data: 8 - at index: 497
+Warning detected in data: 6 - at index: 498
+Warning detected in data: 7 - at index: 499
+Warning detected in data: 7 - at index: 500
+Warning detected in data: 6 - at index: 501
+Concept drift detected in data: 8 - at index: 523
+Warning detected in data: 9 - at index: 530
+Concept drift detected in data: 9 - at index: 547
+Warning detected in data: 8 - at index: 554
+Concept drift detected in data: 9 - at index: 561
+Concept drift detected in data: 9 - at index: 566
+Concept drift detected in data: 9 - at index: 586
+Concept drift detected in data: 9 - at index: 598
+Concept drift detected in data: 9 - at index: 644
+Warning detected in data: 8 - at index: 670
+Concept drift detected in data: 10 - at index: 671
+Concept drift detected in data: 6 - at index: 673
+Concept drift detected in data: 9 - at index: 703
+Concept drift detected in data: 8 - at index: 705
+Concept drift detected in data: 9 - at index: 716
+Concept drift detected in data: 8 - at index: 723
+Warning detected in data: 6 - at index: 751
+Warning detected in data: 7 - at index: 752
+Warning detected in data: 5 - at index: 753
+Warning detected in data: 7 - at index: 754
+Warning detected in data: 5 - at index: 755
+Concept drift detected in data: 8 - at index: 756
+Warning detected in data: 7 - at index: 771
+Warning detected in data: 7 - at index: 772
+Warning detected in data: 7 - at index: 776
+Warning detected in data: 8 - at index: 777
+Concept drift detected in data: 8 - at index: 788
+Concept drift detected in data: 9 - at index: 802
+Concept drift detected in data: 8 - at index: 814
+Warning detected in data: 8 - at index: 826
+Concept drift detected in data: 9 - at index: 864
+Concept drift detected in data: 8 - at index: 867
+Warning detected in data: 7 - at index: 873
+Warning detected in data: 9 - at index: 874
+Warning detected in data: 7 - at index: 875
+Concept drift detected in data: 6 - at index: 876
+Warning detected in data: 8 - at index: 905
+Concept drift detected in data: 9 - at index: 934
+Concept drift detected in data: 9 - at index: 960
+Concept drift detected in data: 9 - at index: 975
+Concept drift detected in data: 9 - at index: 982
+Concept drift detected in data: 10 - at index: 998
+###############################################################
+Listing 2-8
+Output for Concept Drift and Warning Zones Detected Using HDDM_W</pre>
+<pre>###############################################################
+# Import the relevant libraries
+import numpy as np
+from skmultiflow.drift_detection.hddm_w import HDDM_W
+# Initialize the HDDM_W object
+HW = HDDM_W()
+# set seed for reproducibility
+np.random.seed(123)
+# Simulate a data stream of size 1000 from a binomial distribution
+# here, n= number of trials, p= probability of each trial
+n, p = 10, 0.6
+stream = np.random.binomial(n, p, 1000)
+stream[:10]
+# Output- array([5, 7, 7, 6, 5, 6, 3, 5, 6, 6])
+# Data concept are changed from index 299 to 500
+for j in range(299, 500):
+stream[j] = np.random.randint(5, high=9)
+# Stream elements are added to DDM and checking whether drift occurred
+for j in range(1000):
+HW.add_element(stream[j])
+if HW.detected_change():
+print('Concept drift detected in data: ' + str(stream[j]) + ' - at index: ' + str(j))
+if HW.detected_warning_zone():
+print('Warning detected in data: ' + str(stream[j]) + ' - at index: ' + str(j))###############################################################
+Listing 2-7
+Illustration for Concept Drift Detection Using HDDM_W in scikit-multiflow</pre>
+<p>An A-test is better at detecting abrupt or sudden concept drift;
+however, a W-test fares better in gradual concept drift.</p>
+
+
+<h2 class="Heading">Drift Detection Using the Page-Hinkley Method</h2>
+<p>The drift detection method based on the
+Page-Hinkley (PH) test [<a href="#499734_1_En_2_Chapter.xhtml#Par39">12</a>] is a sequential
+analysis method that detects the sudden change in the mean of a Gaussian
+signal [<a href="#499734_1_En_2_Chapter.xhtml#Par40">13</a>]. This method
+tracks the cumulated difference between the observed values and their
+mean up to the current moment [<a href="#499734_1_En_2_Chapter.xhtml#Par41">14</a>]. Generally,
+this method sends an alarm for concept drift when the observed mean at
+some instant is greater than a given threshold λ. The value of λ is
+determined by the admissible false alarm rate. If you increase the value
+of λ, you may be able to reduce the false alarms, but you miss some
+instances of changes in the data distribution.</p>
+<p>
+Listing <a href="#499734_1_En_2_Chapter.xhtml#PC9">2-9</a> illustrates
+concept drift detection using the Page-Hinkley method. It
+simulates a data stream of size 1000 from a normal distribution and then
+changes the data concept from index 299 to 799 (i.e., replace values
+with integers between 5 and 8), as shown in Figure <a href="#499734_1_En_2_Chapter.xhtml#Fig2">2-2</a>. However, unlike
+some of the methods discussed earlier, the Page-Hinkley method doesn’t
+output warning zones. It only shows the instance of concept drift, as
+shown in Listing <a href="#499734_1_En_2_Chapter.xhtml#PC10">2-10</a>.
+
+
+
+</p>
+
+<p>
+<img src="images/499734_1_En_2_Chapter/499734_1_En_2_Fig2_HTML.jpg" style="width:8.92em" alt="../images/499734_1_En_2_Chapter/499734_1_En_2_Fig2_HTML.jpg"/>
+</p>
+
+<p>Figure 2-2</p>
+<p>The data stream with changed concept from index 299 to 799</p>
+
+
+<pre>###############################################################
+### Output:
+Concept drift detected in data: 5.0 - at index: 306
+###############################################################
+Listing 2-10
+Output for Concept Drift Detected Using the Page-Hinkley Method</pre>
+<pre>###############################################################
+# Import the relevant libraries
+import numpy as np
+from skmultiflow.drift_detection import PageHinkley
+# Initialize the PageHinkley object
+ph = PageHinkley()
+# set seed for reproducibility
+np.random.seed(123)
+# Simulate a data stream of size 1000 from a normal distribution
+# with mean=0 and standard deviation=0.1
+stream = np.random.normal(0, 0.1, 1000)
+# Data concept are changed from index 299 to 799
+for j in range(299, 800):
+stream[j] = np.random.randint(5, high=9)
+# Adding stream elements to the PageHinkley drift detector and verifying if drift occurred
+for j in range(1000):
+ph.add_element(stream[j])
+if ph.detected_change():
+print('Concept drift detected in data: ' + str(stream[j]) + ' - at index: ' + str(j))
+###############################################################
+Listing 2-9
+Illustration for Concept Drift Detection Using the Page-Hinkley Method in scikit-multiflow</pre>
+
+
+<h2 class="Heading">Summary</h2>
+<p>This chapter discussed the various algorithms for concept drift
+detection in a streaming data context. It also explored the relevant
+techniques and implemented them using the scikit-multiflow framework in
+Python.</p>
+<p>The next chapter discusses various supervised learning techniques for
+streaming data and implements some of them using the scikit-multiflow
+framework.</p>
+
+
+<h2 class="Heading">References</h2>
+<p>
+
+</p>
+
+<ol>
+<li>
+
+<p>Shenghui Wang, Stefan Schlobach, and Michel Klein. “What Is Concept
+Drift and How to Measure It?” Knowledge Engineering and Management by
+the Masses. <em>Lecture Notes in Computer Science</em>. Springer,
+2010.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Michèle Basseville and Igor V. Nikiforov. <em>Detection of Abrupt
+Changes: Theory and Application</em>. Prentice-Hall, Inc., 1993.</p>
+
+
+ 
+</li>
+<li>
+
+<p>J. Lu, A. Liu, F. Dong, F. Gu, J. Gama, and G. Zhang. “Learning under
+Concept Drift: A Review.” <em>IEEE Transactions on Knowledge &amp; Data
+Engineering</em>. 2019.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Albert Bifet and Ricard Gavalda. “Learning from time-changing data
+with adaptive windowing.” <em>Proceedings of the 2007 SIAM international
+Conference on Data Mining</em>. Society for Industrial and Applied
+Mathematics. 2007. pp. 443-448.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Albert Bifet, Ricard Gavald, Geoff Holmes, and Bernhard Pfahringer.
+<em>Machine Learning for Data Streams: with Practical Examples in
+MOA</em>. MIT Press, 2018.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Joao Gama, Pedro Medas, Gladys Castillo, and Pedro Pereira Rodrigues.
+“Learning with drift detection.” Advances in Artificial Intelligence:
+SBIA 2004. 17th Brazilian Symposium on Artificial Intelligence.
+September 29 – October 1, 2004. pp. 286–295.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Manuel Baena-Garcia, Jose Del Campo-Avila, Raúl Fidalgo, Albert
+Bifet, Ricard Gavaldà, Rafael Morales-Bueno. “Early Drift Detection
+Method.” Fourth International Workshop on Knowledge Discovery from Data
+Streams. 2006.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Isvani Frías-Blanco, José del Campo-Ávila, Gonzalo Ramos-Jiménez,
+Rafael Morales-Bueno, Agustín Ortiz-Díaz, and Yailé Cabal. “Online and
+non-parametric drift detection methods based on Hoeffding’s bounds.”
+<em>IEEE Transactions on Knowledge and Data Engineering</em>. 2014.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Albert Bifet, Geoff Holmes, Richard Kirkby, and Bernhard Pfahringer.
+“MOA: Massive Online Analysis.” <em>Journal of Machine Learning
+Research</em>. 2010.</p>
+
+
+ 
+</li>
+<li>
+
+<p>W. Hoeffding. “Probabilities inequalities for sums of bounded random
+variables,” Journal of the American Statistics Assoc. 1963. pp. 13–
+30.</p>
+
+
+ 
+</li>
+<li>
+
+<p>C. McDiarmid. “On the method of bounded differences.” <em>Proc. Surv.
+Combinatorics</em>. 1989, pp. 148–188.</p>
+
+
+ 
+</li>
+<li>
+
+<p>E. S. Page. “Continuous Inspection Schemes.” <em>Biometrika</em>.
+1954. pp. 100–115.</p>
+
+
+ 
+</li>
+<li>
+
+<p>H. Mouss, D. Mouss, N. Mouss, and L. Sefouhi.. “Test of Page-Hinkley,
+an approach for fault detection in an agro-alimentary production
+system.” Proceedings of the Asian Control Conference. 2004. pp.
+815–818.</p>
+
+
+ 
+</li>
+<li>
+
+<p>J. Gama. <em>Knowledge Discovery from Data Streams</em>. Chapman
+&amp; Hall/CRC, 2010.</p>
+
+
+ 
+</li>
+</ol>
+
+
+
+
+<p></p>
+
+
+<!--Begin Abstract-->
+
+<h1 class="ChapterTitle" lang="en">3. Supervised Learning for Streaming
+Data</h1>
+
+
+<!--End Abstract-->
+
+<p>In the last chapter, you learned some concept drift detection
+algorithms. This chapter focuses on supervised learning algorithms (for
+classification tasks and regression tasks) in a streaming data context.
+In supervised learning, there is a target or a response variable and
+there are predictor variables. The goal of the learner/model is to
+understand the relationship between the target and the predictor
+variables. This can then be used to make predictions on the target
+variable for future observations of the predictor variables [<a href="#499734_1_En_3_Chapter.xhtml#Par71">1</a>]. (I assume that
+you are already familiar with the supervised learning techniques used in
+a batch setting.)</p>
+<p>Chapter <a href="#499734_1_En_1_Chapter.xhtml">1</a> covered the challenges of
+streaming data and how the streaming data algorithms are different from
+batch learning algorithms. This chapter dives into some machine learning
+techniques for streaming data and their implementation using the
+scikit-multiflow framework.</p>
+<p>In Chapter <a href="#499734_1_En_1_Chapter.xhtml">1</a>, you learned about data stream
+generators and how to create a data stream from a source file (CSV
+format). Those ideas are used in nearly all the working examples in this
+chapter.</p>
+<p>The chapter starts with the evaluation methods used in a streaming
+data context. It then discusses supervised learning
+approaches—tree-based, lazy learning, Naïve Bayes, and more. Finally,
+the ensemble learning techniques in the streaming data context are
+explained.</p>
+<p>This chapter is restricted to binary classification
+methods and single target regression (i.e., multiclass
+classification and multitarget regression
+techniques are beyond the scope of this book). All the
+experiments in this chapter are performed on a system with a
+configuration of 1.6 GHz dual-core Intel Core i5 processor, 4 GB RAM,
+and macOS. However, the code should run on a similar or greater
+configuration system or operating system without any changes or
+modifications. This book uses the scikit-multiflow package version
+0.5.3, which was released in June 2020.</p>
+
+<h2 class="Heading">Evaluation Methods</h2>
+<p>This section introduces model evaluation methods that
+are often used in evaluating the performance of supervised learning
+methods in a streaming data context. These methods are known as the
+<em>holdout evaluation
+method</em>  and the <em>prequential evaluation
+method</em>  (a.k.a., the <em>interleaved test-then-train
+method</em>).</p>
+<p>In the holdout evaluation method, the performance evaluation happens
+after every batch of a certain number of examples or observations. The
+learner’s or model’s performance is evaluated on a test dataset formed
+by unseen examples. These unseen examples are used only for evaluation
+purposes and are not used to train the model. The same test dataset can
+be used in multiple evaluation runs. However, it is also possible to
+create dynamic test datasets. The holdout evaluation method can be
+applied using the EvaluateHoldout()
+function available in the scikit-multiflow framework’s evaluation
+module.</p>
+<p>The prequential
+evaluation method, or the interleaved test-then-train method, is
+specifically designed for evaluating models in a streaming data context.
+Each of the examples is analyzed according to its order of arrival. In
+this evaluation method, the incoming unseen example in the data stream
+is first used for testing (i.e., the model/learner makes predictions).
+These unseen examples are also used to train the model before the next
+round of testing. The prequential evaluation
+method can be applied using the EvaluatePrequential()
+function 
+in the scikit-multiflow framework’s evaluation module.</p>
+<p>There is another evaluation method available in the scikit-multiflow
+framework (the <em>prequential evaluation delayed method</em>); however,
+this book sticks to the holdout evaluation method and the prequential
+evaluation method, with more emphasis on the latter.</p>
+<p>This chapter uses these evaluation methods to track the performance
+of various supervised learning algorithms discussed in the next few
+sections. You need to specify the metrics when using either the
+EvaluateHoldout() function or the EvaluatePrequential() function.</p>
+<p>In this chapter, classification problems generally use metrics such
+as prediction accuracy and the f1 score (the harmonic mean of precision
+and recall). For regression problems, metrics such as mean squared error
+and mean absolute error are used.</p>
+
+
+<h2 class="Heading">Decision Trees for Streaming Data</h2>
+<p>This section discusses some of the tree-based techniques for
+classification and regression tasks in the streaming data context. It
+covers Hoeffding trees, Hoeffding Adaptive Tree classifiers, the
+Extremely Fast Decision Tree classifiers, Hoeffding tree regressors, and
+Hoeffding Adaptive Tree regressors, which are applied to different
+datasets using scikit-multiflow.</p>
+
+<h3 class="Heading">Hoeffding Tree Classifier</h3>
+<p>One of the challenges  of streaming data is
+the memory requirements; it is impossible to store all the data. In a
+batch setting, a decision tree reuses instances or observations to
+compute the best split attributes. Thus, using decision tree methods
+such as CART and CHAID, which are generally used in batch data, aren’t
+effective in a streaming data context. To solve this issue, Domingos and
+Hulten [<a href="#499734_1_En_3_Chapter.xhtml#Par72">2</a>] proposed the
+Hoeffding tree, which is an incremental decision tree learner that uses
+new instances to build a tree, making it more suitable to a streaming
+data context. The Hoeffding tree is also known as the Very Fast Decision Tree (VFDT)
+algorithm.</p>
+<p>The Hoeffding tree converges to a tree built by a batch learner with
+sufficiently large data. Thus, the Hoeffding tree uses the idea that a
+small sample is often enough for choosing an optimal splitting attribute
+[<a href="#499734_1_En_3_Chapter.xhtml#Par73">3</a>]. This idea is
+supported by the statistical result known as the <em>Hoeffding bound</em>
+. The Hoeffding bound states (with a probability of 1–£) that
+after n independent observations of a real valued random variable, x,
+with range <em>R</em>, the true mean of x is at least μ − € where μ is
+the observed mean of the random variable x and <img src="images/499734_1_En_3_Chapter/499734_1_En_3_Chapter_TeX_IEq1.png" style="width:11.07em" alt="$$ \mathit{\text{\EUR}}=\sqrt{\left(R\hat{\mkern6mu} 2\ \ln \right(1/}\hbox{\pounds}\left)/2\mathrm{n}\right) $$"/>
+[<a href="#499734_1_En_3_Chapter.xhtml#Par74">4</a>].</p>
+<p>The VFDT method is an implementation of Hoeffding trees. VFDT is a
+decision tree that uses the Hoeffding bound and accumulates sufficient
+statistics of new incoming observations in a data stream while
+converting a tree leaf to a tree node. However, streaming data can be
+very noisy, which affects the performance of VFDT (in terms of
+prediction accuracy). Also, with noisy incoming streaming data, VFDT
+faces tree-size explosion [<a href="#499734_1_En_3_Chapter.xhtml#Par75">5</a>]. There are
+documented techniques to address these VFDT issues.</p>
+<p>
+Listing <a href="#499734_1_En_3_Chapter.xhtml#PC1">3-1</a> creates a
+synthetic dataset using the hyperplane generator discussed in Chapter
+<a href="#499734_1_En_1_Chapter.xhtml">1</a>. Figure <a href="#499734_1_En_3_Chapter.xhtml#Fig1">3-1</a> is a snapshot of
+the synthetic data stream.
+
+</p>
+
+<p>
+<img src="images/499734_1_En_3_Chapter/499734_1_En_3_Fig1_HTML.jpg" style="width:35.45em" alt="../images/499734_1_En_3_Chapter/499734_1_En_3_Fig1_HTML.jpg"/>
+</p>
+
+<p>Figure 3-1</p>
+<p>Snapshot of the synthetic dataset</p>
+
+
+<p>
+The Hoeffding tree
+method is applied to the synthetic dataset using the
+scikit-multiflow framework, as shown in Listing <a href="#499734_1_En_3_Chapter.xhtml#PC2">3-2</a>. The prequential
+evaluation method (with prediction accuracy as a metric) is used in
+performance evaluation. Listing <a href="#499734_1_En_3_Chapter.xhtml#PC3">3-3</a> shows the output
+of the prequential evaluation. The accuracy obtained is 92.07%.
+
+</p>
+<pre>###############################################################
+# Import the relevant libraries
+from skmultiflow.data import HyperplaneGenerator
+import pandas as pd
+import numpy as np
+create = HyperplaneGenerator(random_state = 888, n_features= 10, noise_percentage = 0)
+create.prepare_for_use()
+X , Y = create.next_sample(10000)
+data = pd.DataFrame(np.hstack((X, np.array([Y]).T)))
+data.shape
+# output- (10000, 11)
+print(data.head())
+# Store it in csv
+data.to_csv('data_stream.csv', index=False)
+###############################################################
+Listing 3-1
+Creating a Synthetic Dataset Using the Hyperplane Generator</pre>
+<p>
+
+
+</p>
+<pre>###############################################################
+Prequential Evaluation
+Evaluating 1 target(s).
+Pre-training on 400 sample(s).
+Evaluating...
+##------------------ [10%]
+#################### [100%] [3.95s]
+Processed samples: 10000
+Mean performance:
+M0 - Accuracy     : 0.9207
+###############################################################
+Listing 3-3
+Prequential Evaluation Output of the Hoeffding Tree Classifier</pre>
+<pre>###############################################################
+from skmultiflow.trees import HoeffdingTreeClassifier
+from skmultiflow.evaluation import EvaluatePrequential
+from skmultiflow.data.file_stream import FileStream
+import pandas as pd
+import numpy as np
+# Load the synthetic data stream
+dstream = FileStream('data_stream.csv')
+dstream.prepare_for_use()
+# Create the model instance
+ht_class = HoeffdingTreeClassifier()
+# perform prequential evaluation
+evaluate1 = EvaluatePrequential(show_plot=False,
+pretrain_size=400,
+max_samples=10000,
+metrics=['accuracy']
+)
+evaluate1.evaluate(stream=dstream, model=ht_class)
+###############################################################
+Listing 3-2
+Applying the Hoeffding Tree on the Synthetic Data Stream</pre>
+
+
+<h3 class="Heading">Hoeffding Adaptive Tree Classifier</h3>
+<p>Chapter <a href="#499734_1_En_2_Chapter.xhtml">2</a> introduced the adaptive windowing
+method  for concept drift
+detection (ADWIN), in which a sliding window of dynamic size is used.
+The window size is not fixed; it is computed online based on the rate of
+change observed from the data in the window. The ADWIN algorithm
+increases the window size if it doesn’t see any change in the data
+stream and reduces the window size when there’s a change detected in the
+data stream.</p>
+<p>The Hoeffding Adaptive Tree uses the ADWIN method and is a modified
+version of the Hoeffding tree. First, you need to understand the Concept Adapting Very Fast
+Decision Tree (CVFDT) method [<a href="#499734_1_En_3_Chapter.xhtml#Par76">6</a>]. The CVFDT
+method is more appropriate for data streams with inherent concept drift.
+It updates statistics at inner nodes and leaves. The core idea is that
+whenever a change is detected at a subtree, it grows a candidate
+subtree, and eventually, either the current subtree or the candidate
+subtree is dropped.</p>
+<p>The Hoeffding Adaptive Tree generates an alternate decision tree at
+nodes where the splitting test is no longer appropriate [<a href="#499734_1_En_3_Chapter.xhtml#Par76">6</a>]. The old tree is
+replaced by a new one, which is more accurate. The decisions made on the
+leaf are based on a recent examples/observations window. Memory needs to
+be allocated for an example window; however, there’s no rigorous
+performance guarantee with CVFDT.</p>
+<p>The Hoeffding Adaptive Tree is a slight modification of the CVFDT,
+which uses ADWIN. The purpose of ADWIN is to monitor the error of each
+subtree and the alternate trees. The Hoeffding Adaptive Tree method uses
+the ADWIN estimates to make decisions on the leaf and on growing new
+trees or alternate trees. This method doesn’t need to allocate memory
+for an example window; it is almost as accurate as of the CVFDT and
+sometimes even performs better. Also, a rigorous performance guarantee
+is possible.</p>
+<p>Listing <a href="#499734_1_En_3_Chapter.xhtml#PC4">3-4</a> simulates a
+synthetic data stream with concept drift using the Agrawal generator.
+The Hoeffding Adaptive Tree classifier is applied to the synthetic data
+stream and evaluates the model’s performance using both a prequential
+evaluation and a Holdout evaluation.</p>
+<p>
+Listing <a href="#499734_1_En_3_Chapter.xhtml#PC5">3-5</a> shows the output
+of the prequential evaluation approach. The accuracy obtained is 99.72%,
+whereas in the holdout approach, the accuracy obtained is 99.09% (as
+shown in Listing <a href="#499734_1_En_3_Chapter.xhtml#PC6">3-6</a>).
+
+
+
+</p>
+<pre>###############################################################
+Holdout Evaluation
+Evaluating 1 target(s).
+Evaluating...
+######-------------- [30%] [6.87s]Separating 5000 holdout samples.
+################---- [80%] [15.71s]Separating 5000 holdout samples.
+Processed samples: 30000
+Mean performance:
+M0 - Accuracy     : 0.9909
+###############################################################
+Listing 3-6
+Holdout Evaluation Output of the Hoeffding Adaptive Tree Classifier</pre>
+<pre>###############################################################
+Prequential Evaluation
+Evaluating 1 target(s).
+Pre-training on 400 sample(s).
+Evaluating...
+#################### [100%] [342.55s]
+Processed samples: 300000
+Mean performance:
+M0 - Accuracy     : 0.9972 ###############################################################
+Listing 3-5
+Prequential Evaluation Output of the Hoeffding Adaptive Tree Classifier</pre>
+<pre>###############################################################
+# Import the relevant libraries
+from skmultiflow.trees import HoeffdingAdaptiveTreeClassifier
+from skmultiflow.data import ConceptDriftStream
+from skmultiflow.evaluation import EvaluatePrequential
+from skmultiflow.evaluation import EvaluateHoldout
+# Simulate a sample data stream
+ds = ConceptDriftStream(random_state=777, position=30000)
+ds
+# Output:
+#ConceptDriftStream(alpha=0.0,
+#         drift_stream=AGRAWALGenerator(balance_classes=False,
+#                                       classification_function=2,
+#                                       perturbation=0.0,
+#                                       random_state=112),
+#         position=30000, random_state=777,
+#         stream=AGRAWALGenerator(balance_classes=False,
+#                                 classification_function=0,
+#
+#                     perturbation=0.0, random_state=112),
+#         width=1000)
+# Instantiate the model object
+model_hat = HoeffdingAdaptiveTreeClassifier()
+# Prequential evaluation
+eval1 = EvaluatePrequential(pretrain_size=400, max_samples=300000,batch_size=1,n_wait=100, max_time=2000,show_plot=False, metrics=['accuracy'])
+eval1.evaluate(stream=ds, model=model_hat)
+# Holdout evaluation
+eval2 = EvaluateHoldout(max_samples=30000,
+max_time=2000,
+show_plot=False,
+metrics=['accuracy'],
+dynamic_test_set=True)
+eval2.evaluate(stream=ds, model=model_hat)
+###############################################################
+Listing 3-4
+Applying the Hoeffding Adaptive Tree Classifier on a Synthetic Data Stream</pre>
+
+
+<h3 class="Heading">Extremely Fast Decision Tree Classifier</h3>
+<p>The Extremely Fast Decision Tree (EFDT)  (an instantiation of
+the Hoeffding Anytime Tree) is an incremental decision tree. The Hoeffding Anytime Tree
+operates almost like a Hoeffding tree, but the difference lies in the
+way they split at a node. The Hoeffding tree delays the split at a node
+until it identifies the best split and doesn’t revisit the decision. The
+Hoeffding Anytime Tree splits at a node as soon as it seems to be a
+useful split and does revisit the decision in the availability of a
+better split. The Hoeffding Anytime Tree is not computationally as
+efficient as the Hoeffding tree, but it is statistically more efficient
+[<a href="#499734_1_En_3_Chapter.xhtml#Par77">7</a>].</p>
+<p>
+Listing <a href="#499734_1_En_3_Chapter.xhtml#PC7">3-7</a> uses the same
+synthetic data stream used in Listing <a href="#499734_1_En_3_Chapter.xhtml#PC4">3-4</a>. It applies the
+EFDT classifier to
+the synthetic dataset and evaluates the model’s performance using both
+the prequential evaluation and the holdout evaluation. Listing <a href="#499734_1_En_3_Chapter.xhtml#PC8">3-8</a> shows the output
+of the prequential evaluation approach. The accuracy obtained is 96.07%,
+whereas in the holdout approach, the accuracy obtained is 96.75% (see
+Listing <a href="#499734_1_En_3_Chapter.xhtml#PC9">3-9</a>).
+
+
+
+</p>
+<pre>###############################################################
+Holdout Evaluation
+Evaluating 1 target(s).
+Evaluating...
+######-------------- [30%] [267.24s]Separating 5000 holdout samples.
+################---- [80%] [505.29s]Separating 5000 holdout samples.
+Processed samples: 30000
+Mean performance:
+M0 - Accuracy     : 0.9675 ###############################################################
+Listing 3-9
+Holdout Evaluation Output of the Extremely Fast Decision Tree Classifier</pre>
+<pre>###############################################################
+Prequential Evaluation
+Evaluating 1 target(s).
+Pre-training on 400 sample(s).
+Evaluating...
+#####--------------- [25%] [1820.77s]
+Time limit reached (2000.00s). Evaluation stopped.
+Processed samples: 80949
+Mean performance:
+M0 - Accuracy     : 0.9607 ###############################################################
+Listing 3-8
+Prequential Evaluation Output of the Extremely Fast Decision Tree Classifier</pre>
+<pre>###############################################################
+# Import the relevant libraries
+from skmultiflow.trees import ExtremelyFastDecisionTreeClassifier
+from skmultiflow.data import ConceptDriftStream
+from skmultiflow.evaluation import EvaluatePrequential
+from skmultiflow.evaluation import EvaluateHoldout
+# Simulate a sample data stream
+ds = ConceptDriftStream(random_state=777, position=30000)
+ds
+# Output:
+#ConceptDriftStream(alpha=0.0,
+#       drift_stream=AGRAWALGenerator(balance_classes=False,
+#                                     classification_function=2,
+#                                     perturbation=0.0,
+#                                     random_state=112),
+#       position=30000, random_state=777,
+#       stream=AGRAWALGenerator(balance_classes=False,
+#                               classification_function=0,
+#                               perturbation=0.0, random_state=112),
+#       width=1000)
+# Instantiate the model object
+model_hat = ExtremelyFastDecisionTreeClassifier()
+# Prequential evaluation
+eval1 = EvaluatePrequential(pretrain_size=400, max_samples=300000,batch_size=1,
+n_wait=100, max_time=2000,
+show_plot=False, metrics=['accuracy'])
+eval1.evaluate(stream=ds, model=model_hat)
+# Holdout evaluation
+eval2 = EvaluateHoldout(max_samples=30000,
+max_time=2000,
+show_plot=False,
+metrics=['accuracy'],
+dynamic_test_set=True)
+eval2.evaluate(stream=ds, model=model_hat) ###############################################################
+Listing 3-7
+Applying the Extremely Fast Decision Tree Classifier on a Synthetic Data Stream</pre>
+
+
+<h3 class="Heading">Hoeffding Tree Regressor</h3>
+<p>The Hoeffding tree
+regressor 
+is similar to the Hoeffding tree classifier. It uses the Hoeffding bound
+for making split decisions. The Hoeffding tree regressor uses reduction
+in variance in the target space for deciding on the split candidates. It
+makes predictions by fitting a linear perceptron model or computing the
+sample average.</p>
+<p>Listing <a href="#499734_1_En_3_Chapter.xhtml#PC10">3-10</a> creates a
+synthetic data stream for regression using the RegressionGenerator()
+function in the scikit-multiflow framework. The data stream
+(dstream) has 800 observations, nine features, and one target variable.
+The target variable is continuous because this is a regression context.
+You can see a particular sample in the dstream object using the
+next_sample() function. The Hoeffding tree regressor is applied to the
+data stream, and a prequential evaluation is applied.</p>
+<p>
+The metrics used in the regression context are the <em>mean squared
+error</em> (MSE)
+and the <em>mean absolute error</em> (MAE). Listing <a href="#499734_1_En_3_Chapter.xhtml#PC11">3-11</a> shows the
+output of the prequential evaluation. The MSE is 6665.2407, and the MAE
+is 62.974944.
+
+
+</p>
+<pre>###############################################################
+Prequential Evaluation
+Evaluating 1 target(s).
+Pre-training on 400 sample(s).
+Evaluating...
+#################### [100%] [0.69s]
+Processed samples: 799
+Mean performance:
+M0 - MSE          : 6665.2407
+M0 - MAE          : 62.974944 ###############################################################
+Listing 3-11
+Prequential Evaluation Output of the Hoeffding Tree Regressor</pre>
+<pre>###############################################################
+# Import the relevant libraries
+from skmultiflow.trees import HoeffdingTreeRegressor
+from skmultiflow.data import RegressionGenerator
+import pandas as pd
+from skmultiflow.evaluation import EvaluatePrequential
+# Setup a data stream
+dstream = RegressionGenerator(n_features=9, n_samples=800,n_targets=1, random_state=456)
+dstream
+dstream.next_sample()
+#(array([[ 0.72465838, -1.92979924, -0.02607907,  2.35603757, -0.37461529,
+#         -0.38480019,  0.06603468, -2.1436878 ,  0.49182531]]),
+# array([61.302191]))
+# Instantiate the Hoeffding Tree Regressor object
+htr = HoeffdingTreeRegressor()
+# Prequential evaluation
+eval1 = EvaluatePrequential(pretrain_size=400, max_samples=800, batch_size=1, n_wait=100, max_time=2000, show_plot=False, metrics=['mean_square_error', 'mean_absolute_error'])
+eval1.evaluate(stream=dstream, model=htr)
+###############################################################
+Listing 3-10
+Applying the Hoeffding Tree Regressor on a Synthetic Data Stream</pre>
+
+
+<h3 class="Heading">Hoeffding Adaptive Tree Regressor</h3>
+<p>The Hoeffding Adaptive Tree  can be used in a
+regression context. The Hoeffding Adaptive Tree regressor uses the ADWIN
+method and can be considered a modified version of the Hoeffding tree
+regressor.</p>
+<p>
+Listing <a href="#499734_1_En_3_Chapter.xhtml#PC12">3-12</a> uses the same
+synthetic dataset used in Listing <a href="#499734_1_En_3_Chapter.xhtml#PC10">3-10</a>. The Hoeffding
+Adaptive Tree regressor is applied to this dataset, and a prequential
+evaluation is performed. The output of the prequential evaluation is
+shown in Listing <a href="#499734_1_En_3_Chapter.xhtml#PC13">3-13</a>. The MSE is
+6222.9041, and the MAE is 61.320054.
+
+
+</p>
+<pre>###############################################################
+Prequential Evaluation
+Evaluating 1 target(s).
+Pre-training on 400 sample(s).
+Evaluating...
+#################### [100%] [1.23s]
+Processed samples: 799
+Mean performance:
+M0 - MSE          : 6222.9041
+M0 - MAE          : 61.320054 ###############################################################
+Listing 3-13
+Prequential Evaluation Output of the Hoeffding Adaptive Tree Regressor</pre>
+<pre>###############################################################
+# Import the relevant libraries
+from skmultiflow.trees import HoeffdingAdaptiveTreeRegressor
+from skmultiflow.data import RegressionGenerator
+import pandas as pd
+from skmultiflow.evaluation import EvaluatePrequential
+# Setup a data stream
+dstream = RegressionGenerator(n_features=9, n_samples=800,n_targets=1, random_state=456)
+dstream
+dstream.next_sample()
+#(array([[ 0.72465838, -1.92979924, -0.02607907,  2.35603757, -0.37461529,
+#         -0.38480019,  0.06603468, -2.1436878 ,  0.49182531]]),
+# array([61.302191]))
+# Instantiate the Hoeffding Tree Regressor object
+model_hatr = HoeffdingAdaptiveTreeRegressor()
+# Prequential evaluation
+eval1 = EvaluatePrequential(pretrain_size=400, max_samples=800, batch_size=1, n_wait=100, max_time=2000, show_plot=False, metrics=['mean_square_error', 'mean_absolute_error'])
+eval1.evaluate(stream=dstream, model=model_hatr)
+###############################################################
+Listing 3-12
+Applying the Hoeffding Adaptive Tree Regressor to a Synthetic Data Stream</pre>
+<p>This section discussed some of the prominent tree-based techniques
+for classification and regression in a streaming data context. The next
+section focuses on some of the lazy learning techniques.</p>
+
+
+
+<h2 class="Heading">Lazy Learning Methods for Streaming Data</h2>
+<p>Let’s talk a bit about the k-nearest neighbor (KNN) method for
+classification and regression in a batch
+context. KNN is a non-parametric method that keeps all the observations
+in memory and classifies a new incoming observation based on a
+similarity metric/distance function [<a href="#499734_1_En_3_Chapter.xhtml#Par79">9</a>]. Euclidean
+distance, Mahalanobis distance, and the Manhattan distance are three of
+the commonly used distance functions.</p>
+<p>In a new observation, the KNN algorithm selects the nearest k
+neighbors in the dataset based on the distance function and then
+combines the values of the k nearest neighbors for prediction (i.e., in
+a regression context, it takes the average, and in a classification
+context, it performs majority voting).</p>
+<p>scikit-multiflow has an implementation of the KNN method for
+classification in streaming data context (KNNClassifier()). The
+modus-operandi of this technique is the same as that of KNN, along with
+a window on the training samples. The user can fix the maximum size of
+the window. The KNNClassifier() method
+treats all features in a data stream as continuous and is not
+recommended for datasets with a mix of categorical and continuous
+features.</p>
+<p>
+Listing <a href="#499734_1_En_3_Chapter.xhtml#PC14">3-14</a> applies the KNN
+classifier (where K = 10) on a synthetic dataset, and prequential
+evaluation is applied. The same synthetic dataset generated using
+HyperplaneGenerator() in Listing <a href="#499734_1_En_3_Chapter.xhtml#PC1">3-1</a> is exported to a
+CSV file (data_stream.csv). A snapshot of the dataset is shown in Figure
+<a href="#499734_1_En_3_Chapter.xhtml#Fig1">3-1</a>. The output of
+the prequential evaluation is shown in Listing <a href="#499734_1_En_3_Chapter.xhtml#PC15">3-15</a>. The accuracy
+obtained is 87.99%.
+
+
+</p>
+<pre>###############################################################
+Prequential Evaluation
+Evaluating 1 target(s).
+Pre-training on 1000 sample(s).
+Evaluating...
+##------------------ [10%]
+#################### [100%] [7.31s]
+Processed samples: 10000
+Mean performance:
+M0 - Accuracy     : 0.8799
+###############################################################
+Listing 3-15
+Prequential Evaluation Output of the KNN Classifier</pre>
+<pre>###############################################################
+# Import the relevant libraries
+from skmultiflow.lazy import KNNClassifier
+from skmultiflow.evaluation import EvaluatePrequential
+from skmultiflow.data.file_stream import FileStream
+import pandas as pd
+import numpy as np
+dstream = FileStream('data_stream.csv')
+dstream.prepare_for_use()
+# Instantiate the KNN Classifier method
+knn_class = KNNClassifier(n_neighbors=10, max_window_size=1000)
+# Prequential Evaluation
+evaluate1 = EvaluatePrequential(show_plot=False,
+pretrain_size=1000,
+max_samples=10000,
+metrics=['accuracy']
+)
+# Run the evaluation
+evaluate1.evaluate(stream=dstream, model=knn_class)
+###############################################################
+Listing 3-14
+Applying the KNN Classifier to a Synthetic Data Stream</pre>
+<p>An improvement over the KNN classifier is the KNN ADWIN classifier
+(i.e., KNNADWINClassifier()), which handles the concept drift in a data
+stream more effectively than a KNN classifier. This technique uses the
+adaptive windowing method for concept drift detection (ADWIN).</p>
+<p>
+Listing <a href="#499734_1_En_3_Chapter.xhtml#PC16">3-16</a> creates a
+synthetic dataset using the SEA generator available in the
+scikit-multiflow framework. The SEA generator creates a data stream with
+concept drift and generates three numerical features and a binary target
+variable. SEA is the acronym for <em>streaming ensemble algorithm</em>
+[<a href="#499734_1_En_3_Chapter.xhtml#Par80">10</a>]. Listing <a href="#499734_1_En_3_Chapter.xhtml#PC16">3-16</a> shows an output
+of five observations of the simulated data stream. The KNN ADWIN
+classifier (K = 10) is applied to the data stream, and prequential
+evaluation is applied. The output of the prequential evaluation is shown
+in Listing <a href="#499734_1_En_3_Chapter.xhtml#PC17">3-17</a>. The accuracy
+obtained is 65.93%.
+
+
+</p>
+<pre>###############################################################
+Prequential Evaluation
+Evaluating 1 target(s).
+Pre-training on 1000 sample(s).
+Evaluating...
+#################### [100%] [11.22s]
+Processed samples: 10000
+Mean performance:
+M0 - Accuracy     : 0.6593 ###############################################################
+Listing 3-17
+Prequential Evaluation Output of the KNN ADWIN Classifier</pre>
+<pre>###############################################################
+# Import the relevant libraries
+from skmultiflow.lazy import KNNADWINClassifier
+from skmultiflow.evaluation import EvaluatePrequential
+from skmultiflow.data.sea_generator import SEAGenerator
+# Simulate the data stream
+dstream = SEAGenerator(classification_function = 2, balance_classes = True, noise_percentage = 0.3, random_state = 333)
+#Retrieve five samples
+dstream.next_sample(5)
+# Output:
+#(array([[3.68721825, 0.48303666, 1.04530188],
+#        [2.45403315, 8.73489354, 0.51611639],
+#        [2.38740114, 2.03699194, 1.74533621],
+#        [9.41738118, 4.66915281, 9.59978205],
+#        [1.05404748, 0.42265956, 2.44130999]]), array([1, 0, 0, 1, 1]))
+# Instantiate the KNN ADWIN classifier method
+adwin_knn_class = KNNADWINClassifier(n_neighbors=10, max_window_size=1000)
+# Prequential Evaluation
+evaluate1 = EvaluatePrequential(show_plot=False,
+pretrain_size=1000,
+max_samples=10000,
+metrics=['accuracy'])
+# Run the evaluation
+evaluate1.evaluate(stream=dstream, model=adwin_knn_class) ####################################################################
+Listing 3-16
+Applying the KNN ADWIN Classifier to a Synthetic Data Stream</pre>
+<p>Now, let’s look at another type of KNN-based classifier: the Self
+Adjusting Memory (SAM) model for the KNN algorithm [<a href="#499734_1_En_3_Chapter.xhtml#Par81">11</a>]. This method is
+known as SAM-KNN for the rest of this chapter. The SAM-KNN technique
+effectively handles the heterogeneous concept drift and doesn’t require
+optimization of metaparameters. This technique derives inspiration from
+the dual-store model in human memory research, where knowledge is
+partitioned into short-term memory (STM) and long-term memory (LTM)
+[<a href="#499734_1_En_3_Chapter.xhtml#Par82">12</a>].</p>
+<p>In SAM-KNN, memory is partitioned into STM and LTM. STM contains data
+related to the recent concepts in a dynamic sliding window. LTM
+maintains knowledge of past information. There is a cleaning process to
+keep the size of the STM under control. Moreover, there is a transfer of
+filtered knowledge from STM to LTM. LTM ensures that none of is
+compressed stored information contradicts that of STM. The combined
+memory (CM) is the union of STM and LTM.</p>
+<p>The idea is to combine/ensemble dedicated models (distance weighted
+KNN) for the latest concepts and all the past concepts to maximize the
+prediction accuracy.</p>
+<p>
+Listing <a href="#499734_1_En_3_Chapter.xhtml#PC18">3-18</a> applies the
+SAM-KNN classifier and performs prequential evaluation on the same data
+stream used in Listing <a href="#499734_1_En_3_Chapter.xhtml#PC16">3-16</a>. In Listing
+<a href="#499734_1_En_3_Chapter.xhtml#PC19">3-19</a>, the accuracy
+obtained is 64.66%.
+
+
+</p>
+<pre>###############################################################
+Prequential Evaluation
+Evaluating 1 target(s).
+Pre-training on 1000 sample(s).
+Evaluating...
+#################### [100%] [8.53s]
+Processed samples: 10000
+Mean performance:
+M0 - Accuracy     : 0.6466
+###############################################################
+Listing 3-19
+Prequential Evaluation Output of the SAM-KNN Classifier</pre>
+<pre>###############################################################
+# Import the relevant libraries
+from skmultiflow.lazy import SAMKNNClassifier
+from skmultiflow.evaluation import EvaluatePrequential
+from skmultiflow.data.sea_generator import SEAGenerator
+# Simulate the data stream
+dstream = SEAGenerator(classification_function = 2, balance_classes = True, noise_percentage = 0.3, random_state = 333)
+#Retrieve five samples
+dstream.next_sample(5)
+# Instantiate the SAM-KNN classifier method
+sam_knn_class = SAMKNNClassifier(n_neighbors=10, weighting="distance", stm_size_option="maxACCApprox", max_window_size=1000,use_ltm=True)
+# Prequential Evaluation
+evaluate1 = EvaluatePrequential(show_plot=False,
+pretrain_size=1000,
+max_samples=10000,
+metrics=['accuracy']
+)
+# Run the evaluation
+evaluate1.evaluate(stream=dstream, model=sam_knn_class)
+###############################################################
+Listing 3-18
+Applying the SAM-KNN Classifier to a Synthetic Data Stream</pre>
+<p>scikit-multiflow has an implementation of the KNN method for
+regression in a streaming data context (KNNRegressor()). Just like the
+KNN classifier, a window on the training samples is used. When compared
+to that of the KNN classifier, however, it takes the average of the k
+nearest neighbors for prediction.</p>
+<p>
+Listing <a href="#499734_1_En_3_Chapter.xhtml#PC20">3-20</a> applies the KNN
+regressor to a synthetic dataset. It uses the same synthetic dataset
+used in Listing <a href="#499734_1_En_3_Chapter.xhtml#PC10">3-10</a>. A prequential
+evaluation is applied, and the output is shown in Listing <a href="#499734_1_En_3_Chapter.xhtml#PC21">3-21</a>. The MSE is
+4195.3502, and the MAE is 50.132250.
+
+
+</p>
+<pre>###############################################################
+Prequential Evaluation
+Evaluating 1 target(s).
+Pre-training on 400 sample(s).
+Evaluating...
+#################### [100%] [0.34s]
+Processed samples: 799
+Mean performance:
+M0 - MSE          : 4195.3502
+M0 - MAE          : 50.132250
+###############################################################
+Listing 3-21
+Prequential Evaluation Output of the KNN Regressor</pre>
+<pre>###############################################################
+# Import the relevant libraries
+from skmultiflow.lazy import KNNRegressor
+from skmultiflow.data import RegressionGenerator
+import pandas as pd
+from skmultiflow.evaluation import EvaluatePrequential
+# Setup a data stream
+dstream = RegressionGenerator(n_features=9, n_samples=800,n_targets=1, random_state=456)
+dstream
+dstream.next_sample()
+#(array([[ 0.72465838, -1.92979924, -0.02607907,  2.35603757, -0.37461529,
+#         -0.38480019,  0.06603468, -2.1436878 ,  0.49182531]]),
+# array([61.302191]))
+# Instantiate the KNN Regressor object
+knn_reg = KNNRegressor()
+# Prequential evaluation
+eval1 = EvaluatePrequential(pretrain_size=400, max_samples=800, batch_size=1, n_wait=100, max_time=2000, show_plot=False, metrics=['mean_square_error', 'mean_absolute_error'])
+eval1.evaluate(stream=dstream, model=knn_reg)
+###############################################################
+Listing 3-20
+Applying the KNN Regressor to a Synthetic Data Stream</pre>
+<p>The next section focuses on ensemble learning for streaming data.</p>
+
+
+<h2 class="Heading">Ensemble Learning for Streaming Data</h2>
+<p>Ensemble learning combines multiple models to improve the prediction
+accuracy for out-of-sample data. Typically (though not guaranteed), an
+ensemble learner performs better than the stand-alone base methods.
+Ensemble learning is a very popular technique in machine learning for
+both regression and classification purposes. Some of the well-known
+ensemble learning techniques in a batch data context are random forests,
+bagging, and boosting. This section focuses on some of the ensemble
+learning techniques for streaming data implemented in the
+scikit-multiflow framework.</p>
+
+<h3 class="Heading">Adaptive Random Forests</h3>
+<p>A <em>random
+forest</em>  is a very popular and widely used
+technique for machine learning on batch (non-streaming) data. In a
+random forest, multiple decision trees (built using resampled data and
+with a random subset of features) are combined to improve a model’s
+performance in terms of prediction accuracy. However, random forests
+can’t handle concept drift and require multiple passes over the dataset.
+It is not suitable for analysis in a streaming data context.</p>
+<p>An <em>adaptive random forest</em> (ARF) is an adaptation
+of the random forest technique in a streaming data context [<a href="#499734_1_En_3_Chapter.xhtml#Par83">13</a>]. The ARF method
+uses online bagging to approximate resampling with replacement. However,
+instead of using a (λ = 1) Poisson distribution in online bagging, ARF
+uses a (λ = 6) Poisson distribution. (An overview of the online bagging
+method is presented later in this chapter.)</p>
+<p>The base model in ARF (i.e., random forest tree training
+(RFTreeTrain)) is based on the Hoeffding tree algorithm, but it has a
+few differences. One difference is that the RFTreeTrain doesn’t allow
+early tree pruning. Another difference is that whenever a new node is
+created, a random subset of features is created, and splits are limited
+to only these features. The ARF uses drift detectors in base trees that
+cause resets whenever there is a drift. ARF allows training background
+trees, which replace active trees if a drift is detected.</p>
+<p>
+The ARF technique can be used in classification tasks and regression
+tasks. Listing <a href="#499734_1_En_3_Chapter.xhtml#PC22">3-22</a> illustrates
+applying the ARF classifier on a synthetic data stream (the same data
+stream used in Listing <a href="#499734_1_En_3_Chapter.xhtml#PC18">3-18</a>). The
+hyperparameter for the ARF classifier is the number of estimators/trees
+is 100. The maximum number of features is the square root of the total
+number of features in the data stream. A prequential evaluation is
+applied. Listing <a href="#499734_1_En_3_Chapter.xhtml#PC23">3-23</a> shows that the
+prediction accuracy is 70.18%.
+
+
+</p>
+<pre>###############################################################
+Prequential Evaluation
+Evaluating 1 target(s).
+Pre-training on 1000 sample(s).
+Evaluating...
+#################### [100%] [1526.63s]
+Processed samples: 10000
+Mean performance:
+M0 - Accuracy     : 0.7018
+###############################################################
+Listing 3-23
+Prequential Evaluation Output of the ARF Classifier</pre>
+<pre>###############################################################
+# Import the relevant libraries
+from skmultiflow.meta import AdaptiveRandomForestClassifier
+from skmultiflow.evaluation import EvaluatePrequential
+from skmultiflow.data.sea_generator import SEAGenerator
+# Simulate the data stream
+dstream = SEAGenerator(classification_function = 2, balance_classes = True, noise_percentage = 0.3, random_state = 333)
+# Instatntiate the KNN ADWIN classifier method
+ARF_class = AdaptiveRandomForestClassifier(n_estimators=100, max_features="sqrt", random_state=333)
+# Prequential Evaluation
+evaluate1 = EvaluatePrequential(show_plot=False,
+pretrain_size=1000,
+max_samples=10000,
+metrics=['accuracy']
+)
+# Run the evaluation
+evaluate1.evaluate(stream=dstream, model=ARF_class)
+###############################################################
+Listing 3-22
+Applying the ARF Classifier to a Synthetic Data Stream</pre>
+<p>
+Listing <a href="#499734_1_En_3_Chapter.xhtml#PC24">3-24</a> applies the ARF
+in a regression context on the same synthetic data stream generated in
+Listing <a href="#499734_1_En_3_Chapter.xhtml#PC20">3-20</a>. The number of
+estimators is 100, and the maximum number of features is the square root
+of the total number of features. A prequential evaluation is applied,
+and the output is shown in Listing <a href="#499734_1_En_3_Chapter.xhtml#PC25">3-25</a>. The MSE is
+3661.6862, and the MAE is 46.579340.
+
+
+</p>
+<pre>###############################################################
+Prequential Evaluation
+Evaluating 1 target(s).
+Pre-training on 400 sample(s).
+Evaluating...
+#################### [100%] [77.83s]
+Processed samples: 800
+Mean performance:
+M0 - MSE          : 3661.6862
+M0 - MAE          : 46.579340
+###############################################################
+Listing 3-25
+Prequential Evaluation Output of the ARF Regressor</pre>
+<pre>###############################################################
+# Import the relevant libraries
+from skmultiflow.meta import AdaptiveRandomForestRegressor
+from skmultiflow.data import RegressionGenerator
+from skmultiflow.evaluation import EvaluatePrequential
+# Setup a data stream
+dstream = RegressionGenerator(n_features=9, n_samples=800,n_targets=1, random_state=456)
+# Instantiate the ARF Regressor object
+ARF_reg = AdaptiveRandomForestRegressor(n_estimators=100, max_features="sqrt", random_state=333)
+# Prequential evaluation
+eval1 = EvaluatePrequential(pretrain_size=400, max_samples=800, batch_size=1, n_wait=100, max_time=2000, show_plot=False, metrics=['mean_square_error', 'mean_absolute_error'])
+eval1.evaluate(stream=dstream, model=ARF_reg)
+###############################################################
+Listing 3-24
+Applying the ARF Regressor on a Synthetic Data Stream</pre>
+
+
+<h3 class="Heading">Online Bagging</h3>
+<p>Bagging   is a widely used
+ensemble learning technique in batch (non-streaming) learning. Here, X
+base models are trained on bootstrap sample sets of size N. The
+bootstrapped sample sets are created using sampling with replacement
+from the original training dataset.</p>
+<p>The training set of each of the base models contains the original
+training examples K times, where P(K = k) follows a binomial
+distribution. And when N tends to be infinity, the distribution of K
+tends to be a Poisson(1) distribution (i.e., K ~ exp(–1)/k!) [<a href="#499734_1_En_3_Chapter.xhtml#Par85">15</a>]. Oza and
+Russell [<a href="#499734_1_En_3_Chapter.xhtml#Par85">15</a>] used this idea
+to propose the online learning version of the bagging algorithm, which
+is suitable in a streaming data context.</p>
+<p>In online bagging, as a new training example arrives, the algorithm
+chooses the example K ~ Poisson(1) times for each base model and updates
+the base model accordingly. New instances are classified by performing
+majority voting of the X base models. This step is the same for both
+batch and online bagging methods. Online bagging is considered a good
+approximation to batch bagging [<a href="#499734_1_En_3_Chapter.xhtml#Par85">15</a>].</p>
+<p>
+In scikit-multiflow, the online bagging classification
+technique can be applied using the OzaBaggingClassifier() method.
+Listing <a href="#499734_1_En_3_Chapter.xhtml#PC26">3-26</a> applies the Oza
+bagging classifier to the synthetic dataset used in Listing <a href="#499734_1_En_3_Chapter.xhtml#PC16">3-16</a>. The KNN ADWIN
+classifier model is the base model. Listing <a href="#499734_1_En_3_Chapter.xhtml#PC26">3-26</a> built six base
+models. The hyperparameters of the KNN ADWIN classifier are the same as
+that used in Listing <a href="#499734_1_En_3_Chapter.xhtml#PC16">3-16</a> (i.e., number
+of neighbors is 10 and maximum window size is 1000). A prequential
+evaluation is applied, and the output is shown in Listing <a href="#499734_1_En_3_Chapter.xhtml#PC27">3-27</a>. The accuracy
+obtained is 66.21%.
+
+
+</p>
+<pre>###############################################################
+Prequential Evaluation
+Evaluating 1 target(s).
+Pre-training on 1000 sample(s).
+Evaluating...
+#################### [100%] [61.53s]
+Processed samples: 10000
+Mean performance:
+M0 - Accuracy     : 0.6621
+###############################################################
+Listing 3-27
+Prequential Evaluation Output of the Oza Bagging Classifier</pre>
+<pre>###############################################################
+# Import the relevant libraries
+from skmultiflow.meta import OzaBaggingClassifier
+from skmultiflow.lazy import KNNADWINClassifier
+from skmultiflow.evaluation import EvaluatePrequential
+from skmultiflow.data.sea_generator import SEAGenerator
+# Simulate the data stream
+dstream = SEAGenerator(classification_function = 2, balance_classes = True, noise_percentage = 0.3, random_state = 333)
+# Instantiate the Oza Bagging classifier method with KNN ADWIN classifier as the base model
+oza_class = OzaBaggingClassifier(base_estimator=KNNADWINClassifier(n_neighbors=10, max_window_size=1000), n_estimators=4, random_state = 333)
+# Prequential Evaluation
+evaluate1 = EvaluatePrequential(show_plot=False,
+pretrain_size=1000,
+max_samples=10000,
+metrics=['accuracy']
+)
+# Run the evaluation
+evaluate1.evaluate(stream=dstream, model=oza_class)
+###############################################################
+Listing 3-26
+Applying the Oza Bagging Classifier to a Synthetic Data Stream</pre>
+<p>Now, let’s talk about the online bagging method known as the <em>leveraging bagging
+method</em> , proposed by Bifet et al. [<a href="#499734_1_En_3_Chapter.xhtml#Par86">16</a>]. Here, bagging
+is leveraged by increasing resampling and using output detection codes.
+In the Oza Bagging technique, a sampling with replacement uses the (λ =
+1) Poisson distribution. But in the leveraging bagging method, the value
+of λ is larger. For example, instead of using the (λ = 1) Poisson
+distribution, it uses the (λ = 6) Poisson distribution. The output
+detection code helps correct errors. Each class is assigned a binary
+string of length L, and then an ensemble of L binary classifiers is
+built. This leads to better performance in multiclass classification
+tasks. Also, the leveraging bagging algorithm uses the ADWIN windowing
+technique for handling inherent concept drift in a data stream.</p>
+<p>
+In scikit-multiflow, the leveraging bagging classification technique can
+be applied using the LeveragingBaggingClassifier()
+method. Listing <a href="#499734_1_En_3_Chapter.xhtml#PC28">3-28</a> replicates the
+same experiment performed in Listing <a href="#499734_1_En_3_Chapter.xhtml#PC26">3-26</a> (i.e., the same
+data stream and hyperparameters for the six base models (KNN ADWIN
+classifiers)). However, the OzaBaggingClassifier()
+method is replaced with the LeveragingBaggingClassifier() method.
+A prequential evaluation is performed, and the output is shown in
+Listing <a href="#499734_1_En_3_Chapter.xhtml#PC29">3-29</a>. The accuracy
+obtained is 58.68%.
+
+
+</p>
+<pre>###############################################################
+Prequential Evaluation
+Evaluating 1 target(s).
+Pre-training on 1000 sample(s).
+Evaluating...
+#################### [100%] [310.46s]
+Processed samples: 10000
+Mean performance:
+M0 - Accuracy     : 0.5868
+###############################################################
+Listing 3-29
+Prequential Evaluation Output of the Leveraging Bagging Classifier</pre>
+<pre>###############################################################
+# Import the relevant libraries
+from skmultiflow.meta import LeveragingBaggingClassifier
+from skmultiflow.lazy import KNNADWINClassifier
+from skmultiflow.evaluation import EvaluatePrequential
+from skmultiflow.data.sea_generator import SEAGenerator
+# Simulate the data stream
+dstream = SEAGenerator(classification_function = 2, balance_classes = True, noise_percentage = 0.3, random_state = 333)
+# Instantiate the Leveraging Bagging classifier method with KNN ADWIN classifier as the base model
+leverage_class = LeveragingBaggingClassifier(base_estimator=KNNADWINClassifier(n_neighbors=10, max_window_size=1000), n_estimators=6, random_state = 333)
+# Prequential Evaluation
+evaluate1 = EvaluatePrequential(show_plot=False,
+pretrain_size=1000,
+max_samples=10000,
+metrics=['accuracy']
+)
+# Run the evaluation
+evaluate1.evaluate(stream=dstream, model=leverage_class)
+###############################################################
+Listing 3-28
+Applying the Leveraging Bagging Classifier to a Synthetic Data Stream</pre>
+
+
+<h3 class="Heading">Online Boosting</h3>
+<p>Another well-known ensemble learning technique is <em>boosting</em> . Its
+basic principle is to sequentially combine a set of “weak learners” to
+create a “strong learner.” The AdaBoost technique is one of the first
+boosting techniques for batch data [<a href="#499734_1_En_3_Chapter.xhtml#Par87">17</a>]. (AdaBoost is
+short for <em>adaptive
+boosting</em> .) A weak classifier (i.e., a decision tree) is
+prepared on training data using weighted samples, and then the
+misclassification error rate is calculated for the trained model. The
+misclassified examples by the current classifier are given more weight
+in the training dataset for the next classifier. The subsequent learners
+focus more on the difficult examples, which goes on until there is no
+more significant improvement in the algorithm’s performance.</p>
+<p>Wang and Pineau [<a href="#499734_1_En_3_Chapter.xhtml#Par88">18</a>] proposed the
+<em>online boosting
+classifier</em> , which is the online version of the AdaBoost
+algorithm. In an online learning context, each arriving example is
+trained K times, drawn from a binomial distribution. As in a data
+stream, the number of examples is large (tends to infinity), so the
+binomial distribution tends to a Poisson(λ) distribution where the value
+of λ is calculated by keeping track of the weight of misclassified and
+correctly classified examples. The online boosting algorithm uses the
+ADWIN windowing technique for handling inherent concept drift in a data
+stream.</p>
+<p>
+The online AdaBoost
+algorithm can be applied using the OnlineBoostingClassifier()
+method implemented in the scikit-multiflow framework. Listing
+<a href="#499734_1_En_3_Chapter.xhtml#PC30">3-30</a> applies the
+online boosting classifier on the same data stream used in Listing <a href="#499734_1_En_3_Chapter.xhtml#PC28">3-28</a>. A prequential
+evaluation is performed, and the output is shown in Listing <a href="#499734_1_En_3_Chapter.xhtml#PC31">3-31</a>. The accuracy
+obtained is 58%.
+
+
+</p>
+<pre>###############################################################
+Prequential Evaluation
+Evaluating 1 target(s).
+Pre-training on 1000 sample(s).
+Evaluating...
+#################### [100%] [669.82s]
+Processed samples: 10000
+Mean performance:
+M0 - Accuracy     : 0.5800
+###############################################################
+Listing 3-31
+Prequential Evaluation Output of the Online Boosting Classifier</pre>
+<pre>###############################################################
+# Import the relevant libraries
+from skmultiflow.meta import OnlineBoostingClassifier
+from skmultiflow.evaluation import EvaluatePrequential
+from skmultiflow.data.sea_generator import SEAGenerator
+# Simulate the data stream
+dstream = SEAGenerator(classification_function = 2, balance_classes = True, noise_percentage = 0.3, random_state = 333)
+# Instantiate the Online Boosting Classifier method
+boost_class = OnlineBoostingClassifier(random_state = 333)
+# Prequential Evaluation
+evaluate1 = EvaluatePrequential(show_plot=False,
+pretrain_size=1000,
+max_samples=10000,
+metrics=['accuracy']
+)
+# Run the evaluation
+evaluate1.evaluate(stream=dstream, model=boost_class) ###############################################################
+Listing 3-30
+Applying the Online Boosting Classifier to a Synthetic Data Stream</pre>
+<p>Most of the important supervised learning algorithms in the streaming
+data context have been covered. The next section briefly covers some of
+the data stream preprocessing methods.</p>
+
+
+
+<h2 class="Heading">Data Stream Preprocessing </h2>
+<p>
+So far, this chapter has covered algorithms for both regression and
+classification problems on data streams. All the experiments used clean
+datasets (i.e., data preprocessing wasn’t necessary). However, you can’t
+expect clean data streams in the real world, so you need to do some
+basic data stream preprocessing. The following are some of the data
+preprocessing methods available in the scikit-multiflow framework to
+apply to a data
+stream.
+
+</p>
+
+<ul>
+<li><p>Missing Value Cleaner: The MissingValueCleaner() method can
+replace missing values in a data stream using strategies such as
+replacing missing values with zero, mean, median, or mode.</p></li>
+<li><p>One-hot encoding: The OneHotToCategorical() method performs
+one-hot encoding on categorical variables in a data stream.</p></li>
+<li><p>Windowed Minmax Scaler: The WindowedMinmaxScaler(window_size=200)
+method is for feature transformation on a data stream. Each feature is
+scaled to a given range (between 0 and 1). The window size is user input
+to compute the min and the max values.</p></li>
+<li><p>Windowed Standard Scaler: The
+WindowedStandardScaler(window_size=200) method standardizes the
+features. The window size is user input to compute the mean and the
+standard deviation values.</p></li>
+</ul>
+
+
+
+<h2 class="Heading">Summary</h2>
+<p>This chapter covered most of the important online supervised learning
+techniques for data stream mining in the scikit-multiflow framework.
+However, you should explore two methods that I didn’t discuss in this
+chapter: the Naïve Bayes classifier and the Perceptron classifier
+available in the scikit-multiflow’s Bayes module and the
+scikit-multiflow framework’s neural network module.</p>
+<p>The next chapter discusses some of the online/incremental learning
+algorithms for unsupervised learning of streaming data. It also
+discusses some other tools available for streaming data analysis.</p>
+
+
+<h2 class="Heading">References</h2>
+<p>
+
+</p>
+
+<ol>
+<li>
+
+<p>Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani.
+An <em>Introduction to Statistical Learning with Applications in R</em>.
+Springer Texts in Statistics, 2013.</p>
+
+
+ 
+</li>
+<li>
+
+<p>P. Domingos and G. Hulten. <em>Mining High-Speed Data Streams</em>.
+ACM Press, 2000.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Albert Bifet and Ricard Gavaldà. <em>Adaptive Learning from Evolving
+Data Streams</em>. Springer, 2009.</p>
+
+
+ 
+</li>
+<li>
+
+<p>G. Hulten, L. Spencer, and P. Domingos. <em>Mining Time-Changing Data
+Streams</em>. ACM Press, 2001.</p>
+
+
+ 
+</li>
+<li>
+
+<p>H. Yang and S. Fong. “Optimized very fast decision tree with balanced
+classification accuracy and compact tree size.” The 3rd International
+Conference on Data Mining and Intelligent Information Technology
+Applications. IEEE, 2011.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Geoff Hulten, Laurie Spencer, and Pedro Domingos. “Mining
+Time-Changing Data Streams.” Proceedings of the 7th ACM SIGKDD
+International conference on Knowledge Discovery and Data Mining. ACM
+Press, 2001.</p>
+
+
+ 
+</li>
+<li>
+
+<p>C. Manapragada, G. Webb, and M. Salehi. “Extremely Fast Decision
+Tree.” Proceedings of the 24th ACM SIGKDD International Conference on
+Knowledge Discovery &amp; Data Mining. <a href="https://doi.org/10.1145/3219819.3220005">https://​doi.​org/​10.​1145/​3219819.​3220005</a></p>
+
+
+ 
+</li>
+<li>
+
+<p>Elena Ikonomovska, João Gama, Raquel Sebastião, and Dejan Gjorgjevik.
+“Regression Trees from Data Streams with Drift Detection.” <em>Discovery
+Science</em>. Springer, 2009.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Kilian Q. Weinberger and Lawrence K. Saul. “Distance Metric Learning
+for Large Margin Nearest Neighbor Classification.” <em>Journal of
+Machine Learning Research</em>, 2009.</p>
+
+
+ 
+</li>
+<li>
+
+<p>W. Nick Street and YongSeog Kim. “A streaming ensemble algorithm
+(SEA) for large-scale classification.” Proceedings of the seventh ACM
+SIGKDD international conference on Knowledge discovery and data mining.
+ACM, 2001.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Viktor Losing, Barbara Hammer, and Heiko Wersing. “KNN Classifier
+with Self Adjusting Memory for Heterogeneous Concept Drift.” IEEE 16th
+International Conference on Data Mining (ICDM). IEEE, 2016.</p>
+
+
+ 
+</li>
+<li>
+
+<p>R. C. Atkinson and R. M. Shiffrin, “Human Memory: A Proposed System
+and Its Control Processes.” <em>Psychology of Learning and
+Motivation</em>, 1968. pp. 89–195.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Heitor Murilo Gomes, Albert Bifet, Jesse Read, Jean Paul Barddal,
+Fabricio Enembreck, Bernhard Pfharinger, Geoff Holmes, and Talel
+Abdessalem. “Adaptive random forests for evolving data stream
+classification.” <em>Machine Learning</em>. Springer, 2017.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Heitor Murilo Gomes, Jean Paul Barddal, Luis Eduardo Boiko Ferreira,
+and Albert Bifet. “Adaptive random forests for data stream regression.”
+ESANN, 2018.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Nikunj C. Oza and Stuart Russell. “Online Bagging and Boosting.”
+<em>Artificial Intelligence and Statistics</em>. January 2001, pp.
+105–112.</p>
+
+
+ 
+</li>
+<li>
+
+<p>A. Bifet, G. Holmes, and B. Pfahringer, “Leveraging Bagging for
+Evolving Data Streams.” Joint European Conference on Machine Learning
+and Knowledge Discovery in Databases, 2010. pp. 135–150.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Yoav Freund and Robert E. Schapire. “A decision-theoretic
+generalization of online learning and an application to boosting.”
+<em>Computational Learning Theory</em>. Springer, 1995.</p>
+
+
+ 
+</li>
+<li>
+
+<p>B. Wang and J. Pineau, “Online Bagging and Boosting for Imbalanced
+Data Streams.” <em>IEEE Transactions on Knowledge and Data
+Engineering</em>. December 2016. pp. 3353-3366.</p>
+
+
+ 
+</li>
+</ol>
+
+
+
+
+<p></p>
+
+
+<!--Begin Abstract-->
+
+<h1 class="ChapterTitle" lang="en">4. Unsupervised Learning and Other
+Tools for Data Stream Mining</h1>
+
+
+<!--End Abstract-->
+
+<p>In Chapter <a href="#499734_1_En_3_Chapter.xhtml">3</a>, you learned supervised machine
+learning techniques for both regression and classification problems in a
+streaming data context. This chapter starts with unsupervised learning
+for streaming data and then overviews some of the other software
+environments available for data stream mining.</p>
+
+<h2 class="Heading">Unsupervised Learning for Streaming Data</h2>
+<p>In the previous chapters, you learned about the various methods for
+concept drift detection and supervised machine learning for streaming
+data. Let’s now look at unsupervised learning by first focusing on
+clustering and then moving on to anomaly detection.</p>
+
+<h3 class="Heading">Clustering</h3>
+<p>k-means
+clustering 
+is a popular clustering algorithm for batch data. It partitions the data
+into distinct and non-overlapping k clusters. The objective is to have a
+very low <em>within-cluster variation</em> [<a href="#499734_1_En_4_Chapter.xhtml#Par46">1</a>]. The algorithm
+randomly assigns a number from 1 to k to the observations. This creates
+the initial set of clusters. The cluster centroids are
+computed for each of the k clusters. Observations based on the nearness
+(i.e., a distance metric, such as Euclidean distance) to a cluster
+centroid are reassigned. These steps are reiterated. The iteration stops
+when there are no further changes in the cluster assignments. (Please
+note that the user provides the value of k.)</p>
+<p>The <em>mini-batch
+k-means clustering method</em>  is an incremental learning
+version of the k-means clustering algorithm that you can directly apply
+to a data stream. It is a variant of the k-means algorithm that works on
+a mini-batch of the data instead of the entire dataset. It is suitable
+for streaming data since an entire dataset is never available at any
+point in time. Mini-batches are the subsets of the input data stream.
+They are randomly sampled for each training iteration.</p>
+<p>The mini-batch k-means clustering algorithm chooses a mini-batch
+comprising randomly sampled examples. A generic k-means algorithm is
+then executed, in which the nearest centroid is assigned. In the next
+step, the assigned centroids are updated for each sample in the
+mini-batch. These steps are performed until either convergence or a
+specific number of iterations is reached.</p>
+<p>Also, instead of using random sampling to choose the initial set of
+cluster centers, the k-means++ algorithm [<a href="#499734_1_En_4_Chapter.xhtml#Par48">3</a>] can be used as a
+randomized seeding technique to choose the initial cluster centers’
+first values, which achieves convergence faster.</p>
+<p>The mini-batch k-means clustering algorithm is available in the
+scikit-learn (sklearn) library. Go to <a href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.MiniBatchKMeans.html"><code>https://scikit-learn.org/stable/modules/generated/sklearn.cluster.MiniBatchKMeans.html</code></a>
+for more information.</p>
+<p>
+Listing <a href="#499734_1_En_4_Chapter.xhtml#PC1">4-1</a> applies the mini-batch k-means
+clustering on the Iris dataset. The Iris dataset is publicly
+available in the sklearn library. The dataset contains four features
+regarding sepal and petal length (in cm) and width (in cm). Listing
+<a href="#499734_1_En_4_Chapter.xhtml#PC1">4-1</a> applies
+<strong>MiniBatchKMeans()</strong> and specifies the number of clusters
+as 3 and the mini-batch size as 50. Listing <a href="#499734_1_En_4_Chapter.xhtml#PC1">4-1</a> trained the
+mini-batch k-means clustering model on the Iris dataset
+and shown the cluster centers in Figure <a href="#499734_1_En_4_Chapter.xhtml#Fig1">4-1</a>.
+
+
+</p>
+
+<p>
+<img src="images/499734_1_En_4_Chapter/499734_1_En_4_Fig1_HTML.jpg" style="width:29.52em" alt="../images/499734_1_En_4_Chapter/499734_1_En_4_Fig1_HTML.jpg"/>
+</p>
+
+<p>Figure 4-1</p>
+<p>Cluster venters of the mini-batch k-means clustering model</p>
+
+
+<pre>###############################################################
+# Import the relevant libraries
+from sklearn import datasets
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import MiniBatchKMeans
+# Load data
+iris = datasets.load_iris()
+X = iris.data
+#Data snapshot
+X[0:6,]
+#Output
+#array([[5.1, 3.5, 1.4, 0.2],
+#       [4.9, 3. , 1.4, 0.2],
+#       [4.7, 3.2, 1.3, 0.2],
+#       [4.6, 3.1, 1.5, 0.2],
+#       [5. , 3.6, 1.4, 0.2],
+#       [5.4, 3.9, 1.7, 0.4]])
+#feature names
+iris.feature_names
+#Output:
+#['sepal length (cm)',
+# 'sepal width (cm)',
+# 'petal length (cm)',
+# 'petal width (cm)']
+# Create k-mean object
+clust_kmeans = MiniBatchKMeans(n_clusters=3, batch_size=50, random_state=333)
+# Train model
+model = clust_kmeans.fit(X)
+# Figure out the cluster centers
+model.cluster_centers_
+###############################################################
+Listing 4-1
+Mini-Batch k-means Clustering on the Iris Dataset</pre>
+<p>An alternative to mini-batch k-means clustering is available at
+scikit-learn. This method is known as <em>Birch clustering</em>
+ [<a href="#499734_1_En_4_Chapter.xhtml#Par52">7</a>]. It is an online
+learning algorithm that creates a tree data structure where the cluster
+centroids are read off the leaf. I suggest that you explore this
+technique as an exercise. For more information on Birch clustering in
+scikit-learn, read the official documentation at <a href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.Birch.html"><code>https://scikit-learn.org/stable/modules/generated/sklearn.cluster.Birch.html</code></a>.</p>
+<p>A <em>streaming
+k-means clustering algorithm</em>  is available in Apache Spark’s
+machine learning library, MLlib. This streaming k-means clustering
+algorithm dynamically estimates the clusters and updates the clusters
+when new data arrive. This algorithm contains a parameter called a
+<em>half-life</em> that controls the “decay” of the estimates. A decay
+factor determines how much weight needs to be given to past data. The
+streaming k-means clustering algorithm uses a generalization of the
+mini-batch k-means update rule.</p>
+<p>Other incremental clustering algorithms are not covered in this
+book.</p>
+<p>Some of the earliest online clustering algorithms for streaming data
+are implemented in MOA software. One well-researched approach for data
+stream clustering is the microclustering
+algorithm, which has two phases. The first phase is online and
+summarizes a data stream in local models (microclusters). The second
+phase generates a global cluster model from the micro-clusters.
+CluStream and DenStream are two of the microcluster-based online
+clustering algorithms available in MOA.</p>
+<p>Apache Spark, MOA, and a few other data stream mining tools are
+discussed next.</p>
+
+
+<h3 class="Heading">Anomaly Detection</h3>
+<p><em>Anomaly
+detection</em> 
+ (or <em>outlier detection</em>) is the science of identifying
+events or examples that differ from the norm [<a href="#499734_1_En_4_Chapter.xhtml#Par49">4</a>] (known as
+<em>anomalies</em>). Machine learning literature is replete with
+techniques for anomaly detection, especially in a batch learning
+context. Some of the unique characteristics associated with these
+anomalies are that they rarely occur in a dataset and their features are
+different from normal examples. Some of the practical applications of
+anomaly detection are intrusion detection, fraud detection, surveillance
+analytics, medical applications, and data leakage prevention.</p>
+<p>This chapter focuses on the <em>streaming half-space trees</em>
+(SHST) technique
+for anomaly detection in a streaming data context. The SHST algorithm is
+an incremental one-class anomaly detector for streaming data [<a href="#499734_1_En_4_Chapter.xhtml#Par50">5</a>]. One of the most
+useful features of this algorithm is that it can be trained with only
+genuine or normal instances and works well even when anomalies are
+extremely rare. This method is a random ensemble of half-space trees. A
+half-space tree (HS-tree) of depth d is defined as a full binary tree
+having 2^(d+1) − 1 nodes, where all leaves are at the same depth (i.e.,
+d).</p>
+<p>Streaming half-space
+trees can create the tree structure from the data space
+dimensions alone and don’t need actual training examples. So, this
+method doesn’t need to perform any model restructuring to adapt to the
+streaming data. The model can be deployed before the arrival of
+streaming data. Moreover, the SHST algorithm has constant memory
+requirements and constant amortized time complexity.</p>
+<p>
+Listing <a href="#499734_1_En_4_Chapter.xhtml#PC2">4-2</a> generates a data
+stream with anomalies using AnomalySineGenerator, available in the
+scikit-multiflow framework. It generates a data stream with 500
+observations, out of which 100 are anomalies. A snapshot of the
+generated data stream is shown in Figure <a href="#499734_1_En_4_Chapter.xhtml#Fig2">4-2</a>. The rightmost
+column indicates whether an example is anomalous (i.e., if its 1, it is
+an anomaly; if it’s 0, it is normal). It then applies the SHST algorithm
+on this data stream using the HalfSpaceTrees() method
+available in the scikit-multiflow framework. It trains the model and
+performs a prediction , as shown in Listing
+<a href="#499734_1_En_4_Chapter.xhtml#PC2">4-2</a>.
+
+
+</p>
+
+<p>
+<img src="images/499734_1_En_4_Chapter/499734_1_En_4_Fig2_HTML.jpg" style="width:35.45em" alt="../images/499734_1_En_4_Chapter/499734_1_En_4_Fig2_HTML.jpg"/>
+</p>
+
+<p>Figure 4-2</p>
+<p>Snapshot of the data stream with anomalies </p>
+
+
+<pre>###############################################################
+# Import the relevant libraries
+import pandas as pd
+from skmultiflow.anomaly_detection import HalfSpaceTrees
+from skmultiflow.data import AnomalySineGenerator
+# Generate a data stream with anomalies
+dstream = AnomalySineGenerator(n_samples=500, n_anomalies=100, random_state=333)
+# Instantiate the Half-Space Trees estimator
+HS_trees = HalfSpaceTrees(random_state=333)
+#prep the data stream
+dstream.prepare_for_use()
+X, Y = dstream.next_sample(500)
+data = pd.DataFrame(np.hstack((X, np.array([Y]).T)))
+data.head()
+# Incrementally fit the model
+HS_trees_model= HS_trees.partial_fit(X, Y)
+# Predict the classes of the passed observations
+pred = HS_trees_model.predict(X)
+# Estimate the probability of a sample being anomalous or genuine
+prob = HS_trees_model.predict_proba(X)
+###############################################################
+Listing 4-2
+Anomaly Detection Using Streaming Half-Space Trees</pre>
+
+
+
+<h2 class="Heading">Other Tools and Technologies for Data Stream
+Mining</h2>
+<p>This section provides a high-level introduction to eight open source
+software tools for data stream mining: MOA, Apache Spark, Apache Flink,
+Apache Storm, Apache Kafka, Faust, Creme, and River. There are other
+tools available (both commercial and open source) for data stream
+mining, but they are outside the scope of this book.</p>
+
+<h3 class="Heading">Massive Online Analysis (MOA)</h3>
+<p>Massive Online
+Analysis (MOA)
+ is an open source framework for mining data streams developed in
+Java. MOA is a GUI-based tool. It contains a collection of streaming
+data algorithms for supervised (classification, regression, etc.) and
+unsupervised learning (clustering, etc.) along with model evaluation
+tools [<a href="#499734_1_En_4_Chapter.xhtml#Par51">6</a>]. Most of the
+supervised and unsupervised learning discussed in this book are
+available in MOA.</p>
+<p>Since MOA is GUI-based and primarily developed in Java, it may not
+appeal to Python developers/users. I recommend that you explore this
+tool. It can be downloaded from <a href="https://moa.cms.waikato.ac.nz"><code>https://moa.cms.waikato.ac.nz</code></a>.</p>
+
+
+<h3 class="Heading">Apache Spark</h3>
+<p>Apache
+Spark  is a
+software environment for performing high-speed processing and analytics
+on both batch and streaming data. It provides support for multiple
+languages such as Java, Python, and R. That’s why Spark (or pyspark) is
+a good alternative option for a Python user. Spark can access diverse
+data sources. It can run in the cloud or on Mesos, Hadoop, and
+Kubernetes. Spark’s stack of libraries includes Spark SQL, Spark
+Streaming, MLlib (for machine learning), and GraphX (for graph
+analytics). To download the latest version and to access the
+documentation, please visit <a href="https://spark.apache.org"><code>https://spark.apache.org</code></a>.</p>
+<p>Spark Streaming is an extension of the core Spark API. It is a
+powerful tool for processing data streams at scale. It contains many
+high-level functions, such as map, reduce, join, and window for
+processing high-velocity data streams. Spark Streaming supports MLlib
+operations (i.e., streaming k-means clustering, streaming linear
+regression (a linear regression model with stochastic gradient descent
+fitted for each batch of the data), and more). The official Spark
+Streaming guide is at <a href="https://spark.apache.org/docs/latest/streaming-programming-guide.html"><code>https://spark.apache.org/docs/latest/streaming-programming-guide.html</code></a>.</p>
+
+
+<h3 class="Heading">Apache Flink</h3>
+<p>Apache
+Flink  is a
+unified batch and streaming data analytics engine. It provides highly
+flexible streaming windows for a continuous streaming model. It can
+perform in-memory computations at scale. Flink is integrated with many
+other open source data processing ecosystems, such as YARN and Mesos.
+Flink is very useful for event-driven applications such as anomaly
+detection, rule-based alerts, fraud detection, and business process
+monitoring. Please visit <a href="https://flink.apache.org"><code>https://flink.apache.org</code></a>
+to learn more about Apache Flink.</p>
+
+
+<h3 class="Heading">Apache Storm</h3>
+<p>Apache
+Storm  is
+an open source distributed stream-processing computation framework. It
+is primarily developed in Clojure but works with multiple languages,
+such as Java and Python. Apache Storm is a very powerful tool for
+performing real-time processing on streaming data. It is a stream
+processing engine without batch support. It is a true real-time
+processing framework, taking in a stream as an entire event instead of
+series of small batches. It is scalable and works on parallel
+calculations that run across a cluster of machines.</p>
+<p>A Storm cluster is similar to what a Hadoop cluster is for batch
+data. To perform real-time computations in Storm, you create a
+<em>topology</em>, which is a directed acyclic graph of computation. A
+topology is made of <em>streams</em> (i.e., an unbounded pipeline of
+tuples) and <em>spouts</em> (i.e., source of the data stream). A Storm
+cluster comprises two nodes: master nodes and worker nodes. The master
+node assigns tasks to machines and monitors their performance. A worker
+node assign tasks to other worker nodes.</p>
+<p>To download the latest version of Apache Storm and access the
+official documentation, please visit <a href="https://storm.apache.org/index.html"><code>https://storm.apache.org/index.html</code></a>.</p>
+
+
+<h3 class="Heading">Apache Kafka</h3>
+<p>Apache Kafka is an open source distributed event streaming platform.
+What is <em>event streaming</em>? It is the phenomenon of capturing
+real-time data streams for various sources (databases, sensors, etc.)
+and then storing and processing them to generate insights. Some of the
+real-world use-cases for event streaming are processing financial
+transactions in stock exchanges, analyzing IoT device data, self-driving
+applications, web analytics, log aggregation, and real-time patient
+health monitoring. The official documentation is available at <a href="https://kafka.apache.org/documentation/"><code>https://kafka.apache.org/documentation/</code></a>.</p>
+<p>Apache
+Kafka 
+introduced a powerful but lightweight data stream processing library
+known as Kafka Streams. Developers can build Java and Scala applications
+at scale using Kafka Streams. Applications built using it can be
+deployed to VMs, containers, or the cloud. Documentation on Kafka
+Streams is available at <a href="https://kafka.apache.org/documentation/streams/"><code>https://kafka.apache.org/documentation/streams/</code></a>.</p>
+
+
+<h3 class="Heading">Faust</h3>
+<p>Faust  is a library for
+building streaming applications in Python. It is useful for event
+streaming and is similar to Kafka Streams. But Faust lets you use Python
+syntax and other popular libraries in Python, such as NumPy, TensorFlow,
+and Django, for processing data streams. The official documentation is
+available at <a href="https://faust.readthedocs.io/en/latest/"><code>https://faust.readthedocs.io/en/latest/</code></a>.
+You can also visit its GitHub page at <a href="https://github.com/robinhood/faust"><code>https://github.com/robinhood/faust</code></a>.</p>
+
+
+<h3 class="Heading">Creme</h3>
+<p>
+Creme  is an open source
+library for online machine learning in Python. It is a powerful tool
+used to learn from streaming data. It shares many similarities with the
+scikit-multiflow framework. Creme can be installed from PyPI using the
+following command.
+
+</p>
+<pre>&gt;&gt;&gt; pip install creme</pre>
+<p>Please visit Creme’s GitHub page of to explore this tool further-
+<a href="https://github.com/MaxHalford/creme"><code>https://github.com/MaxHalford/creme</code></a>.</p>
+
+
+<h3 class="Heading">River</h3>
+<p>
+River  [<a href="#499734_1_En_4_Chapter.xhtml#Par520">8</a>] is a new
+library for online machine learning of streaming data using Python. It
+is the result of the merger of Creme and scikit-multiflow. At the time
+of writing this chapter (November 2020), the developers of both packages
+(Creme and scikit-multiflow) announced the merger and attested the
+common shared vision and goals. Figures <a href="#499734_1_En_4_Chapter.xhtml#Fig3">4-3</a> and <a href="#499734_1_En_4_Chapter.xhtml#Fig4">4-4</a> show the merger
+announcement on the scikit-multiflow and Creme GitHub pages. Both of
+these screenshots/images were taken on 22nd Novemeber, 2020.
+
+
+</p>
+
+<p>
+<img src="images/499734_1_En_4_Chapter/499734_1_En_4_Fig4_HTML.jpg" style="width:35.45em" alt="../images/499734_1_En_4_Chapter/499734_1_En_4_Fig4_HTML.jpg"/>
+</p>
+
+<p>Figure 4-4</p>
+<p>Screenshot of the merger announcement in Creme’s GitHub page</p>
+
+
+
+<p>
+<img src="images/499734_1_En_4_Chapter/499734_1_En_4_Fig3_HTML.jpg" style="width:35.45em" alt="../images/499734_1_En_4_Chapter/499734_1_En_4_Fig3_HTML.jpg"/>
+</p>
+
+<p>Figure 4-3</p>
+<p>Screenshot of the merger announcement on scikit-multiflow’s GitHub
+page</p>
+
+
+<p>The new package resulting from the merger is known as River. Creme
+and scikit-multiflow remain on PyPI, GitHub, and conda-forge. The River
+package is available in GitHub at <a href="https://github.com/online-ml/river"><code>https://github.com/online-ml/river</code></a>.
+The API reference document is available at <a href="https://riverml.xyz/latest/api/overview/"><code>https://riverml.xyz/latest/api/overview/</code></a>.</p>
+<p>At the time of writing this chapter, the River package was too new to
+discuss anything further. Many features still need to be developed. I
+believe that River has the potential to be a one-stop solution in Python
+for online machine learning with streaming data. Maybe I can focus on
+this package in the next edition of this book.</p>
+
+
+
+<h2 class="Heading">Conclusion and the Path Forward</h2>
+<p>The purpose of this book is to introduce online/incremental machine
+learning with streaming data using Python. The real-time or near
+real-time analytics is the <em>next big thing</em> (especially with the
+advent of IoT devices, wearables, sensors, etc.). Many organizations and
+research institutes have are focusing on this.</p>
+<p>Chapter <a href="#499734_1_En_1_Chapter.xhtml">1</a> explained how machine learning
+with streaming data is different. Many machine learning methods that
+most of us use daily in a batch context aren’t effective for data stream
+mining.</p>
+<p>This book introduced the various online/incremental learning
+algorithms for concept drift detection, supervised learning, and
+unsupervised learning with streaming data. Given the demand of these
+skills, I strongly believe that these techniques should be in the
+repertoire of any data scientist, researcher, machine learning
+engineers, analytics professional, or data science aspirants.</p>
+<p>The book primarily focused on a Python-based library for data stream
+processing (i.e., the scikit-multiflow framework). This makes sense
+given the fact that Python is the most widely used language by data
+scientists. I discussed quite a few other tools in this chapter, and
+there are plenty of books and other resources available (especially on
+Spark, Kafka, and MOA). However, few books deal with machine learning
+with streaming data. This book is a step in this direction.</p>
+<p>Scikit-multiflow is a very powerful tool for online/incremental
+machine learning with streaming data. You used it to implement various
+supervised and unsupervised learning techniques in a streaming data
+context in this book.</p>
+<p>I recommend that you start with scikit-multiflow to learn and explore
+the online/incremental machine learning techniques discussed in this
+book. Again, the package has merged with the Creme library, and the new
+package is known as River. I suggest that you transition to the River
+library once you are comfortable with the nitty-gritty of the
+scikit-multiflow framework. Please note that most of the techniques you
+learned in the scikit-multiflow framework should be integrated into the
+River package.</p>
+<p>Again, at the time of writing this chapter, the River package is too
+new to discuss in more detail. But I may cover this package or any other
+package that comes up as a suitable alternative to scikit-multiflow in
+the next edition of this book.</p>
+<p>The path forward is to learn the nuances of various
+online/incremental machine learning algorithms using the
+scikit-multiflow framework on various data streams and then move on to
+explore other Python-based tools for data stream mining, such as River,
+Spark, and Faust.</p>
+<p>Happy learning!☺</p>
+
+
+<h2 class="Heading">References</h2>
+<p>
+
+</p>
+
+<ol>
+<li>
+
+<p>Leonard Kaufman and Peter Rousseeuw. <em>Finding Groups in Data: An
+Introduction to Cluster Analysis</em>. Wiley, 1990.</p>
+
+
+ 
+</li>
+<li>
+
+<p>D. Sculley. “Web-Scale K-Means Clustering.” WWW ’10: Proceedings of
+the 19th international conference on World Wide Web. April 2010.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Bahman Bahmani, Benjamin Moseley, Andrea Vattani, Ravi Kumar, and
+Sergei Vassilvitskii. “Scalable K-Means++.” Proceedings of the VLDB
+Endowment. March 2012.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Markus Goldstein and Seiichi Uchida. “A Comparative Evaluation of
+Unsupervised Anomaly Detection Algorithms for Multivariate Data.” Wayne
+State University. April 19, 2016. <a href="https://journals.plos.org/plosone/article%253Fid%253D10.1371/journal.pone.0152173"><code>https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0152173</code></a>.</p>
+
+
+ 
+</li>
+<li>
+
+<p>S. C. Tan, K. M. Ting, and T. F. Liu, “Fast anomaly detection for
+streaming data.” IJCAI Proceedings, International Joint Conference on
+Artificial Intelligence, 2011.</p>
+
+
+ 
+</li>
+<li>
+
+<p>A. Bifet, G. Holmes, R. Kirkby, and B. Pfahringer, “MOA: Massive
+Online Analysis.” <em>Journal of Machine Learning Research</em>,
+2010.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Tian Zhang, Raghu Ramakrishnan, and Maron Livny. “BIRCH: An efficient
+data clustering method for large databases.” <a href="http://www.cs.sfu.ca/CourseCentral/459/han/papers/zhang96.pdf"><code>www.cs.sfu.ca/CourseCentral/459/han/papers/zhang96.pdf</code></a>.</p>
+
+
+ 
+</li>
+<li>
+
+<p>Jacob Montiel, Max Halford, Saulo Martiello Mastelini, Geoffrey
+Bolmier, Raphael Sourty, Robin Vaysse, Adil Zouitine, Heitor Murilo
+Gomes, Jesse Read, Talel Abdessalem, and Albert Bifet, “River: machine
+learning for streaming data in Python.”, arXiv, 2020.</p>
+
+
+ 
+</li>
+</ol>
+
+
+
+
+<p></p>
+
+
+
+
+
+Index
+
+
+
+
+
+A
+
+
+
+
+Adaptive boosting
+
+
+
+
+Adaptive random forest (ARF)
+
+
+
+
+Adaptive windowing method for concept drift detection (ADWIN)
+
+
+
+
+Agarwal stream generator
+
+
+
+
+Agarwal streaming data generation
+
+
+
+
+Anomaly detection
+
+
+
+
+Apache Flink
+
+
+
+
+Apache Kafka
+
+
+
+
+Apache Spark
+
+
+
+
+Apache Storm
+
+
+
+
+
+
+B
+
+
+
+
+Bagging
+
+
+
+
+Batch learning methods
+
+
+
+
+Binary classification methods
+
+
+
+
+Binomial distribution
+
+
+
+
+Birch clustering
+
+
+
+
+
+
+C
+
+
+
+
+Cluster centroids
+
+
+
+
+Concept Adapting Very Fast Decision Tree (CVFDT) method
+
+
+
+
+Concept drift
+
+
+
+
+Continuous data streams
+
+
+
+
+Creme
+
+
+
+
+
+
+D
+
+
+
+
+Damped window model
+
+
+
+
+Data explosion
+
+
+
+
+Dataset generation
+
+
+
+
+Data stream, CSV file
+
+
+
+
+Data stream mining
+
+
+Apache Flink
+
+
+Apache Kafka
+
+
+Apache Spark
+
+
+Apache Storm
+
+
+Creme
+
+
+Faust
+
+
+MOA
+
+
+River
+
+
+
+
+Data stream preprocessing
+
+
+
+
+Decision trees
+
+
+EFDT
+
+
+Hoeffding adaptive tree classifier
+
+
+Hoeffding adaptive tree regressor
+
+
+Hoeffding tree classifier
+
+
+Hoeffding tree regressor
+
+
+
+
+Drift detection
+
+
+moving average-test (HDDM_A)
+
+
+moving weighted average-test (HDDM_W)
+
+
+Page-Hinkley Method
+
+
+
+
+Drift detection method (DDM)
+
+
+
+
+drift_detection module
+
+
+
+
+
+
+E
+
+
+
+
+Early drift detection method (EDDM)
+
+
+
+
+Ensemble learning
+
+
+adaptive random forests
+
+
+Online Bagging
+
+
+
+
+EvaluateHoldout() function
+
+
+
+
+EvaluatePrequential() function
+
+
+
+
+Evaluation methods
+
+
+
+
+Extremely fast decision tree (EFDT) classifier
+
+
+
+
+
+
+F
+
+
+
+
+Faust
+
+
+
+
+FileStream method
+
+
+
+
+
+
+G
+
+
+
+
+Gradient descent algorithm
+
+
+
+
+
+
+H
+
+
+
+
+HalfSpaceTrees() method
+
+
+
+
+Hoeffding adaptive tree classifier
+
+
+
+
+Hoeffding adaptive tree regressor
+
+
+
+
+Hoeffding Anytime Tree
+
+
+
+
+Hoeffding bound
+
+
+
+
+Hoeffding’s inequality
+
+
+
+
+Hoeffding tree classifier
+
+
+
+
+Hoeffding tree regressor
+
+
+
+
+Holdout evaluation method
+
+
+
+
+Hyperplane generator
+
+
+
+
+
+
+I, J
+
+
+
+
+Incremental concept drift
+
+
+
+
+Incremental learning algorithms
+
+
+
+
+Internet of Things (IoT)
+
+
+
+
+Iris dataset
+
+
+
+
+
+
+K
+
+
+
+
+k-means clustering
+
+
+
+
+KNN ADWIN classifier
+
+
+
+
+KNNClassifier() method
+
+
+
+
+KNN regressor
+
+
+
+
+
+
+L
+
+
+
+
+Landmark window model
+
+
+
+
+Lazy learning methods
+
+
+
+
+LeveragingBaggingClassifier() method
+
+
+
+
+Linear regression method
+
+
+
+
+
+
+M, N
+
+
+
+
+Massive online analysis (MOA)
+
+
+
+
+Mean absolute error (MAE)
+
+
+
+
+Mean squared error (MSE)
+
+
+
+
+Microcluster-based online clustering algorithms
+
+
+
+
+Microclustering algorithm
+
+
+
+
+Mini-batch gradient descent
+
+
+
+
+Mini-batch k-means clustering
+
+
+
+
+Moving average-test (HDDM_A)
+
+
+
+
+Moving weighted average-test (HDDM_W)
+
+
+
+
+Multitarget regression techniques
+
+
+
+
+
+
+O
+
+
+
+
+online AdaBoost algorithm
+
+
+
+
+Online bagging
+
+
+
+
+Online boosting classifier
+
+
+
+
+Online learning algorithm
+
+
+
+
+Ordinary least square (OLS) method
+
+
+
+
+Oza bagging classifier
+
+
+
+
+OzaBaggingClassifier() method
+
+
+
+
+
+
+P, Q
+
+
+
+
+Page-Hinkley method
+
+
+
+
+Prequential evaluation method
+
+
+
+
+
+
+R
+
+
+
+
+Random forest
+
+
+
+
+Recurring concept drift
+
+
+
+
+RegressionGenerator() function
+
+
+
+
+
+
+S, T
+
+
+
+
+SAM-KNN Classifier
+
+
+
+
+scikit-learn library
+
+
+
+
+scikit-multiflow framework
+
+
+concept drift detection
+
+
+ADWIN
+
+
+DDM
+
+
+HDDM_A
+
+
+HDDM_W
+
+
+Page-Hinkley method
+
+
+data stream
+
+
+drift_detection module
+
+
+EvaluatePrequential() function
+
+
+Hoeffding tree method
+
+
+online bagging classification technique
+
+
+
+
+SGDRegressor() function
+
+
+
+
+Sliding window model
+
+
+
+
+Stochastic gradient descent (SGD) method
+
+
+
+
+Stochastic gradient descent implementation
+
+
+
+
+Streaming data
+
+
+analytics process flow
+
+
+applications
+
+
+big data
+
+
+challenges
+
+
+characteristics
+
+
+CSV file
+
+
+generators
+
+
+real-time analytics
+
+
+
+
+Streaming half-space trees (SHST) technique
+
+
+
+
+Streaming k-means clustering algorithm
+
+
+
+
+Synthetic dataset
+
+
+
+
+Synthetic data stream
+
+
+ARF classifier
+
+
+ARF regressor
+
+
+EFDT classifier
+
+
+Hoeffding adaptive tree classifier
+
+
+Hoeffding adaptive tree regressor
+
+
+Hoeffding tree regressor
+
+
+KNN ADWIN classifier
+
+
+KNN classifier
+
+
+KNN regressor
+
+
+leveraging bagging classifier
+
+
+online boosting classifier
+
+
+Oza bagging classifier
+
+
+SAM-KNN classifier
+
+
+
+
+
+
+U
+
+
+
+
+Unsupervised learning
+
+
+anomaly detection
+
+
+clustering
+
+
+
+
+
+
+V
+
+
+
+
+Very Fast Decision Tree (VFDT) algorithm
+
+
+
+
+
+
+W, X, Y, Z
+
+
+
+
+Warning zones detection
+
+
+
+
+Windowing techniques
+
+
+
+
+
+

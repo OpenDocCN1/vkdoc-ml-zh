@@ -1,0 +1,7 @@
++   [JavaScript 机器学习实战](README.md)
++   [1. 机器学习基础](practical-machine-learning-in-javascript_1.md)
++   [2. TensorFlow.js](practical-machine-learning-in-javascript_2.md)
++   [4. 文本分类与情感分析](practical-machine-learning-in-javascript_3.md)
++   [5. 输入数据实验](practical-machine-learning-in-javascript_4.md)
++   [6. 生产环境中的机器学习](practical-machine-learning-in-javascript_5.md)
++   [7. 机器学习中的偏见](practical-machine-learning-in-javascript_6.md)

@@ -1,0 +1,9231 @@
+- '
+
+
+  ![](img/978-1-4842-4113-4_CoverFigure.jpg)
+
+
+  ISBN 978-1-4842-4112-7 e-ISBN 978-1-4842-4113-4 [`doi.org/10.1007/978-1-4842-4113-4`](https://doi.org/10.1007/978-1-4842-4113-4)
+  美国国会图书馆控制号：2018966554 © Valentina Porcu 2018 本作品受版权保护。出版商保留所有权利，无论是全部还是部分材料，特别是翻译、重印、重用插图、朗诵、广播、微缩胶片复制或任何其他物理方式，以及电子传输或信息存储与检索、电子改编、计算机软件，或现在已知或以后开发的类似或不同方法。本书中可能出现商标名称、标识和图像。我们不会在每次出现商标名称、标识或图像时使用商标符号，而是仅以编辑方式使用这些名称、标识和图像，以利于商标所有者，无意侵犯商标。本出版物中使用的商品名称、商标、服务标志和类似术语，即使未标明为商标，也不应被视为对其是否受专有权利的意见表达。尽管本书中的建议和信息在出版时被认为是真实准确的，但作者、编辑和出版商均不对可能存在的任何错误或遗漏承担法律责任。出版商对本书所含内容不作任何明示或暗示的保证。本书通过
+  Springer Science+Business Media New York 向全球图书贸易发行，地址：233 Spring Street, 6th Floor,
+  New York, NY 10013。电话：1-800-SPRINGER，传真：(201) 348-4505，电子邮件：orders-ny@springer-sbm.com，或访问
+  www.springeronline.com。Apress Media, LLC 是加利福尼亚州的有限责任公司，其唯一成员（所有者）是 Springer Science
+  + Business Media Finance Inc (SSBM Finance Inc)。SSBM Finance Inc 是特拉华州的一家公司。
+
+
+  引言
+
+
+  **翻译：Nicola Menicacci**
+
+
+  Python 是一种解释型、交互式、面向对象的语言。它拥有一个函数库，可扩展（因为可以轻松创建新模块），并且适用于所有操作系统。由于这些及其他原因，它也是数据挖掘和机器学习中最常用的编程语言之一。
+
+
+  我的目标是陪伴你开始学习这种编程语言，向你展示基本概念，然后帮助你过渡到数据挖掘。我们将首先了解如何使用 Python 及其结构，如何安装 Python，以及如何确定哪些工具最适合数据分析，然后转向介绍数据挖掘包。*《Python
+  数据挖掘快速语法参考》* 是一本入门书籍。它提供指导——从使用 Python 迈出编程第一步，到操作和导入数据集，再到检查数据分析示例。它不会全面解释诸如使用
+  Python 进行机器学习和统计学等主题，这些超出了本书的范围。
+
+
+  ## 本书面向的读者
+
+
+  本书面向那些希望从数据分析角度更好地理解 Python 编程语言的读者。我们将从回顾 Python 的基本概念开始，然后重点介绍最常用的数据分析包。要下载代码、更深入地研究某些主题以及获取有关
+  Python 和数据挖掘的更多实用信息，请访问我的网站（[**Datawiring.me**](http://datawiring.me/)）。从网站首页，你可以订阅我的新闻通讯，以接收有关
+  Python 编码最新动态和其他新闻的更新。对于初学编程的读者，我的建议是手动编写代码以加深理解。
+
+
+  ## 本书的组织结构
+
+
+  *《Python 数据挖掘快速语法参考》* 包含 11 章。在第 1 章中，我们将了解一些基本的安装概念以及用于 Python 编程的工具。我们还将探讨 Python2
+  和 Python3 之间的差异，并学习如何设置工作文件夹。
+
+
+  在第 2 章中，我们将学习一些关于创建对象、输入注释以及为系统保留字的基本概念；并了解构成 Python 编程语言语法一部分的各种运算符类型。
+
+
+  在第 3 章中，我们将扩展对基本 Python 结构（如元组、列表、字典、集合、字符串和文件）的使用，并学习如何创建和转换它们。
+
+
+  在第 4 章中，我们将创建小型的基本函数，并学习如何保存它们。
+
+
+  第 5 章涉及条件指令，这些指令使我们能够扩展函数的功能。此外，我们还将回顾其他一些重要函数。
+
+
+  在第 6 章中，我们将研究面向对象编程的基本概念，并探讨模块、方法和错误处理的概念。
+
+
+  第 7 章专门介绍使用我们已学习的一些基本功能导入文件。我们将学习如何打开和编辑 .csv 格式的文本文件，以及其他各种格式。
+
+
+  第 8 章到第 11 章解释了 Python 最重要的数据挖掘包：用于数学函数和随机数据生成的 NumPy 和 SciPy，用于数据框管理和数据导入的 pandas，用于绘制图表的
+  Matplotlib，以及用于机器学习的 scikit-learn。关于 scikit-learn，讨论仅限于各种算法代码的基本覆盖。由于该主题的复杂性，我们不详细研究各种技术的细节。
+
+
+  ### 关于作者和技术审稿人
+
+
+  ### 关于作者
+
+
+  ### 关于技术审稿人
+
+
+  '
+- '# 1. 开始入门
+
+
+  Python 是数据科学中使用的最重要的编程语言之一。在本章中，你将学习如何安装 Python，并回顾一些用于数据分析的集成开发环境（IDE）。你还将学习如何在计算机上设置工作目录。
+
+
+  ## 安装 Python
+
+
+  Python2 和 Python3 可以轻松地从 [`https://www.python.org/downloads/`](https://www.python.org/downloads/)（图
+  1-1）下载并安装。请注意，如果你在使用 Mac 或 Linux 的 Unix 系统上工作，Python 是预装的。只需输入“python”即可加载程序。
+
+
+  ![../images/469457_1_En_1_Chapter/469457_1_En_1_Fig1_HTML.jpg](img/469457_1_En_1_Fig1_HTML.jpg)
+
+
+  图 1-1
+
+
+  Python 主页
+
+
+  从 [python.org](http://python.org/)（[`python.org/`](http://python.org/)）网站，点击“Downloads”，然后根据你的操作系统选择要使用的适当版本。然后，按照屏幕上的说明安装
+  Python。
+
+
+
+
+
+  ## 编辑器与集成开发环境
+
+
+  使用 Python 等编程语言有多种方式。首先，输入单词“python”，紧接着输入其版本号。数字前没有空格。例如，在图 1-2 中，我输入了“python2”。
+
+
+  ![../images/469457_1_En_1_Chapter/469457_1_En_1_Fig2_HTML.jpg](img/469457_1_En_1_Fig2_HTML.jpg)
+
+
+  图 1-2
+
+
+  打开 Python 的终端
+
+
+  以这种方式编写代码可能会显得有些繁琐，因此我们使用文本编辑器或集成开发环境来简化流程。
+
+
+  有许多编辑器（包括免费和付费的），它们在完整性、可扩展性和易用性方面各不相同。有些简单，有些则更高级。最常用的编辑器包括 Sublime Text、[Text
+  Wrangler](http://www.barebones.com/)（[`www.barebones.com/`](http://www.barebones.com/)）、[Notepad++](http://notepad-plus-plus.org/download/v7.3.1.html)（[`notepad-plus-plus.org/download/v7.3.1.html`](http://notepad-plus-plus.org/download/v7.3.1.html)）（适用于
+  Windows）或 [TextMate](http://macromates.com/)（[`macromates.com/`](http://macromates.com/)）（适用于
+  Mac）。
+
+
+  至于 Python 专用的集成开发环境，[Wingware](http://wingware.com/)（[`wingware.com/`](http://wingware.com/)）、[Komodo](http://www.activestate.com/komodo-ide)（[`www.activestate.com/komodo-ide`](http://www.activestate.com/komodo-ide)）、Pycharm
+  和 [Emacs](http://www.gnu.org/software/emacs/)（[`www.gnu.org/software/emacs/`](http://www.gnu.org/software/emacs/)）都很流行，但还有很多其他选择。它们提供了简化工作的工具，例如自动补全、自动编辑和自动缩进、集成文档、语法高亮和代码折叠（在处理其他代码时隐藏部分代码的能力），并支持调试。
+
+
+  Spyder（包含在 [Anaconda](http://www.continuum.io/downloads)（[`www.continuum.io/downloads`](http://www.continuum.io/downloads)）中）和
+  [Jupyter](http://jupyter.readthedocs.io/en/latest/)（[`jupyter.readthedocs.io/en/latest/`](http://jupyter.readthedocs.io/en/latest/)），你可以从网站
+  [www.anaconda.com](https://www.anaconda.com) 下载，它们与 Canopy 一样，是数据科学中最常用的集成开发环境。Jupyter
+  中一个有用的工具是 nbviewer，它允许交换 Jupyter 的 .ipynb 文件，可以从 [`http://nbviewer.jupyter.org`](http://nbviewer.jupyter.org)
+  下载。nbviewer 也可以链接到 GitHub。
+
+
+  至于 Anaconda，它是一个非常有用的工具，因为它也集成了 Jupyter，可以从 [`www.continuum/`](http://www.continuum/)
+  下载。图 1-3 展示了随 Anaconda 安装的部分资源列表（包含超过 100 个用于数据挖掘、数学、数据分析和代数的包）。你可以通过打开图 1-3 所示的终端窗口，然后输入以下命令来查看完整列表：
+
+
+  ![../images/469457_1_En_1_Chapter/469457_1_En_1_Fig3_HTML.jpg](img/469457_1_En_1_Fig3_HTML.jpg)
+
+
+  图 1-3
+
+
+  随 Anaconda 安装的部分资源
+
+
+  ```
+
+  conda list
+
+  ```
+
+
+  我们可以根据个人习惯和需求，使用这些工具中的一个或多个来用 Python 编程。Spyder（图 1-4）和 Jupyter（图 1-5）在数据挖掘中非常常见。两者都可以单独使用和安装。例如，Jupyter
+  可以通过 http://try.jupyter.org/ 进行测试。然而，安装 Anaconda 后，Spyder 和 Jupyter 都可直接使用。
+
+
+  ![../images/469457_1_En_1_Chapter/469457_1_En_1_Fig5_HTML.jpg](img/469457_1_En_1_Fig5_HTML.jpg)
+
+
+  图 1-5
+
+
+  Jupyter 集成开发环境中打开的脚本示例
+
+
+  ![../images/469457_1_En_1_Chapter/469457_1_En_1_Fig4_HTML.jpg](img/469457_1_En_1_Fig4_HTML.jpg)
+
+
+  图 1-4
+
+
+  Spyder 主屏幕
+
+
+  Python 代码可以直接在计算机终端上运行，或者保存为 .py 文件，然后通过这些编辑器运行。如前所述，“>>>”（如图 1-6 所示）表示我们正在运行 Python
+  代码。
+
+
+  ![../images/469457_1_En_1_Chapter/469457_1_En_1_Fig6_HTML.jpg](img/469457_1_En_1_Fig6_HTML.jpg)
+
+
+  图 1-6
+
+
+  Python 中的命令提示符
+
+
+  为了跟随本书中的示例，我建议你从 **Anaconda.com** 网站安装 Anaconda（图 1-7）并使用 Jupyter。因为 Anaconda 会自动包含（并安装）我们稍后将使用的一组包和模块，之后我们就不必单独安装包或模块了；它们已经加载好，随时可以使用。
+
+
+  ![../images/469457_1_En_1_Chapter/469457_1_En_1_Fig7_HTML.jpg](img/469457_1_En_1_Fig7_HTML.jpg)
+
+
+  图 1-7
+
+
+  Anaconda 主屏幕
+
+
+  ## Python2 与 Python3 的区别
+
+
+  Python 发布了两个不同版本：Python2 和 Python3。Python2 诞生于 2000 年（目前最新版本是 2.7），其支持预计将持续到 2020
+  年。它是历史最悠久、最完整的版本。
+
+
+  Python3 于 2008 年发布（当前版本是 3.6）。Python3 中有许多库，但并非所有库都已从 Python2 转换到 Python3。
+
+
+  这两个版本非常相似，但存在一些差异。一个例子包括数学运算：
+
+
+  ```
+
+  >>> 5/2
+
+  2.5
+
+  列表 1-2
+
+  Python 3.5.2 中的数学运算
+
+  ```
+
+
+  ```
+
+  >>> 5/2
+
+
+  # Python2 执行除法时会截断小数部分。
+
+  列表 1-1
+
+  Python 2.7 中的数学运算
+
+  ```
+
+
+  要在 Python2 中获得正确结果，我们必须指定小数，如下所示：
+
+
+  ```
+
+  >>> 5.0/2
+
+  2.5
+
+  # 或者这样
+
+  >>> 5/2.0
+
+  2.5
+
+  # 或者指定我们谈论的是小数（浮点数）
+
+  >>> float(5)/2
+
+  2.5
+
+  ```
+
+
+  为了同时兼容这两个 Python 版本，你还可以将 Python 导入一种称为 *future* 的形式，它允许你将 Python3 的函数导入到 Python2
+  中：
+
+
+  ```
+
+  >>> from __future__ import division
+
+  >>> 5/2
+
+  2.5
+
+  ```
+
+
+  要更深入地了解这两个 Python 版本之间的差异，请访问[这个在线资源](http://sebastianraschka.com/Articles/2014_python_2_3_key_diff.html)（[`sebastianraschka.com/Articles/2014_python_2_3_key_diff.html`](http://sebastianraschka.com/Articles/2014_python_2_3_key_diff.html)）。
+
+
+  为什么选择某个 Python 版本而不是另一个？Python2 是定义最完善、最稳定的版本，而 Python3 代表了该语言的未来，尽管这两个版本可能并不总是完全一致。在本书的第一部分，我会强调这两个版本之间的差异。然而，从第
+  7 章开始到本书结尾，我们将使用 Python3。
+
+
+  让我们从设置一个工作目录开始。这个目录将存放我们的文件。
+
+
+
+
+  ## 工作目录
+
+
+  工作目录用于存储我们的脚本和文件。当我们要求 Python 导入文件或运行脚本时，它会自动在此目录中查找。要设置工作目录，请在 Python shell 中输入以下内容：
+
+
+  ```
+
+  >>> import os
+
+  >>>> os.getcwd()
+
+  ''~/mypc''
+
+  # 要修改工作目录，我们使用以下表示法，在括号中插入新目录
+
+  >>> os.chdir("/~/Python_script")
+
+  # 然后确认修改是否正确
+
+  >>> os.getcwd()
+
+  ''~/Python_script''
+
+  ```
+
+
+  现在，当我们想要在工作簿中导入一个文件时，只需输入文件名及其扩展名，并用双引号括起来即可：
+
+
+  ```
+
+  "file_name.extension"
+
+  ```
+
+
+  例如：
+
+
+  ```
+
+  "dataframe_data_collection1.csv"
+
+  ```
+
+
+  Python 会检查该文件夹中是否存在同名文件，并将其导入。当我们在电脑上输入并保存一个 Python 文件时，也会发生同样的情况。Python 会自动将其放入该文件夹。即使我们运行一个
+  Python 脚本（稍后会看到），我们也必须直接从终端访问脚本所在（工作目录或其他目录）的文件夹。
+
+
+  如果我们想导入一个不在工作目录中，而是位于电脑其他位置或网络上的文件，可以通过输入完整的文件地址来实现：
+
+
+  ```
+
+  "complete_address.file_name.extension"
+
+  ```
+
+
+  例如：
+
+
+  ```
+
+  "/~/dataframe_data1.csv"
+
+  ```
+
+
+  现在，请确保你理解了使用终端和在喜欢的编程语言中启动会话之间的区别。
+
+
+  ## 使用终端
+
+
+  要运行 Python 脚本，我们首先打开一个终端窗口，如图 1-8 所示。
+
+
+  ![../images/469457_1_En_1_Chapter/469457_1_En_1_Fig8_HTML.jpg](img/469457_1_En_1_Fig8_HTML.jpg)
+
+
+  图 1-8
+
+
+  我的终端
+
+
+  如你所见，显示的是美元符号 ($)，而不是 Python shell 的符号 (>>>)。要查看文件夹和文件的列表，请使用 “ls” 命令（图 1-9）。
+
+
+  ![../images/469457_1_En_1_Chapter/469457_1_En_1_Fig9_HTML.jpg](img/469457_1_En_1_Fig9_HTML.jpg)
+
+
+  图 1-9
+
+
+  我电脑上的资源列表
+
+
+  此时，我们可以通过输入以下命令进入 Python_test 文件夹：
+
+
+  ```
+
+  cd Python_test
+
+  ```
+
+
+  在该文件夹中，我可以找到我的 Python 脚本——即可以通过输入以下命令运行的 .py 文件：
+
+
+  ```
+
+  python test.py
+
+  ```
+
+
+  test.py 是我将要运行的脚本名称。
+
+
+  ## 总结
+
+
+  在本章中，我们学习了如何安装 Python，并回顾了一些可用于数据分析的集成开发环境（IDE）。我们还探讨了 Python2 和 Python3，并学习了如何在终端上设置工作目录。
+
+
+  '
+- '# 2. 入门说明
+
+
+  在本章中，我们将学习 Python 对象和运算符，以及如何在代码中编写注释。在代码中包含注释非常重要，原因有二。首先，它们可以帮助我们在创建脚本数周或数月后，回忆起当时的工作思路。其次，它们有助于其他程序员理解我们为何要这样做。
+
+
+  ## Python 中的对象
+
+
+  在 Python 中，任何条目都被视为一个对象，即存放数据的容器。Python 对象包括元组、列表、集合、字典和容器。Python 的处理过程基于对象。
+
+
+  每个对象通过三个属性来区分：
+
+
+  1.  名称
+
+
+  2.  类型
+
+
+  3.  ID
+
+
+  对象名称由字母数字字符和下划线组成——换句话说，即所有 A 到 Z、a 到 z、0 到 9 的字符以及下划线 _。“类型”是指对象的类型，例如字符串、数值或布尔值。“ID”是唯一标识该对象的数字。
+
+
+  对象驻留在计算机内存中，并且可以被检索。当不再需要时，垃圾回收功能会释放其占用的空间。
+
+
+  某些 ID 和类型是自动分配的。然而，关于名称，请注意有些名称不能用于对象。
+
+
+  ## 系统保留字
+
+
+  Python 有一组为系统保留的单词，不能用作对象或函数的名称。这些单词如下：
+
+
+  > ***and, as, assert, break, class, continue, def, del, elif, else, except, exec,
+  False, finally, for, from, global, if, import, in, is, lambda, None, not, or, pass,
+  print, raise, return, True, try, while, with, yield***
+
+
+  此外，R 语言中的对象名称需遵循一些规则：
+
+
+  *   必须以字母或下划线开头。
+
+
+  *   只能包含字母、数字和下划线。
+
+
+  *   区分大小写。例如，test 对象与 TEST 对象或 Test 对象不同。
+
+
+  ## 在代码中输入注释
+
+
+  在 Python 中，任何以 # 符号开头的注释都不会被程序作为代码读取；它们会被忽略。此功能对于注释代码和日后回忆非常有用。注释可以写在代码行内，也可以写在代码旁边。
+
+
+  ```
+
+  # 注释 1
+
+  >>> print("Hello World") # 注释 2
+
+  ```
+
+
+  要编写多行注释，我们也可以使用三个引号，如下所示：
+
+
+  ```
+
+  """
+
+  注释行 1
+
+  注释行 2
+
+  注释行 3
+
+  """
+
+  ```
+
+
+  ## 数据类型
+
+
+  Python 数据有多种类型，汇总于表 2-1。
+
+
+  表 2-1
+
+
+  Python 数据类型
+
+
+  | 数据类型 | 示例 |
+
+  | --- | --- |
+
+  | 整数 (int) | 1, 20, –19 |
+
+  | 浮点数 (float) | 1.7, 12.54 |
+
+  | 复数 (complex) | 657.23e+34 |
+
+  | 字符串 (str) | "Hello World", ''string1'', """ string2 """ |
+
+  | 列表 (list) | list = [''a'', ''b'', ''c'' ] |
+
+  | 元组 (tuple) | tuple = (''Laura'', 29, ''Andrea'', 4) |
+
+  | 字典 (dictionary) | dictionary = {''name'' : ''Simon'', ''key'': ''D007''} |
+
+
+  要确定对象类型，我们使用 type() 函数：
+
+
+  ```
+
+  # 我们创建一个 x 对象
+
+  >>> x = 1
+
+  >>> type(x)
+
+
+  # 一个 y 对象
+
+  >>> y = 20.75
+
+  >>> type(y)
+
+
+  # 以及一个 z 对象
+
+  >>> z = "test"
+
+  >>> type(z)
+
+
+  ```
+
+
+  ## 文件格式
+
+
+  在 Python 中创建脚本后，你需要将其保存为 .py 扩展名。通常，对于复杂的脚本，你会在编辑器上创建脚本，然后运行它。一个 .py 脚本可以使用前面讨论过的任何不同编辑器编写——甚至是一个普通的文本编辑器——然后重命名为
+  .py 扩展名。
+
+
+  ## 运算符
+
+
+  Python 包含一系列运算符，它们被分为几组：
+
+
+  *   算术运算符
+
+
+  *   比较运算符
+
+
+  *   成员运算符
+
+
+  *   位运算符
+
+
+  *   赋值运算符
+
+
+  *   逻辑运算符
+
+
+  *   身份运算符
+
+
+  除了这些运算符之外，还有一个优先级层次结构，标志着它们的使用顺序。运算符对于算术运算，甚至对于提取具有特定特征的数据都非常重要。
+
+
+  ### 算术运算符
+
+
+  当我们打开 Python 时，能做的最简单的事情就是用它来执行数学运算，为此我们使用表 2-2 中所示的算术运算符。
+
+
+  表 2-2
+
+
+  算术运算符
+
+
+  | 运算符 | 描述 | 示例 |
+
+  | --- | --- | --- |
+
+  | + | 加法 | 3 + 2 = 5 |
+
+  | − | 减法 | 10 − 4 = 6 |
+
+  | * | 乘法 | 4 * 3 = 12 |
+
+  | / | 除法 | 20/2 = 10 |
+
+  | % | 取模 | 21/2 = 1 |
+
+  | ** | 幂运算 | 3 ** 2 = 9 |
+
+  | // | 整除 | 10.5 // 2 = 5.0 |
+
+
+  让我们打开 Python 并执行一些数学运算：
+
+
+  ```
+
+  >>> 10+7
+
+
+  >>> 15-2
+
+
+  >>> 2*3
+
+
+  >>> 10/2
+
+
+  >>> 3**3
+
+
+  >>> 10/3
+
+
+  >>> 25//7
+
+
+  ```
+
+
+
+
+  ### 比较运算符与成员运算符
+
+
+  在 Python 中，我们还有比较运算符和成员运算符（表 2-3）。
+
+
+  表 2-3
+
+
+  比较运算符与成员运算符
+
+
+  | 运算符 | 描述 |
+
+  | --- | --- |
+
+  | > | 大于 |
+
+  | < | 小于 |
+
+  | == | 等于 |
+
+  | >= | 大于或等于 |
+
+  | <= | 小于或等于 |
+
+  | != | 不等于 |
+
+  | is | 是 |
+
+  | is not | 不是 |
+
+  | in | 存在于 |
+
+  | not in | 不存在于 |
+
+
+  这些运算符用于测试对象之间的关系。例如：
+
+
+  ```
+
+  # 我们创建两个对象
+
+  >>> x = 5
+
+  >>> y = 10
+
+  # 让我们验证 x 是否大于 y
+
+  >>> x > y
+
+  False
+
+  # 输出是一个逻辑向量，告诉我们 x 不大于 y
+
+  # 让我们看看 x 是否小于 y
+
+  >>> x >> z = 5
+
+  # 让我们用相等运算符验证 z 是否等于 x
+
+  >>> z == x
+
+  True
+
+  # 在这种情况下，输出是肯定的
+
+  # 让我们验证 z 是否不等于 y
+
+  >>> z != y
+
+  True
+
+  # 在这种情况下，输出也是肯定的
+
+  # 让我们创建一个元组
+
+  >>> v1 = (1,2,3,4,5,6,7)
+
+  # 并验证数字 2 是否在元组中
+
+  >>> 2 in v1
+
+  True
+
+  # 让我们验证数字 8 是否不在元组 v1 中
+
+  >>> 8 not in v1
+
+  True
+
+  # 让我们验证数字 7 是否不在元组 v1 中
+
+  >>> 7 not in v1
+
+  False
+
+  ```
+
+
+  Python 会按字典顺序比较文本字符串，例如使用字符的 ASCII 值。我们不能比较字符串和数字，因为会引发错误。
+
+
+  ### 位运算符
+
+
+  表 2-4 中所示的位运算符在指定多个条件时非常有用。例如，当我们需要从对象（如数据集）中提取数据时。
+
+
+  表 2-4
+
+
+  位运算符
+
+
+  | 运算符 | 描述 |
+
+  | --- | --- |
+
+  | & 或 **and** | 与 |
+
+  | &#124; 或 **or** | 或 |
+
+  | ^ | 异或 |
+
+  | ~ | 按位取反 |
+
+  | << | 左移 |
+
+  | >> | 右移 |
+
+
+  位运算符可以与比较运算符一起使用。让我们看一些例子：
+
+
+  ```
+
+  >>> 3  3
+
+  True
+
+  # 以及
+
+  >>> 3  3
+
+  True
+
+  # 这里是一个使用 or (|) 的例子
+
+  >>> 3  3
+
+  True
+
+  # 至少有一个语句必须为真
+
+  >>> 3 == 4 or 4 > 3
+
+  True
+
+  ```
+
+
+  ### 赋值运算符
+
+
+  赋值运算符用于为给定对象分配一个名称（表 2-5）。
+
+
+  表 2-5
+
+
+  赋值运算符
+
+
+  | 运算符 | 描述 | 示例 |
+
+  | --- | --- | --- |
+
+  | = | 基本赋值运算符 | x = 5 + 6 |
+
+  | += | 加后赋值 | x += y (对应 x = x + y) |
+
+  | -= | 减后赋值 | x -= y (对应 x = x – y) |
+
+  | /= | 除后赋值 | x /= y (对应 x = x/y) |
+
+  | *= | 乘后赋值 | x *= y (对应 x = x * y) |
+
+  | %= | 取模后赋值 | x %= y (对应 x = x % y) |
+
+  | **= | 幂运算后赋值 | x **= y (对应 x = x ** y) |
+
+  | //= | 整除后赋值 | x//=y (对应 x = x//y) |
+
+
+  让我们看一些例子：
+
+
+  ```
+
+  # 我们创建一个值为 10 的 x 对象
+
+  >>> x = 10
+
+  # 对 x 求和并用相同名称覆盖变量 x
+
+  >>> x = x + 5
+
+  >>> x
+
+
+  # 让我们试试 "+="
+
+  >>> x += 5
+
+  >>> x
+
+
+  # 现在试试 "-="
+
+  >>> x -= 5
+
+  >>> x
+
+
+  # 现在使用运算符 "*="
+
+  >>> x *= 3
+
+  >>> x
+
+
+  # 以及运算符 "/="
+
+  >>> x /= 3
+
+  >>> x
+
+
+  # 然后是运算符 "**="
+
+  >>> x **= 2
+
+  >>> x
+
+
+  # 最后是运算符 "//="
+
+  >>> x //= 2
+
+  >>> x
+
+
+  ```
+
+
+  每次，Python 都会执行操作并将结果记录在 x 对象中。
+
+
+  ## 运算符优先级
+
+
+  谈到数学运算符时，我们必须意识到存在一个优先级顺序，当没有插入括号时必须遵守。这类似于数学运算，其中乘法优先于加法。表 2-6 列出了一些管理运算顺序的优先级规则。
+
+
+  表 2-6
+
+
+  运算符优先级规则
+
+
+  | 运算符 | 优先级（从高到低） |
+
+  | --- | --- |
+
+  | ** | 幂运算具有最高优先级 |
+
+  | - | 负号 |
+
+  | * / // % | 乘法、除法、取模、整除 |
+
+  | + - | 加法和减法 |
+
+  | >> << | 按位右移和左移 |
+
+  | & | 按位与 |
+
+  | ^ &#124; | 按位或 |
+
+  | <=, >, <, >= | 小于、大于、小于、大于 |
+
+  | == != | 等于、不等于 |
+
+  | = += -= *= /= %= **= //= | 赋值运算符 |
+
+  | is / is not | 比较 |
+
+  | in / not in | 比较 |
+
+  | not / or / and | 比较 |
+
+
+  ## 缩进
+
+
+  Python 使用缩进来限定指令块，这使得代码更具可读性。因此，代码块由缩进定义。通常，一个缩进对应四个空格。
+
+
+  让我们看一个函数中缩进的例子：
+
+
+  ```
+
+  >>> def multiply_xy(x, y):
+
+  ...   "''让我们将 x 和 y 相乘
+
+  ...   "''
+
+  ...   return(x*y)
+
+  >>> multiply_xy(5,6)
+
+
+  ```
+
+
+  ## 引号
+
+
+  在 Python 中，引号主要用于定义字符串。它们可以是单引号、双引号或三引号。三引号用于包裹文字并在多行中插入注释。例如，当我们希望在正在创建的函数中包含文档时。
+
+
+  ```
+
+  >>> ex1 = ''单引号''
+
+  >>> ex2 = "双引号"
+
+  >>> ex3 = """
+
+  文本字符串 1
+
+  文本字符串 2
+
+  文本字符串 3
+
+  """
+
+  ```
+
+
+  我们将在第 5 章中研究字符串管理。
+
+
+  ## 总结
+
+
+  在本章中，我们学习了注释和运算符。当我们编写数据分析代码时，包含注释不仅是为了提醒自己，也是为了给其他程序员提供指导，这一点很重要。运算符及其优先级帮助我们创建和定义代码。
+
+
+  '
+- "# 3. 基本对象与结构\n\nPython 最重要的特性之一是管理数据结构。让我们来看看它们。\n\n## 数字\n\nPython 中的数字可以是以下任何一种：\n\
+  \n*   整数，即 int\n\n*   浮点数，即 float\n\n*   复数\n\n*   布尔值——即 True 或 False\n\n让我们看一些例子：\n\
+  \n```\n# 创建一个包含整数 (int) 的对象\n>>> n1 = 19\n>>> type(n1)\n\n# 一个浮点数\n>>> n2 = 7.5\n\
+  >>> type(n2)\n\n# 一个布尔值 (True/False)\n>>> n3 = True\n>>> type(n3)\n\n# 一个复数\n>>>\
+  \ n4 = 3j\n>>> type(n4)\n\n```\n\n## 容器对象\n\nPython 的核心是可以创建的各种类型的对象（表 3-1）。\n\n\
+  表 3-1\n\nPython 容器对象\n\n| 容器 | 定界符 |\n| --- | --- |\n| 元组 | ( ) |\n| 列表 | [ ] |\n\
+  | 字典 | { } |\n| 集合 | { } |\n| 字符串 | \"\"\"\" |\n\n让我们逐一检查它们。\n\n\n\n## 元组\n\n元组与字符串和列表一样，都属于*序列*类别。序列是可迭代的对象，表示任意长度的容器。元组是异构且不可变对象的序列，用圆括号标识。不可变性意味着一旦创建了元组，就无法更改它；我们不能将其中的某个元素替换为另一个元素。元组在内存消耗和运行时方面非常高效。\n\
+  \n让我们创建一个元组：\n\n```\n>>> t1 = (1,2,3,4,5)\n# 我们使用 type() 函数基于创建的对象类型进行查询\n>>> type(t1)\n\
+  \n# Python 告诉我们创建了一个元组，因此我们创建了正确的数据结构\n```\n\n序列的常见操作包括索引、切片、连接和重复。如前所述，元组创建后无法修改，但我们*可以*提取、连接或重复其元素。\n\
+  \n```\n# 我们创建另一个元组\n>>> t2 = (\"a\", \"b\", \"c\", \"d\")\n>>> type(t2)\n\n# 我们提取元组\
+  \ t2 的第一个元素\n>>> t2[0]\n'a'\n# 要计算元组的元素个数，我们从零开始计数；要提取第一个元素 \"a\"，我们使用方括号进行切片，并在其中插入数字\
+  \ 0\n# 我们也可以使用减号来提取元组的元素；这些元素从最后一个到第一个进行计数\n>>> t2[-1]\n'd'\n# 我们可以使用冒号提取多个元素\n\
+  >>> t2[1:3]\n('b', 'c')\n```\n\n要确定某个元素是否存在于元组中，我们使用 `in` 运算符：\n\n```\n>>> 'a' in\
+  \ t2\nTrue\n>>> 'z' in t2\nFalse\n```\n\n如前所述，元组是不可变的。如果我们尝试将元组的一个元素替换为另一个元素，会收到错误消息：\n\
+  \n```\n>>> t2['a'] = 15\nTraceback (most recent call last):\nFile \"\", line 1,\
+  \ in \nTypeError: 'tuple' object does not support item assignment\n```\n\n要显示元组可用的函数，请键入\n\
+  \n```\n>>> dir(t2)\n['__add__', '__class__', '__contains__', '__delattr__', '__dir__',\
+  \ '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__',\
+  \ '__getnewargs__', '__gt__', '__hash__', '__init__', '__iter__', '__le__', '__len__',\
+  \ '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__',\
+  \ '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'count',\
+  \ 'index']\n```\n\n我们可以使用元组可用的函数向其中添加元素：\n\n```\n>>> t2 = t2.__add__(('xyz',))\n\
+  # 让我们再次查看我们的元组\n>>> t2\n('a', 'b', 'c', 'd', 'xyz')\n```\n\n最后，我们可以创建包含多种类型对象的元组：\n\
+  \n```\n>>> t3 = (1,2,3,4,5, \"test\", 20.75, \"string2\")\n>>> t3\n(1, 2, 3, 4,\
+  \ 5, 'test', 20.75, 'string2')\n```\n\n## 列表\n\nPython 列表包含各种类型的元素。它们与元组类似，区别在于它们是可变的；你可以向列表中添加或删除元素。\n\
+  \n要创建列表，我们将元素放在方括号内，用逗号分隔：\n\n```\n>>> list1 = [\"jan\", \"feb\", \"mar\", \"apr\"\
+  ]\ntype(list1)\n\n```\n\n我们也可以创建包含数值、逻辑值或字符串值的列表，或者混合多种数据类型：\n\n```\n>>> list2 =\
+  \ [\"one\", 25, True]\n>>> type(list2)\n\n```\n\n我们可以使用 `print()` 函数显示列表：\n\n```\n\
+  >>> print(list1)\n['jan', 'feb', 'mar', 'apr']\n```\n\n或者使用 `len()` 函数确定其长度：\n\n\
+  ```\n>>> len(list1)\n\n```\n\n我们还可以根据位置打印单个列表元素：\n\n```\n>>> list1[0]\n'jan'\n>>>\
+  \ list1[-2]\n'mar'\n# 如果我们插入一个与列表中任何元素都不匹配的位置，会收到错误\n>>> list1[7]\nTraceback (most\
+  \ recent call last):\nFile \"\", line 1, in \nIndexError: list index out of range\n\
+  ```\n\n我们可以从列表中选择一些元素：\n\n```\n>>> list1 = [\"jan\", \"feb\", \"mar\", \"apr\"]\n\
+  >>> list1[1:]\n['feb', 'mar', 'apr']\n>>> list1[:3]\n['jan', 'feb', 'mar']\n```\n\
+  \n我们可以对列表进行乘法运算：\n\n```\n>>> list1*2\n['jan', 'feb', 'mar', 'apr', 'jan', 'feb',\
+  \ 'mar', 'apr']\n```\n\n或者通过组合两个列表来创建一个新列表：\n\n```\n>>> list3 = list1 + list2\n\
+  >>> list3\n['jan', 'feb', 'mar', 'apr', 'one', 25, True]\n```\n\n我们甚至可以提取一些元素并将其保存到另一个列表，这实际上就是切片操作。\n\
+  \n```\n>>> list4 = list3[2:6]\n>>> list4\n['mar', 'apr', 'one', 25]\n```\n\n我们也可以像这样从列表中删除一个元素：\n\
+  \n```\n>>> del list1[1]\n>>> list1\n['jan', 'mar', 'apr']\n```\n\n通过对列表使用 `dir()`\
+  \ 函数，我们可以查看可以在该列表上执行的所有操作：\n\n```\n>>> dir(list1)\n['__add__', '__class__', '__contains__',\
+  \ '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__',\
+  \ '__getattribute__', '__getitem__', '__gt__', '__hash__', '__iadd__', '__imul__',\
+  \ '__init__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__',\
+  \ '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__',\
+  \ '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'clear',\
+  \ 'copy', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']\n\
+  ```\n\n一些最重要的函数包括：\n\n*   **append()** 向列表添加元素\n\n*   **clear()** 移除列表中的所有元素\n\n\
+  *   **copy()** 复制列表\n\n*   **extend()** 合并两个列表\n\n*   **insert()** 在列表的特定位置添加一个元素\n\
+  \n*   **pop()** 从列表中移除一个元素\n\n*   **remove()** 从列表的特定位置移除一个元素\n\n让我们在 list3 上使用其中一些操作。\n\
+  \n```\n>>> list3\n['jan', 'feb', 'mar', 'apr', 'one', 25, True]\n# 我们可以使用 append()\
+  \ 方法添加一个元素\n>>> list3.append(7)\n>>> list3\n['jan', 'feb', 'mar', 'apr', 'one',\
+  \ 25, True, 7]\n# 使用 reverse() 反转列表元素的顺序\n>>> list3.reverse()\n>>> list3\n[7, True,\
+  \ 25, 'one', 'apr', 'mar', 'feb', 'jan']\n# 使用 pop() 删除最后一个元素\n>>> list3.pop()\n\
+  'jan'\n>>> list3\n[7, True, 25, 'one', 'apr', 'mar', 'feb']\n# 使用 sort() 按升序对列表元素重新排序\n\
+  >>> list5 = [100, 12, 45, 67, 89, 7, 19]\n>>> list5.sort()\n>>> list5\n[7, 12, 19,\
+  \ 45, 67, 89, 100]\n# 使用 extend() 用另一个列表扩展列表\n>>> list5.extend([260, 35, 98, 124])\n\
+  >>> list5\n[7, 12, 19, 45, 67, 89, 100, 260, 35, 98, 124]\n# 最后，我们可以使用 clear 函数删除列表中的元素\n\
+  >>> list5.clear()\n>>> list5\n[]\n```\n\n我们也可以创建包含子列表的列表：\n\n```\n>>> list6 = [(5,7),\
+  \ (9,2), (2,3), (14,27)]\n>>> list6\n[(5, 7), (9, 2), (2, 3), (14, 27)]\n# 在这种情况下，让我们选择\
+  \ list6 对象的第三个元素：\n>>> list6[2]\n(2, 3)\n# 让我们只选择 list6 第三个元素的第二个元素：\n>>> list6[2][1]\n\
+  \n```\n\n我们可以使用 `range()` 函数创建一个包含一系列数字的列表。\n\n```\n# range() 函数创建一个从 1 到 19 的数字列表：\n\
+  >>> list7 = range(20)\n# 让我们检查对象的类型\n>>> type(list7)\n\n# 我们打印该对象\n>>> print(list7)\n\
+  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]\n```\n\n\n\
+  \n## 字典\n\nPython 的另一种数据结构是字典。字典是存储键值对的容器，其特点在于使用花括号和冒号。字典是可变的，但无法排序。我们不能像处理列表和元组那样从字典中提取元素。\n\
+  \n在第一个示例中，我们来看一个记录受试者姓名和身高的字典：\n\n```\n>>> dict1 = {'Laura': 163, 'Francis': 169,\
+  \ 'Kate': 165}\n>>> type(dict1)\n\n```\n\n我们可以查询字典中某个键对应的值：\n\n```\n>>> print dict1['Francis']\n\
+  \n```\n\n我们也可以向字典中添加元素并重写它：\n\n```\n>>> dict1['Simon'] = '180'\n>>> dict1\n{'Laura':\
+  \ 163, 'Simon': '180', 'Francis': 169, 'Kate': 165}\n```\n\n要列出字典的键，我们使用 `.keys`\
+  \ 方法：\n\n```\n>>> dict1.keys()\n['Laura', 'Simon', 'Francis', 'Kate']\n```\n\n要仅获取值，我们使用\
+  \ `.values` 方法：\n\n```\n>>> dict1.values()\n[163, 169, 165]\n```\n\n要判断某个键是否存在于字典中，我们使用\
+  \ `in` 运算符：\n\n```\n>>> 'Laura' in dict1\nTrue\n>>> 'Stephanie' in dict1\nFalse\n\
+  ```\n\n我们可以使用 `del` 命令删除字典元素：\n\n```\n>>> del dict1['Simon']\n>>> dict1\n{'Laura':\
+  \ 163, 'Francis': 169, 'Kate': 165}\n```\n\n我们可以使用 `.clear` 方法清空所有字典元素：\n\n```\n\
+  >>> dict1.clear()\n>>> dict1\n{}\n```\n\n现在，让我们创建另一个字典：\n\n```\n>>> dict2 = {'Statistics':28,\
+  \ 'Machine Learning':30, 'Marketing':27,'Analysis':29}\n>>> dict2\n{'Marketing':27,\
+  \ 'Statistics':28, 'Analysis':29, 'Machine Learning':30}\n```\n\n我们可以使用 `len()`\
+  \ 验证字典中的元素数量：\n\n```\n>>> len(dict2)\n\n```\n\n字典 dict2 包含四个键值对。\n\n即使不使用 `print()`\
+  \ 函数，我们也可以查询字典中某个元素的值：\n\n```\n>>> dict2['Marketing']\n\n```\n\n让我们使用 `list()` 函数检查键：\n\
+  \n```\n>>> list(dict2)\n['Marketing', 'Statistics', 'Analysis', 'Machine Learning']\n\
+  ```\n\n我们可以将键按字母顺序排列：\n\n```\n>>> sorted(list(dict2))\n['Analysis', 'Machine Learning',\
+  \ 'Marketing', 'Statistics']\n```\n\n我们可以仅使用 `.values` 方法显示值：\n\n```\n>>> dict2.values()\n\
+  [27, 28, 29, 30]\n```\n\n我们可以使用 `.items` 方法显示所有项：\n\n```\n>>> dict2.items()\n[('Marketing',\
+  \ 27), ('Statistics', 28), ('Analysis', 29), ('Machine Learning', 30)]\n```\n\n\
+  我们可以通过创建一个函数来列出字典中的元素：\n\n```\n>>> for i in dict2: print(i)\n...\nMarketing\nStatistics\n\
+  Analysis\nMachine Learning\n```\n\n我们也可以使用 `.pop` 方法删除其中一项：\n\n```\n>>> dict2.pop('Marketing')\n\
+  \n>>> dict2\n{'Statistics': 28, 'Analysis': 29, 'Machine Learning': 30}\n```\n\n\
+  另一方面，`.popitem` 方法会从字典中随机删除一个元素：\n\n```\n>>> dict2.popitem()\n('Statistics', 28)\n\
+  >>> dict2\n{'Analysis': 29, 'Machine Learning': 30}\n```\n\n现在字典 dict2 中有两个元素。我们可以通过减法来更新其中一个值——例如，29：\n\
+  \n```\n>>> dict2\n{'Analysis': 29, 'Machine Learning': 30}\n>>> dict2['Analysis']\
+  \ -2\n\n```\n\n在这种情况下，我们没有用新值覆盖旧值。让我们给 29 加上 1。为此，我们需要使用以下表示法：\n\n```\n>>> dict2['Analysis']\
+  \ = dict2['Analysis'] + 1\n>>> dict2\n{'Analysis': 30, 'Machine Learning': 30}\n\
+  ```\n\n我们也可以使用第 2 章中介绍的赋值运算符。在这种情况下，我们可以从 30 中减去 2：\n\n```\n>>> dict2['Analysis']\
+  \ -= 2\n>>> dict2\n{'Analysis': 28, 'Machine Learning': 30}\n```\n\n我们还可以创建一个空字典并填充它：\n\
+  \n```\n>>> dict3 = {}\n>>> dict3['key1'] = ['value1']\n>>> dict3\n{'key1': ['value1']}\n\
+  >>> dict3['key2'] = ['value2']\n>>> dict3\n{'key2': ['value2'], 'key1': ['value1']}\n\
+  ```\n\n字典的一个特性叫做*嵌套*。通过嵌套，我们可以将一个字典插入到另一个字典中：\n\n```\n>>> dict4 = {'key1': { 'nested1':\
+  \ { 'subnested1':'value1'}}}\n```\n\n此时，要获取 *value* 值，我们需要像这样进行子集索引：\n\n```\n>>>\
+  \ dict4['key1']['nested1']['subnested1']\n'value1'\n```\n\n## 集合\n\n集合是另一种 Python\
+  \ 结构。它们是包含无序、不重复元素的容器。集合也是不可变的，并支持典型的集合操作，例如并集、交集和差集。\n\n```\n# 我们创建一个集合\n>>> set1\
+  \ = {2, 5, 7, 9, 15}\n# 检查其结构类型\n>>> type(set1)\n\n# 并检查其长度\n>>> len(set1)\n\n```\n\
+  \n集合不支持索引：\n\n```\n>>> set1[2]\nTraceback (most recent call last):\nFile \"\", line\
+  \ 1, in \nTypeError: 'set' object does not support indexing\n```\n\n但是，它们可以告诉我们某个元素是否在集合中：\n\
+  \n```\n>>> 9 in set1\nTrue\n>>> 17 in set1\nFalse\n```\n\n我们也可以创建一个空集合：\n\n```\n\
+  >>> set2 = set()\n>>> type(set2)\n\n```\n\n要填充它，我们使用 `.add` 方法：\n\n```\n>>> set2.add(17)\n\
+  >>> set2\nset([17])\n>>> set2.add(24)\n>>> set2\nset([24, 17])\n>>> set2.add(36)\n\
+  >>> set2\nset([24, 17, 36])\ntype(set2)\n\n>>> len(set2)\n\n```\n\n让我们创建另一个集合：\n\
+  \n```\n>>> set3 = {1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,4,4,4,4,5}\n>>> set3\nset([1, 2,\
+  \ 3, 4, 5])\n# 如你所见，集合由唯一的元素组成\n```\n\n\n\n## 字符串\n\n字符串是由单引号或双引号括起来的字符序列。它们是**不可变**对象，但可以重复和组合，也可以提取部分内容。我们这样编写字符串：\n\
+  \n```\n>>> string1 = \"Hi!\"\n# 并打印它\n>>> string1\n'Hi!'\n# 或者用单引号这样写\n>>> string2\
+  \ = 'Hello'\n>>> string2\n'Hello'\n# 我们可以通过写变量名或使用 print() 函数来打印字符串\n>>> print(string1)\n\
+  Hi!\n```\n\n字符串可以由单个单词、句子片段或完整句子组成。使用单引号时要小心，因为它们可能会造成混淆，例如与撇号一起使用时：\n\n```\n>>>\
+  \ string3 = 'I'd like to code in Python'\nFile \"\", line 1\nstring3 = 'I'd like\
+  \ to code in Python'\n^\nSyntaxError: invalid syntax\n>>> string4 = \"I'd like to\
+  \ code in Python\"\n>>> string4\n\"I'd like to code in Python\"\n```\n\n不过，我们可以用反斜杠来包含引号，如下所示：\n\
+  \n```\n>>> haml = \"Hamlet said: \\\"to be or not to be ...\\\". Oratio answered\
+  \ \"\n>>> haml\n'Hamlet said: \"to be or not to be ...\". Oratio answered '\n```\n\
+  \n还有一些控制字符也很有用。例如，“\\n”表示换行：\n\n```\n>>> haml2 = \"Hamlet said: to be or not to\
+  \ be \\n Oratio answered ...\"\n>>> print(haml2)\nHamlet said: to be or not to be\n\
+  Oratio answered ...\n```\n\n此外，“\\t”表示制表符：\n\n```\n>>> haml3 = \"Hamlet said: to\
+  \ be or not to be \\t Oratio answered ...\"\n>>> print(haml3)\nHamlet said: to be\
+  \ or not to be   Oratio answered ...\n```\n\n引用字符串时可以使用的运算符，包括连接运算符“+”：\n\n```\n\
+  >>> string1 + string2\n'Hi!Hello'\n```\n\n或重复运算符“*”：\n\n```\n>>> string1*10\n'Hi!Hi!Hi!Hi!Hi!Hi!Hi!Hi!Hi!Hi!'\n\
+  ```\n\n我们可以输入三个引号来标记跨越多行的字符串的开始和结束：\n\n```\n>>> string5 = \"\"\"I'd\n... like\n\
+  ... to\n... code\n... in Python\n... \"\"\"\n>>> print(string5)\nI'd\nlike\nto\n\
+  code\nin Python\n```\n\n我们使用 `type()` 函数验证字符串的类：\n\n```\n>>> type(string1)\n\n```\n\
+  \n并使用 `len()` 函数检查长度：\n\n```\n>>> len(string1)\n\n```\n\n要验证对象 ID，我们使用 `id()` 函数：\n\
+  \n```\n>>> id(string1)\n\n```\n\n我们还可以显示字符串的一部分：\n\n```\n>>> string1[0]\n'H'\n>>>\
+  \ string2[2]\n'l'\n>>> string4[-1]\n'n'\n>>> haml[1:10]\n'amlet sai'\n>>> haml[5:]\n\
+  't said: \"to be or not to be ...\". Oratio answered '\n>>> haml[:10]\n'Hamlet sai'\n\
+  >>> haml[:-2]\n'Hamlet said: \"to be or not to be ...\". Oratio answere'\n# 以下表示法用于反转字符串（或仅反转其一部分）\n\
+  >>> haml[::-1]\n' derewsna oitarO .\"... eb ot ton ro eb ot\" :dias telmaH'\n```\n\
+  \n与字符串相关的最重要的函数允许你执行例如将字符串首字母大写的操作。我们可以通过使用 `capitalize()` 方法来实现：\n\n```\n>>> string6\
+  \ = \"let's do a little test\"\n>>> string6.capitalize()\n\"Let's do a little test\"\
+  \n```\n\n其他函数允许你将整个字符串转换为大写或小写字母：\n\n```\n>>> string6.upper()\n\"LET'S DO A LITTLE\
+  \ TEST\"\n>>> string7 = string6.upper()\n>>> string7\n\"LET'S DO A LITTLE TEST\"\
+  \n>>> string7.lower()\n\"let's do a little test\"\n```\n\n`.find` 方法、`.index` 方法和\
+  \ `.count` 方法用于在字符串中查找一个或多个字符：\n\n```\n>>> string7.find(\"TT\")\n\n>>> string7.index('D')\n\
+  \n>>> string7.count('L')\n\n```\n\n`strip()` 函数用于删除字符串开头和结尾的空白字符：\n\n```\n>>> string8\
+  \ = \"     test     \"\n>>> string8.strip()\n'test'\n```\n\n`replace()` 函数允许我们用另一个元素替换字符串的一部分：\n\
+  \n```\n>>> string9 = \"Let's do some tests\"\n>>> string9.replace(\"some\", \"a\
+  \ couple of\")\n\"Let's do a couple of tests\"\n```\n\n我们可以像这样验证字符串中是否存在子字符串：\n\n\
+  ```\n>>> \"do\" in string9\nTrue\n>>> \"ueioua\" in string9\nFalse\n```\n\n使用 `split()`\
+  \ 函数，我们可以将字符串拆分为包含多个元素的列表：\n\n```\n>>> string9.split()\n[\"Let's\", 'do', 'a', 'little',\
+  \ 'test']\n```\n\n`join()` 函数允许我们将一个列表组合成一个字符串：\n\n```\n>>> \"-\".join([\"03\",\
+  \ \"01\", \"2017\"])\n'03-01-2017'\n```\n\n在前面的示例中，插入了连字符作为分隔符。以下示例不包含分隔符。因此，这些项目是连续列出的：\n\
+  \n```\n>>> \"\".join([\"a\", \"b\", \"c\", \"d\"])\n'abcd'\n# 在这个例子中，我们插入一个空格\n\
+  >>> \" \".join([\"a\", \"b\", \"c\", \"d\"])\n'a b c d'\n```\n\n字符串具有不可变性——这意味着它们不能被修改。即使我们总是可以重复使用一个名称并用另一个对象覆盖它，但就其所有含义而言，它将是一个不同的对象。让我们看一个例子：\n\
+  \n```\n# 我们创建一个字符串\n>>> string1 = \"a b c d e f g\"\n# 我们尝试将第一个元素 \"a\" 替换为 \"x\"\
+  \n>>> string1[0] = 'x'\nTraceback (most recent call last):\nFile \"\", line 1, in\
+  \ \nTypeError: 'str' object does not support item assignment\n# 如你所见，我们收到一个错误，因为我们无法以这种方式更改字符串\n\
+  ```\n\n`%` 模运算符允许高级字符串格式化。`%` 运算符用于在字符串中搜索以 `%` 开头的元素，并用其后列表中包含的一个或多个值替换它们。`%` 符号后面必须跟一个字符，该字符指示我们正在输入字符串的数据类型。要打印两个字符串的内容，我们像这样使用\
+  \ `%s`：\n\n```\n# 我们创建第一个字符串\n>>> string1 = 'test'\n# 如果我们想打印这段文本并合并我们的字符串，我们在结束引号前输入\
+  \ %s，然后插入 % (string)\n>>> print 'my string says: %s' %(string1)\nmy string says:\
+  \ test\n```\n\n我们可以使用循环来遍历字符串：\n\n```\n>>> for letter in string1: print(letter)\n\
+  ...\nt\ne\ns\nt\n```\n\n我们可以计算字符串中的字母数量：\n\n```\n>>> word = \"string test\"\n>>>\
+  \ count = 0\n>>> for letter in word :\n...        count = count + 1\n...       \
+  \ print(count)\n\n```\n\n### 注意\n\nPython2 和 Python3 对字符串的管理略有不同。实际上，在 Python3 中，`print()`\
+  \ 是一个函数，需要括号。\n\n```\n# Python2 中的字符串管理\n>>> print 'Hello world'\nHello world\n\
+  # Python3 中的字符串管理\n>>> print 'Hello world'\nFile \"\", line 1\nprint 'Hello world'\n\
+  ^\nSyntaxError: Missing parentheses in call to 'print'\n>>> print('Hello world')\n\
+  Hello world\n# 为了像在 Python3 中那样处理 Python2 中的字符串，我们可以导入 future 模块：\n# Python2 中 future\
+  \ 模块的使用\n>>> from __future__ import print_function\n>>> print('Hello world')\nHello\
+  \ world\n```\n\n## 文件\n\n除了我们检查过的功能之外，我们通常还会从计算机或互联网导入文件进行分析。文件通常被结构化为数据框，但我们也可以导入图像、音频、二进制、文本或其他专有格式，例如\
+  \ SPSS、SAS、数据库等。我们将在第 6 章学习如何导入最简单的格式，例如 `.csv`。\n\n\n\n## 不可变性\n\n如前所述，不可变性是某些\
+  \ Python 结构的一个特性：一旦创建，该结构便无法修改（见表 3-2）。我们可以重复使用一个名称，并用另一个对象覆盖该结构，但就所有意图和目的而言，它将是不同的。\n\
+  \n表 3-2\n\n数据结构与不可变性\n\n| 结构 | 是否可变 |\n| --- | --- |\n| 列表 | ![../images/469457_1_En_3_Chapter/469457_1_En_3_Figa_HTML.jpg](img/469457_1_En_3_Figa_HTML.jpg)\
+  \ |\n| 字典 | ![../images/469457_1_En_3_Chapter/469457_1_En_3_Figb_HTML.jpg](img/469457_1_En_3_Figb_HTML.jpg)\
+  \ |\n| 元组 | ![../images/469457_1_En_3_Chapter/469457_1_En_3_Figc_HTML.jpg](img/469457_1_En_3_Figc_HTML.jpg)\
+  \ |\n| 集合 | ![../images/469457_1_En_3_Chapter/469457_1_En_3_Figd_HTML.jpg](img/469457_1_En_3_Figd_HTML.jpg)\
+  \ |\n| 字符串 | ![../images/469457_1_En_3_Chapter/469457_1_En_3_Fige_HTML.jpg](img/469457_1_En_3_Fige_HTML.jpg)\
+  \ |\n\n让我们看更多示例。首先从列表开始，它是一个可变对象：\n\n```\n# 我们创建一个列表\n>>> list1 = [\"jan\", \"feb\"\
+  , \"mar\", \"apr\"]\n# 检查对象的类型\n>>> type(list1)\n\n# 并检查所创建列表的 ID\n>>> id(list1)\n\
+  \n# 我们添加一个元素\n>>> list1.append(\"oct\")\n# 重新打印列表\n>>> list1\n['jan', 'feb', 'mar',\
+  \ 'apr', 'oct']\n# 再次检查 ID\n>>> id(list1)\n\n# 如你所见，ID 是相同的\n```\n\n现在，让我们创建一个元组，它是一个不可变对象：\n\
+  \n```\n>>> tuple1 = (1,2,3,4)\n# 检查对象类\n>>> type(tuple1)\n\n# 并验证 ID\n>>> id(tuple1)\n\
+  \n# 然后尝试添加一个元素\n>>> tuple1.append(5)\nTraceback (most recent call last):\nFile \"\
+  \", line 1, in \nAttributeError: 'tuple' object has no attribute 'append'\n# 我们重新创建包含最后一个对象的元组\n\
+  >>> tuple1 = (1,2,3,4,5)\n# 并打印其内容\n>>> tuple1\n(1, 2, 3, 4, 5)\n# 并验证 ID\n>>> id(tuple1)\n\
+  \n# 如所见，我们并没有覆盖第一个对象；而是创建了第二个同名对象（第一个 tuple1 对象不再可用）\n```\n\n最后，让我们检查一些字符串示例，它们是不可变的：\n\
+  \n```\n# 我们创建一个字符串\n>>> string1 = \"a b c d e f g\"\n# 并尝试将第一个元素 \"a\" 替换为 \"x\"\
+  \ String1 [0] = 'x'\nTraceback (most recent call last):\nFile \"\", line 1, in \n\
+  TypeError: 'str' object does not support item assignment\n# 我们得到一个错误\n```\n\n##\
+  \ 格式转换\n\n借助一些函数，我们可以相当轻松地将一种结构转换为另一种结构。\n\n```\n# 让我们创建一些对象\n>>> tuple1 = (1,2,3,4,5)\n\
+  >>> list1 = [\"jan\", \"feb\", \"mar\", \"apr\"]\n>>> string1 = \"2017\"\n>>> int1\
+  \ = 67\n# 检查对象的类型\n>>> type(tuple1)\n\n>>> type(list1)\n\n>>> type(string1)\n\n\
+  >>> type(int1)\n\n```\n\n要转换格式，我们使用以下函数：\n\n```\n# list() 可以将例如元组转换为列表\n>>> convt1\
+  \ = list(tuple1)\n# 需要将结果保存到一个新对象中；让我们再做一次并重新检查类型\n>>> type(convt1)\n\n# 从列表转换为元组\n\
+  >>> conv_to_list = tuple(list1)\n>>> type(conv_to_list)\n\n# 从字符串转换为整数\n>>> conv_to_int\
+  \ = int(string1)\n>>> type(conv_to_int)\n\n```\n\n## 总结\n\n在本章中，我们学习了如何创建和操作 Python\
+  \ 中最重要的基本数据结构。像 Python 这样的面向对象编程语言基于两个主要特性：对象和操作。在本章中，我们更多地了解了对象；在第 4 章中，我们将通过创建函数来专注于操作。\n\
+  \n"
+- '# 4. 函数
+
+
+  基于对象的编程语言围绕两个主要概念构建：对象和函数。对象是我们在使用 Python 等编程语言的工作会话中创建的一切。函数允许我们为这些对象分配一个或多个操作。让我们学习如何创建一个函数。
+
+
+  ## 关于 Python 函数的一些说明
+
+
+  使用 Python，我们基本上有两种类型的函数：
+
+
+  1.  内建函数，它们是 Python 的一部分，并在我们运行 Python 时自动加载
+
+
+  2.  我们可以构建和使用的函数（用户自定义）
+
+
+  函数是一段代码，它对一个对象执行一个或多个操作并返回输出结果。当我们必须对多个对象执行相同操作时，函数尤其有用。我们可以做到这一点，而无需多次重复相同的代码行。
+
+
+  这两种类型的函数也得到许多可用于安装到 Python 的库中函数的支持。每当我们需要一个特定的函数（或一个包，即一组函数）时，我们可以安装它并使用它。Anaconda
+  不允许我们安装许多我们需要的包，因为它们已经存在于该套件中。
+
+
+  如果某个包未包含在 Anaconda 中，我们始终可以使用通用术语安装它：
+
+
+  ```
+
+  $ conda install package_name
+
+  ```
+
+
+  或者，我们可以使用 pip：
+
+
+  ```
+
+  $ pip install package_name
+
+  ```
+
+
+  无论如何，安装包的确切措辞始终包含在该包本身的官方文档中。
+
+
+
+
+  ### 一些预定义的内置函数
+
+
+  默认函数位于 **builtins** 模块中。虽然数量众多，但最常用的一些包括 **dir**、**help**、**type** 和 **print**。我们可以通过输入以下内容来显示它们：
+
+
+  ```
+
+  >>> dir(__builtins__)
+
+  [''ArithmeticError'', ''AssertionError'', ''AttributeError'', ''BaseException'',
+  ''BlockingIOError'', ''BrokenPipeError'', ''BufferError'', ''BytesWarning'', ''ChildProcessError'',
+  ''ConnectionAbortedError'', ''ConnectionError'', ''ConnectionRefusedError'', ''ConnectionResetError'',
+  ''DeprecationWarning'', ''EOFError'', ''Ellipsis'', ''EnvironmentError'', ''Exception'',
+  ''False'', ''FileExistsError'', ''FileNotFoundError'', ''FloatingPointError'', ''FutureWarning'',
+  ''GeneratorExit'', ''IOError'', ''ImportError'', ''ImportWarning'', ''IndentationError'',
+  ''IndexError'', ''InterruptedError'', ''IsADirectoryError'', ''KeyError'', ''KeyboardInterrupt'',
+  ''LookupError'', ''MemoryError'', ''NameError'', ''None'', ''NotADirectoryError'',
+  ''NotImplemented'', ''NotImplementedError'', ''OSError'', ''OverflowError'', ''PendingDeprecationWarning'',
+  ''PermissionError'', ''ProcessLookupError'', ''RecursionError'', ''ReferenceError'',
+  ''ResourceWarning'', ''RuntimeError'', ''RuntimeWarning'', ''StopAsyncIteration'',
+  ''StopIteration'', ''SyntaxError'', ''SyntaxWarning'', ''SystemError'', ''SystemExit'',
+  ''TabError'', ''TimeoutError'', ''True'', ''TypeError'', ''UnboundLocalError'',
+  ''UnicodeDecodeError'', ''UnicodeEncodeError'', ''UnicodeError'', ''UnicodeTranslateError'',
+  ''UnicodeWarning'', ''UserWarning'', ''ValueError'', ''Warning'', ''ZeroDivisionError'',
+  ''__build_class__'', ''__debug__'', ''__doc__'', ''__import__'', ''__loader__'',
+  ''__name__'', ''__package__'', ''__spec__'', ''abs'', ''all'', ''any'', ''ascii'',
+  ''bin'', ''bool'', ''bytearray'', ''bytes'', ''callable'', ''chr'', ''classmethod'',
+  ''compile'', ''complex'', ''copyright'', ''credits'', ''delattr'', ''dict'', ''dir'',
+  ''divmod'', ''enumerate'', ''eval'', ''exec'', ''exit'', ''filter'', ''float'',
+  ''format'', ''frozenset'', ''getattr'', ''globals'', ''hasattr'', ''hash'', ''help'',
+  ''hex'', ''id'', ''input'', ''int'', ''isinstance'', ''issubclass'', ''iter'', ''len'',
+  ''license'', ''list'', ''locals'', ''map'', ''max'', ''memoryview'', ''min'', ''next'',
+  ''object'', ''oct'', ''open'', ''ord'', ''pow'', ''print'', ''property'', ''quit'',
+  ''range'', ''repr'', ''reversed'', ''round'', ''set'', ''setattr'', ''slice'', ''sorted'',
+  ''staticmethod'', ''str'', ''sum'', ''super'', ''tuple'', ''type'', ''vars'', ''zip'']
+
+  ```
+
+
+  `dir()` 函数很重要，因为它允许我们显示插入其中的对象的属性或方法列表。例如：
+
+
+  ```
+
+  >>> test1 = ["object1", "object2", "object3", "object4", "object5"]
+
+  >>> dir(test1)
+
+  [''__add__'', ''__class__'', ''__contains__'', ''__delattr__'', ''__delitem__'',
+  ''__delslice__'', ''__doc__'', ''__eq__'', ''__format__'', ''__ge__'', ''__getattribute__'',
+  ''__getitem__'', ''__getslice__'', ''__gt__'', ''__hash__'', ''__iadd__'', ''__imul__'',
+  ''__init__'', ''__iter__'', ''__le__'', ''__len__'', ''__lt__'', ''__mul__'', ''__ne__'',
+  ''__new__'', ''__reduce__'', ''__reduce_ex__'', ''__repr__'', ''__reversed__'',
+  ''__rmul__'', ''__setattr__'', ''__setitem__'', ''__setslice__'', ''__sizeof__'',
+  ''__str__'', ''__subclasshook__'', ''append'', ''count'', ''extend'', ''index'',
+  ''insert'', ''pop'', ''remove'', ''reverse'', ''sort'']
+
+  ```
+
+
+  属性或方法不过是我们能对该特定对象执行的操作，例如向列表中添加一个项目，正如我们在第 3 章中看到的：
+
+
+  ```
+
+  >>> test1.append("pippo")
+
+  >>> test1
+
+  [''object1'', ''object2'', ''object3'', ''object4'', ''object5'', ''pippo'']
+
+  ```
+
+
+  我们可以使用 `type()` 函数，它会显示插入其中的对象的类型。
+
+
+  ```
+
+  >>> type(test1)
+
+
+  ```
+
+
+  重要的是要记住，当使用 `dir()` 函数括起一个对象（例如列表、元组、字典等）时，我们会得到一个可以分配给该特定对象的操作列表。
+
+
+  当我们使用其他数据科学家编写的包和函数时，获取有关其函数及其参数的信息非常有用。让我们看看如何做到这一点。
+
+
+  ## 获取函数信息
+
+
+  在一个函数内部，我们可以找到该函数的所有特定参数。要获取有关函数及其参数的信息，请键入：
+
+
+  ```
+
+  >>> help(print)
+
+  Help on built-in function print in module builtins:
+
+  print(...)
+
+  print(value, ..., sep='' '', end="\n", file=sys.stdout, flush=False)
+
+  Prints the values to a stream, or to sys.stdout by default.
+
+  Optional keyword arguments:
+
+  file:  a file-like object (stream); defaults to the current sys.stdout.
+
+  sep:   string inserted between values, default a space.
+
+  end:   string appended after the last value, default a newline.
+
+  flush: whether to forcibly flush the stream.
+
+  # help() 函数仅适用于 Python3
+
+  ```
+
+
+  这样，我们就获得了一系列关于该函数的信息。要退出，请按 `q`。我们也可以获取关于特定方法的帮助：
+
+
+  ```
+
+  >>> help(test1.append)
+
+  Help on built-in function append:
+
+  append(...)
+
+  L.append(object) -- append object to end
+
+  ```
+
+
+  你可以在 [`https://docs.python.org/2/library/functions.html`](https://docs.python.org/2/library/functions.html)
+  找到 Python 2.7 的内置函数。你可以在 [`https://docs.python.org/3/library/functions.html`](https://docs.python.org/3/library/functions.html)
+  找到版本 3 的内置特性。
+
+
+  如果你使用的是 Jupyter，可以通过按 Tab 键来显示方法。按 Shift+Tab 可以显示函数的参数（图 4-1 和 4-2）。
+
+
+  ![../images/469457_1_En_4_Chapter/469457_1_En_4_Fig2_HTML.jpg](img/469457_1_En_4_Fig2_HTML.jpg)
+
+
+  图 4-2
+
+
+  Jupyter 2 中的函数参数
+
+
+  ![../images/469457_1_En_4_Chapter/469457_1_En_4_Fig1_HTML.jpg](img/469457_1_En_4_Fig1_HTML.jpg)
+
+
+  图 4-1
+
+
+  Jupyter 1 中的方法
+
+
+  使用 Spyder 时，图 4-3 和 4-4 中的信息会自动出现。
+
+
+  ![../images/469457_1_En_4_Chapter/469457_1_En_4_Fig4_HTML.jpg](img/469457_1_En_4_Fig4_HTML.jpg)
+
+
+  图 4-4
+
+
+  Spyder 1 中的函数参数
+
+
+  ![../images/469457_1_En_4_Chapter/469457_1_En_4_Fig3_HTML.jpg](img/469457_1_En_4_Fig3_HTML.jpg)
+
+
+  图 4-3
+
+
+  Spyder 1 中的方法
+
+
+  ## 创建你自己的函数
+
+
+  除了使用默认特性或从其他库导入之外，我们还可以创建自己的函数。如前所述，函数是告诉 Python 如何执行某事的代码片段。一个函数包含三个部分：名称、参数和主体（图
+  4-5）。允许我们创建函数的语句是 `def`：
+
+
+  ![../images/469457_1_En_4_Chapter/469457_1_En_4_Fig5_HTML.jpg](img/469457_1_En_4_Fig5_HTML.jpg)
+
+
+  图 4-5
+
+
+  如何编写函数
+
+
+  ```
+
+  >>> def goal_fun(x):
+
+  ...        "''(x) -> y
+
+  ...        here we will write the documentation of the function, then
+
+  what the function performs
+
+  ...
+
+  "''
+
+  ...        return(x+y)
+
+  ```
+
+
+  让我们创建一个将数字 5 加到任何 x 值上的函数：
+
+
+  ```
+
+  >>> def sum1(x):
+
+  ...        "''sum x to 5
+
+  ...        ""
+
+  ...        return(x+5)
+
+  >>> sum1(10)
+
+
+  >>> sum1(130)
+
+
+  ```
+
+
+  在这个函数中，我们输入了一个参数，但我们可以输入多个参数：
+
+
+  ```
+
+  >>> def mult_xy(x, y):
+
+  ...     "''multiply x and y
+
+  ...     ""
+
+  ...     return(x*y)
+
+  >>> mult_xy(5,6)
+
+
+  ```
+
+
+  为了帮助我们查看某个函数的执行路径，我们可以使用在线工具，例如 Python Tutor（ [`http://pythontutor.com/`](http://pythontutor.com/)
+  ）。
+
+
+
+
+  ## 保存并运行你自己的模块和文件
+
+
+  我们已经了解了如何创建 `.py` 脚本并将其放入工作目录中，我们可以通过导入 **os** 模块并输入以下内容来找到该目录：
+
+
+  ```
+
+  >>> import os
+
+  >>> os.getcwd()
+
+  ```
+
+
+  我们可以使用任何文本编辑器创建一个文件，然后重命名该文件，使其包含 `.py` 扩展名：
+
+
+  ```
+
+  example_script.py
+
+  ```
+
+
+  将脚本放入工作目录后，我们通过输入以下命令来运行它：
+
+
+  ```
+
+  # 在计算机终端中输入
+
+  $ python example_script.py
+
+  ```
+
+
+  如果脚本不在工作目录中，我们需要在计算机终端中更改目录：
+
+
+  ```
+
+  # 在终端中输入
+
+  $ cd directory_address
+
+  ```
+
+
+  例如：
+
+
+  ```
+
+  # 在终端中输入
+
+  $ cd /~/Downloads
+
+  ```
+
+
+  更改目录后，按照我们之前的方式继续操作：
+
+
+  ```
+
+  $ python example_script.py
+
+  ```
+
+
+  Python shell 非常适合快速测试，但对于复杂的脚本，最好使用编辑器编写，然后以这种方式运行，或者复制脚本并在 Python shell 中运行。
+
+
+  ## 总结
+
+
+  编写函数对于数据科学家来说是一项非常重要的任务。像 R 这样的语言拥有大量的包和函数来满足各种统计需求。然而，使用 Python 时，我们通常需要自己编写函数，本章对此进行了详细介绍。在第
+  5 章中，我们将介绍更多可用于构建实用函数的工具。
+
+
+  '
+- '# 5. 条件指令与编写函数
+
+
+  在本章中，我们将探索在 Python 中创建函数和循环的方法。我们可能需要创建循环来对列表中的元素重复执行某个操作，或者创建函数来从数据集中提取某些案例。编写函数对于自动化数据分析非常重要。
+
+
+  ## 条件指令
+
+
+  条件指令是我们在创建函数时用于管理条件的结构。根据特定的值或操作的结果，我们使用以下条件指令对数据执行不同的操作。
+
+
+  *   **if**
+
+
+  *   **elif**
+
+
+  *   **else**
+
+
+  这些结构，连同用于创建循环的结构，对于创建允许我们执行特殊指令（例如对数据集的多行执行递归操作、建立条件等）的功能是必不可少的。
+
+
+  ### if
+
+
+  让我们看一些使用 **if** 的示例：
+
+
+  ```
+
+  >>> x = 5
+
+  >>> y = 7
+
+  >>> if x < y:
+
+  ...        print("x is less than y")
+
+  x is less than y
+
+  ```
+
+
+  现在让我们创建对象并设置一个条件。前面的条件满足，因此打印了所需的语句。
+
+
+  ```
+
+  >>> z = 700
+
+  >>> h = 20
+
+  >>> if h > z:
+
+  ...        print("h is bigger than z")
+
+  ```
+
+
+  在第二个例子中，条件不满足，因此没有打印任何内容。
+
+
+  ### if + else
+
+
+  **if** 也可以与 **else** 一起使用，为我们提供更大的灵活性。例如：
+
+
+  ```
+
+  >>> z = 700
+
+  >>> h = 20
+
+  >>> if h > z:
+
+  ...        print("h is bigger than z")
+
+  ...else:
+
+  ...        print("h is not bigger than z")
+
+  h is not bigger than z
+
+  ```
+
+
+  ### elif
+
+
+  通过使用 **elif**，我们可以实现 **if** 的最大灵活性，它在函数中建立中间条件。例如，让我们创建一个程序，询问我们的分数是多少。然后我们将它归入一个评分等级，我们称之为
+  *result*。让我们使用 Python2 按如下步骤操作（我们可能需要输入编码）：
+
+
+  ```
+
+  #!/usr/bin/env python
+
+  # -*- coding: utf-8 -*-
+
+  >>> print "Enter your score: "
+
+  >>> mark = int(raw_input())
+
+  >>> if 90 <= mark <= 100:
+
+  ...    output = "A"
+
+  ...elif 80 <= mark <= 89:
+
+  ...    output = "B"
+
+  ...elif 70 <= mark <= 79:
+
+  ...    output = "C"
+
+  ...elif 60 <= mark <= 69:
+
+  ...    output = "D"
+
+  ...elif mark <= 59:
+
+  ...    output = "F"
+
+  ...else:
+
+  ...    print "I don''t understand, try again"
+
+  ...print "Your result is " + output
+
+  ```
+
+
+  我们可以保存脚本（我将其命名为 mark2，你可以在代码文件夹中找到它，或者通过打开一个 .txt 文件并将其重命名为 .py 扩展名来自行创建），然后从 Jupyter
+  运行它，如图 5-1 所示。
+
+
+  ![../images/469457_1_En_5_Chapter/469457_1_En_5_Fig1_HTML.jpg](img/469457_1_En_5_Fig1_HTML.jpg)
+
+
+  图 5-1
+
+
+  在 Jupyter 中运行 mark2
+
+
+  ### 注意
+
+
+  Python2 和 Python3 处理用户输入的方式不同。
+
+
+  在 Python 3 中，我们只需使用 input() 而不是 raw_input()：
+
+
+  ```
+
+  >>> print("Enter your score: ")
+
+  >>> score = int(input())
+
+  >>> if 90 <= score <= 100:
+
+  ...    output = "A"
+
+  ...elif 80 <= score <= 89:
+
+  ...    output = "B"
+
+  ...elif 70 <= score <= 79:
+
+  ...    output = "C"
+
+  ...elif 60 <= score <= 69:
+
+  ...    output = "D"
+
+  ...elif score <= 59:
+
+  ...    output = "F"
+
+  ...else:
+
+  ...    print("I don''t understand, try again")
+
+  ...print("Your result is " + output)
+
+  ```
+
+
+  Enter your score:
+
+
+  ```
+
+
+  ```
+
+
+  Your result is B
+
+
+  ## 循环
+
+
+  循环标识允许你重复执行某段代码的结构，可以重复特定次数或在特定条件下重复。Python 中允许你调整操作的最重要的指令是：
+
+
+  *   **for**
+
+
+  *   **while**
+
+
+  *   **continue 和 break**
+
+
+  ### for
+
+
+  Python 指令 **for** 允许定义迭代。**for** 是一个迭代器，因此它能够遍历一个序列并对其执行操作，或执行运算。**for** 指令的格式如下：
+
+
+  ```
+
+  for item in object:
+
+  run action on item
+
+  ```
+
+
+  例如：
+
+
+  ```
+
+  # 我们创建一个对象（本例中是一个元组）并打印每个元素
+
+  >>> x = (1,2,3,4,5,6,7)
+
+  # 检查对象的类型
+
+  type(x)
+
+
+  >>> for n in x:
+
+  ...        print(n)
+
+
+  # 我们创建一个对象，并针对对象的每个元素，打印一条语句以及该元素
+
+  >>> x = (1,2,3,4,5,6,7)
+
+  >>> for n in x:
+
+  ...    print("this is the number", n)
+
+  ("this is the number", 1)
+
+  ("this is the number", 2)
+
+  ("this is the number", 3)
+
+  ("this is the number", 4)
+
+  ("this is the number", 5)
+
+  ("this is the number", 6)
+
+  ("this is the number", 7)
+
+  # 我们也可以打印字符串的元素
+
+  >>> string1 = "example"
+
+  >>> for s in string1:
+
+  ...        print(s)
+
+  e
+
+  x
+
+  a
+
+  m
+
+  p
+
+  l
+
+  e
+
+  >>> for s in string1:
+
+  ...        print(s.capitalize())
+
+  E
+
+  X
+
+  A
+
+  M
+
+  P
+
+  L
+
+  E
+
+  >>> for s in string1:
+
+  ...        print(s*5)
+
+  eeeee
+
+  xxxxx
+
+  aaaaa
+
+  mmmmm
+
+  ppppp
+
+  lllll
+
+  eeeee
+
+  ```
+
+
+  例如，如果我们有一个包含子列表的列表，并且想要打印其中的一些元素，会发生什么？让我们看一个例子：
+
+
+  ```
+
+  # 我们创建一个包含元素对的列表
+
+  >>> list1 = [(5,7), (9,2), (2,3), (14,27)]
+
+  >>> list1
+
+  [(5, 7), (9, 2), (2, 3), (14, 27)]
+
+  ```
+
+
+  我们只想打印每对元素中的第一个元素，如图 5-2 所示。
+
+
+  ![../images/469457_1_En_5_Chapter/469457_1_En_5_Fig2_HTML.jpg](img/469457_1_En_5_Fig2_HTML.jpg)
+
+
+  图 5-2
+
+
+  仅打印第一个元素
+
+
+  ```
+
+  >>> for (el1, el2) in list1:
+
+  ...     print el1
+
+
+  ```
+
+
+  如果我们愿意，还可以对元素对执行操作——例如：
+
+
+  ```
+
+  >>> for (el1, el2) in list1:
+
+  ...        print el1+el2
+
+
+  # 在 Python3 中，我们为函数 print() 添加括号
+
+  >>> for (el1, el2) in list1:
+
+  ...        print(el1+el2)
+
+
+  ```
+
+
+  对于字典，我们可以按如下方式操作：
+
+
+  ```
+
+  >>> dict1 = {"k1":1, "k2":2, "k3":3}
+
+  >>> for key, value in dict1.items():
+
+  ...     print("the key value " + str( key ) + " is " + str( ...value ))
+
+  the key value k3 is 3
+
+  the key value k2 is 2
+
+  the key value k1 is 1
+
+  ```
+
+
+  显然，我们也可以只打印单个键或仅打印值：
+
+
+  ```
+
+  # python2
+
+  >>> for key, value in dict1.items(): print key
+
+  k3
+
+  k2
+
+  k1
+
+  >>> for key, value in dict1.items(): print value
+
+
+  # python3
+
+  >>> for key, value in dict1.items(): print(key)
+
+  k3
+
+  k2
+
+  k1
+
+  >>> for key, value in dict1.items(): print(value)
+
+
+  ```
+
+
+
+
+  ### while
+
+
+  指令 **while** 在满足特定条件时执行操作。它适用于我们不确定需要迭代多少次的情况，因此会一直运行直到满足特定条件。
+
+
+  ```
+
+  # Python2
+
+  >>> x = 1
+
+  >>> while x >> x = 1
+
+  >>> while x < 5:
+
+  ...     print(x)
+
+  ...     x = x+1
+
+  ```
+
+
+  使用 **while** 指令时，必须小心避免启动无限循环，否则将需要强制关闭程序。例如，如果我们设置这种类型的循环，将会得到一连串的“1”，直到我们停止执行：
+
+
+  ```
+
+  # 注意：请勿运行
+
+  >>> x = 1
+
+  >>> while x < 2:
+
+  ...        print x
+
+  ```
+
+
+  让我们再看一个 **while** 的例子：
+
+
+  ```
+
+  # Python2
+
+  >>> y = 1
+
+  >>> while y < 10:
+
+  ...     print "the y value is " ,y
+
+  ...     y = y +1
+
+  the y value is  1
+
+  the y value is  2
+
+  the y value is  3
+
+  the y value is  4
+
+  the y value is  5
+
+  the y value is  6
+
+  the y value is  7
+
+  the y value is  8
+
+  the y value is  9
+
+  # 在这个例子中，我们打印了每个 y 值对应的语句，y 值在每一步都会增加
+
+  ```
+
+
+  ### continue 和 break
+
+
+  **continue** 和 **break** 是两条允许你结束循环或继续执行下一次迭代的指令。让我们看一个 **continue** 的例子：
+
+
+  ```
+
+  # 我们创建一个列表
+
+  >>> list1 = [''item1'', ''item2'', ''item3'', ''cat'', ''item4'', ''item5'']
+
+  # 我们创建一个 for 循环来打印列表中的每个元素
+
+  >>> for item in list1:
+
+  ...    if item in list1:
+
+  ...        if item == ''cat'':
+
+  ...            continue
+
+  ...    print(item)
+
+  item1
+
+  item2
+
+  item3
+
+  item4
+
+  item5
+
+  # for 循环必须跳过与其他元素不同的那个元素；为了实现这个结果，我们使用了 continue，从而“跳过”了该元素
+
+  ```
+
+
+  **break** 的工作方式类似，但与 **continue** 不同，它会中断 **for** 循环：
+
+
+  ```
+
+  >>> for item in list1:
+
+  ...    if item in list1:
+
+  ...        if item == ''cat'':
+
+  ...            break
+
+  ...    print(item)
+
+  item1
+
+  item2
+
+  item3
+
+  range()
+
+  ```
+
+
+  正如我们在列表中看到的，`range()` 是 Python2 中的一个函数（在 Python3 中是一个内置方法），而不是条件指令。这个函数允许你创建由上限和下限（一个范围）界定的列表。
+
+
+  ```
+
+  # Python2
+
+  # 我们创建一个从 1 到 49（包含）的数字列表
+
+  >>> list = range(1, 50)
+
+  >>> list
+
+  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+  23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42,
+  43, 44, 45, 46, 47, 48, 49]
+
+  # 检查对象类型
+
+  >>> type(list)
+
+
+  # 我们创建一个从 30 到 44（包含）的数字列表
+
+  >>> list2 = range(30, 45)
+
+  >>> list2
+
+  [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44]
+
+  # 如果我们不指定下限，只指定上限，列表将从 0 开始：
+
+  >>> list3 = range(14)
+
+  >>> list3
+
+  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+
+  ```
+
+
+  我们还可以添加我们想要包含的步长，例如，三个元素作为第三个参数：这样第一个参数将是起始数字（20），第二个参数是列表的结束数字（40），第三个参数是步长（3）
+
+
+  ```
+
+  >>> list4 = range(20, 40, 3)
+
+  >>> list4
+
+  [20, 23, 26, 29, 32, 35, 38]
+
+  # 这样，我们可以创建例如奇数或偶数的列表
+
+  >>> range(0,10,2)
+
+  [0, 2, 4, 6, 8]
+
+  >>> range(1,10,2)
+
+  [1, 3, 5, 7, 9]
+
+  ```
+
+
+  我们也可以创建两个对象，并请求这两个对象之间的范围。例如，
+
+
+  ```
+
+  >>> x = 17
+
+  >>> y = 39
+
+  >>> range(x, y)
+
+  [17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+  37, 38]
+
+  ```
+
+
+  此外，我们可以将使用 `range()` 创建的列表合并到另一个循环中。例如，
+
+
+  ```
+
+  >>> for el in range(1,10): print el
+
+
+  # 例如，在 for 循环中，我们不传递一个对象，而是传递一个用 range() 创建的列表
+
+  ```
+
+
+  ### 注意
+
+
+  在 Python2 和 Python3 中，`range()` 的使用方式不同。
+
+
+  要在 Python3 中获取数字列表，我们编写
+
+
+  ```
+
+  >>> list(range(10))
+
+  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+  >>> list(range(2,10))
+
+  [2, 3, 4, 5, 6, 7, 8, 9]
+
+  # 如果在 Python3 中使用与 Python2 相同的名称，我们会得到这个结果
+
+  >>> range(10)
+
+  >>> range(0, 10)
+
+  ```
+
+
+  ## 使用条件指令扩展函数
+
+
+  我们刚刚学习的条件和循环指令使我们能够扩展编写函数的能力。让我们看一个例子：
+
+
+  ```
+
+  # 我们创建一个示例函数
+
+  >>> def ex1(x):
+
+  ...        y = 0
+
+  ...        while(y >> ex1(0)
+
+  ''Stop now!''
+
+  ex1(5)
+
+  Add one!
+
+  Add one!
+
+  Add one!
+
+  Add one!
+
+  Add one!
+
+  ''Stop now!''
+
+  ```
+
+
+  ## map( ) 和 filter( ) 函数
+
+
+  `map()` 函数接受两个对象，一个函数和一个数据序列，并将该函数应用于数据序列。这是一个例子：
+
+
+  ```
+
+  # map()
+
+  # Python2
+
+  # 我们创建一个求数字平方的函数
+
+  >>> def square(x):
+
+  ...      return x*x
+
+  # 检查函数是否按预期工作
+
+  >>> square(9)
+
+
+  # 现在让我们创建一个数字列表
+
+  >>> num = [2, 5, 7, 10, 15]
+
+  # 我们将 map() 函数应用于我们的列表，仅通过一次操作就对所有列表数字求平方
+
+  >>> map(square, num)
+
+  [4, 25, 49, 100, 225]
+
+  # Python3
+
+  # 我们使用 list() 函数来获得期望的结果，就像我们对 range() 所做的那样
+
+  >>> list(map(square, num))
+
+  ```
+
+
+  `filter()` 函数将一个函数应用于一个对象，并返回满足特定条件的结果。让我们创建第二个数字列表：
+
+
+  ```
+
+  >>> num2 = range(1,15)
+
+  >>> num2
+
+  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+
+  # 我们创建一个能够区分偶数的函数
+
+  >>> def even(x):
+
+  ...        if x % 2 == 0:
+
+  ...                return True
+
+  ...        else:
+
+  ...                return False
+
+  # 我们将 filter() 函数应用于 even() 函数和一个数字列表，比如 num2
+
+  >>> filter(even, num2)
+
+  [2, 4, 6, 8, 10, 12, 14]
+
+  ```
+
+
+  ## lambda 函数
+
+
+  lambda 函数是一种具有特定语法的 Python 构造，它简化了函数的构建，允许我们将一个函数缩减为一行，从而使代码更简单，但功能不如使用 `def` 构造创建的函数强大。例如，要创建一个求数字平方的函数，我们这样做：
+
+
+  ```
+
+  # 我们创建一个求数字平方的函数
+
+  >>> def square(x):
+
+  ...      return x*x
+
+  # 我们检查函数是否按预期工作
+
+  >>> square(9)
+
+
+  ```
+
+
+  现在我们使用 lambda 函数来创建相同的函数：
+
+
+  ```
+
+  >>> sq2 = lambda x : x*x
+
+  >>> sq2(127)
+
+
+  ```
+
+
+  如你所见，我们可以在一行中创建一个类似的函数。
+
+
+  让我们回到一个数字列表：
+
+
+  ```
+
+  >>> num =[2, 5, 7, 10, 15]
+
+  # 现在我们使用我们创建的第二个函数将函数应用于整个列表
+
+  >>> map(sq2, num)
+
+  [4, 25, 49, 100, 225]
+
+  # 没有必要创建一个函数；我们可以将 lambda 函数直接集成到过程中。在这种情况下，如果我们想在那里使用相同的 lambda 函数，我们将重写它，而不是通过它的名称来调用它
+
+  >>> map(lambda x: x*x, num)
+
+  [4, 25, 49, 100, 225]
+
+  ```
+
+
+
+
+  ## 作用域
+
+
+  编写函数时，我们可以在函数内部定义一个对象，也可以关联一个由函数在外部创建的对象。第一种情况称为*全局变量*；第二种情况称为*局部变量*。因此，对于一个函数，我们涉及三个要素：
+
+
+  1.  **形式参数：** 函数定义中存在的参数
+
+
+  2.  **局部变量：** 通过在函数体内计算表达式来定义，并且仅在函数内部可见
+
+
+  3.  **全局变量：** 既不属于第一类也不属于第二类，而是在函数外部查找的变量
+
+
+  到目前为止，我们一直使用全局变量，先定义它们，然后通过某些函数应用各种操作。然而，在下面的例子中，我们定义一个函数外部的全局测试变量和一个函数内部的局部测试变量。函数调用的是局部变量。
+
+
+  ```
+
+  >>> test = "hello"
+
+  >>>     def fun1():
+
+  ...       test = "hi"
+
+  ...       print(test)
+
+  >>> fun1()
+
+  hi
+
+  ```
+
+
+  然而，在下一个例子中，我们引用的是函数外部的变量。这样操作，计算可以正确执行：
+
+
+  ```
+
+  num1 = 5
+
+  def fun2():
+
+  global num1
+
+  num2 = num1 + 1
+
+  print(num2)
+
+  fun2(num1)
+
+
+  ```
+
+
+  ## 总结
+
+
+  在本章中，我们学习了条件指令，这些是在创建函数时用于管理条件的结构。我们还探讨了如何扩展函数。
+
+
+  '
+- "# 6. 其他基本概念\n\n在本章中，我们将学习一些重要的编程概念（如模块和方法）、列表推导式和类创建、正则表达式，以及错误和异常的管理。\n\n## 面向对象编程\n\
+  \n如前所述，Python 是一种面向对象的编程语言，因此让我们来看看面向对象编程的一些基本概念。一些重要的概念包括：\n\n*   对象\n\n*   类\n\
+  \n*   继承\n\n### 关于对象的更多内容\n\n对象是我们创建的所有数据结构，从仅包含单个数字的小型结构到包含大型数据集的大型结构。我们通过使用库中预装、我们导入或我们创建的特性或方法来对操作应用对象。\n\
+  \n### 类\n\n就类的概念而言，这对我们来说是本书中的一个新主题；我们之前尚未探讨过。Python 允许我们通过类的概念创建与我们的需求相关的结构。类是对象的抽象表示，我们可以随时用真实的实例来填充它。当定义一个新类时，我们可以定义该类的实例。一个类由其自身的特性来定义。例如，如果我们创建一个\
+  \ Dog 类，我们可以规定它由诸如头部形状、口鼻部、毛发类型（短毛或长毛）等特性来定义。一个 Book 类可以包含诸如书籍类型、页数、主要主题、封面类型、ISBN\
+  \ 等特性。\n\n### 继承\n\n面向对象编程的另一个概念是继承。可以从现有的类创建新的类。新类继承原始类的特性，但它们可以通过新特性来扩展这些类。继承很方便，因为它允许我们扩展旧类而无需修改它们。继承可以是单继承和多继承。通过单继承，子类可以从一个现有类继承成员数据和方法；在多继承的情况下，子类可以从多个现有类继承特性。\n\
+  \n让我们看一个创建 Cat 类的简单示例。\n\n```\n>>> class Cat:\n... def __init__(self, name, color,\
+  \ age, race):\n...     self.name = name\n...     self.color = color\n...     self.age\
+  \ = age\n...     self.race = race\n```\n\nCat 由名称、颜色、年龄和品种定义。我们可以创建一个猫的实例：\n\n```\n\
+  >>> cat1 = Cat(\"Fuffy\", \"white\", 3, \"tabby\")\n```\n\n让我们查看它的特性：\n\n```\n>>>\
+  \ print(cat1.name)\nFuffy\n>>> print(cat1.color)\nwhite\n```\n\n我们可以通过添加方法来修改类：\n\
+  \n```\n>>> class Cat:\n... def __init__(self, name, color, age, race):\n...    \
+  \ self.name = name\n...     self.color = color\n...     self.age = age\n...    \
+  \ self.race = race\n... def cry(self):\n...     print(\"meow\")\n... def purr(self):\n\
+  ...     print(\"purr\")\n# 我们用这个新类创建一个猫的实例\n>>> cat2 = Cat(\"Candy\", \"Red\", \"\
+  6\", \"Balinese\")\n```\n\n现在，我们不仅可以像第一个示例那样基于特性来查询实例，\n\n```\n>>> print(cat2.age)\n\
+  \n```\n\n还可以使用方法：\n\n```\n>>> cat2.cry()\nmeow\n>>> cat2.purr()\npurr\n```\n\n让我们为虎斑猫（一种猫的品种）创建一个子类，这样它就能继承其特性。\n\
+  \n```\n>>> class tabby(Cat):\n...     def character(self):\n...         print(\"\
+  warm\")\n# 我们创建一个虎斑猫实例\n>>> tabby1 = tabby(\"Pallina\", \"black\", 4, \"tabby\"\
+  )\n>>> tabby1.purr()\npurr\n>>> tabby1.character()\nwarm\n```\n\n因此，我们不仅可以查询与虎斑猫子类相关的特性，还可以查询与现有\
+  \ Cat 类相关的特性。\n\n## 模块\n\n模块是通常与特定主题（图形、数据分析）相关的函数集合。形式可以属于以下类别之一：\n\n*   Python\
+  \ 模块\n\n*   预编译模块\n\n*   内置模块\n\n要使用一个模块，我们必须首先使用 `import` 指令导入它：\n\n```\nimport\
+  \ ...\n```\n\n例如，\n\n```\nimport numpy\n```\n\n使用 `import`，我们导入了整个模块。\n\n然而，我们可以导入模块的一部分：\n\
+  \n```\nfrom ... import ...\n```\n\n例如，\n\n```\nfrom matplotlib import cm\n```\n\n\
+  为了简化和加快代码编写速度，我们可以用另一个名称导入一个形式：\n\n```\nimport numpy as np\n```\n\n然后，我们可以使用以下命令检查我们的模块：\n\
+  \n```\nhelp('modules')\n```\n\n导入模块后（例如，在 Jupyter 中），我们可以通过按 Tab 键显示该特定模块的所有方法来访问帮助部分（图\
+  \ 6-1）。\n\n![../images/469457_1_En_6_Chapter/469457_1_En_6_Fig1_HTML.jpg](img/469457_1_En_6_Fig1_HTML.jpg)\n\
+  \n图 6-1\n\nJupyter 上的 pandas 方法\n\n此外，我们可以导入模块中非常具体的元素。例如：\n\n```\nfrom math import\
+  \ sqrt\n```\n\n在这种情况下，我们没有导入整个模块——只导入了平方根函数。在这种情况下，我们不需要将 `sqrt` 作为 **math** 模块的方法来调用。我们可以直接调用平方根：\n\
+  \n```\n>>> sqrt(9)\n3.0\n```\n\n如果我们导入整个模块，我们必须将 `sqrt` 指定为 math 模块的方法：\n\n```\n\
+  >>> import math\n>>> math.sqrt(12)\n3.4641016151377544\n```\n\n一些编程语言，如 Anaconda，会自动安装一系列模块和包（图\
+  \ 6-2）。然而，如果我们需要安装一个特定的模块，我们可以从计算机终端通过输入以下命令来完成：\n\n![../images/469457_1_En_6_Chapter/469457_1_En_6_Fig2_HTML.jpg](img/469457_1_En_6_Fig2_HTML.jpg)\n\
+  \n图 6-2\n\n在计算机上安装包\n\n```\n$ pip install nome_modulo\n```\n\n如图 6-2 所示，我们在终端中，而不是在\
+  \ Python 窗口中，因为提示符处缺少 `>>>` 符号。`$` 符号表示正在使用终端。\n\n根据我们正在安装的包（例如，来自 GitHub），我们可能会在包文档本身中找到不同的安装说明。包是模块的集合，通常涉及同一主题。例如，SciPy\
+  \ 和 NumPy 包含数十个数据分析模块。\n\n\n\n## 方法\n\n在 Python 中，一切都是对象，根据其所属的类型，可以对每个对象应用不同的方法（或函数）。方法类似于函数，但它们与特定的类相关联。这意味着列表有自己的方法，元组有不同的方法，依此类推。每个方法都对对象执行一个操作，类似于函数。\n\
+  \n根据我们用于编程或进行 Python 数据分析的工具，我们可能会获得与特定对象关联的方法建议。在使用 Spyder 和 Jupyter 时就是这种情况。图\
+  \ 6-3 展示了在 Spyder 中对象方法的示例；图 6-4 展示了在 Jupyter 中的方法。\n\n![../images/469457_1_En_6_Chapter/469457_1_En_6_Fig4_HTML.jpg](img/469457_1_En_6_Fig4_HTML.jpg)\n\
+  \n图 6-4\n\nJupyter 示例\n\n![../images/469457_1_En_6_Chapter/469457_1_En_6_Fig3_HTML.jpg](img/469457_1_En_6_Fig3_HTML.jpg)\n\
+  \n图 6-3\n\nSpyder 示例\n\n函数的一个例子是 `print()`；方法的一个例子是 `.upper`。让我们看一个示例：\n\n```\n\
+  >>> string1 = \"this is a string\"\n>>> print(string1)\nthis is a string\n>>> string1.upper()\n\
+  \"THIS IS A STRING\"\n```\n\n要获取关于特定方法的信息，我们使用 `help()` 函数。例如，我们可以创建一个列表并使用 `.append`\
+  \ 方法激活帮助：\n\n```\n>>> x = [1,2,3,4,5,6]\n>>> help(x.append)\n```\n\n![../images/469457_1_En_6_Chapter/469457_1_En_6_Fig5_HTML.jpg](img/469457_1_En_6_Fig5_HTML.jpg)\n\
+  \n图 6-5\n\n上述代码的输出\n\n## 列表推导式\n\n列表推导式是一种语法结构，允许我们从其他列表创建新列表。让我们创建一个列表，然后对另一个列表的元素应用一个函数。我们可以使用\
+  \ **for** 循环来实现：\n\n```\n# 我们创建一个数字列表\n>>> numbers = [12, 23, 34, 57, 89, 97]\n\
+  # 在 Python2 中\n# 使用 for 循环将数字 10 添加到列表的每个元素上\n>>> for i in range(len(numbers)):\n\
+  ...         numbers[i] = numbers[i] + 10\n>>> numbers\n[22, 33, 44, 67, 99, 107]\n\
+  # 我们也可以通过列表推导式将某个数字添加到每个元素来创建一个新列表\n# 我们将覆盖第一个列表 numbers，使用 Python3 创建一个新列表，其中每个元素都加上了\
+  \ 10\n>>> numbers = [number + 10 for number in numbers]\n[32, 43, 54, 77, 109, 117]\n\
+  # 我们调用列表每个元素的方式是随意的\n>>> numbers = [n + 10 for n in numbers]\n>>> numbers\n[42,\
+  \ 53, 64, 87, 119, 127]\n```\n\n因此，列表推导式允许我们简化将列表转换为新列表的迭代过程。我们可以将列表推导式应用于数字列表，正如我们刚刚看到的，我们也可以将其应用于字符串。例如，我们可以迭代操作并将其中的所有内容转换为大写：\n\
+  \n```\n>>> strings = ['this', 'is' ,'a', 'string']\n>>> strings2 = [string.upper()\
+  \ for string in strings]\n>>> strings2\n['THIS', 'IS', 'A', 'STRING']\n```\n\n##\
+  \ 正则表达式\n\n想象一下，尝试在文本文档中搜索一个单词。当我们进行搜索时，它会返回我们正在查找的单词的所有实例。然而，如果我们进行这种类型的搜索，可能会遗漏一些出现的情况——例如，如果它们以大写字母开头，或者它们后面或前面有标点符号。如果我们正在查找的单词也存在于另一个单词中，我们还必须考虑单词本身的空格才能找到它。\n\
+  \n使用正则表达式（也称为 *regex*）可以更容易地识别所有这些选项。正则表达式是允许我们描述通用字符串的模式，这使得这种类型的搜索更加精细。它们对于搜索、替换或提取字符串或子字符串非常有用。例如，正则表达式可用于提取日期、电子邮件地址和物理邮件地址，因为它们不仅仅提取单个电子邮件地址。例如，我们可以在搜索框中插入一个结构类似于\
+  \ `address@email.com` 的电子邮件地址，该结构识别电子邮件地址的结构，并根据其结构从同一文档中提取多个电子邮件地址。\n\n在 Python\
+  \ 中，正则表达式通过 **re** 模块处理，我们可以导入它：\n\n```\n>>> import re\n# 我们创建一个示例字符串\n>>> str1\
+  \ = \"Try searching for a word using regular expressions and the Python module kernel\"\
+  \n```\n\n我们使用 `re.search()` 搜索一个出现：\n\n```\n>>> re.search('word', str1)\n\n# 这个结果告诉我们，我们正在查找的单词存在于字符串中\n\
+  # 为了以最简单的形式获得相同的结果，将上一行代码保存到一个对象中，并使用 bool() 函数查询它：\n>>> exre1 = re.search('word',\
+  \ str1)\n>>> bool(exre1)\nTrue\n```\n\n我们可以使用 `.findall()` 搜索一个出现：\n\n```\n>>> re.findall('Try',\
+  \ str1)\n['Try']\n# 如果元素不存在，我们会收到一个空列表\n>>> re.findall('some', str1)\n[]\n# 此函数区分大小写，因此\
+  \ \"'some'\" 与 \"'Some'\" 不同\n```\n\n我们还可以将字符串分割成其组成的元素：\n\n```\n>>> re.split('\
+  \ ', str1)\n['Try', 'searching', 'for', 'a', 'word', 'using', 'regular', 'expressions',\
+  \ 'and', 'the', 'Python', 'module', 'kernel']\n# 在上面的代码中，我们使用空格作为分割元素；接下来，我们使用连词\
+  \ ' and '（并在两侧插入空格以避免搜索单词的内部重复）将字符串分割成单词\n>>> re.split(' and ', str1)\n['Try searching\
+  \ for a word using regular expressions', 'the Python module kernel']\n# 我们通过根据连词\
+  \ \"'and'\" 的位置将字符串一分为二得到上述结果\n```\n\n正则表达式符号（例如 `*`、`+` 和 `?`）允许我们搜索一个字符一次或多次，或者后跟其他字母：\n\
+  \n\n\n```\n>>> re.findall('ea*', str1)\n['ea', 'e', 'e', 'e', 'e', 'e', 'e', 'e']\n\
+  >>> re.findall('ea+', str1)\n['ea']\n>>> re.findall('ea?', str1)\n['ea', 'e', 'e',\
+  \ 'e', 'e', 'e', 'e', 'e']\n>>> re.findall('ea+?', str1)\n['ea']\n# 例如，我们可以提取所有以大写字母开头的单词\n\
+  >>> re.findall('[A-Z][a-z]*', str1)\n['Try', 'Python']\n# 或者提取所有小写字母组成的单词\n>>> re.findall('[a-z]*',\
+  \ str1)\n[\",\n'ry',\n\",\n'searching',\n\",\n'for',\n\",\n'a',\n\",\n'word',\n\"\
+  ,\n'using',\n\",\n'regular',\n\",\n'expressions',\n\",\n'and',\n\",\n'the',\n\"\
+  ,\n\",\n'ython',\n\",\n'module',\n\",\n'kernel',\n\"]\n# 或者提取所有大写或小写字母组成的单词\n>>>\
+  \ re.findall('[a-z]*', str1, re.IGNORECASE)\n['Try',\n\",\n'searching',\n\",\n'for',\n\
+  \",\n'a',\n\",\n'word',\n\",\n'using',\n\",\n'regular',\n\",\n'expressions',\n...\n\
+  # 或者我们可以这样做\n>>> re.findall('[^.\\-! ]+', str1) >>> ['Try', 'searching', 'for',\
+  \ 'a', 'word', 'using', 'regular', 'expressions', 'and', 'the', 'Python', 'module',\
+  \ 'kernel']\n# \\d 用于查找数字\n>>> str2 = \"We are going to meet today at 14:15\"\n\
+  >>> re.findall('\\d', str2)\n# 我们可以使用其他符号来更精确地定位提取目标\n>>> re.findall('\\d+', str2)\n\
+  ['14', '15']\n# 例如，查找所有包含字母 p 的单词\n>>> re.findall(r'[p]\\S*', str1)\n['pressions']\n\
+  # 或者查找包含字母 'p'（不区分大小写）的单词\n>>> re.findall(r'[p]\\S*', str1, re.IGNORECASE)\n['pressions',\
+  \ 'Python']\n# 或者从字符串中提取电子邮件地址\n>>> str3 = \"my email is mail@mail.com, my second\
+  \ email is test2@ex.com\"\n>>> re.findall(\"[\\w\\.-]+@[\\w\\.-]+\", str3, re.IGNORECASE)\n\
+  ['mail@mail.com', 'test2@ex.com']\n```\n\n我们可以使用网络上的工具（例如 [`http://pythex.org`](http://pythex.org)）来测试正则表达式。（[`​pythex.​org/​`](http://pythex.org/)）关于正则表达式的更多信息，可以在\
+  \ [`https://docs.python.org/2/library/re.html`](https://docs.python.org/2/library/re.html)\
+  \ 找到，该页面介绍了 **re** 模块。表 6-1 列出了正则表达式的各种符号。\n\n表 6-1\n\n符号与正则表达式\n\n| 符号 | 描述 |\n\
+  | --- | --- |\n| `\\\\d` | 数字，0, 1, 2, . . . 9 |\n| `\\\\D` | 非数字 |\n| `\\\\s` |\
+  \ 空格 |\n| `\\\\S` | 非空格 |\n| `\\\\w` | 单词字符 |\n| `\\\\W` | 非单词字符 |\n| `\\\\t` |\
+  \ 制表符 |\n| `\\\\n` | 换行符 |\n| ^ | 字符串开头 |\n| $ | 字符串结尾 |\n| \\ | 转义特殊字符——例如，\\\\\
+  \ 表示“\\”，\\+ 表示“+” |\n| &#124; | 分支匹配——例如 /(e&#124;d)n/ 匹配“en”和“dn” |\n| * | 除 \\\
+  n 或行终止符外的任意字符 |\n| [ab] | a 或 b |\n| [^ab] | 除 a 和 b 外的任意字符 |\n| [0-9] | 所有数字 |\n\
+  | [A-Z] | 所有大写字母 A 到 Z |\n| [a-z] | 所有小写字母 a 到 z |\n| [A-z] | 所有大写和小写字母 a 到 z |\n\
+  | i+ | i 至少出现一次 |\n| i* | i 出现零次或多次 |\n| i? | i 出现零次或一次 |\n| i{n} | i 连续出现 n 次 |\n\
+  | i{n1,n2} | i 连续出现 n1 到 n2 次 |\n| i{n1,n2}? | 非贪婪匹配，参见前面的示例 |\n| i{n,} | i 出现 ≥\
+  \ n 次 |\n| [:alnum:] | 字母数字字符：[:alpha:] 和 [:digit:] |\n| [:alpha:] | 字母字符：[:lower:]\
+  \ 和 [:upper:] |\n| [:blank:] | 空白字符，例如空格和制表符 |\n| [:cntrl:] | 控制字符 |\n| [:digit:]\
+  \ | 数字：0 1 2 3 4 5 6 7 8 9 |\n| [:graph:] | 图形字符：[:alnum:] 和 [:punct:] |\n| [:lower:]\
+  \ | 当前区域设置中的小写字母 |\n| [:print:] | 可打印字符：[:alnum:], [:punct:] 和空格 |\n| [:punct:]\
+  \ | 标点字符，例如 ! “” # $ % & “ ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _ ‘ { &#124; }\
+  \ ~ |\n| [:space:] | 空格字符：制表符、换行符、垂直制表符、换页符、回车符、空格 |\n| [:upper:] | 当前区域设置中的大写字母\
+  \ |\n| [:xdigit:] | 十六进制数字：0 1 2 3 4 5 6 7 8 9 A B C D E F a b c d e f |\n\n## 用户输入\n\
+  \n输入函数（Python2 中的 raw_input）用于让我们与程序进行交互，该程序需要根据输入类型处理响应（我们在设置函数时学习过这一点）。在 Python2\
+  \ 中，我们使用 raw_input() 函数处理用户输入：\n\n```\n>>> name = raw_input(\"What is your name?\
+  \ \")\nWhat is your name? Valentina\n>>> print(name)\nValentina\n>>> print(\"Nice\
+  \ to meet you, \" + name)\nNice to meet you, Valentina\n```\n\n### 注意\n\nPython2\
+  \ 和 Python3 处理用户输入的方式不同。\n\n在 Python3 中，我们使用 input() 而不是 raw_input()：\n\n```\n>>>\
+  \ name = input(\"What is your name? \")\nWhat is your name? Valentina\n>>> print(name)\n\
+  Valentina\n>>> print(\"Nice to meet you, \" + name)\nNice to meet you, Valentina\n\
+  ```\n\n当以这种方式输入时，输入内容会被读取为字符串。因此，例如，如果我们想输入一个数字，就必须稍微不同地编写代码。我们必须指定输入的内容应被读取为数字：\n\
+  \n```\n>>> num1 = input('add a number: ')\n>>> num2 = input('add a second number\
+  \ ')\n>>> print(num1 + num2)\n# 结果将是一个整数，由加法运算得出，具体取决于你选择的数字：\n\n```\n\n数字不会被相加，而是像两个字符串一样被拼接。要相加它们，需要指定输入的值是数字，并按如下方式操作：\n\
+  \n```\n>>> num1 = int(input('enter a number: '))\n>>> num2 = int(input('add a second\
+  \ number '))\n>>> print(num1 + num2)\n```\n\n\n\n## 错误与异常\n\nPython 中的错误与异常无非是改变我们代码正常运行的异常或意外事件。异常可能是无效输入（例如，我们要求用户输入数字，但他们输入了字母）、硬件问题或找不到文件或对象的结果。主要有三种类型的错误：\n\
+  \n1.  语法错误\n2.  语义错误\n3.  逻辑错误\n\n语法错误是我们编写代码时犯的错误。它们要么是拼写错误，要么是代码中的语法错误。\n\n```\n\
+  # 由于字符串末尾缺少引号而导致的语法错误消息示例\n>>> print 'Hello World\nFile \"\", line 1\nprint 'Hello\
+  \ World\n^\nSyntaxError: EOL while scanning string literal\n```\n\n错误和异常通常会导致错误消息，然后我们可以使用这些消息来识别错误，并确定我们是否可以通过修改代码或处理异常来补救它。\n\
+  \n当我们预期会发生异常时（称为*已处理异常*），补救方法是编写合适的代码。意外的异常称为*未处理异常*。\n\n为了处理 Python 中的错误和异常，我们通常使用\
+  \ `try()`、`except()` 和 `raise()`。\n\n例如，让我们对两个无法相加的项目求和，例如一个数字和一个字符串：\n\n```\n>>>\
+  \ 37 + 'string'\nTypeError                                 Traceback (most recent\
+  \ call last)\n in ()\n----> 1 37 + 'string'\nTypeError: unsupported operand type(s)\
+  \ for +: 'int' and 'str'\n# 显然，结果是一个错误\n```\n\n让我们看看消息中的错误类型：TypeError。我们需要创建一种方法来处理此错误。例如，让用户输入两个数字，然后返回这两个数字的和。\n\
+  \n```\n>>> try:\n... num1 = int(input('enter a number: '))\n... num2 = int(input('enter\
+  \ a second number '))\n... print(num1 + num2)\nexcept TypeError:\n... print(\"There\
+  \ is something wrong! Check again!\")\n>>> enter a number: 37\n>>> enter a second\
+  \ number 25\n\n```\n\n我们处理了 TypeError 错误。如果用户输入两个数字，它们会被正确求和。\n\n让我们看看如果输入了不正确的值而不是数字会发生什么：\n\
+  \n```\n>>> try:\n... num1 = int(input('enter a number: '))\n... num2 = int(input('enter\
+  \ a second number '))\n... print(num1 + num2)\nexcept TypeError:\n... print(\"There\
+  \ is something wrong! Check again!\")\n>>> enter a number: 37\n>>> enter a second\
+  \ number string\nValueError                                Traceback (most recent\
+  \ call last)\n in ()\n1 try:\n2     num1 = int(input('enter a number: '))\n---->\
+  \ 3     num2 = int(input('enter a second number '))\n4     print(num1 + num2)\n\
+  5 except TypeError:\nValueError: invalid literal for int() with base 10: 'string'\n\
+  ```\n\n有问题！我们处理了 TypeError 错误，但现在出现了一个不同的错误。我们可以按如下方式处理：\n\n```\n>>> try:\n... num1\
+  \ = int(input('enter a number: '))\n... num2 = int(input('enter a second number\
+  \ '))\n... print(num1 + num2)\nexcept TypeError:\n... print(\"There is something\
+  \ wrong! Check again!\")\nexcept ValueError:\n... print(\"There is something wrong!\
+  \ Check again!\")\nenter a number: 37\nenter a second number string\nThere is something\
+  \ wrong! Check again!\n```\n\n或者，我们使用 Exception 来管理异常：\n\n```\n>>>try:\n... num1\
+  \ = int(input('enter a number: '))\n... num2 = int(input('enter a second number\
+  \ '))\n... print(num1 + num2)\nexcept Exception:\n... print(\"There is something\
+  \ wrong! Check again!\")\n>>> enter a number: 37\n>>> enter a second number test\n\
+  There is something wrong! Check again!\n```\n\nException 是一个基本错误的类，它包含了大多数错误。正如我们刚才看到的，其他常见类型是\
+  \ TypeError 和 ValueError，但还有其他类型：AttributeError、EOFError、IOError、IndexError、KeyError、KeyboardInterrupt、NameError、StopIteration\
+  \ 和 ZeroDivisionError。\n\n## 总结\n\n在本章中，我们学习了 Python 编程的基本概念：模块和方法、列表推导式和类创建、正则表达式以及错误和异常。在第\
+  \ 7 章中，我们将学习导入文件。\n\n"
+- '# 7. 导入文件
+
+
+  将文件导入 Python 对于学习如何管理数据集非常重要。在本章中，我们将研究基础知识。我们可以将多种类型的数据导入 Python：从最规范的格式（.csv）或
+  Excel 数据格式，到用于文本挖掘的文本格式，再到二进制文件，如图像、视频和音频。首先，让我们看看一些导入文件的基本方法。有时这样做的方法可能看起来有点棘手。我们在第
+  8 章中研究的 pandas 包使导入数据集进行分析变得更加容易。
+
+
+  导入文件的基本结构如下：
+
+
+  ```
+
+  file1 = open("file.name", mode)
+
+  ```
+
+
+  “mode” 代表我们打开文件的方式。最重要的方式有：
+
+
+  *   只读（“r”）
+
+  *   写入（“w”）
+
+  *   在文档末尾追加一些文本（“a”）
+
+  *   读写（“r+”）
+
+
+  我们使用 `open()` 函数来打开文件。如果文件不存在，它会在工作目录中被创建。
+
+
+  ```
+
+  # 我们打开（或创建）文件
+
+  >>> file1 = open("file1.txt","w")
+
+  # 此时，文件已在我们的工作目录中创建，但它是空的
+
+  # 我们处于写入模式；然后我们这样添加文本
+
+  >>> file1.write("Add line n.1 to the file1")
+
+  # 我们关闭文件
+
+  >>> file1.flush()
+
+  >>> file1.close()
+
+  # 我们以读取模式打开文件
+
+  >>> file1 = open("file1.txt", "r")
+
+  # 我们创建一个包含我们文件的对象，并使用 print() 函数显示它
+
+  >>> text1 = file1.read()
+
+  >>> print(text1)
+
+  Add line 1 to file1
+
+  # 我们关闭文件
+
+  >>> file1.close()
+
+  # 我们以写入模式重新打开文件
+
+  >>> file1 = open("file1.txt","w")
+
+  # 如果我们现在写入新文本，之前写入的行将被替换
+
+  >>> file1.write("Let''s replace the first line with this new one")
+
+  # 我们测试
+
+  >>> file1.flush()
+
+  >>> file1.close()
+
+  >>> file1 = open("file1.txt", "r")
+
+  >>> text2 = file1.read()
+
+  >>> print(text2)
+
+  Let''s replace the first line with this new one
+
+  >>> file1.close()
+
+  # 要添加文本而不覆盖，我们以追加模式打开文件
+
+  >>> file1 = open("file1.txt", "a")
+
+  >>> file1.write("\n Add a second line to this new version of the file")
+
+  >>> file1.close()
+
+  >>> file1 = open("file1.txt", "r")
+
+  >>> text3 = file1.read()
+
+  >>> print(text3)
+
+  We replace the first line with this new one
+
+  Add a second line to this new version of the file
+
+  # 我们可以使用 len() 函数验证文本的长度
+
+  len(text3)
+
+
+  ```
+
+
+  我们还可以创建一个读取文件每一行的小函数：
+
+
+  ```
+
+  >>> file1 = open("file1.txt", "r")
+
+  >>> for line in file1:
+
+  ...        print(line, end = "")
+
+  ```
+
+
+  或者按如下方式进行：
+
+
+  ```
+
+  >>> with open("file1.txt", "a") as file:
+
+  ...        file1.write("this is the third line")
+
+  ```
+
+
+  表 7-1 总结了用于打开文件的模式。
+
+
+  表 7-1
+
+
+  打开文件的模式
+
+
+  | 模式 | 描述 |
+
+  | :--- | :--- |
+
+  | ‘r’ | 只读，默认模式 |
+
+  | ‘rb’ | 以二进制格式只读 |
+
+  | ‘r+’ | 读写 |
+
+  | ‘rb+’ | 以二进制格式读写 |
+
+  | ‘w’ | 写入 |
+
+  | ‘wb’ | 仅以二进制格式写入。覆盖现有文件。如果文件不存在，则创建一个新文件。 |
+
+  | ‘w+’ | 读写。覆盖现有文件。如果文件不存在，则创建一个新文件。 |
+
+  | ‘wb+’ | 以二进制格式读写。覆盖现有文件。如果文件不存在，则创建一个新文件。 |
+
+  | ‘a’ | 追加到现有文件而不覆盖。如果文件不存在，则创建一个新文件。 |
+
+  | ‘ab’ | 追加到现有文件或创建新的二进制文件 |
+
+  | ‘a+’ | 读取、追加并覆盖新文件（或创建一个新文件） |
+
+  | ‘ab+’ | 以二进制格式读取和追加；覆盖新文件或创建一个新文件 |
+
+
+
+
+  ## .csv 格式
+
+
+  .csv 或 .tsv 格式的文件是数据挖掘中最常用的文件类型。稍后，我们将介绍一些能更轻松导入和管理文件的包（例如 pandas）。不过，现在我们先学习一些无需单独安装的基本操作。
+
+
+  ```
+
+  # 我们导入 csv
+
+  import csv
+
+  # 接下来，我生成一个随机的 csv 文件，将其保存在工作目录中，并命名为 ''df''。第二个参数 ''r'' 表示我们以只读模式访问该文件。
+
+  csv1 = open(''df'', ''r'')
+
+  # 如果我们想导入一个不在工作目录中的文件，可以包含完整的地址，例如：
+
+  csv2 = open(''/Users/valentinaporcu/Desktop/df2'', ''r'')
+
+  # 我们继续读取第一个文件
+
+  read = csv.reader(csv1)
+
+  for row in read:
+
+  ...     print row
+
+  ...
+
+  [", ''0'', ''1'', ''2'', ''3'', ''4'']
+
+  [''0'', ''15.982938813888007'', ''96.04182101708831'', ''74.68301929612825'', ''31.670249691004994'',
+  ''50.37042800222742'']
+
+  [...]
+
+  ```
+
+
+  ## 从网络读取
+
+
+  基本方法也允许我们从网络读取文件。例如：
+
+
+  ```
+
+  # Python2
+
+  # 我们导入 csv 和 urllib2
+
+  import csv
+
+  import urllib2
+
+  # 我们创建一个包含地址的对象
+
+  url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
+
+  # 我们创建一个连接
+
+  conn = urllib2.urlopen(url)
+
+  # 我们创建一个包含 .csv 文件的对象
+
+  file = csv.reader(conn)
+
+  # 我们打印文件
+
+  for row in file:
+
+  ...     print row
+
+  ...
+
+  [''5.1'', ''3.5'', ''1.4'', ''0.2'', ''Iris-setosa'']
+
+  [''4.9'', ''3.0'', ''1.4'', ''0.2'', ''Iris-setosa'']
+
+  [''4.7'', ''3.2'', ''1.3'', ''0.2'', ''Iris-setosa'']
+
+  [''4.6'', ''3.1'', ''1.5'', ''0.2'', ''Iris-setosa'']
+
+  [''5.0'', ''3.6'', ''1.4'', ''0.2'', ''Iris-setosa'']
+
+  [''5.4'', ''3.9'', ''1.7'', ''0.4'', ''Iris-setosa'']
+
+  [...]
+
+  ```
+
+
+  ## JSON 格式
+
+
+  让我们看看如何导入一个 JSON 格式的测试文件。一些 JSON 测试文件可以从 [`https://www.jsonar.com/resources/`](https://www.jsonar.com/resources/)
+  下载。
+
+
+  ```
+
+  import json
+
+  jfile = open(''zips.json'').read()
+
+  print(jfile)
+
+  { "city" : "AGAWAM", "loc" : [ -72.622739, 42.070206 ], "pop" : 15338, "state" :
+  "MA", "_id" : "01001" }
+
+  { "city" : "CUSHMAN", "loc" : [ -72.51564999999999, 42.377017 ], "pop" : 36963,
+  "state" : "MA", "_id" : "01002" }
+
+  { "city" : "BARRE", "loc" : [ -72.10835400000001, 42.409698 ], "pop" : 4546, "state"
+  : "MA", "_id" : "01005" }
+
+  { "city" : "BELCHERTOWN", "loc" : [ -72.41095300000001, 42.275103 ], "pop" : 10579,
+  "state" : "MA", "_id" : "01007" }
+
+  { "city" : "BLANDFORD", "loc" : [ -72.936114, 42.182949 ], "pop" : 1240, "state"
+  : "MA", "_id" : "01008" }
+
+  { "city" : "BRIMFIELD", "loc" : [ -72.188455, 42.116543 ], "pop" : 3706, "state"
+  : "MA", "_id" : "01010" }
+
+  { "city" : "CHESTER", "loc" : [ -72.988761, 42.279421 ], "pop" : 1688, "state" :
+  "MA", "_id" : "01011" }
+
+  { "city" : "CHESTERFIELD", "loc" : [ -72.833309, 42.38167 ], "pop" : 177, "state"
+  : "MA", "_id" : "01012" }
+
+  { "city" : "CHICOPEE", "loc" : [ -72.607962, 42.162046 ], "pop" : 23396, "state"
+  : "MA", "_id" : "01013" }
+
+  { "city" : "CHICOPEE", "loc" : [ -72.576142, 42.176443 ], "pop" : 31495, "state"
+  : "MA", "_id" : "01020" }
+
+  { "city" : "WESTOVER AFB", "loc" : [ -72.558657, 42.196672 ], "pop" : 1764, "state"
+  : "MA", "_id" : "01022" }
+
+  { "city" : "CUMMINGTON", "loc" : [ -72.905767, 42.435296 ], "pop" : 1484, "state"
+  : "MA", "_id" : "01026" }
+
+  ```
+
+
+  在第 8 章中，我们将学习如何使用 pandas 创建和导出 JSON 格式的数据框。
+
+
+  ## 其他格式
+
+
+  现在我们已经了解了如何使用 Python 中一些最常见的格式导入文件和数据。其他格式包括：
+
+
+  *   lxml——特别是 **objectify** 模块——允许你将文件导入 XML。
+
+  *   SQLite3 允许你导入 SQL 数据库。
+
+  *   PyMongo 允许你管理 Mongo 数据库。
+
+  *   feedparser 允许你处理多种格式的订阅源，包括 RSS。
+
+  *   xlrd 允许你将文件导入 Excel（但请注意，pandas 使用起来要简单得多）。
+
+
+  ## 总结
+
+
+  以多种格式导入文件和数据集是数据分析中最重要的内容之一。本章描述的过程很重要，因为我们不需要库来导入文件和数据。我们可以使用 Python 中的基本函数。
+
+
+  '
+- '# 8. pandas
+
+
+  在第 7 章中，我们学习了如何使用基本函数导入通用文件。这里我们将探讨 pandas——用于数据集管理的最重要的库之一。
+
+
+  ## 数据挖掘库
+
+
+  从现在开始，包括接下来的章节，我们将研究最重要和最常用的数据挖掘库：
+
+
+  *   **pandas：** 导入、管理和操作各种格式的数据框，提取部分数据，合并两个数据框，还包含一些基本的统计函数。
+
+  *   **NumPy：** 一个用于科学计算的包，包含多个高级数学和代数函数，以及随机数生成；并允许创建数组。
+
+  *   **Matplotlib：** 一个允许从数据集创建图表的库。
+
+  *   **SciPy：** 包含超过 60 个与数学和统计分析相关的统计函数。
+
+  *   **scikit-learn：** 机器学习和数据分析最重要的工具。
+
+
+  ## pandas
+
+
+  在本章中，我们将不再讨论 Python 结构，而是开始研究最重要的数据挖掘包，从 pandas 库开始。
+
+
+  pandas 是一个开源的 Python 库，包含用于导入、管理和操作数据的各种工具。它具有许多用于操作、重组和扫描结构化数据的高级功能，包括切片、管理缺失值、重构数据、提取数据集部分以及从网络导入和解析数据。pandas
+  是最重要的数据挖掘库之一。我们可以：
+
+
+  *   读取和导入结构化数据
+
+  *   组织和操作它们
+
+  *   计算一些基本统计量
+
+
+  我们可以导入整个库：
+
+
+  ```
+
+  >>> import pandas as pd
+
+  ```
+
+
+  或者只导入 pandas 中的主要结构，即 Series 和 DataFrame：
+
+
+  ```
+
+  >>> from pandas import Series, DataFrame
+
+  ```
+
+
+  正如我们将看到的，pandas、NumPy、SciPy 和 Matplotlib 通常协同工作。为了清晰起见，我将以最佳方式呈现它们——首先分别介绍。
+
+
+
+
+  ### pandas：Series
+
+
+  首先，我们总是下载并安装所需的包或包集——这里就是 pandas。pandas 是 Anaconda 套件的一部分，因此如果你已经安装了 Anaconda，则无需再安装它。按如下方式调用：
+
+
+  ```
+
+  >>> import pandas as pd
+
+  ```
+
+
+  如你所见，我们通过创建一个简写 `pd` 来导入该包。此时，要调用 pandas 函数，我们只需编写
+
+
+  ```
+
+  pd.function_name()
+
+  ```
+
+
+  我们也可以导入特定的结构，例如 Series 和 DataFrames：
+
+
+  ```
+
+  >>> from pandas import Series, DataFrame
+
+  ```
+
+
+  在这种情况下，当我们调用或创建这两个结构之一时，开头无需指定“pd”。
+
+
+  第一个 pandas 结构是 Series——一种由索引标识的一维数组。让我们创建第一个序列：
+
+
+  ```
+
+  >>> series1 = Series([25, 27, 28, 30],
+
+  index = ["student1", "student2", "student3", "student4"])
+
+  >>> print(series1)
+
+  student1    25
+
+  student2    27
+
+  student3    28
+
+  student4    30
+
+  dtype: int64
+
+  # 然后我们使用 .describe() 函数获取关于该序列的一些统计信息
+
+  >>> series1.describe()
+
+  count     4.000000
+
+  mean     27.500000
+
+  std       2.081666
+
+  min      25.000000
+
+  25%      26.500000
+
+  50%      27.500000
+
+  75%      28.500000
+
+  max      30.000000
+
+  dtype: float64
+
+  ```
+
+
+  让我们查看序列的第一个元素：
+
+
+  ```
+
+  >>> series1[0]
+
+  ```
+
+
+  `25`
+
+
+  我们也可以提取多个元素：
+
+
+  ```
+
+  >>> series1[[2,3]]
+
+  student3    28
+
+  student4    30
+
+  dtype: int64
+
+  ```
+
+
+  或者通过索引提取元素：
+
+
+  ```
+
+  >>> series1["student1"]
+
+
+  >>> series1[["student1", "student4"]]
+
+  student1    25
+
+  student4    30
+
+  dtype: int64
+
+  ```
+
+
+  `.index` 方法允许我们对序列进行索引：
+
+
+  ```
+
+  >>> series1.index
+
+  Index([''student1'', ''student2'', ''student3'', ''student4''], dtype="object")
+
+  ```
+
+
+  我们还可以验证序列中是否存在某个元素：
+
+
+  ```
+
+  >>> ''student2'' in series1
+
+  True
+
+  ```
+
+
+  如果我们没有单独导入 series 和 data frames，我们可以通过指定使用 pandas 库来创建一个序列：
+
+
+  ```
+
+  >>> series2 = pd.Series([40, 20, 35, 70],
+
+  index = ["price1", "price2", "price3", "price4"])
+
+  # 如果我们没有以 pd 别名导入 pandas，我们可以指定完整的包名
+
+  >>> pandas.Series([40, 20, 35, 70],
+
+  index = ["price1", "price2", "price3", "price4"])
+
+  ```
+
+
+  pandas 序列由索引标记。如果我们不指定索引，它会自动创建：
+
+
+  ```
+
+  >>> series3 = Series([25, 27, 28, 30])
+
+  series3
+
+  0    25
+
+  1    27
+
+  2    28
+
+  3    30
+
+  dtype: int64
+
+  ```
+
+
+  要替换序列中的某些元素，我们使用 `.replace` 方法。
+
+
+  ```
+
+  >>> series3.replace([25, 27], [125, 127])
+
+  0    125
+
+  1    127
+
+  2     28
+
+  3     30
+
+  dtype: int64
+
+  ```
+
+
+  让我们创建另一个序列：一个包含随机数的序列。为此，我们需要加载 NumPy 库：
+
+
+  ```
+
+  >>> import numpy as np
+
+  # 我们创建一个随机数序列
+
+  >>> series4 = pd.Series(np.random.randn(7))
+
+  # 打印它并检查索引
+
+  series4
+
+  0   -0.227393
+
+  1   -1.079208
+
+  2    0.101591
+
+  3    0.157502
+
+  4    1.541307
+
+  5   -0.182501
+
+  6   -0.247327
+
+  dtype: float64
+
+  # 我们可以使用 .index() 方法修改索引
+
+  >>> series4.index = [''a'', ''b'', ''c'', ''d'', ''e'', ''f'', ''g'']
+
+  # 并再次检查索引
+
+  series4
+
+  a   -0.227393
+
+  b   -1.079208
+
+  c    0.101591
+
+  d    0.157502
+
+  e    1.541307
+
+  f   -0.182501
+
+  g   -0.247327
+
+  dtype: float64
+
+  # 我们创建另一个随机序列
+
+  >>> series5 = pd.Series(np.random.randn(7))
+
+  # 然后使用 .concat() 方法合并这两个序列
+
+  >>> s45 = pd.concat([series4, series5])
+
+  # 打印创建的序列
+
+  >>> s45
+
+  a   -0.227393
+
+  b   -1.079208
+
+  c    0.101591
+
+  d    0.157502
+
+  e    1.541307
+
+  f   -0.182501
+
+  g   -0.247327
+
+  0   -0.610507
+
+  1    0.282318
+
+  2   -1.142692
+
+  3   -1.081449
+
+  4   -1.818420
+
+  5   -1.133354
+
+  6    0.804213
+
+  dtype: float64
+
+  # 检查其中一个创建的结构
+
+  >>> type(s45)
+
+  >>> pandas.core.series.Series
+
+  # 我们删除序列中的一些元素
+
+  >>> >>> del(s45[5])
+
+  >>> s45
+
+  a   -0.227393
+
+  b   -1.079208
+
+  c    0.101591
+
+  d    0.157502
+
+  e    1.541307
+
+  f   -0.182501
+
+  g   -0.247327
+
+  0   -0.610507
+
+  1    0.282318
+
+  2   -1.142692
+
+  3   -1.081449
+
+  4   -1.818420
+
+  6    0.804213
+
+  dtype: float64
+
+  >>> del(s45[''f''])
+
+  >>> s45
+
+  b   -1.079208
+
+  c    0.101591
+
+  e    1.541307
+
+  g   -0.247327
+
+  0   -0.610507
+
+  1    0.282318
+
+  2   -1.142692
+
+  3   -1.081449
+
+  4   -1.818420
+
+  6    0.804213
+
+  dtype: float64
+
+  # 我们从序列中切片一些元素
+
+  >>> s45[0]
+
+  -0.61050680805211532
+
+  >>> s45[2:4]
+
+  e    1.541307
+
+  g   -0.247327
+
+  dtype: float64
+
+  # 我们可以执行对象切片，直到第四个位置
+
+  >>> s45[:4]
+
+  # 或者从第五个位置开始
+
+  >>> s45[5:]
+
+  # 或者提取最后三个项目
+
+  >>> s45[-3:]
+
+  # 我们可以使用 .head() 和 .tail() 方法提取第一个和最后一个元素
+
+  >>> s45.head(2)
+
+  >>> s45.tail(3)
+
+  # 我们可以反转序列
+
+  >>> s45[::-1]
+
+  # 最后，我们可以使用 .copy() 方法创建序列的副本
+
+  >>> copys45 = s45.copy()
+
+  ```
+
+
+
+
+  ### pandas：数据框（DataFrame）
+
+
+  pandas 中最重要的结构是 DataFrame，它扩展了 Series 的功能，使我们能够管理数据集。让我们用 pandas 创建一个小的数据框：
+
+
+  ```
+
+  # 我们导入 pandas
+
+  >>> import pandas as pd
+
+  # 我们使用 DataFrame 函数从计算机创建或导入数据集或文件
+
+  # 要获取特定函数的帮助，我们输入
+
+  >>> help(pd.DataFrame())
+
+  Help on DataFrame in module pandas.core.frame object:
+
+  # class DataFrame(pandas.core.generic.NDFrame)
+
+  |  Two-dimensional size-mutable, potentially heterogeneous
+
+  |  tabular data structure with labeled axes (rows and columns).
+
+  |  Arithmetic operations align on both row and column labels.
+
+  |  Can be thought of as a dict-like container for Series objects.
+
+  |  The primary pandas data structure
+
+  |
+
+  |  Parameters
+
+  |  _ _ _ _ _ _ _ _ _ _
+
+  |  data : numpy ndarray (structured or homogeneous), dict, or
+
+  |  DataFrame
+
+  |      Dict can contain Series, arrays, constants, or list-like
+
+  |      objects
+
+  |  index : Index or array-like
+
+  |      Index to use for resulting frame. Will default to
+
+  |      np.arange(n) if no indexing information part of input
+
+  |      data and no index provided
+
+  |  columns : Index or array-like
+
+  |      Column labels to use for resulting frame. Will default to
+
+  |      np.arange(n) if no column labels are provided
+
+  |  dtype : dtype, default None
+
+  ```
+
+
+  ```
+
+  # 我们创建第一个数据集
+
+  >>> df1 = pd.DataFrame({''Names'': [''Simon'', ''Kate'', ''Francis'', ''Laura'',
+  ''Mary'', ''Julian'', ''Rosie''],
+
+  ''Height'':[180, 165, 170, 164, 163, 175, 166],
+
+  ''Weight'':[85, 65, 68, 45, 43, 72, 46],
+
+  ''Pref_food'':[''steak'', ''pizza'', ''pasta'', ''pizza'', ''vegetables'',''steak'',''seafood''],
+
+  ''Sex'':[''m'', ''f'',''m'',''f'', ''f'', ''m'', ''f'']})
+
+  # 注意：我们不能创建名称中包含空格的变量；例如，我们可以创建变量 ''Var_1''，但将变量命名为 ''Var 1'' 会返回错误
+
+  # 我们打印数据框
+
+  >>> df1
+
+  Height    Names   Pref_food Sex  Weight
+
+  0     180    Simon       steak   m      85
+
+  1     165     Kate       pizza   f      65
+
+  2     170  Francis       pasta   m      68
+
+  3     164    Laura       pizza   f      45
+
+  4     163     Mary  vegetables   f      43
+
+  5     175   Julian       steak   m      72
+
+  6     166    Rosie     seafood   f      46
+
+  # 对数据进行统计分析可能很有用，我们可以使用 .describe() 方法来实现
+
+  >>> df1.describe()
+
+  Height     Weight
+
+  count    7.000000   7.000000
+
+  mean   169.000000  60.571429
+
+  std      6.377042  16.154021
+
+  min    163.000000  43.000000
+
+  25%    164.500000  45.500000
+
+  50%    166.000000  65.000000
+
+  75%    172.500000  70.000000
+
+  max    180.000000  85.000000
+
+  # 我们可以查看变量名
+
+  >>> df1.columns
+
+  Index([''Height'', ''Names'', ''Pref_food'', ''Sex'', ''Weight''],
+
+  dtype=''object'')
+
+  ```
+
+
+  此时，我们可以继续设置一个变量——在本例中是 ''Names''——作为索引，方法如下：
+
+
+  ```
+
+  >>> df1.set_index(''Names'')
+
+  ```
+
+
+  ![../images/469457_1_En_8_Chapter/469457_1_En_8_Figb_HTML.jpg](img/469457_1_En_8_Figb_HTML.jpg)
+
+
+  ```
+
+  # 为了巩固索引，我们使用参数 inplace = True
+
+  >>> df1.set_index(''Names'', inplace = True)
+
+  # 我们可以按如下方式重置索引：
+
+  >>> df1.reset_index()
+
+  ```
+
+
+  我们可以继续探索数据。
+
+
+  ```
+
+  # 我们检查案例数和变量数
+
+  >>> print(df1.shape)
+
+  (7, 4)
+
+  # 并确定变量类型
+
+  >>> print(df1.dtypes)
+
+  Height        int64
+
+  Pref_food    object
+
+  Sex          object
+
+  Weight        int64
+
+  dtype: object
+
+  ```
+
+
+  同样，我们可以使用 `head()` 和 `tail()` 函数查看第一个和最后一个元素。我们可能希望指定要显示的案例数量。在这种情况下，我们会使用括号：
+
+
+  ```
+
+  >>> df1.head()
+
+  >>> df1.tail(3)
+
+  ```
+
+
+  我们还可以使用 `.info()` 方法获取有关变量的信息：
+
+
+  ```
+
+  >>> df1.info()
+
+
+  RangeIndex: 7 entries, 0 to 6
+
+  Data columns (total 5 columns):
+
+  Height       7 non-null int64
+
+  Names        7 non-null object
+
+  Pref_food    7 non-null object
+
+  Sex          7 non-null object
+
+  Weight       7 non-null int64
+
+  dtypes: int64(2), object(3)
+
+  memory usage: 360.0+ bytes
+
+  ```
+
+
+  然后，我们可以根据其中一个变量重新排列数据：
+
+
+  ```
+
+  >>> df1.sort_values(by = ''Weight'')
+
+  ```
+
+
+  ![../images/469457_1_En_8_Chapter/469457_1_En_8_Figc_HTML.jpg](img/469457_1_En_8_Figc_HTML.jpg)
+
+
+  ```
+
+  # 我们根据体重重新排列了数据，从最低值到最高值。要反转这些值，从最高到最低，我们将 ascending 参数指定为 False
+
+  >>> df1.sort_values(by = ''Weight'', ascending = False)
+
+  ```
+
+
+  ![../images/469457_1_En_8_Chapter/469457_1_En_8_Figd_HTML.jpg](img/469457_1_En_8_Figd_HTML.jpg)
+
+
+  ```
+
+  # 如果数据集中有任何缺失值（特别是在用作索引的变量中），我们可以通过以下方式将它们全部放在显示的开头或结尾
+
+  >>> df1.sort_values(by = ''Weight'', na_position = "last")
+
+  >>> df1.sort_values(by = ''Weight'', na_position = "first")
+
+  # 要按索引重新排列数据集，我们可以使用 sort_index 而不是 sort_values，以升序或降序方式对数据进行排序
+
+  >>> df1.sort_index()
+
+  >>> df1.sort_index(ascending= False)
+
+  ```
+
+
+  ![../images/469457_1_En_8_Chapter/469457_1_En_8_Fige_HTML.jpg](img/469457_1_En_8_Fige_HTML.jpg)
+
+
+  让我们看一些从数据框中切片项目的示例：
+
+
+  ```
+
+  # 从第一列开始（Python 从 0 开始计数，所以我们使用第 0 列），让我们切片前三个案例：
+
+  >>> df1[:3]
+
+  Names    Height Pref_food Sex  Weight
+
+  0     Simon      180      steak   m      85
+
+  1      Kate      165      pizza   f      65
+
+  2   Francis      170      pasta   m      68
+
+  # 或者从第四个案例切片到末尾
+
+  >>> df1[4:]
+
+  Names   Heigth   Pref_food Sex  Weight
+
+  4      Mary    163  vegetables   f      43
+
+  5      Julian  175       steak   m      72
+
+  6      Rosie   166     seafood   f      46
+
+  # 或者切片其中一列
+
+  >>> df1[''Names'']
+
+  0      Simon
+
+  1       Kate
+
+  2    Francis
+
+  3      Laura
+
+  4       Mary
+
+  5     Julian
+
+  6      Rosie
+
+  Name: Names, dtype: object
+
+  # 通过使用单层方括号，就像我们刚才做的那样，我们可以像提取 Series 一样提取一个变量
+
+  # 这是另一种方法
+
+  >>> df1.Names
+
+  0      Simon
+
+  1       Kate
+
+  2    Francis
+
+  3      Laura
+
+  4       Mary
+
+  5     Julian
+
+  6      Rosie
+
+  Name: Names, dtype: object
+
+  # 第三种方法是使用双层方括号来选择数据框
+
+  >>> df1[[''Names'']]
+
+  ```
+
+
+  ![../images/469457_1_En_8_Chapter/469457_1_En_8_Figf_HTML.jpg](img/469457_1_En_8_Figf_HTML.jpg)
+
+
+  ```
+
+  # 我们也可以选择更多列
+
+  >>> df1[[''Names'', ''Sex'']]
+
+  ```
+
+
+  我们可以选择特定元素的某个变量的值——例如，第三个值：
+
+
+  ```
+
+  >>> df1[''Sex''][2]
+
+  ''m''
+
+  # 或者某些变量的某些值
+
+  >>> df1[''Names''][1:4]
+
+  1       Kate
+
+  2    Francis
+
+  3      Laura
+
+  Name: Names, dtype: object
+
+  ```
+
+
+  要从数据框中选择项目，我们还可以使用 `.loc`、`.iloc` 和 `.ix` 方法：
+
+
+  *   **.loc：** 通过索引工作
+
+  *   **.iloc：** 通过位置提取
+
+  *   **.ix：** 两者都考虑
+
+
+  ```
+
+  # .loc
+
+  >>> df1.loc[1]
+
+  Names         Kate
+
+  Height         165
+
+  Pref_food    pizza
+
+  Sex              f
+
+  Weight          65
+
+  Name: 1, dtype: object
+
+  # 我们可以提取从第一个到第四个的元素
+
+  >>> df1.loc[:3]
+
+  # .iloc
+
+  # 我们可以提取第一个案例和第三个变量中的元素
+
+  >>> df1.iloc[0,2]
+
+  ''steak''
+
+  # .iloc 的替代方法是 .iat 方法
+
+  >>> df1.iat[1,3]
+
+  ''f''
+
+  # .at 和 .iat 方法基于索引
+
+  >>> df1.at[2,''Sex'']
+
+  ''m''
+
+  #  逗号左边，我们指示要提取的案例；右边，指示列或变量（表格未显示）。要提取所有元素，我们使用冒号
+
+  # 如果我们想每隔一个案例提取一次呢？
+
+  >>> df1[::2]
+
+  ```
+
+
+
+
+  ![../images/469457_1_En_8_Chapter/469457_1_En_8_Figg_HTML.jpg](img/469457_1_En_8_Figg_HTML.jpg)
+
+
+  通过布尔运算符，我们可以指定提取条件。例如，我们可以提取数据集中受试者身高（Height）大于 170 的案例：
+
+
+  ```
+
+  >>> df1[df1.Height > 170]
+
+  Names  Height  Pref_food  Sex  Weight
+
+  0    Simon  180         steak    m      85
+
+  5   Julian  175         steak    m      72
+
+  ```
+
+
+  我们也可以指定多个条件，例如提取所有体重超过 163 的女性：
+
+
+  ```
+
+  >>> df1[(df1.Height > 163) & (df1.Sex == ''f'')]
+
+  ```
+
+
+  或者，我们也可以使用`.query()`方法：
+
+
+  ```
+
+  >>> df1.query("Sex != ''f''")
+
+  Names  Height  Pref_food Sex  Weight
+
+  0     Simon     180      steak   m      85
+
+  2   Francis     170      pasta   m      68
+
+  5    Julian     175      steak   m      72
+
+  ```
+
+
+  现在，让我们看看如何重命名列：
+
+
+  ```
+
+  >>> df1 = df1.rename(columns = {''Pref_food'': ''Food''})
+
+  >>> df1.head(2)
+
+  Names  Height   Food  Sex  Weight
+
+  0   Simon  180      steak   m      85
+
+  1   Kate   165      pizza   f      65
+
+  ```
+
+
+  我们可以创建数据框的副本：
+
+
+  ```
+
+  >>> df2 = df1.copy()
+
+  >>> df2
+
+  ```
+
+
+  ![../images/469457_1_En_8_Chapter/469457_1_En_8_Figh_HTML.jpg](img/469457_1_En_8_Figh_HTML.jpg)
+
+
+  我们还可以添加列。例如，让我们向 df2 数据集中添加一个包含以厘米为单位的身高的列：
+
+
+  ```
+
+  >>> df2[''new_col''] = df2.Height/100
+
+  >>> df2
+
+  Names  Heigth        Food Sex  Weight  new_col
+
+  0    Simon     180       steak   m      85     1.80
+
+  1    Kate      165       pizza   f      65     1.65
+
+  2    Francis   170       pasta   m      68     1.70
+
+  3    Laura     164       pizza   f      45     1.64
+
+  4    Mary      163  vegetables   f      43     1.63
+
+  5    Julian    175       steak   m      72     1.75
+
+  6    Rosie     166     seafood   f      46     1.66
+
+  ```
+
+
+  我们也可以使用`.insert()`方法添加列。第一个元素 5 标记了我们想要插入新列的位置（第六个位置），第二个是新列的名称，第三个是新列的值：
+
+
+  ```
+
+  >>> df2.insert(5, column = ''new_col2'', value = df2.Height/100)
+
+  >>> print(df2.head(2))
+
+  Names  Heigth Pref_food Sex  Weight  new_col2  new_col
+
+  0   Simon  180        steak   m      85      1.80     1.80
+
+  1   Kate   165        pizza   f      65      1.65     1.65
+
+  ```
+
+
+  让我们回到未添加内容的 df1 数据集。通过使用`.groupby()`，我们还可以围绕一个或多个变量对数据集进行聚合。
+
+
+  ```
+
+  >>> df1.groupby(''Sex'')
+
+
+  ```
+
+
+  我们可以创建一个包含按“Sex”变量聚合的分组对象：
+
+
+  ```
+
+  >>> grouped1 = df1.groupby(''Sex'')
+
+  # 要查看分组，我们使用 group_name.groups
+
+  >>> grouped1.groups
+
+  {''f'': [1, 3, 4, 6], ''m'': [0, 2, 5]}
+
+  ```
+
+
+  我们可以可视化以某种方式标记的案例数量。
+
+
+  ```
+
+  # 要查看案例，请按以下步骤操作
+
+  >>> for names, groups in grouped1:
+
+  ...    print(names)
+
+  ...    print(groups)
+
+  ```
+
+
+  ![../images/469457_1_En_8_Chapter/469457_1_En_8_Figi_HTML.jpg](img/469457_1_En_8_Figi_HTML.jpg)
+
+
+  ```
+
+  # 注意，我们只获取属于某个分组的数据
+
+  >>> grouped1.get_group(''f'')
+
+  # 我们可以根据两个变量聚合案例
+
+  >>> grouped2 = df1.groupby([''Sex'', ''Pref_food''])
+
+  >>> grouped2.groups
+
+  {(''f'', ''pizza''): [1, 3],
+
+  (''f'', ''seafood''): [6],
+
+  (''f'', ''vegetables''): [4],
+
+  (''m'', ''pasta''): [2],
+
+  (''m'', ''steak''): [0, 5]}
+
+  # 我们还可以确定每个分组中有多少个案例
+
+  >>> grouped2.size()
+
+  Sex  Pref_food
+
+  f    pizza         2
+
+  seafood       1
+
+  vegetables    1
+
+  m    pasta         1
+
+  steak         2
+
+  dtype: int64
+
+  # 我们可以获取数据的一些描述性统计信息
+
+  >>> grouped2.describe()
+
+  ```
+
+
+  ![../images/469457_1_En_8_Chapter/469457_1_En_8_Figj_HTML.jpg](img/469457_1_En_8_Figj_HTML.jpg)
+
+
+  我们还可以使用`.value_counts()`方法统计变量的频率。
+
+
+  ```
+
+  >>> df1[''Sex''].value_counts()
+
+  f    4
+
+  m    3
+
+  Name: Sex, dtype: int64
+
+  ```
+
+
+  回到 df1 数据集，我们可以使用`.info()`方法获取变量的信息。
+
+
+  ```
+
+  >>> print(df1)
+
+  >>> df1.info()
+
+  ```
+
+
+  使用`.astype()`方法，我们可以改变变量的类型。例如，我们可以将变量从 int（数值型变量）覆盖为对象变量，例如字符串：
+
+
+  ```
+
+  >>> df1[''Weight''] = df1[''Weight''].astype(''object'')
+
+  >>> df1.info()
+
+
+  RangeIndex: 7 entries, 0 to 6
+
+  Data columns (total 5 columns):
+
+  Height       7 non-null int64
+
+  Names        7 non-null object
+
+  Pref_food    7 non-null object
+
+  Sex          7 non-null object
+
+  Weight       7 non-null object
+
+  dtypes: int64(1), object(4)
+
+  memory usage: 360.0+ bytes
+
+  ```
+
+
+  我们可以使用`.drop()`方法删除案例和变量：
+
+
+  ```
+
+  >>> df1.drop(0)
+
+  ```
+
+
+  ![../images/469457_1_En_8_Chapter/469457_1_En_8_Figk_HTML.jpg](img/469457_1_En_8_Figk_HTML.jpg)
+
+
+  ```
+
+  # 另一方面，如果我们设置并巩固索引，则根据索引值删除案例
+
+  >>> df1.set_index(''Names'', inplace = True)
+
+  >>> df1.drop("Laura")
+
+  Height   Pref_food Sex  Weight
+
+  Names
+
+  Simon       180       steak   m      85
+
+  Kate        165       pizza   f      65
+
+  Francis     170       pasta   m      68
+
+  Mary        163  vegetables   f      43
+
+  Julian      175       steak   m      72
+
+  Rosie       166     seafood   f      46
+
+  # 我们可以一次删除多个元素
+
+  >>> print(df1.drop(["Mary", "Francis"]))
+
+  # 或者删除整个列
+
+  # 为此，我们必须指定轴 1（默认轴 0 表示行）
+
+  >>> df1.drop("Height", axis = 1)
+
+  Names     Pref_food Sex  Weight
+
+  Simon         steak   m      85
+
+  Kate          pizza   f      65
+
+  Francis       pasta   m      68
+
+  Laura         pizza   f      45
+
+  Mary     vegetables   f      43
+
+  Julian        steak   m      72
+
+  Rosie       seafood   f      46
+
+  ```
+
+
+  要删除多个列，请将它们包含在一个列表中：
+
+
+  ```
+
+  >>> df.drop(["column1", "column2"], axis = 1)
+
+  # 除了将轴指定为 1，我们也可以指定"columns"
+
+  >>> df.drop(["column1", "column2"], axis = "columns")
+
+  ```
+
+
+  pandas 包还允许我们使用相同的函数创建交叉表。例如，在 df1 数据集中，我们可以创建一个关联性别与最爱食物的交叉表：
+
+
+  ```
+
+  >>> pd.crosstab(df1.Sex, df1.Pref_food)
+
+  Pref_food  pasta  pizza  seafood  steak  vegetables
+
+  Sex
+
+  f              0      2        1      0           1
+
+  m              1      0        0      2           0
+
+  ```
+
+
+  当我们添加 margins 参数时，我们还会得到包含总计的行：
+
+
+  ```
+
+  >>> pd.crosstab(df1.Sex, df1.Pref_food, margins = True)
+
+  Pref_food  pasta  pizza  seafood  steak  vegetables  All
+
+  Sex
+
+  f              0      2        1      0           1    4
+
+  m              1      0        0      2           0    3
+
+  All            1      2        1      2           1    7
+
+  ```
+
+
+
+
+  ### pandas：数据导入与导出
+
+
+  pandas 库在从你的计算机导入各种格式（包括 .csv）的文件方面也非常重要：
+
+
+  ```
+
+  import pandas as pd
+
+  >>> df2 = pd.read_csv("file_address.csv")
+
+  # 我们可以通过指定第一行不包含变量名来导入文件
+
+  >>> df2 = pd.read_csv("file_address.csv", header = None)
+
+  # 或者通过指定哪一行包含变量名
+
+  >>> df2 = pd.read_csv("file_address.csv", header = 0)
+
+  >>> df2 = pd.read_csv("file_address.csv", header = 1)
+
+  # 我们也可以指定列名
+
+  >>> df2 = pd.read_csv("file_address.csv", names = [''var1'', ''var2'', ''var3'',
+  ''var4''])
+
+  # 或者只导入部分列
+
+  >>> df2 = pd.read_csv("file_address.csv", usecols = [1,2,3])
+
+  # 我们还可以指定分隔数据的元素
+
+  >>> df2 = pd.read_csv("file_address.csv", sep = " ")
+
+  # 现在我们可以查看数据框的前几条记录
+
+  >>> df2.head()
+
+  # 或者后几条
+
+  >>> df2.tail()
+
+  # 我们使用括号来指定要显示的记录数
+
+  >>> df2.head(9)
+
+  >>> df2.tail(5)
+
+  # 并且我们可以查看数据集的摘要信息
+
+  >>> df2.describe()
+
+  >>> df2.info()
+
+  >>> df.dtypes() # 它告诉我们数据类型
+
+  ```
+
+
+  `pd.read_csv()` 函数也可以用来从网络导入文件。UCI 机器学习仓库（[`archive.ics.uci.edu/ml/index.php`](https://archive.ics.uci.edu/ml/index.php)）提供了许多用于机器学习的数据集。
+
+
+  让我们看一个鸢尾花数据集。图 8-1 到 8-3 以及以下步骤帮助我们导航到其选项卡并复制包含数据集的链接。
+
+
+  ![../images/469457_1_En_8_Chapter/469457_1_En_8_Fig3_HTML.jpg](img/469457_1_En_8_Fig3_HTML.jpg)
+
+
+  图 8-3
+
+
+  UCI 机器学习网站上的鸢尾花数据集，点击“Data Folder”访问包含数据集的页面
+
+
+  ![../images/469457_1_En_8_Chapter/469457_1_En_8_Fig2_HTML.jpg](img/469457_1_En_8_Fig2_HTML.jpg)
+
+
+  图 8-2
+
+
+  *UCI 机器学习网站上的鸢尾花数据集*
+
+
+  ![../images/469457_1_En_8_Chapter/469457_1_En_8_Fig1_HTML.jpg](img/469457_1_En_8_Fig1_HTML.jpg)
+
+
+  图 8-1
+
+
+  UCI 机器学习网站上的鸢尾花数据集，点击“Iris”获取描述页面
+
+
+  首先，我们复制包含数据集的链接。
+
+
+  ```
+
+  # 我们导入 pandas
+
+  >>> import pandas as pd
+
+  # 我们创建一个包含数据集的对象，并使用 pd.read_csv() 导入它
+
+  >>> iris = pd.read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data")
+
+  # 我们通过使用 .head() 函数显示一些记录来检查数据准确性
+
+  >>> iris.head(3)
+
+  5.1  3.5  1.4  0.2  Iris-setosa
+
+  0  4.9  3.0  1.4  0.2  Iris-setosa
+
+  1  4.7  3.2  1.3  0.2  Iris-setosa
+
+  2  4.6  3.1  1.5  0.2  Iris-setosa
+
+  ```
+
+
+  我们使用的 pandas 函数 `pd.read_csv()` 的结构还包括我们在此次导入中未使用的其他参数：
+
+
+  *   **filepath** 文件的地址（在计算机上或外部）
+
+
+  *   **sep = '',''** 分隔数据的分隔符，例如逗号或分号
+
+
+  *   **dtype=** 指定列格式的方法
+
+
+  *   **header=** 第一行中的变量名（如果有）
+
+
+  *   **skiprows=** 仅导入部分记录的方法——例如，`skiprows = 50` 从第 51 条记录开始读取数据
+
+
+  *   **index_col=** 将某一列设置为数据索引的方法
+
+
+  *   **skip_blank_lines=** 移除数据集中任何空行的方法
+
+
+  *   **na_filter=** 识别数据集中缺失值的方法，如果设置为 False，则将其移除
+
+
+  ```
+
+  pd.read_csv( filepath, sep = '','', dtype = None, skiprows = None, index_col = None,
+  skip_blank_lines = True, na_filter = True)
+
+  ```
+
+
+  此外，**usecols=** 参数可用于仅导入数据集中的少数几列。例如，假设我们有图 8-4 中所示的小型数据集，我们想从中提取以下变量：
+
+
+  ![../images/469457_1_En_8_Chapter/469457_1_En_8_Fig4_HTML.jpg](img/469457_1_En_8_Fig4_HTML.jpg)
+
+
+  图 8-4
+
+
+  数据集 students.csv
+
+
+  ```
+
+  >>> df3 = pd.read_csv("~students.csv",usecols =["ID", "mark1"], index_col= ["ID"])
+
+  # 我们验证数据
+
+  df3
+
+  mark1
+
+  ID
+
+  1    17.0
+
+  2    24.0
+
+  3    17.0
+
+  4    27.0
+
+  5    30.0
+
+  6    30.0
+
+  7    23.0
+
+  8    17.0
+
+  9    21.0
+
+  10   24.0
+
+  11   24.0
+
+  12   25.0
+
+  13   24.0
+
+  14    NaN
+
+  15   22.0
+
+  16   30.0
+
+  17   29.0
+
+  18   29.0
+
+  19    NaN
+
+  # 正确，我们只加载了 ''mark1'' 变量
+
+  ```
+
+
+  一个对应的函数是 `df.to_csv(“filename”)`，它允许我们将一个 .csv 文件写入我们的工作目录。我们可以指定 **index=False**
+  参数来避免将索引与数据一起下载。
+
+
+  作为此文件导入函数的替代方案，我们可以使用 `pd.read_table(filepath, sep = ‘,’)` 函数，该函数同时设置了文件路径（filepath）和分隔符。
+
+
+  pandas 的其他功能允许我们读取 Excel 的 .xls 或 .xlsx 文件。为此，我们使用一个通用公式：
+
+
+  ```
+
+  df = pd.read_excel(filepath, "sheet_name")
+
+  ```
+
+
+  在这种情况下，我们不仅必须指定文件的地址，还必须指定 Excel 文件是否包含多个数据表，以及我们要从中读取数据的工作表名称。与 .csv 类似，对于 Excel
+  格式，我们也有一个公式允许我们在计算机的工作目录中写入一个 Excel 文件：`df.to_excel()`。pandas 包还包含一个用于读取 JSON 文件的函数——`pd.read_json()`——并且还允许我们通过
+  `pd.read_html(url)` 函数访问网络数据，以及通过 `pd.to_html()` 将数据框转换为 HTML 表格。
+
+
+  让我们看一个创建和导出 JSON 文件的示例：
+
+
+  ```
+
+  >>> jf = pd.DataFrame(np.arange(16).reshape(4,4), index = [''A'', ''B'', ''C'',
+  ''D''], columns = [''var1'', ''var2'', ''var3'', ''var4''])
+
+  >>> jf
+
+  var1  var2  var3  var4
+
+  A     0     1     2     3
+
+  B     4     5     6     7
+
+  C     8     9    10    11
+
+  D    12    13    14    15
+
+  >>> jf.to_json(''jf.json'')
+
+  # 剩下的就是检查文件是否已正确创建在我们的工作目录中
+
+  ```
+
+
+
+
+  ### pandas：数据操作
+
+
+  我们已经了解了如何创建分组以及操作数据框。现在，让我们通过 pandas 来学习更多的操作元素。首先，导入 pandas 并创建一个小的数据集：
+
+
+  ```
+
+  >>> df2 = pd.DataFrame({''Names'': [''Simon'', ''Kate'', ''Francis'', ''Laura'',
+  ''Mary'', ''Julian'', ''Rosie'', ''Simon'', ''Laura''],
+
+  ''Height'':[180, 165, 170, 164, 163, 175, 166, 180, 164],
+
+  ''Weight'':[85, 65, 68, 45, 43, 72, 46, 85, 45],
+
+  ''Pref_food'': [''steak'', ''pizza'', ''pasta'', ''pizza'', ''vegetables'', ''steak'',
+  ''seafood'', ''steak'', ''pizza''],
+
+  ''Sex'': [''m'',''f'',''m'',''f'',''f'',''m'',''f'', ''m'', ''f'']})
+
+  ```
+
+
+  从“Sex”变量开始，我们创建两个虚拟变量，然后继续使用 pandas：
+
+
+  ```
+
+  >>> df_dummy = pd.get_dummies(df2[''Sex''], prefix = ''Sex'')
+
+  >>> df_dummy
+
+  Sex_f  Sex_m
+
+  0    0.0    1.0
+
+  1    1.0    0.0
+
+  2    0.0    1.0
+
+  3    1.0    0.0
+
+  4    1.0    0.0
+
+  5    0.0    1.0
+
+  6    1.0    0.0
+
+  7    0.0    1.0
+
+  8    1.0    0.0
+
+  ```
+
+
+  此时，我们可以将这两个虚拟变量连接到原始数据集中：
+
+
+  ```
+
+  >>> df2.join(df_dummy)
+
+  Unnamed: 0  Height    Names        Food Sex  Weight  Sex_f  Sex_m
+
+  0           0     180    Simon       steak   m      85    0.0    1.0
+
+  1           1     165     Kate       pizza   f      65    1.0    0.0
+
+  2           2     170  Francis       pasta   m      68    0.0    1.0
+
+  3           3     164    Laura       pizza   f      45    1.0    0.0
+
+  4           4     163     Mary  vegetables   f      43    1.0    0.0
+
+  5           5     175   Julian       steak   m      72    0.0    1.0
+
+  6           6     166    Rosie     seafood   f      46    1.0    0.0
+
+  7           0     180    Simon       steak   m      85    0.0    1.0
+
+  8           3     164    Laura       pizza   f      45    1.0    0.0
+
+  ```
+
+
+  我们将包含虚拟变量的连接数据集保存到一个新对象中：
+
+
+  ```
+
+  >>> df3 = df2.join(df_dummy)
+
+  # 让我们检查一下
+
+  >>> print(df3.head(2))
+
+  Height  Names Pref_food Sex  Weight  Sex_f  Sex_m
+
+  0     180  Simon     steak   m      85    0.0    1.0
+
+  1     165   Kate     pizza   f      65    1.0    0.0
+
+  ```
+
+
+  现在让我们删除原始的“Sex”变量：
+
+
+  ```
+
+  >>> del df3[''Sex'']
+
+  # 再次确认
+
+  >>> print(df3.head(2))
+
+  Height  Names  Pref_food  Weight  Sex_f  Sex_m
+
+  0     180  Simon      steak      85    0.0    1.0
+
+  1     165   Kate      pizza      65    1.0    0.0
+
+  ```
+
+
+  如你所见，我们的数据集中存在几个重复案例。首先，我们需要识别它们：
+
+
+  ```
+
+  >>> df2.duplicated()
+
+  0    False
+
+  1    False
+
+  2    False
+
+  3    False
+
+  4    False
+
+  5    False
+
+  6    False
+
+  7     True
+
+  8     True
+
+  dtype: bool
+
+  # 我们的数据集有两个重复案例
+
+  ```
+
+
+  要删除重复案例，我们使用 `.drop_duplicates()`：
+
+
+  ```
+
+  >>> df2.drop_duplicates()
+
+  ```
+
+
+  要获得一个没有重复的数据集，我们可以覆盖旧数据集或创建另一个对象：
+
+
+  ```
+
+  >>> df3 = df2.drop_duplicates()
+
+  ```
+
+
+  我们也可以删除一个案例，这次使用 `drop`：
+
+
+  ```
+
+  >>> df2.drop(2)
+
+  Height   Names   Pref_food Sex  Weight
+
+  0     180   Simon       steak   m      85
+
+  1     165    Kate       pizza   f      65
+
+  3     164   Laura       pizza   f      45
+
+  4     163    Mary  vegetables   f      43
+
+  5     175  Julian       steak   m      72
+
+  6     166   Rosie     seafood   f      46
+
+  7     180   Simon       steak   m      85
+
+  8     164   Laura       pizza   f      45
+
+  # 在这个例子中，我们删除了第三个案例
+
+  ```
+
+
+  `stack()` 和 `unstack()` 函数允许我们以不同的方式重新组织数据：
+
+
+  ```
+
+  >>> df3.stack()
+
+  0  Height              180
+
+  Names             Simon
+
+  Pref_food         steak
+
+  Sex                   m
+
+  Weight               85
+
+  1  Height              165
+
+  Names              Kate
+
+  Pref_food         pizza
+
+  Sex                   f
+
+  Weight               65
+
+  2  Height              170
+
+  Names           Francis
+
+  Pref_food         pasta
+
+  Sex                   m
+
+  Weight               68
+
+  3  Height              164
+
+  Names             Laura
+
+  Pref_food         pizza
+
+  Sex                   f
+
+  Weight               45
+
+  4  Height              163
+
+  Names              Mary
+
+  Pref_food    vegetables
+
+  Sex                   f
+
+  Weight               43
+
+  [...]
+
+  # 我们将结果保存到一个对象中
+
+  >>> stacked = df3.stack()
+
+  # 现在我们可以使用 unstack() 将其恢复为原始格式
+
+  >>> unstacked = stacked.unstack()
+
+  >>> print(unstacked)
+
+  Height    Names   Pref_food Sex Weight
+
+  0    180    Simon       steak   m     85
+
+  1    165     Kate       pizza   f     65
+
+  2    170  Francis       pasta   m     68
+
+  3    164    Laura       pizza   f     45
+
+  4    163     Mary  vegetables   f     43
+
+  5    175   Julian       steak   m     72
+
+  6    166    Rosie     seafood   f     46
+
+  ```
+
+
+  我们还可以通过 `melt()` 函数重新组织数据：
+
+
+  ```
+
+  >>> pd.melt(df3)
+
+  variable       value
+
+  0      Height         180
+
+  1      Height         165
+
+  2      Height         170
+
+  3      Height         164
+
+  4      Height         163
+
+  5      Height         175
+
+  6      Height         166
+
+  7       Names       Simon
+
+  8       Names        Kate
+
+  9       Names     Francis
+
+  10      Names       Laura
+
+  11      Names        Mary
+
+  12      Names      Julian
+
+  13      Names       Rosie
+
+  [...]
+
+  ```
+
+
+  让我们回到初始数据集
+
+
+  ```
+
+  >>> df2.head(2)
+
+  Height  Names Pref_food Sex  Weight
+
+  0     180  Simon     steak   m      85
+
+  1     165   Kate     pizza   f      65
+
+  ```
+
+
+  并使用 `.T()` 函数来转置行和列：
+
+
+  ```
+
+  # 我们反转行和列
+
+  >>> df2.T
+
+  ```
+
+
+  ![../images/469457_1_En_8_Chapter/469457_1_En_8_Figl_HTML.jpg](img/469457_1_En_8_Figl_HTML.jpg)
+
+
+  我们还可以使用 `.sample()` 函数提取数据的随机样本：
+
+
+  ```
+
+  >>> df2.sample(n=2)
+
+  Height  Names   Pref_food Sex  Weight
+
+  6     166  Rosie     seafood   f      46
+
+  4     163   Mary  vegetables   f      43
+
+  ```
+
+
+  在括号中（`n=2`），我们指定了要提取的案例数量。如何总是随机提取相同的案例，以便提取结果可以重复？我们使用 `np.random.seed()` 函数。该函数括号中的数字并不重要，但如果两个人使用相同的数据集和相同的数字，他们将提取出相同的案例。
+
+
+  为此，我们需要导入 NumPy 包：
+
+
+  ```
+
+  >>> import numpy as np
+
+  >>> np.random.seed(1)
+
+  >>> df2.sample(n=2)
+
+  Height  Names Pref_food Sex  Weight
+
+  3     164  Laura     pizza   f      45
+
+  7     180  Simon     steak   m      85
+
+  >>> np.random.seed(1)
+
+  >>> df2.sample(n=2)
+
+  Height  Names Pref_food Sex  Weight
+
+  3     164  Laura     pizza   f      45
+
+  7     180  Simon     steak   m      85
+
+  ```
+
+
+  除了提取指定数量的案例，我们还可以提取一个百分比，使用参数 `frac=` 代替 `n=`：
+
+
+  ```
+
+  >>> df2.sample(frac = .1)
+
+  >>> df2.sample(frac = .5)
+
+  ```
+
+
+  使用参数 `frac =`，我们指定了百分比；0.1 表示 10%，0.5 表示 50%，以此类推。
+
+
+  ```
+
+  # 我们可以通过指定案例数量（此处为 3）和列（此处为 Weight）来查看某个变量取值最高的案例
+
+  # 让我们考虑没有重复的 df3 数据集
+
+  >>> df3.nlargest(3, "Weight")
+
+  Height    Names Pref_food Sex  Weight
+
+  0     180    Simon     steak   m      85
+
+  5     175   Julian     steak   m      72
+
+  2     170  Francis     pasta   m      68
+
+  ```
+
+
+  现在，让我们调用某个变量取值最低的案例，并指定案例数量：
+
+
+
+
+  ```
+
+  >>> df3.nsmallest(4, "Weight")
+
+  Height  Names   Pref_food Sex  Weight
+
+  4     163   Mary  vegetables   f      43
+
+  3     164  Laura       pizza   f      45
+
+  6     166  Rosie     seafood   f      46
+
+  1     165   Kate       pizza   f      65
+
+  ```
+
+
+  最后，我们可以创建一个小型数据集，并使用 `pivot_table()` 函数重新组织数据：
+
+
+  ```
+
+  >>> df4 = pd.DataFrame({''Date'': [''2017-01-01'', ''2017-01-01'', ''2017-01-02'',
+  ''2017-01-01'', ''2017-01-02'', ''2017-01-02'', ''2017-01-03'', ''2017-01-02'',
+  ''2017-01-03'', ''2017-01-03''],
+
+  ''Type'':[''x'', ''x'', ''y'', ''x'', ''y'', ''x'', ''z'', ''y'', ''z'', ''y''],
+
+  ''Value'':[185, 265, 168, 245, 143, 172, 346, 285, 145, 128],
+
+  })
+
+  >>> print(df4)
+
+  Date Type  Value
+
+  0  2017-01-01    x    185
+
+  1  2017-01-01    x    265
+
+  2  2017-01-02    y    168
+
+  3  2017-01-01    x    245
+
+  4  2017-01-02    y    143
+
+  5  2017-01-02    x    172
+
+  6  2017-01-03    z    346
+
+  7  2017-01-02    y    285
+
+  8  2017-01-03    z    145
+
+  9  2017-01-03    y    128
+
+  >>> print(pd.pivot_table(df4, index = "Date", values = "Value", columns = "Type"))
+
+  Type                 x           y      z
+
+  Date
+
+  2017-01-01  231.666667         NaN    NaN
+
+  2017-01-02  172.000000  198.666667    NaN
+
+  2017-01-03         NaN  128.000000  245.5
+
+  # 我们按日期对数值进行聚合
+
+  ```
+
+
+  ### pandas：缺失值
+
+
+  现在让我们看看如何处理包含缺失数据的数据集。导入 pandas 后，我们加载一个包含缺失值的数据集：
+
+
+  ```
+
+  >>> import pandas as pd
+
+  >>> df_missing = pd.read_csv(''df_missing.csv'')
+
+  # 如你所见，我创建了这个包含缺失数据的小数据集
+
+  >>> df_missing
+
+  A     B     C      D   E
+
+  0  15  96.0  74.0   31.0  50
+
+  1  41  27.0  74.0  279.0  57
+
+  2  21  32.0   NaN   99.0  96
+
+  3  48  97.0  50.0    NaN  69
+
+  4  63  98.0  74.0   44.0  55
+
+  5  43  11.0  80.0   74.0  33
+
+  6  39  38.0  81.0   20.0  41
+
+  7  58  31.0   NaN   76.0  91
+
+  8  85  94.0  37.0   65.0  60
+
+  9  98   NaN  19.0   43.0  32
+
+  ```
+
+
+  我们可以验证案例数和变量数：
+
+
+  ```
+
+  >>> print(df_missing.shape)
+
+  (10, 5)
+
+  ```
+
+
+  我们可以检查完整案例：
+
+
+  ```
+
+  >>> print(df_missing.dropna().shape)
+
+  (6, 5)
+
+  ```
+
+
+  我们还可以使用 `.isnull()`，它回答的问题是：某个值是否缺失？
+
+
+  ```
+
+  >>> pd.isnull(df_missing)
+
+  A      B      C      D      E
+
+  0  False  False  False  False  False
+
+  1  False  False  False  False  False
+
+  2  False  False   True  False  False
+
+  3  False  False  False   True  False
+
+  4  False  False  False  False  False
+
+  5  False  False  False  False  False
+
+  6  False  False  False  False  False
+
+  7  False  False   True  False  False
+
+  8  False  False  False  False  False
+
+  9  False   True  False  False  False
+
+  ```
+
+
+  相反，`.notnull()` 回答的问题是：某个值是否*不*缺失？
+
+
+  ```
+
+  >>> pd.notnull(df_missing)
+
+  A      B      C      D     E
+
+  0  True   True   True   True  True
+
+  1  True   True   True   True  True
+
+  2  True   True  False   True  True
+
+  3  True   True   True  False  True
+
+  4  True   True   True   True  True
+
+  5  True   True   True   True  True
+
+  6  True   True   True   True  True
+
+  7  True   True  False   True  True
+
+  8  True   True   True   True  True
+
+  9  True  False   True   True  True
+
+  ```
+
+
+  我们可以按列统计缺失值：
+
+
+  ```
+
+  >>> df_missing.isnull().sum()
+
+  A    0
+
+  B    1
+
+  C    2
+
+  D    1
+
+  E    0
+
+  # 或者确定缺失数据的总数
+
+  >>> df_missing.isnull().sum().sum()
+
+
+  ```
+
+
+  缺失值可以通过删除（即删除包含缺失值的案例）或插补（即用其他值替换缺失值，例如固定值或平均值）来处理。要执行删除操作，请按以下步骤操作：
+
+
+  ```
+
+  >>> df_missing.dropna()
+
+  A     B     C      D   E
+
+  0  15  96.0  74.0   31.0  50
+
+  1  41  27.0  74.0  279.0  57
+
+  4  63  98.0  74.0   44.0  55
+
+  5  43  11.0  80.0   74.0  33
+
+  6  39  38.0  81.0   20.0  41
+
+  8  85  94.0  37.0   65.0  60
+
+  ```
+
+
+  我们删除了包含缺失值的行。我们也可以删除包含缺失值的列：
+
+
+  ```
+
+  >>> df_missing.dropna(axis = 1, how = ''any'')
+
+  A   E
+
+  0  15  50
+
+  1  41  57
+
+  2  21  96
+
+  3  48  69
+
+  4  63  55
+
+  5  43  33
+
+  6  39  41
+
+  7  58  91
+
+  8  85  60
+
+  9  98  32
+
+  ```
+
+
+  如前所述，使用插补方法，我们可以用另一个值替换缺失值。让我们将所有缺失值替换为一个固定值——在本例中为零：
+
+
+  ```
+
+  >>> df_missing.fillna(0)
+
+  A     B     C      D   E
+
+  0  15  96.0  74.0   31.0  50
+
+  1  41  27.0  74.0  279.0  57
+
+  2  21  32.0   0.0   99.0  96
+
+  3  48  97.0  50.0    0.0  69
+
+  4  63  98.0  74.0   44.0  55
+
+  5  43  11.0  80.0   74.0  33
+
+  6  39  38.0  81.0   20.0  41
+
+  7  58  31.0   0.0   76.0  91
+
+  8  85  94.0  37.0   65.0  60
+
+  9  98   0.0  19.0   43.0  32
+
+  ```
+
+
+  我们也可以用单词替换缺失值，例如“missing”：
+
+
+  ```
+
+  >>> df_missing.fillna(''missing'')
+
+  A        B        C        D   E
+
+  0  15       96       74       31  50
+
+  1  41       27       74      279  57
+
+  2  21       32  missing       99  96
+
+  3  48       97       50  missing  69
+
+  4  63       98       74       44  55
+
+  5  43       11       80       74  33
+
+  6  39       38       81       20  41
+
+  7  58       31  missing       76  91
+
+  8  85       94       37       65  60
+
+  9  98  missing       19       43  32
+
+  ```
+
+
+  或者将缺失值插补为平均值：
+
+
+  ```
+
+  >>> df_missing.fillna(df_missing.mean())
+
+  A          B       C           D   E
+
+  0  15  96.000000  74.000   31.000000  50
+
+  1  41  27.000000  74.000  279.000000  57
+
+  2  21  32.000000  61.125   99.000000  96
+
+  3  48  97.000000  50.000   81.222222  69
+
+  4  63  98.000000  74.000   44.000000  55
+
+  5  43  11.000000  80.000   74.000000  33
+
+  6  39  38.000000  81.000   20.000000  41
+
+  7  58  31.000000  61.125   76.000000  91
+
+  8  85  94.000000  37.000   65.000000  60
+
+  9  98  58.222222  19.000   43.000000  32
+
+  ```
+
+
+  让我们考虑一个变量，例如变量 ''C''。以下代码行将用 C 的平均值替换变量 C 中的每个缺失值：
+
+
+  ```
+
+  >>> df_missing[''C''].fillna(df_missing[''C''].mean())
+
+  0    74.000
+
+  1    74.000
+
+  2    61.125
+
+  3    50.000
+
+  4    74.000
+
+  5    80.000
+
+  6    81.000
+
+  7    61.125
+
+  8    37.000
+
+  9    19.000
+
+  Name: C, dtype: float64
+
+  ```
+
+
+  有两种重要的 `.fillna` 方法可用于插补缺失值：`ffill` 和 `backfill`：
+
+
+  ```
+
+  >>> df_missing[''C''].fillna(method = ''ffill'')
+
+  0    74.0
+
+  1    74.0
+
+  2    74.0
+
+  3    50.0
+
+  4    74.0
+
+  5    80.0
+
+  6    81.0
+
+  7    81.0
+
+  8    37.0
+
+  9    19.0
+
+  Name: C, dtype: float64
+
+  >>> df_missing[''C''].fillna(method = ''backfill'')
+
+  0    74.0
+
+  1    74.0
+
+  2    50.0
+
+  3    50.0
+
+  4    74.0
+
+  5    80.0
+
+  6    81.0
+
+  7    37.0
+
+  8    37.0
+
+  9    19.0
+
+  Name: C, dtype: float64
+
+  # ffill 用其前面的默认值替换缺失值，而 backfill 则用其后面的非缺失值替换。要保存这些插入或替换操作的结果，我们必须创建一个新的数据框或覆盖初始数据框。
+
+  ```
+
+
+
+
+  ### pandas：合并两个数据集
+
+
+  合并两个数据框的方法有很多。我们可以删除重叠的案例、并列两个文件，以及连接新案例或新变量。让我们看一些 pandas 的示例。首先，我们需要创建示例数据框：
+
+
+  ```
+
+  >>> df1 = pd.DataFrame({''id'': [''A'', ''B'', ''C'', ''D''], ''var1'' : [37, 36,
+  43, 23], ''var2'': [120, 117, 230, 315]})
+
+  >>> df1
+
+  id  var1  var2
+
+  0  A    37   120
+
+  1  B    36   117
+
+  2  C    43   230
+
+  3  D    23   315
+
+  >>> df2 = pd.DataFrame({''id'': [''A'', ''B'', ''C'', ''D''], ''var3'' : [12, 16,
+  13, 18], ''var4'': [75, 54, 21, 36]})
+
+  >>> df2
+
+  id  var3  var4
+
+  0  A    12    75
+
+  1  B    16    54
+
+  2  C    13    21
+
+  3  D    18    36
+
+  >>> df3 = pd.DataFrame({''id'': [''A'', ''A'', ''B'', ''B''], ''var3'' : [2, 6,
+  3, 8], ''var4'': [7, 5, 2, 6]})
+
+  id  var3  var4
+
+  0  A     2     7
+
+  1  A     6     5
+
+  2  B     3     2
+
+  3  B     8     6
+
+  ```
+
+
+  合并两个数据集最简单的方法是使用 `.append()` 方法：
+
+
+  ```
+
+  >>> df1.append(df2)
+
+  id  var1   var2  var3  var4
+
+  0  A  37.0  120.0   NaN   NaN
+
+  1  B  36.0  117.0   NaN   NaN
+
+  2  C  43.0  230.0   NaN   NaN
+
+  3  D  23.0  315.0   NaN   NaN
+
+  0  A   NaN    NaN  12.0  75.0
+
+  1  B   NaN    NaN  16.0  54.0
+
+  2  C   NaN    NaN  13.0  21.0
+
+  3  D   NaN    NaN  18.0  36.0
+
+  >>> df3.append(df1)
+
+  id  var1   var2  var3  var4
+
+  0  A   NaN    NaN   2.0   7.0
+
+  1  A   NaN    NaN   6.0   5.0
+
+  2  B   NaN    NaN   3.0   2.0
+
+  3  B   NaN    NaN   8.0   6.0
+
+  0  A  37.0  120.0   NaN   NaN
+
+  1  B  36.0  117.0   NaN   NaN
+
+  2  C  43.0  230.0   NaN   NaN
+
+  3  D  23.0  315.0   NaN   NaN
+
+  ```
+
+
+  如你所见，两个数据集每次都是简单并列，系统不会考虑和调整索引。要合并两个以上的数据集，我们可以使用 `.concat()`：
+
+
+  ```
+
+  >>> pd.concat([df1, df2, df3])
+
+  id  var1   var2  var3  var4
+
+  0  A  37.0  120.0   NaN   NaN
+
+  1  B  36.0  117.0   NaN   NaN
+
+  2  C  43.0  230.0   NaN   NaN
+
+  3  D  23.0  315.0   NaN   NaN
+
+  0  A   NaN    NaN  12.0  75.0
+
+  1  B   NaN    NaN  16.0  54.0
+
+  2  C   NaN    NaN  13.0  21.0
+
+  3  D   NaN    NaN  18.0  36.0
+
+  0  A   NaN    NaN   2.0   7.0
+
+  1  A   NaN    NaN   6.0   5.0
+
+  2  B   NaN    NaN   3.0   2.0
+
+  3  B   NaN    NaN   8.0   6.0
+
+  ```
+
+
+  这样，我们水平连接了数据集。我们也可以通过指定轴为 1 来垂直连接它们（在前面的示例中，未指定轴，因此默认为零）：
+
+
+  ```
+
+  >>> pd.concat([df1, df2, df3], axis = 1)
+
+  # 上面的代码和下面这行代码会得到相同的结果
+
+  >>> pd.concat([df1, df2, df3], axis = ''columns'')
+
+  id  var1  var2 id  var3  var4 id  var3  var4
+
+  0  A    37   120  A    12    75  A     2     7
+
+  1  B    36   117  B    16    54  A     6     5
+
+  2  C    43   230  C    13    21  B     3     2
+
+  3  D    23   315  D    18    36  B     8     6
+
+  ```
+
+
+  我们可以用更高级的方式合并两个数据集，从两个拥有一些共同行和列的表开始，通过共享数据进行合并。允许我们进行这种类型连接的 pandas 函数是 `merge()`。首先，我们需要创建两个数据集：
+
+
+  ```
+
+  >>> stud1 = pd.DataFrame({''ID'': [1,2,3,4,5], ''names'' : [''John'', ''Greta'',
+  ''Francis'', ''Laura'', ''Charles''], ''Logic'': [28, 27, 23, 25, 30]})
+
+  >>> stud2 = pd.DataFrame({''ID'': [1,6,3,4,7], ''names'' : [''John'', ''Kate'',
+  ''Francis'', ''Laura'', ''Simon''], ''Analysis'': [23, 24, 28, 29, 22]})
+
+  # 默认情况下，merge() 函数提取两个数据集的共同案例，因此默认是 ''inner''。内连接选择在两个数据集中具有匹配值的记录
+
+  >>> pd.merge(stud1, stud2, on = ''ID'')
+
+  ID  Logic  names_x  Analysis  names_y
+
+  0   1     28     John        23     John
+
+  1   3     23  Francis        28  Francis
+
+  2   4     25    Laura        29    Laura
+
+  ```
+
+
+  还有其他合并两个数据集的方式：''left''、''right'' 和 ''outer''。我们使用数据集索引——在本例中是 ID 列——作为键（索引）来合并数据集。
+
+
+  ```
+
+  >>> print(pd.merge(stud1, stud2, on = ''ID'', how = ''left''))
+
+  ID  Logic  names_x  Analysis  names_y
+
+  0   1     28     John      23.0     John
+
+  1   2     27    Greta       NaN      NaN
+
+  2   3     23  Francis      28.0  Francis
+
+  3   4     25    Laura      29.0    Laura
+
+  4   5     30  Charles       NaN      NaN
+
+  ```
+
+
+  ''left'' 参数允许我们将第二个数据集合并到第一个数据集中，只取第一个数据集的案例以及第二个和第一个数据集共有的案例。
+
+
+  ```
+
+  >>> print(pd.merge(stud1, stud2, on = ''ID'', how = ''right''))
+
+  ID  Logic  names_x  Analysis  names_y
+
+  0   1   28.0     John        23     John
+
+  1   3   23.0  Francis        28  Francis
+
+  2   4   25.0    Laura        29    Laura
+
+  3   6    NaN      NaN        24     Kate
+
+  4   7    NaN      NaN        22    Simon
+
+  ```
+
+
+  ''right'' 参数允许将第一个数据集合并到第二个数据集中，只取第二个数据集的案例以及同时与第二个和第一个数据集共有的案例。
+
+
+  ```
+
+  >>> print(pd.merge(stud1, stud2, on = ''ID'', how = ''outer''))
+
+  ID  Logic  names_x  Analysis  names_y
+
+  0   1   28.0     John      23.0     John
+
+  1   2   27.0    Greta       NaN      NaN
+
+  2   3   23.0  Francis      28.0  Francis
+
+  3   4   25.0    Laura      29.0    Laura
+
+  4   5   30.0  Charles       NaN      NaN
+
+  5   6    NaN      NaN      24.0     Kate
+
+  6   7    NaN      NaN      22.0    Simon
+
+  ```
+
+
+  当我们使用 ''outer'' 时，我们合并两个数据框的案例，只保留重复案例的一个副本，但不会丢失两个初始数据集中的任何一个数据。
+
+
+  ### pandas：基础统计
+
+
+  pandas 库有很多用于统计的方法，我们可以用它们来获取描述性统计信息。和往常一样，我们使用我们的数据框：
+
+
+  ```
+
+  >>> df = pd.DataFrame({''Names'': [''Simon'', ''Kate'', ''Francis'', ''Laura'',
+  ''Mary'', ''Julian'', ''Rosie''],
+
+  ''Height'':[180, 165, 170, 164, 163, 175, 166],
+
+  ''Weight'':[85, 65, 68, 45, 43, 72, 46],
+
+  ''Pref_food'':[''steak'', ''pizza'', ''pasta'', ''pizza'', ''vegetables'',''steak'',''seafood''],
+
+  ''Sex'':[''m'', ''f'',''m'',''f'', ''f'', ''m'', ''f'']})
+
+  # 关于数值数据的一些信息
+
+  >>> df.describe()
+
+  Height     Weight
+
+  count    7.000000   7.000000
+
+  mean   169.000000  60.571429
+
+  std      6.377042  16.154021
+
+  min    163.000000  43.000000
+
+  25%    164.500000  45.500000
+
+  50%    166.000000  65.000000
+
+  75%    172.500000  70.000000
+
+  max    180.000000  85.000000
+
+  # 我们也可以使用 .transpose 方法重新排列统计信息，使其更易读
+
+  >>> df.describe().transpose()
+
+  count        mean        std    min    25%    50%    75%    max
+
+  Height    7.0  169.000000   6.377042  163.0  164.5  166.0  172.5  180.0
+
+  Weight    7.0   60.571429  16.154021   43.0   45.5   65.0   70.0   85.0
+
+  # 值计数
+
+  >>> df.count()
+
+  Height    7
+
+  Names     7
+
+  Food      7
+
+  Sex       7
+
+  Weight    7
+
+  dtype: int64
+
+  # 中位数计算
+
+  >>> df[''Height''].median()
+
+  166.0
+
+  # 平均值计算
+
+  >>> df[''Height''].mean()
+
+  169.0
+
+  # 最小值
+
+  >>> df[''Height''].min()
+
+
+  # 最大值
+
+  >>> df[''Height''].max()
+
+
+  ```
+
+
+  表 8-1 提供了统计方法的总结。
+
+
+  表 8-1
+
+
+  统计方法
+
+
+  | 方法 | 描述 |
+
+  | --- | --- |
+
+  | .describe | 提供一些描述性统计信息 |
+
+  | .count | 返回每个变量的值的数量 |
+
+  | .mean | 返回平均值 |
+
+  | .median | 返回中位数 |
+
+  | .mode | 返回众数 |
+
+  | .min | 返回最小值 |
+
+  | .max | 返回最大值 |
+
+  | .std | 返回标准差 |
+
+  | .var | 返回方差 |
+
+  | .skew | 返回偏度 |
+
+  | .kurt | 返回峰度 |
+
+
+  ## 总结
+
+
+  在本章中，我们学习了一些使用 pandas 导入和管理数据的更简单方法——pandas 是数据处理和数据科学中最重要的库之一。在第 9 章中，我们将研究另一个对数据处理很重要的包：NumPy。
+
+
+  '
+- '# 9. SciPy 和 NumPy
+
+
+  尽管 pandas 是一个非常重要的数据分析包，但它可以与另外两个包协同工作：SciPy 和 NumPy。
+
+
+
+
+  ## SciPy
+
+
+  SciPy 是 Python 中用于数学和统计分析的最重要的包之一，它与 NumPy 紧密相连。SciPy 包含超过 60 个统计函数，这些函数按模块族组织：
+
+
+  *   scipy.cluster
+
+
+  *   scipy.constants
+
+
+  *   scipy.fftpack
+
+
+  *   scipy.integrate
+
+
+  *   scipy.interpolate
+
+
+  *   scipy.io
+
+
+  *   scipy.lib
+
+
+  *   scipy.linalg
+
+
+  *   scipy.misc
+
+
+  *   scipy.optimize
+
+
+  *   scipy.signal
+
+
+  *   scipy.sparse
+
+
+  *   scipy.spatial
+
+
+  *   scipy.special
+
+
+  *   scipy.stats
+
+
+  *   scipy.weave
+
+
+  ```
+
+  >>> import scipy as sp
+
+  >>> from scipy import stats
+
+  >>> from scipy import cluster
+
+  ```
+
+
+  我们可以通过输入以下内容来获取这些模块的帮助，例如：
+
+
+  ```
+
+  >>> help(sp.cluster)
+
+  # 或
+
+  >>> help(scipy.cluster)
+
+  ```
+
+
+  文档会直接在窗口中打开，我们可以按 `q` 键退出。
+
+
+  例如，SciPy 可用于测量某个数值或分布的概率密度：
+
+
+  ```
+
+  >>> from scipy.stats import norm
+
+  >>> norm.pdf(5)
+
+  1.4867195147342979e-06
+
+  ```
+
+
+  或分配函数：
+
+
+  ```
+
+  >>> norm.cdf(x)
+
+  ```
+
+
+  SciPy 包含非常专业的模块。就本书而言，我们特别关注它与 NumPy 的结合使用，因此本章的重点主要放在第二个包上。
+
+
+  ## NumPy
+
+
+  在 Python 开发的早期，程序员很快就发现自己需要整合用于科学计算的工具。他们的首次尝试产生了 Numeric 包，该包开发于 1995 年，随后又出现了一个名为
+  Numarray 的替代包。这两个包的功能在 2006 年合并，诞生了 NumPy。
+
+
+  NumPy 代表“numeric Python”（数值 Python），是一个专用于科学计算的开源库，尤其是在数组管理方面。它有时被认为是 Python 版的
+  MATLAB，并提供了许多用于代数和随机数生成的高级数学函数。
+
+
+  ```
+
+  >>> import numpy as np
+
+  >>> from numpy import *
+
+  ```
+
+
+  NumPy 最重要的结构是一种特殊类型的多维数组，称为 *ndarray*。ndarray 由两个元素组成：数据（真正的 ndarray）和描述数据的元数据（dtype
+  或数据类型）。每个 ndarray 关联且仅关联一个 dtype。我们可以有一维数组：
+
+
+  ```
+
+  >>> arr1 = np.array([0,1,2,3,4])
+
+  >>> arr1
+
+  array([0, 1, 2, 3, 4])
+
+  ```
+
+
+  或者多维数组：
+
+
+  ```
+
+  >>> arr2 = np.array([[5,6,7,8,9], [10,11,12,13,14]])
+
+  >>> arr2
+
+  array([[ 5,  6,  7,  8,  9],
+
+  [10, 11, 12, 13, 14]])
+
+  >>> arr2_1 = np.array([[5,6,7,8,9], [10,11,12,13,14], [2,5,7]])
+
+  # 重要的是数据具有相同的类型
+
+  ```
+
+
+  我们可以使用 `.dtype()` 函数显示数据类型。
+
+
+  ```
+
+  >>> arr1.dtype
+
+  dtype(''int64'')
+
+  # 数组中元素的数量
+
+  >>> arr1.size
+
+
+  # 位数
+
+  >>> arr1.itemsize
+
+
+  ```
+
+
+  例如，通过使用 NumPy 的 `arange()` 函数，我们可以创建一个数字列表——在下面的例子中，是从 0 到 100：
+
+
+  ```
+
+  >>> arr3 = np.arange(100)
+
+  >>> arr3
+
+  array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+
+  17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+
+  34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+
+  51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67,
+
+  68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84,
+
+  85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99])
+
+  # arange 也允许我们设置一个数字范围
+
+  >>> np.arange(1,10)
+
+  array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+  ```
+
+
+  让我们创建第四个数组：
+
+
+  ```
+
+  >>> arr4 = np.array([[''a'',''b'',''c'',''d'',''e''], [''f'', ''g'', ''h'', ''i'',''l''],
+  [''m'', ''n'', ''o'', ''p'',''q'']])
+
+  >>> arr4
+
+  array([[''a'', ''b'', ''c'', ''d'', ''e''],
+
+  [''f'', ''g'', ''h'', ''i'', ''l''],
+
+  [''m'', ''n'', ''o'', ''p'', ''q'']],
+
+  dtype=''<U1'')
+
+  ```
+
+
+  例如，我们可以选择第一个元素（0）：
+
+
+  ```
+
+  >>> arr4[0]
+
+  array([''a'', ''b'', ''c'', ''d'', ''e''],
+
+  dtype=''<U1'')
+
+  ```
+
+
+  如果我们想选择第一个元素中的第三个元素，可以按如下方式操作：
+
+
+  ```
+
+  >>> arr4[0][3]
+
+  ''d''
+
+  ```
+
+
+  请记住，在 Python 中，我们从零开始计数，而不是从一开始。所以，如果我们选择第一个元素，实际上得到的是第二个：
+
+
+  ```
+
+  >>> arr4[1]
+
+  array([''f'', ''g'', ''h'', ''i'', ''l''],
+
+  dtype=''>> arr4[1][1]
+
+  ''g''
+
+  ```
+
+
+  我们还可以使用负索引并按如下方式反转数组：
+
+
+  ```
+
+  >>> arr4[::-1]
+
+  array([[''m'', ''n'', ''o'', ''p'', ''q''],
+
+  [''f'', ''g'', ''h'', ''i'', ''l''],
+
+  [''a'', ''b'', ''c'', ''d'', ''e'']],
+
+  dtype=''|S1'')
+
+  ```
+
+
+  arr4 数组由三个不同的元素组成。要合并它们，我们可以使用 `.ravel()` 方法：
+
+
+  ```
+
+  >>> arr4.ravel()
+
+  array([''a'', ''b'', ''c'', ''d'', ''e'', ''f'', ''g'', ''h'', ''i'', ''l'', ''m'',
+  ''n'', ''o'',''p'', ''q''],
+
+  dtype=''|S1'')
+
+  ```
+
+
+  让我们创建另一个数组 arr5：
+
+
+  ```
+
+  >>> arr5 = np.array([19, 76, 2, 13, 48, 986, 1, 18])
+
+  >>> arr5
+
+  array([19, 76, 2, 13, 48, 986, 1, 18])
+
+  # 我们可以将其从最小值到最大值重新排序
+
+  >>> np.msort(arr5)
+
+  array([1, 2, 13, 18, 19, 48, 76, 986])
+
+  ```
+
+
+  我们可以使用各种函数重新组织数组的数据。让我们使用刚刚创建的数组 arr5：
+
+
+  ```
+
+  # reshape() 允许我们重新组织数组的数据——在下面的例子中，组织成四行两列
+
+  >>> arr5.reshape(4,2)
+
+  >>> array([[ 19,  76],
+
+  [  2,  13],
+
+  [ 48, 986],
+
+  [  1,  18]])
+
+  >>> arr5.reshape(8,1)
+
+  array([[ 19],
+
+  [ 76],
+
+  [  2],
+
+  [ 13],
+
+  [ 48],
+
+  [986],
+
+  [  1],
+
+  [ 18]])
+
+  # 我们再创建两个数组，将它们组织成三行三列
+
+  >>> x = np.array([20, 42, 17, 3, 7, 12, 14, 70, 9])
+
+  >>> x = x.reshape(3,3)
+
+  >>> x
+
+  array([[20, 42, 17],
+
+  [ 3,  7, 12],
+
+  [14, 70,  9]])
+
+  >>> y = x * 3
+
+  >>> y
+
+  array([[ 60, 126,  51],
+
+  [  9,  21,  36],
+
+  [ 42, 210,  27]])
+
+  # 与 reshape 类似的是 resize() 函数
+
+  >>> z = np.array([120, 72, 37, 43, 57, 12, 54, 20, 9])
+
+  z
+
+  array([120,  72,  37,  43,  57,  12,  54,  20,   9])
+
+  >>> z.resize(3,3)
+
+  >>> z
+
+  array([[120,  72,  37],
+
+  [ 43,  57,  12],
+
+  [ 54,  20,   9]])
+
+  # 我们可以水平连接两个数组
+
+  >>> np.hstack((x, y))
+
+  array([[ 20,  42,  17,  60, 126,  51],
+
+  [  3,   7,  12,   9,  21,  36],
+
+  [ 14,  70,   9,  42, 210,  27]])
+
+  # 使用 .concatenate() 函数并指定轴，可以得到相同的结果
+
+  >>> np.concatenate((x,y), axis = 1)
+
+  array([[ 20,  42,  17,  60, 126,  51],
+
+  [  3,   7,  12,   9,  21,  36],
+
+  [ 14,  70,   9,  42, 210,  27]])
+
+  # 或者我们垂直排列数据
+
+  >>> np.vstack((x,y))
+
+  array([[ 20,  42,  17],
+
+  [  3,   7,  12],
+
+  [ 14,  70,   9],
+
+  [ 60, 126,  51],
+
+  [  9,  21,  36],
+
+  [ 42, 210,  27]])
+
+  # 使用 concatenate() 函数，不指定轴或将其指定为零，可以得到相同的结果
+
+  >>> np.concatenate((x,y))
+
+  array([[ 20,  42,  17],
+
+  [  3,   7,  12],
+
+  [ 14,  70,   9],
+
+  [ 60, 126,  51],
+
+  [  9,  21,  36],
+
+  [ 42, 210,  27]])
+
+  # .dstack() 函数沿第三轴将数组分割成元组
+
+  >>> np.dstack((x,y))
+
+  array([[[ 20,  60],
+
+  [ 42, 126],
+
+  [ 17,  51]],
+
+  [[  3,   9],
+
+  [  7,  21],
+
+  [ 12,  36]],
+
+  [[ 14,  42],
+
+  [ 70, 210],
+
+  [  9,  27]]])
+
+  # .hsplit() 函数将数组按大小和形状分成相等的部分（在本例中，分成三部分）
+
+  >>> np.hsplit(x, 3)
+
+  [array([[20],
+
+  [ 3],
+
+  [14]]), array([[42],
+
+  [ 7],
+
+  [70]]), array([[17],
+
+  [12],
+
+  [ 9]])]
+
+  # 我们也可以使用 .split() 函数
+
+  >>> np.split(x, 3)
+
+  [array([[20, 42, 17]]), array([[ 3,  7, 12]]), array([[14, 70,  9]])]
+
+  # 或者 .vsplit() 函数，意思是垂直分割
+
+  # 我们也可以将数组转换为列表
+
+  >>> z.tolist()
+
+  [[120, 72, 37], [43, 57, 12], [54, 20, 9]]
+
+  ```
+
+
+  正如我们所见，NumPy 处理各种格式的数值数据和字符串，但我们也可以生成随机数据。`zeros()` 和 `ones()` 函数创建仅包含零或一的数组。
+
+
+  ```
+
+  # 第一个元素表示行数；第二个元素表示列数
+
+  >>> np.zeros((4,3))
+
+  array([[ 0.,  0.,  0.],
+
+  [ 0.,  0.,  0.],
+
+  [ 0.,  0.,  0.],
+
+  [ 0.,  0.,  0.]])
+
+  >>> np.ones((5,2))
+
+  array([[ 1.,  1.],
+
+  [ 1.,  1.],
+
+  [ 1.,  1.],
+
+  [ 1.,  1.],
+
+  [ 1.,  1.]])
+
+  ```
+
+
+  NumPy 有多种存储数据的方式。表 9-1 包含了其中一些方式，这些信息来自 [`https://docs.scipy.org/doc/`](https://docs.scipy.org/doc/)
+  上的文档。
+
+
+  表 9-1
+
+
+  数据存储选项
+
+
+
+
+  | **数据类型** | **描述** |
+
+  | --- | --- |
+
+  | bool_ | 布尔型（True 或 False），以字节形式存储 |
+
+  | int_ | 默认整数类型（与 C 语言的 long 相同；通常为 int64 或 int32） |
+
+  | intc | 与 C 语言的 int 相同（通常为 int32 或 int64） |
+
+  | intp | 用于索引的整数（与 C 语言的 ssize_t 相同；通常为 int32 或 int64） |
+
+  | int8 | 字节型（-128 到 127） |
+
+  | int16 | 整型（-32768 到 32767） |
+
+  | int32 | 整型（-2147483648 到 2147483647） |
+
+  | int64 | 整型（-9223372036854775808 到 9223372036854775807） |
+
+  | uint8 | 无符号整型（0 到 255） |
+
+  | uint16 | 无符号整型（0 到 65535） |
+
+  | uint32 | 无符号整型（0 到 4294967295） |
+
+  | uint64 | 无符号整型（0 到 18446744073709551615） |
+
+  | float_ | float64 的简写 |
+
+  | float16 | 半精度浮点数：1 位符号位，5 位指数，10 位尾数 |
+
+  | float32 | 单精度浮点数：1 位符号位，8 位指数，23 位尾数 |
+
+  | float64 | 双精度浮点数：1 位符号位，11 位指数，52 位尾数 |
+
+  | complex_ | complex128 的简写 |
+
+  | complex64 | 复数，由两个 32 位浮点数表示（实部和虚部） |
+
+  | complex128 | 复数，由两个 64 位浮点数表示（实部和虚部） |
+
+
+  当我们创建一个对象时，可以指定要创建的对象类型：
+
+
+  ```
+
+  >>> o1 = np.arange(10, dtype = ''int16'')
+
+  >>> o1
+
+  array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], dtype=int16)
+
+  ```
+
+
+  NumPy 也可用于创建矩阵和进行矩阵计算。
+
+
+  ```
+
+  # 我们创建两个矩阵 mat1 和 mat2
+
+  >>> mat1 = np.matrix([[10, 11, 12, 13, 14], [15, 16, 17, 18, 19], [20, 21, 22, 23,
+  24]])
+
+  >>> mat1
+
+  matrix([[10, 11, 12, 13, 14],
+
+  [15, 16, 17, 18, 19],
+
+  [20, 21, 22, 23, 24]])
+
+  >>> mat2 = np.matrix([[25, 26, 27, 28, 29], [30, 31, 32, 33, 34], [35, 36, 37, 38,
+  39]])
+
+  >>> mat2
+
+  matrix([[25, 26, 27, 28, 29],
+
+  [30, 31, 32, 33, 34],
+
+  [35, 36, 37, 38, 39]])
+
+  # 我们可以进行一些数学运算
+
+  >>> mat1 + mat2
+
+  matrix([[35, 37, 39, 41, 43],
+
+  [45, 47, 49, 51, 53],
+
+  [55, 57, 59, 61, 63]])
+
+  >>> mat2 - mat1
+
+  matrix([[15, 15, 15, 15, 15],
+
+  [15, 15, 15, 15, 15],
+
+  [15, 15, 15, 15, 15]])
+
+  >>> mat2 / mat1
+
+  matrix([[ 2.5      ,  2.36363636,  2.25      ,  2.15384615,  2.07142857],
+
+  [ 2\.       ,  1.9375    ,  1.88235294,  1.83333333,  1.78947368],
+
+  [ 1.75     ,  1.71428571,  1.68181818,  1.65217391,  1.625     ]])
+
+  >>> mat1 * 3
+
+  matrix([[30, 33, 36, 39, 42],
+
+  [45, 48, 51, 54, 57],
+
+  [60, 63, 66, 69, 72]])
+
+  # Numpy 可以计算平均值
+
+  >>> np.mean(mat1)
+
+  17.0
+
+  # 最大值
+
+  >>> np.max(mat1)
+
+
+  # 最小值
+
+  >>> np.min(mat1)
+
+
+  # 中位数
+
+  >>> np.median(mat1)
+
+  17.0
+
+  # 方差
+
+  >>> np.var(mat1)
+
+  18.666666666666668
+
+  # 标准差
+
+  >>> np.std(mat1)
+
+  4.3204937989385739
+
+  # 协方差可以通过 np.cov() 计算
+
+  ```
+
+
+  NumPy 还允许你使用 `loadtxt()` 函数导入数值数据：
+
+
+  ```
+
+  >>> up1 = np.loadtxt(''~/Python_test/df2'', delimiter = '','', usecols = (1,), unpack
+  = True)
+
+  up1
+
+  array([  0\.        ,  15.98293881,  41.7360094 ,  21.02081375,
+
+  54.06254967,   6.68691812,  43.83810058,  39.55058136,
+
+  58.04370289,  85.02891662,  98.25872709])
+
+  # 要导入更多列，我们修改 usecols 参数：
+
+  >>> up1 = np.loadtxt(''~/Python_test/df2'', delimiter = '','', usecols = (1,2,3,4,5),
+  unpack = True)
+
+  ```
+
+
+
+
+  ### NumPy：生成随机数与设置种子
+
+
+  要生成随机数，我们需要导入 NumPy 包。
+
+
+  ```
+
+  >>> import numpy as np
+
+  ```
+
+
+  我们可以按如下方式生成一个随机数：
+
+
+  ```
+
+  >>> np.random.rand()
+
+  0.992777076172216
+
+  # 或者在括号内指定要自动生成的行数和列数
+
+  >>> np.random.rand(2,3)
+
+  array([[ 0.39352349,  0.57116926,  0.88967038],
+
+  [ 0.76375617,  0.24620255,  0.17408501]])
+
+  ```
+
+
+  我们可以创建多维随机数数组：
+
+
+  ```
+
+  # 指定大小（10 是抽取分布的上限）
+
+  >>> np.random.randint(10, size= 8)
+
+  array([5, 8, 3, 7, 6, 8, 5, 3])
+
+  # 接下来，我们创建一个包含四个案例和五个变量的数组
+
+  >>> np.random.randint(10, size=(4, 5))
+
+  array([[4, 7, 1, 9, 8],
+
+  [7, 4, 0, 3, 7],
+
+  [3, 6, 9, 3, 4],
+
+  [4, 7, 3, 3, 9]])
+
+  # 然后我们创建一个三维数组
+
+  >>> np.random.randint(10, size=(4, 5, 6))
+
+  array([[[7, 6, 1, 0, 1, 2],
+
+  [3, 2, 3, 2, 9, 2],
+
+  [5, 5, 6, 5, 0, 2],
+
+  [1, 6, 2, 1, 9, 0],
+
+  [1, 5, 3, 1, 3, 6]],
+
+  [[0, 1, 9, 3, 4, 3],
+
+  [2, 6, 6, 6, 6, 2],
+
+  [2, 3, 7, 6, 2, 5],
+
+  [1, 7, 7, 7, 0, 3],
+
+  [3, 8, 6, 4, 1, 6]],
+
+  [[1, 1, 2, 3, 2, 6],
+
+  [0, 8, 1, 8, 1, 7],
+
+  [7, 4, 3, 1, 6, 7],
+
+  [7, 3, 1, 9, 8, 8],
+
+  [9, 0, 1, 7, 2, 7]],
+
+  [[3, 3, 2, 2, 5, 6],
+
+  [4, 9, 3, 7, 4, 4],
+
+  [8, 6, 3, 3, 7, 0],
+
+  [9, 7, 0, 5, 2, 0],
+
+  [3, 3, 9, 5, 2, 9]]])
+
+  # 使用 random.rand() 生成实数；使用 random.randint() 生成整数
+
+  ```
+
+
+  我们可以设置一个种子，以确保生成相同的随机数，然后重复示例：
+
+
+  ```
+
+  >>> np.random.seed(12345)
+
+  >>> np.random.rand()
+
+  0.9296160928171479
+
+  >>> np.random.rand()
+
+  0.3163755545817859
+
+  >>> np.random.seed(12345)
+
+  >>> np.random.rand()
+
+  0.9296160928171479
+
+  >>> np.random.rand()
+
+  0.3163755545817859
+
+  ```
+
+
+  我们可以使用 `random.randint()` 生成整数随机数：
+
+
+  ```
+
+  >>> print(random.randint(0, 100))
+
+
+  >>> print(random.randint(0, 100))
+
+
+  # 0 和 100 是我们可以抽取元素的界限。在这种情况下，数字 100 不能被抽取。这意味着，如果我们想模拟例如射击游戏，我们可以将界限设置在 1 和 7 之间。
+
+  ```
+
+
+  我们也可以创建一个对象并随机抽取元素：
+
+
+  ```
+
+  >>> test1 = ["object1", "object2", "object3", "object4", "object5"]
+
+  >>> print(random.choice(test1))
+
+  object2
+
+  >>> print(random.choice(test1))
+
+  object4
+
+  ```
+
+
+  我们可以使用 `np.random.randn()` 创建另一个随机对象，它会生成一个正态分布。
+
+
+  ```
+
+  >>> x = np.random.randn(1000)
+
+  # 我们导入 matplotlib（在第 10 章中描述）
+
+  >>> import matplotlib.pyplot as plt
+
+  # 并创建 x 对象的直方图
+
+  >>> plt.hist(x, bins = 100)
+
+  # 我们显示直方图
+
+  >>> plt.show()
+
+  ```
+
+
+  NumPy 也可以用来生成随机数据集，例如图 9-1 中绘制的那个。但是，我们还需要加载 pandas 包。我们已经加载了 NumPy 包，所以让我们按如下步骤进行：
+
+
+  ![../images/469457_1_En_9_Chapter/469457_1_En_9_Fig1_HTML.jpg](img/469457_1_En_9_Fig1_HTML.jpg)
+
+
+  图 9-1
+
+
+  使用 NumPy 和 pandas 创建的随机数据集图
+
+
+  ```
+
+  # 我们导入 pandas
+
+  >>> import pandas as pd
+
+  ```
+
+
+  我们使用 pandas 的 `DataFrame()` 函数创建一个数据框。我们可以立即识别出一个函数属于哪个包，因为该函数是该包的一个方法：
+
+
+  ```
+
+  package_name.function_name()
+
+  # 我们使用 pandas (pd) 包的 DataFrame() 函数来创建数据框，并使用 Numpy 包 (np) 的 random.randn() 函数来生成随机数据。在括号中，我们首先放入要生成的案例数（本例中为
+  10），然后是变量数（本例中为 5）
+
+  >>> rdf = pd.DataFrame(np.random.randn(10,5))
+
+  >>> rdf
+
+  0         1         2         3         4
+
+  0  0.669980  0.626433 -0.693932 -0.841258 -0.165200
+
+  1  0.108567 -0.743791  0.367369  0.645242 -0.297283
+
+  2  1.674781  0.241534 -0.403371  0.175751  0.274626
+
+  3 -2.339962 -0.083003 -1.387095  1.559257 -1.025012
+
+  4  0.383104  0.968755  0.236508  0.186294  0.094319
+
+  5  0.956150 -1.366423  0.694575 -0.107877  1.727657
+
+  6 -0.699931 -1.184346  0.581632  0.333015 -1.137382
+
+  7  0.867757 -0.872935  0.417772 -0.045722  0.432780
+
+  8 -0.685488  1.046816  0.465459 -0.446164  0.227635
+
+  9 -0.019854  0.643384  1.459784  0.559970 -0.358676
+
+  ```
+
+
+  如果我们使用相同的指令重新创建一个数据框，几乎肯定会得到不同的数据。为了获得相同的数据，我们需要使用一个允许我们设置种子的函数。这样，我们就可以复制数据。
+
+
+  ```
+
+  # 我们设置种子
+
+  >>> np.random.seed(12345)
+
+  # 我们创建数据框
+
+  >>> rdf = pd.DataFrame(np.random.randn(10,5))
+
+  # 我们可视化数据框
+
+  rdf
+
+  0         1         2         3         4
+
+  0 -0.204708  0.478943 -0.519439 -0.555730  1.965781
+
+  1  1.393406  0.092908  0.281746  0.769023  1.246435
+
+  2  1.007189 -1.296221  0.274992  0.228913  1.352917
+
+  3  0.886429 -2.001637 -0.371843  1.669025 -0.438570
+
+  4 -0.539741  0.476985  3.248944 -1.021228 -0.577087
+
+  5  0.124121  0.302614  0.523772  0.000940  1.343810
+
+  6 -0.713544 -0.831154 -2.370232 -1.860761 -0.860757
+
+  7  0.560145 -1.265934  0.119827 -1.063512  0.332883
+
+  8 -2.359419 -0.199543 -1.541996 -0.970736 -1.307030
+
+  9  0.286350  0.377984 -0.753887  0.331286  1.349742
+
+  # 我们重新插入相同的种子
+
+  >>> np.random.seed(12345)
+
+  # 我们重新创建一个数据集
+
+  >>> rdf2 = pd.DataFrame(np.random.randn(10,5))
+
+  # 生成的数据是相同的
+
+  >>> rdf2
+
+  0         1         2         3         4
+
+  0 -0.204708  0.478943 -0.519439 -0.555730  1.965781
+
+  1  1.393406  0.092908  0.281746  0.769023  1.246435
+
+  2  1.007189 -1.296221  0.274992  0.228913  1.352917
+
+  3  0.886429 -2.001637 -0.371843  1.669025 -0.438570
+
+  4 -0.539741  0.476985  3.248944 -1.021228 -0.577087
+
+  5  0.124121  0.302614  0.523772  0.000940  1.343810
+
+  6 -0.713544 -0.831154 -2.370232 -1.860761 -0.860757
+
+  7  0.560145 -1.265934  0.119827 -1.063512  0.332883
+
+  8 -2.359419 -0.199543 -1.541996 -0.970736 -1.307030
+
+  9  0.286350  0.377984 -0.753887  0.331286  1.349742
+
+  >>> np.random.seed(12345)
+
+  >>> rdf = pd.DataFrame(np.random.rand(10,5))
+
+  >>> rdf
+
+  0         1         2         3         4
+
+  0 -0.204708  0.478943 -0.519439 -0.555730  1.965781
+
+  1  1.393406  0.092908  0.281746  0.769023  1.246435
+
+  2  1.007189 -1.296221  0.274992  0.228913  1.352917
+
+  3  0.886429 -2.001637 -0.371843  1.669025 -0.438570
+
+  4 -0.539741  0.476985  3.248944 -1.021228 -0.577087
+
+  5  0.124121  0.302614  0.523772  0.000940  1.343810
+
+  6 -0.713544 -0.831154 -2.370232 -1.860761 -0.860757
+
+  7  0.560145 -1.265934  0.119827 -1.063512  0.332883
+
+  8 -2.359419 -0.199543 -1.541996 -0.970736 -1.307030
+
+  9  0.286350  0.377984 -0.753887  0.331286  1.349742
+
+  ```
+
+
+  请注意，我们完全随机的变量没有名称；它们仅由数字标识。让我们更改列名：
+
+
+  ```
+
+  # 我们创建一个包含变量名称的列表
+
+  >>> var_names = [''var1'', ''var2'', ''var3'', ''var4'', ''var5'']
+
+  # 我们使用 .columns 方法
+
+  >>> rdf2.columns = var_names
+
+  # 我们检查数据框的前几个案例
+
+  >>> rdf2.head(2)
+
+  var1      var2      var3      var4      var5
+
+  0 -0.204708  0.478943 -0.519439 -0.555730  1.965781
+
+  1  1.393406  0.092908  0.281746  0.769023  1.246435
+
+  # 变量名称是正确的
+
+  ```
+
+
+  我们可以使用其他 NumPy 函数获取其他类型的分布。
+
+
+  ```
+
+  # 二项分布
+
+  >>> rdf_bin = pd.DataFrame(np.random.binomial(100, 0.5, (10,5)))
+
+  >>> rdf_bin
+
+  0   1   2   3   4
+
+  0  47  56  48  42  53
+
+  1  43  56  51  56  46
+
+  2  50  42  40  55  46
+
+  3  46  43  54  51  53
+
+  4  41  48  47  45  42
+
+  5  53  55  51  50  58
+
+  6  51  57  46  53  48
+
+  7  56  53  46  54  54
+
+  8  53  50  52  53  46
+
+  9  50  46  54  57  56
+
+  # 泊松分布
+
+  >>> rdf_poi = pd.DataFrame(np.random.poisson(100, (10,5)))
+
+  >>> rdf_poi
+
+  0    1    2    3    4
+
+  0  109  107   98  111   95
+
+  1  115  109  101  108   95
+
+  2  105   97  102  100   94
+
+  3   94   93   94  122   96
+
+  4  117   85  135   90   83
+
+  5  103  106  105   93  116
+
+  6  111   95  100   95   80
+
+  7   81   75   84   93  101
+
+  8  105  109  104  104  113
+
+  9   97  120   90   98   95
+
+  # 均匀分布
+
+  >>> rdf_un = pd.DataFrame(np.random.uniform(1, 100,(10,5)))
+
+  >>> rdf_un
+
+  0          1          2          3          4
+
+  0  49.139046  98.433411  60.777590  76.202858  68.767153
+
+  1  93.309206  95.028762  99.021002  13.489383  97.683461
+
+  2  23.681460  19.419586  51.411931  53.519271  28.981285
+
+  3  31.705992  31.678553  27.372500  59.749684  22.496303
+
+  4  40.835909  29.567563  18.210241  23.345639  98.875500
+
+  5  43.971084  82.990738  57.678770  65.538128  73.244077
+
+  6  39.737081  39.893383  86.095572  81.191942  83.817845
+
+  7  19.610805  36.600078  48.716414  96.641192  56.768005
+
+  8  82.922981   8.534653  55.760657  55.246106  90.638916
+
+  9  37.579379  90.215102  14.922471  10.818199  97.345143
+
+  ```
+
+
+  我们如何保存在 NumPy 中创建的数据框或数组？首先，我们创建一个数据框
+
+
+  ```
+
+  >>> tos = pd.DataFrame(np.random.randn(10,5))
+
+  ```
+
+
+  然后使用 NumPy 的 `save()` 函数保存它。
+
+
+  ```
+
+  >>> np.save(''tos_saved'', tos)
+
+  # 我们可以在工作目录中检查它
+
+  ```
+
+
+  要加载我们保存的文件，我们使用 NumPy 中的 `load()` 函数。
+
+
+  ```
+
+  >>> load1 = np.load(''tos_saved.npy'')
+
+  ```
+
+
+  NumPy 包含其他高级数学模块，例如用于线性代数的 `numPy.linalg`，用于傅里叶变换的 `fft`，以及许多用于财务分析的函数，例如利息和期货计算。你可以在
+  [`https://docs.scipy.org/doc/`](https://docs.scipy.org/doc/) 找到关于 NumPy 功能的所有必要文档。
+
+
+
+
+  ## 摘要
+
+
+  NumPy 和 SciPy 是数据分析人员使用的两个非常重要的软件包。它们各自拥有多种功能，但可以组合使用，例如用于创建随机数据集。
+
+
+  '
+- '# 10. Matplotlib
+
+
+  创建图表是探索性分析中的重要步骤，也是数据分析的初始阶段之一。我们可以使用 Matplotlib 构建各种分析图表，以不同方式展示数据。
+
+
+  ## 基本绘图
+
+
+  为了以图形方式表示数据，我们可以使用 Matplotlib 库，它是最常用的图形表示软件包之一。其文档可在 [`https://matplotlib.org`](https://matplotlib.org)
+  找到。Matplotlib 网站的图库部分（位于 [`https://matplotlib.org/gallery.html`](https://matplotlib.org/gallery.html)
+  ）提供了一系列带有代码的图表示例。
+
+
+  Matplotlib 随 Anaconda 一起安装，因此我们需要导入它。
+
+
+  ```
+
+  # 我们导入 Matplotlib 库
+
+  >>> import matplotlib as mlp
+
+  >>> import matplotlib.pyplot as plt
+
+  >>> %matplotlib inline
+
+  # 最后一行代码允许我们直接使用 Jupyter 查看图表
+
+  ```
+
+
+  我们可以通过以列表形式将元素直接插入函数中来表示它们。以下代码生成了图 10-1 中的图表。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig1_HTML.jpg](img/469457_1_En_10_Fig1_HTML.jpg)
+
+
+  图 10-1
+
+
+  一个绘制的列表
+
+
+  ```
+
+  >>> plt.plot([5,7,2,4], [4,6,9,2], ''ro'')
+
+  # ''ro'' 代表圆形对象
+
+  ```
+
+
+  ```
+
+  >>> plt.plot([5,7,2,4])
+
+  ```
+
+
+  圆形对象的图表如图 10-2 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig2_HTML.jpg](img/469457_1_En_10_Fig2_HTML.jpg)
+
+
+  图 10-2
+
+
+  一个绘制的圆形对象列表
+
+
+  如图 10-1 所示，我们可以创建一条线。但是，我们也可以通过修改参数来自定义颜色和表示类型。
+
+
+  让我们创建两个对象并绘制它们。
+
+
+  ```
+
+  # 我们创建两个对象
+
+  >>> x = [ 50, 70, 90, 65]
+
+  >>> y = [129, 192, 163, 172]
+
+  >>> plt.plot(x, y, linewidth = 4.0)
+
+  ```
+
+
+  图表如图 10-3 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig3_HTML.jpg](img/469457_1_En_10_Fig3_HTML.jpg)
+
+
+  图 10-3
+
+
+  一个自定义图表
+
+
+  如您所见，我们使用线宽参数更改了线条粗细。我们还可以使用 **linestyle** 参数或 **ls** 来修改线条：
+
+
+  ```
+
+  >>> plt.plot(x, y, linewidth = 2.0, linestyle = ''--'')
+
+  ```
+
+
+  图表如图 10-4 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig4_HTML.jpg](img/469457_1_En_10_Fig4_HTML.jpg)
+
+
+  图 10-4
+
+
+  修改后的线条样式
+
+
+  我们可以添加标记以更好地突出数据：
+
+
+  ```
+
+  >>> plt.plot(x, y, linewidth = 1.0, ls = ''-'', marker = "o", markersize = 10)
+
+  ```
+
+
+  图表如图 10-5 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig5_HTML.jpg](img/469457_1_En_10_Fig5_HTML.jpg)
+
+
+  图 10-5
+
+
+  带有标记的图表
+
+
+  我们可以通过编辑（例如，内部颜色）来进一步自定义标记：
+
+
+  ```
+
+  >>> plt.plot(x, y, linewidth = 1.0, ls = ''-'', marker = "o", markersize = 10, markerfacecolor
+  = ''white'')
+
+  ```
+
+
+  图表如图 10-6 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig6_HTML.jpg](img/469457_1_En_10_Fig6_HTML.jpg)
+
+
+  图 10-6
+
+
+  标记颜色更改后的图表
+
+
+  有关如何自定义图表的更多信息，可以使用
+
+
+  ```
+
+  >>> help(plt.plot)
+
+  ```
+
+
+  接下来，我们可以添加参数来添加标题和轴名称。
+
+
+  ```
+
+  >>> plt.plot(x, y)
+
+  >>> plt.title("标题")
+
+  >>> plt.xlabel("X 轴")
+
+  >>> plt.ylabel("Y 轴")
+
+  ```
+
+
+  图表如图 10-7 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig7_HTML.jpg](img/469457_1_En_10_Fig7_HTML.jpg)
+
+
+  图 10-7
+
+
+  带有标题和轴标签的图表
+
+
+  我们可以通过更改所有图表元素的颜色来进一步自定义图表：
+
+
+  ```
+
+  >>> plt.plot(x, y, color = "yellow")
+
+  >>> plt.title("标题", color = "blue")
+
+  >>> plt.xlabel("X 轴", color = "purple")
+
+  >>> plt.ylabel("Y 轴", color = "green")
+
+  ```
+
+
+  图表如图 10-8 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig8_HTML.jpg](img/469457_1_En_10_Fig8_HTML.jpg)
+
+
+  图 10-8
+
+
+  更改图表元素颜色
+
+
+  我们还可以使用 ''grid'' 参数添加网格，使用 ''legend'' 参数添加图例。
+
+
+  ```
+
+  >>> plt.plot(x, y)
+
+  >>> plt.title("标题", color = "blue")
+
+  >>> plt.xlabel("X 轴", color = "purple")
+
+  >>> plt.ylabel("Y 轴", color = "green")
+
+  >>> plt.grid(True)
+
+  >>> plt.legend([''图例 1''])
+
+  ```
+
+
+  图表如图 10-9 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig9_HTML.jpg](img/469457_1_En_10_Fig9_HTML.jpg)
+
+
+  图 10-9
+
+
+  带有网格和图例的图表
+
+
+  我们可以通过更改 ''loc'' 参数将图例移动到图表内部：
+
+
+  ```
+
+  >>> plt.plot(x, y)
+
+  >>> plt.title("标题", color = "blue")
+
+  >>> plt.xlabel("X 轴", color = "purple")
+
+  >>> plt.ylabel("Y 轴", color = "green")
+
+  >>> plt.grid(True)
+
+  >>> plt.legend([''图例 2''], loc = 2)
+
+  ```
+
+
+  图表如图 10-10 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig10_HTML.jpg](img/469457_1_En_10_Fig10_HTML.jpg)
+
+
+  图 10-10
+
+
+  重新定位图例后的图表
+
+
+  以下是图例的可能位置：
+
+
+  *   0
+
+
+  *   1 = 右上角
+
+
+  *   2 = 左上角
+
+
+  *   3 = 右下角
+
+
+  *   4 = 左下角
+
+
+  *   5 = 右侧
+
+
+  *   6 = 左侧居中
+
+
+  *   7 = 右侧居中
+
+
+  *   8 = 底部居中
+
+
+  *   9 = 顶部居中
+
+
+  *   10 = 居中
+
+
+  颜色的代码如下：
+
+
+  *   b = 蓝色
+
+
+  *   c = 青色
+
+
+  *   g = 绿色
+
+
+  *   m = 品红色
+
+
+  *   r = 红色
+
+
+  *   y = 黄色
+
+
+  *   k = 黑色
+
+
+  *   w = 白色
+
+
+  我们还可以更改图表中使用的形状：
+
+
+  ```
+
+  >>> plt.plot([1,2,3,4],[1,4,8,15],''b*'')
+
+  >>> plt.plot([1,3,5,7],[1,4,8,12],''g^'')
+
+  >>> plt.plot([1,2,3,5],[2,5,4,12],''ro'')
+
+  >>> plt.legend([''第一个'',''第二个'',''第三个''],loc=0)
+
+  ```
+
+
+  图表如图 10-11 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig11_HTML.jpg](img/469457_1_En_10_Fig11_HTML.jpg)
+
+
+  图 10-11
+
+
+  具有不同形状点的图表
+
+
+  现在让我们使用 subplot() 函数创建子图：
+
+
+  ```
+
+  >>> plt.subplot(2,2,1)
+
+  >>> plt.plot([1,2,3,4],[1,4,8,15],''b*'')
+
+  >>> plt.subplot(2,2,2)
+
+  >>> plt.plot([1,3,5,7],[1,4,8,12],''g^'')
+
+  >>> plt.subplot(2,2,3)
+
+  >>> plt.plot([1,2,3,5],[2,5,4,12],''ro'')
+
+  >>> plt.subplot(2,2,4)
+
+  >>> plt.plot([1,2,3,5],[2,5,4,12],''b'')
+
+  ```
+
+
+  图表如图 10-12 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig12_HTML.jpg](img/469457_1_En_10_Fig12_HTML.jpg)
+
+
+  图 10-12
+
+
+  创建子图
+
+
+  我们可以指定想要的图表数量（本例中为两个）以及它们的放置方式（本例中为并排）：
+
+
+  ```
+
+  >>> plt.subplot(1,2,1)
+
+  >>> plt.plot([1,2,3,4],[1,4,8,15],''b*'')
+
+  >>> plt.subplot(1,2,2)
+
+  >>> plt.plot([1,3,5,7],[1,4,8,12],''g^'')
+
+  ```
+
+
+  图表如图 10-13 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig13_HTML.jpg](img/469457_1_En_10_Fig13_HTML.jpg)
+
+
+  图 10-13
+
+
+  创建两个并排的子图
+
+
+
+
+  ## 饼图
+
+
+  现在让我们看看如何创建饼图：饼图可用于展示某事物的构成（例如市场）。要绘制饼图，我们可以使用 `plt.pie()` 函数：
+
+
+  ```
+
+  >>> plt.pie(x)
+
+  ```
+
+
+  该图如图 10-14 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig14_HTML.jpg](img/469457_1_En_10_Fig14_HTML.jpg)
+
+
+  图 10-14
+
+
+  一个基础饼图
+
+
+  我们可以通过编辑其颜色来自定义它：
+
+
+  ```
+
+  # 我们创建一个颜色调色板
+
+  >>> col1 = ["yellow", "red", "purple", "orange"]
+
+  # 我们将新颜色应用到图表中
+
+  >>> plt.pie(x, colors = col1)
+
+  ```
+
+
+  该图如图 10-15 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig15_HTML.jpg](img/469457_1_En_10_Fig15_HTML.jpg)
+
+
+  图 10-15
+
+
+  一个带有自定义颜色的饼图
+
+
+  要进一步修改颜色，我们可以使用十六进制颜色代码。可以在 [`http://cloford.com/resources/colours/500col.htm`](http://cloford.com/resources/colours/500col.htm)
+  找到代码列表。
+
+
+  让我们添加一些标签：
+
+
+  ```
+
+  >>> lab1 = [''A'',''B'',''C'',''D'']
+
+  >>> plt.pie(x, colors = col1, labels = lab1)
+
+  ```
+
+
+  该图如图 10-16 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig16_HTML.jpg](img/469457_1_En_10_Fig16_HTML.jpg)
+
+
+  图 10-16
+
+
+  一个带有标签的饼图
+
+
+  我们可以通过使用 `''explode''` 参数来分离饼图的扇区。我们甚至可以指定分离扇区之间的距离：
+
+
+  ```
+
+  >>> ex1 = [0.5,0,0,1]
+
+  >>> lab1 = [''A'',''B'',''C'',''D'']
+
+  >>> plt.pie(x, colors = col1, labels = lab1, explode = ex1)
+
+  ```
+
+
+  该图如图 10-17 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig17_HTML.jpg](img/469457_1_En_10_Fig17_HTML.jpg)
+
+
+  图 10-17
+
+
+  一个分离式饼图
+
+
+  ## 其他图表
+
+
+  我们还可以创建其他类型的图表。例如，我们可以构建一个散点图。散点图对于观察两个变量之间的关系非常有用。
+
+
+  ```
+
+  >>> plt.scatter(x, y)
+
+  ```
+
+
+  该图如图 10-18 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig18_HTML.jpg](img/469457_1_En_10_Fig18_HTML.jpg)
+
+
+  图 10-18
+
+
+  一个散点图
+
+
+  我们可以使用 `plt.bar()` 函数创建条形图。条形图和直方图对于比较数据以及展示分类变量非常有用：
+
+
+  ```
+
+  >>> plt.bar(x, y)
+
+  ```
+
+
+  该图如图 10-19 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig19_HTML.jpg](img/469457_1_En_10_Fig19_HTML.jpg)
+
+
+  图 10-19
+
+
+  一个条形图
+
+
+  我们可以改变条形图的方向：
+
+
+  ```
+
+  >>> plt.barh(x, y)
+
+  ```
+
+
+  该图如图 10-20 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig20_HTML.jpg](img/469457_1_En_10_Fig20_HTML.jpg)
+
+
+  图 10-20
+
+
+  一个改变方向后的条形图
+
+
+  我们可以从数据框创建图表。为此，我们必须导入 pandas 用于数据集和 NumPy 管理。让我们生成一个包含十个案例和四个变量的随机数据集。
+
+
+  ```
+
+  >>> import pandas as pd
+
+  >>> import numpy as np
+
+  >>> df1 = pd.DataFrame(np.random.rand(10, 4), columns = [''var1'', ''var2'', ''var3'',
+  ''var4''])
+
+  >>> df1.plot(kind = "bar")
+
+  ```
+
+
+  该图如图 10-21 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig21_HTML.jpg](img/469457_1_En_10_Fig21_HTML.jpg)
+
+
+  图 10-21
+
+
+  一个使用随机数据框创建的条形图
+
+
+  要创建堆叠条形图，我们使用 `''stacked''` 参数：
+
+
+  ```
+
+  >>> df1.plot(kind = "bar", stacked = True)
+
+  ```
+
+
+  该图如图 10-22 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig22_HTML.jpg](img/469457_1_En_10_Fig22_HTML.jpg)
+
+
+  图 10-22
+
+
+  一个带有堆叠条形图的图表
+
+
+  我们可以创建一个表示数据集中变量的直方图。（本章末尾会更详细地讨论直方图。）
+
+
+  ```
+
+  >>> df1.hist()
+
+  ```
+
+
+  该图如图 10-23 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig23_HTML.jpg](img/469457_1_En_10_Fig23_HTML.jpg)
+
+
+  图 10-23
+
+
+  数据集中每个变量的多个直方图
+
+
+  或者，我们可以表示单个变量：
+
+
+  ```
+
+  >>> df1[''var1''].hist()
+
+  ```
+
+
+  该图如图 10-24 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig24_HTML.jpg](img/469457_1_En_10_Fig24_HTML.jpg)
+
+
+  图 10-24
+
+
+  一个变量的直方图
+
+
+  我们也可以使用除名称之外的方法来选择列，例如 `.loc` 方法。
+
+
+  ```
+
+  >>> df1.loc[1].hist()
+
+  ```
+
+
+  我们通过使用 `boxplot()` 函数来创建箱线图。这种可视化可用于展示分布的形状、其中心值及其变异性：
+
+
+  ```
+
+  >>> df1.boxplot(return_type = "axes")
+
+  ```
+
+
+  该图如图 10-25 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig25_HTML.jpg](img/469457_1_En_10_Fig25_HTML.jpg)
+
+
+  图 10-25
+
+
+  一个箱线图
+
+
+  我们可以构建面积图：
+
+
+  ```
+
+  >>> df1.plot(kind = "area")
+
+  ```
+
+
+  该图如图 10-26 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig26_HTML.jpg](img/469457_1_En_10_Fig26_HTML.jpg)
+
+
+  图 10-26
+
+
+  一个面积图
+
+
+  我们使用的每个函数都有其自己的参数，我们可以更改这些参数，正如我们在本章第一部分看到的那样。例如，我们可以通过应用我们已经创建的调色板来更改面积图的颜色：
+
+
+  ```
+
+  >>> df1.plot(kind = "area", color = col1)
+
+  ```
+
+
+  该图如图 10-27 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig27_HTML.jpg](img/469457_1_En_10_Fig27_HTML.jpg)
+
+
+  图 10-27
+
+
+  一个更改了颜色调色板的面积图
+
+
+  ## 保存图表
+
+
+  我们可以使用 `.savefig` 方法保存我们的图表。我们还可以指定其名称并设置分辨率（每英寸点数）：
+
+
+  ```
+
+  >>> df1.plot(kind = "scatter", x = "var3", y = "var4")
+
+  # 我们按以下方式将图像保存到工作目录中
+
+  >>> plt.savefig(''graph1.png'', dpi = 600)
+
+  ```
+
+
+  让我们检查图表是否已成功保存到我们的工作目录中。我们可以使用下载的图像，例如用于演示，或在数据分析后将其包含在报告中，或在探索阶段解释我们的数据。
+
+
+
+
+  ## 选择图表样式
+
+
+  Matplotlib 还包含一组可应用于图表的样式。我们可以通过输入以下代码来查看这些样式：
+
+
+  ```
+
+  >>> plt.style.available
+
+  [''bmh'',
+
+  ''classic'',
+
+  ''dark_background'',
+
+  ''fivethirtyeight'',
+
+  ''ggplot'',
+
+  ''grayscale'',
+
+  ''seaborn-bright'',
+
+  ''seaborn-colorblind'',
+
+  ''seaborn-dark-palette'',
+
+  ''seaborn-dark'',
+
+  ''seaborn-darkgrid'',
+
+  ''seaborn-deep'',
+
+  ''seaborn-muted'',
+
+  ''seaborn-notebook'',
+
+  ''seaborn-paper'',
+
+  ''seaborn-pastel'',
+
+  ''seaborn-poster'',
+
+  ''seaborn-talk'',
+
+  ''seaborn-ticks'',
+
+  ''seaborn-white'',
+
+  ''seaborn-whitegrid'',
+
+  ''seaborn'']
+
+  ```
+
+
+  要应用某种样式，我们需要插入一行包含主题名称的代码：
+
+
+  ```
+
+  >>> plt.style.use(''dark_background'')
+
+  >>> df1.plot(kind = "area")
+
+  ```
+
+
+  该图表如图 10-28 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig28_HTML.jpg](img/469457_1_En_10_Fig28_HTML.jpg)
+
+
+  图 10-28
+
+
+  一个使用 Matplotlib “深色背景” 主题的自定义面积图
+
+
+  这是另一个示例：
+
+
+  ```
+
+  >>> plt.style.use(''seaborn-darkgrid'')
+
+  >>> df1.plot(kind = "area")
+
+  ```
+
+
+  该图表如图 10-29 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig29_HTML.jpg](img/469457_1_En_10_Fig29_HTML.jpg)
+
+
+  图 10-29
+
+
+  一个使用 “seaborn” 主题的自定义面积图
+
+
+  ## 直方图进阶
+
+
+  我们可以用 NumPy 创建两个随机对象，分别以图形方式表示它们，然后将它们的数据合并到一个图表中：
+
+
+  ```
+
+  >>> df2 = np.random.randn(100)
+
+  >>> df3 = np.random.randn(100)
+
+  >>> plt.hist(df2)
+
+  ```
+
+
+  第一个图表如图 10-30 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig30_HTML.jpg](img/469457_1_En_10_Fig30_HTML.jpg)
+
+
+  图 10-30
+
+
+  第一个直方图
+
+
+  现在让我们显示第二个直方图。
+
+
+  ```
+
+  >>> plt.hist(df3)
+
+  ```
+
+
+  该图表如图 10-31 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig31_HTML.jpg](img/469457_1_En_10_Fig31_HTML.jpg)
+
+
+  图 10-31
+
+
+  第二个直方图
+
+
+  现在让我们合并这两个数据集：
+
+
+  ```
+
+  >>> plt.hist(df2, color = "red", alpha = 0.3, bins = 15)
+
+  >>> plt.hist(df3, alpha = 0.6, bins = 15)
+
+  # 我们将两个数据集一起呈现，并通过 alpha 参数定义是否使用颜色、透明度，以及我们希望数据被划分的区间数量。
+
+  ```
+
+
+  该图表如图 10-32 所示。
+
+
+  ![../images/469457_1_En_10_Chapter/469457_1_En_10_Fig32_HTML.jpg](img/469457_1_En_10_Fig32_HTML.jpg)
+
+
+  图 10-32
+
+
+  一个合并后的直方图
+
+
+  Matplotlib 只是众多可用于显示数据的 Python 包之一。其他图表创建包可以在 [`http://pbpython.com/visualization-tools-1.html`](http://pbpython.com/visualization-tools-1.html)
+  找到。例如，最常用的数据挖掘图表之一就是 seaborn。
+
+
+  ## 总结
+
+
+  Matplotlib 是用于绘制数据的最基础的库之一。绘制数据集以进行数据分析，对于理解变量之间的关系至关重要。
+
+
+  '
+- '# 11. Scikit-learn
+
+
+  Scikit-learn 是 Python 机器学习中最重要且最常用的包之一。它提供了许多用于各种预测算法的函数。在本章中，我们将研究 Scikit-learn
+  包中包含的一些算法。鉴于该主题的广度，所呈现的示例反映了最常用的模型。那些没有机器学习基础知识的读者可能会发现理解本章中介绍的一些技术比较困难，这些技术不会详细解释。
+
+
+  ## 什么是机器学习？
+
+
+  机器学习是数据分析的一个分支，它将以特定方式构建的数据集转化为可应用于新数据的预测。机器学习利用我们已有的数据来预测未来的行为。机器学习技术是数据挖掘领域的一场真正革命，它们对各种应用领域都产生了巨大影响。
+
+
+  机器学习广泛应用于日常使用的许多应用程序中。像亚马逊、Netflix、谷歌、苹果和 Facebook 这样的大公司出于各种原因使用机器学习算法。例如，Facebook
+  使用机器学习来识别图像中的人脸；亚马逊和 Netflix 分析客户的偏好（你最后查看或购买的商品），以推荐可能符合你兴趣的新产品。
+
+
+  例如，谷歌在翻译和自动驾驶中使用机器学习，或者根据我们的习惯以及我们在每周特定日子常去的地方，来建议交通较少的路线。机器学习还帮助我们区分垃圾邮件和非垃圾邮件，通常使用概率方法或结合多种方法（例如，将概率方法添加到关键词和用户定义的规则中）。
+
+
+  苹果和微软使用机器学习为我们提供语音助手，帮助我们仅通过语音操作手机或平板电脑。其他公司目前正在完善人工智能方法、自动驾驶等。
+
+
+  当 IBM 开发的超级计算机 Watson 参加 *Jeopardy!* 问答节目时，机器学习领域获得了更广泛的关注。
+
+
+  机器学习也被用于预测选举结果，最早由科学家 Nate Silver 在 2012 年 10 月发布美国大选预测，其结果与实际数据非常接近。
+
+
+  预测性数据挖掘用于医疗保健领域。患者数据和临床记录可以帮助识别那些患某些疾病（如糖尿病或心脏病）风险较高的人群。例如，DNA 分析和基因检测试剂盒已被用于检测导致或与某些类型癌症（包括乳腺癌）相关的基因。
+
+
+  机器学习最古老的应用之一是手写识别——特别是手写地址和邮政编码。识别基于每个手写数字的各种出现情况，使用神经网络（由贝尔实验室进行）。
+
+
+  机器学习及其相关主题（如深度学习和人工智能）的研究每天都在进步，并处于计算领域的前沿。像 Kaggle 这样的网站每隔几天就会发布内容，订阅者在此期间尝试解决给定的问题。最著名的
+  Kaggle 竞赛是由 Netflix 宣布的。2006 年，Netflix 为推荐系统悬赏 100 万美元。设计出的系统并未被 Netflix 采用，因为它过于复杂且计算成本高昂。
+
+
+  让我们来看看 Scikit-learn 包中的各种模块和技术。
+
+
+
+
+  ### 导入 Scikit-learn 内置数据集
+
+
+  首先，scikit-learn 包中包含一些数据集，我们可以像这样导入它们：
+
+
+  ```
+
+  >>> from sklearn import datasets
+
+  ```
+
+
+  要导入其中一个数据集，请输入：
+
+
+  ```
+
+  >>> iris = datasets.load_iris()
+
+  ```
+
+
+  鸢尾花数据集由三种不同鸢尾花的花瓣和花萼组成：*杂色鸢尾*、*弗吉尼亚鸢尾*和*山鸢尾*。它包含 150 个均匀分布在三种花卉上的案例，以及五个变量。
+
+
+  在前面的章节中，我们了解了如何从本地计算机的外部文件或通过链接从网站导入 `.csv` 格式的数据集。Scikit-learn 还包含一些最常用的数据挖掘数据集，例如鸢尾花和波士顿房价数据集。Scikit-learn
+  中使用的格式对于初学者来说可能会有些令人困惑。所有数据集都包含在同一个对象中，但并非像我们在前几章中检查的 `.csv` 文件那样的表格格式。Scikit-learn
+  中的数据集包含数组格式的数据、目标或标签（我们想要预测的变量）以及其他一些信息，例如变量描述（在 `DESCR` 对象中）和列名，这些信息分布在两个不同的对象中：`feature_names`
+  用于变量，`target_names` 用于目标或标签。
+
+
+  ```
+
+  >>> type(iris)
+
+  sklearn.datasets.base.Bunch
+
+  >>> iris.keys()
+
+  dict_keys([''data'', ''target'', ''target_names'', ''DESCR'', ''feature_names''])
+
+  ```
+
+
+  我们可以显示实际的数据集：
+
+
+  ```
+
+  >>> iris.data
+
+  array([[ 5.1,  3.5,  1.4,  0.2],
+
+  [ 4.9,  3\. ,  1.4,  0.2],
+
+  [ 4.7,  3.2,  1.3,  0.2],
+
+  [ 4.6,  3.1,  1.5,  0.2],
+
+  [ 5\. ,  3.6,  1.4,  0.2],
+
+  [ 5.4,  3.9,  1.7,  0.4],
+
+  [ 4.6,  3.4,  1.4,  0.3],
+
+  [ 5\. ,  3.4,  1.5,  0.2],
+
+  [ 4.4,  2.9,  1.4,  0.2],
+
+  [...]
+
+  ```
+
+
+  通过这种方式，我们只显示数值数据。要查看实际的分类，我们必须按如下步骤操作：
+
+
+  ```
+
+  >>> iris.target
+
+  array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+
+  0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+
+  1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+
+  2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+
+  2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2])
+
+  # 数据目标是数值型的，因为 scikit-learn 默认不接受分类数据，因此需要将数据编码为数值形式
+
+  # 我们显示名称
+
+  >>> iris.target_names
+
+  array([''setosa'', ''versicolor'', ''virginica''],
+
+  dtype=''<U10'')
+
+  ```
+
+
+  我们可以按如下方式显示案例和变量的数量：
+
+
+  ```
+
+  >>> iris.data.shape
+
+  (150, 4)
+
+  ```
+
+
+  我们可以通过使用 `.DESCR` 获取数据的描述：
+
+
+  ```
+
+  >>> iris.DESCR
+
+  ```
+
+
+  ![../images/469457_1_En_11_Chapter/469457_1_En_11_Figa_HTML.jpg](img/469457_1_En_11_Figa_HTML.jpg)
+
+
+  ### 创建训练集和测试集
+
+
+  在机器学习中，我们通常从一个 `.csv` 格式的数据集开始。从这个文件中，我们将创建 4 个部分。Scikit-learn 允许我们做的一件事是创建训练数据集和测试数据集。在机器学习中，我们通常从一个带标签的数据集开始，并将其分成两部分：一部分用于训练（约占数据集的
+  70%–80%），用于训练算法；另一部分用于测试（剩余的 20%–30%），用于测试数据算法的有效性。这个特性使我们能够将实际数据与算法预测的数据进行比较，并查看它们的效果。训练集和测试集也分为两部分：一部分包含我们将用于创建模型的变量，另一部分包含我们想要学习预测的变量。
+
+
+  ```
+
+  >>> from sklearn.model_selection import train_test_split
+
+  >>> x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.3)
+
+  # 我们只需要指定测试数据集的百分比——在本例中为 30% (0.3)
+
+  ```
+
+
+  例如，如果我们将其应用于鸢尾花数据集，我们可以创建四个对象：一个包含鸢尾花数据集四个变量和 70% 案例的训练对象，一个包含其余元素（30%）的测试对象，以及一个始终被分成两部分的标签或目标变量。
+
+
+  ```
+
+  >>> x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target,
+  test_size = 0.3)
+
+  ```
+
+
+  让我们检查一下创建的各种对象的大小：
+
+
+  ```
+
+  >>> x_train.data.shape
+
+  (105, 4)
+
+  >>> x_test.data.shape
+
+  (45, 4)
+
+  >>> y_train.data.shape
+
+  (105,)
+
+  >>> y_test.data.shape
+
+  (45,)
+
+  ```
+
+
+  ### 预处理
+
+
+  Scikit-learn 允许对数据进行预处理（尽管我们不需要对鸢尾花数据集进行预处理）。
+
+
+  ```
+
+  >>> from sklearn import preprocessing
+
+  # iris_scaled = pd.DataFrame(preprocessing.scale(iris_data))
+
+  ```
+
+
+  ### 回归
+
+
+  回归分析用于解释变量 y（称为*响应变量*或*因变量*）与一个或多个自变量之间的关系。
+
+
+  为了计算回归，让我们从 Scikit-learn 导入正确的模型：
+
+
+  ```
+
+  >>> from sklearn.linear_model import LinearRegression
+
+  # 我们通过创建回归模型的副本来简化工作
+
+  >>> lr = LinearRegression()
+
+  # 我们使用训练对象创建模型
+
+  >>> lr.fit(x_train, y_train)
+
+  # 我们查看系数
+
+  >>> print(lr.intercept_)
+
+  >>> lr.coef_
+
+  # 我们预测测试对象的隶属关系
+
+  >>> pred = lr.predict(x_test)
+
+  >>> print(pred)
+
+  ```
+
+
+  现在让我们看一下允许我们应用指标来衡量模型效果的代码：
+
+
+  ```
+
+  >>> from sklearn import metrics
+
+  >>> print(''MAE'', metrics.mean_absolute_error(y_test, pred))
+
+  >>> print(''MSE'', metrics.mean_squared_error(y_test, pred))
+
+  >>> print(''RMSE'', np.sqrt(metrics.mean_squared_error(y_test, pred)))
+
+  >>> metrics.explained_variance_score(y_test, pred)
+
+  ```
+
+
+  ### K-近邻算法
+
+
+  K-近邻算法是一种用于数据预测和数据挖掘的有监督算法。它也用于模式识别（例如面部识别）、识别遗传密码中的模式、识别疾病以及电影和音乐推荐系统。K-近邻算法背后的逻辑可以用拉丁短语“*Similes
+  cum similar bus facillime congregantur*”来概括，意思是“物以类聚”。简而言之，我们使用该算法分析数据集中的案例以找到相似的元素。然后，新案例根据它们与某个组的接近程度以及彼此之间的距离被聚合到新形成的组中。K-近邻算法然后计算未分类项与其他项的距离，并将其分配给最近的元素（或元素，k）的类别。k
+  只不过是我们可以用来确定未知类别项类别的邻近观测值的数量。例如，如果我们将 k 设置为 2，我们根据其两个最近的元素将类别分配给该项。如果将其设置为 3，我们得到三个最近的元素，依此类推。
+
+
+  ```
+
+  # 我们不能在鸢尾花数据集上使用 K-近邻算法，因此从现在开始，我们仅限于给出各种分类模型代码的概念
+
+  >>> from sklearn.neighbors import KNeighborsClassifier
+
+  >>> knn = KNeighborsClassifier(n_neighbors = 3)
+
+  >>> x_train = 从数据集中，我们将使用除标签之外的变量
+
+  >>> y_train = 测试标签
+
+  >>> x_test = 新数据
+
+  >>> y_test = 新数据标签
+
+  >>> knn.fit(x_train, y_train)
+
+  >>> new_pred = knn.predict(x_new)
+
+  >>> print(new_pred)
+
+  ```
+
+
+  在处理分类问题时，我们使用不同于回归的方法来测试模型的充分性：
+
+
+  ```
+
+  >>> from sklearn.metrics import classification_report, confusion_matrix
+
+  >>> print(confusion_matrix(y_test, y_pred))
+
+  >>> print(classification_report(y_test, y_pred))
+
+  ```
+
+
+
+
+  ### 交叉验证
+
+
+  交叉验证是指将数据集划分为数量相等的若干份，通常用 k 表示（常分为五份或十份），然后在这 k 组数据上检验预测模型的适用性。
+
+
+  ```
+
+  >>> from sklearn.model_selection import cross_val_score
+
+  >>> cv5 = cross_val_score(model, x_train, y_train, cv = 5)
+
+  >>> cv10 = cross_val_score(model, x_train, y_train, cv = 10)
+
+  >>> print(np.mean(cv5))
+
+  >>> print(np.mean(cv10))
+
+  ```
+
+
+  ### 支持向量机
+
+
+  支持向量机（SVM）用于确定属于两个不同类别的项目之间的边界，然后将它们投影到多维空间中，以识别能够最大化两组数据之间间隔的超平面。
+
+
+  ```
+
+  >>> from sklearn.svm import SVC
+
+  >>> clf = svm.SVC(kernel=''linear'', C=1).fit(x_train, y_train)
+
+  >>> clf.score(x_test, y_test)
+
+  >>> from sklearn.model_selection import cross_val_predict
+
+  >>> pred = cross_val_predict(clf, iris.data, iris.target, cv=10)
+
+  >>> metrics.accuracy_score(iris.target, pred)
+
+  ```
+
+
+  ### 决策树
+
+
+  决策树背后的基本思想是一种*分而治之*的模型，在该模型中，每一步我们都可以减少节点之间的变异性。我们从整个数据集开始，然后将其划分为更小的组，这些组基于内部特征更加同质且本质。
+
+
+  ```
+
+  >>> from sklearn.tree import DecisionTreeClassifier
+
+  >>> dtc = DecisionTreeClassifier()
+
+  >>> dtc = dtc.fit(x_train, y_train)
+
+  >>> pred = dtc.predict(y_test)
+
+  >>> sklearn.metrics.confusion_matrix(y_test, pred)
+
+  >>> sklearn.metrics.accuracy_score(y_test, pred)
+
+  >>> sklearn.metrics.classification_report(y_test, pred)
+
+  ```
+
+
+  ### KMeans
+
+
+  KMeans 是一种无监督的分类方法，这意味着在分类过程中我们没有标签来指导。因此，我们选择使用聚类作为一种有用的探索性分析方法，因为它允许我们根据数据集中元素的相似或相异程度对其进行分组。
+
+
+  聚类包含一组方法，可以将异质总体分割为同质的子组。在所有可用的聚类方法中，KMeans 是重要的方法之一。聚类的基本概念基于这样一个事实：我们将一个集合中的项目划分为同质的组，而最初并不对其进行标记。无标签数据的分组方式必须确保组内元素不仅同质，而且与其他组的元素异质。在划分聚类项目后，我们可以将新项目归类为属于第一个数据集的任一聚类。
+
+
+  ```
+
+  >>> from sklearn.cluster import KMeans
+
+  >>> kmeans = KMeans(n_clusters=4)
+
+  >>> kmeans.fit(df)
+
+  >>> pred = kmeans.predict(df)
+
+  >>> pred
+
+  ```
+
+
+  以上只是对使用 Scikit-learn 包进行机器学习的一个粗略讨论。机器学习是一个具有挑战性的课题，因此不易在几页纸中概括。我认为介绍一些预测性数据挖掘概念以及可用于机器学习的各种
+  Scikit-learn 模块会有所帮助。
+
+
+  ## 管理日期
+
+
+  使用 Python 管理日期非常重要，尤其是在处理时间序列表示时。我们可以使用 `datetime` 包和 pandas 来处理日期。首先，我们必须导入 `datetime`。
+
+
+  ```
+
+  >>> import datetime as dt
+
+  # 我们创建第一个包含时间的对象
+
+  >>> t1 = dt.time(19, 43 , 30)
+
+  >>> print(t1)
+
+  19:43:30
+
+  # 要创建包含日期的对象，我们使用 dates
+
+  >>> dt.date.today()
+
+  >>> datetime.date(2017, 3, 28)
+
+  # 我们可以查询创建的对象关于年、月、日的信息
+
+  >>> today = dt.date.today()
+
+  >>> today.year
+
+
+  >>> today.month
+
+
+  >>> today.day
+
+
+  >>> t2 = dt.date(2016, 5, 20)
+
+  >>> print(t2)
+
+  2016-05-20
+
+  # 我们可以查询对象以获取年、月、日
+
+  >>> t2.year
+
+
+  >>> t2.month
+
+
+  >>> t2.day
+
+
+  # 我们可以从计算机中找到精确的小时和分钟
+
+  >>> dt.datetime.now()
+
+  >>> datetime.datetime(2017, 3, 30, 13, 4, 52, 591324)
+
+  ```
+
+
+  用于解析日期的资源可在 [`http://strftime.org/`](http://strftime.org/) 找到。
+
+
+  让我们继续使用 pandas 进行日期管理。
+
+
+  ```
+
+  >>> import pandas as pd
+
+  # 我们可以通过 Timestamp 管理各种数据格式
+
+  >>> pd.Timestamp("2016-3-7")
+
+  >>> pd.Timestamp("2016/4/10")
+
+  >>> pd.Timestamp("2015, 12, 10")
+
+  >>> pd.Timestamp("2015, 12, 10 12:42:57")
+
+  >>> date1 = ["2016/4/10", "2015, 12, 10", "2015, 12, 10 12:42:57"]
+
+  >>> print(date1)
+
+  [''2016/4/10'', ''2015, 12, 10'', ''2015, 12, 10 12:42:57'']
+
+  >>> type(date1)
+
+  list
+
+  >>> pd.to_datetime(date1)
+
+  DatetimeIndex([''2016-04-10 00:00:00'', ''2015-12-10 00:00:00'',
+
+  ''2015-12-10 12:42:57''],
+
+  dtype=''datetime64[ns]'', freq=None)
+
+  # 我们创建另一个包含日期但也包含其他元素的对象
+
+  >>> date2 = ["2016/4/10", "2015, 12, 10", "2015, 12, 10 12:42:57", "October", "2011",
+  "test"]
+
+  # 如果我们将此对象传递给 Timestamp，会得到一个错误
+
+  >>> pd.to_datetime(date2)
+
+  # 我们可以使用 ''coerce'' 参数处理错误
+
+  >>> pd.to_datetime(date2, errors = "coerce")
+
+  DatetimeIndex([''2016-04-10 00:00:00'', ''2015-12-10 00:00:00'',
+
+  ''2015-12-10 12:42:57'',                 ''NaT'',
+
+  ''2011-01-01 00:00:00'',                 ''NaT''],
+
+  dtype=''datetime64[ns]'', freq=None)
+
+  ```
+
+
+  未被识别的日期被标识为 NaT。
+
+
+  让我们继续，创建一个日期范围：
+
+
+  ```
+
+  >>> period1 = pd.date_range(start = "2016  01 01", end = "2016 12 31")
+
+  >>> print(period1)
+
+  DatetimeIndex([''2016-01-01'', ''2016-01-02'', ''2016-01-03'', ''2016-01-04'',
+
+  ''2016-01-05'', ''2016-01-06'', ''2016-01-07'', ''2016-01-08'',
+
+  ''2016-01-09'', ''2016-01-10'',
+
+  ...
+
+  ''2016-12-22'', ''2016-12-23'', ''2016-12-24'', ''2016-12-25'',
+
+  ''2016-12-26'', ''2016-12-27'', ''2016-12-28'', ''2016-12-29'',
+
+  ''2016-12-30'', ''2016-12-31''],
+
+  dtype=''datetime64[ns]'', length=366, freq="D")
+
+  ```
+
+
+  频率参数（**freq=‘D’**）表示设置了以天（day）为间隔，但我们可以修改它：
+
+
+
+
+  ```
+
+  # 例如，插入十天
+
+  >>> pd.date_range(start = "2016  01 01", end = "2016 12 31", freq = "10D")
+
+  DatetimeIndex([''2016-01-01'', ''2016-01-11'', ''2016-01-21'', ''2016-01-31'',
+
+  ''2016-02-10'', ''2016-02-20'', ''2016-03-01'', ''2016-03-11'',
+
+  ''2016-03-21'', ''2016-03-31'', ''2016-04-10'', ''2016-04-20'',
+
+  ''2016-04-30'', ''2016-05-10'', ''2016-05-20'', ''2016-05-30'',
+
+  ''2016-06-09'', ''2016-06-19'', ''2016-06-29'', ''2016-07-09'',
+
+  ''2016-07-19'', ''2016-07-29'', ''2016-08-08'', ''2016-08-18'',
+
+  ''2016-08-28'', ''2016-09-07'', ''2016-09-17'', ''2016-09-27'',
+
+  ''2016-10-07'', ''2016-10-17'', ''2016-10-27'', ''2016-11-06'',
+
+  ''2016-11-16'', ''2016-11-26'', ''2016-12-06'', ''2016-12-16'',
+
+  ''2016-12-26''],
+
+  dtype=''datetime64[ns]'', freq="10D")
+
+  # 或者 12 小时
+
+  >>> pd.date_range(start = "2016  01 01", end = "2016 12 31", freq = "12H")
+
+  DatetimeIndex(''2016-01-01 00:00:00'', ''2016-01-01 12:00:00'',
+
+  ''2016-01-02 00:00:00'', ''2016-01-02 12:00:00'',
+
+  ''2016-01-03 00:00:00'', ''2016-01-03 12:00:00'',
+
+  ''2016-01-04 00:00:00'', ''2016-01-04 12:00:00'',
+
+  ''2016-01-05 00:00:00'', ''2016-01-05 12:00:00'',
+
+  ...
+
+  # 频率为每周一
+
+  >>> pd.date_range(start = "2016  01 01", end = "2016 12 31", freq = "W-Mon")
+
+  DatetimeIndex([''2016-01-04'', ''2016-01-11'', ''2016-01-18'', ''2016-01-25'',
+
+  ''2016-02-01'', ''2016-02-08'', ''2016-02-15'', ''2016-02-22'',
+
+  ''2016-02-29'', ''2016-03-07'', ''2016-03-14'', ''2016-03-21'',
+
+  ''2016-03-28'', ''2016-04-04'', ''2016-04-11'', ''2016-04-18'',
+
+  ...
+
+  # 频率为每周三
+
+  >>> pd.date_range(start = "2016  01 01", end = "2016 12 31", freq = "W-Wed")
+
+  DatetimeIndex([''2016-01-06'', ''2016-01-13'', ''2016-01-20'', ''2016-01-27'',
+
+  ''2016-02-03'', ''2016-02-10'', ''2016-02-17'', ''2016-02-24'',
+
+  ''2016-03-02'', ''2016-03-09'', ''2016-03-16'', ''2016-03-23'',
+
+  ''2016-03-30'', ''2016-04-06'', ''2016-04-13'', ''2016-04-20'',
+
+  ...
+
+  ```
+
+
+  还有其他方法可以处理日期。以下是创建日期范围的另一种方式：
+
+
+  ```
+
+  >>> range1 = pd.date_range(start = "2016  01 01", end = "2016 03 31", freq = "D")
+
+  # 现在我们使用 .weekday_name 方法
+
+  >>> range1.weekday_name
+
+  array([''Friday'', ''Saturday'', ''Sunday'', ''Monday'', ''Tuesday'', ''Wednesday'',
+
+  ''Thursday'', ''Friday'', ''Saturday'', ''Sunday'', ''Monday'', ''Tuesday'',
+
+  ''Wednesday'', ''Thursday'', ''Friday'', ''Saturday'', ''Sunday'', ''Monday'',
+
+  ''Tuesday'', ''Wednesday'', ''Thursday'', ''Friday'', ''Saturday'', ''Sunday'',
+
+  ''Monday'', ''Tuesday'', ''Wednesday'', ''Thursday'', ''Friday'', ''Saturday'',
+
+  ...
+
+  ```
+
+
+  使用 Jupyter，我们可以通过 Tab 键查看管理日期的方法（图 [11-1）。
+
+
+  ![../images/469457_1_En_11_Chapter/469457_1_En_11_Fig1_HTML.jpg](img/469457_1_En_11_Fig1_HTML.jpg)
+
+
+  图 11-1
+
+
+  使用 Tab 键管理日期
+
+
+  ## 数据源
+
+
+  为了开始数据挖掘和机器学习，我们将使用大量数据集来理解算法的工作原理。许多数据挖掘数据集可以从加州大学尔湾分校（UCI）的在线商店下载。UCI 网站（ [`http://archive.ics.uci.edu/ml/index.php`](http://archive.ics.uci.edu/ml/index.php)
+  ）（图 11-2）包含了所有最常用的数据科学数据集，例如鸢尾花、波士顿、葡萄酒、短信垃圾邮件收集等，以及更多数据集（ [`http://archive.ics.uci.edu/ml/datasets.html`](http://archive.ics.uci.edu/ml/datasets.html)
+  ）。
+
+
+  ![../images/469457_1_En_11_Chapter/469457_1_En_11_Fig2_HTML.jpg](img/469457_1_En_11_Fig2_HTML.jpg)
+
+
+  图 11-2
+
+
+  UCI 网站上的部分数据集
+
+
+  最近，甚至 Kaggle 也开始鼓励数据科学家发布数据集（ [`https://www.kaggle.com/datasets`](https://www.kaggle.com/datasets)
+  ），以促进数据科学家之间的交流（图 11-3）。
+
+
+  ![../images/469457_1_En_11_Chapter/469457_1_En_11_Fig3_HTML.jpg](img/469457_1_En_11_Fig3_HTML.jpg)
+
+
+  图 11-3
+
+
+  Kaggle 网站上的部分数据集
+
+
+  正如我们所见，Scikit-learn 包也包含可以导入的数据集。有关 scikit-learn 及其特色数据集的更多信息，您可以浏览包文档，网址为 [`http://scikit-learn.org/stable/datasets/`](http://scikit-learn.org/stable/datasets/)
+  。
+
+
+  一个名为 *datareader* 的 pandas 包模块，提供了从某些在线来源提取数据的工具（ [`https://pandas-datareader.readthedocs.io/en/latest/remote_data.html#google-finance`](https://pandas-datareader.readthedocs.io/en/latest/remote_data.html#google-finance)
+  ），特别是那些处理股票交易所存储库的来源，例如雅虎财经和谷歌财经。
+
+
+  ### 索引
+
+
+  ### A
+
+
+  Anaconda 主屏幕 .append() 方法 面积图 赋值运算符 .astype() 方法
+
+
+  ### B
+
+
+  条形图 位运算符 boxplot() 函数 箱线图
+
+
+  ### C
+
+
+  聚类 调色板 比较运算符 .concatenate() 函数 .concat() 方法 条件指令 elif 扩展函数 if + else 条件 Continuum.io
+  .csv 格式 自定义面积图
+
+
+  ### D
+
+
+  DataFrame() 函数 DataFrame，Pandas 聚合 布尔运算符 创建 交叉表创建 .info() 方法 数据重排 数据切片 可视化 数据操作，Pandas
+  数据挖掘库 因变量 .describe() 方法 df.to_excel() dir() 函数 分而治之模型 .drop_duplicates() .drop()
+  方法 .dstack() 函数 .dtype() 函数
+
+
+  ### E
+
+
+  错误和异常 已处理异常 管理异常 语法错误 TypeError 未处理异常
+
+
+  ### F
+
+
+  Feedparser 格式 .fillna 方法 filter() 函数 傅里叶变换 函数 创建 元素 信息 预定义内置函数 保存模块和文件 类型
+
+
+  ### G
+
+
+  Github .groupby()
+
+
+  ### H
+
+
+  .head() 方法 直方图数据集 .hsplit() 函数
+
+
+  ### I
+
+
+  导入文件 模式，打开文件 结构 网页 插补方法 .index() 方法 .info() 方法 .insert() 方法 集成开发环境（IDE） .isnull()
+
+
+  ### J
+
+
+  JSON Jupyter 打开脚本工具
+
+
+  ### K
+
+
+  KMeans
+
+
+  ### L
+
+
+  Lambda 函数 列表推导式 load() 函数 loadtxt() 函数 .loc 方法 循环 continue 和 break for range() 函数
+  while lxml 格式
+
+
+  ### M
+
+
+  机器学习 Apple 和 Microsoft 交叉验证 决策树 领域 Google 导入数据集 KMeans k-近邻算法 预测性数据挖掘 预处理 回归 研究
+  支持向量机 训练和测试数据集 UCI 鸢尾花数据集 网站 特性 用途 map() 函数 数学运算符 Matplotlib 自定义绘图元素 颜色 网格和图例 图例
+  形状库 线条样式 标记 绘图和图表样式 绘制列表 重新定位图例 圆角对象 .savefig 方法 散点图 subplot() 函数 标题和坐标轴标签 melt()
+  函数 成员运算符 merge() 函数 方法 .append 方法 help() 函数 在 Jupyter 上 print() 函数 使用 Spyder 模块
+  类别 元素 import 指令 安装包 math 方法
+
+
+  ### N
+
+
+  ndarray 嵌套 .notnull() np.random.randn() 函数 np.random.seed() 函数 Numarray NumPy .concatenate()
+  函数 数据存储，选项 .dstack() 函数 .dtype() 函数 .hsplit() 函数 多维数组 对象创建 包 随机数和种子 DataFrame ()
+  函数 数据集 生成整数 load() 函数 np.random.randn() 函数 泊松分布 random.rand() 函数 行和列 三维数组 均匀分布 .ravel()
+  方法 resize() 函数 .vsplit() 函数 NumPy arrange() 函数 NumPy 库
+
+
+  ### O
+
+
+  面向对象编程 类 继承 对象 ones() 函数 open() 函数 运算符 赋值 位运算 比较 数学 成员 优先级规则
+
+
+
+
+  ### P, Q
+
+
+  Pandas 数据集合并函数 导入与导出数据 缺失值 序列统计 `pd.read_csv()` 函数 饼图 自定义颜色 分离十六进制颜色代码 标签 `pivot_table()`
+  函数 PyMongo 格式 `.py` 脚本 Python 代码注释 代码运行命令 容器对象 数据类型 字典 文件格式 文件夹与文件 格式转换 未来 主页 IDE
+  Jupyter Spyder 不可变元组与字符串 缩进 安装 列表 数学运算 数字 对象 属性 规则 运算符（*参见* 运算符） 引号 保留术语 集合 字符串
+  终端 网站 工作目录 Python2 *与* Python3 Python3 Python shell 符号 Python 专用 IDE `python test.py`
+  脚本
+
+
+  ### R
+
+
+  随机数据框 `range()` 函数 `.ravel()` 方法 正则表达式（regex） 电子邮件地址 `.findall()` `re` 模块 `re.search()`
+  符号 `.replace` 方法 `resize()` 函数 响应变量
+
+
+  ### S
+
+
+  `.sample()` 函数 `.savefig` 方法 散点图 Scikit-learn 包 数据来源 机器学习（*参见* 机器学习） 管理日期 SciPy
+  `.split()` 函数 Spyder SQLite3 格式 堆叠条形图 `stack()` 函数 统计方法 `.sum()` 支持向量机
+
+
+  ### T
+
+
+  `.tail()` 方法 文本编辑器 `.T()` 函数 元组序列 `type()` 函数
+
+
+  ### U
+
+
+  `unstack()` 函数 用户输入数字 `raw_input()` 函数
+
+
+  ### V, W
+
+
+  `.value_counts()` 方法 `.vsplit()` 函数
+
+
+  ### X, Y
+
+
+  xlrd 格式
+
+
+  ### Z
+
+
+  `zeros()` 函数
+
+  '

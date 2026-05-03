@@ -1,0 +1,6306 @@
+- '
+
+
+  ![](img/978-1-4842-8978-5_CoverFigure.jpg)
+
+
+  ISBN 978-1-4842-8977-8 e-ISBN 978-1-4842-8978-5 [`doi.org/10.1007/978-1-4842-8978-5`](https://doi.org/10.1007/978-1-4842-8978-5)
+  © Akshay R Kulkarni, Adarsha Shivananda, Anoosh Kulkarni, V Adithya Krishnan 2023
+  Apress Standard 本出版物中使用的通用描述性名称、注册商标名称、商标、服务标记等，即使未作特别声明，也不意味着这些名称不受相关保护性法律和法规的约束，因此可供一般使用。出版商、作者和编辑可以假定，本书中的建议和信息在出版之日是真实和准确的。出版商、作者或编辑均不对本书所含材料或可能存在的任何错误或遗漏提供明示或暗示的担保。出版商对已出版地图中的管辖权主张和机构归属保持中立。
+
+
+  本 Apress 印记由注册公司 APress Media, LLC（Springer Nature 的一部分）出版。
+
+
+  注册公司地址为：1 New York Plaza, New York, NY 10004, U.S.A.
+
+
+  *献给我们家人*
+
+
+  前言
+
+
+  在阅读本书之前，您应具备统计学、机器学习和 Python 编程的基础知识。如果您想学习如何构建从基础到高级的时间序列预测模型，那么本书将通过提供 Python
+  实现方法为您提供帮助。在本书结束时，您将掌握时间序列中所有不同类型建模方法的实用知识。
+
+
+  渴望了解未知并预测未来，长期以来一直是人类文化的一部分。这种渴望驱使人类走向预测的学科。时间序列预测基于数据先前（过去）观察到的模式来预测未知的未来数据点。它不仅可能依赖于先前的目标点和时间（单变量），还可能依赖于其他独立变量（多变量）。本书是一本包含各种处理时间序列预测方法的食谱书。
+
+
+  刚开始一个新的时间序列项目但缺乏该领域经验的数据科学家，可以轻松利用本书中各种与领域无关的方法，来启动并简化他们的开发过程。
+
+
+  本书分为五个章节。第 1 章涵盖了读取和处理时间序列数据以及基本探索性数据分析（EDA）的方法。接下来的三章涵盖了单变量和多变量数据集的各种预测建模技术。第 2
+  章包含多种统计单变量预测方法，更高级的技术在第 3 章中继续介绍。第 3 章还涵盖了统计多变量方法。第 4 章介绍了使用机器学习（基于回归）进行时间序列预测。第
+  5 章是关于使用深度学习的高级时间序列建模方法。
+
+
+  每章中所有实现的代码以及所需的数据集均可从 github.com/apress/time-series-algorithm-recipes 下载。
+
+
+  关于作者 关于技术审校者
+
+
+  '
+- '# 1. 时间序列入门
+
+
+  *时间序列* 是一系列依赖于时间的数据点。例如，电子商务网站上某产品的需求（或销售额）可以在时间序列中按时间进行度量，其中需求（或销售额）按时间排序。然后可以分析这些数据以发现关键的时间洞察并预测未来值，这有助于企业进行规划并增加收入。
+
+
+  时间序列数据用于每个需要实时分析的领域。分析这些数据并预测其未来值已成为这些领域的关键。
+
+
+  时间序列分析/预测以前被认为是一个纯粹的统计问题。现在，它被用于许多基于机器学习和深度学习的解决方案中，这些解决方案的表现同样出色，甚至优于大多数其他解决方案。本书使用各种方法和途径来分析和预测时间序列。
+
+
+  本章使用方法来读取/写入时间序列数据，并执行简单的预处理和探索性数据分析（EDA）。
+
+
+  以下是本章探讨的方法列表。
+
+
+  *   方法 1-1. 读取时间序列对象
+
+
+  *   方法 1-2. 保存时间序列对象
+
+
+  *   方法 1-3. 探索时间序列数据类型
+
+
+  *   方法 1-4. 时间序列组件
+
+
+  *   方法 1-5. 时间序列分解
+
+
+  *   方法 1-6. 季节性可视化
+
+
+  ## 方法 1-1A. 读取时间序列对象（航空旅客数据）
+
+
+  ### 问题
+
+
+  您想要读取时间序列数据并将其加载到数据框中。
+
+
+  ### 解决方案
+
+
+  Pandas 将数据加载到数据框结构中。
+
+
+  ### 工作原理
+
+
+  以下步骤用于读取数据。
+
+
+  #### 步骤 1A-1. 导入所需的库。
+
+
+  ```
+
+  import pandas as pd
+
+  import matplotlib.pyplot as plt
+
+  ```
+
+
+  #### 步骤 1A-2. 为日期时间列编写解析函数。
+
+
+  在读取数据之前，我们先编写一个解析函数。
+
+
+  ```
+
+  date_parser_fn = lambda dates: pd.datetime.strptime(dates, ''%Y-%m'')
+
+  ```
+
+
+  #### 步骤 1A-3. 读取数据。
+
+
+  读取航空旅客数据。
+
+
+  ```
+
+  data = pd.read_csv(''./data/AirPassenger.csv'', parse_dates = [''Month''], index_col
+  = ''Month'', date_parser = date_parser_fn)
+
+  plt.plot(data)
+
+  plt.show()
+
+  ```
+
+
+  图 1-1 显示了时间序列图输出。
+
+
+  ![](img/540422_1_En_1_Fig1_HTML.jpg)
+
+
+  图 1-1
+
+
+  输出
+
+
+  以下是 `read_csv` 的一些重要输入参数。
+
+
+  *   `parse_dates` 指定数据集中需要解析的日期时间列。
+
+
+  *   `index_col` 指定作为 pandas 数据框唯一标识符的列。在大多数时间序列用例中，它是日期时间列。
+
+
+  *   `date_parser` 是一个用于解析日期的函数（即，将输入字符串转换为日期时间格式/类型）。pandas 以 `YYYY-MM-DD HH:MM:SS`
+  格式读取数据。使用解析器函数时，请转换为这种格式。
+
+
+  ## 方法 1-1B. 读取时间序列对象（印度 GDP 数据）
+
+
+  ### 问题
+
+
+  您想要将加载的时间序列数据框保存到文件中。
+
+
+  ### 解决方案
+
+
+  将数据框保存为逗号分隔（CSV）文件。
+
+
+  ### 工作原理
+
+
+  以下步骤用于读取数据。
+
+
+  #### 步骤 1B-1. 导入所需的库。
+
+
+  ```
+
+  import pandas as pd
+
+  import matplotlib.pyplot as plt
+
+  import pickle
+
+  ```
+
+
+  #### 步骤 1B-2. 读取印度的 GDP 时间序列数据。
+
+
+  ```
+
+  indian_gdp_data = pd.read_csv(''./data/GDPIndia.csv'', header=0)
+
+  date_range = pd.date_range(start=''1/1/1960'', end=''31/12/2017'', freq=''A'')
+
+  indian_gdp_data [''TimeIndex''] = pd.DataFrame(date_range, columns=[''Year''])
+
+  indian_gdp_data.head(5).T
+
+  ```
+
+
+  #### 步骤 1B-3. 绘制时间序列图。
+
+
+  ```
+
+  plt.plot(indian_gdp_data.TimeIndex, indian_gdp_data.GDPpercapita)
+
+  plt.legend(loc=''best'')
+
+  plt.show()
+
+  ```
+
+
+  图 1-2 显示了输出的时间序列。
+
+
+  ![](img/540422_1_En_1_Fig2_HTML.jpg)
+
+
+  图 1-2
+
+
+  输出
+
+
+  #### 步骤 1B-4. 存储并检索为 pickle 文件。
+
+
+  ```
+
+  ### 存储为 pickle 对象
+
+  import pickle
+
+  with open(''gdp_india.obj'', ''wb'') as fp:
+
+  pickle.dump(IndiaGDP, fp)
+
+  ### 检索 pickle 对象
+
+  with open(''gdp_india.obj'', ''rb'') as fp:
+
+  indian_gdp_data1 = pickle.load(fp)
+
+  indian_gdp_data1.head(5).T
+
+  ```
+
+
+  图 1-3 显示了检索到的转置后的时间序列对象。
+
+
+  ![](img/540422_1_En_1_Fig3_HTML.jpg)
+
+
+  图 1-3
+
+
+  输出
+
+
+  ## 方法 1-2. 保存时间序列对象
+
+
+  ### 问题
+
+
+  您想要将加载的时间序列数据框保存到文件中。
+
+
+  ### 解决方案
+
+
+  将数据框保存为 CSV 文件。
+
+
+
+
+  ### 工作原理
+
+
+  以下步骤用于存储数据。
+
+
+  #### 步骤 2-1\. 保存先前加载的时间序列对象。
+
+
+  ```
+
+  ### 将 TS 对象保存为 CSV 文件
+
+  data.to_csv(''ts_data.csv'', index = True, sep = '','')
+
+  ### 检查存储的对象
+
+  data1 = data.from_csv(''ts_data.csv'', header = 0)
+
+  ### 检查
+
+  print(data1.head(2).T)
+
+  ```
+
+
+  输出结果如下。
+
+
+  ```
+
+  1981-01-01
+
+  1981-01-02    17.9
+
+  1981-01-03    18.8
+
+  Name: 20.7, dtype: float64
+
+  ```
+
+
+  ## 配方 1-3A. 探索时间序列数据类型：单变量
+
+
+  ### 问题
+
+
+  您希望加载并探索单变量时间序列数据。
+
+
+  ### 解决方案
+
+
+  *单变量时间序列*是指仅包含一个随时间变化变量的数据。
+
+
+  让我们来看一个示例数据集，该数据集记录了 1981 年至 1990 年南半球每月的最低气温。其中，气温是随时间变化的目标变量。
+
+
+  ### 工作原理
+
+
+  以下步骤用于读取并绘制单变量数据。
+
+
+  #### 步骤 3A-1\. 导入所需的库。
+
+
+  ```
+
+  import pandas as pd
+
+  import matplotlib.pyplot as plt
+
+  ```
+
+
+  #### 步骤 3A-2\. 读取时间序列数据。
+
+
+  ```
+
+  data = pd.read_csv(''./data/daily-minimum-temperatures.csv'', header = 0, index_col
+  = 0, parse_dates = True, squeeze = True)
+
+  print(data.head())
+
+  ```
+
+
+  输出结果如下。
+
+
+  ```
+
+  Date
+
+  1981-01-01    20.7
+
+  1981-01-02    17.9
+
+  1981-01-03    18.8
+
+  1981-01-04    14.6
+
+  1981-01-05    15.8
+
+  Name: Temp, dtype: float64
+
+  ```
+
+
+  #### 步骤 3A-3\. 绘制时间序列图。
+
+
+  现在，让我们绘制时间序列数据以检测模式。
+
+
+  ```
+
+  data.plot()
+
+  plt.ylabel(''最低气温'')
+
+  plt.title(''1981 年至 1990 年南半球最低气温'')
+
+  plt.show()
+
+  ```
+
+
+  图 1-4 显示了输出的时间序列图。
+
+
+  ![](img/540422_1_En_1_Fig4_HTML.jpg)
+
+
+  图 1-4
+
+
+  时间序列图
+
+
+  这被称为*单变量时间序列分析*，因为只使用了一个变量，即气温（过去 19 年的温度）。
+
+
+  ## 配方 1-3B. 探索时间序列数据类型：多变量
+
+
+  ### 问题
+
+
+  您希望加载并探索多变量时间序列数据。
+
+
+  ### 解决方案
+
+
+  *多变量时间序列*是一种时间序列数据类型，其目标变量依赖更多的特征，这些特征也随时间变化；也就是说，目标变量不仅依赖于其过去的值。这种关系用于预测目标值。
+
+
+  让我们加载并探索一个北京污染数据集，该数据集是多变量的。
+
+
+  ### 工作原理
+
+
+  以下步骤用于读取并绘制多变量数据。
+
+
+  #### 步骤 3B-1\. 导入所需的库。
+
+
+  ```
+
+  import pandas as pd
+
+  from datetime import datetime
+
+  import matplotlib.pyplot as plt
+
+  ```
+
+
+  #### 步骤 3B-2\. 编写解析函数。
+
+
+  在加载原始数据集并将日期时间信息解析为 pandas 数据框索引之前，我们先编写一个解析函数。
+
+
+  ```
+
+  def parse(x):
+
+  return datetime.strptime(x, ''%Y %m %d %H'')
+
+  ```
+
+
+  #### 步骤 3B-3\. 加载数据集。
+
+
+  ```
+
+  data1 = pd.read_csv(''./data/raw.csv'',  parse_dates = [[''year'', ''month'', ''day'',
+  ''hour'']],
+
+  index_col=0, date_parser=parse)
+
+  ```
+
+
+  #### 步骤 3B-4\. 进行基本预处理。
+
+
+  删除“No”列。
+
+
+  ```
+
+  data1.drop(''No'', axis=1, inplace=True)
+
+  ```
+
+
+  手动指定每一列的名称。
+
+
+  ```
+
+  data1.columns = [''污染'', ''露点'', ''气温'', ''气压'', ''风向'', ''风速'', ''降雪'', ''降雨'']
+
+  data1.index.name = ''日期''
+
+  ```
+
+
+  将所有缺失值标记为 0。
+
+
+  ```
+
+  data1[''污染''].fillna(0, inplace=True)
+
+  ```
+
+
+  删除前 24 小时的数据。
+
+
+  ```
+
+  data1 = data1[24:]
+
+  ```
+
+
+  汇总前五行数据。
+
+
+  ```
+
+  print(data1.head(5))
+
+  ```
+
+
+  输出结果如下。
+
+
+  ```
+
+  污染  露点  气温   气压 风向  风速  降雪  降雨
+
+  日期
+
+  2010-01-02 00:00:00      129.0  -16  -4.0  1020.0      SE     1.79     0     0
+
+  2010-01-02 01:00:00      148.0  -15  -4.0  1020.0      SE     2.68     0     0
+
+  2010-01-02 02:00:00      159.0  -11  -5.0  1021.0      SE     3.57     0     0
+
+  2010-01-02 03:00:00      181.0   -7  -5.0  1022.0      SE     5.36     1     0
+
+  2010-01-02 04:00:00      138.0   -7  -5.0  1022.0      SE     6.25     2     0
+
+  ```
+
+
+  这些信息来自一个关于北京污染和天气状况的数据集。记录的时间粒度为每小时一次，持续测量了五年。数据包括日期时间列、污染指标（即 PM2.5 浓度）以及一些关键的天气信息，包括气温、气压和风速。
+
+
+  #### 步骤 3B-5\. 绘制每个序列的图表。
+
+
+  现在，让我们将每个序列绘制为单独的子图，但风向除外，因为它是分类变量。
+
+
+  ```
+
+  vals = data1.values
+
+  # 指定要绘制的列
+
+  group_list = [0, 1, 2, 3, 5, 6, 7]
+
+  i = 1
+
+  # 绘制每一列
+
+  plt.figure()
+
+  for group in group_list:
+
+  plt.subplot(len(group_list), 1, i)
+
+  plt.plot(vals[:, group])
+
+  plt.title(data1.columns[group], y=0.5, loc=''right'')
+
+  i += 1
+
+  plt.show()
+
+  ```
+
+
+  图 1-5 显示了所有变量随时间变化的图表。
+
+
+  ![](img/540422_1_En_1_Fig5_HTML.jpg)
+
+
+  图 1-5
+
+
+  所有变量随时间变化的图表
+
+
+  ## 配方 1-4A. 时间序列成分：趋势
+
+
+  ### 问题
+
+
+  您希望从趋势开始，找出时间序列的成分。
+
+
+  ### 解决方案
+
+
+  *趋势*是指数据在特定方向上的整体运动，即数值在一段时间内上升（增加）或下降（减少）。
+
+
+  让我们使用一个洗发水销售数据集，该数据集包含三年内每月的销售数量。
+
+
+  ### 工作原理
+
+
+  以下步骤用于读取并绘制数据。
+
+
+  #### 步骤 4A-1\. 导入所需的库。
+
+
+  ```
+
+  import pandas as pd
+
+  import matplotlib.pyplot as plt
+
+  ```
+
+
+  #### 步骤 4A-2\. 编写解析函数。
+
+
+  ```
+
+  def parsing_fn(x):
+
+  return datetime.strptime(''190''+x, ''%Y-%m'')
+
+  ```
+
+
+  #### 步骤 4A-3\. 加载数据集。
+
+
+  ```
+
+  data = pd.read_csv(''./data/shampoo-sales.csv'', header=0, parse_dates=[0], index_col=0,
+  squeeze=True, date_parser= parsing_fn)
+
+  ```
+
+
+  #### 步骤 4A-4\. 绘制时间序列图。
+
+
+  ```
+
+  data.plot()
+
+  plt.show()
+
+  ```
+
+
+  图 1-6 显示了时间序列图。
+
+
+  ![](img/540422_1_En_1_Fig6_HTML.jpg)
+
+
+  图 1-6
+
+
+  输出结果
+
+
+  如图 1-6 所示，该数据呈现上升趋势。输出的时间序列图显示，平均而言，数值随时间增加。
+
+
+  ## 配方 1-4B. 时间序列成分：季节性
+
+
+  ### 问题
+
+
+  您希望基于季节性找出时间序列数据的成分。
+
+
+  ### 解决方案
+
+
+  *季节性*是指时间序列数据中特定模式或变化的重复出现。
+
+
+  让我们使用一个 1981 年至 1990 年澳大利亚墨尔本每日最低气温数据集。重点在于季节性。
+
+
+
+
+  ### 工作原理
+
+
+  以下步骤将读取并绘制数据。
+
+
+  #### 步骤 4B-1\. 导入所需的库。
+
+
+  ```
+
+  import pandas as pd
+
+  import matplotlib.pyplot as plt
+
+  ```
+
+
+  #### 步骤 4B-2\. 读取数据。
+
+
+  ```
+
+  data = pd.read_csv(''./data/daily-minimum-temperatures.csv'', header = 0, index_col
+  = 0, parse_dates = True, squeeze = True)
+
+  ```
+
+
+  #### 步骤 4B-3\. 绘制时间序列图。
+
+
+  ```
+
+  data.plot()
+
+  plt.ylabel(''Minimum Temp'')
+
+  plt.title(''Min temp in Southern Hemisphere from 1981 to 1990'')
+
+  plt.show()
+
+  ```
+
+
+  图 1-7 展示了该时间序列图。
+
+
+  ![](img/540422_1_En_1_Fig7_HTML.jpg)
+
+
+  **图 1-7**
+
+
+  输出结果
+
+
+  图 1-7 显示该数据具有强烈的季节性成分（即数据随时间呈现重复模式）。
+
+
+  #### 步骤 4B-4\. 按月绘制箱线图。
+
+
+  让我们通过箱线图来检查 1990 年的月度变化。
+
+
+  ```
+
+  month_df = DataFrame()
+
+  one_year_ser = data[''1990'']
+
+  grouped_df = one_year_ser.groupby(Grouper(freq=''M''))
+
+  month_df = pd.concat([pd.DataFrame(x[1].values) for x in grouped_df], axis=1)
+
+  month_df = pd.DataFrame(month_df)
+
+  month_df.columns = range(1,13)
+
+  month_df.boxplot()
+
+  plt.show()
+
+  ```
+
+
+  图 1-8 展示了按月输出的箱线图。
+
+
+  ![](img/540422_1_En_1_Fig8_HTML.jpg)
+
+
+  **图 1-8**
+
+
+  月度箱线图输出
+
+
+  箱线图（图 1-8）展示了每个月最低温度的分布情况。每年似乎都有一个季节性成分，呈现出从夏季到冬季的波动。这表明存在月度季节性。
+
+
+  #### 步骤 4B-5\. 按年绘制箱线图。
+
+
+  让我们按年份分组，观察不同年份间的分布变化。这样，你可以检查每个时间聚合层级上的季节性。
+
+
+  ```
+
+  grouped_ser = data.groupby(Grouper(freq=''A''))
+
+  year_df  = pd.DataFrame()
+
+  for name, group in grouped_ser:
+
+  year_df[name.year] = group.values
+
+  year_df.boxplot()
+
+  plt.show()
+
+  ```
+
+
+  图 1-9 展示了按年输出的箱线图。
+
+
+  ![](img/540422_1_En_1_Fig9_HTML.jpg)
+
+
+  **图 1-9**
+
+
+  年度箱线图
+
+
+  图 1-9 显示，在箱线图输出中，年度季节性变化或趋势并不明显。
+
+
+  ## 配方 1-4C. 时间序列成分：季节性（续）
+
+
+  ### 问题
+
+
+  你想通过另一个季节性示例来寻找时间序列成分。
+
+
+  ### 解决方案
+
+
+  让我们探索拖拉机销售数据以理解季节性。
+
+
+  ### 工作原理
+
+
+  以下步骤将读取并绘制数据。
+
+
+  #### 步骤 4C-1\. 导入所需的库。
+
+
+  ```
+
+  import pandas as pd
+
+  import matplotlib.pyplot as plt
+
+  ```
+
+
+  #### 步骤 4C-2\. 读取拖拉机销售数据。
+
+
+  ```
+
+  tractor_sales_data = pd.read_csv("./data/tractor_salesSales.csv")
+
+  tractor_sales_data.head(5)
+
+  ```
+
+
+  #### 步骤 4C-3\. 设置用作索引的日期时间序列。
+
+
+  ```
+
+  date_ser = pd.date_range(start=''2003-01-01'', freq=''MS'', periods=len(Tractor))
+
+  ```
+
+
+  #### 步骤 4C-4\. 格式化数据。
+
+
+  ```
+
+  tractor_sales_data.rename(columns={''Number of Tractor Sold'':''Tractor-Sales''},
+  inplace=True)
+
+  tractor_sales_data.set_index(dates, inplace=True)
+
+  tractor_sales_data = tractor_sales_data[[''Tractor-Sales'']]
+
+  tractor_sales_data.head(5)
+
+  ```
+
+
+  #### 步骤 4C-5\. 绘制时间序列图。
+
+
+  ```
+
+  tractor_sales_data.plot()
+
+  plt.ylabel(''Tractor Sales'')
+
+  plt.title("Tractor Sales from 2003 to 2014")
+
+  plt.show()
+
+  ```
+
+
+  图 1-10 展示了该时间序列图的输出。
+
+
+  ![](img/540422_1_En_1_Fig10_HTML.jpg)
+
+
+  **图 1-10**
+
+
+  输出结果
+
+
+  从时间序列图（图 1-10）可以看出，该数据具有强烈的季节性，并伴随上升趋势。
+
+
+  #### 步骤 4C-6\. 按月绘制箱线图。
+
+
+  让我们按月检查箱线图，以更好地理解季节性。
+
+
+  ```
+
+  month_df = pd.DataFrame()
+
+  one_year_ser = tractor_sales_data[''2011'']
+
+  grouped_ser = one_year_ser.groupby(Grouper(freq=''M''))
+
+  month_df = pd.concat([pd.DataFrame(x[1].values) for x in grouped_ser], axis=1)
+
+  month_df = pd.DataFrame(month_df)
+
+  month_df.columns = range(1,13)
+
+  month_df.boxplot()
+
+  plt.show()
+
+  ```
+
+
+  图 1-11 展示了按月输出的箱线图。
+
+
+  ![](img/540422_1_En_1_Fig11_HTML.jpg)
+
+
+  **图 1-11**
+
+
+  月度箱线图
+
+
+  箱线图显示每年都有一个季节性成分，其中从五月到八月存在波动。
+
+
+  ## 配方 1-5A. 时间序列分解：加法模型
+
+
+  ### 问题
+
+
+  你想学习如何使用加法模型分解时间序列。
+
+
+  ### 解决方案
+
+
+  *   加法模型表明各成分是相加的。
+
+
+  *   它是线性的，随时间的变化量是恒定的。
+
+
+  *   季节性应具有相同的频率和振幅。频率是周期之间的宽度，振幅是每个周期的高度。
+
+
+  statsmodels 库提供了经典分解方法的实现，但用户必须指定模型是加法还是乘法。该函数名为 `seasonal_decompose`。
+
+
+  ### 工作原理
+
+
+  以下步骤将加载并分解时间序列。
+
+
+  #### 步骤 5A-1\. 加载所需的库。
+
+
+  ```
+
+  ### Load required libraries
+
+  import pandas as pd
+
+  import matplotlib.pyplot as plt
+
+  from statsmodels.tsa.seasonal import seasonal_decompose
+
+  import statsmodels.api as sm
+
+  ```
+
+
+  #### 步骤 5A-2\. 读取并处理零售营业额数据。
+
+
+  ```
+
+  turn_over_data = pd.read_csv(''./data/RetailTurnover.csv'')
+
+  date_range = pd.date_range(start=''1/7/1982'', end=''31/3/1992'', freq=''Q'')
+
+  turn_over_data[''TimeIndex''] = pd.DataFrame(date_range, columns=[''Quarter''])
+
+  ```
+
+
+  #### 步骤 5A-3\. 绘制时间序列图。
+
+
+  ```
+
+  plt.plot(turn_over_data.TimeIndex, turn_over_data.Turnover)
+
+  plt.legend(loc=''best'')
+
+  plt.show()
+
+  ```
+
+
+  图 1-12 展示了该时间序列图的输出。
+
+
+  ![](img/540422_1_En_1_Fig12_HTML.jpg)
+
+
+  **图 1-12**
+
+
+  时间序列图输出
+
+
+  图 1-12 显示趋势呈线性增长，并且存在恒定的线性季节性。
+
+
+  #### 步骤 5A-4\. 分解时间序列。
+
+
+  让我们将时间序列分解为趋势、季节性和残差。
+
+
+  ```
+
+  decomp_turn_over = sm.tsa.seasonal_decompose(turn_over_data.Turnover, model="additive",
+  freq=4)
+
+  decomp_turn_over.plot()
+
+  plt.show()
+
+  ```
+
+
+  图 1-13 展示了时间序列分解的输出。
+
+
+  ![](img/540422_1_En_1_Fig13_HTML.jpg)
+
+
+  **图 1-13**
+
+
+  时间序列分解输出
+
+
+  #### 步骤 5A-5\. 分离各成分。
+
+
+  你可以通过以下方式将趋势、季节性和残差作为单独的序列获取。
+
+
+  ```
+
+  trend = decomp_turn_over.trend
+
+  seasonal = decomp_turn_over.seasonal
+
+  residual = decomp_turn_over.resid
+
+  ```
+
+
+  ## 配方 1-5B. 时间序列分解：乘法模型
+
+
+  ### 问题
+
+
+  你想学习如何使用乘法模型分解时间序列。
+
+
+  ### 解决方案
+
+
+  *   乘法模型表明各成分是相乘的。
+
+
+  *   它是非线性的，例如二次或指数形式，这意味着变化量会随时间增加或减少。
+
+
+  *   季节性的频率和/或振幅呈增加或减少趋势。
+
+
+
+
+  ### 工作原理
+
+
+  以下步骤将加载并分解时间序列。
+
+
+  #### 步骤 5B-1：加载所需的库。
+
+
+  ```
+
+  ### 加载所需的库
+
+  import pandas as pd
+
+  import matplotlib.pyplot as plt
+
+  from statsmodels.tsa.seasonal import seasonal_decompose
+
+  import statsmodels.api as sm
+
+  ```
+
+
+  #### 步骤 5B-2：加载航空旅客数据。
+
+
+  ```
+
+  air_passengers_data = pd.read_csv(''./data/AirPax.csv'')
+
+  ```
+
+
+  #### 步骤 5B-3：处理数据。
+
+
+  ```
+
+  date_range = pd.date_range(start=''1/1/1949'', end=''31/12/1960'', freq=''M'')
+
+  air_passengers_data [''TimeIndex''] = pd.DataFrame(date_range, columns=[''Month''])
+
+  print(air_passengers_data.head())
+
+  ```
+
+
+  输出结果如下。
+
+
+  ```
+
+  Year Month  Pax  TimeIndex
+
+  0  1949   Jan  112 1949-01-31
+
+  1  1949   Feb  118 1949-02-28
+
+  2  1949   Mar  132 1949-03-31
+
+  3  1949   Apr  129 1949-04-30
+
+  4  1949   May  121 1949-05-31
+
+  ```
+
+
+  图 1-14 展示了时间序列输出图。
+
+
+  ![](img/540422_1_En_1_Fig14_HTML.jpg)
+
+
+  图 1-14
+
+
+  时间序列输出图
+
+
+  #### 步骤 5B-4：分解时间序列。
+
+
+  ```
+
+  decomp_air_passengers_data = sm.tsa.seasonal_decompose(air_passengers_data.Pax,
+  model="multiplicative", freq=12)
+
+  decomp_air_passengers_data.plot()
+
+  plt.show()
+
+  ```
+
+
+  图 1-15 展示了时间序列分解输出。
+
+
+  ![](img/540422_1_En_1_Fig15_HTML.jpg)
+
+
+  图 1-15
+
+
+  时间序列分解输出
+
+
+  #### 步骤 5B-5：获取季节性成分。
+
+
+  ```
+
+  Seasonal_comp = decomp_air_passengers_data.seasonal
+
+  Seasonal_comp.head(4)
+
+  ```
+
+
+  输出结果如下。
+
+
+  ```
+
+  0    0.910230
+
+  1    0.883625
+
+  2    1.007366
+
+  3    0.975906
+
+  Name: Pax, dtype: float64
+
+  ```
+
+
+  ## 配方 1-6：季节性可视化
+
+
+  ### 问题
+
+
+  您希望学习如何可视化季节性成分。
+
+
+  ### 解决方案
+
+
+  让我们看看几种用于可视化和检测季节性的额外方法。零售营业额数据展示了每个季度的季节性成分。
+
+
+  ### 工作原理
+
+
+  以下步骤将加载并可视化时间序列（即季节性成分）。
+
+
+  #### 步骤 6-1：导入所需的库。
+
+
+  ```
+
+  import pandas as pd
+
+  import matplotlib.pyplot as plt
+
+  ```
+
+
+  #### 步骤 6-2：加载数据。
+
+
+  ```
+
+  turn_over_data = pd.read_csv(''./data/RetailTurnover.csv'')
+
+  ```
+
+
+  #### 步骤 6-3：处理数据。
+
+
+  ```
+
+  date_range = pd.date_range(start=''1/7/1982'', end=''31/3/1992'', freq=''Q'')
+
+  turn_over_data[''TimeIndex''] = pd.DataFrame(date_range, columns=[''Quarter''])
+
+  ```
+
+
+  #### 步骤 6-4：数据透视。
+
+
+  现在让我们对表格进行数据透视，使得季度信息位于列中，年份信息位于行中，数值由营业额信息构成。
+
+
+  ```
+
+  quarterly_turn_over_data = pd.pivot_table(turn_over_data, values = "Turnover", columns
+  = "Quarter", index = "Year")
+
+  quarterly_turn_over_data
+
+  ```
+
+
+  图 1-16 展示了按季度划分的营业额输出。
+
+
+  ![](img/540422_1_En_1_Fig16_HTML.jpg)
+
+
+  图 1-16
+
+
+  季度营业额输出
+
+
+  #### 步骤 6-5：绘制折线图。
+
+
+  让我们为四个季度绘制折线图。
+
+
+  ```
+
+  quarterly_turn_over_data.plot()
+
+  plt.show()
+
+  ```
+
+
+  图 1-17 展示了季度级别的折线图。
+
+
+  ![](img/540422_1_En_1_Fig17_HTML.jpg)
+
+
+  图 1-17
+
+
+  季度营业额折线图
+
+
+  #### 步骤 6-6：绘制箱线图。
+
+
+  让我们也在季度级别绘制箱线图。
+
+
+  ```
+
+  quarterly_turn_over_data.boxplot()
+
+  plt.show()
+
+  ```
+
+
+  图 1-18 展示了按季度划分的箱线图输出。
+
+
+  ![](img/540422_1_En_1_Fig18_HTML.jpg)
+
+
+  图 1-18
+
+
+  季度级别箱线图
+
+
+  通过观察箱线图和折线图，您可以得出结论：第一季度的年营业额显著较高，而第二季度则相当低。
+
+
+  '
+- '# 2. 统计单变量建模
+
+
+  单变量时间序列数据分析是最常见的时间数据类型，其中单个数值观测值在相等的时间间隔内按顺序记录。在此分析中，仅考虑观测到的变量及其与时间的关系。
+
+
+  通过单变量建模来预测该单变量数据的未来值。在这种情况下，预测仅依赖于历史值。可以通过多种统计方法进行预测。本章将介绍几种重要的方法。
+
+
+  以下是执行单变量统计建模的配方。
+
+
+  *   配方 2-1：移动平均（MA）预测
+
+
+  *   配方 2-2：自回归（AR）模型
+
+
+  *   配方 2-3：自回归移动平均（ARMA）模型
+
+
+  *   配方 2-4：差分自回归移动平均（ARIMA）模型
+
+
+  *   配方 2-5：差分自回归移动平均（ARIMA）模型的网格搜索超参数调优
+
+
+  *   配方 2-6：季节性差分自回归移动平均（SARIMA）模型
+
+
+  *   配方 2-7：简单指数平滑（SES）模型
+
+
+  *   配方 2-8：霍尔特-温特斯（HW）模型
+
+
+  ## 配方 2-1：移动平均（MA）预测
+
+
+  ### 问题
+
+
+  您希望加载时间序列数据并使用*移动平均*进行预测。
+
+
+  ### 解决方案
+
+
+  移动平均是一种捕捉指标随时间平均变化的方法。对于特定的窗口长度（即一个较短的时间段/范围），您计算目标值的均值，然后将此窗口从数据起始到结束在整个时间段上移动。它通常用于平滑数据并消除任何随机波动。
+
+
+  让我们使用 pandas 的滚动均值函数来获取移动平均。
+
+
+
+
+  ### 工作原理
+
+
+  以下步骤将读取数据并使用移动平均法进行预测。
+
+
+  #### 步骤 1-1. 导入所需的库。
+
+
+  ```
+
+  from pandas import read_csv, Grouper, DataFrame, concat
+
+  import matplotlib.pyplot as plt
+
+  from datetime import datetime
+
+  ```
+
+
+  #### 步骤 1-2. 读取数据。
+
+
+  美国 GDP 数据是一个时间序列数据集，显示了 1929 年至 1991 年美国年度国内生产总值（GDP）数值（以美元计）。
+
+
+  以下代码读取美国 GDP 数据。
+
+
+  ```
+
+  us_gdp_data = pd.read_csv(''./data/GDPUS.csv'', header=0)
+
+  ```
+
+
+  #### 步骤 1-3. 预处理数据。
+
+
+  ```
+
+  date_rng = pd.date_range(start=''1/1/1929'', end=''31/12/1991'', freq=''A'')
+
+  print(date_rng)
+
+  us_gdp_data[''TimeIndex''] = pd.DataFrame(date_rng, columns=[''Year''])
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  DatetimeIndex([''1929-12-31'', ''1930-12-31'', ''1931-12-31'', ''1932-12-31'',
+
+  ''1933-12-31'', ''1934-12-31'', ''1935-12-31'', ''1936-12-31'',
+
+  ''1937-12-31'', ''1938-12-31'', ''1939-12-31'', ''1940-12-31'',
+
+  ''1941-12-31'', ''1942-12-31'', ''1943-12-31'', ''1944-12-31'',
+
+  ''1945-12-31'', ''1946-12-31'', ''1947-12-31'', ''1948-12-31'',
+
+  ''1949-12-31'', ''1950-12-31'', ''1951-12-31'', ''1952-12-31'',
+
+  ''1953-12-31'', ''1954-12-31'', ''1955-12-31'', ''1956-12-31'',
+
+  ''1957-12-31'', ''1958-12-31'', ''1959-12-31'', ''1960-12-31'',
+
+  ''1961-12-31'', ''1962-12-31'', ''1963-12-31'', ''1964-12-31'',
+
+  ''1965-12-31'', ''1966-12-31'', ''1967-12-31'', ''1968-12-31'',
+
+  ''1969-12-31'', ''1970-12-31'', ''1971-12-31'', ''1972-12-31'',
+
+  ''1973-12-31'', ''1974-12-31'', ''1975-12-31'', ''1976-12-31'',
+
+  ''1977-12-31'', ''1978-12-31'', ''1979-12-31'', ''1980-12-31'',
+
+  ''1981-12-31'', ''1982-12-31'', ''1983-12-31'', ''1984-12-31'',
+
+  ''1985-12-31'', ''1986-12-31'', ''1987-12-31'', ''1988-12-31'',
+
+  ''1989-12-31'', ''1990-12-31'', ''1991-12-31''],
+
+  dtype=''datetime64[ns]'', freq=''A-DEC'')
+
+  ```
+
+
+  #### 步骤 1-4. 绘制时间序列图。
+
+
+  ```
+
+  plt.plot(us_gdp_data.TimeIndex, us_gdp_data.GDP)
+
+  plt.legend(loc=''best'')
+
+  plt.show()
+
+  ```
+
+
+  图 2-1 显示了输出的时间序列图。
+
+
+  ![](img/540422_1_En_2_Fig1_HTML.jpg)
+
+
+  图 2-1
+
+
+  输出
+
+
+  #### 步骤 1-5. 使用滚动均值计算移动平均。
+
+
+  本例中使用的窗口大小为 5。
+
+
+  ```
+
+  mvg_avg_us_gdp = us_gdp_data.copy()
+
+  #计算滚动均值 - 窗口大小为 5
+
+  mvg_avg_us_gdp[''moving_avg_forecast''] = us_gdp_data[''GDP''].rolling(5).mean()
+
+  ```
+
+
+  #### 步骤 1-6. 绘制预测值与实际值对比图。
+
+
+  ```
+
+  plt.plot(us_gdp_data[''GDP''], label=''美国 GDP'')
+
+  plt.plot(mvg_avg_us_gdp[''moving_avg_forecast''], label=''美国 GDP MA(5)'')
+
+  plt.legend(loc=''best'')
+
+  plt.show()
+
+  ```
+
+
+  图 2-2 显示了移动平均（MA）预测值与实际值的对比。
+
+
+  ![](img/540422_1_En_2_Fig2_HTML.jpg)
+
+
+  图 2-2
+
+
+  MA 预测值与实际值对比
+
+
+  ## 配方 2-2. 自回归（AR）模型
+
+
+  ### 问题
+
+
+  您希望加载时间序列数据，并使用*自回归模型*进行预测。
+
+
+  ### 解决方案
+
+
+  自回归模型使用滞后值（即某个数据点的历史值）来预测未来值。预测结果是这些滞后值的线性组合。
+
+
+  我们使用 `statsmodels.tsa` 中的 `AutoReg` 函数进行建模。
+
+
+  ### 工作原理
+
+
+  以下步骤将加载数据并使用 AR 模型进行预测。
+
+
+  #### 步骤 2-1. 导入所需的库。
+
+
+  ```
+
+  import pandas as pd
+
+  import numpy as np
+
+  import matplotlib.pyplot as plt
+
+  from statsmodels.tsa.stattools import adfuller
+
+  from statsmodels.tsa.ar_model import AutoReg
+
+  from statsmodels.graphics.tsaplots import plot_pacf
+
+  ```
+
+
+  #### 步骤 2-2. 加载并绘制数据集。
+
+
+  ```
+
+  url=''opsd_germany_daily.csv''
+
+  data = pd.read_csv(url,sep=",")
+
+  data[''Consumption''].plot()
+
+  ```
+
+
+  图 2-3 显示了时间序列数据的图。
+
+
+  ![](img/540422_1_En_2_Fig3_HTML.jpg)
+
+
+  图 2-3
+
+
+  输出
+
+
+  #### 步骤 2-3. 检查时间序列数据的平稳性。
+
+
+  让我们查看 Augmented Dickey-Fuller 检验输出中的 p 值。如果 p 值小于 0.05，则时间序列是平稳的。
+
+
+  ```
+
+  data_stationarity_test = adfuller(data[''Consumption''], autolag=''AIC'')
+
+  print("P-value: ", data_stationarity_test[1])
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  P-value:  4.7440549018424435e-08
+
+  ```
+
+
+  #### 步骤 2-4. 确定要训练的 AR 模型的阶数。
+
+
+  让我们绘制偏自相关函数（PACF）图，以评估过去数据（滞后值）对未来数据的直接影响。
+
+
+  ```
+
+  pacf = plot_pacf(data[''Consumption''], lags=25)
+
+  ```
+
+
+  图 2-4 显示了偏自相关函数图的输出。
+
+
+  ![](img/540422_1_En_2_Fig4_HTML.jpg)
+
+
+  图 2-4
+
+
+  偏自相关函数图
+
+
+  图 2-4 显示了偏自相关函数的输出，以及在 AR 模型阶数上存在显著偏相关之前的滞后数量。在本例中，该数量为 8。
+
+
+  #### 步骤 2-5. 创建训练数据和测试数据。
+
+
+  ```
+
+  train_df = data[''Consumption''][:len(data)-100]
+
+  test_df = data[''Consumption''][len(data)-100:]
+
+  ```
+
+
+  #### 步骤 2-6. 调用并拟合 AR 模型。
+
+
+  ```
+
+  model_ar = AutoReg(train_df, lags=8).fit()
+
+  ```
+
+
+  #### 步骤 2-7. 输出模型摘要。
+
+
+  ```
+
+  print(ar_model.summary())
+
+  ```
+
+
+  图 2-5 显示了 AR 模型摘要。
+
+
+  ![](img/540422_1_En_2_Fig5_HTML.jpg)
+
+
+  图 2-5
+
+
+  AR 模型摘要
+
+
+  #### 步骤 2-8. 从模型获取预测值。
+
+
+  ```
+
+  predictions = model_ar.predict(start=len(train_df), end=(len(data)-1), dynamic=False)
+
+  ```
+
+
+  #### 步骤 2-9. 绘制预测值与实际值对比图。
+
+
+  ```
+
+  from matplotlib import pyplot
+
+  pyplot.plot(predictions)
+
+  pyplot.plot(test_df, color=''red'')
+
+  ```
+
+
+  图 2-6 显示了 AR 模型的预测值与实际值对比。
+
+
+  ![](img/540422_1_En_2_Fig6_HTML.jpg)
+
+
+  图 2-6
+
+
+  预测值与实际值对比
+
+
+  ## 配方 2-3. 自回归移动平均（ARMA）模型
+
+
+  ### 问题
+
+
+  您希望加载时间序列数据，并使用*自回归移动平均*（ARMA）模型进行预测。
+
+
+  ### 解决方案
+
+
+  ARMA 模型结合了自回归和移动平均的概念，构建了一个更稳健的模型。它有两个超参数（p 和 q），分别用于调整自回归和移动平均部分。
+
+
+  我们使用 `statsmodels.tsa` 中的 `ARIMA` 函数进行建模。
+
+
+  ### 工作原理
+
+
+  以下步骤将加载数据并使用 ARMA 模型进行预测。
+
+
+  #### 步骤 3-1. 导入所需的库。
+
+
+  ```
+
+  import pandas_datareader.data as web
+
+  import datetime
+
+  import pandas as pd
+
+  import numpy as np
+
+  from sklearn.metrics import mean_squared_error
+
+  import matplotlib.pyplot as plt
+
+  import seaborn as sns
+
+  from statsmodels.tsa.arima.model import ARIMA
+
+  from statsmodels.tsa.statespace.sarimax import SARIMAX
+
+  from statsmodels.tsa.api import SimpleExpSmoothing
+
+  from statsmodels.tsa.holtwinters import ExponentialSmoothing
+
+  import warnings
+
+  ```
+
+
+  #### 步骤 3-2. 加载数据。
+
+
+  我们使用 2017 年 12 月 31 日至 2018 年 1 月 4 日的比特币价格（以美元计）数据。
+
+
+  ```
+
+  btc_data = pd.read_csv("btc.csv")
+
+  print(btc_data.head())
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  Date       BTC-USD
+
+  0  2017-12-31  14156.400391
+
+  1  2018-01-01  13657.200195
+
+  2  2018-01-02  14982.099609
+
+  3  2018-01-03  15201.000000
+
+  4  2018-01-04  15599.200195
+
+  ```
+
+
+  #### 步骤 3-3. 预处理数据。
+
+
+  ```
+
+  btc_data.index = pd.to_datetime(btc_data[''Date''], format=''%Y-%m-%d'')
+
+  del btc_data[''Date'']
+
+  ```
+
+
+  #### 步骤 3-4. 绘制时间序列图。
+
+
+  ```
+
+  plt.ylabel(''价格-比特币'')
+
+  plt.xlabel(''日期'')
+
+  plt.xticks(rotation=45)
+
+  plt.plot(btc_data.index, btc_data[''BTC-USD''], )
+
+  ```
+
+
+  图 2-7 显示了比特币价格数据的时间序列图。
+
+
+  ![](img/540422_1_En_2_Fig7_HTML.jpg)
+
+
+  图 2-7
+
+
+  比特币价格数据
+
+
+
+
+  #### 步骤 3-5\. 进行训练-测试集划分。
+
+
+  ```
+
+  train_data = btc_data[btc_data.index < pd.to_datetime("2020-11-01", format=''%Y-%m-%d'')]
+
+  test_data = btc_data[btc_data.index >= pd.to_datetime("2020-11-01", format=''%Y-%m-%d'')]
+
+  print(train_data.shape)
+
+  print(test_data.shape)
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  (1036, 1)
+
+  (31, 1)
+
+  ```
+
+
+  #### 步骤 3-6\. 绘制训练-测试集划分后的时间序列图。
+
+
+  ```
+
+  plt.plot(train_data, color = "black", label = ''Train'')
+
+  plt.plot(test_data, color = "green", label = ''Test'')
+
+  plt.ylabel(''Price-BTC'')
+
+  plt.xlabel(''Date'')
+
+  plt.xticks(rotation=35)
+
+  plt.title("Train/Test split")
+
+  plt.show()
+
+  ```
+
+
+  图 2-8 展示了训练-测试集划分后的时间序列图。
+
+
+  ![](img/540422_1_En_2_Fig8_HTML.jpg)
+
+
+  图 2-8
+
+
+  训练-测试集划分输出
+
+
+  #### 步骤 3-7\. 从训练集中定义实际值。
+
+
+  ```
+
+  actuals = train_data[''BTC-USD'']
+
+  ```
+
+
+  #### 步骤 3-8\. 初始化并拟合 ARMA 模型。
+
+
+  ```
+
+  ARMA_model = ARIMA(actuals, order = (1, 0, 1))
+
+  ARMA_model = ARMA_model.fit()
+
+  ```
+
+
+  #### 步骤 3-9\. 获取测试集预测值。
+
+
+  ```
+
+  predictions = ARMA_model.get_forecast(len(test_data.index))
+
+  predictions_df = predictions.conf_int(alpha = 0.05)
+
+  predictions_df["Predictions"] = ARMA_model.predict(start = predictions_df.index[0],
+  end = predictions_df.index[-1])
+
+  predictions_df.index = test_data.index
+
+  predictions_arma = predictions_df["Predictions"]
+
+  ```
+
+
+  #### 步骤 3-10\. 将训练集、测试集和预测值绘制为折线图。
+
+
+  ```
+
+  plt.plot(train_data, color = "black", label = ''Train'')
+
+  plt.plot(test_data, color = "green", label = ''Test'')
+
+  plt.ylabel(''Price-BTC'')
+
+  plt.xlabel(''Date'')
+
+  plt.xticks(rotation=35)
+
+  plt.title("ARMA model predictions")
+
+  plt.plot(predictions_arma, color="red", label = ''Predictions'')
+
+  plt.legend()
+
+  plt.show()
+
+  ```
+
+
+  图 2-9 展示了 ARMA 模型的预测值与实际值对比。
+
+
+  ![](img/540422_1_En_2_Fig9_HTML.jpg)
+
+
+  图 2-9
+
+
+  预测值与实际值输出
+
+
+  #### 步骤 3-11\. 计算模型的 RMSE 分数。
+
+
+  ```
+
+  rmse_arma = np.sqrt(mean_squared_error(test_data["BTC-USD"].values, predictions_df["Predictions"]))
+
+  print("RMSE: ",rmse_arma)
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  RMSE:  4017.145069637629
+
+  ```
+
+
+  RMSE（均方根误差）非常高，因为数据集不是平稳的。你需要使其平稳，或者使用自回归积分滑动平均（ARIMA）模型以获得更好的性能。
+
+
+  ## 配方 2-4\. 自回归积分滑动平均（ARIMA）模型
+
+
+  ### 问题
+
+
+  你想加载时间序列数据，并使用*自回归积分滑动平均*（ARIMA）模型进行预测。
+
+
+  ### 解决方案
+
+
+  ARIMA 模型在 ARMA 模型的基础上进行了改进，因为它还包含第三个参数 d，该参数负责对数据进行差分处理，使其达到平稳状态，从而获得更好的预测效果。
+
+
+  让我们使用 `statsmodels.tsa` 中的 `ARIMA` 函数进行建模。
+
+
+  ### 工作原理
+
+
+  以下步骤使用 ARIMA 模型加载数据并进行预测。
+
+
+  本配方也使用了配方 2-3 中的步骤 3-1 至 3-7。
+
+
+  #### 步骤 4-1\. 通过差分使数据平稳。
+
+
+  ```
+
+  # 差分
+
+  ts_diff = actuals - actuals.shift(periods=4)
+
+  ts_diff.dropna(inplace=True)
+
+  ```
+
+
+  #### 步骤 4-2\. 检查 ADF（增广迪基-富勒）检验的平稳性。
+
+
+  ```
+
+  # 检查平稳性
+
+  from statsmodels.tsa.stattools import adfuller
+
+  result = adfuller(ts_diff)
+
+  pval = result[1]
+
+  print(''ADF Statistic: %f'' % result[0])
+
+  print(''p-value: %f'' % result[1])
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  ADF Statistic: -6.124168
+
+  p-value: 0.000000
+
+  ```
+
+
+  #### 步骤 4-3\. 获取自相关函数和偏自相关函数的值。
+
+
+  ```
+
+  from statsmodels.tsa.stattools import adfuller
+
+  lag_acf = acf(ts_diff, nlags=20)
+
+  lag_pacf = pacf(ts_diff, nlags=20, method=''ols'')
+
+  ```
+
+
+  #### 步骤 4-4\. 绘制 ACF 和 PACF 图以获取 p 值和 q 值。
+
+
+  分别绘制 ACF 和 PACF 图以获取 q 值和 p 值。
+
+
+  ```
+
+  # 绘制 ACF 图：
+
+  plt.figure(figsize = (15,5))
+
+  plt.subplot(121)
+
+  plt.stem(lag_acf)
+
+  plt.axhline(y = 0, linestyle=''--'',color=''black'')
+
+  plt.axhline(y = -1.96/np.sqrt(len(ts_diff)),linestyle=''--'',color=''gray'')
+
+  plt.axhline(y = 1.96/np.sqrt(len(ts_diff)),linestyle=''--'',color=''gray'')
+
+  plt.xticks(range(0,22,1))
+
+  plt.xlabel(''Lag'')
+
+  plt.ylabel(''ACF'')
+
+  plt.title(''Autocorrelation Function'')
+
+  # 绘制 PACF 图：
+
+  plt.subplot(122)
+
+  plt.stem(lag_pacf)
+
+  plt.axhline(y = 0, linestyle = ''--'', color = ''black'')
+
+  plt.axhline(y =-1.96/np.sqrt(len(actuals)), linestyle = ''--'', color = ''gray'')
+
+  plt.axhline(y = 1.96/np.sqrt(len(actuals)),linestyle = ''--'', color = ''gray'')
+
+  plt.xlabel(''Lag'')
+
+  plt.xticks(range(0,22,1))
+
+  plt.ylabel(''PACF'')
+
+  plt.title(''Partial Autocorrelation Function'')
+
+  plt.tight_layout()
+
+  plt.show()
+
+  ```
+
+
+  图 2-10 展示了 ACF 和 PACF 图的输出。
+
+
+  ![](img/540422_1_En_2_Fig10_HTML.jpg)
+
+
+  图 2-10
+
+
+  ACF 和 PACF 图
+
+
+  根据 ACF 图，截断点为 1，因此 q 值为 1。根据 PACF 图，截断点为 10，因此 p 值为 10。
+
+
+  #### 步骤 4-5\. 初始化并拟合 ARIMA 模型。
+
+
+  使用推导出的 p、d 和 q 值。
+
+
+  ```
+
+  ARIMA_model = ARIMA(actuals, order = (10, 4, 1))
+
+  ARIMA_model = ARIMA_model.fit()
+
+  ```
+
+
+  #### 步骤 4-6\. 获取测试集预测值。
+
+
+  ```
+
+  predictions = ARIMA_model.get_forecast(len(test_data.index))
+
+  predictions_df = predictions.conf_int(alpha = 0.05)
+
+  predictions_df["Predictions"] = ARIMA_model.predict(start = predictions_df.index[0],
+  end = predictions_df.index[-1])
+
+  predictions_df.index = test_data.index
+
+  predictions_arima = predictions_df["Predictions"]
+
+  ```
+
+
+  #### 步骤 4-7\. 将训练集、测试集和预测值绘制为折线图。
+
+
+  ```
+
+  plt.plot(train_data, color = "black", label = ''Train'')
+
+  plt.plot(test_data, color = "green", label = ''Test'')
+
+  plt.ylabel(''Price-BTC'')
+
+  plt.xlabel(''Date'')
+
+  plt.xticks(rotation=35)
+
+  plt.title("ARIMA model predictions")
+
+  plt.plot(predictions_arima, color="red", label = ''Predictions'')
+
+  plt.legend()
+
+  plt.show()
+
+  ```
+
+
+  图 2-11 展示了 ARIMA 模型的预测值与实际值对比。
+
+
+  ![](img/540422_1_En_2_Fig11_HTML.jpg)
+
+
+  图 2-11
+
+
+  预测值与实际值输出
+
+
+  #### 步骤 4-8\. 计算模型的 RMSE 分数。
+
+
+  ```
+
+  rmse_arima = np.sqrt(mean_squared_error(test_data["BTC-USD"].values, predictions_df["Predictions"]))
+
+  print("RMSE: ",rmse_arima)
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  RMSE:  2895.312718157126
+
+  ```
+
+
+  由于进行了差分处理并找到了合适的 p、d 和 q 值，该模型的性能优于 ARMA 模型。但由于模型并非完美调优，其 RMSE 仍然较高。
+
+
+  ## 配方 2-5\. ARIMA 模型的网格搜索超参数调优
+
+
+  ### 问题
+
+
+  你想使用具有最佳超参数的 ARIMA 模型进行预测。
+
+
+  ### 解决方案
+
+
+  让我们使用网格搜索方法来调整模型的超参数。ARIMA 模型有三个参数（p、d 和 q），可以使用经典的网格搜索方法进行调优。遍历各种组合并评估每个模型，以找到最佳配置。
+
+
+  ### 工作原理
+
+
+  以下步骤在使用 ARIMA 模型进行预测之前，加载数据并调整超参数。
+
+
+  本配方也使用了配方 2-3 中的步骤 3-1 至 3-7。
+
+
+
+
+  #### 步骤 5-1\. 编写一个函数来评估 ARIMA 模型。
+
+
+  该函数返回特定 ARIMA 阶数（输入）的 RMSE 分数。它执行与配方 2-3 中步骤 3-8 和 3-9 相同的任务。
+
+
+  ```
+
+  def arima_model_evaluate(train_actuals, test_data, order):
+
+  # Model initalize and fit
+
+  ARIMA_model = ARIMA(actuals, order = order)
+
+  ARIMA_model = ARIMA_model.fit()
+
+  # Getting the predictions
+
+  predictions = ARIMA_model.get_forecast(len(test_data.index))
+
+  predictions_df = predictions.conf_int(alpha = 0.05)
+
+  predictions_df["Predictions"] = ARIMA_model.predict(start = predictions_df.index[0],
+  end = predictions_df.index[-1])
+
+  predictions_df.index = test_data.index
+
+  predictions_arima = predictions_df["Predictions"]
+
+  # calculate RMSE score
+
+  rmse_score = np.sqrt(mean_squared_error(test_data["BTC-USD"].values, predictions_df["Predictions"]))
+
+  return rmse_score
+
+  ```
+
+
+  #### 步骤 5-2\. 编写一个函数，通过网格搜索超参数调优来评估多个模型。
+
+
+  该函数使用步骤 5-8 中定义的 `arima_model_evaluate` 函数来计算多个 ARIMA 模型的 RMSE 分数，并返回最佳模型/配置。它接收需要测试/实验的
+  p、d、q 值列表作为输入。
+
+
+  ```
+
+  def evaluate_models(train_actuals, test_data, list_p_values, list_d_values, list_q_values):
+
+  best_rmse, best_config = float("inf"), None
+
+  for p in list_p_values:
+
+  for d in list_d_values:
+
+  for q in list_q_values:
+
+  arima_order = (p,d,q)
+
+  rmse = arima_model_evaluate(train_actuals, test_data, arima_order)
+
+  if rmse < best_rmse:
+
+  best_rmse, best_config = rmse, arima_order
+
+  print(''ARIMA%s RMSE=%.3f'' % (arima_order,rmse))
+
+  print(''Best Configuration: ARIMA%s , RMSE=%.3f'' % (best_config, best_rmse))
+
+  return best_config
+
+  ```
+
+
+  #### 步骤 5-3\. 通过调用已定义的函数执行网格搜索超参数调优。
+
+
+  ```
+
+  p_values = range(0, 4)
+
+  d_values = range(0, 4)
+
+  q_values = range(0, 4)
+
+  warnings.filterwarnings("ignore")
+
+  best_config = evaluate_models(actuals, test_data, p_values, d_values, q_values)
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  ARIMA(0, 0, 0) RMSE=8973.268
+
+  ARIMA(0, 0, 1) RMSE=8927.094
+
+  ARIMA(0, 0, 2) RMSE=8895.924
+
+  ARIMA(0, 0, 3) RMSE=8861.499
+
+  ARIMA(0, 1, 0) RMSE=3527.133
+
+  ARIMA(0, 1, 1) RMSE=3537.297
+
+  ARIMA(0, 1, 2) RMSE=3519.475
+
+  ARIMA(0, 1, 3) RMSE=3514.476
+
+  ARIMA(0, 2, 0) RMSE=1112.565
+
+  ARIMA(0, 2, 1) RMSE=3455.709
+
+  ARIMA(0, 2, 2) RMSE=3315.249
+
+  ARIMA(0, 2, 3) RMSE=3337.231
+
+  ARIMA(0, 3, 0) RMSE=30160.941
+
+  ARIMA(0, 3, 1) RMSE=887.423
+
+  ARIMA(0, 3, 2) RMSE=3209.141
+
+  ARIMA(0, 3, 3) RMSE=2970.229
+
+  ARIMA(1, 0, 0) RMSE=4079.516
+
+  ARIMA(1, 0, 1) RMSE=4017.145
+
+  ARIMA(1, 0, 2) RMSE=4065.809
+
+  ARIMA(1, 0, 3) RMSE=4087.934
+
+  ARIMA(1, 1, 0) RMSE=3537.539
+
+  ARIMA(1, 1, 1) RMSE=3535.791
+
+  ARIMA(1, 1, 2) RMSE=3537.341
+
+  ARIMA(1, 1, 3) RMSE=3504.703
+
+  ARIMA(1, 2, 0) RMSE=725.218
+
+  ARIMA(1, 2, 1) RMSE=3318.935
+
+  ARIMA(1, 2, 2) RMSE=3507.106
+
+  ARIMA(1, 2, 3) RMSE=3314.726
+
+  ARIMA(1, 3, 0) RMSE=12360.360
+
+  ARIMA(1, 3, 1) RMSE=727.351
+
+  ARIMA(1, 3, 2) RMSE=2968.820
+
+  ARIMA(1, 3, 3) RMSE=3019.434
+
+  ARIMA(2, 0, 0) RMSE=4014.318
+
+  ARIMA(2, 0, 1) RMSE=4022.540
+
+  ARIMA(2, 0, 2) RMSE=4062.346
+
+  ARIMA(2, 0, 3) RMSE=4088.628
+
+  ARIMA(2, 1, 0) RMSE=3522.798
+
+  ARIMA(2, 1, 1) RMSE=3509.829
+
+  ARIMA(2, 1, 2) RMSE=3523.407
+
+  ARIMA(2, 1, 3) RMSE=3517.972
+
+  ARIMA(2, 2, 0) RMSE=748.267
+
+  ARIMA(2, 2, 1) RMSE=3498.685
+
+  ARIMA(2, 2, 2) RMSE=3514.870
+
+  ARIMA(2, 2, 3) RMSE=3310.798
+
+  ARIMA(2, 3, 0) RMSE=33486.993
+
+  ARIMA(2, 3, 1) RMSE=797.942
+
+  ARIMA(2, 3, 2) RMSE=2979.751
+
+  ARIMA(2, 3, 3) RMSE=2965.450
+
+  ARIMA(3, 0, 0) RMSE=4060.745
+
+  ARIMA(3, 0, 1) RMSE=4114.216
+
+  ARIMA(3, 0, 2) RMSE=4060.737
+
+  ARIMA(3, 0, 3) RMSE=3810.374
+
+  ARIMA(3, 1, 0) RMSE=3509.046
+
+  ARIMA(3, 1, 1) RMSE=3499.516
+
+  ARIMA(3, 1, 2) RMSE=3520.499
+
+  ARIMA(3, 1, 3) RMSE=3521.356
+
+  ARIMA(3, 2, 0) RMSE=1333.102
+
+  ARIMA(3, 2, 1) RMSE=3482.502
+
+  ARIMA(3, 2, 2) RMSE=3451.985
+
+  ARIMA(3, 2, 3) RMSE=3285.008
+
+  ARIMA(3, 3, 0) RMSE=14358.749
+
+  ARIMA(3, 3, 1) RMSE=1477.509
+
+  ARIMA(3, 3, 2) RMSE=3142.936
+
+  ARIMA(3, 3, 3) RMSE=2957.573
+
+  最佳配置: ARIMA(1, 2, 0) , RMSE=725.218
+
+  ```
+
+
+  #### 步骤 5-4\. 使用最佳配置初始化并拟合 ARIMA 模型。
+
+
+  ```
+
+  ARIMA_model = ARIMA(actuals, order = best_config)
+
+  ARIMA_model = ARIMA_model.fit()
+
+  ```
+
+
+  #### 步骤 5-5\. 获取测试预测结果。
+
+
+  ```
+
+  predictions = ARIMA_model.get_forecast(len(test_data.index))
+
+  predictions_df = predictions.conf_int(alpha = 0.05)
+
+  predictions_df["Predictions"] = ARIMA_model.predict(start = predictions_df.index[0],
+  end = predictions_df.index[-1])
+
+  predictions_df.index = test_data.index
+
+  predictions_arima = predictions_df["Predictions"]
+
+  ```
+
+
+  #### 步骤 5-6\. 将训练集、测试集和预测结果绘制成折线图。
+
+
+  ```
+
+  plt.plot(train_data, color = "black", label = ''Train'')
+
+  plt.plot(test_data, color = "green", label = ''Test'')
+
+  plt.ylabel(''Price-BTC'')
+
+  plt.xlabel(''Date'')
+
+  plt.xticks(rotation=35)
+
+  plt.title("ARIMA model predictions")
+
+  plt.plot(predictions_arima, color="red", label = ''Predictions'')
+
+  plt.legend()
+
+  plt.show()
+
+  ```
+
+
+  图 2-12 展示了 ARIMA 模型的预测值与实际值对比。
+
+
+  ![](img/540422_1_En_2_Fig12_HTML.jpg)
+
+
+  图 2-12
+
+
+  预测值与实际值输出
+
+
+  #### 步骤 5-7\. 计算模型的 RMSE 分数。
+
+
+  ```
+
+  rmse_arima = np.sqrt(mean_squared_error(test_data["BTC-USD"].values, predictions_df["Predictions"]))
+
+  print("RMSE: ",rmse_arima)
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  RMSE:  725.2180143501593
+
+  ```
+
+
+  这是迄今为止最佳的 RMSE，因为模型经过了调优并且拟合良好。
+
+
+  ## 配方 2-6\. 季节性自回归积分滑动平均 (SARIMA) 模型
+
+
+  ### 问题
+
+
+  您希望加载时间序列数据，并使用*季节性自回归积分滑动平均* (SARIMA) 模型进行预测。
+
+
+  ### 解决方案
+
+
+  SARIMA 模型是 ARIMA 模型的扩展。它也能对数据的季节性成分进行建模。它使用季节性的 p、d 和 q 分量作为超参数输入。
+
+
+  让我们使用 `statsmodels.tsa` 中的 `SARIMAX` 函数进行建模。
+
+
+  ### 工作原理
+
+
+  以下步骤使用 SARIMA 模型加载数据并进行预测。
+
+
+  本配方也使用了配方 2-3 中的步骤 3-1 到 3-7。
+
+
+  #### 步骤 6-1\. 初始化并拟合 SARIMA 模型。
+
+
+  ```
+
+  SARIMA_model = SARIMAX(actuals, order = (1, 2, 0), seasonal_order=(2,2,2,12))
+
+  SARIMA_model = SARIMA_model.fit()
+
+  ```
+
+
+  #### 步骤 6-2\. 获取测试预测结果。
+
+
+  ```
+
+  predictions = SARIMA_model.get_forecast(len(test_data.index))
+
+  predictions_df = predictions.conf_int(alpha = 0.05)
+
+  predictions_df["Predictions"] = SARIMA_model.predict(start = predictions_df.index[0],
+  end = predictions_df.index[-1])
+
+  predictions_df.index = test_data.index
+
+  predictions_sarima = predictions_df["Predictions"]
+
+  ```
+
+
+  #### 步骤 6-3\. 将训练集、测试集和预测结果绘制成折线图。
+
+
+  ```
+
+  plt.plot(train_data, color = "black", label = ''Train'')
+
+  plt.plot(test_data, color = "green", label = ''Test'')
+
+  plt.ylabel(''Price-BTC'')
+
+  plt.xlabel(''Date'')
+
+  plt.xticks(rotation=35)
+
+  plt.title("SARIMA model predictions")
+
+  plt.plot(predictions_sarima, color="red", label = ''Predictions'')
+
+  plt.legend()
+
+  plt.show()
+
+  ```
+
+
+  图 2-13 展示了季节性 ARIMA 模型的预测值与实际值对比。
+
+
+  ![](img/540422_1_En_2_Fig13_HTML.jpg)
+
+
+  图 2-13
+
+
+  预测值与实际值输出
+
+
+  #### 步骤 6-4\. 计算模型的 RMSE 分数。
+
+
+  ```
+
+  rmse_sarima = np.sqrt(mean_squared_error(test_data["BTC-USD"].values, predictions_df["Predictions"]))
+
+  print("RMSE: ",rmse_sarima)
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  RMSE:  1050.157033576061
+
+  ```
+
+
+  您可以进一步调整季节性成分以获得更好的 RMSE 分数。可以使用相同的网格搜索方法进行调整。
+
+
+  ## 配方 2-7\. 简单指数平滑 (SES) 模型
+
+
+  ### 问题
+
+
+  您希望加载时间序列数据，并使用*简单指数平滑* (SES) 模型进行预测。
+
+
+  ### 解决方案
+
+
+  简单指数平滑是一种使用指数窗口函数的平滑方法（类似于移动平均线）。
+
+
+  让我们使用 `statsmodels.tsa` 中的 `SimpleExpSmoothing` 函数进行建模。
+
+
+
+
+  ### 工作原理
+
+
+  以下步骤使用 SES 模型加载数据并进行预测。
+
+
+  本配方同样使用了配方 2-3 中的步骤 3-1 至 3-7。
+
+
+  #### 步骤 7-1\. 初始化并拟合 SES 模型。
+
+
+  ```
+
+  SES_model = SimpleExpSmoothing(actuals)
+
+  SES_model = SES_model.fit(smoothing_level=0.8,optimized=False)
+
+  ```
+
+
+  #### 步骤 7-2\. 获取测试集预测结果。
+
+
+  ```
+
+  predictions_ses = SES_model.forecast(len(test_data.index))
+
+  ```
+
+
+  #### 步骤 7-3\. 将训练集、测试集和预测结果绘制为折线图。
+
+
+  ```
+
+  plt.plot(train_data, color = "black", label = ''Train'')
+
+  plt.plot(test_data, color = "green", label = ''Test'')
+
+  plt.ylabel(''Price-BTC'')
+
+  plt.xlabel(''Date'')
+
+  plt.xticks(rotation=35)
+
+  plt.title("SImple Exponential Smoothing (SES) model predictions")
+
+  plt.plot(predictions_ses, color=''red'', label = ''Predictions'')
+
+  plt.legend()
+
+  plt.show()
+
+  ```
+
+
+  图 2-14 展示了 SES 模型的预测值与实际值的对比。
+
+
+  ![](img/540422_1_En_2_Fig14_HTML.jpg)
+
+
+  图 2-14
+
+
+  预测值与实际值输出
+
+
+  #### 步骤 7-4\. 计算模型的 RMSE 分数。
+
+
+  ```
+
+  rmse_ses = np.sqrt(mean_squared_error(test_data["BTC-USD"].values, predictions_ses))
+
+  print("RMSE: ",rmse_ses)
+
+  ```
+
+
+  输出结果如下。
+
+
+  ```
+
+  RMSE:  3536.5763879303104
+
+  ```
+
+
+  正如预期，RMSE 值非常高，因为它是一个简单的平滑函数，只有在数据没有趋势时表现最佳。
+
+
+  ## 配方 2-8\. Holt-Winters (HW) 模型
+
+
+  ### 问题
+
+
+  您希望加载时间序列数据，并使用 Holt-Winters (HW) 模型进行预测。
+
+
+  ### 解决方案
+
+
+  Holt-Winters 也是一种平滑函数。它使用指数加权移动平均。它编码过去的历史值来预测当前和未来的值。
+
+
+  对于建模，我们使用 `statsmodels.tsa.holtwinters` 中的 `ExponentialSmoothing` 函数。
+
+
+  ### 工作原理
+
+
+  以下步骤使用 HW 模型加载数据并进行预测。
+
+
+  本配方同样使用了配方 2-3 中的步骤 3-1 至 3-7。
+
+
+  #### 步骤 8-1\. 初始化并拟合 HW 模型。
+
+
+  ```
+
+  HW_model = ExponentialSmoothing(actuals, trend=''add'')
+
+  HW_model = HW_model.fit()
+
+  ```
+
+
+  #### 步骤 8-2\. 获取测试集预测结果。
+
+
+  ```
+
+  predictions_hw = HW_model.forecast(len(test_data.index))
+
+  ```
+
+
+  #### 步骤 8-3\. 将训练集、测试集和预测结果绘制为折线图。
+
+
+  ```
+
+  plt.plot(train_data, color = "black", label = ''Train'')
+
+  plt.plot(test_data, color = "green", label = ''Test'')
+
+  plt.ylabel(''Price-BTC'')
+
+  plt.xlabel(''Date'')
+
+  plt.xticks(rotation=35)
+
+  plt.title("HW model predictions")
+
+  plt.plot(predictions_hw, color=''red'', label = ''Predictions'')
+
+  plt.legend()
+
+  plt.show()
+
+  ```
+
+
+  图 2-15 展示了 HW 模型的预测值与实际值的对比。
+
+
+  ![](img/540422_1_En_2_Fig15_HTML.jpg)
+
+
+  图 2-15
+
+
+  预测值与实际值输出
+
+
+  #### 步骤 8-4\. 计算模型的 RMSE 分数。
+
+
+  ```
+
+  rmse_hw = np.sqrt(mean_squared_error(test_data["BTC-USD"].values, predictions_hw))
+
+  print("RMSE: ",rmse_hw)
+
+  ```
+
+
+  输出结果如下。
+
+
+  ```
+
+  RMSE:  2024.6833967531811
+
+  ```
+
+
+  RMSE 值略高，但对于此数据集，加法模型的表现优于乘法模型。对于乘法模型，请将 `ExponentialSmoothing` 函数中的 `trend` 参数改为
+  `''mul''`。
+
+
+  '
+- '# 3. 高级单变量与统计多变量建模
+
+
+  第 2 章探讨了在 Python 中实现单变量统计建模的各种配方。本章将探讨一些更高级的技术，以及对另一种时间数据类型——多变量时间序列的建模。多变量时间序列除了日期和时间之外，还包含影响目标变量的其他时间相关特征。本章将探讨在
+  Python 中实现多变量建模的各种统计方法和配方。
+
+
+  本章涵盖以下用于执行高级单变量和统计多变量建模的配方。
+
+
+  *   配方 3-1\. FBProphet 单变量时间序列建模
+
+  *   配方 3-2\. 通过控制变点进行 FBProphet 建模
+
+  *   配方 3-3\. 通过调整趋势进行 FBProphet 建模
+
+  *   配方 3-4\. 结合节假日进行 FBProphet 建模
+
+  *   配方 3-5\. 使用添加回归量进行 FBProphet 建模
+
+  *   配方 3-6\. 使用 Auto-ARIMA 进行时间序列预测
+
+  *   配方 3-7\. 使用 VAR 模型进行多变量时间序列预测
+
+
+  ## 配方 3-1\. FBProphet 单变量时间序列建模
+
+
+  ### 问题
+
+
+  您希望加载时间序列数据，并使用 Facebook Prophet 模型进行预测。
+
+
+  ### 解决方案
+
+
+  Facebook 的 Prophet 算法于 2017 年发布。它已成为单变量时间序列建模领域的变革者。该算法在具有加法趋势和多重季节性的数据上表现非常出色。它已被广泛应用于各个领域的准确预测。
+
+
+  ### 工作原理
+
+
+  以下步骤使用 FBProphet 读取数据并进行预测。
+
+
+  #### 步骤 1-1\. 导入所需的库。
+
+
+  ```
+
+  import numpy as np
+
+  import pandas as pd
+
+  from fbprophet import Prophet
+
+  from fbprophet.plot import plot_plotly, add_changepoints_to_plot
+
+  from sklearn.model_selection import train_test_split
+
+  import plotly.offline as py
+
+  import matplotlib.pyplot as plt
+
+  py.init_notebook_mode()
+
+  %matplotlib inline
+
+  ```
+
+
+  #### 步骤 1-2\. 读取数据。
+
+
+  以下代码读取鳄梨数据集。
+
+
+  ```
+
+  df = pd.read_csv("avocado.csv").drop(columns=["Unnamed: 0"])
+
+  df.head()
+
+  ```
+
+
+  图 3-1 展示了鳄梨数据集的前几行。
+
+
+  ![](img/540422_1_En_3_Fig1_HTML.jpg)
+
+
+  图 3-1
+
+
+  鳄梨数据集头部
+
+
+  #### 步骤 1-3\. 创建训练数据集。
+
+
+  ```
+
+  train_df = pd.DataFrame()
+
+  train_df[''ds''] = pd.to_datetime(df["Date"])
+
+  train_df[''y''] = df.iloc[:,1]
+
+  train_df.head()
+
+  ```
+
+
+  图 3-2 展示了训练数据框的前几行。
+
+
+  ![](img/540422_1_En_3_Fig2_HTML.jpg)
+
+
+  图 3-2
+
+
+  训练数据框头部
+
+
+  #### 步骤 1-4\. 初始化一个基础的 Facebook Prophet 模型。
+
+
+  ```
+
+  # Initializing basic prophet model:
+
+  basic_prophet_model = Prophet()
+
+  basic_prophet_model.fit(train_df)
+
+  ```
+
+
+  #### 步骤 1-5\. 创建用于预测的未来数据框。
+
+
+  ```
+
+  future_df = basic_prophet_model.make_future_dataframe(periods=300)
+
+  future_df.tail()
+
+  ```
+
+
+  图 3-3 展示了未来数据框的尾部。
+
+
+  ![](img/540422_1_En_3_Fig3_HTML.jpg)
+
+
+  图 3-3
+
+
+  未来数据框尾部
+
+
+  #### 步骤 1-6\. 获取预测结果。
+
+
+  ```
+
+  # Getting the forecast
+
+  forecast_df = basic_prophet_model.predict(future_df)
+
+  ```
+
+
+  #### 步骤 1-7\. 绘制预测结果图。
+
+
+  ```
+
+  plot1 = basic_prophet_model.plot(forecast_df)
+
+  ```
+
+
+  图 3-4 展示了预测输出。
+
+
+  ![](img/540422_1_En_3_Fig4_HTML.jpg)
+
+
+  图 3-4
+
+
+  预测输出
+
+
+  图 3-4 中的蓝色线条即为预测值。
+
+
+  #### 步骤 1-8\. 绘制预测成分图。
+
+
+  ```
+
+  # to view the forecast components
+
+  plot2 = basic_prophet_model.plot_components(forecast_df)
+
+  ```
+
+
+  图 3-5 展示了趋势和季节性成分。
+
+
+  ![](img/540422_1_En_3_Fig5_HTML.jpg)
+
+
+  图 3-5
+
+
+  成分输出
+
+
+  ## 配方 3-2\. 通过控制变点进行 FBProphet 建模
+
+
+  ### 问题
+
+
+  您希望使用 Facebook Prophet 模型进行预测，并调整变点。
+
+
+  ### 解决方案
+
+
+  变点是时间序列中检测到突变的确切点。默认情况下，在时间序列的前 80% 中，变点数量设置为 25。让我们通过调整 `n_change_points` 和 `changepoint_range`
+  参数来调整这些默认值，以控制预测输出。
+
+
+  ### 工作原理
+
+
+  以下步骤使用 FBProphet 进行预测并调整变点。
+
+
+  本配方同样使用了配方 3-1 中的步骤 1-1 至 1-6。
+
+
+
+
+  #### 步骤 2-1\. 绘制变化点。
+
+
+  让我们在预测图中绘制基础 Prophet 模型的变化点。
+
+
+  ```
+
+  plot3 = basic_prophet_model.plot(forecast_df)
+
+  adding_changepoints = add_changepoints_to_plot(plot3.gca(), basic_prophet_model,
+  forecast_df)
+
+  ```
+
+
+  图 3-6 展示了绘制在预测图上的变化点。
+
+
+  ![](img/540422_1_En_3_Fig6_HTML.jpg)
+
+
+  图 3-6
+
+
+  带有变化点的预测图
+
+
+  在图 3-6 中，红色虚线代表由 FBProphet 检测到的变化点。
+
+
+  #### 步骤 2-2\. 打印变化点。
+
+
+  ```
+
+  basic_prophet_model.changepoints
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  584     2015-02-08
+
+  1168    2015-03-15
+
+  1752    2015-04-26
+
+  2336    2015-05-31
+
+  2920    2015-07-12
+
+  3504    2015-08-16
+
+  4087    2015-09-20
+
+  4671    2015-11-01
+
+  5255    2015-12-06
+
+  5839    2016-01-17
+
+  6423    2016-02-21
+
+  7007    2016-03-27
+
+  7591    2016-05-08
+
+  8175    2016-06-12
+
+  8759    2016-07-24
+
+  9343    2016-08-28
+
+  9927    2016-10-02
+
+  10511   2016-11-13
+
+  11094   2016-12-18
+
+  11678   2017-01-29
+
+  12262   2017-03-05
+
+  12846   2017-04-09
+
+  13430   2017-05-21
+
+  14014   2017-06-25
+
+  14598   2017-08-06
+
+  名称: ds, 数据类型: datetime64[ns]
+
+  ```
+
+
+  #### 步骤 2-3\. 检查每个变化点的幅度。
+
+
+  ```
+
+  deltas = basic_prophet_model.params[''delta''].mean(0)
+
+  plot4 = plt.figure(facecolor=''w'')
+
+  ax = plot4.add_subplot(111)
+
+  ax.bar(range(len(deltas)), deltas)
+
+  ax.grid(True, which=''major'', c=''gray'', ls=''-'', lw=1, alpha=0.2)
+
+  ax.set_ylabel(''速率变化'')
+
+  ax.set_xlabel(''潜在变化点'')
+
+  plot4.tight_layout()
+
+  ```
+
+
+  图 3-7 展示了每个变化点的幅度。
+
+
+  ![](img/540422_1_En_3_Fig7_HTML.jpg)
+
+
+  图 3-7
+
+
+  变化点幅度
+
+
+  #### 步骤 2-4\. 调整 n_changepoints 超参数并进行预测。
+
+
+  ```
+
+  # 将 n_changepoints 设置为超参数：
+
+  prophet_model_changepoint = Prophet(n_changepoints=20, yearly_seasonality=True)
+
+  # 获取预测结果
+
+  forecast_df_changepoint = prophet_model_changepoint.fit(train_df).predict(future_df)
+
+  # 绘制带有变化点的预测图
+
+  plot5 = prophet_model_changepoint.plot(forecast_df_changepoint)
+
+  adding_changepoints = add_changepoints_to_plot(plot5.gca(), prophet_model_changepoint,
+  forecast_df_changepoint)
+
+  ```
+
+
+  图 3-8 展示了预测输出。
+
+
+  ![](img/540422_1_En_3_Fig8_HTML.jpg)
+
+
+  图 3-8
+
+
+  预测输出
+
+
+  可以控制变化点的数量（增加或减少），并相应地调整预测输出。大幅增加变化点可能导致过拟合，而大幅减少则会导致欠拟合。
+
+
+  #### 步骤 2-5\. 调整 changepoint_range 超参数并进行预测。
+
+
+  ```
+
+  # 将 changepoint_range 设置为超参数：
+
+  prophet_model_changepoint2 = Prophet(changepoint_range=0.9, yearly_seasonality=True)
+
+  # 获取预测结果
+
+  forecast_df_changepoint2 = prophet_model_changepoint2.fit(train_df).predict(future_df)
+
+  # 绘制带有变化点的预测图
+
+  plot6 = prophet_model_changepoint2.plot(forecast_df_changepoint2)
+
+  adding_changepoints = add_changepoints_to_plot(plot5.gca(), prophet_model_changepoint2,
+  forecast_df_changepoint2)
+
+  ```
+
+
+  图 3-9 展示了预测输出。
+
+
+  ![](img/540422_1_En_3_Fig9_HTML.jpg)
+
+
+  图 3-9
+
+
+  预测输出
+
+
+  通过调整 `changepoint_range` 参数，可以控制变化点在时间序列中的分布范围。它是一个百分比值，表示变化点所在的时间序列（从起点开始）的比例。
+
+
+  ## 配方 3-3\. 通过调整趋势进行 FBProphet 建模
+
+
+  ### 问题
+
+
+  您希望使用 Facebook Prophet 模型进行预测，并调整趋势组件。
+
+
+  ### 解决方案
+
+
+  `changepoint_prior_scale` 可以解决模型的过拟合或欠拟合问题。通过调整其值，趋势的复杂度会发生变化。增大该值会增加复杂度，减小则会降低复杂度。
+
+
+  ### 工作原理
+
+
+  以下步骤使用 FBProphet 进行预测，并调整与趋势相关的参数（即 `changepoint_prior_scale`）。
+
+
+  本配方也使用了配方 3-1 中的步骤 1-1 至 1-3。
+
+
+  #### 步骤 3-1\. 增加 changepoint_prior_scale 超参数。
+
+
+  ```
+
+  prophet_model_trend = Prophet(n_changepoints=20, yearly_seasonality=True, changepoint_prior_scale=0.08)
+
+  ```
+
+
+  #### 步骤 3-2\. 预测并绘制输出。
+
+
+  ```
+
+  # 获取预测结果
+
+  forecast_df_trend = prophet_model_trend.fit(train_df).predict(future_df)
+
+  # 绘制带有变化点的预测图
+
+  plot7 = prophet_model_trend.plot(forecast_df_trend)
+
+  adding_changepoints = add_changepoints_to_plot(plot7.gca(), prophet_model_trend,
+  forecast_df_trend)
+
+  ```
+
+
+  图 3-10 展示了预测输出。
+
+
+  ![](img/540422_1_En_3_Fig10_HTML.jpg)
+
+
+  图 3-10
+
+
+  预测输出
+
+
+  图 3-10 说明增加 `changepoint_prior_scale` 会增加趋势的复杂度。然而，过度增加可能导致过拟合。
+
+
+  #### 步骤 3-3\. 减小 changepoint_prior_scale 超参数。
+
+
+  ```
+
+  prophet_model_trend2 = Prophet(n_changepoints=20, yearly_seasonality=True, changepoint_prior_scale=0.001)
+
+  ```
+
+
+  #### 步骤 3-4\. 预测并绘制输出。
+
+
+  ```
+
+  # 获取预测结果
+
+  forecast_df_trend2 = prophet_model_trend2.fit(train_df).predict(future_df)
+
+  # 绘制带有变化点的预测图
+
+  plot8 = prophet_model_trend2.plot(forecast_df_trend2)
+
+  adding_changepoints = add_changepoints_to_plot(plot8.gca(), prophet_model_trend2,
+  forecast_df_trend2)
+
+  ```
+
+
+  图 3-11 展示了预测输出。
+
+
+  ![](img/540422_1_En_3_Fig11_HTML.jpg)
+
+
+  图 3-11
+
+
+  预测输出
+
+
+  图 3-11 显示减小 `changepoint_prior_scale` 会降低趋势的复杂度。不过，过度减小可能导致欠拟合。
+
+
+  ## 配方 3-4\. 考虑节假日的 FBProphet 建模
+
+
+  ### 问题
+
+
+  您希望在使用 Facebook Prophet 模型进行预测时考虑节假日数据。
+
+
+  ### 解决方案
+
+
+  节假日信息是另一个可以添加到 Prophet 模型的输入参数，模型在考虑时间序列变化时会使用此信息。在节假日期间，预计时间序列会发生显著变化；因此，模型不会学习这种模式。
+
+
+  在节假日数据框中，包含一系列作为节假日的日期。还可以提供上、下窗口，表示节假日前后受影响天数的扩展。
+
+
+
+
+  ### 工作原理
+
+
+  以下步骤使用 FBProphet 进行预测，并添加了节假日组件。
+
+
+  本配方同样使用了配方 3-1 中的步骤 1-1 至 1-3。
+
+
+  #### 步骤 4-1\. 创建自定义节假日数据框。
+
+
+  ```
+
+  holidays_df = pd.DataFrame({
+
+  ''holiday'': ''avocado season'',
+
+  ''ds'': pd.to_datetime([''2014-07-31'', ''2014-09-16'',
+
+  ''2015-07-31'', ''2015-09-16'',
+
+  ''2016-07-31'', ''2016-09-16'',
+
+  ''2017-07-31'', ''2017-09-16'',
+
+  ''2018-07-31'', ''2018-09-16'',
+
+  ''2019-07-31'', ''2019-09-16'']),
+
+  ''lower_window'': -1,
+
+  ''upper_window'': 0,
+
+  })
+
+  ```
+
+
+  #### 步骤 4-2\. 使用节假日数据框初始化并拟合 Prophet 模型。
+
+
+  ```
+
+  prophet_model_holiday = Prophet(holidays=holidays_df)
+
+  prophet_model_holiday.fit(train_df)
+
+  ```
+
+
+  #### 步骤 4-3\. 为预测创建未来数据框。
+
+
+  ```
+
+  future_df = prophet_model_holiday.make_future_dataframe(periods=12, freq = ''m'')
+
+  ```
+
+
+  #### 步骤 4-4\. 获取预测结果。
+
+
+  ```
+
+  forecast_df = prophet_model_holiday.predict(future_df)
+
+  prophet_model_holiday.plot(forecast_df)
+
+  ```
+
+
+  图 3-12 显示了预测输出。
+
+
+  ![](img/540422_1_En_3_Fig12_HTML.jpg)
+
+
+  图 3-12
+
+
+  预测输出
+
+
+  ## 配方 3-5\. 使用添加回归变量的 FBProphet 建模
+
+
+  ### 问题
+
+
+  您希望使用添加了回归变量的 Facebook Prophet 模型进行预测。
+
+
+  ### 解决方案
+
+
+  可以通过使用 `add_regressor` 功能向模型添加额外的回归变量。
+
+
+  ### 工作原理
+
+
+  以下步骤使用添加了回归变量的 FBProphet 进行预测。
+
+
+  本配方同样使用了配方 3-1 中的步骤 1-1 和 1-2。
+
+
+  #### 步骤 5-1\. 对类型列进行标签编码。
+
+
+  ```
+
+  # Label encoding type column
+
+  from sklearn.preprocessing import LabelEncoder
+
+  le = LabelEncoder()
+
+  df.iloc[:,10] = le.fit_transform(df.iloc[:,10])
+
+  df.head(2)
+
+  ```
+
+
+  图 3-13 显示了输出数据框。
+
+
+  ![](img/540422_1_En_3_Fig13_HTML.jpg)
+
+
+  图 3-13
+
+
+  输出数据框
+
+
+  #### 步骤 5-2\. 获取所需格式的数据。
+
+
+  ```
+
+  data = df[[''Date'', ''Total Volume'', ''4046'', ''4225'', ''4770'', ''Small Bags'',
+  ''type'']]
+
+  data.rename(columns={''Date'':''ds''},inplace=True)
+
+  data[''y''] = df.iloc[:,1]
+
+  ```
+
+
+  #### 步骤 5-3\. 进行训练-测试集划分。
+
+
+  ```
+
+  train_df = data[:18000]
+
+  test_df = data[18000:]
+
+  ```
+
+
+  #### 步骤 5-4\. 初始化 Prophet 模型并添加回归变量。
+
+
+  ```
+
+  prophet_model_regressor = Prophet()
+
+  prophet_model_regressor.add_regressor(''type'')
+
+  prophet_model_regressor.add_regressor(''Total Volume'')
+
+  prophet_model_regressor.add_regressor(''4046'')
+
+  prophet_model_regressor.add_regressor(''4225'')
+
+  prophet_model_regressor.add_regressor(''4770'')
+
+  prophet_model_regressor.add_regressor(''Small Bags'')
+
+  ```
+
+
+  #### 步骤 5-5\. 拟合数据。
+
+
+  ```
+
+  prophet_model_regressor.fit(train_df)
+
+  future_df = prophet_model_regressor.make_future_dataframe(periods=249)
+
+  ```
+
+
+  #### 步骤 5-6\. 预测测试集中的数据。
+
+
+  ```
+
+  forecast_df = prophet_model_regressor.predict(test_df)
+
+  prophet_model_regressor.plot(forecast_df)
+
+  ```
+
+
+  图 3-14 显示了预测输出。
+
+
+  ![](img/540422_1_En_3_Fig14_HTML.jpg)
+
+
+  图 3-14
+
+
+  预测输出
+
+
+  图 3-14 显示蓝色区域为预测数据。
+
+
+  ## 配方 3-6\. 使用 Auto-ARIMA 进行时间序列预测
+
+
+  ### 问题
+
+
+  您希望加载时间序列数据并使用 Auto-ARIMA 进行预测。
+
+
+  ### 解决方案
+
+
+  使用 stats model 中定义的内置方法可以轻松实现。
+
+
+  ### 工作原理
+
+
+  以下步骤读取数据并使用 Auto-ARIMA 进行预测。
+
+
+  #### 步骤 6-1\. 导入所需库。
+
+
+  ```
+
+  #import all the required libraries
+
+  import pandas as pd
+
+  from pmdarima.arima import auto_arima
+
+  from pmdarima.arima import ADFTest
+
+  from matplotlib import pyplot as plt
+
+  from sklearn.metrics import r2_score
+
+  ```
+
+
+  #### 步骤 6-2\. 读取数据。
+
+
+  从 Git 链接下载数据。
+
+
+  以下代码用于读取数据。
+
+
+  ```
+
+  #read data
+
+  auto_arima_data = pd.read_csv(''auto_arima_data.txt'')
+
+  auto_arima_data.head()
+
+  ```
+
+
+  图 3-15 显示了输出数据框。
+
+
+  ![](img/540422_1_En_3_Fig15_HTML.jpg)
+
+
+  图 3-15
+
+
+  输出数据框
+
+
+  读取数据后，让我们确保数据中不存在空值。并检查每列的数据类型。
+
+
+  #### 步骤 6-3\. 预处理数据。
+
+
+  ```
+
+  #check missing values
+
+  auto_arima_data.isnull().sum()
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  Month              0
+
+  Champagne sales    0
+
+  dtype: int64
+
+  ```
+
+
+  不存在空值。让我们检查每列的数据类型。
+
+
+  ```
+
+  #check datatype
+
+  auto_arima_data.info()
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  RangeIndex: 105 entries, 0 to 104
+
+  Data columns (total 2 columns):
+
+  #   Column           Non-Null Count  Dtype
+
+  ---  ------           --------------  -----
+
+  0   Month            105 non-null    object
+
+  1   Champagne sales  105 non-null    int64
+
+  dtypes: int64(1), object(1)
+
+  memory usage: 1.8+ KB
+
+  ```
+
+
+  现在，让我们将 ''Month'' 变量的数据类型从字符串更改为日期时间。同时，使用 `set_index` 方法将数据框索引设置为该变量。
+
+
+  ```
+
+  #convert object to datatime and set index
+
+  auto_arima_data[''Month''] = pd.to_datetime(auto_arima_data[''Month''])
+
+  auto_arima_data.set_index(''Month'',inplace=True)
+
+  auto_arima_data.head()
+
+  ```
+
+
+  图 3-16 显示了输出数据框。
+
+
+  ![](img/540422_1_En_3_Fig16_HTML.jpg)
+
+
+  图 3-16
+
+
+  输出数据框
+
+
+  #### 步骤 6-4\. 分析数据模式。
+
+
+  您可以使用 `.plot()` 方法简单地绘制折线图来分析基本的时间序列成分。
+
+
+  ```
+
+  #line plot to understand the pattern
+
+  auto_arima_data.plot()
+
+  ```
+
+
+  图 3-17 显示了时间序列图输出。
+
+
+  ![](img/540422_1_En_3_Fig17_HTML.jpg)
+
+
+  图 3-17
+
+
+  输出
+
+
+  图表显示目标列存在季节性。每年销售额都会出现一个峰值。
+
+
+  #### 步骤 6-5\. 检验平稳性。
+
+
+  如果您使用任何统计模型方法，平稳性检验是时间序列用例中的一个重要步骤。让我们使用增强迪基-富勒（ADF）检验来检查数据的平稳性。
+
+
+  ```
+
+  #Stationarity check
+
+  stationary_test = ADFTest(alpha= 0.05)
+
+  stationary_test.should_diff(auto_arima_data)
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  (0.01, False)
+
+  ```
+
+
+  输出显示数据是非平稳的。因此，在构建 Auto-ARIMA 模型时，我们需要使数据平稳。这里使用了由 ''d'' 值表示的积分（I）概念。
+
+
+  #### 步骤 6-6\. 将数据集拆分为训练集和测试集。
+
+
+  让我们将数据集分为两部分：训练集和测试集。使用训练集构建或训练模型，并使用测试集预测数据。
+
+
+  ```
+
+  #train test split and plot
+
+  train_data = auto_arima_data[:85]
+
+  test_data = auto_arima_data[-20:]
+
+  plt.plot(train_data)
+
+  plt.plot(test_data)
+
+  ```
+
+
+  图 3-18 显示了训练-测试集划分输出。
+
+
+  ![](img/540422_1_En_3_Fig18_HTML.jpg)
+
+
+  图 3-18
+
+
+  训练-测试集划分输出
+
+
+  在图 3-18 中，蓝色线条代表训练集，橙色线条代表测试集。
+
+
+
+
+  #### 步骤 6-7\. 构建 Auto-ARIMA 模型。
+
+
+  在 Auto-ARIMA 模型中，小写的 p、d、q 值表示非季节性成分。大写的 P、D、Q 值表示季节性成分。它的工作原理类似于超参数调优技术，通过不同的组合来寻找
+  p、d、q 的最优值。最终值根据所考虑的较低 AIC 和 BIC 参数来确定。
+
+
+  让我们尝试 p、d、q 值从 0 到 5 的范围，以从模型中获得最佳值。
+
+
+  ```
+
+  #model building with parameters
+
+  auto_arima_model = auto_arima(train_data, start_p = 0, d=1, start_q = 0, max_p =
+  5, max_d = 5,
+
+  max_q= 5, start_P = 0, D=1, start_Q = 0, max_P = 5, max_D = 5,
+
+  max_Q= 5, m=12, seasonal = True, error_action = ''warn'', trace = True, supress_warnings=
+  True,
+
+  stepwise = True, random_state =20, n_fits = 50)
+
+  ```
+
+
+  图 3-19 展示了 Auto-ARIMA 的输出。
+
+
+  ![](img/540422_1_En_3_Fig19_HTML.jpg)
+
+
+  图 3-19
+
+
+  Auto-ARIMA 输出
+
+
+  以下是模型的摘要。
+
+
+  ```
+
+  #model summary
+
+  auto_arima_model.summary()
+
+  ```
+
+
+  图 3-20 展示了 Auto-ARIMA 模型的摘要。
+
+
+  ![](img/540422_1_En_3_Fig20_HTML.jpg)
+
+
+  图 3-20
+
+
+  Auto-ARIMA 模型摘要
+
+
+  #### 步骤 6-8\. 使用测试数据进行预测。
+
+
+  让我们使用测试集进行预测。
+
+
+  ```
+
+  #forecasting on test set
+
+  pred = pd.DataFrame(auto_arima_model.predict(n_periods = 20), index = test_data.index)
+
+  pred.columns= [''pred_sales'']
+
+  #plot
+
+  plt.figure(figsize=(8,5))
+
+  plt.plot(train_data, label = "Training data")
+
+  plt.plot(test_data, label = "Test data")
+
+  plt.plot(pred, label = "Predicted data")
+
+  plt.legend()
+
+  plt.show()
+
+  ```
+
+
+  图 3-21 展示了预测输出。
+
+
+  ![](img/540422_1_En_3_Fig21_HTML.jpg)
+
+
+  图 3-21
+
+
+  预测输出
+
+
+  #### 步骤 6-9\. 评估模型。
+
+
+  让我们使用测试集的预测来评估模型。
+
+
+  ```
+
+  #Evaluating using r square score
+
+  test_data[''prediction''] = pred
+
+  r2_score(test_data[''Champagne sales''],test_data[''prediction''])
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  0.811477383636726
+
+  ```
+
+
+  ## 配方 3-7\. 使用 VAR 模型进行多元时间序列预测
+
+
+  ### 问题
+
+
+  您想要加载时间序列数据并使用多个特征进行预测。
+
+
+  ### 解决方案
+
+
+  使用 statsmodels 中定义的向量自回归（VAR）模型可以轻松实现。
+
+
+  ### 工作原理
+
+
+  以下步骤读取数据并使用 VAR 模型进行预测。
+
+
+  #### 步骤 7-1\. 导入所需的库。
+
+
+  ```
+
+  #import all the required libraries
+
+  import pandas as pd
+
+  from math import sqrt
+
+  from sklearn.metrics import mean_squared_error
+
+  from statsmodels.tsa.vector_ar.vecm import coint_johansen
+
+  from statsmodels.tsa.vector_ar.var_model import VAR
+
+  ```
+
+
+  #### 步骤 7-2\. 读取数据。
+
+
+  从 Git 链接下载数据。
+
+
+  以下代码读取数据。
+
+
+  ```
+
+  #read data
+
+  var_data = pd.read_excel(''AirQualityUCI.xlsx'', parse_dates=[[''Date'', ''Time'']])
+
+  var_data.head()
+
+  ```
+
+
+  在读取数据时，让我们解析日期时间列。
+
+
+  图 3-22 展示了输出的数据框。
+
+
+  ![](img/540422_1_En_3_Fig22_HTML.jpg)
+
+
+  图 3-22
+
+
+  输出数据框
+
+
+  读取数据后，让我们确保没有空值。
+
+
+  #### 步骤 7-3\. 预处理数据。
+
+
+  ```
+
+  #check missing values
+
+  var_data.isnull().sum()
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  Date_Time        0
+
+  CO(GT)           0
+
+  PT08.S1(CO)      0
+
+  NMHC(GT)         0
+
+  C6H6(GT)         0
+
+  PT08.S2(NMHC)    0
+
+  NOx(GT)          0
+
+  PT08.S3(NOx)     0
+
+  NO2(GT)          0
+
+  PT08.S4(NO2)     0
+
+  PT08.S5(O3)      0
+
+  T                0
+
+  RH               0
+
+  AH               0
+
+  dtype: int64
+
+  ```
+
+
+  现在，让我们将 Date_Time 变量的数据类型从字符串更改为日期时间。同时，使用 `set_index` 方法将数据框的索引设置为此变量。
+
+
+  ```
+
+  var_data[''Date_Time''] = pd.to_datetime(var_data.Date_Time , format = ''%d/%m/%Y
+  %H.%M.%S'')
+
+  var_data1 = var_data.drop([''Date_Time''], axis=1)
+
+  var_data1.index = var_data.Date_Time
+
+  var_data1.head()
+
+  ```
+
+
+  图 3-23 展示了输出的数据框。
+
+
+  ![](img/540422_1_En_3_Fig23_HTML.jpg)
+
+
+  图 3-23
+
+
+  输出数据框
+
+
+  目前，数据集中没有缺失值。为了安全起见，让我们准备一段代码，以防数据集中出现任何空值。
+
+
+  ```
+
+  #missing value treatment
+
+  cols = var_data1.columns
+
+  for j in cols:
+
+  for i in range(0,len(var_data1)):
+
+  if var_data1[j][i] == -200:
+
+  var_data1[j][i] = var_data1[j][i-1]
+
+  ```
+
+
+  #### 步骤 7-4\. 检查平稳性。
+
+
+  让我们使用 ADF 检验来检查数据的平稳性。该检验最多适用于 12 个变量，因此由于有 13 个变量，我们随机删除一个。
+
+
+  ```
+
+  #checking stationarity
+
+  from statsmodels.tsa.vector_ar.vecm import coint_johansen
+
+  #since the test works for only 12 variables, I have randomly dropped
+
+  #in the next iteration, I would drop another and check the eigenvalues
+
+  test = var_data1.drop([ ''CO(GT)''], axis=1)
+
+  coint_johansen(test,-1,1).eig
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  array([1.75628733e-01, 1.52399674e-01, 1.15090998e-01, 1.04309966e-01,
+
+  9.29562919e-02, 6.90255307e-02, 5.76654697e-02, 3.43596700e-02,
+
+  3.06350634e-02, 1.18801270e-02, 2.46819409e-03, 7.09473977e-05])
+
+  ```
+
+
+  #### 步骤 7-5\. 将数据集拆分为训练集和测试集。
+
+
+  让我们拆分数据集。
+
+
+  ```
+
+  #creating the train and validation set
+
+  train_data = var_data1[:int(0.8*(len(var_data1)))]
+
+  valid_data = var_data1[int(0.8*(len(var_data1))):]
+
+  ```
+
+
+  #### 步骤 7-6\. 构建 VAR 模型并在测试集上进行预测。
+
+
+  ```
+
+  ##fit the model
+
+  from statsmodels.tsa.vector_ar.var_model import VAR
+
+  var_model = VAR(endog=train_data)
+
+  var_model_fit = var_model.fit()
+
+  # make prediction on validation
+
+  pred = var_model_fit.forecast(var_model_fit.endog, steps=len(valid_data))
+
+  pred
+
+  ```
+
+
+  图 3-24 展示了预测输出。
+
+
+  ![](img/540422_1_En_3_Fig24_HTML.jpg)
+
+
+  图 3-24
+
+
+  预测输出
+
+
+  预测结果以数组形式呈现，其中每个列表代表一行的预测值。让我们将其转换为更易读的格式。
+
+
+  ```
+
+  ##converting predictions to dataframe
+
+  pred1 = pd.DataFrame(index=range(0,len(pred)),columns=[cols])
+
+  for j in range(0,13):
+
+  for i in range(0, len(pred1)):
+
+  pred1.iloc[i][j] = pred[i][j]
+
+  pred1
+
+  ```
+
+
+  图 3-25 展示了输出的数据框。
+
+
+  ![](img/540422_1_En_3_Fig25_HTML.jpg)
+
+
+  图 3-25
+
+
+  输出数据框
+
+
+  #### 步骤 7-7\. 评估模型。
+
+
+  让我们获取每个变量的 RMSE（均方根误差）评估指标。
+
+
+  ```
+
+  ##check rmse
+
+  for i in cols:
+
+  print(''rmse value for'', i, ''is : '', sqrt(mean_squared_error(pred1[i], valid_data[i])))
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  rmse value for CO(GT) is :  1.4086965424457896
+
+  rmse value for PT08.S1(CO) is :  205.91037633777376
+
+  rmse value for NMHC(GT) is :  6.670741427642936
+
+  rmse value for C6H6(GT) is :  7.130304477786223
+
+  rmse value for PT08.S2(NMHC) is :  277.8562837309765
+
+  rmse value for NOx(GT) is :  214.7579379769933
+
+  rmse value for PT08.S3(NOx) is :  244.9612992895686
+
+  rmse value for NO2(GT) is :  66.65226538131333
+
+  rmse value for PT08.S4(NO2) is :  490.052866528993
+
+  rmse value for PT08.S5(O3) is :  446.50499189012726
+
+  rmse value for T is :  10.722429361274823
+
+  rmse value for RH is :  17.114848634832306
+
+  rmse value for AH is :  0.5216105887695865
+
+  ```
+
+
+
+
+  '
+- '# 4. 基于机器学习回归的预测
+
+
+  前几章介绍了如何使用时间序列算法预测未来值。同样，在时间序列建模中，有两种类型的时间序列：单变量和多变量。更多信息请参考第 2 章和第 3 章。
+
+
+  本章旨在构建用于时间序列预测的经典机器学习回归算法。基于机器学习的预测之所以强大，是因为它能够利用其他因素/特征来预测数值。
+
+
+  本章重点介绍如何构建用于预测的回归模型。
+
+
+  *   方法 4-1. 为时间序列预测构建回归模型
+
+
+  *   方法 4-2. 实现 XGBoost 模型
+
+
+  *   方法 4-3. 实现 LightGBM 模型
+
+
+  *   方法 4-4. 实现随机森林模型
+
+
+  *   方法 4-5. 选择最佳模型
+
+
+  ## 方法 4-1. 为时间序列预测构建回归模型
+
+
+  ### 问题
+
+
+  您希望为时间序列预测构建回归模型。
+
+
+  ### 解决方案
+
+
+  以下是基于机器学习回归的预测的基本步骤。
+
+
+  1.  数据收集
+
+  2.  数据清洗与预处理
+
+  3.  特征选择
+
+  4.  训练-测试-验证集划分
+
+  5.  模型构建
+
+  6.  评估
+
+  7.  预测
+
+
+  图 4-1 展示了构建基于机器学习回归的预测的步骤。
+
+
+  ![](img/540422_1_En_4_Fig1_HTML.jpg)
+
+
+  图 4-1
+
+
+  输出
+
+
+  ### 工作原理
+
+
+  以下步骤用于构建回归模型。
+
+
+  #### 步骤 1-1. 安装并导入所需的库。
+
+
+  让我们导入所有必需的库。
+
+
+  ```
+
+  #import libraries
+
+  import pandas as pd
+
+  import numpy as np
+
+  import glob
+
+  import time
+
+  from sklearn.feature_selection import SelectKBest
+
+  from sklearn.feature_selection import f_regression
+
+  import xgboost as xgb
+
+  from lightgbm import LGBMRegressor
+
+  from sklearn.ensemble import RandomForestRegressor
+
+  from sklearn.metrics import mean_squared_error
+
+  from plotly.offline import init_notebook_mode, iplot
+
+  import plotly.graph_objs as go
+
+  from plotly import tools
+
+  init_notebook_mode(connected=True)
+
+  from sklearn.metrics import mean_squared_error
+
+  ```
+
+
+  #### 步骤 1-2. 收集数据。
+
+
+  本章使用电力消耗数据。请从 GitHub 上获取该数据集。
+
+
+  以下代码用于读取数据。
+
+
+  ```
+
+  df = pd.read_csv(''train_6BJx641.csv'')
+
+  df.head()
+
+  ```
+
+
+  图 4-2 显示了数据的前五行。
+
+
+  ![](img/540422_1_En_4_Fig2_HTML.jpg)
+
+
+  图 4-2
+
+
+  输出
+
+
+  #### 步骤 1-3. 预处理数据并创建特征（特征工程）。
+
+
+  在构建任何模型之前，必须检查数据质量并根据模型要求进行预处理。
+
+
+  那么，让我们看看需要哪些清洗和预处理步骤。
+
+
+  数据集中包含一个 ID 列，该列不能直接输入模型，因此我们先删除 ID 列。
+
+
+  ```
+
+  del df[''ID'']
+
+  ```
+
+
+  让我们检查缺失值。
+
+
+  ```
+
+  df.isnull().sum()
+
+  ```
+
+
+  图 4-3 显示了缺失值的输出结果。
+
+
+  ![](img/540422_1_En_4_Fig3_HTML.jpg)
+
+
+  图 4-3
+
+
+  输出
+
+
+  输出结果如下。
+
+
+  所有列中均不存在缺失值，因此无需处理。
+
+
+  现在，让我们检查每列的数据类型。
+
+
+  ```
+
+  df.info()
+
+  ```
+
+
+  图 4-4 显示了每列数据类型的输出结果。
+
+
+  ![](img/540422_1_En_4_Fig4_HTML.jpg)
+
+
+  图 4-4
+
+
+  输出
+
+
+  让我们将日期列转换为 pandas 的 datetime 格式，并创建特征（即所谓的*特征工程*）。
+
+
+  ```
+
+  #Creating datetime features to use in the model to capture seasonality
+
+  df[''time''] = pd.to_datetime(df[''datetime''])
+
+  df[''year''] = df.time.dt.year
+
+  df[''month''] = df.time.dt.month
+
+  df[''day''] = df.time.dt.day
+
+  df[''hour''] = df.time.dt.hour
+
+  df.drop(''time'', axis=1, inplace=True)
+
+  df.head()
+
+  ```
+
+
+  图 4-5 显示了创建 datetime 特征后前五行的输出结果。
+
+
+  ![](img/540422_1_En_4_Fig5_HTML.jpg)
+
+
+  图 4-5
+
+
+  输出
+
+
+  让我们使用 datetime 列对数据框进行排序，然后将其删除，因为它不参与模型构建。
+
+
+  ```
+
+  #sorting
+
+  df=df.sort_values(by=''datetime'')
+
+  #Deleting the column
+
+  del df[''datetime'']
+
+  ```
+
+
+  图 4-6 显示了排序并删除 datetime 列后前五行的输出结果。
+
+
+  ![](img/540422_1_En_4_Fig6_HTML.jpg)
+
+
+  图 4-6
+
+
+  输出
+
+
+  年、月、日、小时列是通过 datetime 列创建的，并将它们用于构建模型以捕捉趋势和季节性。同样，您也可以添加目标变量的滞后特征作为特征。
+
+
+  *创建滞后特征的代码片段：df[‘lag1’]=df[‘col name’].shift(1)*
+
+
+  数据集中包含一个分类特征，因此我们使用独热编码方法进行编码。
+
+
+  ```
+
+  #convering all categorical columns to numerical.
+
+  df1=pd.get_dummies(df)
+
+  ```
+
+
+  图 4-7 显示了编码后前五行的输出结果。
+
+
+  ![](img/540422_1_En_4_Fig7_HTML.jpg)
+
+
+  图 4-7
+
+
+  输出
+
+
+  这里使用了 get_dummies 方法。该方法在 pandas 中定义，用于将所有分类列编码为数值列。该数据集中只有一列分类数据。
+
+
+  所需的清洗和预处理已完成。接下来，我们关注特征选择。
+
+
+  #### 步骤 1-4. 选择特征。
+
+
+  为了构建监督式机器学习模型，您需要考虑那些对目标特征有显著影响的特征。
+
+
+  为了获取构建模型所需的显著特征，您可以执行高级统计检验，如方差分析、卡方检验和相关性分析，或者使用 sklearn 中定义的内置函数 SelectKBest，它通过为每列提供评分来帮助您选择特征。
+
+
+  在使用 SelectKBest 之前，让我们为所有自变量和目标特征创建单独的对象。
+
+
+  ```
+
+  #creating target and features objects
+
+  x = df1.drop(columns=[''electricity_consumption''])
+
+  y = df1.iloc[:,4]
+
+  ```
+
+
+  现在，让我们拟合 SelectKBest。
+
+
+  ```
+
+  #implementing selectKbest
+
+  st=time.time()
+
+  bestfeatures = SelectKBest(score_func=f_regression)
+
+  fit = bestfeatures.fit(x,y)
+
+  et=time.time()-st
+
+  print(et)
+
+  dfscores = pd.DataFrame(fit.scores_)
+
+  dfcolumns = pd.DataFrame(x.columns)
+
+  featureScores = pd.concat([dfcolumns,dfscores],axis=1)
+
+  featureScores.columns = [''Featuress'',''Score'']
+
+  best_features=featureScores.nlargest(5,''Score'')
+
+  best_features
+
+  ```
+
+
+  图 4-8 显示了前五个特征的输出结果。
+
+
+  ![](img/540422_1_En_4_Fig8_HTML.jpg)
+
+
+  图 4-8
+
+
+  输出
+
+
+  n 值为 5，因此显示了五个带有评分的特征。
+
+
+
+
+  #### 步骤 1-5：处理训练集、测试集和验证集的划分。
+
+
+  特征选择部分已完成。现在，我们来划分数据集以进行模型构建。你可以使用内置函数来分割数据。但由于这是一个预测问题，我们不希望随机分割。最新的日期记录应归入验证集，最早的记录应归入训练集，中间的记录则归入测试集。
+
+
+  让我们使用基本的 pandas 方法来分割数据。
+
+
+  ```
+
+  # 训练集-测试集-验证集划分
+
+  test=df1.tail(7940)
+
+  #测试集
+
+  test1=test.head(7440)
+
+  #训练集
+
+  train=df1.head(18556)
+
+  #验证集
+
+  pred=test.tail(500)
+
+  ```
+
+
+  数据已准备就绪且格式正确，现在开始建模过程。
+
+
+  让我们尝试多种模型，然后选择性能最佳的一个。
+
+
+  请注意，在构建模型时，无论特征选择的结果如何，都会考虑所有特征。
+
+
+  在拟合模型之前，再次为所有自变量和目标特征创建单独的对象。
+
+
+  ```
+
+  #创建目标和特征对象
+
+  #用于训练集
+
+  y_train=train.iloc[:,4]
+
+  X_train=train.drop(columns=[''electricity_consumption''])
+
+  #用于测试集
+
+  y_test=test1.iloc[:,4]
+
+  X_test=test1.drop(columns=[''electricity_consumption''])
+
+  #用于验证集
+
+  y_pred=pred.iloc[:,4]
+
+  X_pred=pred.drop(columns=[''electricity_consumption''])
+
+  ```
+
+
+  ## 方案 4-2：实现 XGBoost 模型
+
+
+  ### 问题
+
+
+  你想使用 XGBoost 模型。
+
+
+  ### 解决方案
+
+
+  最简单的构建方法是使用 sklearn 库。
+
+
+  ### 工作原理
+
+
+  让我们按照步骤进行。
+
+
+  #### 步骤 2-1：构建 XGBoost 模型。
+
+
+  预处理后的训练数据（来自方案 4-1）已准备好用于构建模型。让我们构建 XGBoost 模型。
+
+
+  ```
+
+  # Xgboost 模型
+
+  xg_reg = xgb.XGBRegressor(objective =''reg:linear'', colsample_bytree = 0.3, learning_rate
+  = 0.1,
+
+  max_depth = 100, alpha = 10, n_estimators = 140)
+
+  xg_reg.fit(X_train,y_train)
+
+  ```
+
+
+  #### 步骤 2-2：在测试集上评估 XGBoost 模型。
+
+
+  ```
+
+  # 在测试数据上评估模型
+
+  predictions = xg_reg.predict(X_test)
+
+  errors = abs(predictions - y_test)
+
+  mape = 100 * np.mean(errors / y_test)
+
+  mse=mean_squared_error(y_test,predictions)
+
+  RMSE=np.sqrt(mse)
+
+  print("XGBOOST 模型")
+
+  print("测试集的 mape 值",mape)
+
+  print("测试集的 mse 值",mse)
+
+  print("测试集的 RMSE 值",RMSE)
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  XGBOOST 模型
+
+  测试集的 mape 值 20.395743624282215
+
+  测试集的 mse 值 9949.946409810507
+
+  测试集的 RMSE 值 99.74941809259093
+
+  ```
+
+
+  #### 步骤 2-3：在验证集上评估 XGBoost 模型。
+
+
+  ```
+
+  # 在测试数据上评估模型
+
+  predictions = xg_reg.predict(X_pred)
+
+  errors = abs(predictions - y_pred)
+
+  mape = 100 * np.mean(errors / y_pred)
+
+  mse=mean_squared_error(y_pred,predictions)
+
+  RMSE=np.sqrt(mse)
+
+  print("XGBOOST 模型")
+
+  print("验证集的 mape 值",mape)
+
+  print("验证集的 mse 值",mse)
+
+  print("验证集的 RMSE 值",RMSE)
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  XGBOOST 模型
+
+  验证集的 mape 值 18.31413324392246
+
+  验证集的 mse 值 6692.219349248934
+
+  验证集的 RMSE 值 81.80598602332799
+
+  ```
+
+
+  ## 方案 4-3：实现 LightGBM 模型
+
+
+  ### 问题
+
+
+  你想使用 LightGBM 模型。
+
+
+  ### 解决方案
+
+
+  最简单的构建方法是使用 sklearn 库。
+
+
+  ### 工作原理
+
+
+  让我们按照步骤进行。
+
+
+  #### 步骤 3-1：构建 LightGBM 模型。
+
+
+  使用相同的预处理训练数据（来自方案 4-1）来构建 LightGBM 模型。
+
+
+  ```
+
+  # LightGBM 模型
+
+  lgb_reg = LGBMRegressor(n_estimators=100, random_state=42)
+
+  lgb_reg.fit(X_train, y_train)
+
+  ```
+
+
+  #### 步骤 3-2：在测试集上评估 LightGBM 模型。
+
+
+  ```
+
+  # 在测试数据上评估模型
+
+  predictions = lgb_reg.predict(X_test)
+
+  errors = abs(predictions - y_test)
+
+  mape = 100 * np.mean(errors / y_test)
+
+  mse=mean_squared_error(y_test,predictions)
+
+  RMSE=np.sqrt(mse)
+
+  print("LIGHTGBM 模型")
+
+  print("测试集的 mape 值",mape)
+
+  print("测试集的 mse 值",mse)
+
+  print("测试集的 RMSE 值",RMSE)
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  LIGHTGBM 模型
+
+  测试集的 mape 值 17.8086387209238
+
+  测试集的 mse 值 7448.058075387331
+
+  测试集的 RMSE 值 86.30213250776212
+
+  ```
+
+
+  #### 步骤 3-3：在验证集上评估 LightGBM 模型。
+
+
+  ```
+
+  # 在测试数据上评估模型
+
+  predictions = lgb_reg.predict(X_pred)
+
+  errors = abs(predictions - y_pred)
+
+  mape = 100 * np.mean(errors / y_pred)
+
+  mse=mean_squared_error(y_pred,predictions)
+
+  RMSE=np.sqrt(mse)
+
+  print("LIGHTGBM 模型")
+
+  print("验证集的 mape 值",mape)
+
+  print("验证集的 mse 值",mse)
+
+  print("验证集的 RMSE 值",RMSE)
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  LIGHTGBM 模型
+
+  验证集的 mape 值 14.524462046915062
+
+  验证集的 mse 值 4610.576774339071
+
+  验证集的 RMSE 值 67.90122807681074
+
+  ```
+
+
+  ## 方案 4-4：实现随机森林模型
+
+
+  ### 问题
+
+
+  你想使用随机森林模型。
+
+
+  ### 解决方案
+
+
+  最简单的构建方法是使用 sklearn 库。
+
+
+  ### 工作原理
+
+
+  让我们按照步骤进行。
+
+
+  #### 步骤 4-1：构建随机森林模型。
+
+
+  使用相同的预处理训练数据（来自方案 4-1）来构建随机森林模型。
+
+
+  ```
+
+  # 随机森林模型
+
+  regr = RandomForestRegressor(n_estimators=100, random_state=42)
+
+  regr.fit(X_train, y_train)
+
+  ```
+
+
+  #### 步骤 4-2：在测试集上评估 LightGBM 模型。
+
+
+  ```
+
+  # 在测试数据上评估模型
+
+  predictions = regr.predict(X_test)
+
+  errors = abs(predictions - y_test)
+
+  mape = 100 * np.mean(errors / y_test)
+
+  mse=mean_squared_error(y_test,predictions)
+
+  RMSE=np.sqrt(mse)
+
+  print("随机森林模型")
+
+  print("测试集的 mape 值",mape)
+
+  print("测试集的 mse 值",mse)
+
+  print("测试集的 RMSE 值",RMSE)
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  随机森林模型
+
+  测试集的 mape 值 18.341864621229462
+
+  测试集的 mse 值 7642.701889959678
+
+  测试集的 RMSE 值 87.42254794936875
+
+  ```
+
+
+  #### 步骤 4-3：在验证集上评估 LightGBM 模型。
+
+
+  ```
+
+  # 在测试数据上评估模型
+
+  predictions = regr.predict(X_pred)
+
+  errors = abs(predictions - y_pred)
+
+  mape = 100 * np.mean(errors / y_pred)
+
+  mse=mean_squared_error(y_pred,predictions)
+
+  RMSE=np.sqrt(mse)
+
+  print("随机森林模型")
+
+  print("验证集的 mape 值",mape)
+
+  print("验证集的 mse 值",mse)
+
+  print("验证集的 RMSE 值",RMSE)
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  随机森林模型
+
+  验证集的 mape 值 16.41982254170068
+
+  验证集的 mse 值 5138.454886199999
+
+  验证集的 RMSE 值 71.68301672083841
+
+  ```
+
+
+  ## 方案 4-5：选择最佳模型
+
+
+  ### 问题
+
+
+  你想从所有已实现的模型中选择性能最佳的模型。
+
+
+  ### 解决方案
+
+
+  以下是使用的一些评估指标。
+
+
+  *   **MAE**（平均绝对误差）计算为绝对误差项的均值，其中误差是实际值与预测值之间的差值。
+
+
+  *   **MSE**（均方误差）是平方误差项的均值，其中误差是实际值与预测值之间的差值。
+
+
+  *   **RMSE**（均方根误差）是均方误差的平方根。
+
+
+  *   **MAPE**（平均绝对百分比误差）是绝对百分比误差的均值，其中百分比误差是误差与实际值的比率。
+
+
+  *   **准确率** 在时间序列和回归中，通过 1 减去平均绝对百分比误差来计算。
+
+
+  所有三个回归模型都已训练完成。与其查看每个模型在每次训练时的评估指标，不如使用一段代码来提供最佳预测模型，并将预测值与实际值绘制成图。
+
+
+  ### 工作原理
+
+
+  以下步骤用于选择性能最佳的模型。
+
+
+
+
+  #### 步骤 5-1\. 评估方法。
+
+
+  让我们编写一个函数来评估这些模型。
+
+
+  ```
+
+  #function to evaluate the model.
+
+  def evaluate(model, test_features, test_labels):
+
+  predictions = model.predict(test_features)
+
+  errors = abs(predictions - test_labels)
+
+  mape = 100 * np.mean(errors / test_labels)
+
+  accuracy = 100 - mape
+
+  mse=mean_squared_error(test_labels,predictions)
+
+  RMSE=np.sqrt(mse)
+
+  print(''Model Performance'')
+
+  print(''Average Error: {:0.4f} degrees.''.format(np.mean(errors)))
+
+  print(''Accuracy = {:0.2f}%.''.format(accuracy))
+
+  print(''RMSE = {:0.2f}''.format(RMSE))
+
+  return accuracy,predictions,RMSE
+
+  ```
+
+
+  #### 步骤 5-2\. 在测试集中比较性能。
+
+
+  让我们调用评估函数来获取性能最佳的模型，该函数将返回最佳模型名称、模型对象和预测结果。
+
+
+  让我们检查测试集中性能最佳的模型。
+
+
+  ```
+
+  models=[xg_reg,lgb_reg,regr]
+
+  model_name=[''XGBoost'',''LightGBM'',''RandomForest'']
+
+  model_RMSE=[]
+
+  model_predictions=[]
+
+  for item in models:
+
+  base_accuracy,predictions,RMSE=evaluate(item,X_test,y_test)
+
+  model_RMSE.append(RMSE)
+
+  model_predictions.append(predictions)
+
+  r=model_RMSE.index(min(model_RMSE))
+
+  best_model_predictions=model_predictions[r]
+
+  best_model_name=model_name[r]
+
+  best_model=models[r]
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  Model Performance
+
+  Average Error: 67.7595 degrees.
+
+  Accuracy = 79.60%.
+
+  RMSE = 99.75
+
+  Model Performance
+
+  Average Error: 58.4586 degrees.
+
+  Accuracy = 82.19%.
+
+  RMSE = 86.30
+
+  Model Performance
+
+  Average Error: 59.3871 degrees.
+
+  Accuracy = 81.66%.
+
+  RMSE = 87.42
+
+  ```
+
+
+  ```
+
+  print(''Best Model:'')
+
+  print(best_model_name)
+
+  print(''Model Object:'')
+
+  print(best_model)
+
+  print(''Predictions:'')
+
+  print(best_model_predictions)
+
+  ```
+
+
+  图 4-9 展示了测试集的最佳模型、模型对象和预测结果。
+
+
+  输出如下。
+
+
+  ![](img/540422_1_En_4_Fig9_HTML.jpg)
+
+
+  图 4-9
+
+
+  输出
+
+
+  在这三个回归模型中，LightGBM 在两个测试集上表现最佳，其 RMSE 最低（86）。
+
+
+  让我们使用 LightGBM 模型的预测结果。
+
+
+  #### 步骤 5-3\. 绘制测试集中 LightGBM 模型预测值与实际值的对比图。
+
+
+  让我们使用 Plotly 为测试集绘制预测值与实际值的对比图。
+
+
+  ```
+
+  #Plot timeseries
+
+  y_test=pd.DataFrame(y_test)
+
+  y_test[''predictions'']=best_model_predictions
+
+  X_test[''datetime'']=pd.to_datetime(X_test[[''year'',''month'',''day'',''hour'']])
+
+  y_test[''datetime'']=X_test[''datetime'']
+
+  y_test=y_test.sort_values(by=''datetime'')
+
+  trace0 = go.Scatter(x=y_test[''datetime''].astype(str), y=y_test[''electricity_consumption''].values,
+  opacity = 0.8, name=''actual_value'')
+
+  trace1 = go.Scatter(x=y_test[''datetime''].astype(str), y=y_test[''predictions''].values,
+  opacity = 0.8, name=''prediction'')
+
+  layout = dict(
+
+  title= "Prediction vs actual:",
+
+  xaxis=dict(
+
+  rangeselector=dict(
+
+  buttons=list([
+
+  dict(count=1, label=''1m'', step=''month'', stepmode=''backward''),
+
+  dict(count=6, label=''6m'', step=''month'', stepmode=''backward''),
+
+  dict(count=12, label=''12m'', step=''month'', stepmode=''backward''),
+
+  dict(step=''all'')
+
+  ])
+
+  ),
+
+  rangeslider=dict(visible = True),
+
+  type=''date''
+
+  )
+
+  )
+
+  fig = dict(data= [trace0,trace1], layout=layout)
+
+  iplot(fig)
+
+  ```
+
+
+  图 4-10 展示了测试集的预测值与实际值对比图。
+
+
+  ![](img/540422_1_En_4_Fig10_HTML.jpg)
+
+
+  图 4-10
+
+
+  输出
+
+
+  #### 步骤 5-4\. 在验证集中比较性能。
+
+
+  让我们检查验证集中性能最佳的模型。
+
+
+  ```
+
+  models=[xg_reg,lgb_reg,regr]
+
+  model_name=[''XGBoost'',''LightGBM'',''RandomForest'']
+
+  model_RMSE=[]
+
+  model_predictions=[]
+
+  for item in models:
+
+  base_accuracy,predictions,RMSE=evaluate(item,X_pred,y_pred)
+
+  model_RMSE.append(RMSE)
+
+  model_predictions.append(predictions)
+
+  r=model_RMSE.index(min(model_RMSE))
+
+  best_model_predictions=model_predictions[r]
+
+  best_model_name=model_name[r]
+
+  best_model=models[r]
+
+  ```
+
+
+  输出如下。
+
+
+  ```
+
+  Model Performance
+
+  Average Error: 54.9496 degrees.
+
+  Accuracy = 81.69%.
+
+  RMSE = 81.81
+
+  Model Performance
+
+  Average Error: 43.6196 degrees.
+
+  Accuracy = 85.48%.
+
+  RMSE = 67.90
+
+  Model Performance
+
+  Average Error: 46.8309 degrees.
+
+  Accuracy = 83.58%.
+
+  RMSE = 71.68
+
+  ```
+
+
+  ```
+
+  print(''Best Model:'')
+
+  print(best_model_name)
+
+  print(''Model Object:'')
+
+  print(best_model)
+
+  print(''Predictions:'')
+
+  print(best_model_predictions)
+
+  ```
+
+
+  图 4-11 展示了验证集的最佳模型、模型对象和预测结果。
+
+
+  输出如下。
+
+
+  ![](img/540422_1_En_4_Fig11_HTML.jpg)
+
+
+  图 4-11
+
+
+  输出
+
+
+  在这三个回归模型中，LightGBM 在两个测试集上表现最佳，其 RMSE 最低（67）。
+
+
+  让我们使用 LightGBM 模型的预测结果。
+
+
+  #### 步骤 5-5\. 绘制验证集中 LightGBM 模型预测值与实际值的对比图。
+
+
+  让我们使用 Plotly 为验证集绘制预测值与实际值的对比图。
+
+
+  ```
+
+  #Plot timeseries
+
+  y_pred=pd.DataFrame(y_pred)
+
+  y_pred[''predictions'']=best_model_predictions
+
+  X_pred[''datetime'']=pd.to_datetime(X_pred[[''year'',''month'',''day'',''hour'']])
+
+  y_pred[''datetime'']=X_pred[''datetime'']
+
+  y_pred=y_pred.sort_values(by=''datetime'')
+
+  trace0 = go.Scatter(x=y_pred[''datetime''].astype(str), y=y_pred[''electricity_consumption''].values,
+  opacity = 0.8, name=''actual_value'')
+
+  trace1 = go.Scatter(x=y_pred[''datetime''].astype(str), y=y_pred[''predictions''].values,
+  opacity = 0.8, name=''prediction'')
+
+  layout = dict(
+
+  title= "Prediction vs actual:",
+
+  xaxis=dict(
+
+  rangeselector=dict(
+
+  buttons=list([
+
+  dict(count=1, label=''1m'', step=''month'', stepmode=''backward''),
+
+  dict(count=6, label=''6m'', step=''month'', stepmode=''backward''),
+
+  dict(count=12, label=''12m'', step=''month'', stepmode=''backward''),
+
+  dict(step=''all'')
+
+  ])
+
+  ),
+
+  rangeslider=dict(visible = True),
+
+  type=''date''
+
+  )
+
+  )
+
+  fig = dict(data= [trace0,trace1], layout=layout)
+
+  iplot(fig)
+
+  ```
+
+
+  图 4-12 展示了验证集的预测值与实际值对比图。
+
+
+  ![](img/540422_1_En_4_Fig12_HTML.jpg)
+
+
+  图 4-12
+
+
+  输出
+
+
+  从两张图表来看，LightGBM 模型的预测效果相当不错。
+
+
+  '
+- "# 5. 基于深度学习的时间序列预测\n\n深度学习方法为时间序列预测带来了巨大前景，例如自动学习时间依赖性以及自动处理趋势和季节性等时间结构。\n\n近年来，随着数据和计算能力的日益普及，深度学习已成为新一代时间序列预测模型的重要组成部分，并取得了卓越的成果。\n\
+  \n在经典的机器学习模型（如自回归模型（AR）或指数平滑法）中，特征工程是手动完成的，并且通常会结合领域知识来优化某些参数。而深度学习模型则仅直接从数据中学习特征和动态。得益于此，它们加快了数据准备过程，并能全面学习更复杂的数据模式。\n\
+  \n本章包含以下主题。\n\n*   方案 5-1\\. 使用 LSTM 进行时间序列预测\n\n*   方案 5-2\\. 使用 GRU 模型进行多变量时间序列预测\n\
+  \n*   方案 5-3\\. 使用 NeuralProphet 进行时间序列预测\n\n*   方案 5-4\\. 使用 RNN 进行时间序列预测\n\n##\
+  \ 方案 5-1\\. 使用 LSTM 进行时间序列预测\n\n### 问题\n\n您希望加载时间序列数据并使用 LSTM 进行预测。\n\n### 解决方案\n\
+  \n通过使用 Keras 中定义的内置方法，可以轻松实现。\n\n### 工作原理\n\n以下步骤使用 LSTM 读取数据并进行预测。\n\n#### 步骤 1-1\\\
+  . 导入所需的库。\n\n```\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot\
+  \ as plt\nimport tensorflow as tf\nimport sklearn.preprocessing\nfrom sklearn.metrics\
+  \ import r2_score\nfrom keras.layers import Dense,Dropout,SimpleRNN,LSTM\nfrom keras.models\
+  \ import Sequential\n```\n\n\n\n#### 步骤 1-2\\. 使用 DOM_hourly.csv 数据进行分析。\n\n让我们使用\
+  \ DOM_hourly 数据（即 Dominion Energy (DOM) 的时间序列数据）来测量以兆瓦 (MW) 为单位的预估能耗。\n\n```\nfile_path\
+  \ ='./data/DOM_hourly.csv'\n```\n\n#### 步骤 1-3\\. 读取数据。\n\n```\ndata = pd.read_csv(file_path,\
+  \ index_col='Datetime', parse_dates=['Datetime'])\ndata.head()\n```\n\n图 5-1 显示了数据框的前几行。\n\
+  \n![](img/540422_1_En_5_Fig1_HTML.jpg)\n\n图 5-1\n\n输出\n\n#### 步骤 1-4\\. 检查缺失数据。\n\
+  \n```\ndata.isna().sum()\n```\n\n输出如下。\n\n```\nDOM_MW    0\ndtype: int64\n```\n\n\
+  #### 步骤 1-5\\. 绘制时间序列数据。\n\n```\ndata.plot(figsize=(16,4),legend=True)\nplt.title('DOM\
+  \ hourly power consumption data - BEFORE NORMALIZATION')\nplt.show()\n```\n\n图 5-2\
+  \ 显示了时间序列图。\n\n![](img/540422_1_En_5_Fig2_HTML.jpg)\n\n图 5-2\n\n输出\n\n#### 步骤 1-6\\\
+  . 编写一个函数来归一化数据。\n\n```\ndef normalize_fn(data):\nscaler_object = sklearn.preprocessing.MinMaxScaler()\n\
+  data['DOM_MW']=scaler_object.fit_transform(data['DOM_MW'].values.reshape(-1,1))\n\
+  return data\n```\n\n#### 步骤 1-7\\. 调用 normalize_fn 函数。\n\n```\ndata_norm = normalize_fn(data)\n\
+  data_norm.head()\n```\n\n图 5-3 显示了输出的数据框。\n\n![](img/540422_1_En_5_Fig3_HTML.jpg)\n\
+  \n图 5-3\n\n输出\n\n#### 步骤 1-7\\. 绘制归一化后的数据。\n\n```\ndata_norm.plot(figsize=(16,4),legend=True)\n\
+  plt.title('DOM hourly power consumption data - AFTER NORMALIZATION')\n```\n\n```\n\
+  plt.show()\n```\n\n#### 步骤 1-8\\. 创建一个函数来执行数据准备和训练-测试分割。\n\n```\ndef data_prep(data,\
+  \ length):\nX = []\n```\n\n```\ny = []\nfor i in range(length, len(data)):\nX.append(data.iloc[i\
+  \ - length: i, 0])\ny.append(data.iloc[i, 0])\n# train-test split\n# training contains\
+  \ first 110000 days and test contains the remaining 6189 days\ntrain_X = X[:110000]\n\
+  train_y = y[:110000]\ntest_X = X[110000:]\ntest_y = y[110000:]\n# converting to\
+  \ numpy array\ntrain_X = np.array(train_X)\ntrain_y = np.array(train_y)\ntest_X\
+  \ = np.array(test_X)\ntest_y = np.array(test_y)\n# reshaping data to required format\
+  \ to input to RNN, LSTM models\ntrain_X = np.reshape(train_X, (110000, length, 1))\n\
+  test_X = np.reshape(test_X, (test_X.shape[0], length, 1))\nreturn [train_X, train_y,\
+  \ test_X, test_y]\n```\n\n#### 步骤 1-9\\. 调用 data_prep 函数。\n\n```\nsequence_length\
+  \ = 20\ntrain_X, train_y, test_X, test_y = data_prep(data, sequence_length)\nprint('train_X.shape\
+  \ = ',train_X.shape)\nprint('train_y.shape = ', train_y.shape)\nprint('test_X.shape\
+  \ = ', test_X.shape)\nprint('test_y.shape = ',test_y.shape)\n```\n\n#### 步骤 1-10\\\
+  . 初始化 LSTM 模型。\n\n```\nmodel = Sequential()\nmodel.add(LSTM(40,activation=\"tanh\"\
+  ,return_sequences=True, input_shape=(train_X.shape[1],1)))\nmodel.add(Dropout(0.15))\n\
+  model.add(LSTM(40,activation=\"tanh\",return_sequences=True))\nmodel.add(Dropout(0.15))\n\
+  model.add(LSTM(40,activation=\"tanh\",return_sequences=False))\nmodel.add(Dropout(0.15))\n\
+  model.add(Dense(1))\n```\n\n#### 步骤 1-11\\. 创建模型摘要。\n\n```\nmodel.summary()\n```\n\
+  \n图 5-4 显示了模型摘要。\n\n![](img/540422_1_En_5_Fig4_HTML.jpg)\n\n图 5-4\n\n输出\n\n####\
+  \ 步骤 1-12\\. 拟合模型。\n\n```\nmodel.compile(optimizer=\"adam\",loss=\"MSE\")\nmodel.fit(train_X,\
+  \ train_y, epochs=10, batch_size=1000)\n```\n\n图 5-5 显示了第 1 到第 10 个周期。\n\n![](img/540422_1_En_5_Fig5_HTML.jpg)\n\
+  \n图 5-5\n\n输出\n\n#### 步骤 1-13\\. 进行模型预测并打印评分。\n\n```\npredictions = model.predict(test_X)\n\
+  score = r2_score(test_y,predictions)\nprint(\"R-Squared Score of LSTM model\",score)\n\
+  ```\n\n输出如下。\n\n```\nR-Squared Score of LSTM model =  0.94996673239313\n```\n\n\
+  #### 步骤 1-14\\. 编写一个函数来绘制预测结果。\n\n```\ndef plotting_actual_vs_pred(y_test, y_pred,\
+  \ title):\nplt.figure(figsize=(16, 4))\nplt.plot(y_test, color='blue', label='Actual\
+  \ power consumption data')\nplt.plot(y_pred, alpha=0.7, color='orange', label='Predicted\
+  \ power consumption data')\nplt.title(title)\nplt.xlabel('Time')\nplt.ylabel('Normalized\
+  \ power consumption scale')\nplt.legend()\nplt.show()\n```\n\n#### 步骤 1-15\\. 调用\
+  \ plotting_actual_vs_pred 函数。\n\n```\nplotting_actual_vs_pred(test_y, predictions,\
+  \ \"Predictions made by LSTM model\")\n```\n\n图 5-6 显示了实际值与预测值的对比图。\n\n![](img/540422_1_En_5_Fig6_HTML.jpg)\n\
+  \n图 5-6\n\n输出\n\n## 配方 5-2\\. 使用 GRU 模型进行多变量时间序列预测\n\n### 问题\n\n您想要加载具有多个目标的时间序列数据，并使用\
+  \ GRU 对其进行预测。\n\n### 解决方案\n\n使用 Keras 中定义的内置方法可以轻松实现。\n\n### 工作原理\n\n以下步骤使用 GRU\
+  \ 读取数据并进行预测。\n\n#### 步骤 2-1\\. 导入所需的库。\n\n```\n#import all the required libraries\n\
+  import tensorflow as tf\nfrom tensorflow import keras\nimport numpy as np\nimport\
+  \ pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n```\n\n\
+  #### 步骤 2-2\\. 读取数据。\n\n从 Git 链接下载数据。\n\n以下代码读取数据。\n\n```\n#read data\ntrain_data\
+  \ = pd.read_csv(\"../input/daily-climate-time-series-data/DailyDelhiClimateTrain.csv\"\
+  ,index_col=0)\n# Display dimensions of dataframe\nprint(train_data.shape)\nprint(train_data.info())\n\
+  ```\n\n图 5-7 显示了输出。\n\n![](img/540422_1_En_5_Fig7_HTML.jpg)\n\n图 5-7\n\n输出\n\n除了日期列之外，需要预测的其他四个特征是平均温度、湿度、风速和平均气压。\n\
+  \n#### 步骤 2-3\\. 分析数据。\n\n让我们检查数据集的随机样本记录，并执行单变量分析以查看每列的基本统计信息。\n\n```\n# sample\
+  \ records\nprint(\"-----\")\nprint(\"Original dataset  : \\n\",train_data.sample(10))\n\
+  # Univariate analysis\nprint(\"------\n-------\")\n# Display statistics for numeric\
+  \ columns\nprint(train_data.describe())\n```\n\n图 5-8 显示了样本并描述了数据框。\n\n![](img/540422_1_En_5_Fig8_HTML.jpg)\n\
+  \n图 5-8\n\n输出\n\n数据集包含四列数据（对应日期），因此让我们绘制它们并尝试理解趋势。\n\n```\n#line plots to understand\
+  \ the trend\nprint(\"------------------------------------------\")\ntrain_data.plot(figsize=(12,8),subplots=True)\n\
+  ```\n\n图 5-9 显示了所有四个变量的趋势。\n\n![](img/540422_1_En_5_Fig9_HTML.jpg)\n\n图 5-9\n\n\
+  输出\n\n让我们使用直方图绘制所有变量以分析其分布。\n\n```\n#line plots to understand the trend\nprint(\"\
+  -------------\")\ntrain_data.plot(figsize=(12,8),subplots=True)\n```\n\n图 5-10 显示了所有四个变量的分布。\n\
+  \n![](img/540422_1_En_5_Fig10_HTML.jpg)\n\n图 5-10\n\n输出\n\n\n\n#### 步骤 2-4\\. 数据预处理。\n\
+  \n分析数据后，让我们确保数据中不存在空值。\n\n```\n#检查缺失值\nprint(\"空值数量：\\n\",train_data.isnull().sum())\n\
+  sns.heatmap(train_data.isnull(), cbar=False, yticklabels=False, cmap=\"viridis\"\
+  )\n```\n\n图 5-11 展示了“检查缺失值”的输出结果。\n\n![](img/540422_1_En_5_Fig11_HTML.jpg)\n\n**图\
+  \ 5-11**\n\n**输出**\n\n输出结果如下。\n\n数据中不存在空值。接下来，我们选择特征，并确保所有列的数据类型均为浮点型。\n\n```\n\
+  # 我们选择一个特定的特征（特征集）。在此示例中，\nmy_dataset = train_data[[\"meantemp\",'humidity','wind_speed','meanpressure']]\n\
+  print(\"我们的新数据集：\\n\",my_dataset.sample(5))\n# 更改数据类型\nprint(\"-------------\")\n\
+  # 确保所有数据均为浮点型\nmy_dataset = my_dataset.astype(\"float32\")\nvalues     = my_dataset.values\n\
+  print(\"数值：\\n\",values)\n```\n\n图 5-12 展示了样本数据集。\n\n![](img/540422_1_En_5_Fig12_HTML.png)\n\
+  \n**图 5-12**\n\n**输出**\n\n现在，我们使用 MinMaxScaler 对特征进行归一化。\n\n```\n# # 归一化特征\nfrom\
+  \ sklearn.preprocessing import MinMaxScaler\nscaler = MinMaxScaler(feature_range=(0,\
+  \ 1))\nscaled = scaler.fit_transform(values)\nprint(\"缩放后数据：\\n\",scaled)print(\"\
+  原始数值：\\n\",values)\n```\n\n输出结果如下。\n\n```\nscaled :\n[[0.12227073 0.8209571  0\\\
+  .         0.1326033 ]\n[0.04279476 0.9075908  0.07058267 0.13288099]\n[0.03566229\
+  \ 0.849835   0.10974261 0.1329938 ]\n...\n[0.24745268 0.88063806 0.14842887 0.13289464]\n\
+  [0.276718   0.849835   0.17349596 0.1326597 ]\n[0.12227073 1.0000001  0\\.     \
+  \    0.1326467 ]]\n```\n\n现在，我们将序列转换为监督学习格式。\n\n```\n## 将序列转换为监督学习格式\ndef series_to_supervised(data,\
+  \ n_in=1, n_out=1, dropnan=True):\nn_vars = 1 if type(data) is list else data.shape[1]\n\
+  df = pd.DataFrame(data)\ncols, names = list(), list()\n# 输入序列 (t-n, ... t-1)\nfor\
+  \ i in range(n_in, 0, -1):\ncols.append(df.shift(i))\nnames += [(\"var%d(t-%d)\"\
+  \ % (j+1, i)) for j in range(n_vars)]\n# 预测序列 (t, t+1, ... t+n)\nfor i in range(0,\
+  \ n_out):\ncols.append(df.shift(-i))\nif i == 0:\nnames += [(\"var%d(t)\" % (j+1))\
+  \ for j in range(n_vars)]\nelse:\nnames += [(\"var%d(t+%d)\" % (j+1, i)) for j in\
+  \ range(n_vars)]\n# 合并所有列\nagg = pd.concat(cols, axis=1)\nagg.columns = names\n\
+  # 删除包含 NaN 值的行\nif dropnan:\nagg.dropna(inplace=True)\nreturn agg\n# 调用函数\n# 构建监督学习框架\n\
+  # 重塑为 X=t 和 Y=t+1\ni_in  = 100 # 过去观测值数量\nn_out = 1 # 未来观测值数量\nreframed = series_to_supervised(scaled,\
+  \ i_in, n_out)\nprint(\"将数据集表示为监督学习问题：\\n\",reframed.head(10))\n```\n\n输出结果如下。\n\
+  \n```\n将数据集表示为监督学习问题：\nvar1(t-100)  var2(t-100)  var3(t-100)  var4(t-100)  var1(t-99)\
+  \ \\\n100     0.122271     0.820957     0.000000     0.132603    0.042795\n101 \
+  \    0.042795     0.907591     0.070583     0.132881    0.035662\n102     0.035662\
+  \     0.849835     0.109743     0.132994    0.081514\n103     0.081514     0.668867\
+  \     0.029212     0.132799    0.000000\n104     0.000000     0.847910     0.087636\
+  \     0.132712    0.030568\n105     0.030568     0.801320     0.035054     0.132907\
+  \    0.030568\n106     0.030568     0.752805     0.149218     0.133167    0.087336\n\
+  107     0.087336     0.580858     0.169182     0.133000    0.244541\n108     0.244541\
+  \     0.436881     0.296068     0.132777    0.152838\n109     0.152838     0.561056\
+  \     0.175272     0.132603    0.296943\nvar2(t-99)  var3(t-99)  var4(t-99)  var1(t-98)\
+  \  var2(t-98)  ... \\\n100    0.907591    0.070583    0.132881    0.035662    0.849835\
+  \  ...\n101    0.849835    0.109743    0.132994    0.081514    0.668867  ...\n102\
+  \    0.668867    0.029212    0.132799    0.000000    0.847910  ...\n103    0.847910\
+  \    0.087636    0.132712    0.030568    0.801320  ...\n104    0.801320    0.035054\
+  \    0.132907    0.030568    0.752805  ...\n105    0.752805    0.149218    0.133167\
+  \    0.087336    0.580858  ...\n106    0.580858    0.169182    0.133000    0.244541\
+  \    0.436881  ...\n107    0.436881    0.296068    0.132777    0.152838    0.561056\
+  \  ...\n108    0.561056    0.175272    0.132603    0.296943    0.437294  ...\n109\
+  \    0.437294    0.250389    0.132665    0.244541    0.699670  ...\nvar3(t-2)  \
+  \ var4(t-2)  var1(t-1)  var2(t-1)  var3(t-1)  var4(t-1) \\\n100   0.204879   0.131258\
+  \   0.733624   0.168317   0.144481   0.131438\n101   0.144481   0.131438   0.733624\
+  \   0.124422   0.184273   0.131397\n102   0.184273   0.131397   0.698690   0.221122\
+  \   0.150233   0.131550\n103   0.150233   0.131550   0.739738   0.182178   0.236855\
+  \   0.131657\n104   0.236855   0.131657   0.680131   0.299711   0.153659   0.131475\n\
+  105   0.153659   0.131475   0.680131   0.322814   0.148034   0.131068\n106   0.148034\
+  \   0.131068   0.798581   0.129332   0.246921   0.130564\n107   0.246921   0.130564\
+  \   0.709170   0.124422   0.157745   0.130850\n108   0.157745   0.130850   0.742358\
+  \   0.194719   0.112675   0.130936\n109   0.112675   0.130936   0.681223   0.206271\
+  \   0.094065   0.130899\nvar1(t)   var2(t)   var3(t)   var4(t)\n100  0.733624  0.124422\
+  \  0.184273  0.131397\n101  0.698690  0.221122  0.150233  0.131550\n102  0.739738\
+  \  0.182178  0.236855  0.131657\n103  0.680131  0.299711  0.153659  0.131475\n104\
+  \  0.680131  0.322814  0.148034  0.131068\n105  0.798581  0.129332  0.246921  0.130564\n\
+  106  0.709170  0.124422  0.157745  0.130850\n107  0.742358  0.194719  0.112675 \
+  \ 0.130936\n108  0.681223  0.206271  0.094065  0.130899\n109  0.752729  0.179868\
+  \  0.180898  0.131003\n[10 rows x 404 columns]\n```\n\n#### 步骤 2-5\\. 划分训练集和测试集。\n\
+  \n我们将数据划分为训练集和测试集，并使用测试集来验证模型。\n\n```\n# # 划分训练集和测试集\n# 将数值数组转换为数据集矩阵\nvalues_spl\
+  \ = reframed.values\ntrain_size = int(len(values_spl) * 0.80)\ntest_size  = len(values_spl)\
+  \ - train_size\ntrain, test = values_spl[0:train_size,:], values_spl[train_size:len(values_spl),:]\n\
+  print(\"训练集和测试集长度：\",len(train), \"  \", len(test))\nprint(\"-------------\")\n\
+  # 划分输入和输出\nX_train, y_train = train[:, :-4], train[:, -4:]\nX_test, y_test   = test[:,\
+  \ :-4],  test[:, -4:]\nprint(\"X_train 形状：\",X_train.shape,\" y_train 形状：\",y_train.shape)\n\
+  print(\"X_test 形状：\",X_test.shape, \" y_test 形状：\",y_test.shape)\nprint(\"-------------\"\
+  )\n# 将输入重塑为 3D 格式 [样本数, 时间步长, 特征数]\n# LSTM 网络期望输入数据 (X) 以特定的数组结构提供，\n# 格式为：[样本数,\
+  \ 时间步长, 特征数]。\n# 目前，我们的数据格式为：[样本数, 特征数]\nX_train = X_train.reshape((X_train.shape[0],\
+  \ 1, X_train.shape[1]))\nX_test  = X_test.reshape((X_test.shape[0], 1, X_test.shape[1]))\n\
+  print(\"X_train 3D 形状：\",X_train.shape,\" y_train 形状：\",y_train.shape)\nprint(\"\
+  X_test 3D 形状：\",X_test.shape, \" y_test 形状：\",y_test.shape)\n```\n\n输出结果如下。\n\n\
+  ```\n训练集和测试集长度： 1089     273\n```\n\n```\n\nX_train 形状： (1089, 400)  y_train 形状：\
+  \ (1089, 4)\nX_test 形状： (273, 400)  y_test 形状： (273, 4)\n```\n\n```\n\nX_train 3D\
+  \ 形状： (1089, 1, 400)  y_train 形状： (1089, 4)\nX_test 3D 形状： (273, 1, 400)  y_test\
+  \ 形状： (273, 4)\n```\n\n\n\n#### 步骤 2-6\\. 构建模型。\n\n让我们构建在 Keras 中定义的 GRU 模型。\n\n\
+  首先，导入并定义所有层。\n\n```\n# #导入并定义各层\nmodel = keras.models.Sequential()\nmodel.add(keras.layers.GRU(64,\
+  \ return_sequences=True, activation=\"relu\",\nkernel_initializer=\"he_normal\"\
+  , recurrent_initializer=\"he_normal\",\ndropout=0.15, recurrent_dropout=0.15,\n\
+  input_shape=(X_train.shape[1], X_train.shape[2]) ))\nmodel.add(keras.layers.GRU(32,return_sequences=True,\
+  \ activation=\"relu\", kernel_initializer=\"he_normal\",\nrecurrent_initializer=\"\
+  he_normal\", dropout=0.15, recurrent_dropout=0.15 ))\nmodel.add(keras.layers.GRU(8,\
+  \ activation=\"relu\", kernel_initializer=\"he_normal\",\nrecurrent_initializer=\"\
+  he_normal\", dropout=0.15, recurrent_dropout=0.15 ))\nmodel.add(keras.layers.Dense(4,\
+  \ activation=\"relu\"))\nprint(model.summary())\n```\n\n输出如下。\n\n```\nModel: \"\
+  sequential_2\"\n______________________________________________________________\n\
+  Layer (type)                 Output Shape              Param #\n==============================================================\n\
+  gru_6 (GRU)                  (None, 1, 64)             89472\n______________________________________________________________\n\
+  gru_7 (GRU)                  (None, 1, 32)             9408\n______________________________________________________________\n\
+  gru_8 (GRU)                  (None, 8)                 1008\n______________________________________________________________\n\
+  dense_2 (Dense)              (None, 4)                 36\n==============================================================\n\
+  Total params: 99,924\nTrainable params: 99,924\nNon-trainable params: 0\n______________________________________________________________\n\
+  None\n```\n\n让我们绘制并检查。\n\n```\n# #绘制模型\nfrom tensorflow.keras.utils import plot_model\n\
+  plot_model(model, show_shapes=True)\n```\n\n图 5-13 展示了模型图。\n\n![](img/540422_1_En_5_Fig13_HTML.jpg)\n\
+  \n图 5-13\n\n输出\n\n让我们编译并拟合模型。\n\n```\n## 编译模型\noptimizer = keras.optimizers.Adam(learning_rate=0.01,\
+  \ beta_1=0.9, beta_2=0.999)\nmodel.compile(loss=\"mean_squared_error\", optimizer=optimizer,\
+  \ metrics=[\"mse\",\"mae\"])\n# 学习率调度\nlr_scheduler = keras.callbacks.ReduceLROnPlateau(factor=0.00001,\
+  \ patience=3, monitor=\"val_loss\", min_lr=0.00000001)\n# 训练与评估模型\nhistory = model.fit(X_train,\
+  \ y_train, epochs=100, batch_size=64, validation_split=0.2,\ncallbacks=[lr_scheduler])\n\
+  ```\n\n输出如下。\n\n```\nEpoch 1/100\n14/14 [==============================] - 10s 88ms/step\
+  \ - loss: 0.1164 - mse: 0.1164 - mae: 0.2643 - val_loss: 0.0367 - val_mse: 0.0367\
+  \ - val_mae: 0.1475\nEpoch 2/100\n14/14 [==============================] - 0s 14ms/step\
+  \ - loss: 0.0437 - mse: 0.0437 - mae: 0.1532 - val_loss: 0.0142 - val_mse: 0.0142\
+  \ - val_mae: 0.0913\nEpoch 3/100\n14/14 [==============================] - 0s 15ms/step\
+  \ - loss: 0.0236 - mse: 0.0236 - mae: 0.1087 - val_loss: 0.0135 - val_mse: 0.0135\
+  \ - val_mae: 0.0789\nEpoch 4/100\n14/14 [==============================] - 0s 14ms/step\
+  \ - loss: 0.0192 - mse: 0.0192 - mae: 0.0962 - val_loss: 0.0121 - val_mse: 0.0121\
+  \ - val_mae: 0.0789\nEpoch 5/100\n14/14 [==============================] - 0s 14ms/step\
+  \ - loss: 0.0170 - mse: 0.0170 - mae: 0.0906 - val_loss: 0.0102 - val_mse: 0.0102\
+  \ - val_mae: 0.0691\nEpoch 6/100\n14/14 [==============================] - 0s 14ms/step\
+  \ - loss: 0.0153 - mse: 0.0153 - mae: 0.0850 - val_loss: 0.0087 - val_mse: 0.0087\
+  \ - val_mae: 0.0640\n```\n\n\n\n#### 步骤 2-7\\. 评估并预测模型。\n\n让我们绘制 MSE 和 MAE 等评估指标（定义请参考第\
+  \ 4 章）。\n\n```\n# # 绘制学习曲线\npd.DataFrame(history.history).plot(figsize=(8, 5))\n\
+  plt.grid(True)\nplt.gca().set_ylim(0, 1) # 设置垂直范围为 [0-1]\nplt.show()\n```\n\n图 5-14\
+  \ 展示了模型评估指标图。\n\n![](img/540422_1_En_5_Fig14_HTML.jpg)\n\n图 5-14\n\n输出\n\n```\n\
+  print(\"-------------\")\n# 评估模型\nmodel_evaluate = model.evaluate(X_test, y_test)\n\
+  print(\"损失                   : \",model_evaluate[0])\nprint(\"均方误差             \
+  \  : \",model_evaluate[1])\nprint(\"平均绝对误差           : \",model_evaluate[2])\n#\
+  \ 进行预测\ntrainPredict = model.predict(X_train)\ntestPredict  = model.predict(X_test)\n\
+  print(\"trainPredict : \",trainPredict.shape)\nprint(\"testPredict  : \",testPredict.shape)\n\
+  print(trainPredict)\ntestPredict = scaler.inverse_transform(testPredict)\nprint(testPredict.shape)\n\
+  print(y_test.shape)\ny_test=scaler.inverse_transform(y_test)\n```\n\n输出如下。\n\n![](img/540422_1_En_5_Figa_HTML.jpg)\n\
+  \n```\ntrainPredict :  (1089, 4)\ntestPredict  :  (273, 4)\narray([[0.794252  ,\
+  \ 0.29386416, 0.16390276, 0.13381857],\n[0.80810547, 0.28626317, 0.16907552, 0.1337166\
+  \ ],\n[0.8088531 , 0.28755552, 0.1696803 , 0.13367665],\n...,\n[0.67830986, 0.43075496,\
+  \ 0.139501  , 0.13334922],\n[0.69778967, 0.4183182 , 0.14170927, 0.13308588],\n\
+  [0.7168243 , 0.40688953, 0.14848372, 0.13296095]], dtype=float32)\n(273, 4)\n(273,\
+  \ 4)\n```\n\n现在我们已经得到了所有四个特征的预测值，让我们绘制它们与实际值的折线图。\n\n![](img/540422_1_En_5_Fig15_HTML.jpg)\n\
+  \n图 5-15\n\n输出\n\n1.  绘制平均温度。\n\n    ```\n    ## 绘制平均温度\n    plt.plot(testPredict[:,0],\
+  \ color=\"blue\",\n    label=\"预测平均温度\", linewidth=2)\n    plt.plot(y_test[:,0],\
+  \ color=\"red\",\n    label=\"实际平均温度\", linewidth=2)\n    plt.legend()\n    # 使用深灰色线条显示主网格线\n\
+  \    plt.grid(visible=True, which=\"major\", color=\"#666666\", linestyle=\"-\"\
+  )\n    # 使用非常淡且几乎透明的灰色线条显示次网格线\n    plt.minorticks_on()\n    plt.grid(visible=True,\
+  \ which=\"minor\", color=\"#999999\", linestyle=\"-\", alpha=0.2)\n    plt.show()\n\
+  \    ```\n\n    图 5-15 展示了平均温度列的预测值与实际值对比图。\n\n![](img/540422_1_En_5_Fig16_HTML.jpg)\n\
+  \n图 5-16\n\n输出\n\n1.  绘制湿度。\n\n    ```\n    ## # 绘制湿度\n    plt.plot(testPredict[:,1],\
+  \ color=\"blue\",\n    label=\"预测湿度\", linewidth=2)\n    plt.plot(y_test[:,1], color=\"\
+  red\",\n    label=\"实际湿度\", linewidth=2)\n    plt.legend()\n    # 使用深灰色线条显示主网格线\n\
+  \    plt.grid(visible=True, which=\"major\", color=\"#666666\", linestyle=\"-\"\
+  )\n    # 使用非常淡且几乎透明的灰色线条显示次网格线\n    plt.minorticks_on()\n    plt.grid(visible=True,\
+  \ which=\"minor\", color=\"#999999\", linestyle=\"-\", alpha=0.2)\n    plt.show()\n\
+  \    ```\n\n    图 5-16 展示了湿度列的预测值与实际值对比图。\n\n![](img/540422_1_En_5_Fig17_HTML.jpg)\n\
+  \n图 5-17\n\n输出\n\n1.  绘制风速。\n\n    ```\n    # # 绘制风速\n    plt.plot(testPredict[:,2],\
+  \ color=\"blue\",\n    label=\"预测风速\", linewidth=2)\n    plt.plot(y_test[:,2], color=\"\
+  red\",\n    label=\"实际风速\", linewidth=2)\n    plt.legend()\n    # 使用深灰色线条显示主网格线\n\
+  \    plt.grid(visible=True, which=\"major\", color=\"#666666\", linestyle=\"-\"\
+  )\n    # 使用非常淡且几乎透明的灰色线条显示次网格线\n    plt.minorticks_on()\n    plt.grid(visible=True,\
+  \ which=\"minor\", color=\"#999999\", linestyle=\"-\", alpha=0.2)\n    plt.show()\n\
+  \    ```\n\n    图 5-17 展示了风速列的预测值与实际值对比图。\n\n![](img/540422_1_En_5_Fig18_HTML.jpg)\n\
+  \n图 5-18\n\n输出\n\n1.  绘制平均气压。\n\n    ```\n    # 绘制平均气压\n    plt.plot(testPredict[:,3],\
+  \ color=\"blue\",\n    label=\"预测平均气压\", linewidth=4)\n    plt.plot(y_test[:,3],\
+  \ color=\"red\",\n    label=\"实际平均气压\", linewidth=4)\n    plt.legend()\n    # 使用深灰色线条显示主网格线\n\
+  \    plt.grid(visible=True, which=\"major\", color=\"#666666\", linestyle=\"-\"\
+  )\n    # 使用非常淡且几乎透明的灰色线条显示次网格线\n    plt.minorticks_on()\n    plt.grid(visible=True,\
+  \ which=\"minor\", color=\"#999999\", linestyle=\"-\", alpha=0.2)\n    plt.show()\n\
+  \    ```\n\n    图 5-18 展示了平均气压列的预测值与实际值对比图。\n\n## 技巧 5-3\\. 使用 NeuralProphet 进行时间序列预测\n\
+  \n### 问题\n\n您希望加载单变量时间序列数据，并使用 NeuralProphet 进行预测。\n\n### 解决方案\n\n通过使用内置包可以轻松实现。\n\
+  \n\n\n### 工作原理\n\n以下步骤使用 NeuralProphet 读取数据并进行预测。\n\n#### 步骤 3-1. 导入所需的库。\n\n```\n\
+  #import all the required libraries\nimport pandas as pd\nfrom neuralprophet import\
+  \ NeuralProphet\nimport matplotlib.pyplot as plt\n```\n\n#### 步骤 3-2. 读取数据。\n\n\
+  从 Git 链接下载数据。\n\n以下代码用于读取数据。在读取数据时，我们解析日期列。\n\n```\n#read data\ndf_np = pd.read_csv(\"\
+  ./DailyDelhiClimateTrain.csv\",\nparse_dates=[\"date\"])\n```\n\n#### 步骤 3-3. 预处理数据。\n\
+  \n我们根据 NeuralProphet 的要求对数据进行预处理。\n\n由于是单变量预测，我们只选择一个特征与日期列一起进行预测。\n\n此外，NeuralProphet\
+  \ 要求日期列命名为 \"ds\"，目标列命名为 \"y\"。\n\n```\n#Data pre-process\ndf_np = df_np[[\"date\"\
+  , \"meantemp\"]]\ndf_np.rename(columns={\"date\": \"ds\", \"meantemp\": \"y\"},\
+  \ inplace=True)\n```\n\n#### 步骤 3-4. 构建模型并进行预测。\n\n我们初始化 NeuralProphet 模型，并定义所有参数，包括附加信息。如果你打算使用默认变量，请使用\
+  \ `model = NeuralProphet()`。\n\n```\n# model = NeuralProphet() if you're using default\
+  \ variables below.\nmodel = NeuralProphet(\ngrowth=\"linear\",  # 确定趋势类型：'linear',\
+  \ 'discontinuous', 'off'\nchangepoints=None, # 可能包含变化点的日期列表（None -> 自动）\nn_changepoints=5,\n\
+  changepoints_range=0.8,\ntrend_reg=0,\ntrend_reg_threshold=False,\nyearly_seasonality=\"\
+  auto\",\nweekly_seasonality=\"auto\",\ndaily_seasonality=\"auto\",\nseasonality_mode=\"\
+  additive\",\nseasonality_reg=0,\nn_forecasts=1,\nn_lags=0,\nnum_hidden_layers=0,\n\
+  d_hidden=None,     # AR-Net 隐藏层的维度\nlearning_rate=None,\nepochs=40,\nloss_func=\"\
+  Huber\",\nnormalize=\"auto\",  # 归一化类型 ('minmax', 'standardize', 'soft', 'off')\n\
+  impute_missing=True,\n)\n```\n\n模型初始化后，我们拟合模型并进行预测。\n\n```\n#make predictions\n\
+  metrics = model.fit(df_np, freq=\"D\")\nfuture = model.make_future_dataframe(df_np,\
+  \ periods=365, n_historic_predictions=len(df_np))\nforecast = model.predict(future)\n\
+  ```\n\n图 5-19 显示了模型的输出。\n\n![](img/540422_1_En_5_Fig19_HTML.jpg)\n\n图 5-19\n\n输出\n\
+  \n现在，我们绘制图表以查看预测值。\n\n```\n##forecast plot\nfig, ax = plt.subplots(figsize=(14,\
+  \ 10))\nmodel.plot(forecast, xlabel=\"Date\", ylabel=\"Temp\", ax=ax)\nax.set_title(\"\
+  Mean Temperature in Delhi\", fontsize=28, fontweight=\"bold\")\n```\n\n图 5-20 显示了预测值与实际值的对比图。\n\
+  \n![](img/540422_1_En_5_Fig20_HTML.jpg)\n\n图 5-20\n\n输出\n\n显示了最近一年的预测图。预测值的时间范围为\
+  \ 2017 年至 2018 年。预测值与历史值相似，这意味着模型已经捕捉到了季节性和线性趋势。\n\n你还可以绘制模型参数。\n\n```\n##plotting\
+  \ model parameters\nmodel.plot_parameters()\n```\n\n图 5-21 显示了模型参数图。\n\n![](img/540422_1_En_5_Fig21_HTML.jpg)\n\
+  \n图 5-21\n\n输出\n\n使用平均绝对误差（MAE）绘制的模型损失如下所示。你也可以使用平滑 L1 损失函数。\n\n```\n###ploting\
+  \ Evaluation\nfig, ax = plt.subplots(figsize=(14, 10))\nax.plot(metrics[\"MAE\"\
+  ], 'ob', linewidth=6)\nax.plot(metrics[\"RMSE\"], '-r', linewidth=2)\n```\n\n图 5-22\
+  \ 显示了模型评估图。\n\n![](img/540422_1_En_5_Fig22_HTML.jpg)\n\n图 5-22\n\n输出\n\n## 方法 5-4.\
+  \ 使用 RNN 进行时间序列预测\n\n### 问题\n\n你想要加载时间序列数据，并使用*循环神经网络*（RNN）进行预测。\n\n### 解决方案\n\n\
+  通过使用 Keras 中定义的内置方法可以轻松实现。\n\n### 工作原理\n\n以下步骤使用 RNN 读取数据并进行预测。\n\n方法 5-1 中的步骤 1-1\
+  \ 到 1-9 也适用于本方法。\n\n#### 步骤 4-1. 初始化 RNN 模型。\n\n```\nmodel = Sequential()\nmodel.add(LSTM(40,activation=\"\
+  tanh\",return_sequences=True, input_shape=(train_X.shape[1],1)))\nmodel.add(Dropout(0.15))\n\
+  model.add(LSTM(40,activation=\"tanh\",return_sequences=True))\nmodel.add(Dropout(0.15))\n\
+  model.add(LSTM(40,activation=\"tanh\",return_sequences=False))\nmodel.add(Dropout(0.15))\n\
+  model.add(Dense(1))\n```\n\n#### 步骤 4-2. 创建模型摘要。\n\n```\nmodel.summary()\n```\n\n\
+  图 5-23 显示了模型摘要。\n\n![](img/540422_1_En_5_Fig23_HTML.jpg)\n\n图 5-23\n\n输出\n\n####\
+  \ 步骤 4-3. 拟合模型。\n\n```\nmodel.compile(optimizer=\"adam\",loss=\"MSE\")\nmodel.fit(train_X,\
+  \ train_y, epochs=10, batch_size=1000)\n```\n\n图 5-24 显示了第 1 到第 10 个训练周期。\n\n![](img/540422_1_En_5_Fig24_HTML.jpg)\n\
+  \n图 5-24\n\n输出\n\n#### 步骤 4-4. 进行模型预测并打印评分。\n\n```\npredictions = model.predict(test_X)\n\
+  score = r2_score(test_y,predictions)\nprint(\"R-Squared Score of RNN model = \"\
+  ,score)\n```\n\n输出如下。\n\n```\nR-Squared Score of RNN model =  0.9466957722475382\n\
+  ```\n\n#### 步骤 4-5 与方法 5-1 中的步骤 1-14 相同。\n\n\n\n\n#### 步骤 4-6\\. 调用 `plotting_actual_vs_pred`\
+  \ 函数。\n\n```\nplotting_actual_vs_pred(test_y, predictions, \"Predictions made by\
+  \ simple RNN model\")\n```\n\n图 5-25 展示了实际值与预测值的对比图。\n\n![](img/540422_1_En_5_Fig25_HTML.jpg)\n\
+  \n图 5-25\n\n输出\n\n索引 A 加法模型分解 添加组件 更改组件 组件分离 库，加载 绘图 季节性 statsmodels 库 时间序列 营业额数据\
+  \ 增强迪基-富勒检验 自回归模型 实际值 *与* 预测值对比 自相关函数 AutoReg 函数 调用/拟合 预测 滞后值 库，导入 绘图 预测 平稳性 摘要\
+  \ 训练/测试数据 自回归积分滑动平均模型 自相关函数/偏自相关函数值 ADF 检验与 ARMA 模型 数据平稳化 初始化/拟合 绘图 预测值 *与* 实际值对比\
+  \ RMSE 分数 测试预测 自回归模型 自回归滑动平均模型 实际值 ARIMA 函数 比特币价格数据 概念 初始化/拟合 库，导入 加载数据 绘图 预测值 *与*\
+  \ 实际值对比 预处理 RMSE 分数 测试预测 训练-测试分割 B 最佳模型 评估图 预测 测试集 验证集 C 逗号分隔文件 D 深度学习方法 另请参见 GRU\
+  \ 模型；LSTM E 指数平滑法 F Facebook Prophet 模型 添加回归量 数据拟合 数据预测 数据初始化 标签与编码 训练-测试分割 调整趋势\
+  \ changepoint_prior_scale 绘制输出 变点 超参数 幅度 绘图 打印 节假日 自定义 未来数据框 初始化数据框 单变量时间序列数据框 用于预测\
+  \ 导入库 初始化 绘图预测 绘制预测组件 读取数据 训练数据集 G get_dummies 方法 网格搜索 超参数 ARIMA 模型 评估 初始化/拟合 预测值\
+  \ *与* 实际值对比 RMSE 分数 arima_model_evaluate 函数 绘图 测试预测 调优 GRU 模型 分析数据 构建 评估 导入库 预处理数据\
+  \ 读取数据 训练-测试分割 H, I, J, K 霍尔特-温特斯模型 ExponentialSmoothing 函数 初始化/拟合 绘图 预测值 *与* 实际值对比\
+  \ RMSE 分数 测试预测 L LightGBM 模型 构建 评估 验证集 LSTM data_prep 函数 拟合模型 导入库 初始化 缺失数据 模型预测\
+  \ 模型摘要 归一化 归一化数据 normalize_fn 函数 绘制预测 plotting_actual_vs_pred 函数 读取数据 时间序列数据 训练-测试分割\
+  \ M 机器学习回归算法 收集数据 导入库 预处理数据 选择特征 时间序列 验证分割 平均绝对误差 平均绝对百分比误差 均方误差 移动平均 定义 库，导入 绘图\
+  \ 预测值 *与* 实际时间序列对比 预处理 读取数据 滚动均值 乘法模型分解 航空乘客数据 组件 数据处理 库，加载 绘图 二次/指数 季节性成分 季节性 时间序列\
+  \ 多元时间序列数据 北京污染数据集 定义 库，导入 加载数据集 加载/探索 解析函数 绘图 PM2.5 浓度 预处理 关系 多元时间序列，VAR 模型 构建\
+  \ 评估模型 导入库 预处理数据 读取数据 分割数据集 平稳性 N, O, P, Q NeuralProphet 构建模型 导入库 预处理数据 读取数据 R 随机森林模型\
+  \ 构建 评估 验证集 循环神经网络 拟合模型 初始化 模型摘要 plotting_actual_vs_pred 函数 预测 均方根误差 S 季节性自回归积分滑动平均模型\
+  \ 初始化/拟合 绘图 预测值 *与* 实际值对比 RMSE 分数 SARIMAX 函数 测试预测 季节性 定义 库，导入 绘图 日期 *与* 温度对比 月度箱线图\
+  \ 年度箱线图 读取数据 温度数据集 拖拉机销售数据 日期时间序列 格式化数据 库，导入 月度箱线图 绘图 读取数据 可视化 添加方法 箱线图 数据处理 库，导入\
+  \ 折线图 加载数据 输出 数据透视表 SelectKBest 简单指数平滑法模型 定义 初始化/拟合 绘图 预测值 *与* 实际值对比 RMSE 分数 SimpleExpSmoothing\
+  \ 函数 测试预测 T 时间序列分析/预测 需求/销售，产品配方 用途 时间序列，Auto-ARIMA 分析数据模式 构建 评估模型 导入库 输出 预处理数据\
+  \ 读取数据 平稳性 摘要 测试数据 训练与测试 时间序列对象 航空乘客数据框 库，导入 Pandas 解析函数 绘图输出 read_csv 读取数据 印度 GDP\
+  \ 数据 CSV 文件 数据框 库，导入 绘图输出 读取数据 检索对象 存储/检索，pickle 保存 趋势 定义 库，导入 加载数据集 解析函数 绘图 洗发水销售数据集\
+  \ U, V, W 单变量统计建模 单变量时间序列分析 单变量时间序列数据 定义 预测 库，导入 加载/探索 绘图 读取数据 温度数据集 X, Y, Z XGBoost\
+  \ 模型 构建 评估 验证集\n"

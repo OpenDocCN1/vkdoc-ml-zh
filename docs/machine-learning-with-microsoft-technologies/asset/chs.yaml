@@ -1,0 +1,6978 @@
+- '
+
+
+  ![](img/978-1-4842-3658-1_CoverFigure.jpg)
+
+
+  ISBN 978-1-4842-3657-4 e-ISBN 978-1-4842-3658-1 [`doi.org/10.1007/978-1-4842-3658-1`](https://doi.org/10.1007/978-1-4842-3658-1)
+  © Leila Etaati 2019 本作品受版权保护。出版商保留所有权利，涉及材料的全部或部分内容，特别是翻译、重印、重用插图、朗诵、广播、以缩微胶卷或任何其他物理方式复制，以及传输或信息存储与检索、电子改编、计算机软件，或采用目前已知或未来开发的类似或不同方法。本书中可能出现商标名称、标识和图像。我们仅在编辑风格中使用这些名称、标识和图像，以维护商标所有者的利益，并无意侵犯商标，而非在每次出现时都使用商标符号。本出版物中使用的商品名称、商标、服务标志及类似术语，即使未明确标识，也不应被视为对其是否受专有权利保护的立场表达。尽管本书中的建议和信息在出版时被认为是真实准确的，但作者、编辑和出版商均不对可能存在的任何错误或遗漏承担法律责任。出版商对本书所含内容不作任何明示或暗示的保证。本书通过
+  Springer Science+Business Media New York 在全球图书贸易中发行，地址：233 Spring Street, 6th Floor,
+  New York, NY 10013。电话：1-800-SPRINGER，传真：(201) 348-4505，电子邮件：orders-ny@springer-sbm.com，或访问
+  www.springeronline.com。Apress Media, LLC 是一家加利福尼亚有限责任公司，其唯一成员（所有者）是 Springer Science+Business
+  Media Finance Inc (SSBM Finance Inc)。SSBM Finance Inc 是一家特拉华州公司。
+
+
+  *献给我亲爱的丈夫 Reza，没有他的支持，我无法取得这些成就*
+
+
+  *献给我的母亲，感谢她的耐心与勇气；献给我的兄弟 Kamran 和 Kouros，以及我的姐妹 Kiana，感谢他们所有的鼓励*
+
+
+  *献给所有激励过我的人*
+
+
+  ### 关于作者与技术审校者
+
+
+  ### 关于作者
+
+
+  ### 关于技术审校者
+
+
+  '
+- '# 第一部分 入门
+
+
+  '
+- "# 1. 机器学习简介\n\n机器学习使决策者能够从其数据中获得更深入的洞察。如今，机器学习的应用已不再局限于研究和特定行业。在大多数领域，都存在利用机器学习从现有数据中获取更简洁、更深入信息的宝贵机会。因此，大多数大型软件公司都为其用户提供了通过易用软件访问机器学习的机会。例如，作为商业软件开发先驱的微软，在开发必应搜索引擎、Xbox、Kinect\
+  \ 等产品时都利用了机器学习。机器学习在微软的应用并不仅限于新软件的开发。在微软的许多软件开发工具中，例如 Microsoft SQL Server、Power\
+  \ BI 和 .NET，都有机会利用机器学习来创建更智能的应用程序和报告。\n\n在本章中，你将学习机器学习的核心概念和方法，回顾机器学习的类型，并逐步了解机器学习的生命周期。此外，你还将了解微软产品中可用的、非常有用的机器学习工具。\n\
+  \n## 机器学习概念\n\n机器学习是人工智能的一个子集。Ian Goodfellow 及其同事 [1] 介绍了一个图表，展示了人工智能的不同方法。如图 1-1\
+  \ 所示，机器学习是人工智能的几种方法之一。\n\n![../images/463840_1_En_1_Chapter/463840_1_En_1_Fig1_HTML.jpg](img/463840_1_En_1_Fig1_HTML.jpg)\n\
+  \n图 1-1\n\n展示人工智能类别及子类别的维恩图 [1]\n\n学者和作者们对机器学习提出了不同的定义。例如，Sebastian Raschka 将机器学习定义为使用算法理解数据的工具\
+  \ [2]。他提到，我们会遇到大量的结构化数据（数字）和非结构化数据（图像、语音文本等）。从这些数据中获取洞察会影响决策过程，并帮助管理者更好地理解发生了什么、为什么发生、未来会发生什么以及如何使其发生。\n\
+  \n机器学习的概念基于从当前数据集中发现共同模式。历史上，我们创建报告和软件来理解过去发生的事情。分析近期事件和数据总是有助于我们进行进一步的分析，例如寻找关键绩效指标等。调查过去发生的事情相对直接，并能为我们提供一些价值（图\
+  \ 1-2）。下一步，我们希望变得更加敏捷以应对变化，因此分析实时数据至关重要。分析近期数据显然比分析历史数据能提供更多洞察。这个过程比之前的方法稍微困难一些，但能为组织带来更多价值。\n\
+  \n![../images/463840_1_En_1_Chapter/463840_1_En_1_Fig2_HTML.png](img/463840_1_En_1_Fig2_HTML.png)\n\
+  \n图 1-2\n\n从过去到未来，各种分析的价值与难度\n\n第三步是根本原因分析，这是一种侧重于因果关系的调查研究。例如，分析某个特定分支销售额下降的主要原因，可以为业务所有者提供大量价值。\n\
+  \n从数据中获取更好价值的进一步步骤是分析未来会发生什么，即*预测分析*。了解未来会发生什么，或洞察数据模式，将帮助决策者实施更明智的公司政策。“将会发生什么”的分析比之前的步骤需要更多的努力和时间。然而，这是企业获取更有价值、更具可操作信息的机遇。\n\
+  \n最后一步是“如何使其发生”。这种*规范性分析*在预测未来后推荐应采取的措施。这个过程为任何组织带来了更多洞察，但与其他阶段相比，实施起来更具挑战性。\n\n\
+  ## 机器学习方法\n\n机器学习主要有两种方法：\n\n*   监督学习\n\n*   无监督学习\n\n以下段落将对每种方法进行简要说明。在第 5 章中，我将更详细地介绍这些方法，并提供两者的示例。\n\
+  \n\n\n\n### 监督学习\n\n监督学习的主要目标是学习如何根据历史数据预测一个类别或数值。另一种定义是，监督学习是从带标签的训练数据中推断出函数关系的机器学习任务\
+  \ [2]。\n\n监督学习有不同的方法。一种是预测数值，例如预测某个视频频道的订阅人数，其范围可能从一人到数百万人不等。监督学习使得预测该频道将有多少人订阅成为可能。另一个例子是预测来年的销售额，其范围可能从\
+  \ 1,000 美元到 200,000 美元。通过这种方法，算法可以预测公司的销售数量。我们将这种方法称为*回归方法*，其输出结果是一个连续值。\n\n监督学习的另一种方法涉及预测类别，例如预测客户是会留在公司还是离开。在这个例子中，目标是预测现有客户是否会留在某个群体中。另一个案例可能考虑一家提供不同客户等级的公司，例如金卡、银卡和铜卡客户。在这种情况下，监督学习方法可能会预测新客户属于金卡、银卡还是铜卡群体。在这种类型的监督学习中，预测列应该是一个*离散的类别标签*。\n\
+  \n### 无监督学习\n\n在监督学习中，我们在创建和训练模型之前就已经对答案有了概念。而在无监督学习中，我们不预测任何列，也不给数据附加任何标签。无监督学习的主要目标是发现数据的自然模式，探索数据并提取其中有意义的信息。\n\
+  \n## 机器学习生命周期\n\n机器学习生命周期包含四个主要步骤：\n\n1.  业务理解\n\n2.  数据获取与理解\n    1.  数据收集\n\n\
+  \    2.  特征选择\n\n    3.  数据整理\n\n3.  建模\n    1.  模型选择\n\n    2.  拆分数据集\n\n    3.\
+  \  训练模型\n\n4.  部署\n    1.  评估模型\n\n    2.  监控模型\n\n微软提出了一个团队数据科学过程（TDSP）来说明这些阶段（图\
+  \ 1-3）。\n\n![../images/463840_1_En_1_Chapter/463840_1_En_1_Fig3_HTML.jpg](img/463840_1_En_1_Fig3_HTML.jpg)\n\
+  \n图 1-3\n\n微软提出的团队数据科学过程生命周期 [3]\n\n第一步是理解业务问题。了解业务的人员是识别公司需求和机器学习能够解决的问题的最佳资源。然而，并非所有问题都能通过机器学习解决！此外，机器学习用例应与业务利益相关者、数据科学家和工程师协作确定优先级，以便从有价值、负担得起且成功概率高的解决方案开始。\n\
+  \n第二步是数据摄取，涉及从不同来源收集所需数据，并进行探索和清洗。找到与问题相关的数据列（主要针对监督学习）有助于创建更准确的算法。此外，对于每个算法，在建模阶段之前必须完成特定的数据转换。\n\
+  \n第三步是建模，包括模型选择。这是通过分析问题和数据的性质来完成的。大部分数据应分配给模型创建（训练），留一小部分用于测试和评估模型。如图 1-3 所示，机器学习过程是迭代的。例如，创建模型后，有可能其准确性不高。在这种情况下，我们必须重新检查之前的步骤，例如业务理解或数据获取。\n\
+  \n## 机器学习语言与平台\n\n为了创建机器学习模型，你必须至少熟悉一种便于进行机器学习的语言。不过，也有一些工具，例如 Microsoft Azure 机器学习，提供了拖放式环境。\n\
+  \n有许多不同的语言可用于进行机器学习，包括 Python、Java、R、C++、C、JavaScript 等。然而，在所有这些语言中，Python 和 R 是使用最广泛的，它们专注于模型创建和机器学习过程。\n\
+  \n还有许多不同的工具可用于进行机器学习。在本书中，我们将特别关注那些可以帮助我们执行机器学习的微软工具，以及如何使用不同的微软技术来实现特定的机器学习过程。\n\
+  \n微软多年来已在其部分工具（如必应搜索或 Xbox）中集成了机器学习。2004 年，它将数据挖掘工具嵌入到 SQL Server 中。这些工具帮助 SQL 和商业智能（BI）开发人员利用机器学习来创建更具洞察力的报告。\n\
+  \nSQL Server 允许用户利用多维数据集中的现有数据快速生成挖掘模型。在 SQL Server 中使用数据挖掘工具的主要优点是它们易于部署、界面出色且用户友好。然而，也存在一些缺点。例如，无法使用\
+  \ R 或 Python 创建自定义代码，并且可用的算法数量有限。\n\n随后，微软于 2014 年宣布推出基于云的机器学习平台 Azure 机器学习（AML）。该平台提供了流畅的拖放式环境，并且无需任何软件即可运行。Azure\
+  \ 机器学习支持 R 和 Python，并提供超过 25 种专用于机器学习的算法（图 1-4）。你将在第 12 章中了解更多相关信息。\n\n![../images/463840_1_En_1_Chapter/463840_1_En_1_Fig4_HTML.jpg](img/463840_1_En_1_Fig4_HTML.jpg)\n\
+  \n图 1-4\n\nAzure 机器学习环境易于使用且灵活\n\n除了 Azure 机器学习之外，微软还提供了在其部分其他工具中嵌入 R 或 Python 代码的能力，例如\
+  \ Power BI，这是一种广泛用于 BI 实践的自助式 BI 工具。2015 年，微软开始在 Power BI 中提供机器学习的新可能性，例如在报表部分提供自定义视觉对象，帮助开发人员编写\
+  \ R 代码以实现可视化和机器学习。你将在第 4 章中了解更多相关信息。\n\nMicrosoft Power BI 的另一个关键组件是 Power Query。Power\
+  \ Query 帮助开发人员从不同来源获取数据，并提供许多用于清洗数据的功能。2016 年，微软引入了在 Power Query 内部编写 R 代码以进行机器学习的选项。在\
+  \ Power BI 报表和 Power Query 中编写代码是有区别的。在前者中，你可以创建视觉对象（图 1-5），但在后者中则不能。此外，R 视觉对象中的代码会在筛选上下文更改或页面打开时每次运行，而\
+  \ Power Query 编辑器中的 R 脚本仅在刷新时运行，除非存在直接查询连接。你将在第 6、7 和 8 章中学习如何在 Power Query 中使用\
+  \ R 执行机器学习。\n\n![../images/463840_1_En_1_Chapter/463840_1_En_1_Fig5_HTML.jpg](img/463840_1_En_1_Fig5_HTML.jpg)\n\
+  \n图 1-5\n\nPower BI 报表中用于机器学习的 R 视觉对象\n\n\n\n另一个集成机器学习的微软平台是 Microsoft Azure，这是一个云平台，包含用于数据获取、存储、可视化和输出的各种组件。Microsoft\
+  \ Azure 的多个部分都具备机器学习能力。如图 1-6 所示，可以在 Microsoft Power BI、Microsoft SQL Server 2016\
+  \ 和 2017（第 9 章和第 10 章）、Azure Data Lake（第 11 章）、Azure Stream Analytics（第 13 章）、Azure\
+  \ Machine Learning Studio（第 12 章）以及 Azure Machine Learning Workbench（第 14 章）中编写\
+  \ R 或 Python 代码。此外，还将对 Azure HDInsight（第 15 章）进行一些介绍。接下来，在第 16 章中，将概述数据科学虚拟机。在第\
+  \ 17 章中，读者将熟悉 CNTK 的概念。此外，一些服务（如认知服务）提供了不同的 API，用于在自然语言处理、文本分析、图像和语音处理等领域进行机器学习。我将在第\
+  \ 18 章和第 19 章中详细介绍这些内容。图 1-6 展示了所有 Azure 组件如何与其他 Azure 工具交互，以加速机器学习开发的进程。\n\n![../images/463840_1_En_1_Chapter/463840_1_En_1_Fig6_HTML.jpg](img/463840_1_En_1_Fig6_HTML.jpg)\n\
+  \n图 1-6\n\n提供不同机器学习执行可能性的 Microsoft Azure 组件\n\n此外，还可以在 Azure 门户中创建数据科学虚拟机（DSVM）（图\
+  \ 1-7）。DSVM 支持多种语言（例如 R、Python、C#）、机器学习模型（Azure Machine Learning Workbench、H2O）、数据摄取工具、数据探索和开发。我将在第五部分深入介绍如何使用这些组件。\n\
+  \n![../images/463840_1_En_1_Chapter/463840_1_En_1_Fig7_HTML.jpg](img/463840_1_En_1_Fig7_HTML.jpg)\n\
+  \n图 1-7\n\nMicrosoft 数据科学虚拟机（DSVM）组件 [4]\n\n## 总结\n\n本章介绍了 Microsoft 机器学习产品，简要说明了什么是机器学习、机器学习流程以及机器学习生命周期。此外，还描述了一些主要的机器学习方法，例如描述性分析、预测性分析和规范性分析。概述了如何利用这些工具来创建预测性、描述性和规范性分析。在本书的其余部分，将深入介绍\
+  \ Microsoft 技术栈中的大部分 AI 工具，并解释如何利用它们来实现机器学习。\n\n"
+- '# 2. R 语言入门
+
+
+  R 无疑是机器学习中最流行的语言之一。它是一种编程语言和免费软件环境，主要用于统计计算和数据可视化。R 语言长期以来一直被学术界、数据科学家和统计学家使用。它是一种统计语言，非常适合机器学习、统计学，并可作为可视化工具使用。Microsoft
+  技术与 R 语言之间存在集成，这增强了 Microsoft 应用程序和报表中的机器学习能力。R 是一种开源且专有的语言，可用于 Windows 和 Mac 操作系统。它可以通过包进行扩展
+  [1]。本章概述了如何安装 RStudio，以及如何通过安装包来扩展 R 的功能，并将解释如何使用 R 进行机器学习、统计分析和可视化。
+
+
+  ## 安装 RStudio
+
+
+  要编写和使用 R 进行机器学习和统计分析，你必须在机器上安装一个 R 版本。有不同版本的 R 和不同的工具来编写 R 代码，但在本书中，我们将使用 RStudio
+  编写 R 脚本，RStudio 是一个用于 R 的集成开发环境（IDE），可以使用语法高亮编辑器。要安装 RStudio，你必须访问网站 [`www.rstudio.com/products/RStudio/`](http://www.rstudio.com/products/RStudio/)。你也可以在桌面上或通过服务器运行
+  R 脚本。本书使用了桌面版 RStudio。此外，还安装并使用了免费的桌面版 RStudio。首先，在你的机器上安装 RStudio 桌面版并打开它。RStudio
+  环境有四个主要部分，如图 2-1 所示。
+
+
+  ![../images/463840_1_En_2_Chapter/463840_1_En_2_Fig1_HTML.jpg](img/463840_1_En_2_Fig1_HTML.jpg)
+
+
+  图 2-1
+
+
+  RStudio 环境
+
+
+  你可以在 R 编辑器中编写 R 代码。与其他 R IDE 相比，该编辑器更加用户友好。输出或控制台区域显示代码运行的结果。绘图区域显示可视化图表、帮助部分等。最后一个部分，环境和运行历史，显示变量和日志。
+
+
+  让我们从 R 中的一个简单表达式开始。我们想将值 10 赋给变量名 `X`。简单的语句是
+
+
+  ```
+
+  X<-10
+
+  ```
+
+
+  在 R 中，`<-` 符号用于将值赋给变量。要运行代码，你只需按 Ctrl+Enter 或单击编辑器窗口中的运行按钮。
+
+
+  如图 2-2 所示，我运行了语句 `x<-1`，结果会显示在控制台编辑器中。现在我将确定 `X` 变量的类型。为此，有一个名为 `typeof` 的函数，它接收一个变量并识别其类型。RStudio
+  还为每个函数提供“智能感知”。
+
+
+  ![../images/463840_1_En_2_Chapter/463840_1_En_2_Fig2_HTML.jpg](img/463840_1_En_2_Fig2_HTML.jpg)
+
+
+  图 2-2
+
+
+  在 R 代码中运行一个简单语句
+
+
+  运行 `typeof` 函数后（图 2-3），你将在控制台窗口中看到输出。变量 `X` 的类型是双精度型。R 中有不同的数据类型和结构，本章稍后将讨论这些内容。
+
+
+  ![../images/463840_1_En_2_Chapter/463840_1_En_2_Fig3_HTML.jpg](img/463840_1_En_2_Fig3_HTML.jpg)
+
+
+  图 2-3
+
+
+  在 RStudio 中运行 `typeof` 函数以识别变量类型
+
+
+  ## 安装包
+
+
+  为了扩展 R 的功能，可以安装额外的包。每个包都有不同的函数，为使用 R 提供更多功能。
+
+
+  安装包的主要命令是 `install.packages()`。当你安装 R 时，你的机器上会创建一个库文件夹，其中包含一些用于使用 R 的基本包，例如“基础”包。但是，在第
+  4 章中，你将看到如何使用此命令添加一些有助于机器学习的包。
+
+
+  ## R 数据结构
+
+
+  每种编程语言都有特定的数据结构。R 有一些预定义的数据结构，每种结构都有特定的用途。为了在 R 中执行机器学习，我们通常使用数据结构，例如向量、列表、数据框、因子、数组和矩阵。接下来，我将简要解释其中一些。
+
+
+
+  ### 向量——c( )
+
+
+  向量存储一组有序的值。每个值都属于相同的数据类型。向量可以保存整数（不含小数的数字）、双精度浮点数（含小数的数字）、字符（文本数据）和逻辑值（`TRUE` 或
+  `FALSE`）等数据类型。参见图 2-4。
+
+
+  ![../images/463840_1_En_2_Chapter/463840_1_En_2_Fig4_HTML.jpg](img/463840_1_En_2_Fig4_HTML.jpg)
+
+
+  图 2-4
+
+
+  向量的简单可视化
+
+
+  要在 R 中创建向量数据结构，必须使用函数 `c()`。若要创建一个存储公司员工姓名的向量，可以编写如下代码：
+
+
+  ```
+
+  employee_name<-c("Jan","Jack","Mike")
+
+  ```
+
+
+  存储员工年龄和学历的方法与此相同。
+
+
+  ```
+
+  employee_age<-c(23,34,23)
+
+  employee_degree<-c("BS","MS","BS")
+
+  ```
+
+
+  `employee_name`、`employee_age` 和 `employee_degree` 的记录结果如下（图 2-5）：
+
+
+  ![../images/463840_1_En_2_Chapter/463840_1_En_2_Fig5_HTML.jpg](img/463840_1_En_2_Fig5_HTML.jpg)
+
+
+  图 2-5
+
+
+  员工姓名、年龄和学历记录
+
+
+  ### 因子
+
+
+  因子是第二种数据结构，用于处理特定类型的向量：分类值或有序值。例如，因子不直接存储“女性”和“男性”类型，而是存储 1 和 2，从而占用更少的存储空间。要定义因子，首先需要定义一个向量；员工学历就是一个分类变量。我们使用常见的
+  `Factor()` 函数将向量转换为因子类型，如下所示：
+
+
+  ```
+
+  employee_degreeFactor<-factor(c("BS","MS","BS"))
+
+  运行 employee_degreefactor 的结果为
+
+  employee_degreeFactor
+
+  [1] BS MS BS
+
+  Levels: BS MS
+
+  ```
+
+
+  如上述输出所示，在每个员工的学历旁边，还有一个名为 `Level` 的参数。
+
+
+  ### 列表——list( )
+
+
+  列表是另一种数据结构，与向量类似，但可以包含多种数据类型的组合（图 2-6）。而向量只能包含一种数据类型。
+
+
+  ![../images/463840_1_En_2_Chapter/463840_1_En_2_Fig6_HTML.jpg](img/463840_1_En_2_Fig6_HTML.jpg)
+
+
+  图 2-6
+
+
+  列表的简单可视化
+
+
+  列表帮助我们组合不同的数据类型。在 R 中创建列表时，我们使用 `list()` 命令，如下所示：
+
+
+  ```
+
+  employee_list<-list(employee_name,employee_age,employee_degree)
+
+  ```
+
+
+  如上述代码所示，`list()` 函数接收一个向量数据结构来创建列表。
+
+
+  运行变量 `employee_list` 的输出结果如下：
+
+
+  ```
+
+  [[1]]
+
+  [1] "Jan"  "Jack" "Mike"
+
+  [[2]]
+
+  [1] 23 34 23
+
+  [[3]]
+
+  [1] "BS" "MS" "BS"
+
+  ```
+
+
+  ### 数据框——data.frame( )
+
+
+  我们在机器学习中使用的主要数据结构是数据框。数据框与 SQL Server 和 Power BI 中的表结构非常相似。它包含列和行。数据框的图形化表示如图 2-7
+  所示。
+
+
+  ![../images/463840_1_En_2_Chapter/463840_1_En_2_Fig7_HTML.jpg](img/463840_1_En_2_Fig7_HTML.jpg)
+
+
+  图 2-7
+
+
+  数据框结构的简单可视化
+
+
+  要定义数据框，我们使用 `data.frame` 语法，如下所示：
+
+
+  ```
+
+  employee_DataFrame<-data.frame(employee_name,employee_age,employee_degree)
+
+  ```
+
+
+  运行变量 `employee_Dataframe` 的结果为：
+
+
+  ```
+
+  employee_name employee_age employee_degree
+
+  1           Jan           23              BS
+
+  2          Jack           34              MS
+
+  3          Mike           23              BS
+
+  ```
+
+
+  数据框类似于一个表格。我们可以分别访问其中的单元格、行和列。例如，要提取 `employee_Dataframe` 中的特定列，比如员工年龄，我们可以使用以下代码：
+
+
+  ```
+
+  employee_DataFrame$employee_age
+
+  ```
+
+
+  另一种访问行或列的方式是通过索引编号。逗号前的空格代表所有行，逗号后的数字代表列号。例如，我们可以使用以下代码提取第一列的所有行：
+
+
+  ```
+
+  employee_DataFrame[,1]
+
+  [1] Jan  Jack Mike
+
+  Levels: Jack Jan Mike
+
+  ```
+
+
+  类似地，要提取所有列中某个特定员工的数据，我们可以利用以下代码：
+
+
+  ```
+
+  employee_DataFrame[1,]
+
+  employee_name employee_age employee_degree
+
+  1           Jan           23              BS
+
+  ```
+
+
+  ## R 用于统计分析
+
+
+  R 已被广泛用于统计分析。它可以用于从简单的统计分析到复杂的统计检验。
+
+
+  一个简单的统计分析是寻找数据的中心。在 R 中，有一个简单的命令 `summary()` 可以做到这一点，它提供数据集的简要描述。
+
+
+  以下是一个二手车数据集（图 2-8）：
+
+
+  ![../images/463840_1_En_2_Chapter/463840_1_En_2_Fig8_HTML.jpg](img/463840_1_En_2_Fig8_HTML.jpg)
+
+
+  图 2-8
+
+
+  二手车数据集
+
+
+  如图 2-8 所示，我们拥有每辆车的价格和里程数。如果我们想查看它们的简单中心度量，可以使用 `summary` 函数。
+
+
+  ```
+
+  summary(used cars)
+
+  ```
+
+
+  在 RStudio 中运行代码后，我们得到以下输出（图 2-9）：
+
+
+  ![../images/463840_1_En_2_Chapter/463840_1_En_2_Fig9_HTML.jpg](img/463840_1_En_2_Fig9_HTML.jpg)
+
+
+  图 2-9
+
+
+  在 RStudio 中运行 `summary` 函数代码的输出
+
+
+  对于数值变量，例如价格或里程数，我们有五个度量值：最小值（Min.）和最大值（Max.）、平均值（mean）、中位数（median），以及第一和第三四分位数（1st
+  Qu.、3rd Qu.）。
+
+
+  ## R 用于机器学习
+
+
+  R 包含许多帮助数据科学家执行机器学习的包和函数。使用 R 语言，您可以进行预测性、描述性和规范性分析。来自 KDnuggets 网站的以下 R 包（表 2-1）在机器学习领域尤其受欢迎
+  [2]。
+
+
+  表 2-1
+
+
+  用于机器学习的 R 包
+
+
+  | **排名** | **包名称** | **机器学习类型** |
+
+  | --- | --- | --- |
+
+  | 1 | caret | 预测性分析（分类和回归） |
+
+  | 2 | randomForest | 预测性分析（分类和回归） |
+
+  | 3 | E1071 | 描述性分析 |
+
+  | 4 | rpart | 预测性分析（分类和回归） |
+
+  | 5 | nnet | 预测性分析（分类和回归） |
+
+  | 6 | arules | 描述性分析（数据挖掘） |
+
+  | 7 | kernlab | 预测性分析（分类和回归）及描述性分析 |
+
+
+  用于机器学习的包和函数还有很多。在本书中，我将展示如何在 Power BI 中使用它们。
+
+
+
+
+  ## R 语言用于可视化
+
+
+  R 语言可用于可视化。`Ggplot2` 包是一个流行的包，可帮助我们绘制不同的图表。借助 R 可视化，您可以绘制静态、动态和 3D 图表。在第 6 章中，我将讨论在
+  Power BI 中使用 R 代码绘制图表的一些方法。
+
+
+  我们希望实现可视化的主要目的如下：
+
+
+  *   比较
+
+
+  *   构成
+
+
+  *   分布
+
+
+  *   关系 [3]
+
+
+  图 2-10 中的图表展示了可视化的主要目标。
+
+
+  ![../images/463840_1_En_2_Chapter/463840_1_En_2_Fig10_HTML.jpg](img/463840_1_En_2_Fig10_HTML.jpg)
+
+
+  图 2-10
+
+
+  根据目的选择合适的图表
+
+
+  图 2-10 说明，可视化的主要目的可分为四个方面：关系、分布、比较和构成。此图表是一张用于寻找最佳可视化匹配方案的地图。大多数可用的可视化工具都能遵循此图表。然而，使用
+  R 脚本扩展了这些能力，可以绘制我们想要的所有不同类型的图表。
+
+
+  ## 总结
+
+
+  本章概述了什么是 R 语言以及如何安装它。它还简要介绍了 R 语言中可用的包和不同的数据结构。最后，简要讨论了如何使用 R 语言进行可视化和机器学习。本书的其余部分将更深入地解释如何借助
+  R 脚本绘制图表。
+
+
+  '
+- "# 3. Python 入门\n\nPython 是用于执行机器学习的主要语言之一。它是一种多用途语言，已被用于设备编程、面向对象编程、机器学习等领域。在本章中，您将学习\n\
+  \n*   Python IDE\n\n*   安装包\n\n*   Python 数据结构\n\n*   使用 Python 进行统计分析\n\n*   Python\
+  \ 用于可视化\n\n*   Python 用于机器学习\n\n然而，本章的主要目的是简要介绍 R 语言。\n\n## Python IDE\n\n根据 DataCamp\
+  \ 网站 ( [`www.datacamp.com/community/tutorials/data-science-python-ide`](http://www.datacamp.com/community/tutorials/data-science-python-ide)\
+  \ ) 的介绍，有五种顶级的集成开发环境 (IDE) 可用于编写代码。以下是每种环境的简要说明。\n\n*   **Spyder** 是一个与 RStudio\
+  \ 非常相似的环境（图 3-1），因此如果您从 R 语言转向 Python，它是一个非常好的选择。它支持 Windows 和 MacOS 系统。Spyder 也可以从\
+  \ Anaconda 网站 ( [`www.anaconda.com/distribution/`](http://www.anaconda.com/distribution/)\
+  \ ) 下载。\n\n    ![../images/463840_1_En_3_Chapter/463840_1_En_3_Fig1_HTML.jpg](img/463840_1_En_3_Fig1_HTML.jpg)\n\
+  \n    图 3-1\n\n    Spyder 环境\n\n*   **Rodeo** 是另一个类似于 RStudio 的 Python IDE。您可以从\
+  \ ( [`https://rodeo.yhat.com/`](https://rodeo.yhat.com/) ) 下载它。Rodeo 有四个主要环境（图 3-2）。一个用于编写代码，一个用于显示结果的控制台，一个用于安装包的区域，另一个用于显示图表。\n\
+  \n    ![../images/463840_1_En_3_Chapter/463840_1_En_3_Fig2_HTML.jpg](img/463840_1_En_3_Fig2_HTML.jpg)\n\
+  \n    图 3-2\n\n    Rodeo 环境\n\n*   **PyCharm** 是另一个用于编写 Python 代码的 IDE。当前版本的 Azure\
+  \ Machine Learning Workbench 支持此 IDE `(` [`www.jetbrains.com/pycharm/`](http://www.jetbrains.com/pycharm/)\
+  \ )。\n\n*   **Jupyter** 是另一个用于编写 Python 代码的 IDE，可以通过浏览器或桌面版本访问。\n\n*   **Microsoft\
+  \ Visual Studio** 是另一个用于编写 Python 的 IDE。可以在 Microsoft Visual Studio 内的 Azure Machine\
+  \ Learning Workbench 中编辑 Python 代码。下一节将详细说明如何使用 Azure Machine Learning 和 Visual\
+  \ Studio。\n\n## 安装包\n\n要在 Visual Studio 中编写 Python 代码，我们必须首先安装 Visual Studio 2017\
+  \ ( [`https://docs.microsoft.com/en-us/visualstudio/install/install-visual-studio`](https://docs.microsoft.com/en-us/visualstudio/install/install-visual-studio)\
+  \ )。从“文件”菜单中，选择“新建项目”选项。然后选择 Python ➤ Python 应用程序 ➤ 设置位置，然后单击“确定”按钮（图 3-3）。\n\n\
+  ![../images/463840_1_En_3_Chapter/463840_1_En_3_Fig3_HTML.jpg](img/463840_1_En_3_Fig3_HTML.jpg)\n\
+  \n图 3-3\n\n在 Visual Studio 2017 中创建 Python 应用程序\n\n为了扩展 Python 编程的能力，您必须安装一些额外的包。每个包都有不同的功能，为我们使用\
+  \ Python 提供了更多的功能。要在 Visual Studio 中安装包，我们必须单击“视图” ➤ “其他窗口” ➤ “Python 环境”（图 3-4）。\n\
+  \n![../images/463840_1_En_3_Chapter/463840_1_En_3_Fig4_HTML.jpg](img/463840_1_En_3_Fig4_HTML.jpg)\n\
+  \n图 3-4\n\nVisual Studio 2017 中的 Python 环境\n\n在“Python 环境”中，选择 Python 3.6 版本。在另一个选项卡中，选择“包”。在搜索区域中，输入包名称（图\
+  \ 3-5）。例如，要安装 Pandas，请单击“从 PyPi 安装 pip install pandas”。\n\n![../images/463840_1_En_3_Chapter/463840_1_En_3_Fig5_HTML.jpg](img/463840_1_En_3_Fig5_HTML.jpg)\n\
+  \n图 3-5\n\n在 Python 中安装包\n\n安装包后，您将在输出中看到一条消息。图 3-6 显示 Panda 包已成功安装。\n\n![../images/463840_1_En_3_Chapter/463840_1_En_3_Fig6_HTML.jpg](img/463840_1_En_3_Fig6_HTML.jpg)\n\
+  \n图 3-6\n\n安装包的输出结果\n\n安装包后，您将能够检查它是否已安装。在交互式 Python 3.6 中，编写以下代码，以检查 Pandas 包是否已安装。\n\
+  \n```\nimport pandas\nprint('pandas: {}'.format(pandas.__version__))\n```\n\n现在我们必须测试环境，以确保包已成功安装。您可以在不同的环境中运行代码。从图\
+  \ 3-7 中可以看出，可以在 Anaconda 5.0.1、Python 3.6 和 ProjectApplication 1 中运行代码。\n\n![../images/463840_1_En_3_Chapter/463840_1_En_3_Fig7_HTML.jpg](img/463840_1_En_3_Fig7_HTML.jpg)\n\
+  \n图 3-7\n\n在不同环境中的 Visual Studio 内运行 Python 代码\n\n## Python 用于统计摘要\n\n进行任何机器学习或统计分析的第一步是汇总数据集。我们将从维度、列的统计摘要以及数据预览方面来查看数据集。我们可以从以下链接访问关于汽车的数据资源：\
+  \ [`https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data`](https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data)\
+  \ 。\n\n我们将直接从网站加载数据，然后为每一列分配一个名称。为每一列分配名称将有助于我们更好地探索数据。然后我们将使用 Panda 包来加载和读取数据。\n\
+  \n```\nURL = \"https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data\"\
+  \nnames = ['MPG', 'Cyl', 'Disp', 'HorsePower', 'Weight','Acceleration','Model Year','Origin','Car\
+  \ Name']\ndataset = pandas.read_csv(URL, names=names)\n```\n\n\n\n### 维度\n\n要获取数据的维度，例如行数和列数，我们使用\
+  \ `shape` 属性，如下所示：\n\n```\nprint(dataset.shape)\n```\n\n结果\n\n```\n(398, 9)\n```\n\
+  \n上述结果表明我们有 398 行和 9 列。此外，我们可以使用 `head` 属性查看前 20 行数据，如下所示：\n\n```\nprint(dataset.head(20))\n\
+  ```\n\n### 统计分布\n\n要检查属性的统计摘要，我们可以使用 `describe` 命令，如下所示：\n\n```\nprint(dataset.describe())\n\
+  ```\n\n### 用于可视化的 Python\n\nPython 允许用户创建图表。它提供了多种数据可视化选项。Matplotlib 是 Python 中用于可视化的主要包。它非常强大，可用于创建复杂的图表。Matplot\
+  \ 是第一个可视化库，其他工具，如 Seaborn、ggplot、Bokeh 等，都是在其基础上构建的（参见 [`https://blog.modeanalytics.com/python-data-visualization-libraries/`](https://blog.modeanalytics.com/python-data-visualization-libraries/)\
+  \ ）。\n\nPython 中也可使用 ggplot2 包。ggplot2 基于 R 的绘图系统。它基于图层工作。\n\nBokeh 是另一个类似于 ggplot2\
+  \ 的库，但它是 Python 原生的。它帮助开发者绘制交互式和基于 Web 的图表。\n\nPlotly 是一个在线数据可视化工具，对于创建交互式图表非常有用。Plotly\
+  \ 既可用于 R 也可用于 Python。\n\n### 用于机器学习的 Python\n\nPython 是一种简单、优雅且一致的语言。例如，与 R 相比，它的可读性更强。\n\
+  \nPython 在应用数据科学领域尤其受欢迎。它拥有不同的机器学习包，例如 NumPy、Pandas、Keras、TensorFlow 等。然而，它是一种通用语言，可用于数据工程、网站抓取、Web\
+  \ 应用程序构建等。\n\n## 总结\n\n本章概述了 Python 及相关软件，并讨论了如何使用它来执行机器学习。\n\n"
+- "# 4. Power BI 中的 R 可视化\n\nPower BI 是一种自助式商业智能（BI）软件。该工具可用于企业级的数据可视化、数据清洗、建模、分析和协作。关于如何使用\
+  \ Power BI，已经出版了许多书籍和博客。在本章中，我将展示如何利用 R 创建更好的可视化效果，并从 Power BI 中获得额外价值。在本章中，我将解释如何在\
+  \ Power BI 中设置 R，如何使用 R 脚本在 Power BI 中绘制图表，如何设置 Power BI 报表环境，如何设置 Power BI 以编写\
+  \ R 代码，以及如何在 Power BI 中绘制 R 图表。\n\n## Power BI\n\nPower BI 报表环境帮助我们可视化数据。根据 Abela\
+  \ 博士 [1] 的观点，数据可视化有四个主要目的，如下所示，并在图 4-1 中以图形方式呈现：\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig1_HTML.jpg](img/463840_1_En_4_Fig1_HTML.jpg)\n\
+  \n图 4-1\n\n数据可视化示意图 [1]\n\n1.  数据比较\n2.  数据关系\n3.  数据构成\n4.  数据分布\n\nPower BI Desktop\
+  \ 是一款免费应用程序，您可以从 [`https://powerbi.microsoft.com/en-us/desktop/`](https://powerbi.microsoft.com/en-us/desktop/)\
+  \ 下载。Power BI 可视化面板支持图 4-1 中建议的大部分图表。通过从市场或其他来源导入自定义视觉对象，可以扩展可视化功能。\n\nPower BI\
+  \ Desktop 通过“获取数据”选项帮助用户从不同来源获取数据（图 4-2）。要了解更多关于 Power BI 的信息，请访问 [`http://radacad.com/online-book-power-bi-from-rookie-to-rockstar`](http://radacad.com/online-book-power-bi-from-rookie-to-rockstar)\
+  \ 。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig2_HTML.jpg](img/463840_1_En_4_Fig2_HTML.jpg)\n\
+  \n图 4-2\n\nPower BI 可视化环境\n\n### 在 Power BI 中设置 R\n\n要在 Power BI 中绘制 R 图表，第一步是至少安装一个\
+  \ R 版本或 Microsoft R Open。现在我们必须指定要使用的 R 版本。为此，我们单击“文件”菜单，然后单击“选项和设置”，再单击“选项”。在“全局”选项下，单击“R\
+  \ 脚本”，以指定 R 版本（图 4-3）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig3_HTML.jpg](img/463840_1_En_4_Fig3_HTML.jpg)\n\
+  \n图 4-3\n\n在 Power BI 中设置 R 环境\n\n如第 3 章所述，R 基于包。每当您使用特定的包时，必须首先在您的机器上安装它。（如果您使用的是\
+  \ Power BI Desktop，大多数包已安装在服务中。）您可以使用 R IDE（例如 R Studio）安装包。然后，在 Power BI R 编辑器中，您必须引用该包。此外，请确保您使用的是已安装的\
+  \ R 包的正确版本（图 4-4）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig4_HTML.jpg](img/463840_1_En_4_Fig4_HTML.jpg)\n\
+  \n图 4-4\n\n在 Power BI 中指定 R 版本和环境\n\n\n\n### 在 Power BI 中编写 R 代码\n\n可以在 Power BI\
+  \ 的报表区域编写 R 代码。为此，我们必须先将数据导入 Power BI 报表。\n\n一个包含汽车规格（如市区和高速公路速度、气缸数等）的数据集，可从 [`https://forge.scilab.org/index.php/p/rdataset/source/tree/master/csv/ggplot2/mpg.csv`](https://forge.scilab.org/index.php/p/rdataset/source/tree/master/csv/ggplot2/mpg.csv)\
+  \ 下载。该数据集是免费的，名为“mpg.csv”。我将使用这个数据集，在一张图中展示汽车在高速公路和市区的速度、气缸数、生产年份以及驱动类型（前轮、后轮等）。如图\
+  \ 4-1 所示，要展示不同项目之间的数据对比，我们必须使用表格图。我们将通过“获取数据”选项将数据导入 Power BI Desktop，并导入一个 CSV\
+  \ 文件（图 4-5）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig5_HTML.jpg](img/463840_1_En_4_Fig5_HTML.jpg)\n\
+  \n图 4-5\n\n将 CSV 文件导入 Power BI Desktop\n\n导入数据后，您应该能在“字段”下看到它。单击 R 并将其拖到空白区域（图 4-6）。\n\
+  \n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig6_HTML.jpg](img/463840_1_En_4_Fig6_HTML.jpg)\n\
+  \n图 4-6\n\n将 R 放入空白区域\n\n展开 mpg 数据集（图 4-7），并选择 cty（市区速度）、hwy（高速公路速度）和 cyl（气缸数）选项。\n\
+  \n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig7_HTML.jpg](img/463840_1_En_4_Fig7_HTML.jpg)\n\
+  \n图 4-7\n\n从 mpg 文件中选择相关数据\n\nR 脚本编辑器将被启用。在 R 脚本编辑器下，您会看到一些 R 代码。井号（#）是在 R 中用于注释的符号，不会作为脚本执行。Power\
+  \ BI 会自动将选定的字段放入一个名为 `dataset` 的变量中，因此所有字段（cty、hwy 和 cyl）都将存储在一个数据集变量中，相当于使用了 `<-`\
+  \ 语法。此外，Power BI 会自动删除任何重复的行。这在 R 脚本编辑器区域中有说明（图 4-8）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig8_HTML.jpg](img/463840_1_En_4_Fig8_HTML.jpg)\n\
+  \n图 4-8\n\nVisual Studio 2017 中的活动 Python 环境\n\n接下来，我们将放置用于在 Power BI 中绘制二维图形的 R\
+  \ 代码。在 Power BI 中，要使用任何 R 脚本，都需要使用 `install.package()` 函数在 R 中安装该包。在我们的例子中，必须安装\
+  \ ggplot2。我们使用函数 `library(ggplot2)` 来引用这个包。R 编辑器中的第一行代码是 `library(ggplot2)`。这个包包含一些用于绘制图表的重要函数。\n\
+  \n为了绘制图表，我首先使用 `ggplot` 函数来配置一个二维图表。第一个参数是 `dataset`，它包含我们的三个字段。然后，在 ggplot2 中还有另一个名为\
+  \ `aes` 的函数，它用于标识哪个字段应位于 x 轴或 y 轴上。最后，在图表中，我还想指示汽车的气缸数。这可以通过在 `aes` 函数中添加另一个图层来实现：Size。因此，气缸数更多的汽车将显示为更大的点（见图\
+  \ 4-9）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig9_HTML.jpg](img/463840_1_En_4_Fig9_HTML.jpg)\n\
+  \n图 4-9\n\nR 脚本编辑器\n\n```\nt←ggplot(dataset, aes(x=cty, y=hwy,size=cyl))\n```\n\n\
+  然而，上图显示的是没有任何特定图表的图形区域。我们需要一个散点图来在 x 轴和 y 轴上指示市区和高速公路速度。ggplot2 的 `geom_point` 函数用于绘制散点图。该函数有一个值为\
+  \ pch=21 的参数，这与图表中点的形状有关。例如，如果我将此值设置为 20，它会变成一个实心圆；值为 23 则变成菱形。要运行代码，请单击运行选项（图 4-10）。\n\
+  \n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig10_HTML.jpg](img/463840_1_En_4_Fig10_HTML.jpg)\n\
+  \n图 4-10\n\n如何运行 R 代码\n\n单击运行代码选项后，图表将显示在 R 可视化对象中（图 4-11）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig11_HTML.jpg](img/463840_1_En_4_Fig11_HTML.jpg)\n\
+  \n图 4-11\n\n使用 `ggplot` 函数绘制图表\n\n在图 4-11 中，您可以看到我们有三个不同的字段：高速公路速度和市区速度，分别位于 y 轴和\
+  \ x 轴上。汽车的气缸变量显示为不同的圆点大小。但是，您可能需要更大的圆点，以区分 8 缸和 4 缸的汽车。我们通过添加另一个图层，即添加一个函数名来满足这一需求，如下所示：\n\
+  \n```\nscale_size_continuous(range=c(1,5))\n```\n\n以下是完整的代码：\n\n```\nt<-ggplot(dataset,\
+  \ aes(x=cty, y=hwy,size=cyl)) + geom_point(pch=23)+scale_size_continuous(range=c(1,5))\n\
+  in the scale_size_continues(range=c(1,5))\n```\n\n指定的最小值和最大值之间的差值为 5。我可以通过将其从 5\
+  \ 改为 10 来增加这个差值。生成的散点图如图 4-12 所示。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig12_HTML.jpg](img/463840_1_En_4_Fig12_HTML.jpg)\n\
+  \n图 4-12\n\n显示市区和高速公路速度以及气缸数的散点图\n\n在下一个示例中，我将 `pch` 值更改为 24，并在 `aes` 函数名中添加了另一行代码：`fill=Red`。这意味着图表将显示实心的红色矩形（图\
+  \ 4-13）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig13_HTML.jpg](img/463840_1_En_4_Fig13_HTML.jpg)\n\
+  \n图 4-13\n\n最终图表\n\n```\nt<-ggplot(dataset, aes(x=cty, y=hwy,size=cyl,fill=\"Red\"\
+  )) + geom_point(pch=24)+scale_size_continuous(range=c(1,5))\n```\n\n通过使用 R 中的 `facet`\
+  \ 命令，可以在一个图表中显示五个不同的变量。这有助于我们在图表中获得更多维度。为此，我们将展示汽车的生产年份及其驱动类型。因此，我们必须更改代码，如下所示：\n\
+  \n```\nt← ggplot(dataset, aes(x=cty, y=hwy,color = factor(cyl))) + geom_point(size=4)\n\
+  ```\n\n通过更改 `aes` 函数参数，我们用 `color` 参数替换了 `size` 参数。这表明我想区分汽车的气缸值，不仅通过圆点大小，还要通过为它们分配不同的颜色来显示。因此，我按照上面的代码片段更改了\
+  \ `aes` 函数。\n\n我们必须更改代码，如下所示：\n\n```\nlibrary(ggplot2)\nt<-ggplot(dataset, aes(x=cty,\
+  \ y=hwy,color = factor(cyl))) + geom_point(size=4)\nt<-t + facet_grid(year ~ drv)\n\
+  ```\n\n现在，您可以在 y 轴和 x 轴上看到汽车在高速公路和市区的速度。此外，我们还将气缸数显示为颜色，将驱动类型和生产年份显示为分面（图 4-14）。\n\
+  \n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig14_HTML.jpg](img/463840_1_En_4_Fig14_HTML.jpg)\n\
+  \n图 4-14\n\n绘制显示五个变量的表格图\n\n## Power BI 中的 R 功能\n\nR 脚本编辑器具有一些功能，可帮助我们更好地使用 Power\
+  \ BI Desktop，例如切片和切块以及编辑 R 代码。\n\n\n\n### 切片与切块\n\nR 可视化具有交互性，可以对它们进行切片和切块。我们将使用一个切片器来切分分面图。同时，我们还会在报表区域插入一个年份切片器，以筛选\
+  \ R 可视化对象（图 4-15）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig15_HTML.jpg](img/463840_1_En_4_Fig15_HTML.jpg)\n\
+  \n图 4-15\n\n对 R 可视化对象进行切片和切块\n\n### 在 RStudio 中编辑 R 代码\n\n可以在 RStudio 中打开包含数据的代码。此外，还可以选择使用我们已有的数据在\
+  \ RStudio 中运行 R 代码（图 4-16）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig16_HTML.jpg](img/463840_1_En_4_Fig16_HTML.jpg)\n\
+  \n图 4-16\n\n运行 R 代码\n\n点击“运行”选项后，RStudio 中将打开一个包含汽车相关数据的页面。导入的数据集包含了数据的所有变更（图 4-17）。\n\
+  \n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig17_HTML.jpg](img/463840_1_En_4_Fig17_HTML.jpg)\n\
+  \n图 4-17\n\n在 RStudio 中打开 R 代码\n\n## 自定义可视化对象\n\n使用自定义可视化对象是扩展 Power BI 可视化能力的另一种方式。有两种方法可以访问自定义可视化对象：\n\
+  \n1.  使用 Office 商店中已有的自定义可视化对象\n\n2.  创建自定义可视化对象\n\n### Power BI Office 商店中的自定义可视化对象\n\
+  \nOffice 商店为 Power BI 用户提供了多种自定义可视化对象。要访问它们，您必须首先登录您的工作账户（图 4-18）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig18_HTML.jpg](img/463840_1_En_4_Fig18_HTML.jpg)\n\
+  \n图 4-18\n\n登录 Power BI 账户\n\n然后，在 Power BI 可视化窗格中，点击三个点，选择“从商店导入”选项（图 4-19）。\n\n\
+  ![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig19_HTML.jpg](img/463840_1_En_4_Fig19_HTML.jpg)\n\
+  \n图 4-19\n\n从 Power BI 商店导入可视化对象\n\n接下来，您将看到一个标题为“Power BI 自定义可视化对象”的页面。这里列出了许多类别，例如筛选器、KPI、地图、高级分析、时间、仪表、信息图和数据可视化（图\
+  \ 4-20）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig20_HTML.jpg](img/463840_1_En_4_Fig20_HTML.jpg)\n\
+  \n图 4-20\n\nPower BI 自定义可视化对象窗格\n\n如前所述，Power BI 自定义可视化对象包含一个“高级分析”类别。点击它，您将看到诸如时间序列、关联规则、聚类等高级分析功能。我将使用其中一个自定义可视化对象来预测牛奶产量。\n\
+  \n第一步是将牛奶数据集导入 Power BI Desktop。该数据包含两列：牛奶生产日期和牛奶产量值（图 4-21）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig21_HTML.jpg](img/463840_1_En_4_Fig21_HTML.jpg)\n\
+  \n图 4-21\n\n牛奶产量数据\n\n现在，我们必须从 Power BI 自定义可视化对象中导入自定义可视化对象，以预测牛奶产量（图 4-22）。\n\n\
+  ![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig22_HTML.jpg](img/463840_1_En_4_Fig22_HTML.jpg)\n\
+  \n图 4-22\n\n高级分析时间序列自定义可视化对象\n\n导入自定义可视化对象后，您会看到它已添加到标准可视化面板中（图 4-23）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig23_HTML.jpg](img/463840_1_En_4_Fig23_HTML.jpg)\n\
+  \n图 4-23\n\n预测自定义可视化对象\n\n导入预测自定义可视化对象后，我们现在必须为数据字段选择日期和值。\n\n此自定义可视化对象使用指数平滑算法来预测未来十个月的牛奶产量（图\
+  \ 4-24）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig24_HTML.jpg](img/463840_1_En_4_Fig24_HTML.jpg)\n\
+  \n图 4-24\n\n预测牛奶产量\n\n预测图表中，黄色部分表示前几个月的实际牛奶产量数据，红色部分表示后十个月的预测数据。\n\n背后的算法是不可访问的，我们只能更改参数（图\
+  \ 4-25）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig25_HTML.jpg](img/463840_1_En_4_Fig25_HTML.jpg)\n\
+  \n图 4-25\n\n预测未来十个月的牛奶产量\n\nPower BI 中的自定义可视化对象扩展了使用不同图表的可能性。然而，由微软团队创建的自定义可视化对象数量是有限的。为了扩展可视化能力，有一种方法可以通过使用\
+  \ R 脚本来创建自定义可视化对象。在下一节中，我将解释创建自定义可视化对象的过程。\n\n\n\n### 创建自定义视觉对象\n\nPower BI Desktop\
+  \ 中的一些主要 Power BI 标准视觉对象被广泛使用。然而，如前一节所述，可以通过自定义视觉对象来扩展这些功能。要访问自定义视觉对象，您必须在 Power\
+  \ BI Desktop 中单击“市场”。有两种方法可以使用 Java 脚本或 R 代码创建自定义视觉对象。\n\n我将简要解释使用 R 代码创建自定义视觉对象的过程。\n\
+  \n1.  第一步是从 [`https://nodejs.org/`](https://nodejs.org/) 安装 NodeJS。\n\n2.  接下来，使用命令提示符安装\
+  \ Power BI 视觉对象工具（图 4-26）：\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig26_HTML.jpg](img/463840_1_En_4_Fig26_HTML.jpg)\n\
+  \n图 4-26\n\n通过命令提示符安装 Power BI 自定义视觉对象\n\n```\nnpm install -g powerbi-visuals-tools\n\
+  ```\n\n1.  安装 Power BI 自定义视觉对象后，为确保它们已正确安装，我们必须运行 `pbiviz` 命令。运行此命令后，Power BI 自定义视觉对象工具的相关信息将显示在命令提示符控制台中（图\
+  \ 4-27）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig27_HTML.jpg](img/463840_1_En_4_Fig27_HTML.jpg)\n\
+  \n图 4-27\n\n确认 Power BI 自定义视觉对象\n\n2.  接下来，我们必须创建一个 `rhtml` 模板。要创建模板文件夹，我们首先必须在\
+  \ C 盘中创建一个空文件夹。在 C 盘中创建一个名为 `CustomVisual` 的新文件夹后，然后，使用命令提示符，我们必须将目录更改为 `C:\\ CustomVisual`。在命令提示符中，我们运行以下代码：\n\
+  \n```\npbiviz new sampleRHTMLVisual -t rhtml\n```\n\n通过运行该代码，将在 `CustomVisual` 文件夹中创建一个名为\
+  \ `sampleRHTMLVisual` 的文件夹。在此文件夹中，有一个名为 `script.r` 的 R 文件（图 4-28）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig28_HTML.jpg](img/463840_1_En_4_Fig28_HTML.jpg)\n\
+  \n图 4-28\n\n自定义视觉对象的示例文件夹\n\n这是一个提供模板的文件夹，用于创建其他 R 自定义视觉对象。检查文件夹内的 `script. R` 文件（图\
+  \ 4-29）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig29_HTML.jpg](img/463840_1_En_4_Fig29_HTML.jpg)\n\
+  \n图 4-29\n\n脚本文件中的 R 代码\n\n现在，如图 4-29 中的代码所示，我们需要两个库，Plotly 和 ggplot2，以便使用 Plotly\
+  \ 绘制一个简单的 ggplot2 图表。\n\n这里，数据集已硬编码为 `iris`，这是 R 中的一个开源数据集。该图从 `iris` 数据集中获取数据，并显示花瓣、长度和花的种类。然后我们使用\
+  \ `ggplotly` 函数来显示数据。\n\n因此，我们有了一个 R 脚本。现在我将首先从中创建一个包，然后编写我的代码来创建不同的图表。因此，我返回命令提示符，并在该文件夹中键入\
+  \ `pbiviz package`（图 4-30）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig30_HTML.jpg](img/463840_1_En_4_Fig30_HTML.jpg)\n\
+  \n图 4-30\n\n在命令提示符中创建自定义视觉对象\n\n1.  在 Power BI 文件中打开自定义视觉对象。为此，我们必须选择“可视化”标准面板中的“从文件导入”选项（图\
+  \ 4-31）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig31_HTML.jpg](img/463840_1_En_4_Fig31_HTML.jpg)\n\
+  \n图 4-31\n\n将自定义视觉对象导入 Power BI\n\n2.  选择“从文件导入”选项后，我们必须浏览 `sampleRHTMLVisual` 文件夹并查找\
+  \ `dist` 文件夹。在此文件夹中，有一个以文件夹名称命名的 `pbiviz` 文件。我们必须将此文件导入 Power BI 可视化面板（图 4-32）。\n\
+  \n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig32_HTML.jpg](img/463840_1_En_4_Fig32_HTML.jpg)\n\
+  \n图 4-32\n\n已导入的自定义视觉对象\n\n3.  最后一步是将自定义视觉对象拖放到 Power BI 报表区域（图 4-33）。该视觉对象与特定数据无关。\n\
+  \n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig33_HTML.jpg](img/463840_1_En_4_Fig33_HTML.jpg)\n\
+  \n图 4-33\n\n带有 R 代码的自定义视觉对象\n\n我们可以更改 R 代码，并使用不同的名称和图标创建自定义视觉对象。在另一个示例中，我将创建一个表格图表。（我已在本章前面解释过相关的\
+  \ R 代码。）\n\n首先，我们必须返回到我们从示例 Power BI 包中获得的 `sampleRHTMLVisual` 文件夹，然后复制该文件夹，以创建一个新的自定义视觉对象。我们将文件夹名称更改为\
+  \ `TableChart`。这里有一个 `pbiviz` 文件，其中包含自定义视觉对象的名称、图标等信息。我们必须更改 `pbiviz.json` 文件的内容。\n\
+  \n1.  将自定义视觉对象的名称更改为“TableChart”。\n\n2.  为自定义视觉对象创建一个尺寸为 20×20 的图标，并将其放入 `assets`\
+  \ 文件夹中。\n\n3.  更改 JSON 文件中图标的地址（图 4-34）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig34_HTML.jpg](img/463840_1_En_4_Fig34_HTML.jpg)\n\
+  \n图 4-34\n\n必须更改 JSON 文件名\n\n4.  更改名称并为自定义视觉对象创建新图标后，我们必须保存 JSON 文件，并将创建的图标放入 `assets`\
+  \ 文件夹中。\n\n5.  接下来，我们必须更改 `scripts. R` 文件中的 R 脚本。在 `actual code` 部分，将现有代码替换为以下代码。\n\
+  \n```\n    if(ncol(Values)==5)\n    {\n    names(Values)[1]<-paste(\"X\")\n    names(Values)[2]<-paste(\"\
+  Y\")\n    names(Values)[3]<-paste(\"Z\")\n    names(Values)[4]<-paste(\"W\")\n \
+  \   names(Values)[5]<-paste(\"M\")\n    g=ggplot(Values,aes(x=X,y=Y,color=Z))+geom_jitter()+facet_grid(\
+  \ M ~  W,scales = \"free\")\n    }\n    ```\n\n6.  保存文件。\n\n7.  我们现在必须返回到命令提示符环境，并将目录更改为\
+  \ `sampleRHTMLVisual` 文件夹，通过键入 `pbiviz package`（图 4-35）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig35_HTML.jpg](img/463840_1_En_4_Fig35_HTML.jpg)\n\
+  \n图 4-35\n\n命令提示符中的 `pbiviz` 命令\n\n8.  运行代码后，我们应该能够在 `dist` 文件夹中看到一个名为 `TableChart`\
+  \ 的新 `pbiviz` 文件（图 4-36）。\n\n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig36_HTML.jpg](img/463840_1_En_4_Fig36_HTML.jpg)\n\
+  \n图 4-36\n\n表格图表的自定义视觉对象\n\n9.  最后，我们必须将创建的自定义视觉对象导入 Power BI Desktop，并将数据字段传递给该视觉对象。\n\
+  \n如前所述，我们必须更改代码，如下所示：\n\n```\nif(ncol(Values)==5)\n{\nnames(Values)[1]<-paste(\"\
+  X\")\nnames(Values)[2]<-paste(\"Y\")\nnames(Values)[3]<-paste(\"Z\")\nnames(Values)[4]<-paste(\"\
+  W\")\nnames(Values)[5]<-paste(\"M\")\ng=ggplot(Values,aes(x=X,y=Y,color=Z))+geom_jitter()+facet_grid(\
+  \ M ~  W,scales = \"free\")\n}\n```\n\n主要数据集是 `Values`。`Values` 数据集中的第一项与 x 轴相关，第二项与\
+  \ y 轴相关，依此类推。\n\n因此，在 Power BI Desktop 中，请注意您在 R 代码中指定的轴。\n\n\n\n如图 4-37 所示，导入的视觉对象包含名称和图标。此外，在数据字段中，我们将\
+  \ `Values` 作为主数据集，并且我们放入其中的变量顺序与为每个变量指定的代码一致。例如，`cty` 字段将位于 x 轴上，`hwy` 位于 y 轴上（第二个值），以此类推。\n\
+  \n![../images/463840_1_En_4_Chapter/463840_1_En_4_Fig37_HTML.jpg](img/463840_1_En_4_Fig37_HTML.jpg)\n\
+  \n图 4-37\n\n具有特定 R 代码、名称和图标的自定义视觉对象\n\n可以更改 `Value` 字段，使其拥有独立的 x、y、图例、行和列数据字段。这可以通过\
+  \ `capabilities.JSON` 实现。有关如何更改数据字段以及如何添加更多设置的更多信息，可通过其他 Microsoft 来源和 RADACAD 网站获取。\n\
+  \n## 总结\n\n本章解释了如何设置 Power BI Desktop 以编写 R 代码。还描述了如何在 Power BI 内部使用 R 包（例如 ggplot2\
+  \ 和 Plotly）绘制简单图表。简要介绍了 Power BI 中可用于高级分析的自定义视觉对象。最后，简要介绍了如何通过编写 R 和 JSON 脚本来创建\
+  \ R 自定义视觉对象的过程。下一章将解释企业在开始机器学习之前需要理解的主要概念。\n\n## 参考\n\n1.  Dr. Abela，《极致演示™方法：复杂信息的高效沟通》，“选择恰当的图表”，[`http://extremepresentation.typepad.com/blog/2006/09/choosing_a_good.html`](http://extremepresentation.typepad.com/blog/2006/09/choosing_a_good.html)，2006\
+  \ 年 9 月 6 日。\n\n"
+- '# 第二部分 使用 R 和 Power BI 进行机器学习
+
+
+  使用 R 和 Power BI 进行机器学习
+
+
+  如今，各行各业对机器学习的应用兴趣浓厚。将 Power BI 视为一个协作式自助服务工具，它支持描述性分析（数据摄取、转换、建模和可视化）的整个价值链。除了这些功能外，Power
+  BI 还提供了用于执行高级分析和机器学习的出色工具。第 5 章至第 8 章主要关注 Power BI 内部的主要机器学习周期。在第 5 章中，将讨论与我们将通过机器学习解决哪些业务问题相关的概念。第
+  6 章重点介绍在 Power BI 内部进行数据整理（数据清洗）的可能性。第 7 章和第 8 章重点介绍用于预测性和描述性分析的机器学习算法。
+
+
+  '
+- "# 5. 业务理解\n\n业务理解是在任何平台或语言中开展机器学习的主要且首要的步骤。并非所有业务问题都能通过机器学习方法解决。机器学习分为几个基本类别，包括监督学习和无监督学习。\n\
+  \n监督学习是指输入和输出变量都已确定的情况。无监督学习是指只有输入数据，而没有相应输出变量的情况。\n\n另一种机器学习分类由三大类组成：\n\n*   描述性分析\n\
+  *   预测性分析\n*   规范性分析\n\n描述性分析主要使用无监督学习方法进行总结、分类和提取规则，以回答已经发生的事情。预测性分析是关于基于过去数据进行预测的机器学习方法。最后，规范性分析使用优化和推荐算法来最大化预期结果。\n\
+  \n然而，还有其他分析类型，例如诊断分析，也有助于更好地理解业务。根据 Gartner [1] 的说法，这四种分析方法有助于组织中的决策者做出更好的决策。\n\n\
+  这些方法中的每一种（图 5-1）都能为公司提供一些价值，并且实施它们需要一定程度的技能。描述性分析是最简单的方法。它不需要高水平的技能，并且可以使用不同的工具完成。诊断和发现分析能提供对数据更深入的洞察，并且需要更高的技能。\n\
+  \n![../images/463840_1_En_5_Chapter/463840_1_En_5_Fig1_HTML.jpg](img/463840_1_En_5_Fig1_HTML.jpg)\n\
+  \n图 5-1\n\n分析与信息 [1]\n\n如图 5-2 所示，接下来的两种分析，即预测性分析和规范性分析，能提供对数据更深入的洞察，更好地理解未来可能发生的事情，此外还能提供一些规范性建议。这些分析为公司带来的价值比其他三种分析更大，并且它们需要更高的技能水平。\n\
+  \n![../images/463840_1_En_5_Chapter/463840_1_En_5_Fig2_HTML.png](img/463840_1_En_5_Fig2_HTML.png)\n\
+  \n图 5-2\n\n高级分析 [1]\n\n在本章中，我将解释每种分析类型的主要概念，以及我们可以针对每种分析采取的不同方法。\n\n## 描述性分析\n\n\
+  描述性分析是理解数据和现有模式的主要方法。描述性分析可用于理解数据的结构、现有规则或数据中的模式等。描述性分析可分为三大类。\n\n*   运营报告\n*  \
+  \ 统计分析\n*   数据挖掘方法\n\n运营报告主要是侧重于分析过去数据的传统报告。这些报告主要用于判断公司的绩效。图 5-3 展示了这样一份报告，说明了不同行业和收入群体的平均总小时工资率。\n\
+  \n![../images/463840_1_En_5_Chapter/463840_1_En_5_Fig3_HTML.jpg](img/463840_1_En_5_Fig3_HTML.jpg)\n\
+  \n图 5-3\n\n使用 Power BI 生成的每小时平均总工资报告\n\n这份报告简要描述了不同行业工人的小时工资率。其他类型的报告则涉及数据的统计事实。\n\
+  \n统计分析是进行描述性分析的另一种方式，它使我们能够更好地理解数据的统计行为。统计分析有多种类型，例如单变量分析，其中每一列数据被单独考虑，例如数据摘要和数据分布（图\
+  \ 5-4）。从上图可以看出，员工的平均小时工资率以直方图的形式呈现，以显示其分布。此外，我们还可以看到最小值、最大值和平均分布。这些数据的中位数以箱线图或表格形式绘制。箱线图显示数据在中位数（中点）处分布平滑，这与数据平均值相同。\n\
+  \n![../images/463840_1_En_5_Chapter/463840_1_En_5_Fig4_HTML.jpg](img/463840_1_En_5_Fig4_HTML.jpg)\n\
+  \n图 5-4\n\n统计分析——单变量分析\n\n其他形式的统计分析涉及两个不同数据列之间的双变量相关性和回归。\n\n另一种形式是关于寻找规则、数据的自然聚类和现有模式，这可以通过数据挖掘方法（在第\
+  \ 8 章中简要说明）来完成。在第 8 章中，我将解释一些旨在进行描述性分析的算法（如聚类、购物篮分析和决策树）的代码和概念。\n\n\n\n## 预测分析\n\
+  \n另一种与机器学习相关的分析类型是预测分析。预测分析属于监督学习，意味着我们希望从过去的数据中学习，以预测未来的趋势。预测分析基于某种概率来预测未来。没有任何方法能以\
+  \ 100%的概率预测未来。预测分析主要基于统计学的概率。我们可以将预测分析分为两种主要方法：\n\n*   回归\n\n*   分类\n\n回归方法预测一个数值，例如，未来三个月的销售额，或未来三年网站关注者的数量。\n\
+  \n分类分析则关注对群体进行预测。分类预测某个人或事物属于哪个或哪些类别。例如，在分析客户流失问题时，分类分析可以预测一个新客户属于可能离开还是留下的群体。\n\
+  \n对于回归和分类这两种方法，都有许多相关的算法可以帮助我们。在第 7 章中，我们将探讨其中一些算法。\n\n对于回归分析，有几种相关的算法，例如线性回归、逻辑回归、多项式回归、逐步回归、岭回归、套索回归和弹性网络回归。此外，还有一些其他技术，如神经网络、决策树等（图\
+  \ 5-5）。\n\n![../images/463840_1_En_5_Chapter/463840_1_En_5_Fig5_HTML.jpg](img/463840_1_En_5_Fig5_HTML.jpg)\n\
+  \n图 5-5\n\n回归分析 [2]\n\n对于分类分析，也有许多相关算法，包括支持向量机（SVM）、决策树和 K 近邻（KNN）（参见第 7 章）。第 7\
+  \ 章将介绍一个使用 Power BI 进行分类分析的示例。\n\n时间序列预测是预测分析的一个子领域，与回归算法有一些相似之处。时间序列分析预测的值是基于时间的。时间序列数据可能与趋势和/或季节性相关（图\
+  \ 5-6）。\n\n![../images/463840_1_En_5_Chapter/463840_1_En_5_Fig6_HTML.jpg](img/463840_1_En_5_Fig6_HTML.jpg)\n\
+  \n图 5-6\n\n牛奶产量的时间序列预测\n\n## 规范分析\n\n规范分析是关于推荐系统的。推荐系统预测用户对某个项目的评分或偏好。推荐系统可以分为两大类：\n\
+  \n![../images/463840_1_En_5_Chapter/463840_1_En_5_Fig8_HTML.jpg](img/463840_1_En_5_Fig8_HTML.jpg)\n\
+  \n图 5-8\n\n协同过滤 [4]\n\n*   *基于内容的系统*：这些系统寻找项目之间的相似性。基于内容的推荐系统分析项目描述，并推荐与用户兴趣相似度更高的项目\
+  \ [3]。例如，如果我们想向客户推荐新电影，基于内容的过滤会检查新提供的电影与客户已看过的电影之间的相似性（图 5-7）。\n\n    ![../images/463840_1_En_5_Chapter/463840_1_En_5_Fig7_HTML.jpg](img/463840_1_En_5_Fig7_HTML.jpg)\n\
+  \n    图 5-7\n\n    基于内容的过滤\n\n*   *协同过滤*：这种方法用于根据相似用户对项目的喜好来推荐项目（图 5-8）。\n\n## 业务理解\n\
+  \n如前所述，业务理解是关于确定我们可以将业务问题归入哪个类别。重要的是，要确定我们的问题适合特定的类别，例如预测分析、描述性分析或规范分析。业务理解需要与业务专家和业务利益相关者进行互动。此外，我们要解决的业务问题会影响算法选择过程、数据收集和数据清洗。第\
+  \ 6 章至第 8 章提供了一些针对不同业务问题的机器学习示例。\n\n## 总结\n\n本章简要介绍了不同的数据分析和机器学习方法，包括描述性分析、预测分析和规范分析。Power\
+  \ BI 是一个全面的数据驱动分析工具，为进行任何高级分析提供了基础设施。在下一章中，我将讨论如何在 Power BI 中使用 R 进行数据整理。\n\n"
+- '# 6. 预测分析的数据整理
+
+
+  在机器学习过程中，业务理解之后，下一步是收集正确的数据、特征选择和数据整理。数据整理包括数据清洗、连接不同数据源、质量控制、数据集成、数据转换和数据缩减过程（图
+  6-1）。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig1_HTML.png](img/463840_1_En_6_Fig1_HTML.png)
+
+
+  图 6-1
+
+
+  机器学习过程
+
+
+  在本章中，我将向您展示如何在 Power BI Desktop 查询编辑器内执行数据清洗。将简要介绍 Power Query 编辑器，包括如何从不同资源导入数据，如何使用
+  Power Query 编辑器进行数据清洗，以及如何在其中编写 R 脚本。
+
+
+  ## Power Query 编辑器
+
+
+  Power Query 编辑器是 Power BI 的数据转换工具。它是一个用于获取数据、数据清洗、数据建模以及编写 M、R 或 Python 脚本的综合工具。要访问
+  Power BI 中的 Power Query 编辑器，您必须单击“编辑查询”图标（图 6-2）。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig2_HTML.jpg](img/463840_1_En_6_Fig2_HTML.jpg)
+
+
+  图 6-2
+
+
+  访问 Power Query 编辑器
+
+
+  Power Query 编辑器提供不同的数据转换选项。您可以从各种不同的资源获取数据，例如 Excel、CSV、XML、JSON、文件夹、SharePoint、SQL
+  Server、SAP、MySQL、Oracle、Azure、Azure Blob、Azure SQL、Azure HDInsight、Google Analytics、Dynamics、Facebook、MailChimp
+  等（图 6-3）。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig3_HTML.jpg](img/463840_1_En_6_Fig3_HTML.jpg)
+
+
+  图 6-3
+
+
+  Power Query 编辑器中可用的数据资源
+
+
+  Power Query 编辑器有不同的组件。“主页”选项卡包含用于从不同资源获取数据、执行一些简单数据转换的组件，以及用于编写 M 语言的高级编辑器。使用 Power
+  Query，我们可以在一个小窗口中查看应用于数据转换的步骤（图 6-4）。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig4_HTML.jpg](img/463840_1_En_6_Fig4_HTML.jpg)
+
+
+  图 6-4
+
+
+  Power Query 中的“主页”选项卡
+
+
+  Power Query 中的另一个组件是“转换”选项卡。它提供了一些数据转换所需的工具，例如更改日期和时间列、统计转换等（图 6-5）。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig5_HTML.jpg](img/463840_1_En_6_Fig5_HTML.jpg)
+
+
+  图 6-5
+
+
+  Power Query 转换
+
+
+  此外，还有一个名为“运行 R 脚本”的组件，允许用户在 Power Query 内部编写相关的 R 代码。在下一节中，我将向您展示如何使用 Power Query
+  进行一些旨在进行机器学习和数据分析的数据转换。
+
+
+
+
+  ## Power Query 中的数据整理
+
+
+  在进行机器学习之前，我们必须经历两个主要过程：数据准备和数据整理。数据准备涉及从资源中收集数据、整合数据并将其加载到一个资源中，类似于 ETL（提取、转换和加载）过程。
+
+
+  数据整理则是在应用层加载数据，并执行数据清洗、格式化和集成。
+
+
+  Python 语言包含一些流行的数据整理过程，例如重塑数据、选择数据和合并数据。
+
+
+  ### 重塑数据
+
+
+  重塑数据的主要方法之一是数据透视。这涉及将列数据转换为列名，如图 6-6 所示。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig6_HTML.png](img/463840_1_En_6_Fig6_HTML.png)
+
+
+  图 6-6
+
+
+  数据透视
+
+
+  在 Python 中创建数据的相关代码（图 6-7）如下：
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig7_HTML.jpg](img/463840_1_En_6_Fig7_HTML.jpg)
+
+
+  图 6-7
+
+
+  使用 Python 代码进行数据透视
+
+
+  ```
+
+  data=[["2nd March 2018","A",12.36],   ["3rd March 2018","A",23.69],  ["2nd March
+  2018","B",25.36],     ["2nd March 2018","C",17.28],    ["3rd March 2018","B",19.2]]
+
+  using package pandas
+
+  import pandas as pd
+
+  df=pd.DataFrame(data)
+
+  pivot table
+
+  df=pd.pivot_table(df,index=[df[0]],columns=df[1])
+
+  ```
+
+
+  在 R 中，我们可以通过以下代码实现：
+
+
+  ```
+
+  install.packages("tidyr")
+
+  date=c("2nd March 2018","2nd March 2018","2nd March 2018","2nd March 2018","2nd
+  March 2018")
+
+  Type=c("A","A","B","C","B")
+
+  index=c(0,1,2,3,4)
+
+  Value=c(12.36,23.69,25.36,17.28,19.2)
+
+  df=data.frame(index,date,Type,Value)
+
+  library("tidyr")
+
+  spread(df,Type,Value)
+
+  and the result is the same (a bit different out put)
+
+  ```
+
+
+  现在，我们将了解如何在 Power Query 中无需编写任何代码即可启动此过程。要使用 Power Query 进行数据透视，我们必须通过使用“输入数据”选项（图
+  6-8）来输入数据。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig8_HTML.jpg](img/463840_1_En_6_Fig8_HTML.jpg)
+
+
+  图 6-8
+
+
+  手动输入数据
+
+
+  通过单击“输入数据”，我们能够手动将数据放入 Power Query 中（图 6-9）。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig9_HTML.jpg](img/463840_1_En_6_Fig9_HTML.jpg)
+
+
+  图 6-9
+
+
+  创建数据表
+
+
+  我们拥有与 Python 中相同的数据（图 6-10）。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig10_HTML.jpg](img/463840_1_En_6_Fig10_HTML.jpg)
+
+
+  图 6-10
+
+
+  Power BI 中的数据集
+
+
+  现在我们只需单击“类型”列（图 6-11）。然后在“转换”选项卡下单击“透视列”。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig11_HTML.jpg](img/463840_1_En_6_Fig11_HTML.jpg)
+
+
+  图 6-11
+
+
+  单击“类型”列和透视选项
+
+
+  接下来，我们指定要将值放入哪一列以及值的类型（图 6-12）。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig12_HTML.jpg](img/463840_1_En_6_Fig12_HTML.jpg)
+
+
+  图 6-12
+
+
+  指定类型和值
+
+
+  数据透视的结果如图 6-13 所示。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig13_HTML.jpg](img/463840_1_En_6_Fig13_HTML.jpg)
+
+
+  图 6-13
+
+
+  数据透视表
+
+
+  还有其他重塑数据的例子，例如逆透视、融合和迭代，这些都可以在 Power Query 中完成。此外，在 Power Query 中，选择和设置条件来检查数据的过程也可以非常轻松地完成。
+
+
+  ### 选择数据
+
+
+  要在 Python 中根据条件选择值，我们使用 `where` 函数，如下所示：
+
+
+  ```
+
+  df.where(df[2]>17)
+
+  ```
+
+
+  在 `df` 数据集中，我们将选择大于 17 的值（图 6-14）。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig14_HTML.jpg](img/463840_1_En_6_Fig14_HTML.jpg)
+
+
+  图 6-14
+
+
+  使用 Python 选择值
+
+
+  在 Power Query 中，您必须单击要筛选的列，然后选择筛选选项、数字筛选器和“大于或等于”选项（图 6-15）。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig15_HTML.jpg](img/463840_1_En_6_Fig15_HTML.jpg)
+
+
+  图 6-15
+
+
+  Power Query 选择值
+
+
+  然后，在 Power Query 中，只需将列筛选为 17（图 6-16）。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig16_HTML.jpg](img/463840_1_En_6_Fig16_HTML.jpg)
+
+
+  图 6-16
+
+
+  Power Query 筛选值
+
+
+  ### 合并数据
+
+
+  另一种流行的数据准备形式是合并数据，例如，连接两个可能来自不同数据源的表。在 Python 中，如果我们想这样做，有一个 `merge` 函数可以用来连接两个不同的数据集。例如，考虑以下数据集：
+
+
+  ```
+
+  data1=[["a",11],["b",1],["c",99]]
+
+  data2=[["a",20],["b",0],["d",21]]
+
+  data1=pd.DataFrame(data1)
+
+  data1.columns=["Type","Value"]
+
+  data2.columns=["Type","Value"]
+
+  data2=pd.DataFrame(data2)
+
+  merg=pd.merge(data1,data2,how=''left'',on="Type")
+
+  ```
+
+
+  如前面的代码所示，我们可以指定连接类型和连接列。我们可以将 `how` 属性更改为 `left`、`right`、`inner` 和 `outer`（图 6-17）。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig17_HTML.jpg](img/463840_1_En_6_Fig17_HTML.jpg)
+
+
+  图 6-17
+
+
+  使用 Python 合并数据
+
+
+  同样的过程也可以在 Power Query 中执行。我在 Power Query 中创建了两个不同的数据集 `Data1` 和 `Data2`（图 6-18）。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig18_HTML.jpg](img/463840_1_En_6_Fig18_HTML.jpg)
+
+
+  图 6-18
+
+
+  在 Power Query 中创建数据集
+
+
+  创建数据集后，您必须单击“合并”列，以将 `Data1` 与 `Data2` 合并（图 6-18）。
+
+
+  在“合并”窗口中，我们可以指定要基于哪一列进行合并，以及我们感兴趣的合并类型（图 6-19）。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig19_HTML.jpg](img/463840_1_En_6_Fig19_HTML.jpg)
+
+
+  图 6-19
+
+
+  基于“类型”列和左外部连接合并数据
+
+
+  合并后，我们必须指定要向用户显示哪些列（图 6-20）。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig20_HTML.jpg](img/463840_1_En_6_Fig20_HTML.jpg)
+
+
+  图 6-20
+
+
+  列选择
+
+
+  然后输出就会出现，我们将能够看到结果（图 6-21）。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig21_HTML.jpg](img/463840_1_En_6_Fig21_HTML.jpg)
+
+
+  图 6-21
+
+
+  合并 Data1 和 Data2 的结果
+
+
+  这些是您可以在 Power Query 中执行的一些基本数据转换。您还可以使用 Power Query 菜单或 M 或 R 语言执行更复杂的过程。
+
+
+
+
+  ## 使用 R 脚本进行数据转换
+
+
+  并非所有数据转换都能通过 Power Query 中的现有菜单轻松完成。为了提升数据转换能力，我们可以在 Power Query 内部使用 R 语言。Kaggle
+  网站（[`https://www.kaggle.com/lbronchal/breast-cancer-dataset-analysis`](https://www.kaggle.com/lbronchal/breast-cancer-dataset-analysis)）上有一个关于女性乳腺癌的数据集。该数据集包含
+  569 行和 32 列。第一列是患者 ID，第二列是诊断结果。其余列与癌细胞的规格相关。
+
+
+  第 2 列到第 32 列包含一些数值，但这些数值不在同一范围内。例如，“radius_mean”列的值范围是 6.9 到 22，而“compactness_mean”列的值范围是
+  0.019 到 0.34。还有另一种数据准备过程，称为归一化，用于将数据统一到同一尺度。这个过程对某些算法（如 lKNN）很有用；但并非总是推荐使用（见图 6-22）。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig22_HTML.jpg](img/463840_1_En_6_Fig22_HTML.jpg)
+
+
+  图 6-22
+
+
+  与女性乳腺癌相关的数据集
+
+
+  ### 归一化
+
+
+  数据归一化意味着将数据调整到特定范围内，例如 0 到 1。我将使用一种遵循“MinMax”方法的公式来归一化名称。在此示例中，我将把癌症数据集中所有列的数据（患者
+  ID 和诊断列除外，因为它们包含文本）调整到 0 到 1 的范围内。
+
+
+  首先，对于每一列，我们必须找到最小值和最大值。对于每个值，我们必须按如下公式进行计算：
+
+
+  ![$$ Normalize\ value=\left(\frac{\min (x)-x}{\max (x)-\min (x)}\right) $$](img/463840_1_En_6_Chapter_TeX_Equa.png)
+
+
+  我们可以使用 Power Query 中的 R 语言将此转换应用于数据。
+
+
+  在 Power Query 中，有一个用于编写 R 代码的选项：运行 R 脚本（图 6-23）。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig23_HTML.jpg](img/463840_1_En_6_Fig23_HTML.jpg)
+
+
+  图 6-23
+
+
+  在 Power Query 中运行 R 脚本
+
+
+  “运行 R 脚本”编辑器并非十分高级。您想要转换的数据存储在变量名 `dataset` 下。
+
+
+  因此，我们将使用 `dataset` 变量和归一化数据的公式。
+
+
+  在 R 中，我将编写一个函数来放置 MinMax 公式。
+
+
+  ```
+
+  Normalize<- function (x)
+
+  {
+
+  return ((x-min(x))/(max(x)-min(x)))
+
+  }
+
+  ```
+
+
+  然后，我必须将此函数应用于数据集。为此，我必须使用 R 中的另一个函数，名为 `lapply`。
+
+
+  `lapply` 函数接收数据集和归一化函数的名称。然后，它将函数应用于数据集。在我的示例中，您不需要对第一列和第二列应用 MinMax 归一化，因此只需使用
+  `dataset[3:32]` 而不是 `dataset`。
+
+
+  ```
+
+  NormalizedData<-as.data.frame(lapply(dataset[3:32],Normalize))
+
+  ```
+
+
+  如图 6-24 所示，编写代码后，我们需要按下“确定”按钮。Power Query 将对数据应用归一化转换。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig24_HTML.jpg](img/463840_1_En_6_Fig24_HTML.jpg)
+
+
+  图 6-24
+
+
+  R 脚本编辑器
+
+
+  运行代码后，数据转换的结果如图 6-25 所示。您可以在“运行 R 脚本”中看到已应用的步骤。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig25_HTML.jpg](img/463840_1_En_6_Fig25_HTML.jpg)
+
+
+  图 6-25
+
+
+  归一化后的数据
+
+
+  ## 其他数据转换
+
+
+  还有其他使用 Power Query 转换数据的方法。
+
+
+  ### 更改数据类型
+
+
+  要更改 Power Query 中的数据类型，请单击“数据类型”选项并选择正确的数据类型。同样，您也可以通过单击每列旁边的图标来更改数据类型（图 6-26）。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig26_HTML.jpg](img/463840_1_En_6_Fig26_HTML.jpg)
+
+
+  图 6-26
+
+
+  更改数据类型
+
+
+  ### 分组依据
+
+
+  在 Power Query 中，我们还可以通过特定的聚合选项对数据进行分组。首先，我们必须单击要按其分组数据的列。然后，我们单击菜单中的“分组依据”图标（图 6-27）。在“分组依据”窗口中，我们在“操作”下选择所需的分组依据选项和聚合类型。接下来，我们选择“求和”作为聚合选项。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig27_HTML.jpg](img/463840_1_En_6_Fig27_HTML.jpg)
+
+
+  图 6-27
+
+
+  使用特定聚合进行分组
+
+
+  最后，数据将按类型值进行分组（图 6-28）。
+
+
+  ![../images/463840_1_En_6_Chapter/463840_1_En_6_Fig28_HTML.jpg](img/463840_1_En_6_Fig28_HTML.jpg)
+
+
+  图 6-28
+
+
+  聚合后的结果数据
+
+
+  还有许多其他类型的数据转换，例如基于分隔符拆分列、转置行、更改数据类型、添加日期或时间列、包含一些统计计算、合并列等等。在“添加列”选项卡下，可以添加自定义列、从示例创建列、创建函数、格式化数据列、添加日期、月份、天数、时间等列。此外，还可以使用
+  M 语言转换数据，但这超出了本书的范围。
+
+
+  ## 总结
+
+
+  本章简要介绍了如何在 Power Query 编辑器中使用 R 语言。它解释了我们如何使用它来重塑数据、选择数据、使用 R 代码编写数学函数并将其应用于数据集等。在
+  Power Query 编辑器中，R 或 Python 还有其他用途，例如使用 R 进行正则表达式处理，或使用 R 和 Python 进行机器学习。下一章将介绍更多在
+  Power Query 编辑器中使用 R 的示例。
+
+
+  '
+- '# 7. 在 Power Query 中使用 R 进行预测分析
+
+
+  本章将解释如何通过编写 R 代码在 Power BI Query 编辑器中进行机器学习。主要目的是提供一些示例，说明我们如何使用 R 代码进行预测分析（分类和回归）。将提供与某些算法相关的概念和代码。此外，还将讨论通过
+  Power BI Query 编辑器中的参数自动化预测的过程。
+
+
+
+
+  ## 神经网络
+
+
+  我们对计算机的期望是，输入一些内容，然后得到符合需求的输出。科学家们试图通过创造一种智能机器来模仿人脑——一种能够像人类一样进行推理的机器。
+
+
+  人脑最重要的组成部分是神经元。人脑由 7500 万个神经元组成。每个神经元通过突触与其他神经元相连。因此，神经网络中的结构就是一些相互连接的节点。在人体中，如果一个神经元被某些外部因素触发，它就会通过突触将信息从接收节点传递到其他节点（图
+  7-1）。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig1_HTML.jpg](img/463840_1_En_7_Fig1_HTML.jpg)
+
+
+  图 7-1
+
+
+  神经系统
+
+
+  神经网络模仿了与人脑相同的概念。一个节点从环境中获取一些输入，然后神经网络模型产生输出，就像计算机系统一样产生结果（图 7-2）。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig2_HTML.jpg](img/463840_1_En_7_Fig2_HTML.jpg)
+
+
+  图 7-2
+
+
+  计算机系统架构
+
+
+  在神经网络中，存在：
+
+
+  *   一组输入节点
+
+  *   一组输出节点
+
+  *   中间的一些处理过程，以获得良好的结果
+
+  *   信息流
+
+  *   节点之间的连接
+
+
+  某些连接比其他连接更重要，这意味着它们对结果的影响更大。在神经网络中，我们将这种重要性称为连接的*权重*。
+
+
+  另一个能更好地表达神经网络目标的类比是登山后的下山过程。当我们到达山顶且天气有雾时，我们只能看到前方一米。我们必须在一米能见度下决定选择哪个方向。我们根据当前位置迈出第一步，再次决定跟随哪个方向并迈出下一步。因此，每一步我们都在评估路线，并选择下山的最佳方式（图
+  7-3）。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig3_HTML.jpg](img/463840_1_En_7_Fig3_HTML.jpg)
+
+
+  图 7-3
+
+
+  神经网络与登山的类比
+
+
+  每个决策都可以看作是一个节点，它引导我们走向更好、更快的解决方案。在神经网络中，有一些隐藏节点执行主要任务。它们在使用称为激活函数的函数时，为输出找到最佳值。
+
+
+  在本节中，我将引用一个来自 *Machine Learning with R* [1] 的示例。该示例是关于预测混凝土的强度。混凝土已被用于许多不同的结构，例如桥梁、公寓、道路等。为了安全起见，混凝土的强度至关重要。混凝土的强度取决于用于制造它的材料，例如水泥、矿渣、粉煤灰、水等等。我们有一个混凝土成分的数据集（图
+  7-4）。你可以从“Machine Learning with R datasets” [2] 下载它。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig4_HTML.jpg](img/463840_1_En_7_Fig4_HTML.jpg)
+
+
+  图 7-4
+
+
+  混凝土数据集
+
+
+  神经网络可用于预测一个值或类别，也可用于预测多个事物。在我们的示例中，我们将预测一个值，即混凝土的强度。首先，我们将数据加载到 Power BI 中，并在查询编辑器中编写一些
+  R 代码。然后我们必须进行一些数据转换（图 7-5）。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig5_HTML.jpg](img/463840_1_En_7_Fig5_HTML.jpg)
+
+
+  图 7-5
+
+
+  使用 Python 代码进行数据透视
+
+
+  如图 7-5 所示，在标记为 2、3 和 4（红色圆圈内）的部分，数据不在同一尺度上。在应用任何机器学习之前，我们必须进行一些数据归一化。数据归一化的过程在第
+  6 章中解释。这里使用相同的代码来归一化数据。
+
+
+  ```
+
+  normalize <- function(x) {
+
+  return((x - min(x)) / (max(x) - min(x)))
+
+  }
+
+  concrete_norm <- as.data.frame(lapply(dataset, normalize))
+
+  ```
+
+
+  在数据清洗和数据转换之后，我们必须将数据集分成一部分用于训练，一部分用于测试。这个过程帮助模型从数据中学习并模仿数据的行为。因此，我们必须将超过 70% 的数据用于训练，其余用于测试。为了避免偏差，我们必须打乱数据。R
+  中的 `sample` 函数已被用于为数据集创建随机行号。此外，80% 的数据被放入训练数据集，其余保留用于测试。
+
+
+  ```
+
+  nrows<-nrow(dataset)
+
+  sampledata<-sample(nrows,0.8∗nrows)
+
+  concrete_train <- concrete_norm[sampledata,]
+
+  concrete_test <- concrete_norm[-sampledata,]
+
+  ```
+
+
+  在 R 中有许多用于神经网络算法的包和算法。其中一个包是 `neuralnet`。这个包包含一个用于神经网络算法的函数。要使用这个包，我们必须先在 RStudio
+  中使用 `install.packages()` 安装它。安装包后，我们只需引用 `vis` 包的 `library` 命令。
+
+
+  ```
+
+  library("neuralnet")
+
+  ```
+
+
+  下一步是使用训练数据集创建一个训练模型，并确定我们要预测哪一列。
+
+
+  ```
+
+  concrete_model <- neuralnet(strength ~ cement + slag
+
+  + ash + water + superplastic + coarseagg + fineagg + age,
+
+  data = concrete_train)
+
+  ```
+
+
+  现在模型已创建，我们可以测试其准确性。我们将针对所有八个属性对训练数据集运行该模型。
+
+
+  ```
+
+  model_results <- compute(concrete_model, concrete_test[1:8])
+
+  predicted_strength <- model_results$net.result
+
+  ```
+
+
+  并且我们必须创建一个输出数据集来展示给用户。
+
+
+  ```
+
+  output<-dataset[-sampledata,]
+
+  output$Pred<-predicted_strength∗100
+
+  ```
+
+
+  结果将存储在一个数据框结构的输出变量中。另一个重要的考虑因素是，Power Query 只识别 `data.frame` 格式。因此，其他数据结构，如向量、列表和矩阵，无法在
+  Power Query 编辑器中显示（图 7-6）。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig6_HTML.jpg](img/463840_1_En_7_Fig6_HTML.jpg)
+
+
+  图 7-6
+
+
+  预测结果
+
+
+  可以在可视化区域中查看神经网络结构，以查看隐藏节点、层等。因此，我们必须使用 R 自定义视觉对象，在 Power BI 报表中复制混凝土数据集，如图 7-7 所示。接下来，我们必须编写相同的神经网络预测代码，并添加另一行代码来绘制模型。运行代码，你将看到刚刚出现在图层上的神经网络结构，误差为
+  3.001。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig7_HTML.jpg](img/463840_1_En_7_Fig7_HTML.jpg)
+
+
+  图 7-7
+
+
+  Power BI 报表中的神经网络模型结构
+
+
+  ```
+
+  normalize <- function(x) {
+
+  return((x - min(x)) / (max(x) - min(x)))
+
+  }
+
+  concrete_norm <- as.data.frame(lapply(dataset, normalize))
+
+  summary(concrete_norm$strength)
+
+  concrete_train <- concrete_norm[1:773,]
+
+  concrete_test <- concrete_norm[774:1030,]
+
+  library("neuralnet")
+
+  concrete_model <- neuralnet(strength ~ cement + slag
+
+  + ash + water + superplastic + coarseagg + fineagg + age,
+
+  data = concrete_train)
+
+  plot(concrete_model)
+
+  ```
+
+
+  我们可以通过改变隐藏节点和层的数量来减小误差。
+
+
+
+
+  ## 决策树
+
+
+  决策树是一种常见的机器学习方法。该工具可用于预测、描述性分析和特征选择。决策树遵循我们做出决策的方式。想象一位求职者需要在多个不同的工作中做出选择。他或她为选择设定了一些标准，例如：工作职责是什么？年薪或时薪是多少？最后，每年需要出差多少次？我们可以模拟求职者的决策过程，如图
+  7-8 所示。树的根节点是主要的决策点，即对工作说“是”或“否”。然后，最重要的标准是职位名称是否与求职者的专业领域匹配。第二重要的标准是薪资。最后，如果还没有到达叶节点，第三个标准是检查每年所需的出差天数。决策树使用信息增益理论来确定树分支的主要标准。关于其工作原理的详细信息，请访问
+  [`http://radacad.com/decision-tree-conceps-part-1`](http://radacad.com/decision-tree-conceps-part-1)
+  [3]。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig8_HTML.jpg](img/463840_1_En_7_Fig8_HTML.jpg)
+
+
+  图 7-8
+
+
+  求职决策树
+
+
+  在 Power BI 中使用决策树有多种方法。其中一种方法是使用 Power BI 自定义可视化。
+
+
+  要访问此功能，首先必须登录 Power BI 账户（图 7-9）。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig9_HTML.jpg](img/463840_1_En_7_Fig9_HTML.jpg)
+
+
+  图 7-9
+
+
+  Power BI 账户
+
+
+  我们必须通过单击“可视化”面板中的三个点，然后选择“从商店导入”选项来检索可视化效果（图 7-10）。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig10_HTML.jpg](img/463840_1_En_7_Fig10_HTML.jpg)
+
+
+  图 7-10
+
+
+  从商店导入可视化效果
+
+
+  在 Power BI 自定义可视化页面上，有不同类别的可视化效果，包括筛选器、KPI、地图、高级分析等（图 7-11）。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig11_HTML.jpg](img/463840_1_En_7_Fig11_HTML.jpg)
+
+
+  图 7-11
+
+
+  Power BI 自定义可视化效果
+
+
+  您只需单击“高级分析”选项，然后选择“决策树图”（图 7-12）。单击“添加”按钮将该图表添加到 Power BI 可视化效果中。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig12_HTML.jpg](img/463840_1_En_7_Fig12_HTML.jpg)
+
+
+  图 7-12
+
+
+  Power BI 商店中的决策树自定义可视化效果
+
+
+  ### 注意
+
+
+  首次添加此图表时，必须确保您的机器上已安装 RStudio 或任何 R 版本。Power BI 将开始安装一些必需的包，例如将 `rpart` 安装到您本地的
+  R 版本中。只需允许 Power BI 安装所有包即可。下一步，一个新的自定义可视化效果将出现在 Power BI 的“可视化”面板中（图 7-13）。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig13_HTML.jpg](img/463840_1_En_7_Fig13_HTML.jpg)
+
+
+  图 7-13
+
+
+  “可视化”面板中的决策树自定义可视化效果
+
+
+  为了测试自定义可视化效果，我们必须将一些数据导入 Power BI Desktop 以进行预测性分析。该数据是关于*泰坦尼克号*灾难的免费数据集 [4]。我们必须选择用于决策的字段。主要目标（目标变量）是预测人们是否幸存。为此，首先我们必须选择几个可能影响乘客生存的列，例如年龄、性别和乘客等级。然后，将“幸存”列作为目标变量放入相关的数据字段中（图
+  7-14）。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig14_HTML.jpg](img/463840_1_En_7_Fig14_HTML.jpg)
+
+
+  图 7-14
+
+
+  Power Query 筛选值
+
+
+  下一步是从年龄列中移除缺失值（“空白”）。最后，相关的决策树图会出现在 Power BI 报表中（图 7-14）。
+
+
+  在树的根节点处，有四个带编号的标签。0 代表无法幸存的乘客。此外，这些人由绿色标签标识。“100%”表示所有数据都在根节点。“0.52”和“0.48”表示大约
+  0.52 是男性，0.48 是女性。换句话说，决策树决定分析的第一个属性（基于熵理论）是乘客的性别（图 7-15）。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig15_HTML.jpg](img/463840_1_En_7_Fig15_HTML.jpg)
+
+
+  图 7-15
+
+
+  决策树中的根节点
+
+
+  在下一层，左侧的标签是绿色的，并且已经分支以代表男性乘客。基于该分支，我们可以总结出大多数男性乘客未能幸存（0）。然而，如图 7-16 所示，对于女性（右侧的分支），将要分析的属性是乘客等级。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig16_HTML.jpg](img/463840_1_En_7_Fig16_HTML.jpg)
+
+
+  图 7-16
+
+
+  树分析的第二层
+
+
+  对于年龄超过七岁（第二个节点）的男性（根节点），他们有 58% 的可能性无法幸存（绿色标签和 0）（图 7-17）。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig17_HTML.jpg](img/463840_1_En_7_Fig17_HTML.jpg)
+
+
+  图 7-17
+
+
+  针对男性的决策树分析
+
+
+  年龄超过七岁（第二个节点）的男性（根节点）将无法幸存（绿色标签和 0），可能性为 53%。此外，年龄小于七岁的男性将幸存。
+
+
+  Power Query 内部的决策树可用于执行机器学习，并在 Power BI 报表中显示结果（与“神经网络”部分中解释的过程相同）。
+
+
+  在下一节中，我将为 Power Query 内部的决策树编写 R 代码，并展示如何向其传递参数。
+
+
+
+
+  ## Power Query 中的自动化机器学习
+
+
+  在上一节中，我解释了如何使用决策树进行预测分析。现在，我们将在 Power Query 中使用它，无需特定图表即可进行预测。
+
+
+  首先，我们必须点击页面顶部的 Power Query 编辑器，导航到 Power Query 环境。在 Power Query 中，你必须先从 [`www.kaggle.com/c/titanic`](http://www.kaggle.com/c/titanic)
+  [4] 下载*泰坦尼克号*数据集。然后，点击新建源，选择文本/CSV 选项导入数据集，并点击确定（图 7-18）。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig18_HTML.jpg](img/463840_1_En_7_Fig18_HTML.jpg)
+
+
+  图 7-18
+
+
+  将泰坦尼克号数据集导入 Power Query
+
+
+  将数据集导入 Power Query 后，我们必须导航到“转换”选项卡，然后点击“运行 R 脚本”。在 R 编辑器中，我们将能够编写 R 代码。代码的第一行引用了一个名为
+  `rpart` 的库。`rpart` 包必须首先安装在你的 RStudio 中。安装前，请先使用以下命令确认你尚未安装它：
+
+
+  ```
+
+  Library("rpart")
+
+  ```
+
+
+  否则，在 RStudio 中，使用以下代码查看你的机器上已安装了哪些库。
+
+
+  ```
+
+  packagematrix <- installed.packages();
+
+  NameOnly <- packagematrix[,1];
+
+  OutputDataSet <- as.data.frame(NameOnly);
+
+  OutputDataSet
+
+  ```
+
+
+  首先，我们必须确保 `rpart` 已安装到我们的机器上。然后，我们在 R 编辑器中编写以下代码（就像本章前面为神经网络所做的那样）。现在，我们必须引用 `rpart`
+  库，并将数据分为训练集和测试集。
+
+
+  ```
+
+  library(rpart)
+
+  numrows<-nrow(dataset)
+
+  sampledata<-sample(numrows,0.8∗numrows)
+
+  train<-dataset[sampledata,]
+
+  test<-dataset[-sampledata,]
+
+  ```
+
+
+  创建模型是下一步。这涉及到我们想要预测的属性，并基于训练数据集为其创建模型。此外，我们必须有一个 `Survived ~` 的公式。这表明我们想要根据年龄、性别和乘客等级来预测幸存列。`predict`
+  函数将用于预测分析中的生存情况。
+
+
+  ```
+
+  DT<-rpart(Survived~ Age+Pclass+Sex,data=train,method= ="class")
+
+  prediction<-predict (DT,test)
+
+  rpartresult<-data.frame(prediction,test)
+
+  ```
+
+
+  因此，预测结果将以名称 `rpartresult` 显示在 Power Query 中。结果将包含两个不同的附加列。“X0”代表乘客未幸存的概率，“x1”代表乘客幸存的概率。现在想象一下，我们想要使用
+  `rpart` 算法对另一个数据集进行分类，例如第 6 章讨论的与癌症相关的数据。可以对 R 代码进行参数化，以便将所需的数据集、预测列等传递给 R 代码。为此，我们必须复制该数据集（图
+  7-19）。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig19_HTML.jpg](img/463840_1_En_7_Fig19_HTML.jpg)
+
+
+  图 7-19
+
+
+  复制泰坦尼克号数据集
+
+
+  现在只需右键单击新数据集，从中创建一个函数。需要从新复制的数据集中创建一个函数（图 7-20）。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig20_HTML.jpg](img/463840_1_En_7_Fig20_HTML.jpg)
+
+
+  图 7-20
+
+
+  在 Power Query 中创建函数
+
+
+  创建函数后，我们必须通过传递参数来自定义它。为此，我们必须导航到高级编辑器（图 7-21）。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig21_HTML.jpg](img/463840_1_En_7_Fig21_HTML.jpg)
+
+
+  图 7-21
+
+
+  Power Query 中的高级编辑器
+
+
+
+
+  在高级编辑器中，可以查看之前应用于泰坦尼克数据集并以 M 语言编写的步骤。如图 7-22 所示，数据集的来源已从本地计算机中识别出来。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig22_HTML.jpg](img/463840_1_En_7_Fig22_HTML.jpg)
+
+
+  图 7-22
+
+
+  用于编写 M 语言的高级编辑器
+
+
+  前三行应替换为以下一行：
+
+
+  ```
+
+  (#"Source Table" as table) as table=>
+
+  let
+
+  Source = #"Source Table",
+
+  ```
+
+
+  在第一行中，我们定义了一个名为 `Source Table` 的变量，并在第三行中将其赋值给 `Source` 变量。下一步，我们将删除一些以 `Promoted
+  Headers` 和 `Changed Type` 开头的行。这些行仅用于特定数据集（`titanic`）的转换。现在我们有了以下几行，仍需进行一些转换：
+
+
+  ```
+
+  (#"Source Table" as table) as table=>
+
+  let
+
+  Source = #"Source Table",
+
+  #"Run R Script" = R.Execute("# ''dataset'' holds the input data for this script#(lf)library(rpart)
+  #(lf)numrows<-nrow(dataset)#(lf)sampledata<-sample(numrows,0.8∗numrows)#(lf)train<-dataset[sampledata,]#(lf)test<-dataset[-sampledata,]#(lf)DT<-rpart(Survived~
+  Age+Pclass+Sex,data=train,method=""class"")#(lf)prediction<-predict (DT,test)#(lf)rpartresult<-data.frame(prediction,test)",[dataset=#"Changed
+  Type"]),
+
+  rpartresult = #"Run R Script"{[Name="rpartresult"]}[Value]
+
+  in
+
+  rpartresult
+
+  in
+
+  Source
+
+  ```
+
+
+  如上述代码所示，我们有一个标题行 `#"Run R Script" =`，其中包含一个函数 `R.Execute`。该函数包含我们编写的所有 R 代码。在 M
+  语言中，一个函数的输出将传递给下一个函数。前一个函数是用于更改类型 `Changed Type`，我们已将其删除。现在我们必须修改 `Run R Script`
+  中的代码，如下所示：
+
+
+  ```
+
+  #"Run R Script" = R.Execute("# ''dataset'' holds the input data for this script#(lf)library(rpart)
+  #(lf)numrows<-nrow(dataset)#(lf)sampledata<-sample(numrows,0.8∗numrows)#(lf)train<-dataset[sampledata,]#(lf)test<-dataset[-sampledata,]#(lf)DT<-rpart(Survived~
+  Age+Pclass+Sex,data=train,method=""class"")#(lf)prediction<-predict (DT,test)#(lf)rpartresult<-data.frame(prediction,test)",[dataset=#"Changed
+  Type"]),
+
+  ```
+
+
+  `Changed Type` 应替换为 `Source`，如下列代码所示：
+
+
+  ```
+
+  let
+
+  Source = #"Source Table",
+
+  #"Run R Script" = R.Execute("# ''dataset'' holds the input data for this script#(lf)library(rpart)
+  #(lf)numrows<-nrow(dataset)#(lf)sampledata<-sample(numrows,0.8∗numrows)#(lf)train<-dataset[sampledata,]#(lf)test<-dataset[-sampledata,]#(lf)DT<-rpart(Survived~
+  Age+Pclass+Sex,data=train,method=""class"")#(lf)prediction<-predict (DT,test)#(lf)rpartresult<-data.frame(prediction,test)",[dataset=Source]),
+
+  rpartresult = #"Run R Script"{[Name="rpartresult"]}[Value]
+
+  in
+
+  rpartresult
+
+  in
+
+  Source
+
+  ```
+
+
+  我们仍需进行一些额外的修改。这些修改将应用于我们想要预测的 Name 列。目前，它是“Survived~ Age+Pclass+Sex”，但我们希望将 Survived
+  列替换为用户提供的参数。此外，我们不想使用另一列作为输入，而是考虑所有列。因此，我们必须修改代码，如下所示：
+
+
+  ```
+
+  (#"Source Table" as table, #"Prediction Column"as text) as table=>
+
+  let
+
+  Source = #"Source Table",
+
+  #"Run R Script" = R.Execute("# ''dataset'' holds the input data for this script#(lf)library(rpart)
+  #(lf)numrows<-nrow(dataset)#(lf)sampledata<-sample(numrows,0.8∗numrows)#(lf)train<-dataset[sampledata,]#(lf)test<-dataset[-sampledata,]#(lf)DT<-rpart(
+  "&#"Prediction Column"&"~ .,data=train,method=""class"")#(lf)prediction<-predict
+  (DT,test)#(lf)rpartresult<-data.frame(prediction,test)",[dataset=Source]),
+
+  rpartresult = #"Run R Script"{[Name="rpartresult"]}[Value]
+
+  in
+
+  rpartresult
+
+  in
+
+  Source
+
+  ```
+
+
+  我们需要对代码稍作优化，删除最后一行 `in Source`。因此，最终的代码将是：
+
+
+  ```
+
+  (#"Source Table" as table,#"Prediction Column"as text) as table=>
+
+  let
+
+  Source = #"Source Table",
+
+  #"Run R Script" = R.Execute("# ''dataset'' holds the input data for this script#(lf)library(rpart)
+  #(lf)numrows<-nrow(dataset)#(lf)sampledata<-sample(numrows,0.8∗numrows)#(lf)train<-dataset[sampledata,]#(lf)test<-dataset[-sampledata,]#(lf)DT<-rpart(
+  "&#"Prediction Column"&"~ .,data=train,method=""class"")#(lf)prediction<-predict
+  (DT,test)#(lf)rpartresult<-data.frame(prediction,test)",[dataset=Source]),
+
+  rpartresult = #"Run R Script"{[Name="rpartresult"]}[Value]
+
+  in
+
+  rpartresult
+
+  ```
+
+
+  运行代码后，我们将得到一个带有输入变量的函数（图 7-23）。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig23_HTML.jpg](img/463840_1_En_7_Fig23_HTML.jpg)
+
+
+  图 7-23
+
+
+  创建具有两个输入的分类函数
+
+
+  为了测试该函数，我们必须创建一个数据集传递给函数。导入新的泰坦尼克数据集，然后按住 Ctrl 键并单击四个主要列：Survived、Pclass、Age 和 Sex。接下来，右键单击并选择“删除列”选项（图
+  7-24）。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig24_HTML.jpg](img/463840_1_En_7_Fig24_HTML.jpg)
+
+
+  图 7-24
+
+
+  选择列
+
+
+  最后，得到一个包含四列的数据集，可以传递给函数。在函数中，对于第一个参数，我们必须选择泰坦尼克数据集；对于第二个参数，选择名为 Survived 的预测列（图
+  7-25）。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig25_HTML.jpg](img/463840_1_En_7_Fig25_HTML.jpg)
+
+
+  图 7-25
+
+
+  调用函数
+
+
+  接下来，我们可能会收到一条关于“编辑权限”的消息，该消息涉及授予在查询上运行外部脚本的权限（图 7-26）。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig26_HTML.jpg](img/463840_1_En_7_Fig26_HTML.jpg)
+
+
+  图 7-26
+
+
+  权限请求
+
+
+  接受权限后，我们现在可以看到结果，如图 7-27 所示。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig27_HTML.jpg](img/463840_1_En_7_Fig27_HTML.jpg)
+
+
+  图 7-27
+
+
+  泰坦尼克数据集的函数结果
+
+
+  为了测试该函数，我导入了另一个数据集 [5]，该数据集在第 6 章中介绍过。这是一个与乳腺癌患者相关的数据集。我想预测患者的诊断结果：患者的癌症是否会变为恶性“M”或良性“B”。我们对此新数据集遵循与之前相同的过程。首先，导入它，然后将数据集的名称和列传递给函数（图
+  7-28）。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig28_HTML.jpg](img/463840_1_En_7_Fig28_HTML.jpg)
+
+
+  图 7-28
+
+
+  为癌症数据集调用分类函数
+
+
+  调用函数后，预测结果将显示为一个新查询（图 7-29）。
+
+
+  ![../images/463840_1_En_7_Chapter/463840_1_En_7_Fig29_HTML.jpg](img/463840_1_En_7_Fig29_HTML.jpg)
+
+
+  图 7-29
+
+
+  癌症诊断数据集的预测结果
+
+
+  ## 总结
+
+
+  本章的主要目的是展示如何通过 R 代码在 Power Query 编辑器内部执行机器学习。介绍了两种不同的算法：神经网络和决策树。我讨论了如何设置参数以使机器学习更加灵活。在下一章中，我将讨论使用
+  Power BI 进行描述性分析。
+
+
+
+
+  '
+- '# 8. 在 Power Query 中使用 R 进行描述性分析
+
+
+  本章重点介绍 Power BI 中的描述性分析。首先简要说明如何利用描述性分析辅助决策。接着简要介绍聚类分析、如何在 Power BI 报表中执行聚类，以及如何在
+  Power Query 编辑器中进行聚类。最后，我将介绍如何在 Power BI 中进行购物篮分析。
+
+
+  ## K-Means 聚类
+
+
+  聚类分析是将相似对象归入同一组或同一簇的任务。聚类后的对象彼此之间的相似度高于其他对象。例如，我们可能希望根据客户的购买行为或人口统计信息对客户进行分组 [1]。或者，举一个科学领域的例子，我们可能希望将过去十年新西兰发生的地震次数和震级进行聚类。出于医疗目的，我们可能希望根据实验室结果对癌症患者进行分类。
+
+
+  在机器学习中，有许多不同的算法可以帮助我们进行聚类。其中一些算法是基于质心的，例如 k-means、GMM、模糊 c-means 等。其他算法则基于连通性 [2]，例如层次聚类。还有一些算法是基于密度、概率、降维以及神经网络/深度学习的。
+
+
+  在本章中，我将向您展示如何使用 k-means 算法对数据进行分类。有一个家庭用电数据集，可以从 UCI 机器学习库免费获取 [3]。该数据集记录了某个家庭在近四年时间内的电力消耗情况。该数据集包含日期、时间、全局有功功率、无功功率、平均电压、平均电流强度以及厨房、洗碗机、烤箱、热水器等设备的瓦时数等属性。您将看到如何使用
+  Power BI 中的两种不同方法自然地对这些数据进行分类。
+
+
+  ## 聚类自定义视觉对象
+
+
+  第一种也是简单的聚类数据方法是使用 Power BI 商店中的自定义视觉对象：聚类。要访问它，您首先必须登录 Power BI 帐户。在“可视化”面板中，单击三个点，然后选择“从商店获取”选项。在“高级分析”下，您将找到用于自定义视觉对象的“聚类”选项（图
+  8-1）。
+
+
+  ![../images/463840_1_En_8_Chapter/463840_1_En_8_Fig1_HTML.jpg](img/463840_1_En_8_Fig1_HTML.jpg)
+
+
+  图 8-1
+
+
+  聚类自定义视觉对象
+
+
+  将自定义视觉对象添加到 Power BI 环境。如果这是您第一次添加 Power BI 自定义视觉对象，则会安装一些包，例如 Plotly、XML 等。接下来，您必须从字段区域中选择四个不同的列。如图
+  8-2 所示，已选择了一些列，例如电压、全局强度（家庭全局分钟平均电流强度）、子计量 3 和 1（厨房、洗碗机、热水器等设备的瓦时活动能量）。
+
+
+  ![../images/463840_1_En_8_Chapter/463840_1_En_8_Fig2_HTML.jpg](img/463840_1_En_8_Fig2_HTML.jpg)
+
+
+  图 8-2
+
+
+  选择用于聚类的列
+
+
+  选择参数后，您必须对其进行设置。单击格式图标，然后缩放数据以进行归一化。如果您想指定簇的数量，可以应用 PCA，或者保留默认设置（将自动选择簇）。
+
+
+  如图 8-3 所示，聚类结果显示在聚类图中。K-means 聚类发现了大约四个主要簇。如图所示，簇 4 包含更多项目，而簇 1 包含的项目比其他簇少。然而，此可视化的局限性在于我们无法看到具体数字，也无法根据其属性比较每个簇。
+
+
+  ![../images/463840_1_En_8_Chapter/463840_1_En_8_Fig3_HTML.jpg](img/463840_1_En_8_Fig3_HTML.jpg)
+
+
+  图 8-3
+
+
+  聚类参数和结果
+
+
+  在下一节中，将展示在 Power Query 内部执行聚类分析的过程，以及如何使用 Power BI 可视化来展示结果。
+
+
+
+
+  ## Power Query 中的聚类分析
+
+
+  如前面章节所述，可以在 Power Query 内部使用 R 代码进行机器学习。本节将解释如何在 Power Query 中使用 R 代码进行数据聚类，并展示如何利用
+  Power BI 可视化来更好地描述按相关聚类分组的数据。
+
+
+  首先，我们需要进入查询编辑器，然后右键点击数据集并选择“复制”选项，来复制当前的数据集（如图 8-4 所示）。
+
+
+  ![../images/463840_1_En_8_Chapter/463840_1_En_8_Fig4_HTML.jpg](img/463840_1_En_8_Fig4_HTML.jpg)
+
+
+  图 8-4
+
+
+  复制家庭用电数据集
+
+
+  复制数据集后，你将获得一份家庭用电数据的副本，在应用 R 代码之前，需要先对其进行转换。
+
+
+  ![../images/463840_1_En_8_Chapter/463840_1_En_8_Fig5_HTML.jpg](img/463840_1_En_8_Fig5_HTML.jpg)
+
+
+  图 8-5
+
+
+  数据清洗
+
+
+  1.  删除日期和时间列。点击每一列，然后右键选择“删除”。
+
+
+  2.  删除错误。数据中可能存在一些错误，因此需要设定处理规则，例如，点击“删除行”并选择“删除错误”、“删除空行”或“删除缺失值”（图 8-5）。
+
+
+  数据清洗完成后，点击“转换”选项卡并选择“运行 R 脚本”选项来执行 R 脚本。在 R 编辑器中，首先需要使用 R 中的归一化函数将数据统一到同一尺度，如下所示：
+
+
+  ```
+
+  normalize <- function(x) {
+
+  return ((x - min(x)) / (max(x) - min(x))) }
+
+  NormalizedData <- as.data.frame(lapply(dataset, normalize))
+
+  ```
+
+
+  `kmeans` 函数使用 k-means 聚类算法对数据进行聚类。该算法需要一个数据集和聚类数量。
+
+
+  ```
+
+  ClusterData<-kmeans(NormalizedData ,4)
+
+  ```
+
+
+  数据聚类后，我们需要创建一个输出数据集。为此，我们利用 `data.frame` 函数，从原始数据集和聚类编号创建一个数据框数据集。
+
+
+  ```
+
+  PowerConsumption<-data.frame(dataset,ClusterData$cluster)
+
+  ```
+
+
+  运行代码后，数据集现在包含原始数据以及一个显示聚类编号的新列。此外，我们需要为当前数据集添加一个索引列，作为后续分析的主键。要添加新列，请点击顶部菜单中的“添加列”选项卡，然后点击“索引列”，默认从
+  0 开始，但你可以通过选择其他选项将其改为从 1 开始。
+
+
+  如图 8-6 所示，我们的数据现在已准备好进行可视化和进一步分析。此时，只需关闭并应用更改即可。
+
+
+  ![../images/463840_1_En_8_Chapter/463840_1_En_8_Fig6_HTML.jpg](img/463840_1_En_8_Fig6_HTML.jpg)
+
+
+  图 8-6
+
+
+  在 Power Query 中对数据进行聚类
+
+
+  在可视化窗格中，我们将使用一些简单的可视化图表来比较各个聚类（图 8-7）。第一个图表显示每个聚类中的项目数量。我们可以看出每个聚类包含多少个项目。
+
+
+  ![../images/463840_1_En_8_Chapter/463840_1_En_8_Fig7_HTML.jpg](img/463840_1_En_8_Fig7_HTML.jpg)
+
+
+  图 8-7
+
+
+  每个聚类中的项目数量
+
+
+  此外，你还可以使用漏斗图选项来显示某个聚类中某个属性的平均值（图 8-8）。
+
+
+  ![../images/463840_1_En_8_Chapter/463840_1_En_8_Fig8_HTML.jpg](img/463840_1_En_8_Fig8_HTML.jpg)
+
+
+  图 8-8
+
+
+  聚类比较数据
+
+
+  还可以进行假设分析。例如，如果电压从 244 变为 254，我们可以检查哪些聚类主要包含该范围，以及哪些其他属性与该子集共同出现。如图 8-9 所示，聚类 2
+  和聚类 3 主要覆盖了 244 到 254 的电压范围。
+
+
+  ![../images/463840_1_En_8_Chapter/463840_1_En_8_Fig9_HTML.jpg](img/463840_1_En_8_Fig9_HTML.jpg)
+
+
+  图 8-9
+
+
+  聚类结果的假设分析
+
+
+  ## 购物篮分析（关联规则）
+
+
+  另一种描述性分析和数据挖掘的方法是购物篮分析，或称关联规则。购物篮（关联规则）分析用于发现商店中客户的购买行为，以确定哪些相关商品被一起购买。这种方法不仅用于优化产品布局和营销投入，还用于确定医疗保健、政府政策、活动管理等方面的规则
+  [5]。
+
+
+  在本节中，我将解释如何使用购物篮分析，如何用 R 语言编写代码，以及如何得出有效的规则。
+
+
+
+
+  ### 什么是购物篮分析？
+
+
+  这种分析用于研究客户的购买行为。例如，对于一家美容用品店，这种分析可能会揭示顾客同时购买洗发水和护发素的频率之间的关联。从营销角度来看，或许推广洗发水会促使顾客也购买护发素。从销售角度来看，将洗发水放在商店货架上护发素的旁边，会鼓励顾客同时购买这两样商品
+  [4]。
+
+
+  如前所述，“关联规则”是购物篮分析的另一种说法。关联规则的形式是“如果 X，那么 Y”。例如，购买人寿保险的人中有 60% 可能会接着购买健康保险。再举一个例子，在线购书的人中有
+  80% 可能也会在线购买音乐。此外，患有高血压且超重的人中有 50% 可能胆固醇也高 [3]。
+
+
+  关联规则的其他例子包括：在癌症数据中搜索 DNA 和蛋白质序列中有趣且频繁出现的模式；在购买记录或医疗索赔中寻找与欺诈性信用卡或保险索赔同时发生的模式；以及识别导致客户取消手机服务或升级有线电视套餐的行为组合。可以看出，关联规则不仅适用于购物，还可以应用于医疗保健、保险和其他行业。该方法的数学计算原理在此处说明：[`http://radacad.com/make-business-decisions-market-basket-analysis-part-1`](http://radacad.com/make-business-decisions-market-basket-analysis-part-1)。
+
+
+  购物篮分析有三个主要属性。
+
+
+  *   *支持度*：一个项集或规则的支持度衡量其在数据中出现的频率。
+
+
+  *   *置信度*：置信度是关于规则的概率。例如，如果一位顾客购买了鲜花，那么他们购买一张早日康复卡片的概率是多少。
+
+
+  *   *提升度*：规则的重要性，即它能解释多少方差。
+
+
+  每次分析的第一步是确定主要的业务问题。在本书中，我遵循了 Lantz [6] 提供的示例，这些示例识别了顾客最常一起购买的购物清单项目。第二步是将数据导入 Power
+  BI。你可以从 GitHub [7] 下载数据。该数据集包含超过 9,000 条客户交易信息。要在 R 中进行购物篮分析，我们必须安装 `arules` 包。此外，我们还必须在
+  RStudio 中安装与 `arules` 相关的另外两个包：`Matrix` 和 `Methods`。要安装这些包，你的机器上必须有一个 R 版本，例如 RStudio
+  或 Microsoft R Open。要安装这些包，请打开 R IDE，点击“新建 R 脚本”，然后输入“Install.packages(<package name="">)</package>*.”*
+
+
+  我们按照前面章节描述的相同步骤，在 Power Query 中加载数据并运行 R 脚本（图 8-10）。
+
+
+  ![../images/463840_1_En_8_Chapter/463840_1_En_8_Fig10_HTML.jpg](img/463840_1_En_8_Fig10_HTML.jpg)
+
+
+  图 8-10
+
+
+  将数据集导入 Power BI 并运行 R 脚本
+
+
+  然后，你必须将以下代码放入 R 脚本编辑器中：
+
+
+  ```
+
+  library(Matrix)
+
+  library(arules)
+
+  library(methods)
+
+  groceries <- read.transactions("[your local address]/groceries.csv", sep = ",")
+
+  Temp<-apriori(groceries, parameter = list(support = 0.006, confidence = 0.25, minlen
+  = 2))
+
+  output<-inspect(Temp[1:100])
+
+  ```
+
+
+  在这段代码中，使用了来自 `arules` 包的 `apriori` 函数。
+
+
+  在客户行为中发现关联规则的结果如图 8-11 所示。第一列 (lhs) 列出了人们购买的主要商品；第三列 (rhs) 列出了与 lhs 商品相关的商品。支持度、置信度和提升度度量分别显示在第四到第六列。总共提取了
+  100 条规则。最后，点击左上角的“关闭并应用”。现在，我们可以在 Power BI 中创建一个可视化来展示一个商品及其相关商品。
+
+
+  ![../images/463840_1_En_8_Chapter/463840_1_En_8_Fig11_HTML.jpg](img/463840_1_En_8_Fig11_HTML.jpg)
+
+
+  图 8-11
+
+
+  购物篮分析的结果
+
+
+  现在，我们可以在 Power BI 中创建一个可视化来展示一个商品及其相关商品。我们使用来自 Power BI 网站的一个特定自定义可视化“力导向图”来展示商品之间的关系。要获取此可视化，请点击“可视化”选项卡顶部的“市场”，然后搜索“力导向图*.*”
+
+
+  导入自定义可视化后，还应导入相关列（图 8-12）。对于源，我们放入 `lh`。对于目标，应使用 `rhs`。对于权重，我们使用 `lift` 属性。
+
+
+  ![../images/463840_1_En_8_Chapter/463840_1_En_8_Fig12_HTML.jpg](img/463840_1_En_8_Fig12_HTML.jpg)
+
+
+  图 8-12
+
+
+  导入自定义可视化及相关列
+
+
+  如图 8-13 所示，必须更改一些可视化参数，以便更好地查看可视化效果（图 8-14）。
+
+
+  ![../images/463840_1_En_8_Chapter/463840_1_En_8_Fig14_HTML.jpg](img/463840_1_En_8_Fig14_HTML.jpg)
+
+
+  图 8-14
+
+
+  自定义可视化参数设置
+
+
+  ![../images/463840_1_En_8_Chapter/463840_1_En_8_Fig13_HTML.jpg](img/463840_1_En_8_Fig13_HTML.jpg)
+
+
+  图 8-13
+
+
+  Power Query 筛选值
+
+
+  我们需要另一个来自 Power BI 商店的自定义可视化：Chiclet Slicer。这个自定义可视化是一个特定的切片器，可用于使用特定图像对图表进行切片和切块。如前所述，点击“市场”，然后搜索“Chiclet
+  Slicer”。导入可视化后，选择值 `rhs`，复制切片器，并设置值 `lhs`（图 8-15）。
+
+
+  ![../images/463840_1_En_8_Chapter/463840_1_En_8_Fig15_HTML.jpg](img/463840_1_En_8_Fig15_HTML.jpg)
+
+
+  图 8-15
+
+
+  导入 Chiclet Slicer
+
+
+  你将看到一个报告，如图 8-16 所示。
+
+
+  ![../images/463840_1_En_8_Chapter/463840_1_En_8_Fig16_HTML.jpg](img/463840_1_En_8_Fig16_HTML.jpg)
+
+
+  图 8-16
+
+
+  购物篮分析报告
+
+
+  通过在切片器中选择一个商品（例如切片奶酪）及其 `rhs` 值，图表会向我们展示顾客最常与该商品一起购买的相关商品，例如香肠和酸奶。
+
+
+  ## 总结
+
+
+  本章简要介绍了描述性分析。首先，解释了聚类。然后，说明了如何在 Power BI 可视化中使用 K 均值聚类，以及在 Power Query 编辑器中进行聚类的过程。最后，介绍了购物篮分析。
+
+
+  '
+- '# 第三部分机器学习 SQL Server
+
+
+
+
+  '
+- "# 9. 在 SQL Server 2016 和 2017 中使用 R\n\n2016 年，微软宣布可以在 SQL Server Management Studio\
+  \ 中编写 R 代码。为了能在 SQL Server 2016 中编写 R 代码，我们必须先安装 R 服务。2017 年，微软提供了在 SQL Server 2017\
+  \ 中编写 Python 代码的能力。开发者可以使用机器学习服务器，并访问不同的 R 或 Python 包，在 SQL Server Management Studio\
+  \ 中编写 R 和 Python 代码。在 2017 版本中，我们不再使用 R 服务，而是使用机器学习服务，它允许我们将 R 或 Python 代码嵌入到 SQL\
+  \ 脚本中。本章将解释如何设置 SQL Server Management Studio 以编写 R 或 Python 脚本的过程。同时也会简要介绍一些必要的包。此外，还会解释如何创建模型并将其复用于其他数据集的最佳实践。\n\
+  \n## SQL Server 2016 和 2017\n\n在 SQL Server 2016 中使用 R 的第一步是安装 SQL Server 2016 [1]。你可以选择\
+  \ SQL Server 的任一版本，例如免费的 Enterprise、Standard 或 Express 版本。安装时，你必须拥有管理员账户。\n\n1.\
+  \  要启动 SQL Server 2016 的安装向导，请从“安装”选项卡中选择“新的 SQL Server 独立安装”或“向现有安装添加功能”（图 9-1）。\n\
+  \n    ![../images/463840_1_En_9_Chapter/463840_1_En_9_Fig1_HTML.jpg](img/463840_1_En_9_Fig1_HTML.jpg)\n\
+  \n    图 9-1\n\n    SQL Server 安装\n\n2.  在功能选择页面上，选择 **R 服务（数据库内）**。如图 9-2 所示，SQL\
+  \ Server 复制和 R 服务（数据库内）已安装。\n\n    ![../images/463840_1_En_9_Chapter/463840_1_En_9_Fig2_HTML.jpg](img/463840_1_En_9_Fig2_HTML.jpg)\n\
+  \n    图 9-2\n\n    SQL Server 功能选择\n\n3.  最后一步是同意安装 Microsoft R Open。安装完成后，你必须重新启动计算机并以管理员身份运行\
+  \ SQL Server。有关安装过程的更多信息，请参考微软关于如何在 SQL Server 2016 中安装 R 服务的链接 [1]。\n\n在 SQL Server\
+  \ 2017 中设置机器学习服务的过程与 2016 版本相同。唯一的区别在于功能选择中，我们可以同时使用 R 和 Python 语言。此外，我们必须同意安装 Microsoft\
+  \ R 服务和 Python（图 9-3）。\n\n![../images/463840_1_En_9_Chapter/463840_1_En_9_Fig3_HTML.jpg](img/463840_1_En_9_Fig3_HTML.jpg)\n\
+  \n图 9-3\n\n为 SQL Server 2017 安装机器学习服务\n\nSQL Server 2017 中的机器学习服务可在本地和云中运行。该服务包含丰富的算法集，例如\
+  \ RevoScaleR、Revoscalepy 和 MicrosoftML。此外，它还支持多种微软自定义的 R 和 Python 包。在本章中，我将解释如何简化在\
+  \ SQL Server 2016 和 2017 中编写 R 脚本的过程（两者相同）。此外，还将解释如何使用 R 进行机器学习，什么是 RevoScaleR，以及如何支持特定算法。同时也会涵盖一些功能，例如如何使用预训练模型进行视觉分析和情感分析，以及如何将解决方案部署为\
+  \ Web 服务。\n\n## 运行 R 脚本\n\n在 SQL Server（2016 或 2017）中安装 R 服务后，你必须通过特定的存储过程启用 SQL\
+  \ Server Management Studio 中的外部脚本编写功能。首先，请确保你已经下载并安装了 SQL Server Management Studio\
+  \ [2]。\n\n以“以管理员身份运行”方式运行 Management Studio，然后点击“新建查询”打开查询窗口，并运行以下代码：\n\n```\nsp_configure\n\
+  ```\n\n运行上述代码后，你将获得一个用于配置选项的存储过程列表（图 9-4）。\n\n![../images/463840_1_En_9_Chapter/463840_1_En_9_Fig4_HTML.jpg](img/463840_1_En_9_Fig4_HTML.jpg)\n\
+  \n图 9-4\n\nSQL Server 中可用的配置选项\n\n在第 9 行，有一个名为 `external scripts enabled` 的配置存储过程，包含四列。该存储过程使我们能够编写\
+  \ R 代码。它有两个主要属性：`config_value` 和 `run_value`。当你运行以下代码时：\n\n```\nsp_configure 'external\
+  \ scripts enabled'.\n```\n\n`config` 和 `run` 的初始值为零（图 9-5）。\n\n![../images/463840_1_En_9_Chapter/463840_1_En_9_Fig5_HTML.jpg](img/463840_1_En_9_Fig5_HTML.jpg)\n\
+  \n图 9-5\n\n运行外部脚本存储过程\n\n要在 SQL Server 2017/2016 中运行 R 代码，我们必须将 `run_value` 更改为\
+  \ 1。\n\n```\nExec sp_configure 'external scripts enabled' ,1 Reconfigure with override\n\
+  ```\n\n现在，如果我们再次运行图 9-5 中的代码，我们将得到另一个结果（图 9-6）。\n\n![../images/463840_1_En_9_Chapter/463840_1_En_9_Fig6_HTML.jpg](img/463840_1_En_9_Fig6_HTML.jpg)\n\
+  \n图 9-6\n\n在 SQL Server 中启用 R 脚本的运行\n\n`run_value` 可能尚未更改为 1，因此你必须重新启动 SQL Server\
+  \ Management Studio。\n\n在 `run_value` 更改为 1 之后，可以检查 R 脚本是否已启用。我们执行一个具有三个主要输入的存储过程：\n\
+  \n*   `@language` 获取脚本语言的名称。\n\n*   `@script` 存储相关的 R 脚本。在以下示例中，我们将输入变量分配给输出变量 `OutputDataSet<-InputDataSet`。\n\
+  \n*   `@input_data_1` 存储供 R 脚本使用的相关数据。在以下示例中，它是一个非常简单的 SQL 代码：`select 1 as hello`。\n\
+  \n```\nexec sp_execute_external_script  @language =N'R',\n@script=N'OutputDataSet<-InputDataSet',\n\
+  @input_data_1 =N'select 1 as hello'\nwith result sets (([hello] int not null));\n\
+  go\n```\n\n如果你运行上述代码，你将看到输出是 `hello`，值为 `1`（图 9-7）。存储过程的输出可以通过“with result sets”来标识。输出中显示的列名是\
+  \ hello，输出值是一个整数（1），并且不应为空。因此，我们有 `[hello] int not null`。\n\n![../images/463840_1_En_9_Chapter/463840_1_En_9_Fig7_HTML.jpg](img/463840_1_En_9_Fig7_HTML.jpg)\n\
+  \n图 9-7\n\n启用 R 脚本\n\n\n\n## R 语言中的包\n\n可以检查 R 服务的路径。获取 R 语言库路径的代码如下：\n\n```\nOutputDataSet\
+  \ <- data.frame(.libPaths())\n```\n\n要运行存储过程，我们将语言参数设置为 R。\n\n```\n@language = N'R'\n\
+  ```\n\n输入的 R 脚本是：\n\n```\n@script = N'OutputDataSet <- data.frame(.libPaths());'.\n\
+  ```\n\n因此，完整的代码如下：\n\n```\nEXECUTE sp_execute_external_script  @language = N'R'\n\
+  , @script = N'OutputDataSet <- data.frame(.libPaths());'\nWITH RESULT SETS (([DefaultLibraryName]\
+  \ VARCHAR(MAX) NOT NULL));\nGO\n```\n\n运行代码后，R 的库路径将显示在输出窗口中（图 9-8）。\n\n![../images/463840_1_En_9_Chapter/463840_1_En_9_Fig8_HTML.jpg](img/463840_1_En_9_Fig8_HTML.jpg)\n\
+  \n图 9-8\n\nR 库路径\n\n你可以检查机器学习服务中已安装的包。用于检查已安装包的 R 代码如下：\n\n```\npackagematrix <-\
+  \ installed.packages();\nNameOnly <- packagematrix[,1];\nOutputDataSet <- as.data.frame(NameOnly)\n\
+  ```\n\n由于我们没有从用户那里获取任何输入值，因此存储过程没有任何输入（图 9-9）。\n\n```\nEXECUTE sp_execute_external_script\
+  \ @language=N'R'\n,@script = N'str(OutputDataSet); packagematrix <- installed.packages();\n\
+  NameOnly <- packagematrix[,1]; OutputDataSet <- as.data.frame(NameOnly);'\n,@input_data_1\
+  \ = N'SELECT 1 as col'\nWITH RESULT SETS ((PackageName nvarchar(250) ))\n```\n\n\
+  运行代码后，你可以看到 SQL Server 中现有的 R 包。\n\n如图 9-9 所示，显示了 R 包的列表。这里有来自 Microsoft 的各种库，以及其他一些开源或第三方包。在下一节中，我将介绍其中的两个。\n\
+  \n![../images/463840_1_En_9_Chapter/463840_1_En_9_Fig9_HTML.jpg](img/463840_1_En_9_Fig9_HTML.jpg)\n\
+  \n图 9-9\n\nSQL Server 机器学习服务中的 R 包\n\n### RevoScaleR 包\n\nRevoScaleR 是由 Revolutionary\
+  \ Analytics（现归 Microsoft 所有）创建的一个包，旨在大规模地导入、转换和分析数据。该包提供了不同类别的函数，涵盖数据存储、导入与另存为、数据转换、绘制图表（如直方图、折线图等）、描述性分析、预测分析、包管理等\
+  \ [3]。\n\n在本节中，我将介绍一些你可能用于机器学习目的的函数。示例将在 SQL Server 2017 中展示。\n\n### rxLinMod\n\n\
+  `rxLinMode` 用于对数据拟合线性模型。在下面的示例中，我将向你展示如何使用此函数创建一个模型，用于预测混凝土强度与用水量、水泥用量、粉煤灰用量和龄期等输入变量的关系。`rxLinMode`\
+  \ 函数基于一个公式和一个训练数据集创建模型。\n\n正如你在以下代码中看到的，第一行是 `EXECUTE sp_execute_external_script\
+  \ @language=N'R'`，它调用了一个存储过程，允许用户在 SQL Server 内部编写 R 脚本。该存储过程负责在 SQL Server 代码中使用\
+  \ R 或 Python 等外部脚本。\n\n```\nEXECUTE sp_execute_external_script @language=N'R'\n\
+  ,@script = N'require(\"RevoScaleR\")\nformula=strength~cement+ash+age+water\nModel_1=rxLinMod(formula,data=inputDataSet)\n\
+  Model=data.frame(payload = as.raw(serialize(Model_1, connection=NULL)))'\n,@input_data_1\
+  \ = N'Select strength,cement,ash,age,water from [dbo].[concrete]; '\n, @output_data_1_name\
+  \ = N'Model'\n,@input_data_1_name = N'inputDataSet'\nWITH RESULT SETS (([concreteModel]\
+  \ varbinary(max) NOT NULL  ));\n```\n\n代码中的第二行包含了存储在 `\"@script\"` 参数中的相关 R 代码。该代码通过使用\
+  \ `require` 函数引用了 RevoScaleR 包。无需安装此包，因为它已存在于机器学习/R 服务中。第二行 R 代码是关于创建公式的。我们的任务是根据其他一些变量（如用水量、水泥用量等）来预测混凝土强度。允许我们执行此操作的公式是\
+  \ `strength~cement+ash+age+water`，它将公式存储在一个名为 `\"formula\"` 的变量中。第三行包含 `rxLinMod`\
+  \ 函数，该函数根据公式创建一个线性模型。最后，代码的最后一行将公式存储在一个名为 `\"Model\"` 的输出变量中。\n\n`@input_data_1`\
+  \ 使用 SQL 查询 `N'Select strength,cement,ash,age,water from [dbo].[concrete]'` 存储从\
+  \ SQL 数据库收集的数据。最后，输出变量 `Model` 将存储线性模型。\n\n创建模型后，我想将其存储起来，用于预测新的数据系列。要存储模型，请使用以下代码：\n\
+  \n```\nIF NOT EXISTS (SELECT 1 FROM sys.objects\nWHERE object_id = OBJECT_ID(N'[dbo].[LinearModel]')\n\
+  AND [type] IN (N'U'))\nBEGIN\nCREATE TABLE [dbo].LinearModel NULL\n);\nEND\n```\n\
+  \n接下来，我们必须将模型插入到表中。以下代码将模型插入到 `LinearModel` 表中。\n\n```\nInsert into [dbo].[LinearModel]\n\
+  EXECUTE sp_execute_external_script @language=N'R'\n,@script = N'require(\"RevoScaleR\"\
+  )\nformula=strength~cement+ash+age+water\nModel_1=rxLinMod(formula,data=inputDataSet)\n\
+  Model=data.frame(payload = as.raw(serialize(Model_1, connection=NULL)))'\n,@input_data_1\
+  \ = N'Select strength,cement,ash,age,water from [dbo].[concrete]; '\n, @output_data_1_name\
+  \ = N'Model'\n,@input_data_1_name = N'inputDataSet'\n```\n\n模型已经存储在数据库中。现在，在另一个存储过程中，我们将使用该模型来预测数据。\n\
+  \n```\ndeclare @rx_model varbinary(max) = (select [Model] from [dbo].[LinearModel]\
+  \ );\nexec sp_execute_external_script\n@language = N'R'\n, @script = N'\nrequire(\"\
+  RevoScaleR\");\ncdr_model<-unserialize(rx_model);\npredictions <- rxPredict(modelObject\
+  \ = cdr_model,\ndata = PredictionData)\nprediction <-as.data.frame(predictions);'\n\
+  , @input_data_1 = N'Select strength,cement,ash,age,water from [dbo].[concrete]'\n\
+  , @input_data_1_name = N'PredictionData'\n, @output_data_1_name=N'prediction'\n\
+  , @params = N'@rx_model varbinary(max)'\n, @rx_model = @rx_model\nwith result sets\
+  \ ((\"prediction\" float not null ))  ;\n```\n\n存储过程还有另一个输入，它不仅仅是一个数据集。它包含我们已经存储在数据库中的模型的输入。\n\
+  \n通过运行存储过程，将显示以下预测结果（图 9-10）。\n\n![../images/463840_1_En_9_Chapter/463840_1_En_9_Fig10_HTML.jpg](img/463840_1_En_9_Fig10_HTML.jpg)\n\
+  \n图 9-10\n\n混凝土强度预测的线性模型\n\n还有其他用于回归分析的模型。这些包括用于逻辑回归的 `rxLogit`；用于将线性模型推广到数据的 `rxGlm`；以及其他模型。此外，对于其他类型的分析，例如群体预测（分类），还有诸如\
+  \ `rxDTree`、`rxBTree`、`rxDForest` 和 `rxNaiveBayes` 等算法 [3]。\n\n### Azure ML 包\n\n\
+  Azure ML 是另一个用于管理在 Azure ML Studio 中创建的实验的包（参见第 12 章）。该包包含一些常用函数，并允许用户从 R 函数创建 Web\
+  \ 服务。该包还允许 R 用户探索 Azure ML 数据集、浏览现有数据集等。有关如何使用此包的详细信息，请参阅第 12 章，该章在解释 Azure 机器学习工作室之后提供。\n\
+  \n\n\n## 在 SQL Server Reporting Services 中创建 R 可视化图表\n\n可以在 SQL Server 中生成 R 图表，并在\
+  \ SQL Server Reporting Services (SSRS) 中显示该图表。第一步是将所需的包安装到机器学习服务中。为此，我们可以在外部脚本存储过程中使用\
+  \ `install.packages()` 命令，如下所示：\n\n```\nEXECUTE sp_execute_external_script @language=N'R'\n\
+  ,@script = N' install.packages(\"ggplot2\");'\n,@input_data_1 = N'SELECT 1 as col'\n\
+  WITH RESULT SETS ((PackageName nvarchar(250) ))\n```\n\n上述代码可能有效，但有时由于管理员权限问题，它可能无法工作。你可能会在\
+  \ `install.packages(\"arules\")` 中收到类似以下警告的消息：\n\n```\n'lib = \"C:/Program Files/Microsoft\
+  \ SQL Server/MSSQL14.ML2017/R_SERVICES/library\"' is not writable\nError in install.packages(\"\
+  ggplot2\") : unable to install packages\nCalls: source -> withVisible -> eval ->\
+  \ eval -> install.packages\n```\n\n要解决此问题，我们必须以管理员身份运行 `Rugi.exe` 来安装包。此外，我们必须指定包的安装位置。因此，需要\
+  \ SQL Server 中 R 的机器学习服务的路径。R 中有一个函数 `.libPaths()`，它可以显示已安装包的位置。所以，我们必须在 SQL Server\
+  \ 2017 中运行此代码，以找出 R 库路径。\n\n```\nEXECUTE sp_execute_external_script  @language =\
+  \ N'R'\n, @script = N'OutputDataSet <- data.frame(.libPaths());'\nWITH RESULT SETS\
+  \ (([DefaultLibraryName] VARCHAR(MAX) NOT NULL));\nGO\n```\n\n运行代码后，机器学习服务库路径将显示在\
+  \ SQL Server 输出窗口中（图 9-11）。\n\n![../images/463840_1_En_9_Chapter/463840_1_En_9_Fig11_HTML.jpg](img/463840_1_En_9_Fig11_HTML.jpg)\n\
+  \n图 9-11\n\n机器学习服务的库路径\n\n安装 ggplot2 时，可能会收到另一条消息，要求安装其他包。安装 ggplot2 库后，我们可以编写 R\
+  \ 代码来创建图表并将其存储在 SQL Server 中。我将使用以下 SQL 代码绘制图表：\n\n```\nexec sp_execute_external_script\
+  \ @language =N'R', @script=N'library(\"ggplot2\") fields<-inputDataSet fields<-na.omit(fields)\
+  \ image_file = tempfile(); jpeg(filename = image_file, width=1000, height=1000);\
+  \ print(ggplot(fields,aes(x=fields$TaxAmt,y=fields$TaxAmt))+geom_boxplot()+facet_grid(fields$Color~.)\
+  \ ) dev.off(); OutputDataset <- data.frame(data=readBin(file(image_file,\"rb\"),what=raw(),n=1e6))\
+  \ ',@input_data_1 =N'select Color,Size,class,TaxAmt,SalesAmount from [dbo].[FactInternetSales]\
+  \ FIS inner join [dbo].[DimProduct] DP on FIS.ProductKey=dp.ProductKey' ,@input_data_1_name\
+  \ = N'inputDataSet' ,@output_data_1_name = N'OutputDataset' WITH RESULT SETS ((plot\
+  \ varbinary(max)));\n```\n\n### R 代码部分\n\n```\nlibrary(\"ggplot2\")\nfields<-inputDataSet\n\
+  fields<-na.omit(fields)\nimage_file = tempfile();\njpeg(filename = image_file, width=1000,\
+  \ height=1000);\nprint(ggplot(fields,aes(x=fields$TaxAmt,y=fields$TaxAmt))+geom_boxplot()+facet_grid(fields$Color~.)\n\
+  )\ndev.off();\nOutputDataset <- data.frame(data=readBin(file(image_file,\"rb\"),what=raw(),n=1e6\n\
+  ```\n\n以下是对上述代码的简要说明：\n\n`library(\"ggplot2\")`：引用该包。\n\n`fields<-inputDataSet:`：获取数据。\n\
+  \n```\nimage_file = tempfile();\n```\n\n`jpeg(filename = image_file, width=500,\
+  \ height=500);`：从 ggplot2 包创建图像文件。\n\n`ggplot(fields,aes(x=fields$TaxAmt,y=fields$TaxAmt))+geom_boxplot()+facet_grid(fields$Color~.)`：指代之前文章中已解释过的代码。\n\
+  \n```\ndev.off();\nOutputDataset <- data.frame(data=readBin(file(image_file,\"rb\"\
+  ),what=raw(),n=1e6\n```\n\n此代码创建一个 Var 二进制变量，用于将绘图转换为二进制类型的变量。上述代码创建了一个带有箱线图的表格图表。\n\
+  \n下一步是从 SQL Server 获取数据。\n\n### 输入数据\n\n```\n@input_data_1 =N'select Color,Size,class,TaxAmt,SalesAmount\
+  \ from [dbo].[FactInternetSales] FIS inner join [dbo].[DimProduct] DP on FIS.ProductKey=dp.ProductKey'\
+  \ ,@input_data_1_name = N'inputDataSet' ,@output_data_1_name = N'OutputDataset'\n\
+  ```\n\n相关的数据集 AdventureWorks* 可以从 [`www.microsoft.com/en-us/download/details.aspx?id=49502`](http://www.microsoft.com/en-us/download/details.aspx%253Fid%253D49502)\
+  \ [4] 下载。\n\n### 返回数据\n\n```\nWITH RESULT SETS ((plot varbinary(max)));\n```\n\n\
+  最后，我们必须以二进制变量的形式返回绘图。\n\n运行代码后，我们可能会得到如图 9-12 所示的结果。\n\n![../images/463840_1_En_9_Chapter/463840_1_En_9_Fig12_HTML.jpg](img/463840_1_En_9_Fig12_HTML.jpg)\n\
+  \n图 9-12\n\n为图表创建二进制值\n\n现在我们必须将数据存储在表中。首先，我们使用以下代码在 SQL Server 中创建一个名为 ggplot 的表：\n\
+  \n```\nIF NOT EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ggplot]')\
+  \ AND [type] IN (N'U')) BEGIN alter TABLE [dbo].ggplot NULL ); END\n```\n\n然后，通过插入以下命令将绘图输入到表中：\n\
+  \n```\ninsert into [dbo].[ggplot] exec sp_execute_external_script @language =N'R',\
+  \ @script=N'library(\"ggplot2\") fields<-inputDataSet fields<-na.omit(fields) image_file\
+  \ = tempfile(); jpeg(filename = image_file, width=1000, height=1000); print(ggplot(fields,aes(x=fields$TaxAmt,y=fields$TaxAmt))+geom_boxplot()+facet_grid(fields$Color~.)\
+  \ ) dev.off(); OutputDataset <- data.frame(data=readBin(file(image_file,\"rb\"),what=raw(),n=1e6))\
+  \ ', @input_data_1 =N'select Color,Size,class,TaxAmt,SalesAmount from [dbo].[FactInternetSales]\
+  \ FIS inner join [dbo].[DimProduct] DP on FIS.ProductKey=dp.ProductKey' ,@input_data_1_name\
+  \ = N'inputDataSet' ,@output_data_1_name = N'OutputDataset'\n```\n\n现在，我们已经在数据库中创建并存储了一个图表。\n\
+  \n### 在 SSRS 中显示图表\n\n要在 SQL Server 数据工具中显示图表，我们必须创建一个新的 SSRS 项目（图 9-13）。\n\n![../images/463840_1_En_9_Chapter/463840_1_En_9_Fig13_HTML.jpg](img/463840_1_En_9_Fig13_HTML.jpg)\n\
+  \n图 9-13\n\n在 SQL Server 数据工具中创建 SSRS 项目\n\n接下来，我们按照创建 SSRS 报表所需的步骤进行操作（图 9-14）。\n\
+  \n![../images/463840_1_En_9_Chapter/463840_1_En_9_Fig14_HTML.jpg](img/463840_1_En_9_Fig14_HTML.jpg)\n\
+  \n图 9-14\n\n使用数据工具创建 SSRS 项目\n\n然后必须创建一个查询，从 ggplot 表中获取绘图（图 9-15）。\n\n![../images/463840_1_En_9_Chapter/463840_1_En_9_Fig15_HTML.jpg](img/463840_1_En_9_Fig15_HTML.jpg)\n\
+  \n图 9-15\n\n在 SSRS 中从 SQL Server 表获取数据\n\n接下来，我们必须将图像插入到报表区域，并查看预览选项卡（图 9-16）以检查图表。\n\
+  \n![../images/463840_1_En_9_Chapter/463840_1_En_9_Fig16_HTML.jpg](img/463840_1_En_9_Fig16_HTML.jpg)\n\
+  \n图 9-16\n\nSSRS 中的箱线图\n\n## 总结\n\n本章简要说明了如何在 SQL Server 2016 和 2017 中运行 R 脚本。它概述了如何通过外部脚本和存储过程运行必要的代码。此外，还讨论了如何使用\
+  \ RevoScaleR 和 Azure ML 等包来访问额外的机器学习和 R 服务。此外，通过一个示例解释了如何进行预测分析的过程。下一章将概述如何在 Azure\
+  \ Databricks 中进行机器学习。\n\n\n\n"
+- '# 10. Azure Databricks
+
+
+  Databricks 是一项基于 Apache Spark 开源项目的分析服务。Apache Spark 是一个批处理和实时处理环境。Apache Spark
+  因其能够分析海量数据、具备流处理能力、图计算、机器学习以及交互式查询引擎，而在数据科学家中颇受欢迎。Spark 提供内存集群计算。Databricks 是 Spark
+  上用于大数据分析的流行工具之一。Databricks 已被用于摄取大量数据、清洗数据、应用机器学习等场景。2018 年 2 月，Microsoft Azure
+  与 Databricks 进行了集成，为数据工程师、数据科学家和数据分析师提供了更好的协作。此次集成为数据科学和数据工程团队在 Azure 中提供了一个快速、简单且基于
+  Spark 的协作平台 [1]。Azure Databricks 是一个用于大数据分析和机器学习的新平台。Azure Databricks 中的笔记本使数据工程师、数据科学家和业务分析师能够使用单一工具进行协作。本章概述了
+  Azure Databricks 是什么、它所处的环境及其在数据科学中的应用。
+
+
+  ## Databricks 环境
+
+
+  要在 Azure 环境中创建 Azure Databricks，请登录你的一个 Azure 账户。然后，创建一个 Azure Databricks 模块（图 10-1）。
+
+
+  ![../images/463840_1_En_10_Chapter/463840_1_En_10_Fig1_HTML.jpg](img/463840_1_En_10_Fig1_HTML.jpg)
+
+
+  图 10-1
+
+
+  Azure Databricks 环境
+
+
+  创建 Azure Databricks 模块后，Azure 将导航到一个新页面。要访问 Azure Databricks，请单击“启动工作区”（图 10-2）。
+
+
+  ![../images/463840_1_En_10_Chapter/463840_1_En_10_Fig2_HTML.jpg](img/463840_1_En_10_Fig2_HTML.jpg)
+
+
+  图 10-2
+
+
+  启动工作区
+
+
+  如图 10-3 所示，Azure Databricks 环境包含不同的组件。主要组件是工作区和集群。启动后的第一步是创建一个集群。Databricks 中的集群为
+  ETL（提取、转换、加载）、流分析和机器学习提供了一个统一平台。集群分为两种类型：交互式集群和作业集群。笔记本集群用于协作分析数据。而作业集群则用于使用 API
+  快速、稳健地运行自动化工作负载。集群页面可能包含这两种集群类型。每个集群可以有不同的节点。首先，你必须创建一个集群。单击“创建集群”选项（图 10-3）。
+
+
+  ![../images/463840_1_En_10_Chapter/463840_1_En_10_Fig3_HTML.jpg](img/463840_1_En_10_Fig3_HTML.jpg)
+
+
+  图 10-3
+
+
+  在 Databricks 中创建集群
+
+
+  在“创建集群”页面（图 10-4）上，输入相关信息，例如集群名称、版本（默认）、Python 版本、最小和最大工作节点数等。
+
+
+  ![../images/463840_1_En_10_Chapter/463840_1_En_10_Fig4_HTML.jpg](img/463840_1_En_10_Fig4_HTML.jpg)
+
+
+  图 10-4
+
+
+  Azure Databricks 中的“创建集群”页面
+
+
+  如图 10-4 所示，我们有一个驱动节点和一个工作节点。工作节点用于分配你的工作负载。驱动节点负责维护 SparkContext。可以自动调整和自动缩放集群的大小。通过启用自动缩放，可以在集群的生命周期内限制最小和最大工作节点数。
+
+
+  要使用集群，你应该等待状态变为“正在运行”（图 10-5）。通过创建交互式集群，你可以创建一个笔记本，在其中编写代码并快速获取结果。
+
+
+  ![../images/463840_1_En_10_Chapter/463840_1_En_10_Fig5_HTML.jpg](img/463840_1_En_10_Fig5_HTML.jpg)
+
+
+  图 10-5
+
+
+  正在运行的集群
+
+
+  要创建笔记本，请单击“工作区”选项并创建一个新笔记本（图 10-6）。
+
+
+  ![../images/463840_1_En_10_Chapter/463840_1_En_10_Fig6_HTML.jpg](img/463840_1_En_10_Fig6_HTML.jpg)
+
+
+  图 10-6
+
+
+  在 Databricks 中创建笔记本
+
+
+  通过创建新笔记本，你可以指定该笔记本属于哪个集群，以及笔记本的主要语言（Python、Scala、R 和 SQL）是什么。在此示例中，R 语言已被选为默认语言。但是，你仍然可以在笔记本中使用其他语言编写，方法是在脚本前写入
+  `%scala`、`%python`、`%sql` 或 `%r`（图 10-7）。
+
+
+  ![../images/463840_1_En_10_Chapter/463840_1_En_10_Fig7_HTML.jpg](img/463840_1_En_10_Fig7_HTML.jpg)
+
+
+  图 10-7
+
+
+  在 Databricks 中创建 R 笔记本
+
+
+
+
+  默认情况下，笔记本中有一个用于编写代码的区域。如图 10-8 所示，有一个名为 Cmd1 的编辑器节点，您可以在其中编写代码并一次性运行所有代码。在我们的示例中，只有一个节点，编写代码的主要语言是
+  R。此外，我们通过编写以下代码，使用了 `gpplot2` 包中名为 `mpg` 的现有数据集：
+
+
+  ```
+
+  library(ggplot2)
+
+  display(mpg)
+
+  ```
+
+
+  `display` 命令用于在 Databricks 中显示数据集。要运行代码，请点击节点右侧的箭头，然后选择“运行单元格”（图 10-8）。
+
+
+  ![../images/463840_1_En_10_Chapter/463840_1_En_10_Fig8_HTML.jpg](img/463840_1_En_10_Fig8_HTML.jpg)
+
+
+  图 10-8
+
+
+  在 Databricks 中编写 R 笔记本
+
+
+  运行代码后，结果将以表格形式显示在单元格末尾。如图 10-9 所示，初始结果以表格形式呈现；不过，也可以将结果显示为与其他图表相同的格式。
+
+
+  ![../images/463840_1_En_10_Chapter/463840_1_En_10_Fig9_HTML.jpg](img/463840_1_En_10_Fig9_HTML.jpg)
+
+
+  图 10-9
+
+
+  运行 R 代码
+
+
+  要显示图表，您必须点击单元格底部的图表图标（图 10-10）。
+
+
+  ![../images/463840_1_En_10_Chapter/463840_1_En_10_Fig10_HTML.jpg](img/463840_1_En_10_Fig10_HTML.jpg)
+
+
+  图 10-10
+
+
+  在 Databricks 中显示图表
+
+
+  您可以通过点击“绘图选项”来更改要在图表中显示的项目（图 10-11）。
+
+
+  ![../images/463840_1_En_10_Chapter/463840_1_En_10_Fig11_HTML.jpg](img/463840_1_En_10_Fig11_HTML.jpg)
+
+
+  图 10-11
+
+
+  Databricks 中的图表选项
+
+
+  可以创建新的单元格来编写更多 R 或 Scala 代码。在我们的示例中，我们必须将一个名为 Titanic 的数据集上传到 Azure Databricks。
+
+
+  要导入数据，请点击窗口左侧的“数据”选项（图 10-12），然后点击“添加数据”。这将导航到一个新页面（图 10-12）。然后点击“上传文件”。只需浏览并上传
+  `titanic` 文件。如果您需要此文件，可以从 [`www.kaggle.com/c/titanic`](http://www.kaggle.com/c/titanic)
+  获取。
+
+
+  ![../images/463840_1_En_10_Chapter/463840_1_En_10_Fig12_HTML.jpg](img/463840_1_En_10_Fig12_HTML.jpg)
+
+
+  图 10-12
+
+
+  使用“数据”选项导入数据
+
+
+  如图 10-13 所示，我们必须使用用户界面 (UI) 创建一个表，并选择要上传到的相关集群。
+
+
+  ![../images/463840_1_En_10_Chapter/463840_1_En_10_Fig13_HTML.jpg](img/463840_1_En_10_Fig13_HTML.jpg)
+
+
+  图 10-13
+
+
+  将数据导入 Azure Databricks
+
+
+  我们现在创建一个新的工作区，命名为
+
+
+  ```
+
+  val titanic = spark.table("titanic")
+
+  display(titanic.select("∗"))
+
+  ```
+
+
+  为了处理 Titanic 数据集，我们只需要选择 Survived、Sex、Age 和 PClass 列（见图 10-14）。
+
+
+  ![../images/463840_1_En_10_Chapter/463840_1_En_10_Fig14_HTML.jpg](img/463840_1_En_10_Fig14_HTML.jpg)
+
+
+  图 10-14
+
+
+  运行 Scala 语言从 Azure Data Lake Store 获取数据
+
+
+  ```
+
+  val specificColumnsDf = titanic.select("Survived", "Pclass", "Sex", "Age")
+
+  val renamedColumnsDF = specificColumnsDf.withColumnRenamed("Sex", "Gender")
+
+  display(renamedColumnsDF)
+
+  ```
+
+
+  现在，出于机器学习的目的，我们将预测特定年龄、性别和乘客等级的新乘客是否幸存。为此，我们必须在另一个单元格中对该数据运行 R 代码，以创建一个模型并预测特定年龄、性别和乘客等级的乘客是否幸存。我们必须将数据从
+  Scala 传递到 R。为此，我们必须创建一个临时表，将该表提供给 R 代码，使用以下代码：
+
+
+  ```
+
+  renamedColumnsDF.createOrReplaceTempView("TempTable")
+
+  ```
+
+
+  我们通过点击最新单元格下方的加号来添加一个新单元格。在新单元格中，我们必须编写 R 代码。因此，我们必须通过在代码开头放置 `%r` 来指明语言。此外，我们使用了
+  SparkR 中的一些包，因此我们使用 `SQL` 函数从上一个 Scala 单元格中获取数据。最后，我们将数据存储在一个 `dataset` 变量中。
+
+
+  ```
+
+  %r
+
+  library(SparkR)
+
+  sql("REFRESH TABLE TempTable")
+
+  df <- sql("SELECT ∗ FROM TempTable")
+
+  dataset<-as.data.frame(df)
+
+  display(df)
+
+  ```
+
+
+  在同一个单元格或新单元格中，您可以编写一些用于机器学习的代码。在我们的示例中，我们旨在检查特定乘客等级、年龄和性别的乘客是否幸存。*rpart* 包可用于创建决策树。该包帮助我们预测生存概率。
+
+
+  ```
+
+  %r
+
+  library(SparkR)
+
+  sql("REFRESH TABLE TempTable")
+
+  df <- sql("SELECT ∗ FROM TempTable")
+
+  dataset<-as.data.frame(df)
+
+  library(rpart)
+
+  DT<-rpart(Survived~.,data=dataset,method="class")
+
+  test<-dataset[,2:4]
+
+  Prediction<-predict(DT,test)
+
+  output<-data.frame(test,Prediction)
+
+  display(output)
+
+  ```
+
+
+  运行该单元格后，将显示输出（图 10-15）。
+
+
+  ![../images/463840_1_En_10_Chapter/463840_1_En_10_Fig15_HTML.jpg](img/463840_1_En_10_Fig15_HTML.jpg)
+
+
+  图 10-15
+
+
+  在 Azure Databricks 中创建新单元格
+
+
+  也可以使用诸如 ggplot2 之类的 R 包来绘制图表。例如，如果我们想查看带有特定图例的散点图中的 Pclass、年龄和性别，我们可以利用以下代码。
+
+
+  ```
+
+  %r
+
+  display(output)
+
+  library(ggplot2)
+
+  ggplot(output,aes(x=output$Age,y=output$Pclass, color=output$Gender))+geom_jitter()
+
+  ```
+
+
+  如图 10-16 所示，将生成一个带有图例 output$Gender 的散点图。
+
+
+  ![../images/463840_1_En_10_Chapter/463840_1_En_10_Fig16_HTML.jpg](img/463840_1_En_10_Fig16_HTML.jpg)
+
+
+  图 10-16
+
+
+  在 Azure Databricks 中创建新单元格
+
+
+  Azure Databricks 不仅用于机器学习。它还可以从不同资源检索数据，对其应用更改，然后在某些可视化工具（如 Power BI）中显示结果。此外，还可以安排该过程（图
+  10-17）。
+
+
+  ![../images/463840_1_En_10_Chapter/463840_1_En_10_Fig17_HTML.jpg](img/463840_1_En_10_Fig17_HTML.jpg)
+
+
+  图 10-17
+
+
+  使用 Databricks 安排进程
+
+
+  有多种从 SQL 数据库获取数据的方法，包括诸如 Azure Blob、Data Lake Store、Azure Cosmos 等 Azure 服务 [2]。
+
+
+  ## 总结
+
+
+  本章简要概述了如何使用 Azure Databricks 进行机器学习。它讨论了如何使用 Databricks 环境编写 R 和 Scala 脚本，以及如何将数据从
+  Databricks 环境中的一个单元格传递到另一个单元格。最后，您了解了如何应用 R 代码来训练模型并将其用于预测。还解释了如何导入数据以及如何进行机器学习的过程。下一章将概述如何在
+  Azure Data Lake 中进行机器学习。
+
+
+  '
+- '# 第四部分 Azure 中的机器学习
+
+
+
+
+  '
+- '# 11. Azure Data Lake 中的 R
+
+
+  Azure Data Lake Store 是 Microsoft Cloud 的组件之一，可帮助开发人员、数据科学家和分析师存储任意规模和形状的数据。Azure
+  Data Lake 针对处理大量数据进行了优化。它提供具有最佳性能的并行处理。在 Azure Data Lake 中，我们可以创建分层的数据文件夹结构。凭借这些能力，Azure
+  Data Lake 使数据科学家能够以高可扩展性和成本效益轻松应用高级分析和机器学习建模。Azure Data Lake Analytics 包含 U-SQL，这是一种类似
+  SQL 的语言，可让你处理非结构化数据 [1]。可以在 Azure Data Lake 内部执行机器学习，并从 RStudio 探索 Azure Data Lake，以在
+  RStudio 环境中创建模型。此外，还可以通过 Hive 查询从 Azure Data Lake 获取数据，并在 Azure Machine Learning
+  中使用这些数据。在本章中，你将了解如何使用 Azure Data Lake 中的 U-SQL 语言与 R 来写入和处理数据，以及如何将数据从 Azure Data
+  Lake 导入到 RStudio，或从 RStudio 导入到 Azure Data Lake。
+
+
+  ## Azure Data Lake 环境
+
+
+  Azure Data Lake 是 Microsoft Cloud 的组件之一，旨在存储数据。如图 11-1 所示，Azure Portal 中的第二个组件是关于数据存储的。Azure
+  Data Lake Store 可以存储任意大小或格式（结构化和非结构化）的数据。它也用于进行分析（第三个组件）。Azure Data Lake Analytics
+  可用于数据分析（使用 U-SQL）和机器学习。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig1_HTML.jpg](img/463840_1_En_11_Fig1_HTML.jpg)
+
+
+  图 11-1
+
+
+  Microsoft Cloud 组件
+
+
+  要访问 Azure Data Lake Store 和 Data Lake Analytics，你必须拥有一个 Azure 帐户。你可以通过访问以下链接创建一个：[`https://tsmatz.wordpress.com/2017/06/08/azure-data-lake-r-extension/`](https://tsmatz.wordpress.com/2017/06/08/azure-data-lake-r-extension/)。登录“Portal.Azure.com”，然后点击门户左侧的“创建资源”图标（图
+  11-2）。通过输入“data lake”，将出现两个不同的 Azure Data Lake 组件。首先，我们将创建 Azure Data Lake Store。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig2_HTML.jpg](img/463840_1_En_11_Fig2_HTML.jpg)
+
+
+  图 11-2
+
+
+  创建 Azure Data Lake Store 和 Data Lake Analytics
+
+
+  点击“创建”选项后，首先需要提供一些信息，例如服务名称、订阅、资源组和服务器位置（图 11-3）。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig3_HTML.jpg](img/463840_1_En_11_Fig3_HTML.jpg)
+
+
+  图 11-3
+
+
+  创建 Azure Data Lake Store
+
+
+  创建组件需要一些时间。如图 11-4 所示，Azure Data Lake Store 已创建完成。创建 Azure Data Lake Store 后，我们可以将新数据上传到其中。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig4_HTML.jpg](img/463840_1_En_11_Fig4_HTML.jpg)
+
+
+  图 11-4
+
+
+  创建 Azure Data Lake Store
+
+
+  通过点击“数据资源管理器”选项，可以查看数据和结构。从这里，如图 11-5 所示，可以上传数据、创建文件夹、定义访问级别等。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig5_HTML.jpg](img/463840_1_En_11_Fig5_HTML.jpg)
+
+
+  图 11-5
+
+
+  Azure Data Lake Store 中的数据资源管理器
+
+
+  目前，Azure Data Lake Store 中没有数据。可以从其他 Azure 组件将数据导入到 Data Lake Store。在本节中，为了机器学习的目的，我们首先将通过
+  Azure Data Lake Analytics 创建一个数据样本。
+
+
+  为此，我们必须创建一个 Data Lake Analytics 资源（图 11-6）。我们遵循与创建 Data Lake Store 相同的过程。但是，我们必须指定要使用哪个
+  Data Lake Store。请注意：你必须始终先创建 Data Lake Store，然后再创建 Data Lake Analytics。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig6_HTML.jpg](img/463840_1_En_11_Fig6_HTML.jpg)
+
+
+  图 11-6
+
+
+  创建 Azure Data Lake Analytics 资源
+
+
+  在指定名称、位置、相关的 Data Lake Store、订阅等信息后，你必须等待组件创建完成并显示在 Azure Dashboard 上（图 11-7）。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig7_HTML.jpg](img/463840_1_En_11_Fig7_HTML.jpg)
+
+
+  图 11-7
+
+
+  在 Azure Dashboard 上创建的 Data Lake Store
+
+
+
+
+  只需点击已创建的 Azure Data Lake Analytics。Data Lake Analytics 可用于开发和运行大规模并行数据，以及使用 U-SQL、R、Python
+  和 .NET 转换和处理数据。首先，我们将导入一些示例数据和代码。在页面顶部，点击 **Sample scripts** 选项（图 11-8）。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig8_HTML.jpg](img/463840_1_En_11_Fig8_HTML.jpg)
+
+
+  **图 11-8**
+
+
+  Data Lake Analytics 示例脚本
+
+
+  在 **Sample scripts** 页面中，有两个主要的示例数据：**Sample data missing** 和 **U-SQL Advanced Analytic…**。我们需要后者来访问示例数据和代码。示例数据将存储在
+  Data Lake Store 中（图 11-9）。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig9_HTML.jpg](img/463840_1_En_11_Fig9_HTML.jpg)
+
+
+  **图 11-9**
+
+
+  Data Lake Analytics 中的示例数据
+
+
+  要编写 U-SQL 并导入一些示例数据和代码，请点击 **U-SQL Advanced Analytics** 选项。随后，大约 2.5GB 的数据将被下载到
+  Azure Data Lake Store 中。下载开始后，您将在 **Install U-SQL Extensions** 页面上看到启用 U-SQL 和导入数据的过程。安装过程以管道形式显示，可能需要大约两分钟才能运行完成（图
+  11-10）。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig10_HTML.jpg](img/463840_1_En_11_Fig10_HTML.jpg)
+
+
+  **图 11-10**
+
+
+  安装 U-SQL 扩展的过程
+
+
+  接下来，关闭页面，点击 **adlsbook**，然后点击页面顶部的 **Data explorer**（图 11-11）。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig11_HTML.jpg](img/463840_1_En_11_Fig11_HTML.jpg)
+
+
+  **图 11-11**
+
+
+  Azure Data Lake Store 中已导入的数据
+
+
+  您可以浏览 Data Lake Store 文件夹。在 **adlsbook** 下列出的文件夹中，有两个分别名为 **R** 和 **Python**。点击
+  **R** 文件夹，可以看到合并的数据、U-SQL 文件、zip 文件等（图 11-12）。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig12_HTML.jpg](img/463840_1_En_11_Fig12_HTML.jpg)
+
+
+  **图 11-12**
+
+
+  Data Explorer — R 和 Python 示例文件
+
+
+  点击 **R** 文件夹中的一个 U-SQL 文件，例如 `ExtR_PredictUsingLinearModel_RScript.usql`*。* 点击文件后，您可以在单独的页面中看到相关的
+  U-SQL 文件内容，如图 11-13 所示。如图所示，U-SQL 脚本与 SQL 语言类似。您可以检查文件格式、下载代码、重命名文件、通过 **Access**
+  撤销或授予文件访问权限等。在下一节中，我将解释 U-SQL 语言以及如何在其中编写 R 代码或 Python 代码。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig13_HTML.jpg](img/463840_1_En_11_Fig13_HTML.jpg)
+
+
+  **图 11-13**
+
+
+  R 脚本中用于预测模型的 U-SQL 文件
+
+
+  ## 在 U-SQL 中运行 R 脚本
+
+
+  要了解 U-SQL 语言的工作原理，请点击 **R** 文件夹中的一个代码示例。然后点击 `ExtR_rxDTree.usql`。在此示例中，我们将根据鸢尾花的花萼长度预测其种类。首先，我们必须从某个资源获取数据。在代码中，数据已从
+  `/usqlext/samples/R/iris.csv` 中提取。该数据集位于 Azure Data Lake Store 中 **usqlext** 文件夹下的
+  **samples** 子文件夹中，位于 R 代码目录下。复制整个代码，返回 Azure Data Lake Analytics 主页面，然后点击页面顶部的 **New
+  job**（图 11-14）。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig14_HTML.jpg](img/463840_1_En_11_Fig14_HTML.jpg)
+
+
+  **图 11-14**
+
+
+  复制代码并点击 **New job**
+
+
+  在 **New job** 页面中，有一个编辑器允许您将代码放入其中（图 11-15）。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig15_HTML.jpg](img/463840_1_En_11_Fig15_HTML.jpg)
+
+
+  **图 11-15**
+
+
+  在 Azure Data Analytics 中从 **New job** 页面传递 U-SQL 代码
+
+
+  将代码插入编辑器后，在页面顶部的 **Job name** 框中可以输入“MSBook”。
+
+
+  我们可以提交代码来运行它，但我们将修改代码。在接下来的段落中，我将解释这段代码。
+
+
+  这段代码是一个简单的预测分析。有一个名为 **iris** 的免费数据集，它包含花卉的规格信息。该数据集有五列：种类类型以及花萼和花瓣的长度与宽度。我们的分析将根据花萼长度预测花卉的种类。第一步是确定如何访问输入数据（iris
+  数据集）。该数据集已导入到 Data Lake Store 的 **R** 文件夹下。要在 U-SQL 脚本中使用数据，我们必须将其存储在一个变量中。
+
+
+  ```
+
+  DECLARE @IrisData string =  @"/usqlext/samples/R/iris.csv";
+
+  ```
+
+
+  此外，我们想将预测结果写回到另一个位置。因此，在路径中，我们定义一个新路径，并将输出链接存储在一个单独的变量中，如下所示：
+
+
+  ```
+
+  DECLARE @OutputFileModelSummary string = @"/usqlext/MSBook/RXTreeIris.txt";
+
+  ```
+
+
+  下一部分是关于 R 脚本定义的，使用以下代码：
+
+
+  ```
+
+  DECLARE @myRScript = @"
+
+  require(RevoScaleR),
+
+  rxDTree(Species ~ SepalLength, data=inputFromUSQL)
+
+  ";
+
+  ```
+
+
+  `@myRScript` 变量将存储我们下一步要运行的 R 代码。上述代码使用了 R 中的 `RevoScaleR` 包。该包包含一个 `rxDTree` 函数，这是一个决策树算法，用于根据花萼长度预测花卉的种类。
+
+
+  现在我们可以使用一些 U-SQL 语言，通过以下代码将输入链接中的数据提取到一个名为 `@InputData` 的变量中：
+
+
+  ```
+
+  @InputData =
+
+  EXTRACT SepalLength double,
+
+  SepalWidth double,
+
+  PetalLength double,
+
+  PetalWidth double,
+
+  Species  string
+
+  FROM @IrisData
+
+  USING Extractors.Csv();
+
+  @ExtendedData =
+
+  SELECT 0 AS Par,
+
+  ∗
+
+  FROM @InputData;
+
+  ```
+
+
+  U-SQL 代码使用 `Extractors.Csv()` 函数从 CSV 文件中获取数据。下一步，我们将使用 `Extension.R.Reducer()`
+  函数来运行代码。
+
+
+  ```
+
+  @RScriptOutput = REDUCE @ExtendedData ON Par
+
+  PRODUCE Par, RowId int, ROutput string
+
+  READONLY Par
+
+  USING new Extension.R.Reducer(command:@myRScript, rReturnType:"charactermatrix",
+  stringsAsFactors:true);
+
+  OUTPUT @RScriptOutput TO @OutputFileModelSummary USING Outputters.Tsv();
+
+  ```
+
+
+  现在您可以使用 **Submit** 按钮提交代码。提交代码后，MSBook 作业将开始运行（图 11-16）。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig16_HTML.jpg](img/463840_1_En_11_Fig16_HTML.jpg)
+
+
+  **图 11-16**
+
+
+  运行 MSBook 作业的过程
+
+
+  运行代码后，您必须检查输出文件夹，以确认模型是否以文本文件形式存储在那里（图 11-17）。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig17_HTML.jpg](img/463840_1_En_11_Fig17_HTML.jpg)
+
+
+  **图 11-17**
+
+
+  保存决策树模型的输出文件夹
+
+
+  我们在第 9 章中为机器学习执行的相同过程，也可以在这里应用。我们可以创建一个模型，并将其作为文本文件存储在 Azure Data Lake Store 中。然后，我们可以在另一个作业中使用该模型来评估模型，或使用它来预测一系列新数据。上一阶段创建的模型可以在另一个作业中使用。
+
+
+
+
+  ## 通过 RStudio 管理文件夹
+
+
+  可以将 Azure Data Lake Store (ADLS) 中的数据加载到 RStudio 中，用于机器学习。此外，我们还可以使用 R 脚本，在 RStudio
+  环境中管理 ADLS。因此，无需访问 ADLS 门户，我们就能管理门户，并将数据从 ADLS 带到 RStudio 中进行机器学习实践。然而，在确保我们的代码足够完善后，我们可以在
+  ADLS 内部使用 U-SQL，将 R 代码嵌入到 ADLS 环境中（如上一节所述）。本节将解释从 RStudio 环境访问文件的过程。
+
+
+  在上一节中，我们已经创建了一个 ADLS。但是，我们必须创建一个从 Azure 到外部应用程序（此处为 RStudio）的连接。为此，我们必须创建一个用于服务到服务身份验证的
+  Azure Active Directory。
+
+
+  在 Azure 门户页面的左侧，点击 **Azure Active Directory**（图 11-18）。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig18_HTML.jpg](img/463840_1_En_11_Fig18_HTML.jpg)
+
+
+  **图 11-18**
+
+  Azure 中的 Azure Active Application
+
+
+  接下来点击 **应用注册**，然后点击 **新应用程序注册**（图 11-19）。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig19_HTML.jpg](img/463840_1_En_11_Fig19_HTML.jpg)
+
+
+  **图 11-19**
+
+  Azure Active Directory 中的应用程序注册
+
+
+  现在，你只需提供一些常规信息，例如名称、应用程序类型和登录 URL。
+
+
+  登录 URL 以后可以更改，所以现在，我输入了一个随机 URL（网站地址 [`http://radacad.com`](http://radacad.com)）（图
+  11-20）。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig20_HTML.jpg](img/463840_1_En_11_Fig20_HTML.jpg)
+
+
+  **图 11-20**
+
+  Azure Active Directory 中的应用程序注册
+
+
+  创建完成后，创建的应用程序不会显示在页面上，因此你必须点击 **查看所有应用程序**（图 11-21）。这将刷新页面并显示应用程序注册列表。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig21_HTML.jpg](img/463840_1_En_11_Fig21_HTML.jpg)
+
+
+  **图 11-21**
+
+  应用程序注册
+
+
+  现在，你可以在页面上看到应用程序注册列表（图 11-22）。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig22_HTML.jpg](img/463840_1_En_11_Fig22_HTML.jpg)
+
+
+  **图 11-22**
+
+  应用程序注册中的应用程序 ID
+
+
+  要访问 ADLS，我们需要三个不同的标识，例如应用程序 ID（客户端 ID）、租户 ID 和客户端密钥 ID。
+
+
+  客户端 ID，即应用程序 ID，可以从应用注册中获取（图 11-22）。对于租户 ID，你必须返回 Active Directory 并点击 **属性**，然后将目录
+  ID 复制为租户 ID（图 11-23）。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig23_HTML.jpg](img/463840_1_En_11_Fig23_HTML.jpg)
+
+
+  **图 11-23**
+
+  目录 ID（租户 ID）
+
+
+  我们需要从 Azure 获取的最后一个令牌是客户端密钥 ID。要获取密钥 ID，你必须转到 Azure Active Directory，然后转到应用注册，并选择你创建的应用程序。现在只需点击创建的应用程序（图
+  11-24）。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig24_HTML.jpg](img/463840_1_En_11_Fig24_HTML.jpg)
+
+
+  **图 11-24**
+
+  从 Azure Active Directory 获取客户端密钥 ID——第 1 部分
+
+
+  现在你必须点击 **RADLSBook**，进入主页面。在 RADLSBook 中点击 **设置**（图 11-25）*。*
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig25_HTML.jpg](img/463840_1_En_11_Fig25_HTML.jpg)
+
+
+  **图 11-25**
+
+  从 Azure Active Directory 获取客户端密钥 ID——第 2 部分
+
+
+  在设置页面上，点击 **密钥** 选项。在密钥页面上，你将能够创建一个密码。我们必须创建一个新密码。点击 **密钥描述** 并输入一个名称（图 11-26）。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig26_HTML.jpg](img/463840_1_En_11_Fig26_HTML.jpg)
+
+
+  **图 11-26**
+
+  从 Azure Active Directory 获取客户端密钥 ID——第 3 部分
+
+
+  接下来，你必须指定密码的持续时间。最后，保存密钥，以便能够看到代码。保存代码后，你会收到一条消息，提示你必须复制该代码，并且如果你离开此页面，代码将隐藏。因此，一旦你创建了代码，就必须立即复制它（图
+  11-27）。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig27_HTML.jpg](img/463840_1_En_11_Fig27_HTML.jpg)
+
+
+  **图 11-27**
+
+  从 Azure Active Directory 获取客户端密钥 ID——第 4 部分
+
+
+  现在你拥有了身份验证令牌。下一步是打开 RStudio，编写一些 R 脚本，用于从 Azure Data Lake 获取数据、将数据上传到 Azure Data
+  Lake、列出文件夹等。这有助于我们首先轻松调试 R 代码，然后在 U-SQL 中使用这些代码。
+
+
+  在你的机器上打开 RStudio，然后打开一个空的 R 脚本。要处理 Azure 中的数据，我们必须安装一些库，如下所列：
+
+
+  ```
+
+  install.packages("httr")
+
+  install.packages("jsonlite")
+
+  install.packages("curl")
+
+  ```
+
+
+  安装库后，为了确保它们已安装并检查包依赖关系，请编写以下代码：
+
+
+  ```
+
+  library(httr)
+
+  library(jsonlite)
+
+  library(curl)
+
+  ```
+
+
+  现在，我们必须通过以下代码创建到 Azure Active Directory 的连接：
+
+
+  ```
+
+  h ",
+
+  "client_secret"=""
+
+  )
+
+  ```
+
+
+  然后，要获取 Azure Data Lake Store 中的文件夹列表，请使用以下代码。你必须使用租户 ID（图 11-22）和你的 Azure Data Lake
+  Store 名称（例如，`adlsbook`）。
+
+
+  ```
+
+  req /oauth2/token", handle = h)
+
+  res .azuredatalakestore.net/webhdfs/v1/?op=LISTSTATUS",
+
+  add_headers(Authorization = paste(res$token_type, res$access_token)))
+
+  ```
+
+
+  现在，我们可以使用以下代码浏览 Azure Data Lake Store 主目录中的文件夹：
+
+
+  ```
+
+  nlite::toJSON(jsonlite::fromJSON(content(r,"text")), pretty = TRUE)
+
+  ```
+
+
+  请确保你没有输入任何拼写错误，并且正确复制粘贴了代码。如图 11-28 所示，`adlsbook` 中已有三个文件夹：`catalog`、`system` 和
+  `usqlext`。这些文件夹显示在 R 输出控制台中。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig28_HTML.jpg](img/463840_1_En_11_Fig28_HTML.jpg)
+
+
+  **图 11-28**
+
+  Azure Data Lake Store (adlsbook) 中列出的文件夹
+
+
+  图 11-28 显示了文件夹列表、目录类型、访问时间、创建时间、所有者等信息。
+
+
+  要访问数据，我们必须提供要访问的文件的路径。例如，我们想要从 `adlsbook` 中获取 `usqlext`、`samples`、`R` 和 `iris.csv`
+  中的数据（图 11-29）。
+
+
+  ![../images/463840_1_En_11_Chapter/463840_1_En_11_Fig29_HTML.jpg](img/463840_1_En_11_Fig29_HTML.jpg)
+
+
+  **图 11-29**
+
+  adlsbook 中的 iris 数据
+
+
+  路径如下：[`https://adlsbook.azuredatalakestore.net/webhdfs/v1/usqlext/samples/R/iris.csv?op=OPEN&read=true`](https://adlsbook.azuredatalakestore.net/webhdfs/v1/usqlext/samples/R/iris.csv%253Fop%253DOPEN%2526read%253Dtrue)
+
+
+  注意：连接可能会断开，因此你必须重新运行我们用于创建连接的代码。
+
+
+
+
+  ```
+
+  h ",
+
+  "client_secret"=""
+
+  )
+
+  req /oauth2/token", handle = h)
+
+  res <- fromJSON(rawToChar(req$content))
+
+  r <- httr::GET("https://adlsbook.azuredatalakestore.net/webhdfs/v1/usqlext/samples/R/iris.csv?op=OPEN&read=true",
+
+  add_headers(Authorization = paste(res$token_type,res$access_token)))
+
+  ```
+
+
+  要访问数据，您可以轻松下载以下内容并访问数据。
+
+
+  ```
+
+  writeBin(content(r), "C:/pbi/iris.csv")
+
+  irisDownloaded <- read.csv("C:/pbi/iris.csv")
+
+  head(irisDownloaded)
+
+  ```
+
+
+  也可以将数据从 RStudio 上传到 Azure Data Lake 或创建一个文件夹。请访问 [`https://blogs.msdn.microsoft.com/microsoftrservertigerteam/2017/03/14/using-r-to-perform-filesystem-operations-on-azure-data-lake-store/`](https://blogs.msdn.microsoft.com/microsoftrservertigerteam/2017/03/14/using-r-to-perform-filesystem-operations-on-azure-data-lake-store/)
+  查看所有可能性。
+
+
+  您也可以在 Visual Studio 中运行 U-SQL。为此，您的机器上必须安装 Visual Studio 2015 或 2017。关于如何在 Visual
+  Studio 中运行 U-SQL 语言，网上有很多博客文章 [2]。
+
+
+  ## 总结
+
+
+  本章解释了如何应用 Azure Data Lake 来实践机器学习。您了解了我们如何在 Azure Data Lake Analytics 中运行 R 代码并将结果存储在其中。此外，还简要说明了如何通过
+  R Studio 访问 Azure Data Lake Store 数据，以及如何使用 U-SQL 语言。如何在 Visual Studio 中运行 U-SQL
+  语言超出了本书的讨论范围。
+
+
+  '
+- '# 12. Azure Machine Learning Studio
+
+
+  Azure Machine Learning (ML) Studio 是一个云机器学习平台。它提供了一个易于使用的拖放式环境。该平台包含超过 20 种预定义的机器学习算法。借助
+  Azure ML Studio，可以从不同资源导入数据，设计机器学习实验，并根据模型创建 Web 服务。此外，还可以在 Azure ML Studio 环境中运行
+  R 或 Python 代码。在本章中，我将首先介绍该环境以及如何在其中制定实验，如何创建简单的机器学习模型，如何测试和评估模型，以及如何从本地机器或其他 Azure
+  组件导入数据。同时，我还将讨论从模型创建 Web 服务的过程。将探讨如何在 Azure ML Studio 中运行 R 代码。此外，还将详细阐述如何在 R Studio
+  中探索 Azure ML 实验。
+
+
+  ## Azure Machine Learning 环境
+
+
+  要使用 Azure ML Studio，您必须登录 [`https://studio.azureml.net/`](https://studio.azureml.net/)
+  。登录时，您可以使用 Google、Yahoo 或公司账户（图 12-1）。Azure ML 有两种订阅方式：一种是免费的，另一种是标准版。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig1_HTML.jpg](img/463840_1_En_12_Fig1_HTML.jpg)
+
+
+  图 12-1
+
+
+  Machine Learning Studio 登录界面
+
+
+  登录门户后，会看到一个空的环境。如图 12-2 所示，屏幕左侧有七个不同的选项：项目、实验、Web 服务、笔记本、数据集、已训练模型和设置。实验是创建模型的主要场所。如图所示，首次使用时实验区是空的。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig2_HTML.jpg](img/463840_1_En_12_Fig2_HTML.jpg)
+
+
+  图 12-2
+
+
+  Azure ML Studio 环境
+
+
+  可以拥有多个不同的工作区，结合免费或标准订阅。如图 12-3 所示，用户可以在这些环境之间切换。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig3_HTML.jpg](img/463840_1_En_12_Fig3_HTML.jpg)
+
+
+  图 12-3
+
+
+  Azure ML 工作区
+
+
+  在接下来的章节中，将简要介绍 Azure ML 的不同组件。
+
+
+  ## Azure Machine Learning 实验
+
+
+  实验是创建机器学习模型的主要载体。如图 12-3 所示，我们有两个主要的实验区：我的实验和示例。我的实验是创建新机器学习模型和存储所有用户创建实验的地方。示例实验包含微软预定义的示例。
+
+
+  要创建新实验，请点击屏幕左侧的“实验”，然后点击页面左下角的“新建”选项，再选择“空白实验”（图 12-4）。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig4_HTML.jpg](img/463840_1_En_12_Fig4_HTML.jpg)
+
+
+  图 12-4
+
+
+  设置实验
+
+
+  如图 12-4 所示，实验处于拖放式环境中。屏幕左侧有一些组件，如已保存数据集、数据转换、机器学习等，可帮助我们创建 ML 模型。
+
+
+  要创建实验，您必须获取数据。导入数据主要有两种方式：从本地机器导入数据（图 12-5）或使用内置数据组件。在我们的示例中，首先我将从本地机器导入数据。数据集是泰坦尼克号数据集，可从
+  [`http://web.stanford.edu/class/archive/cs/cs109/cs109.1166/stuff/titanic.csv`](http://web.stanford.edu/class/archive/cs/cs109/cs109.1166/stuff/titanic.csv)
+  获取 [1]。要导入数据，我们必须点击屏幕左侧的“数据集”选项，然后点击“新建”选项。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig5_HTML.jpg](img/463840_1_En_12_Fig5_HTML.jpg)
+
+
+  图 12-5
+
+
+  从本地机器导入数据
+
+
+  导入数据集后，我们能够创建一个实验，目标是预测特定年龄、性别和乘客舱位的乘客是否幸存。要创建新实验，您必须首先点击屏幕左侧的“实验”选项。Azure ML 由不同的模块（节点）组成，每个活动都显示为单独的节点。在搜索区域中，输入“Titanic”。然后将该节点拖放到白色设计图面区域，如图
+  12-6 所示。如图 12-6 所示，泰坦尼克号数据集显示为一个只有单个输出的独立节点。要查看数据集，您必须右键单击输出节点，然后点击“可视化”选项。这将允许您查看数据以及一些额外的有用信息，例如
+  PassengerID、Survived、Pclass、Name 等列。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig6_HTML.jpg](img/463840_1_En_12_Fig6_HTML.jpg)
+
+
+  图 12-6
+
+
+  导入和可视化数据
+
+
+  此外，在每个列名下方有一个小的直方图，指示每列的值频率（图 12-7）。同时，通过点击每一列，您可以在页面右侧看到统计摘要，如图 12-7 所示。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig7_HTML.jpg](img/463840_1_En_12_Fig7_HTML.jpg)
+
+
+  图 12-7
+
+
+  可视化数据集
+
+
+
+
+  下一步是清洗数据。如图 12-7 所示，对于*泰坦尼克号*上乘客的年龄数据，有 177 行存在缺失值。创建模型前的主要工作之一就是移除或替换这些缺失值。有一个名为“清理缺失数据”的模块可以完成此操作。搜索该模块，将其拖放到实验区域。如图
+  12-8 所示，该模块有一个输入端口和两个输出端口。将泰坦尼克号数据集的输出连接到缺失值模块的输入。然后，通过点击缺失值模块，指定您希望如何解决缺失值问题。该模块有一个属性页面，您可以在其中选择要移除缺失值的列。接着指定清理模式，例如用平均值、中位数或自定义值进行替换。也可以选择移除整个缺失数据行，或使用
+  PCA 算法[2]进行替换。如图 12-8 所示，已选择了“年龄”列，清理模式设置为“移除整行”。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig8_HTML.jpg](img/463840_1_En_12_Fig8_HTML.jpg)
+
+
+  图 12-8
+
+
+  *从数据中移除缺失值*
+
+
+  另一个我们应该执行的数据转换是移除对“幸存”列没有影响的列，例如乘客 ID、姓名等。我们运行机器学习所需的列只有年龄、性别、船舱等级和幸存。数据集中还有另一个名为“选择列”的模块。将此模块拖放到实验中，然后将“清理缺失数据”的第一个输出连接到“选择列”的输入。接着，在属性面板中，选择所需的列（图
+  12-9）。至此，该数据集的主要数据清洗和整理工作已完成。下一步是选择相关算法。
+
+
+  此处机器学习的主要目的是预测一位新乘客是否幸存。根据第 4 章的讨论，我们预测的是一个类别，而非连续值。使用分类方法进行预测分析可以解决这个问题。在 Azure
+  ML 中，大约有 25 种主要算法，被分为四大场景：异常检测、分类、聚类和回归*。* 针对我们的场景，必须使用分类算法。展开分类算法列表，可以看到根据要预测的类别数量进行了进一步分组。如果是二分类问题，则必须使用带有“二类”标识的算法。该问题正是预测人员幸存与否的情况。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig9_HTML.jpg](img/463840_1_En_12_Fig9_HTML.jpg)
+
+
+  图 12-9
+
+
+  在数据集中选择列
+
+
+  如图 12-10 所示，在“分类”下，我们有九种不同的算法可用于预测幸存或未幸存者。每种算法都可用于不同的场景和不同的数据类型。微软提供了一份用于选择最佳算法的速查表[3]。对于*泰坦尼克号*问题，我们的列数不超过
+  100 列，数据是非线性的，并且需要高精度和快速训练。因此，我选择了“二类提升决策树”算法。不过，最佳实践是选择不同的算法，然后比较它们的准确率。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig10_HTML.jpg](img/463840_1_En_12_Fig10_HTML.jpg)
+
+
+  图 12-10
+
+
+  Azure ML 中的机器学习算法
+
+
+  按照第 4 章介绍的机器学习生命周期，我们必须拆分数据，一部分用于训练，其余部分用于测试。在 Azure ML 中，有三个不同的模块用于拆分数据、训练模型和测试模型：拆分数据、训练模型和评分模型。首先，我拖放“拆分数据”模块（图
+  12-11）。“拆分数据”允许我们指定多少数据用于训练，多少用于测试。如图 12-11 所示，“拆分数据”已连接到“选择列”模块的输出。拆分比例设置为 0.7（30%用于测试，70%用于训练）。其中一个输出节点用于训练，另一个用于测试。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig11_HTML.jpg](img/463840_1_En_12_Fig11_HTML.jpg)
+
+
+  图 12-11
+
+
+  用于机器学习目的的拆分数据
+
+
+  我们必须将用于训练和测试的相关模块拖放到实验中。如图 12-12 所示，拆分模块的右侧输出已连接到“训练模型”，而“拆分数据”的另一个输出已连接到“评分模型”。此外，在“训练模型”属性下，已选择了“幸存”列。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig12_HTML.jpg](img/463840_1_En_12_Fig12_HTML.jpg)
+
+
+  图 12-12
+
+
+  将训练模型和评分模型拖放到实验中
+
+
+  现在我们可以运行代码，查看评分模型输出的预测结果。要运行它，请点击页面底部的“运行”按钮。运行实验后，我们将能够在评分模型模块的输出中看到测试数据预测的结果。右键单击输出并可视化数据（图
+  12-13）。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig13_HTML.jpg](img/463840_1_En_12_Fig13_HTML.jpg)
+
+
+  图 12-13
+
+
+  *泰坦尼克号*示例的预测结果
+
+
+  可以使用“评估模型”来评估模型，以检查所创建模型的准确率。下一节将解释创建应用程序编程接口（API）的过程。
+
+
+
+
+  ## 创建 Web 服务
+
+
+  评估模型后的下一步是可选的：创建一个 API，以便每个人都能通过提供数据来使用该模型。要创建 Web 服务，您必须先运行实验，然后点击“设置 Web 服务”（建议使用预测
+  Web 服务）。如图 12-14 所示，已为 Web 服务创建了输入和输出链接。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig14_HTML.png](img/463840_1_En_12_Fig14_HTML.png)
+
+
+  图 12-14
+
+
+  从机器学习模型创建 Web 服务
+
+
+  再次运行实验，然后点击页面底部的“部署 Web 服务”*。*部署 Web 服务后，将显示一个新页面。在此页面上，您可以查看 API 的详细信息，包括用于单次处理和批量处理数据的
+  API。
+
+
+  如图 12-15 所示，有一个 API 密钥，您可以共享该密钥以允许其他人使用 ML 模型。此外，对于 API URL，主要有两种使用 API 的方式：请求-响应方法和批量处理方法。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig15_HTML.jpg](img/463840_1_En_12_Fig15_HTML.jpg)
+
+
+  图 12-15
+
+
+  *为*泰坦尼克号*问题创建 Web 服务*
+
+
+  点击“批量执行”选项，导航至包含 API 信息的新页面（图 12-16）。如图所示，页面显示了用于请求信息的 Web 服务 URL。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig16_HTML.jpg](img/463840_1_En_12_Fig16_HTML.jpg)
+
+
+  图 12-16
+
+
+  Web 服务信息页面
+
+
+  此外，还可以将创建的模型嵌入到其他应用程序中，例如 Web 应用程序、报表等，并利用任何语言（如 C#、Python 和 R）。在 Web 服务信息页面上，转到“示例代码”部分。如图
+  12-17 所示，其中有 C#、Python 和 R 的示例代码，使用户能够将代码嵌入到应用程序中。但是，您必须更改 Web 服务的输入和输出，以便最终用户能够提供正确的信息并获得相关的预测。例如，在图
+  12-15 创建的 Web 服务中，服务的输入也获取了用户的乘客 ID、姓名和其他无关数据，我们必须对这些数据进行精炼，以便只接收诸如年龄、性别和乘客等级等信息。再举一个关于输出的例子，用户可能只对获取预测结果和概率感兴趣，而不需要所有其他输入列。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig17_HTML.jpg](img/463840_1_En_12_Fig17_HTML.jpg)
+
+
+  图 12-17
+
+
+  Web 服务示例代码
+
+
+  下一步，我将通过为输出添加“数据集中的选择列”模块，并更改 Web 服务输入的选定列，来精炼 Web 服务的输入和输出（图 12-18）。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig18_HTML.jpg](img/463840_1_En_12_Fig18_HTML.jpg)
+
+
+  图 12-18
+
+
+  更改 Web 服务的输入和输出
+
+
+  如图 12-18 所示，对于 Web 服务输入，我们断开链接并将其连接到“评分模型”的输入，并且在“数据集中的选择列”模块中（图 12-18，3），仅选择了年龄、性别和乘客等级。类似地，对于
+  Web 服务输出，拖放“数据集中的选择列”模块以仅选择“评分标签”和“评分概率”。接下来，我们将 Web 服务输出连接到“数据集中的选择列”模块。最后，我们运行实验并再次部署。会出现一条关于覆盖
+  Web 服务的消息，我们需要确认。再次部署后，在 Web 服务页面上，点击“测试”按钮（图 12-19，1）。之后，我们就可以测试 API 了。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig19_HTML.jpg](img/463840_1_En_12_Fig19_HTML.jpg)
+
+
+  图 12-19
+
+
+  测试 Web 服务
+
+
+  如图 12-19 所示，通过向 API 输入三个参数：年龄、性别和乘客等级，该特定行的机器学习结果将显示在页面底部（图 12-20，1）*。*
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig20_HTML.jpg](img/463840_1_En_12_Fig20_HTML.jpg)
+
+
+  图 12-20
+
+
+  API 结果及对 Excel 的调用
+
+
+  下一步允许我们在 Excel 中分析 API。我们只需导航到“应用”（图 12-20）并点击“Excel 2013 或更高版本”（图 12-20，2）*。*点击
+  Excel 图标后，会出现一条“下载示例数据”的消息*。*保存 Excel 文件并打开它，然后启用 Excel（图 12-21）。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig21_HTML.jpg](img/463840_1_En_12_Fig21_HTML.jpg)
+
+
+  图 12-21
+
+
+  在 Excel 中启用 Azure ML API
+
+
+  接下来，将出现一个新窗口。使用示例数据（图 12-22，1），然后在“输入”字段下，选择输入数据范围（图 12-22，2）。然后，在“输出”字段下，写入输出单元格编号（图
+  12-22，3）。然后点击“预测”选项。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig22_HTML.jpg](img/463840_1_En_12_Fig22_HTML.jpg)
+
+
+  图 12-22
+
+
+  在 Excel 中启用 Azure ML API
+
+
+  通过运行代码并选择“自动预测”选项，预测结果将显示在输出单元格中（图 12-23）。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig23_HTML.jpg](img/463840_1_En_12_Fig23_HTML.jpg)
+
+
+  图 12-23
+
+
+  在 Excel 中调用 API
+
+
+  可以添加更多输入行以进行更多预测。
+
+
+
+
+  ## R 与 Azure ML Studio
+
+
+  Azure ML Studio 内置了 25 种算法。然而，在某些情况下，用户可能希望使用自己的算法。在 Azure ML Studio 中编写 R 或 Python
+  代码是可行的。在本节中，你将看到如何可视化图表并查看数据输出。
+
+
+  在 Azure ML Studio 中创建一个新实验。使用相同的数据集（泰坦尼克号）。将“Titanic”拖放到实验区域。然后，在搜索区域中，输入“Execute
+  R Scripts”。将该模块拖放到实验区域（图 12-24）。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig24_HTML.jpg](img/463840_1_En_12_Fig24_HTML.jpg)
+
+
+  图 12-24
+
+
+  在 Azure ML 中执行 R 脚本
+
+
+  如图 12-24 所示，有一个用于编写 R 脚本的编辑器。Execute R Scripts 模块有三个输入节点。左侧的前两个用于数据集，最后一个用于 zip
+  文件。点击此模块，我们可以编写代码。如图 12-24 所示，来自节点 1 的输入数据已通过以下代码检索并存储在 `dataset1` 中。
+
+
+  ```
+
+  dataset1 <- maml.mapInputPort(1) # class: data.frame
+
+  ```
+
+
+  在此示例中，输入节点包含泰坦尼克号数据集（图 12-24）。因此，我将按如下方式更改代码：
+
+
+  ```
+
+  Titanic<- maml.mapInputPort(1) # class: data.frame
+
+  ```
+
+
+  下一步，我们将使用以下代码根据*泰坦尼克号*乘客的年龄创建一个箱线图：
+
+
+  ```
+
+  boxplot(titanic$Age)
+
+  ```
+
+
+  接下来，我们创建数据的统计摘要。
+
+
+  ```
+
+  output<-data.frame(titanic$Age,titanic$Pclass,titanic$Sex)
+
+  summary(output)
+
+  ```
+
+
+  最后，我们希望在输出节点中仅显示年龄、性别和乘客等级。最终代码将如图 12-25 所示。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig25_HTML.jpg](img/463840_1_En_12_Fig25_HTML.jpg)
+
+
+  图 12-25
+
+
+  Azure ML Studio 中的 R 脚本
+
+
+  现在我们必须运行实验。Execute R Script 有两个输出节点。左侧的输出节点保存了包含三个主要列的输出变量（图 12-26）。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig26_HTML.jpg](img/463840_1_En_12_Fig26_HTML.jpg)
+
+
+  图 12-26
+
+
+  Azure ML Studio 中 Execute R Scripts 的第一个输出
+
+
+  另一个输出包含有关 R 图表及其统计摘要的一些信息。要查看输出，请右键单击右侧输出节点并可视化该节点（图 12-27）。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig27_HTML.jpg](img/463840_1_En_12_Fig27_HTML.jpg)
+
+
+  图 12-27
+
+
+  Execute R Scripts 的第二个输出
+
+
+  可以从 RStudio 探索 Azure ML 数据集和实验。此外，R 用户可以在 RStudio 中编写一个函数，然后从中创建一个 API。
+
+
+  为此，首先，你必须使用以下命令在 RStudio 中安装 Azure ML 包：
+
+
+  ```
+
+  install.package("AzureML")
+
+  ```
+
+
+  第二步是从 Azure ML Studio 获取一些标识密钥。导航到 `studio.azureml.net`，在你的 Azure ML 环境中，单击“设置”，复制工作区
+  ID（图 12-28），并将其存储在 RStudio 的一个变量中，如下所示：
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig28_HTML.jpg](img/463840_1_En_12_Fig28_HTML.jpg)
+
+
+  图 12-28
+
+
+  来自 Azure ML 环境的工作区 ID
+
+
+  ```
+
+  id<- "your workspace ID"
+
+  ```
+
+
+  导航到“设置”菜单中的另一个选项卡，然后选择“身份验证令牌”。复制主身份验证令牌并将其分配给 RStudio 中的一个变量。
+
+
+  ```
+
+  auth<-"your authorization token"
+
+  ```
+
+
+  Azure ML 包中有一个 `workspace` 函数，它通过获取身份验证令牌和工作区 ID 来创建对 Azure ML Studio 工作区的引用。
+
+
+  ```
+
+  ws <- workspace( id , auth  )
+
+  ```
+
+
+  可能会收到缺少 R 工具软件的错误。因此，你必须从 [4] 安装最新版本的 R 工具，并将其存储在 RStudio 的同一根目录下。
+
+
+  最后，为了探索 Azure ML 中的所有实验，有一个 `experiments` 函数，它接收 `ws` 对象作为输入以连接到 Azure ML 环境。
+
+
+  ```
+
+  experiments(ws, filter = "all")
+
+  ```
+
+
+  使用 `experiments` 函数可以让你筛选要查看详细信息的 Azure ML 实验。你可以将筛选值设置为 `all`、`samples` 和 `my datasets`。在此示例中，我将筛选器设置为
+  `all`。通过在 RStudio 中应用名称函数来检查详细信息，你可以看到列，例如实验名称、版本、所有者等（图 12-29）。
+
+
+  ![../images/463840_1_En_12_Chapter/463840_1_En_12_Fig29_HTML.jpg](img/463840_1_En_12_Fig29_HTML.jpg)
+
+
+  图 12-29
+
+
+  探索我们能够从 Azure ML 实验中看到的属性
+
+
+  可以使用 `upload.dataset` 命令将数据集从 RStudio 上传到 Azure ML。
+
+
+  `ggplot2` 包中有一个数据集，我将把它上传到 Azure ML Studio。
+
+
+  ```
+
+  library(ggplot2)
+
+  upload.dataset(mpg,ws,"mpg")
+
+  ```
+
+
+  你必须提供数据集、工作区对象（`ws`）以及要在 Azure ML 环境中保存数据集的名称。现在，如果你在 Azure ML 中探索数据集，你将能够看到新上传的数据集。
+
+
+  ## 总结
+
+
+  本章简要介绍了 Azure ML Studio。首先，实现了一个用于预测*泰坦尼克号*乘客生存情况的简单机器学习模型。下一步是从该模型创建一个 API，对其进行分析，并在
+  Excel 中显示结果。此外，还解释了如何使用 Execute R Scripts 模块在 Azure ML 内部编写 R 代码。本章的最后部分解释了如何通过
+  R 代码探索 Azure ML Studio，以及如何将数据集从 RStudio 上传到 Azure ML 数据集。
+
+
+  '
+- '# 13. Azure Stream Analytics 中的机器学习
+
+
+  Azure Stream Analytics 是一个事件处理引擎，允许用户分析来自设备、传感器和应用程序的高容量流数据。Azure Stream Analytics
+  可用于物联网 (IoT) 实时分析、远程监控和数据库存控制。然而，Azure Stream Analytics 是 Azure 中另一个我们可以运行机器学习的组件。可以在
+  Azure Stream Analytics 内部使用在 Azure ML Studio 中创建的机器学习模型 API，以便将机器学习应用于来自传感器、应用程序和实时数据库的流数据。在本章中，我将解释如何在
+  Azure Stream Analytics 内部使用机器学习。首先，对 Azure Stream Analytics 进行一般性介绍，然后，给出一个将应用于流数据的
+  Azure ML Studio API 的简单示例。
+
+
+
+
+  ## Azure Stream Analytics 环境
+
+
+  Azure Stream Analytics 是 Azure 环境中的一个事件处理组件。要创建 Azure Stream Analytics，你必须登录 Azure
+  账户并创建一个 Stream Analytics 作业（图 13-1）。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig1_HTML.jpg](img/463840_1_En_13_Fig1_HTML.jpg)
+
+
+  图 13-1
+
+
+  在 Azure 环境中创建 Stream Analytics 作业
+
+
+  在 Azure 中创建 Stream Analytics 作业后，你必须设置一些预定义参数，例如作业名称、订阅、资源组等（图 13-2）。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig2_HTML.jpg](img/463840_1_En_13_Fig2_HTML.jpg)
+
+
+  图 13-2
+
+
+  Stream Analytics 作业初始化
+
+
+  Stream Analytics 类似于 Azure 内部的服务总线，能够从某些组件获取数据，对接收到的数据进行分析，并将其传递给其他组件。因此，Stream
+  Analytics 环境包含三个主要组件：输入、输出和查询。Stream Analytics 只能从三个主要组件获取数据：事件中心、IoT 中心和 Blob 存储。这三个组件主要用于从外部传感器、应用程序和实时
+  API 收集数据。Stream Analytics 可以将数据传递给其他 Azure 组件，例如 Blob 存储、Azure SQL 数据库、Power BI
+  等（图 13-3）。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig3_HTML.jpg](img/463840_1_En_13_Fig3_HTML.jpg)
+
+
+  图 13-3
+
+
+  Stream Analytics 输出
+
+
+  最后，另一个重要组件是查询编辑器，它帮助用户在将数据发送到输出之前对接收到的数据进行分析（图 13-4）。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig4_HTML.jpg](img/463840_1_En_13_Fig4_HTML.jpg)
+
+
+  图 13-4
+
+
+  Stream Analytics 主要组件（输入、输出和查询）
+
+
+  Stream Analytics 使用的语言是 Stream Analytics 查询语言，它与 SQL 脚本语言非常相似。
+
+
+  ## 案例研究
+
+
+  在我们的案例研究中，我将演示如何通过事件中心从应用程序获取数据，然后将收集到的数据传递到 Stream Analytics，应用机器学习，最后在 Power BI
+  服务中展示实时结果。
+
+
+  该过程在图 13-5 中进行了说明。如图所示，有一个应用程序将实时数据发送到事件中心。Stream Analytics 接收实时数据，对接收到的数据应用 Azure
+  ML API 模型，然后将其发送到 Power BI。在 Power BI 报表中，最终用户除了可以看到应用的机器学习结果外，还可以看到实时数据。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig5_HTML.jpg](img/463840_1_En_13_Fig5_HTML.jpg)
+
+
+  图 13-5
+
+
+  获取数据、应用机器学习并在 Power BI 中显示结果的案例研究
+
+
+  ### 事件中心
+
+
+  第一步是在云中创建事件中心服务。创建事件中心服务的步骤与创建 Stream Analytics 相同。创建一个新服务并提供相关信息（图 13-6）。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig6_HTML.jpg](img/463840_1_En_13_Fig6_HTML.jpg)
+
+
+  图 13-6
+
+
+  在 Azure 中创建事件中心
+
+
+  有了事件中心服务，你可以向你的服务添加一个新的事件中心（图 13-7）。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig7_HTML.jpg](img/463840_1_En_13_Fig7_HTML.jpg)
+
+
+  图 13-7
+
+
+  创建新的事件中心
+
+
+  ### 应用程序
+
+
+  第二步是创建一个生成一些示例数据的应用程序。该应用程序是一个示例 .NET 框架应用程序，可以自动生成一些随机数据。（该应用程序已包含在第 13 章的书籍材料中。）打开包含该应用程序的文件夹（图
+  13-8）。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig8_HTML.jpg](img/463840_1_En_13_Fig8_HTML.jpg)
+
+
+  图 13-8
+
+
+  生成随机实时数字的应用程序
+
+
+  正如我本章前面提到的，我将使用一个 .NET C# 控制台应用程序将数据传递到事件中心。该应用程序由 Reza Rad [1] 创建。在他的博客文章“推送数据应用程序”部分中，Rad
+  逐步解释了创建此应用程序的过程。
+
+
+  但是，对于包含在本章相关材料中的应用程序，你必须使用 Visual Studio 打开它，然后打开解决方案资源管理器，转到引用，右键单击并选择管理 NuGet
+  包。接下来，单击浏览，选择 WindowsAzure.ServiceBus，然后安装它（图 13-9）。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig9_HTML.jpg](img/463840_1_En_13_Fig9_HTML.jpg)
+
+
+  图 13-9
+
+
+  在 Visual Studio 中安装 Azure 服务总线
+
+
+  安装 Azure 服务总线后，你必须设置配置。单击 App.config，然后在键部分的代码中（图 13-10），更改端点 URL 名称和密钥（来自下一节中创建的
+  Stream Analytics）。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig10_HTML.jpg](img/463840_1_En_13_Fig10_HTML.jpg)
+
+
+  图 13-10
+
+
+  设置配置
+
+
+  最后，你必须在程序的主代码部分输入事件中心的名称（图 13-11）。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig11_HTML.jpg](img/463840_1_En_13_Fig11_HTML.jpg)
+
+
+  图 13-11
+
+
+  在代码中更改事件中心名称
+
+
+  现在代码已准备就绪。在运行代码之前，你必须设置 Stream Analytics。
+
+
+
+
+  ## Azure Stream Analytics
+
+
+  第一步是在 Azure 中创建一个 Stream Analytics 作业（图 13-12）。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig12_HTML.jpg](img/463840_1_En_13_Fig12_HTML.jpg)
+
+
+  图 13-12
+
+
+  在 Azure 中创建新的 Stream Analytics 作业
+
+
+  创建 Stream Analytics 后，必须设置输入、输出和查询。如前所述，Stream Analytics 能够从其他 Azure 组件检索数据。如图 13-13
+  所示，Stream Analytics 可以从三个主要的 Azure 组件获取数据，然后将流数据传递给其他资源，例如 Power BI、SQL 数据库等。转换查询利用了一种类似
+  SQL 的查询语言，用于在一段时间内对流数据进行筛选、排序、聚合和联接 [2]。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig13_HTML.jpg](img/463840_1_En_13_Fig13_HTML.jpg)
+
+
+  图 13-13
+
+
+  为 Stream Analytics 输入数据
+
+
+  在我们的案例研究中，我们将从事件中心获取数据，对其应用机器学习，然后将其传递给 Power BI，以查看应用了分析后的实时数据。
+
+
+  要创建输入，请单击 Stream Analytics 主页上的“输入”选项（图 13-14）。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig14_HTML.jpg](img/463840_1_En_13_Fig14_HTML.jpg)
+
+
+  图 13-14
+
+
+  为 Azure Stream Analytics 创建输入
+
+
+  为 Stream Analytics 创建输入后，我们必须按照与输入相同的过程创建输出（图 13-15）。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig15_HTML.jpg](img/463840_1_En_13_Fig15_HTML.jpg)
+
+
+  图 13-15
+
+
+  在 Stream Analytics 中为 Power BI 创建输出
+
+
+  创建 Stream Analytics 输入和输出后，在创建查询之前，我们必须在 .NET 代码中设置一些密钥和名称。单击 Stream Analytics 组件，然后选择“共享访问策略”。单击“RootManageSharedAccessKey”，然后复制主密钥（图
+  13-16）。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig16_HTML.jpg](img/463840_1_En_13_Fig16_HTML.jpg)
+
+
+  图 13-16
+
+
+  共享访问密钥
+
+
+  复制数据，然后将其粘贴到图 13-11 所示的主代码部分。
+
+
+  ## Azure ML
+
+
+  在 Azure ML Studio 中，我创建了一个用于数据分组的简单模型。该模型的主要目的是从应用程序获取数据，然后将其分为四个主要组。接下来，我创建一个 API，以便
+  Stream Analytics 能够将数据传递给它，并获取组号和实际值。导入应用程序将要生成的示例数据（图 13-17）。示例数据已包含在第 13 章的书籍材料中。然后将“选择数据集中的列”组件拖放到选定的值列上。最后，利用另一个名为“将数据分组到箱中”的组件。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig17_HTML.jpg](img/463840_1_En_13_Fig17_HTML.jpg)
+
+
+  图 13-17
+
+
+  Azure ML 模型
+
+
+  请按照以下步骤为此模型生成 API。
+
+
+  1.  使用页面底部的“运行”选项运行模型。
+
+
+  2.  单击“设置页面”，为 API 创建输入和输出（图 13-18）。
+
+
+  3.  然后，再次运行模型并单击“部署 Web 服务”。
+
+
+  创建 Web 服务后，将显示一个新页面。在新页面的中间位置，会显示该 Web 服务的 API 密钥。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig18_HTML.jpg](img/463840_1_En_13_Fig18_HTML.jpg)
+
+
+  图 13-18
+
+
+  创建 Azure ML Web 服务
+
+
+  要从 Stream Analytics 连接到 Azure ML API，我们必须单击“应用程序”（位于页面底部），然后单击“Excel 2010 或更早版本的工作簿”（图
+  13-19）。将下载一个新的 Excel 工作簿。打开 Excel 文件，然后在页面顶部，您将看到 Web 服务 URL 和访问密钥。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig19_HTML.jpg](img/463840_1_En_13_Fig19_HTML.jpg)
+
+
+  图 13-19
+
+
+  创建 Azure ML Web 服务
+
+
+  复制 Web 服务 URL 和访问密钥的代码（图 13-20）。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig20_HTML.jpg](img/463840_1_En_13_Fig20_HTML.jpg)
+
+
+  图 13-20
+
+
+  Excel 文件中的访问密钥和 URL
+
+
+  现在我们有了密钥和 URL，必须在 Stream Analytics 中设置一个函数，以访问在 Azure ML Studio 中创建的模型。
+
+
+  ## Stream Analytics 函数
+
+
+  在此阶段，我们已经创建了一个用于生成随机数的事件中心应用程序、Stream Analytics，以及一个用于对流数据进行分组的 Azure ML 模型和 API。
+
+
+  在本节中，我们必须在 Stream Analytics 内部创建一个函数，以调用在 Azure ML 中创建的 API。单击 Azure Stream Analytics
+  作业，然后单击“函数”（图 13-21）。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig21_HTML.jpg](img/463840_1_En_13_Fig21_HTML.jpg)
+
+
+  图 13-21
+
+
+  在 Azure Stream Analytics 中创建函数
+
+
+  在“函数”页面上，选择订阅名称、从 Excel 文件中提取的密钥和 URL（图 13-22）。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig22_HTML.jpg](img/463840_1_En_13_Fig22_HTML.jpg)
+
+
+  图 13-22
+
+
+  创建函数
+
+
+  在 Stream Analytics 主页上，我们必须在查询编辑器中添加一些代码来调用该函数。单击“编辑查询”，然后在编辑器中粘贴以下代码：
+
+
+  ```
+
+  WITH MLStreamAnalytics AS (
+
+  SELECT value, MLStreamAnalytics(value) as result
+
+  FROM azureml
+
+  )
+
+  SELECT
+
+  value, result.[value_quantized]
+
+  INTO
+
+  MLoutput
+
+  FROM
+
+  MLStreamAnalytics
+
+  ```
+
+
+  代码的第一部分用于调用函数并从中获取结果。如图 13-23 所示，代码的第一部分是关于创建一个临时表来调用 `MLStreamAnalytics(value)`。下一步是从事件中心组件（来自
+  Azure ML）获取数据。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig23_HTML.jpg](img/463840_1_En_13_Fig23_HTML.jpg)
+
+
+  图 13-23
+
+
+  在 Stream Analytics 中编辑查询
+
+
+  代码的第二部分从 Azure Stream Analytics 中的函数获取数据，并将数据传递给 Power BI 组件（`MLoutput`）。
+
+
+
+
+  ## 流数据的实时分析
+
+
+  最后一步是运行代码。首先，我们必须通过点击“启动”按钮来运行流分析作业（图 13-24）。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig24_HTML.jpg](img/463840_1_En_13_Fig24_HTML.jpg)
+
+
+  图 13-24
+
+
+  运行流分析作业
+
+
+  运行流分析作业后，从 [`powerbi.microsoft.com`](http://powerbi.microsoft.com) 打开你的 Power BI
+  服务。如图 13-25 所示，Power BI 中已创建了一个流式数据集。要使用它，请点击报表图标并创建一个空白报表。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig25_HTML.jpg](img/463840_1_En_13_Fig25_HTML.jpg)
+
+
+  图 13-25
+
+
+  在 Power BI 中创建流式数据集
+
+
+  在报表页面上，会显示一个新的 Power BI 报表，其中包含一个具有两个字段的数据集：`Value` 和 `Value_quantized`（图 13-26）。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig26_HTML.jpg](img/463840_1_En_13_Fig26_HTML.jpg)
+
+
+  图 13-26
+
+
+  包含流分析的 Power BI 报表
+
+
+  现在，我们必须运行 .NET 应用程序中的代码，并将报表添加到新的工作区。运行代码并检查工作区后，除了使用 Azure ML 模型分配给每个值的组名和编号之外，你还可以看到来自应用程序的实时数据以及
+  Power BI 中的流式数据（图 13-27）。
+
+
+  ![../images/463840_1_En_13_Chapter/463840_1_En_13_Fig27_HTML.jpg](img/463840_1_En_13_Fig27_HTML.jpg)
+
+
+  图 13-27
+
+
+  Power BI 中的流式实时数据
+
+
+  ## 总结
+
+
+  本章概述了 Azure 流分析，并简要解释了其不同组件。一个用例演示了如何使用 Azure ML 模型和 API 将流分析用于实时分析。创建了一个用于生成随机数的示例应用程序，然后回顾了如何将事件中心、流分析、Azure
+  ML 和 Power BI 结合使用，以展示流式实时数据分析。
+
+
+  '
+- '# 14. Azure 机器学习 (ML) Workbench
+
+
+  Azure ML Workbench 是微软在 2017 年推出的另一个工具。Azure 机器学习服务（预览版）将端到端数据科学与高级分析工具集成在一起。它们帮助专业数据科学家准备数据、开发实验并在云规模上部署模型
+  [1]。在本章中，首先简要介绍 Azure ML Workbench，然后对 Azure ML Studio 和 Azure ML Workbench 进行比较。接下来将介绍安装
+  Azure ML Workbench 的过程。之后，将讨论数据的加载、准备和可视化。
+
+
+  ## Azure ML Workbench
+
+
+  Azure ML Workbench 是一个集成的、端到端的数据科学和高级分析解决方案。它是一个用于准备数据、开发模型和实验，并最终在云规模上进行部署的工具。Azure
+  ML Workbench 是 Azure ML 的一个新版本，与 Azure ML Studio 有一些不同之处。在表 14-1 中，我总结了 Azure ML
+  Workbench 和 Azure ML Studio 之间的主要区别。
+
+
+  表 14-1
+
+
+  Azure ML Workbench 与 Azure ML Studio 对比
+
+
+  |  | Azure ML Workbench | Azure ML Studio |
+
+  | --- | --- | --- |
+
+  | 用户视角 | 适合专业数据科学家。 | 对于非机器学习专家用户来说，这是一个很好的工具。 |
+
+  | 部署 | 可以在云端部署模型、管理模型并跟踪其部署。 | 在 Azure ML Studio 中，模型通过创建 API 进行部署。 |
+
+  | 开发语言 | 唯一的开发语言是 Python。 | 除了使用一些现有模型和转换组件外，还可以使用 R 或 Python 代码开发模型。 |
+
+  | 可访问性 | 本地平台 | 基于云的平台 |
+
+
+  Azure 机器学习的五个主要组件是：
+
+
+  *   Azure 机器学习 Workbench
+
+  *   Azure 机器学习实验服务
+
+  *   Azure 机器学习模型管理服务
+
+  *   用于 Apache Spark 的 Microsoft 机器学习库（MMLSpark 库）
+
+  *   用于 AI 的 Visual Studio Code 工具
+
+
+  Azure ML Workbench 是一个桌面应用程序，也是一个命令行工具。它支持 Windows 和 MacOS。使用它，可以管理机器学习解决方案。
+
+
+  ### Azure ML Workbench 安装
+
+
+  安装 Azure ML Workbench 的第一步是为 Azure 机器学习服务创建服务帐户 [2]。登录 Azure 门户 (`portal.azure.com`)
+  并选择“机器学习实验”（图 14-1）。
+
+
+  ![../images/463840_1_En_14_Chapter/463840_1_En_14_Fig1_HTML.jpg](img/463840_1_En_14_Fig1_HTML.jpg)
+
+
+  图 14-1
+
+
+  创建 Azure ML 模型实验
+
+
+  接下来，我们必须设置参数，如图 14-2 所示。
+
+
+  ![../images/463840_1_En_14_Chapter/463840_1_En_14_Fig2_HTML.jpg](img/463840_1_En_14_Fig2_HTML.jpg)
+
+
+  图 14-2
+
+
+  为 Azure ML 模型实验设置参数
+
+
+  可以从概览页面下载 Azure ML Workbench。如图 14-3 所示，我创建了机器学习模型管理。
+
+
+  ![../images/463840_1_En_14_Chapter/463840_1_En_14_Fig3_HTML.jpg](img/463840_1_En_14_Fig3_HTML.jpg)
+
+
+  图 14-3
+
+
+  Azure ML 模型和实验管理
+
+
+  从 Azure 门户下载 Azure ML Workbench。初始安装过程可能需要几分钟。
+
+
+  ### Azure ML Workbench 环境
+
+
+  安装 Azure ML Workbench 后，打开它。如图 14-4 所示，开始时，Azure ML Workbench 中没有列出任何项目。
+
+
+  ![../images/463840_1_En_14_Chapter/463840_1_En_14_Fig4_HTML.jpg](img/463840_1_En_14_Fig4_HTML.jpg)
+
+
+  图 14-4
+
+
+  Azure ML 模型主页
+
+
+  要开始使用 Azure ML Workbench，有一些示例项目可以帮助用户了解更多信息。首先，你必须创建一个空的工作区。要创建新工作区，请单击加号 (+)，然后单击“新建工作区”（图
+  14-5）。
+
+
+  ![../images/463840_1_En_14_Chapter/463840_1_En_14_Fig5_HTML.jpg](img/463840_1_En_14_Fig5_HTML.jpg)
+
+
+  图 14-5
+
+
+  创建新的 Azure 工作区
+
+
+  如图 14-6 所示，要创建新工作区，我们必须提供有关工作区的一些详细信息，例如名称和描述。
+
+
+  ![../images/463840_1_En_14_Chapter/463840_1_En_14_Fig6_HTML.jpg](img/463840_1_En_14_Fig6_HTML.jpg)
+
+
+  图 14-6
+
+
+  提供有关新 Azure 工作区的详细信息
+
+
+  在新工作区下创建一个新项目。在最后一个文本框“搜索项目模板”下，搜索“鸢尾花分类”（图 14-7）。
+
+
+  ![../images/463840_1_En_14_Chapter/463840_1_En_14_Fig7_HTML.jpg](img/463840_1_En_14_Fig7_HTML.jpg)
+
+
+  图 14-7
+
+
+  鸢尾花分类项目
+
+
+  创建鸢尾花分类项目。创建项目后，将显示项目环境。有五个主要选项卡（图 14-8）。在下一节中，将解释每个组件。
+
+
+  ![../images/463840_1_En_14_Chapter/463840_1_En_14_Fig8_HTML.jpg](img/463840_1_En_14_Fig8_HTML.jpg)
+
+
+  图 14-8
+
+
+  Azure ML Workbench 中的鸢尾花项目
+
+
+
+
+  ### Azure ML Workbench 导入数据
+
+
+  第一步是将数据导入 Azure ML Workbench。点击“数据”选项。其中包含两个主要部分。“数据源”存储原始数据源。“数据准备”选项存储经过准备和清理的数据。要将数据导入
+  Azure ML Studio，必须点击页面顶部的加号 (+)，如图 14-9 所示。
+
+
+  ![../images/463840_1_En_14_Chapter/463840_1_En_14_Fig9_HTML.jpg](img/463840_1_En_14_Fig9_HTML.jpg)
+
+
+  图 14-9
+
+
+  导入数据
+
+
+  点击“添加数据源”，其中有四个主要选项用于导入数据，如图 14-10 所示：
+
+
+  ![../images/463840_1_En_14_Chapter/463840_1_En_14_Fig10_HTML.jpg](img/463840_1_En_14_Fig10_HTML.jpg)
+
+
+  图 14-10
+
+
+  添加数据源选项
+
+
+  *   文本文件
+
+
+  *   Parquet
+
+
+  *   Excel 文件
+
+
+  *   数据库
+
+
+  在此示例中，鸢尾花数据（文本文件）将从本地 PC 导入 Azure ML Workbench 环境。选择“文本文件”并将数据导入 Azure ML Workbench（你可以从
+  [`www.kaggle.com/uciml/iris`](http://www.kaggle.com/uciml/iris) 下载鸢尾花数据集文件）。
+
+
+  如图 14-11 所示，鸢尾花数据集已导入。“数据源”部分中的数据集存储原始数据。它还显示了缺失的行数、有效行数等信息。
+
+
+  ![../images/463840_1_En_14_Chapter/463840_1_En_14_Fig11_HTML.jpg](img/463840_1_En_14_Fig11_HTML.jpg)
+
+
+  图 14-11
+
+
+  将数据导入 Azure ML Workbench
+
+
+  要准备数据，请点击窗口顶部的“准备”选项，并为新数据集指定一个合适的名称。然后，在“数据准备”部分，将显示一个新数据，如图 14-12 所示。
+
+
+  ![../images/463840_1_En_14_Chapter/463840_1_En_14_Fig12_HTML.jpg](img/463840_1_En_14_Fig12_HTML.jpg)
+
+
+  图 14-12
+
+
+  准备数据
+
+
+  右键单击第一列。有一些用于数据清理的选项，例如“替换 NA 值”、“替换缺失值”等。将列重命名为“花萼长度”、“花萼宽度”、“花瓣长度”和“花瓣宽度”。可以创建图表，以便更好地理解数据。如图
+  14-13 所示，在右键菜单的底部，有一些图表选项，例如“列统计信息”、“直方图”、“值计数”等。
+
+
+  对于我们的示例，我们可以通过选择直方图来查看数据的分布情况。
+
+
+  ![../images/463840_1_En_14_Chapter/463840_1_En_14_Fig13_HTML.jpg](img/463840_1_En_14_Fig13_HTML.jpg)
+
+
+  图 14-13
+
+
+  鸢尾花花萼长度直方图
+
+
+  此编辑器为数据科学家提供了一种手段，可以更好地分析数据并更深入地了解数据特征，例如分布、异常值等。Azure Machine Learning Workbench
+  通过与 Jupyter Notebook 集成，支持交互式数据科学实验。导入并清理数据后，必须运行并训练模型。如图 14-14 所示，有一个用于运行代码和测试模型的笔记本编辑器。点击窗口左侧的“笔记本”选项。那里会出现一个笔记本。（在第
+  19 章中，将对 Jupyter Notebook 进行简要介绍。）
+
+
+  ![../images/463840_1_En_14_Chapter/463840_1_En_14_Fig14_HTML.jpg](img/463840_1_En_14_Fig14_HTML.jpg)
+
+
+  图 14-14
+
+
+  Azure ML Workbench 中的 Jupyter Notebook
+
+
+  窗口左侧有一个名为“运行”的选项。它显示运行模型的历史记录。开始时，没有运行历史记录。
+
+
+  鸢尾花项目的相关文件已加载到窗口左侧的最后一个选项中。如图 14-15 所示，所有与鸢尾花分类相关的文件都位于此处。
+
+
+  ![../images/463840_1_En_14_Chapter/463840_1_En_14_Fig15_HTML.jpg](img/463840_1_En_14_Fig15_HTML.jpg)
+
+
+  图 14-15
+
+
+  鸢尾花文件
+
+
+  如图 14-15 所示，列出了与鸢尾花项目相关的所有文件。其中一个文件是 `iris_sklearn.py`。此文件包含用于鸢尾花分类的模型和数据。可以在本地
+  Docker 上运行代码，如图 14-16 所示。
+
+
+  ![../images/463840_1_En_14_Chapter/463840_1_En_14_Fig16_HTML.jpg](img/463840_1_En_14_Fig16_HTML.jpg)
+
+
+  图 14-16
+
+
+  运行 Python 代码
+
+
+  点击“运行”选项并运行模型。运行模型后，点击窗口右侧的“运行”。你将能够看到运行的详细信息，包括状态、运行开始时间、持续时间、准确率等，如图 14-17 所示。
+
+
+  ![../images/463840_1_En_14_Chapter/463840_1_En_14_Fig17_HTML.jpg](img/463840_1_En_14_Fig17_HTML.jpg)
+
+
+  图 14-17
+
+
+  鸢尾花运行详情
+
+
+  运行 Python 代码的详细信息已显示在图 14-16 中。鸢尾花分类的评估结果显示在图 14-18 中。
+
+
+  ![../images/463840_1_En_14_Chapter/463840_1_En_14_Fig18_HTML.jpg](img/463840_1_En_14_Fig18_HTML.jpg)
+
+
+  图 14-18
+
+
+  鸢尾花分类结果
+
+
+  ## 总结
+
+
+  本章简要介绍了 Azure ML Workbench 环境，包括如何安装和访问该环境的说明。在下一章中，你将了解如何从 SQL Server 数据库导入数据，然后将其加载到
+  Azure ML Workbench，以及如何在 Docker 上的 Spark 中运行它。
+
+
+  '
+- '# 15. HDInsight 上的机器学习
+
+
+  本章将概述如何使用 HDInsight 进行机器学习。HDInsight 基于 Apache Spark，用于内存集群处理。在内存中处理数据比基于磁盘的计算快得多。Spark
+  还支持 Scala 语言，该语言支持分布式数据集。在 Spark 中创建集群非常快，并且它能够使用 Jupyter Notebook，这使得数据处理和可视化更加容易。Spark
+  集群还可以与 Azure Event Hub 和 Kafka 集成。此外，还可以设置 Azure 机器学习 (ML) 服务来运行分布式 R 计算。下一节将讨论在
+  HDInsight 中设置 Spark 的过程。
+
+
+  ## HDInsight 概述
+
+
+  HDInsight 是一种开源分析和基于云的服务。与 Azure HDInsight 集成对于处理海量数据来说简单、快速且经济高效。HDInsight 有许多不同的用例场景，例如
+  ETL（提取、转换和加载）、数据仓库、机器学习、物联网 (IoT) 等。
+
+
+  使用 HDInsight 进行机器学习的主要好处是可以访问基于内存的处理框架。HDInsight 帮助开发人员使用一些优秀的开源框架（例如 Hadoop、Spark、Hive、LLAP、Kafka、Storm
+  和 Microsoft Machine Learning Server [1]）来处理和分析大数据并开发解决方案。
+
+
+
+
+  ## 在 HDInsight 中设置集群
+
+
+  第一步是在 Azure 中设置 HDInsight。登录你的 Azure 账户，并在 Azure 中创建一个 HDInsight 组件（图 15-1）。如图 15-1
+  所示，HDInsight 有不同的模块，例如 HDInsight Spark 监控和 HDInsight InteractiveQuery 监控。在这些模块中，选择
+  **HDInsight 分析** 选项。
+
+
+  ![../images/463840_1_En_15_Chapter/463840_1_En_15_Fig1_HTML.jpg](img/463840_1_En_15_Fig1_HTML.jpg)
+
+
+  图 15-1
+
+
+  在 Azure 中设置 HDInsight
+
+
+  创建 HDInsight 时，必须遵循一些步骤来设置集群并确定其大小。第一步是为集群设置名称、设置订阅并选择集群类型（图 15-2）。可用的集群类型有多种，包括
+  Spark、Hadoop、Kafka、ML Services 等。
+
+
+  ![../images/463840_1_En_15_Chapter/463840_1_En_15_Fig2_HTML.jpg](img/463840_1_En_15_Fig2_HTML.jpg)
+
+
+  图 15-2
+
+
+  在 Azure 中创建 HDInsight
+
+
+  下一步是确定集群的大小并查看摘要（图 15-3）。
+
+
+  ![../images/463840_1_En_15_Chapter/463840_1_En_15_Fig3_HTML.jpg](img/463840_1_En_15_Fig3_HTML.jpg)
+
+
+  图 15-3
+
+
+  设置 HDInsight
+
+
+  创建 HDInsight 可能需要一些时间。创建 HDInsight 组件后，在主页的“概述”部分，选择“集群仪表板”（图 15-4）。
+
+
+  ![../images/463840_1_En_15_Chapter/463840_1_En_15_Fig4_HTML.jpg](img/463840_1_En_15_Fig4_HTML.jpg)
+
+
+  图 15-4
+
+
+  HDInsight 环境
+
+
+  接下来，选择 **Jupyter Notebook**。在新页面上，选择“新建”选项（图 15-5）。
+
+
+  ![../images/463840_1_En_15_Chapter/463840_1_En_15_Fig5_HTML.jpg](img/463840_1_En_15_Fig5_HTML.jpg)
+
+
+  图 15-5
+
+
+  Jupyter Notebook 环境
+
+
+  如图 15-5 所示，有多个环境选项，例如 PySpark、PySpark3 和 Spark。你可以在所有这些环境中编写 Python 代码。
+
+
+  为 Spark 创建新页面后，你必须使用创建 HDInsight 组件时提供的用户名和密码登录。Jupyter 环境类似于笔记本，因此也类似于 Azure Databricks
+  环境。如图 15-6 所示，你可以在其中编写代码并运行整个单元格来查看结果。
+
+
+  ![../images/463840_1_En_15_Chapter/463840_1_En_15_Fig6_HTML.jpg](img/463840_1_En_15_Fig6_HTML.jpg)
+
+
+  图 15-6
+
+
+  Jupyter Notebook 环境
+
+
+  还可以从其他 Azure 组件（例如 Azure Data Lake Store Gen1）获取数据（图 15-7）。为此，你必须运行以下代码（在 Databricks
+  中，运行相同的代码）。
+
+
+  ![../images/463840_1_En_15_Chapter/463840_1_En_15_Fig7_HTML.jpg](img/463840_1_En_15_Fig7_HTML.jpg)
+
+
+  图 15-7
+
+
+  从 Azure Data Lake Store Gen1 获取数据
+
+
+  ```
+
+  spark.conf.set("dfs.adls.oauth2.access.token.provider.type", "ClientCredential")
+
+  spark.conf.set("dfs.adls.oauth2.client.id", "a1824181-e20c-4952-894f-6f53670672dd")
+
+  spark.conf.set("dfs.adls.oauth2.credential", "iRzOkcyahiomc5AKobyVxFdDVF/mEbS3mqN1moehG0w=")
+
+  spark.conf.set("dfs.adls.oauth2.refresh.url", "https://login.microsoftonline.com/0b414bdb-2159-4b16-ad13-b2d54a1781da/oauth2/token")
+
+  val df=spark.read.option("header", "true").csv("adl://adlsbook.azuredatalakestore.net/titanic.csv")
+
+  val specificColumnsDf = df.select("Survived", "Pclass", "Sex", "Age")
+
+  val renamedColumnsDF = specificColumnsDf.withColumnRenamed("Sex", "Gender")
+
+  renamedColumnsDF.createOrReplaceTempView("some_name")
+
+  renamedColumnsDF.show()
+
+  ```
+
+
+  也可以在 Jupyter Notebook 中使用 Spark 执行机器学习。有关示例，请参阅 [`https://docs.microsoft.com/en-us/azure/hdinsight/spark/apache-spark-ipython-notebook-machine-learning`](https://docs.microsoft.com/en-us/azure/hdinsight/spark/apache-spark-ipython-notebook-machine-learning)
+  上的教程。
+
+
+  ## 总结
+
+
+  本章概述了 HDInsight 及其设置方法。简要说明了如何将 HDInsight 用于不同目的，以及如何在 Azure 环境中设置 HDInsight，并介绍了如何访问
+  Jupyter Notebook 以在 PySpark、Spark 或 PySpark3 环境中编写代码。还展示了一个如何连接到 Azure Data Lake
+  Store Gen1 以获取数据的示例。
+
+
+  ## 参考
+
+
+  1.  Microsoft Azure，“Azure HDInsight 文档”，[`https://docs.microsoft.com/en-us/azure/hdinsight/`](https://docs.microsoft.com/en-us/azure/hdinsight/)
+  ，2019 年。
+
+
+  '
+- '# 16. 数据科学虚拟机和 AI 框架
+
+
+  数据科学虚拟机（DSVM）是 Azure 云上专为进行数据科学而定制的一台虚拟机。DSVM 拥有一些预配置和预安装的工具，可帮助用户构建人工智能（AI）应用程序。DSVM
+  有助于数据科学团队获得一致的设置环境。本章将简要介绍 DSVM 及其安装方法，并概述其预安装的工具。
+
+
+  ## 数据科学虚拟机概述
+
+
+  数据科学虚拟机是一种预安装和预配置的工具，能够促进数据科学团队之间的协作。在云中安装一组所需的工具，可以减少维护软件的需求以及相关的时间和成本。
+
+
+  DSVM 可以帮助培训师和教育工作者使用一致的设置环境来教授数据科学。拥有一个预构建的设置环境非常适合短期培训。DSVM 可用于学习和比较不同的机器学习工具，例如
+  Microsoft ML Server、SQL Server、Visual Studio、Jupyter、深度学习工具等。DSVM 包含许多不同的数据科学和深度学习工具，包括：
+
+
+  *   预装了流行包的 Microsoft R Open
+
+
+  *   Microsoft ML Server（R、Python）开发者版
+
+
+  *   Microsoft Office 专业增强版
+
+
+  *   Anaconda Python 2.7、3.5
+
+
+  *   关系数据库
+
+
+  *   数据库工具
+
+
+  *   支持 R、Python、Julia、PySpark、Sparkmagic 和 SparkR 的 Jupyter Notebook Server
+
+
+  *   开发工具，例如 Visual Studio 2017、RStudio Desktop 和 Server、PyCharm Community 等
+
+
+  *   Power BI Desktop
+
+
+  *   数据移动和管理工具，例如 Azure Storage Explorer 和 Microsoft Data Management Gateway
+
+
+  *   机器学习工具，例如 Azure Machine Learning、Weka、Rattle 和 H2O
+
+
+  *   深度学习工具，例如 Microsoft Cognitive Toolkit、TensorFlow 和 Keras
+
+
+  *   大数据平台，例如 Spark 和 Hadoop [1]
+
+
+
+
+  ## 设置数据科学虚拟机
+
+
+  要设置 DSVM，首先必须登录 Azure 门户。选择“AI + 机器学习”，然后点击“数据科学虚拟机 – Windows 2016”（图 16-1）。
+
+
+  ![../images/463840_1_En_16_Chapter/463840_1_En_16_Fig1_HTML.jpg](img/463840_1_En_16_Fig1_HTML.jpg)
+
+
+  图 16-1
+
+
+  数据科学虚拟机设置
+
+
+  下一步是设置大小并选择合适的配置。出于数据科学的目的，虚拟机 CPU 应具有四个以上内核以及 14GB 或更大的 RAM [2]（图 16-2）。所需服务旁边会有一个星号（如图
+  16-2 所示）。
+
+
+  ![../images/463840_1_En_16_Chapter/463840_1_En_16_Fig2_HTML.jpg](img/463840_1_En_16_Fig2_HTML.jpg)
+
+
+  图 16-2
+
+
+  选择数据科学虚拟机大小
+
+
+  下一步是配置设置，以确定位置和名称。最后一步将显示 DSVM 的摘要。部署 DSVM 大约需要五分钟来创建服务（图 16-3）。创建资源后，点击“转到资源”。
+
+
+  ![../images/463840_1_En_16_Chapter/463840_1_En_16_Fig3_HTML.jpg](img/463840_1_En_16_Fig3_HTML.jpg)
+
+
+  图 16-3
+
+
+  DSVM 创建
+
+
+  最终用户将看到 DSVM 的概览（图 16-4）。如图所示，其中包含 DSVM 的位置、虚拟机大小等概览信息。
+
+
+  ![../images/463840_1_En_16_Chapter/463840_1_En_16_Fig4_HTML.jpg](img/463840_1_En_16_Fig4_HTML.jpg)
+
+
+  图 16-4
+
+
+  DSVM 概览
+
+
+  要连接到 DSVM，请点击窗口顶部的“连接”选项。相关的远程桌面协议 (RDP) 文件将从 Azure 下载（图 16-5）。
+
+
+  ![../images/463840_1_En_16_Chapter/463840_1_En_16_Fig5_HTML.jpg](img/463840_1_En_16_Fig5_HTML.jpg)
+
+
+  图 16-5
+
+
+  下载 RDP 文件
+
+
+  下载 RDP 文件后，打开虚拟机并检查环境（图 16-6）。
+
+
+  ![../images/463840_1_En_16_Chapter/463840_1_En_16_Fig6_HTML.jpg](img/463840_1_En_16_Fig6_HTML.jpg)
+
+
+  图 16-6
+
+
+  DSVM 环境
+
+
+  在 DSVM 中，已预装带有 R 和 Python 工具的 Visual Studio（RTVS 和 PTVS）。如图 16-7 所示，您可以通过 Visual
+  Studio 检查最近的更新 [2]。
+
+
+  ![../images/463840_1_En_16_Chapter/463840_1_En_16_Fig7_HTML.jpg](img/463840_1_En_16_Fig7_HTML.jpg)
+
+
+  图 16-7
+
+
+  Visual Studio 2017 中的 R 和 Python 工具
+
+
+  RStudio 已安装在 DSVM 中。您必须在 RStudio 中安装所有必需的包，并且所有用户都能访问这些包（图 16-8）。
+
+
+  ![../images/463840_1_En_16_Chapter/463840_1_En_16_Fig8_HTML.jpg](img/463840_1_En_16_Fig8_HTML.jpg)
+
+
+  图 16-8
+
+
+  DSVM 中的 RStudio
+
+
+  ## 案例研究
+
+
+  您可以运行不同的机器学习场景。本节将解释在 DSVM 的 Jupyter Notebook 中运行的一个机器学习场景。要访问 Jupyter Notebook，请点击
+  DSVM 桌面上的快捷方式。然后，在 Jupyter 中编写代码并运行（图 16-9）。在示例中，我运行了以下代码：
+
+
+  ![../images/463840_1_En_16_Chapter/463840_1_En_16_Fig9_HTML.jpg](img/463840_1_En_16_Fig9_HTML.jpg)
+
+
+  图 16-9
+
+
+  在 Jupyter Notebook 中运行 R 代码
+
+
+  ```
+
+  library(data.table)
+
+  ad <- fread("http://www-bcf.usc.edu/~gareth/ISL/Advertising.csv")
+
+  ```
+
+
+  该数据集涉及电视、广播和报纸上的广告成本以及产生的销售额。
+
+
+  下一步，我们将根据电视、广播和报纸影响的人数等变量来预测销售额。使用线性回归*，创建一个基于电视、广播和报纸广告数量预测销售额的模型。使用以下代码创建模型（图
+  16-10）：
+
+
+  ![../images/463840_1_En_16_Chapter/463840_1_En_16_Fig10_HTML.jpg](img/463840_1_En_16_Fig10_HTML.jpg)
+
+
+  图 16-10
+
+
+  在 Jupyter Notebook 中创建模型
+
+
+  ```
+
+  linearReg<-lm(sales~TV+radio+newspaper,data=ad)
+
+  linearReg
+
+  summary(linearReg)
+
+  ```
+
+
+  接下来，我们必须创建一个函数，该函数从用户处获取新数据并对其应用线性回归。首先，我们必须为此创建一个函数。
+
+
+  ```
+
+  newdata<-adv[1:5,]
+
+  library(AzureML)
+
+  predictfunction <-function(newdata)
+
+  {predict(linearReg,newdata)} [2]
+
+  ```
+
+
+  此函数根据电视、广播和报纸上的广告数量预测销售额。上述函数基于前面代码中创建的模型预测新的数据集。现在，下一步，我们必须从 Azure ML Studio 环境中获取一些工作区
+  ID 和身份验证 ID。要获取数据，请登录 Azure ML Studio，然后点击“设置”以获取信息，例如工作区 ID（图 16-11）。
+
+
+  ![../images/463840_1_En_16_Chapter/463840_1_En_16_Fig11_HTML.jpg](img/463840_1_En_16_Fig11_HTML.jpg)
+
+
+  图 16-11
+
+
+  从 Azure ML Studio 获取工作区 ID
+
+
+  我们需要的另一个信息是身份验证令牌，来自主要授权令牌（图 16-12）。
+
+
+  ![../images/463840_1_En_16_Chapter/463840_1_En_16_Fig12_HTML.jpg](img/463840_1_En_16_Fig12_HTML.jpg)
+
+
+  图 16-12
+
+
+  从 Azure ML Studio 获取身份验证密钥
+
+
+  复制这些密钥并将标识信息放入以下代码中。`Workspace` 函数是一个 Azure ML 函数，用于在 R 语言和 Azure ML Studio 之间创建连接。
+
+
+  ```
+
+  workspace_id<-"Workspace ID"
+
+  Authenticationid<-"Authentication Token"
+
+  ws<-workspace(workspace_id,Authenticationid)
+
+  newdata<-adv[2:5,]
+
+  ```
+
+
+  下一步是调用另一个函数 `publishWebservice`，以根据创建的函数在 Azure ML 中生成一个 Web 服务。
+
+
+  ```
+
+  data.frame(actual=newdata$sales,prediction=predictfunction(newdata))
+
+  ep<-publishWebService(ws=ws,fun=predictfunction,name="SalesPredictionAdvertisement",inputSchema=newdata)
+
+  ```
+
+
+  在 Jupyter 环境中运行整个代码（图 16-13）。
+
+
+  ![../images/463840_1_En_16_Chapter/463840_1_En_16_Fig13_HTML.jpg](img/463840_1_En_16_Fig13_HTML.jpg)
+
+
+  图 16-13
+
+
+  将 R ML 代码发布到 Azure ML Web 服务
+
+
+  运行代码后，检查 Azure ML Studio 中的 Web 服务，以查看在 Azure ML Studio 中创建的 API（图 16-14）。
+
+
+  ![../images/463840_1_En_16_Chapter/463840_1_En_16_Fig14_HTML.jpg](img/463840_1_En_16_Fig14_HTML.jpg)
+
+
+  图 16-14
+
+
+  在 Azure ML 中创建的 Web 服务
+
+
+  通过点击“测试”按钮测试 API（图 16-15）。
+
+
+  ![../images/463840_1_En_16_Chapter/463840_1_En_16_Fig15_HTML.jpg](img/463840_1_En_16_Fig15_HTML.jpg)
+
+
+  图 16-15
+
+
+  在 Azure ML Studio 中测试 Web 服务
+
+
+  ## 总结
+
+
+  本章简要介绍了 DSVM。解释了如何设置 DSVM 以及如何设置相关参数的过程。此外，还简要介绍了哪些应用程序已预装。最后，展示了一个在 Jupyter Notebook
+  中进行机器学习，然后部署到 Azure ML Studio 的场景。
+
+
+
+
+  '
+- '# 17. 使用认知工具包 (CNTK) 的深度学习工具
+
+
+  微软认知工具包 (CNTK) 是一个开源的深度学习工具 [1]。本章将首先介绍神经网络和深度学习的基本概念。接着，介绍什么是 CNTK，以及如何获取和安装它。最后，将详细阐述一个使用
+  CNTK 解决简单问题的基本案例研究。
+
+
+  ## 神经网络概念
+
+
+  我们对计算机的期望是，根据我们的输入，得到符合我们需求的输出。科学家们试图通过智能机器来模仿人脑。当然，机器的推理方式与人类不同。人脑的主要元素是神经元。人脑由
+  7500 万个神经元组成。每个神经元通过突触与其他神经元相连（图 17-1）。神经网络由相互连接的节点组成。在人体中，如果一个神经元被某些外部触发（如高温）激活，它将通过突触将信息从接收节点传递到其他节点
+  [2]。
+
+
+  ![../images/463840_1_En_17_Chapter/463840_1_En_17_Fig1_HTML.jpg](img/463840_1_En_17_Fig1_HTML.jpg)
+
+
+  图 17-1
+
+
+  神经网络突触 [2]
+
+
+  神经网络模仿了与人脑相同的概念。一个节点接收来自用户的输入，然后神经网络模型创建输出，产生类似于计算机系统的结果。一个神经网络具有：
+
+
+  *   一组输入节点
+
+  *   一组输出节点
+
+  *   两者之间的一些处理过程，以获得良好结果
+
+  *   信息流
+
+  *   节点之间的连接
+
+
+  为了更好地理解这个过程，想象我们正站在山顶上，想要下山。天气有雾。在这种情况下，我们只能看到前方一米。因此，我们决定只走下可见的这一米。我们根据当前位置迈出第一步，然后决定下一步的方向。我们重复这个过程，直到到达无法继续前进的点。如果那个点就是目的地，过程就完成了；如果不是，我们必须返回并尝试其他方向。因此，对于每一步，我们都会评估路径并选择最佳路线，直到我们下山。
+
+
+  在神经网络中，我们经历相同的过程。我们有输入节点、一些隐藏节点（到达输出的途径）和输出节点。每个隐藏节点都有一个激活函数，用于处理输入或其他隐藏节点的输出结果（图
+  17-2）。
+
+
+  ![../images/463840_1_En_17_Chapter/463840_1_En_17_Fig2_HTML.png](img/463840_1_En_17_Fig2_HTML.png)
+
+
+  图 17-2
+
+
+  一个简单的神经网络
+
+
+  为了更好地理解这个概念及其工作原理，让我们想象一下，我们想根据客户是否会将其支持转向另一家公司来对其进行分类。该问题如图 17-3 所示。如图所示，有两组人（客户）。一组用蓝点表示，另一组用绿点表示。主要目标是根据其中一种颜色对人进行分组。
+
+
+  ![../images/463840_1_En_17_Chapter/463840_1_En_17_Fig3_HTML.png](img/463840_1_En_17_Fig3_HTML.png)
+
+
+  图 17-3
+
+
+  使用 2*x* + *y* = 2 进行分类
+
+
+  如图所示，我们可以用一条线部分地隔离（分类）蓝点和绿点。
+
+
+  所使用的相关方程是 ![$$ \frac{1}{3}x+y=2 $$](img/463840_1_En_17_Chapter_TeX_IEq1.png)。这个方程不能完全对这些点进行分类，所以我们必须尝试另一个方程。下一个方程是
+  *x* = 4。如图 17-4 所示，新方程仍然不能产生完整或准确的分类。
+
+
+  ![../images/463840_1_En_17_Chapter/463840_1_En_17_Fig4_HTML.png](img/463840_1_En_17_Fig4_HTML.png)
+
+
+  图 17-4
+
+
+  尝试使用 *x* = 4 进行分类
+
+
+  这两个公式都不擅长对数据进行分类。然而，如果我们先应用第一个函数，再应用第二个函数，我们可以相对较好地对这些点进行分类。
+
+
+  如图 17-5 所示，我们取得了比以前更好的结果。
+
+
+  ![../images/463840_1_En_17_Chapter/463840_1_En_17_Fig5_HTML.png](img/463840_1_En_17_Fig5_HTML.png)
+
+
+  图 17-5
+
+
+  对数据进行分类
+
+
+  因此，如果我们想将这个流程说明为神经网络结构，我们将得到类似于图 17-6 所示的结构。
+
+
+  ![../images/463840_1_En_17_Chapter/463840_1_En_17_Fig6_HTML.png](img/463840_1_En_17_Fig6_HTML.png)
+
+
+  图 17-6
+
+
+  数据科学虚拟机 (DSVM) 环境
+
+
+  隐藏层（绿色节点）可以有不同的函数来帮助对数据进行分类（图 17-7）。这些被称为激活函数。
+
+
+  ![../images/463840_1_En_17_Chapter/463840_1_En_17_Fig7_HTML.png](img/463840_1_En_17_Fig7_HTML.png)
+
+
+  图 17-7
+
+
+  激活函数
+
+
+  神经网络有不同的拓扑结构，例如单输出（图 17-8）或多输出。
+
+
+  ![../images/463840_1_En_17_Chapter/463840_1_En_17_Fig8_HTML.png](img/463840_1_En_17_Fig8_HTML.png)
+
+
+  图 17-8
+
+
+  单输出神经网络
+
+
+  神经网络也可以有多个层和多个输出（图 17-9）。具有多个层的神经网络反映了所谓的*深度学习* [2]。
+
+
+  ![../images/463840_1_En_17_Chapter/463840_1_En_17_Fig9_HTML.png](img/463840_1_En_17_Fig9_HTML.png)
+
+
+  图 17-9
+
+
+  具有多个输出和多个隐藏层的神经网络
+
+
+  神经网络有不同的类型，例如前馈深度神经网络 (DNN) 和卷积神经网络 (CNN) 等。
+
+
+  ## 微软认知服务工具包
+
+
+  CNTK 是一个易于使用的工具包，可以轻松解决问题。该工具包可以处理大量数据，并且易于扩展。CNTK 是一个完全开源的产品。它允许在多个 GPU（图形处理单元）上进行处理。该工具包已用于许多微软产品，例如认知服务、Cortana、必应搜索、Skype、Skype
+  Translator 等。根据许多用户的经验，CNTK 速度很快，并且使用相关的 Python 语言 API 非常直观。
+
+
+
+
+  ### CNTK 安装
+
+
+  安装 CNTK [3] 有多种方式。CNTK 支持 64 位 Windows 和 Linux 操作系统。要在 Windows 上为 Python 安装 CNTK，首先必须以管理员身份打开命令提示符并运行。在命令提示符中，输入以下代码：
+
+
+  ```
+
+  pip install cntk
+
+  ```
+
+
+  安装 CNTK 后，所需的包将被安装，并会显示 CNTK 版本（图 17-10）。
+
+
+  ![../images/463840_1_En_17_Chapter/463840_1_En_17_Fig10_HTML.jpg](img/463840_1_En_17_Fig10_HTML.jpg)
+
+
+  图 17-10
+
+
+  安装 CNTK
+
+
+  安装完成后，你可以通过以下代码检查 CNTK 版本：
+
+
+  ```
+
+  python -c "import cntk; print(cntk.__version__)"
+
+  ```
+
+
+  你可以通过安装一些示例来访问一些示例和教程。首先，必须进入 C 盘并运行以下代码：
+
+
+  ```
+
+  python -m cntk.sample_installer
+
+  ```
+
+
+  然后检查以下文件夹以获取一些示例和教程（图 17-11）：
+
+
+  ![../images/463840_1_En_17_Chapter/463840_1_En_17_Fig11_HTML.jpg](img/463840_1_En_17_Fig11_HTML.jpg)
+
+
+  图 17-11
+
+
+  CNTK 示例
+
+
+  ```
+
+  C:\Windows\System32\CNTK-Samples-2-6
+
+  ```
+
+
+  在示例文件夹下，你将找到示例、手册等。
+
+
+  安装 CNTK 后，在 Python 环境中，你可以通过以下代码访问 CNTK 库：
+
+
+  ```
+
+  import cntk
+
+  ```
+
+
+  使用 CNTK 的另一种方式是通过 Azure 环境。同样，CNTK 已预装在 DSVM 中，因此你可以直接使用。在下一节中，我将提供一个来自 [`www.cntk.ai/pythondocs/CNTK_101_LogisticRegression.html`](http://www.cntk.ai/pythondocs/CNTK_101_LogisticRegression.html)
+  [4] 的示例，说明如何使用 CNTK 进行分类。
+
+
+  ## 案例研究
+
+
+  为了继续我们的案例研究，首先必须按照第 16 章所述设置 DSVM，然后启动虚拟机（图 17-12）。
+
+
+  ![../images/463840_1_En_17_Chapter/463840_1_En_17_Fig12_HTML.jpg](img/463840_1_En_17_Fig12_HTML.jpg)
+
+
+  图 17-12
+
+
+  启动 DSVM
+
+
+  接下来，通过下载 RDF 文件（图 17-13）打开 DSVM，并启动虚拟机。
+
+
+  ![../images/463840_1_En_17_Chapter/463840_1_En_17_Fig13_HTML.jpg](img/463840_1_En_17_Fig13_HTML.jpg)
+
+
+  图 17-13
+
+
+  DSVM 文件与激活
+
+
+  打开 DSVM 后，在任务栏中打开 Jupyter Notebook，这将导航到一个基于 Web 的 Jupyter Notebook 网站（图 17-14）。
+
+
+  ![../images/463840_1_En_17_Chapter/463840_1_En_17_Fig14_HTML.jpg](img/463840_1_En_17_Fig14_HTML.jpg)
+
+
+  图 17-14
+
+
+  DSVM 中的 Jupyter Notebook
+
+
+  在 Jupyter Notebook 环境中，选择 Python [conda env:Anaconda]（图 17-15）。
+
+
+  ![../images/463840_1_En_17_Chapter/463840_1_En_17_Fig15_HTML.jpg](img/463840_1_En_17_Fig15_HTML.jpg)
+
+
+  图 17-15
+
+
+  Jupyter Notebook
+
+
+  下一步，我们将运行来自 [`www.cntk.ai/pythondocs/CNTK_101_LogisticRegression.html`](http://www.cntk.ai/pythondocs/CNTK_101_LogisticRegression.html)
+  [4] 的一个示例。在此示例中，目标是基于患者的年龄和癌细胞大小，预测癌症患者的肿瘤是良性（蓝色）还是恶性（红色）。因此，我们的神经网络有两个输入和两个输出（图
+  17-16）。
+
+
+  ![../images/463840_1_En_17_Chapter/463840_1_En_17_Fig16_HTML.png](img/463840_1_En_17_Fig16_HTML.png)
+
+
+  图 17-16
+
+
+  神经网络结构
+
+
+  第一步是导入用于显示结果的适当库（`print_function`）、数组计算（`numpy`）和 CNTK（`cntk`），以及用于文件名、文件路径和目录的库（`sys`
+  和 `os`）。
+
+
+  ```
+
+  from __future__ import print_function
+
+  import numpy as np
+
+  import sys
+
+  import os
+
+  import cntk as C
+
+  import cntk.tests.test_utils
+
+  cntk.tests.test_utils.set_device_from_pytest_env() # （仅对我们的构建系统需要）
+
+  C.cntk_py.set_fixed_random_seed(1) # 固定随机种子，使逻辑回归示例可重复 [4]
+
+  ```
+
+
+  现在我们必须获取数据。首先，我们需要使用以下代码确定输入和输出的数量：
+
+
+  ```
+
+  input_dim = 2
+
+  num_output_classes = 2
+
+  ```
+
+
+  然后我们创建一个函数来生成一些随机数据。该函数获取样本大小以及输入和输出的数量（参见以下与 [`www.cntk.ai/pythondocs/CNTK_101_LogisticRegression.html`](http://www.cntk.ai/pythondocs/CNTK_101_LogisticRegression.html)
+  [4] 相关的代码）。
+
+
+  ```
+
+  np.random.seed(0)
+
+  # 辅助函数，用于生成随机数据样本
+
+  def generate_random_data_sample(sample_size, feature_dim, num_classes):
+
+  # 使用 NumPy 创建合成数据。
+
+  Y = np.random.randint(size=(sample_size, 1), low=0, high=num_classes)
+
+  # 确保数据是可分离的
+
+  X = (np.random.randn(sample_size, feature_dim)+3) ∗ (Y+1)
+
+  # 指定数据类型以匹配稍后教程中使用的输入变量
+
+  # （默认类型为 double）
+
+  X = X.astype(np.float32)
+
+  # 将类别 0 转换为向量 "1 0 0"，
+
+  # 类别 1 转换为向量 "0 1 0"，...
+
+  class_ind = [Y==class_number for class_number in range(num_classes)]
+
+  Y = np.asarray(np.hstack(class_ind), dtype=np.float32)
+
+  return X, Y
+
+  ```
+
+
+  然后我们使用以下代码调用该函数：
+
+
+  ```
+
+  mysamplesize = 32
+
+  features, labels = generate_random_data_sample(mysamplesize, input_dim, num_output_classes)
+
+  ```
+
+
+  你可以使用 Python 的 `matplotlib` 库绘制输入数据。
+
+
+
+
+  ```
+
+  import matplotlib.pyplot as plt
+
+  %matplotlib inline
+
+  # let 0 represent malignant/red and 1 represent benign/blue
+
+  colors = [''r'' if label == 0 else ''b'' for label in labels[:,0]]
+
+  plt.scatter(features[:,0], features[:,1], c=colors)
+
+  plt.xlabel("Age (scaled)")
+
+  plt.ylabel("Tumor size (in cm)")
+
+  plt.show()
+
+  ```
+
+
+  运行代码后，你将获得数据的二维表示（图 17-17）。
+
+
+  ![../images/463840_1_En_17_Chapter/463840_1_En_17_Fig17_HTML.jpg](img/463840_1_En_17_Fig17_HTML.jpg)
+
+
+  图 17-17
+
+
+  实际数据表示
+
+
+  下一步是创建一个神经网络模型。要创建模型，首先必须识别输入变量并将其赋值给 `feature` 变量，同时指定数据类型。
+
+
+  ```
+
+  feature = C.input_variable(input_dim, np.float32)
+
+  ```
+
+
+  下一步是设置网络。我们将使用逻辑回归作为激活函数（公式）来对数据进行分类（图 17-5 和图 17-4）。为此，我们必须定义一个函数来识别神经网络结构的各层。如图
+  17-4 及相关讨论所示，我们需要一个用于数据分类的方程。
+
+
+  形式参数可以如下所示：
+
+
+  ![$$ z=\sum \limits_{i=1}^n\ w\mathrm{i}\ast \mathrm{Xi}+\mathrm{b}=\mathrm{w}.\mathrm{x}+\mathrm{b}
+  $$](img/463840_1_En_17_Chapter_TeX_Equa.png)
+
+
+  或
+
+
+  ```
+
+  Z=W∗X+b
+
+  ```
+
+
+  所使用的方程与图 17-3 中所示的相同：2x+y=2。
+
+
+  ```
+
+  mydict = {}
+
+  def linear_layer(input_var, output_dim):
+
+  input_dim = input_var.shape[0]
+
+  weight_param = C.parameter(shape=(input_dim, output_dim))
+
+  bias_param = C.parameter(shape=(output_dim))
+
+  mydict[''w''], mydict[''b''] = weight_param, bias_param
+
+  return C.times(input_var, weight_param) + bias_param
+
+  ```
+
+
+  因此，输出将如下所示：
+
+
+  ```
+
+  output_dim = num_output_classes
+
+  z = linear_layer(feature, output_dim)
+
+  ```
+
+
+  创建网络结构后的下一步是根据数据行为和概率来训练数据，使其尽可能接近观测数据。有一个名为*熵* [5] 的概念用于训练数据，示例如下：
+
+
+  ```
+
+  label = C.input_variable(num_output_classes, np.float32)
+
+  loss = C.cross_entropy_with_softmax(z, label)
+
+  ```
+
+
+  创建模型后，我们必须通过以下代码对其进行评估：
+
+
+  ```
+
+  eval_error = C.classification_error(z, label)
+
+  ```
+
+
+  有关更多示例，请查看微软网站上的相关示例和资源。
+
+
+  ## 总结
+
+
+  本章旨在介绍神经网络及相关深度学习概念。随后讨论了如何在 DSVM 上设置和运行 CNTK。接着对神经网络相关概念、其结构等进行了详细阐述。然后介绍了如何在 Windows
+  上为 Python 语言设置 CNTK。最后，简要说明了如何使用 CNTK 库进行预测。
+
+
+  '
+- '# 第五部分数据科学虚拟机
+
+
+  '
+- '# 18. 认知服务工具包
+
+
+  微软认知服务是一系列 API 和服务的集合，可帮助开发人员创建更智能的应用程序和报告。通过使用认知服务，开发人员可以在其应用程序中添加诸如人脸识别、情感识别、文本分析等智能功能。本章首先概述认知服务，然后解释如何在
+  Power BI 报表中使用它们进行文本分析。最后，简要探讨了如何在 Windows 应用程序中使用认知服务。
+
+
+  ## 认知服务概述
+
+
+  你可以通过获取 Web 服务 URL 和密钥来使用不同的认知服务。要查看可用的服务，你必须导航到认知服务网站 [1]。如图 18-1 所示，有五个主要类别用于解决业务问题：视觉、知识、语言、语音和搜索。
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig1_HTML.jpg](img/463840_1_En_18_Fig1_HTML.jpg)
+
+
+  图 18-1
+
+
+  主要认知服务类别
+
+
+  如图 18-2 所示，有五种不同的 API 用于解决业务语言问题。文本分析是最受欢迎的功能之一，用于语言检测、识别文本中的主要关键词、主题提取以及检查文本在上下文中的正面或负面程度（情感分析）。
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig2_HTML.jpg](img/463840_1_En_18_Fig2_HTML.jpg)
+
+
+  图 18-2
+
+
+  认知服务中的语言类别
+
+
+  语言类别中的其他服务涉及文本翻译、识别对话和文本中的主要意图和目标。
+
+
+  这些功能可以组合使用。例如，可以将语言理解服务与语音服务集成，实现即时的语音到意图处理，并结合机器人应用程序（第 19 章）开发更复杂的应用程序。
+
+
+  在本章中，你将了解如何使用文本分析服务，在 Power BI 中执行文本分析，以检测客户反馈中的主要关键词、反馈的正面程度以及检测语言。
+
+
+  首先，我们必须设置使用认知服务的环境。要使用认知服务，你可以注册免费试用。试用服务免费提供七天，无需信用卡。另一种访问认知服务的方式是使用一个月的免费 Azure
+  账户，该账户提供 280 美元的 Azure 信用额度，并且所有数据和自定义设置都将被保存。最后一种方法是使用现有的 Azure 账户（图 18-3）。
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig3_HTML.jpg](img/463840_1_En_18_Fig3_HTML.jpg)
+
+
+  图 18-3
+
+
+  不同的认知服务账户
+
+
+  要在 Azure 中设置认知服务，你必须登录你的 Azure 账户并搜索你需要的服务。登录 Azure 门户后，你必须创建一个文本分析服务。要创建文本分析服务，你必须在
+  Azure 中创建一个新服务，方法是点击页面左上角。在“新建”页面中，将显示主要服务类别（图 18-4）。AI + 机器学习是 Azure 中的主要服务之一。点击它以查看可用选项。如图
+  18-4 所示，计算机视觉、人脸（识别）、文本分析、语言理解、翻译器语音、必应搜索和 Azure 搜索是 AI + 机器学习下的主要主题。
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig4_HTML.jpg](img/463840_1_En_18_Fig4_HTML.jpg)
+
+
+  图 18-4
+
+
+  不同的认知服务功能
+
+
+
+
+  ## 文本分析服务
+
+
+  并非所有收集的数据都是数字和结构化数据。为了更全面地了解客户、产品等，可以收集和分析文本，以提升公司绩效。文本分析是将非结构化文本数据转换为有意义数据的过程，用于理解客户需求和反馈
+  [2]。
+
+
+  本节将介绍一个案例研究，说明如何在 Power BI 中使用文本分析 API，并将其应用于客户反馈。
+
+
+  第一步是在 Azure 门户中设置文本分析服务（图 18-5）。
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig5_HTML.jpg](img/463840_1_En_18_Fig5_HTML.jpg)
+
+
+  图 18-5
+
+
+  在 Azure 门户中设置文本分析
+
+
+  此服务有不同的定价层。第一个是免费层，允许用户每月对 5K 行数据应用文本分析服务（图 18-6）。
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig6_HTML.jpg](img/463840_1_En_18_Fig6_HTML.jpg)
+
+
+  图 18-6
+
+
+  文本分析的定价层
+
+
+  创建文本分析服务后，我们从创建的服务中获取 API URL 和密钥访问权限。图 18-7 显示了如何在文本分析服务中访问 URL 和访问密钥。
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig7_HTML.jpg](img/463840_1_En_18_Fig7_HTML.jpg)
+
+
+  图 18-7
+
+
+  访问 URL 和密钥
+
+
+  从 Azure 门户创建服务后，我们必须在 Power BI Desktop 中调用它，并将其应用于其中的可用数据。
+
+
+  ### 数据集
+
+
+  Fabrikam 是一家模拟生产公司。它收到了客户关于运输、技术支持和其他问题的电子邮件。商业智能（BI）经理希望对公司收到的客户电子邮件进行一些分析，以更好地理解客户邮件的要点，并确定他们是否对公司的服务感到满意。你可以从
+  [`https://github.com/Kaiqb/KaiqbRepo0731190208/blob/master/CognitiveServices/TextAnalytics/FabrikamComments.csv`](https://github.com/Kaiqb/KaiqbRepo0731190208/blob/master/CognitiveServices/TextAnalytics/FabrikamComments.csv)
+  下载数据集 [3]。
+
+
+  第一步是打开 Power BI Desktop，并将数据集作为文本/CSV 文件加载到 Power BI 中（图 18-8）。
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig8_HTML.jpg](img/463840_1_En_18_Fig8_HTML.jpg)
+
+
+  图 18-8
+
+
+  从 Power BI 获取 CSV 文件
+
+
+  然后，不要加载数据，而是点击“编辑”选项，导航到 Power Query 环境进行数据转换（图 18-9）。如图 18-9 所示，显示了数据集的概览。大约有 20
+  行数据，涉及客户电子邮件、姓名和 ID、电子邮件主题以及评论。
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig9_HTML.jpg](img/463840_1_En_18_Fig9_HTML.jpg)
+
+
+  图 18-9
+
+
+  在 Power Query 中编辑数据
+
+
+  首先，我们将在 Power Query 中，使用“添加列”选项卡下的“合并列”功能，合并“主题”和“评论”列。一般步骤如图 18-10 所示。
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig10_HTML.jpg](img/463840_1_En_18_Fig10_HTML.jpg)
+
+
+  图 18-10
+
+
+  合并主题和评论列
+
+
+  创建新列后，我们必须将其重命名为“客户反馈”。
+
+
+  ### 创建文本分析函数
+
+
+  可以在 Power Query 中创建一个函数，将文本分析应用于 Power Query 中的特定列。要创建函数，我们必须点击主页面左侧查询中的空白区域，然后选择“空白查询”选项（图
+  18-11）。
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig11_HTML.jpg](img/463840_1_En_18_Fig11_HTML.jpg)
+
+
+  图 18-11
+
+
+  创建空白查询
+
+
+  将创建的查询重命名为“情感分析”。下一步是将空白查询转换为函数。为此，我们必须访问所创建查询背后的 M 查询，方法是点击“主页”选项卡，然后点击“高级编辑器”（图
+  18-12）。这里有一个编辑器，我们将使用它来编写一些 M 脚本，并将查询更改为函数。
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig12_HTML.jpg](img/463840_1_En_18_Fig12_HTML.jpg)
+
+
+  图 18-12
+
+
+  Power BI 查询编辑器
+
+
+  下一步是添加以下代码：
+
+
+  ```
+
+  (text) => let
+
+  apikey      = "",
+
+  endpoint    = "https://.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment",
+
+  jsontext    = Text.FromBinary(Json.FromValue(Text.Start(Text.Trim(text), 5000))),
+
+  jsonbody    = "{ documents: [ { language: ""en"", id: ""0"", text: " & jsontext
+  & " } ] }",
+
+  bytesbody   = Text.ToBinary(jsonbody),
+
+  headers     = [#"Ocp-Apim-Subscription-Key" = apikey],
+
+  bytesresp   = Web.Contents(endpoint, [Headers=headers, Content=bytesbody]),
+
+  jsonresp    = Json.Document(bytesresp),
+
+  sentiment   = jsonresp[documents]{0}[score]
+
+  in  sentiment
+
+  ```
+
+
+  如上述代码所示，第一行是关于函数输入，即 `text`。在第 2 行，必须粘贴从 Azure 服务收集的 API 密钥。在第 3 行，必须提供连接到 API 所需的
+  URL。正如你在 URL 末尾所见，显示了我们将要使用的认知服务。在此示例中，我们使用的是情感分析。第 4 到 11 行指示了连接到认知服务并以 JSON 格式获取结果所需的代码。最后一行是结果列，显示每条评论的情感得分。
+
+
+  现在，用上述代码替换之前的代码，然后点击“确定”。空白查询将更改为函数类型，并出现一个带有文本框的页面。你可以通过写一个句子（例如“今天天气真好”）来测试它，然后点击“调用”按钮查看结果。
+
+
+  如图 18-13 所示，情感分析的结果是 0.92。
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig13_HTML.jpg](img/463840_1_En_18_Fig13_HTML.jpg)
+
+
+  图 18-13
+
+
+  在 Power Query 中测试文本分析函数
+
+
+  情感分析的输出是一个从 0 到 1 的数字。数字越接近 1 表示评论是正面的，越接近 0 表示反馈是负面的。
+
+
+  最后一步，我们可以将函数应用于客户反馈（评论）列。点击 Fabrikam 数据集，选择“添加列”选项卡，然后点击“调用自定义函数”。在新页面上，为新列选择一个合适的名称，然后在下拉菜单中选择该函数。从最后一个下拉项中，选择要应用该函数的列（图
+  18-14）。
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig14_HTML.jpg](img/463840_1_En_18_Fig14_HTML.jpg)
+
+
+  图 18-14
+
+
+  调用自定义函数进行情感分析
+
+
+  数据集概览的末尾将显示一个新列，其中包含情感分析的数值结果。如图 18-15 所示，该数字在 0 到 1 之间变化。你可以点击“主页”选项卡，然后点击“关闭并应用”，在
+  Power BI Desktop 中查看结果。
+
+
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig15_HTML.jpg](img/463840_1_En_18_Fig15_HTML.jpg)
+
+
+  图 18-15
+
+
+  Power BI Desktop 中的情感分析结果
+
+
+  使用其他功能（如语言检测和关键短语提取）的过程与此相同，仅端点 URL 会略有变化。对于语言检测，端点 URL 将变更为：
+
+
+  ```
+
+  endpoint    = "https://.api.cognitive.microsoft.com/text/analytics/v2.0/languages",
+
+  ```
+
+
+  对于关键短语提取，端点 URL 将变更为：
+
+
+  ```
+
+  endpoint    = "https://.api.cognitive.microsoft.com/text/analytics/v2.0/keyPhrases"
+
+  ```
+
+
+  此外，代码的最后一行将更改为显示不同的变量。对于语言检测，代码如下：
+
+
+  ```
+
+  language    = jsonresp[documents]{0}[detectedLanguages]{0}[name]
+
+  in  language
+
+  ```
+
+
+  对于关键短语，代码如下：
+
+
+  ```
+
+  keyphrases  = Text.Lower(Text.Combine(jsonresp[documents]{0}[keyPhrases], ", "))
+
+  in  keyphrases
+
+  ```
+
+
+  前面的示例是关于在 Power BI 中使用认知服务。在下一节中，我将展示如何在 Windows 应用程序中使用人脸（即面部识别）服务。
+
+
+  ## 智能应用：面部识别服务
+
+
+  认知服务的另一个功能是人脸（面部识别）API。该 API 除了能检测情绪以及找出两张图片中人脸的相似面部特征外，还能从图像中执行人脸检测。
+
+
+  在应用程序中使用人脸 API 之前，可以先试用一下。要查看演示，请导航至认知服务网站，然后进入视觉类别（图 18-16）。在视觉类别下，点击“图像中的情绪识别”演示。要测试该
+  API，请浏览并选择一张图片，然后提交。上传图片后，点击“提交”按钮。
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig16_HTML.jpg](img/463840_1_En_18_Fig16_HTML.jpg)
+
+
+  图 18-16
+
+
+  认知服务面部识别
+
+
+  如图 18-17 所示，上传图片后，API 会显示情绪，例如愤怒、轻蔑、厌恶、恐惧、快乐、中性、悲伤和惊讶，并用 0 到 1 之间的数字表示。如图 18-17
+  所示，唯一数值较高的度量是快乐，而图片中的人物正在微笑。
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig17_HTML.jpg](img/463840_1_En_18_Fig17_HTML.jpg)
+
+
+  图 18-17
+
+
+  图像情绪检测演示
+
+
+  我们将创建一个能够使用认知服务中的人脸 API 进行图像检测的 Windows 应用程序。
+
+
+  创建人脸 API 的过程与文本分析类似。首先，我们必须登录 Azure 门户，然后在 *AI + 机器学习* 下搜索人脸 API（图 18-18）。
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig18_HTML.jpg](img/463840_1_En_18_Fig18_HTML.jpg)
+
+
+  图 18-18
+
+
+  Azure 中的面部识别功能
+
+
+  创建服务后，点击页面左侧的“密钥”选项卡并获取密钥（图 18-19）。
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig19_HTML.jpg](img/463840_1_En_18_Fig19_HTML.jpg)
+
+
+  图 18-19
+
+
+  获取人脸 API 密钥
+
+
+  我们将创建一个使用面部识别功能的 Windows 应用程序 [4]。要编写代码，您必须首先下载 Visual Studio 2015 或 2017 的免费版本之一
+  [5]。然后，您必须创建一个 Windows 应用程序（图 18-20）。在本案例中，我使用的是 Visual Studio 2015。
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig20_HTML.jpg](img/463840_1_En_18_Fig20_HTML.jpg)
+
+
+  图 18-20
+
+
+  创建 Windows 应用程序
+
+
+  下一步是在 Windows 应用程序中安装 Microsoft Azure 认知服务人脸 API。要安装它，我们必须导航到“工具”选项卡，然后导航到“NuGet
+  包管理器”，并选择“包管理器控制台”。接下来，我们必须在控制台编辑器中输入以下代码（图 18-21）。
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig21_HTML.jpg](img/463840_1_En_18_Fig21_HTML.jpg)
+
+
+  图 18-21
+
+
+  在 Windows 中安装人脸 API
+
+
+  ```
+
+  Install-Package Microsoft.Azure.CognitiveServices.Vision.Face -Version 2.0.0-preview
+
+  ```
+
+
+  然后，我们必须为应用程序创建界面。我们需要在屏幕上添加一个按钮。为此，我们修改代码。右键单击 MainWindow.xaml 页面，选择“视图设计器”，并将代码更改为以下内容（图
+  18-22）：
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig22_HTML.jpg](img/463840_1_En_18_Fig22_HTML.jpg)
+
+
+  图 18-22
+
+
+  修改代码
+
+
+
+
+  修改代码后，可视化效果将随之改变。我们必须修改 C# 代码以访问人脸 API。首先，需要添加对 Azure 认知服务中人脸 API 的引用。
+
+
+  ```
+
+  using Microsoft.Azure.CognitiveServices.Vision.Face;
+
+  using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
+
+  ```
+
+
+  要修改代码，请单击 `MainWindows.xaml.cs`，然后将上述代码添加到引用部分（图 18-23）。
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig23_HTML.jpg](img/463840_1_En_18_Fig23_HTML.jpg)
+
+
+  图 18-23
+
+
+  添加人脸识别库
+
+
+  现在，我们必须按如下方式修改代码：
+
+
+  ```
+
+  namespace FaceTutorial
+
+  {
+
+  public partial class MainWindow : Window
+
+  {
+
+  private const string subscriptionKey = "";
+
+  private const string baseUri =
+
+  "https://.api.cognitive.microsoft.com/face/v1.0";
+
+  private readonly IFaceClient faceClient = new FaceClient(
+
+  new ApiKeyServiceClientCredentials(subscriptionKey),
+
+  new System.Net.Http.DelegatingHandler[] { });
+
+  IList faceList;   // 检测到的人脸列表。
+
+  String[] faceDescriptions;      // 检测到的人脸描述列表。
+
+  double resizeFactor;            // 显示图像的缩放因子。
+
+  public MainWindow()
+
+  {
+
+  InitializeComponent();
+
+  if (Uri.IsWellFormedUriString(baseUri, UriKind.Absolute))
+
+  {
+
+  faceClient.BaseUri = new Uri(baseUri);
+
+  }
+
+  else
+
+  {
+
+  MessageBox.Show(baseUri,
+
+  "Invalid URI", MessageBoxButton.OK, MessageBoxImage.Error);
+
+  Environment.Exit(0);
+
+  }
+
+  }
+
+  // 显示图像并调用 UploadAndDetectFaces 方法。
+
+  private async void BrowseButton_Click(object sender, RoutedEventArgs e)
+
+  {
+
+  // 从用户处获取要扫描的图像文件。
+
+  var openDlg = new Microsoft.Win32.OpenFileDialog();
+
+  openDlg.Filter = "JPEG Image(∗.jpg)|∗.jpg";
+
+  bool? result = openDlg.ShowDialog(this);
+
+  // 如果取消则返回。
+
+  if (!(bool)result)
+
+  {
+
+  return;
+
+  }
+
+  // 显示图像文件。
+
+  string filePath = openDlg.FileName;
+
+  Uri fileUri = new Uri(filePath);
+
+  BitmapImage bitmapSource = new BitmapImage();
+
+  bitmapSource.BeginInit();
+
+  bitmapSource.CacheOption = BitmapCacheOption.None;
+
+  bitmapSource.UriSource = fileUri;
+
+  bitmapSource.EndInit();
+
+  FacePhoto.Source = bitmapSource;
+
+  }
+
+  // 当鼠标悬停在人脸矩形上时显示人脸描述。
+
+  private void FacePhoto_MouseMove(object sender, MouseEventArgs e)
+
+  {
+
+  }
+
+  }
+
+  }
+
+  ```
+
+
+  现在，我们必须更改订阅密钥和 API 的位置。为了检测并上传图像，我们编写一个函数，如下所示：
+
+
+  ```
+
+  private async Task> UploadAndDetectFaces(string imageFilePath)
+
+  {
+
+  // 要返回的人脸属性列表。
+
+  IList faceAttributes =
+
+  new FaceAttributeType[]
+
+  {
+
+  FaceAttributeType.Gender, FaceAttributeType.Age,
+
+  FaceAttributeType.Smile, FaceAttributeType.Emotion,
+
+  FaceAttributeType.Glasses, FaceAttributeType.Hair
+
+  };
+
+  // 调用人脸 API。
+
+  try
+
+  {
+
+  using (Stream imageFileStream = File.OpenRead(imageFilePath))
+
+  {
+
+  // 第二个参数指定返回 faceId，
+
+  // 第三个参数指定不返回人脸特征点。
+
+  IList faceList =
+
+  await faceClient.Face.DetectWithStreamAsync(
+
+  imageFileStream, true, false, faceAttributes);
+
+  return faceList;
+
+  }
+
+  }
+
+  // 捕获并显示人脸 API 错误。
+
+  catch (APIErrorException f)
+
+  {
+
+  MessageBox.Show(f.Message);
+
+  return new List();
+
+  }
+
+  // 捕获并显示所有其他错误。
+
+  catch (Exception e)
+
+  {
+
+  MessageBox.Show(e.Message, "Error");
+
+  return new List();
+
+  }
+
+  }
+
+  ```
+
+
+  我们可以在图片中每个人物的脸部周围绘制一个矩形。在 `BrowseButton` 函数中，编写以下代码：
+
+
+  ```
+
+  Title = "Detecting...";
+
+  faceList = await UploadAndDetectFaces(filePath);
+
+  Title = String.Format(
+
+  "Detection Finished. {0} face(s) detected", faceList.Count);
+
+  if (faceList.Count > 0)
+
+  {
+
+  // 准备在人脸周围绘制矩形。
+
+  DrawingVisual visual = new DrawingVisual();
+
+  DrawingContext drawingContext = visual.RenderOpen();
+
+  drawingContext.DrawImage(bitmapSource,
+
+  new Rect(0, 0, bitmapSource.Width, bitmapSource.Height));
+
+  double dpi = bitmapSource.DpiX;
+
+  resizeFactor = (dpi > 0) ? 96 / dpi : 1;
+
+  faceDescriptions = new String[faceList.Count];
+
+  for (int i = 0; i < faceList.Count; ++i)
+
+  {
+
+  DetectedFace face = faceList[i];
+
+  // 在人脸上绘制矩形。
+
+  drawingContext.DrawRectangle(
+
+  Brushes.Transparent,
+
+  new Pen(Brushes.Red, 2),
+
+  new Rect(
+
+  face.FaceRectangle.Left ∗ resizeFactor,
+
+  face.FaceRectangle.Top ∗ resizeFactor,
+
+  face.FaceRectangle.Width ∗ resizeFactor,
+
+  face.FaceRectangle.Height ∗ resizeFactor
+
+  )
+
+  );
+
+  // 存储人脸描述。
+
+  faceDescriptions[i] = FaceDescription(face);
+
+  }
+
+  drawingContext.Close();
+
+  // 显示带有脸部矩形的图像。
+
+  RenderTargetBitmap faceWithRectBitmap = new RenderTargetBitmap(
+
+  (int)(bitmapSource.PixelWidth ∗ resizeFactor),
+
+  (int)(bitmapSource.PixelHeight ∗ resizeFactor),
+
+  96,
+
+  96,
+
+  PixelFormats.Pbgra32);
+
+  faceWithRectBitmap.Render(visual);
+
+  FacePhoto.Source = faceWithRectBitmap;
+
+  // 设置状态栏文本。
+
+  faceDescriptionStatusBar.Text =
+
+  "Place the mouse pointer over a face to see the face description.";
+
+  }
+
+  ```
+
+
+  人脸描述必须显示在图像底部。通过使用以下函数，您可以在页面底部显示人脸描述，例如根据不同的情绪。
+
+
+  ```
+
+  private string FaceDescription(DetectedFace face)
+
+  {
+
+  StringBuilder sb = new StringBuilder();
+
+  sb.Append("Face: ");
+
+  // 添加性别、年龄和微笑。
+
+  sb.Append(face.FaceAttributes.Gender);
+
+  sb.Append(", ");
+
+  sb.Append(face.FaceAttributes.Age);
+
+  sb.Append(", ");
+
+  sb.Append(String.Format("smile {0:F1}%, ", face.FaceAttributes.Smile ∗ 100));
+
+  // 添加情绪。显示所有超过 10% 的情绪。
+
+  sb.Append("Emotion: ");
+
+  Emotion emotionScores = face.FaceAttributes.Emotion;
+
+  if (emotionScores.Anger >= 0.1f)
+
+  sb.Append(String.Format("anger {0:F1}%, ", emotionScores.Anger ∗ 100));
+
+  if (emotionScores.Contempt >= 0.1f)
+
+  sb.Append(String.Format("contempt {0:F1}%, ", emotionScores.Contempt ∗ 100));
+
+  if (emotionScores.Disgust >= 0.1f)
+
+  sb.Append(String.Format("disgust {0:F1}%, ", emotionScores.Disgust ∗ 100));
+
+  if (emotionScores.Fear >= 0.1f)
+
+  sb.Append(String.Format("fear {0:F1}%, ", emotionScores.Fear ∗ 100));
+
+  if (emotionScores.Happiness >= 0.1f)
+
+  sb.Append(String.Format("happiness {0:F1}%, ", emotionScores.Happiness ∗ 100));
+
+  if (emotionScores.Neutral >= 0.1f)
+
+  sb.Append(String.Format("neutral {0:F1}%, ", emotionScores.Neutral ∗ 100));
+
+  if (emotionScores.Sadness >= 0.1f)
+
+  sb.Append(String.Format("sadness {0:F1}%, ", emotionScores.Sadness ∗ 100));
+
+  if (emotionScores.Surprise >= 0.1f)
+
+  sb.Append(String.Format("surprise {0:F1}%, ", emotionScores.Surprise ∗ 100));
+
+  // 添加眼镜。
+
+  sb.Append(face.FaceAttributes.Glasses);
+
+  sb.Append(", ");
+
+  // 添加头发。
+
+  sb.Append("Hair: ");
+
+  // 如果秃头置信度超过 1%，则显示。
+
+  if (face.FaceAttributes.Hair.Bald >= 0.01f)
+
+  sb.Append(String.Format("bald {0:F1}% ", face.FaceAttributes.Hair.Bald ∗ 100));
+
+  // 显示所有超过 10% 的头发颜色属性。
+
+  IList hairColors = face.FaceAttributes.Hair.HairColor;
+
+  foreach (HairColor hairColor in hairColors)
+
+  {
+
+  if (hairColor.Confidence >= 0.1f)
+
+  {
+
+  sb.Append(hairColor.Color.ToString());
+
+  sb.Append(String.Format(" {0:F1}% ", hairColor.Confidence ∗ 100));
+
+  }
+
+  }
+
+  // 返回构建的字符串。
+
+  return sb.ToString();
+
+  }
+
+  ```
+
+
+  最后一段代码是关于当鼠标悬停在图片上时显示人脸描述。
+
+
+
+  ```csharp
+
+  private void FacePhoto_MouseMove(object sender, MouseEventArgs e)
+
+  {
+
+  // 如果 REST 调用尚未完成，则返回。
+
+  if (faceList == null)
+
+  return;
+
+  // 查找鼠标相对于图像的位置。
+
+  Point mouseXY = e.GetPosition(FacePhoto);
+
+  ImageSource imageSource = FacePhoto.Source;
+
+  BitmapSource bitmapSource = (BitmapSource)imageSource;
+
+  // 实际尺寸与显示尺寸之间的缩放调整。
+
+  var scale = FacePhoto.ActualWidth / (bitmapSource.PixelWidth / resizeFactor);
+
+  // 检查此鼠标位置是否位于人脸矩形上方。
+
+  bool mouseOverFace = false;
+
+  for (int i = 0; i = left && mouseXY.X = top  && mouseXY.Y <= top + height)
+
+  {
+
+  faceDescriptionStatusBar.Text = faceDescriptions[i];
+
+  mouseOverFace = true;
+
+  break;
+
+  }
+
+  }
+
+  // 当鼠标不在人脸矩形上方时显示的字符串。
+
+  if (!mouseOverFace)
+
+  faceDescriptionStatusBar.Text =
+
+  "将鼠标指针放在人脸上以查看人脸描述。";
+
+  }
+
+  ```
+
+
+  如果确保所有库和引用工作正常，您将能够在 .NET 应用程序中正确访问 Azure 认知服务库。
+
+
+  现在，您必须运行代码：单击“开始”按钮，然后单击“浏览”按钮并导入一张图片，即可在页面底部看到图像描述（图 18-24）。如您所见，该软件会提供描述，例如我的年龄、情绪、发色等。
+
+
+  ![../images/463840_1_En_18_Chapter/463840_1_En_18_Fig24_HTML.jpg](img/463840_1_En_18_Fig24_HTML.jpg)
+
+
+  图 18-24
+
+
+  人脸情绪检测
+
+
+  ## 总结
+
+
+  本章简要介绍了 Microsoft 认知服务中易于使用的 AI 工具。首先对认知服务及其访问方式进行了简要说明，然后解释了如何在其他 Microsoft 工具（如
+  Power BI）中使用认知服务文本分析 API。接着，讨论了在 Windows 应用程序中使用认知 API 的过程，并展示了所有相关代码。下一章将探讨用于创建智能应用程序的另一个工具——Bot
+  Framework。
+
+
+  '
+- "# 19. Bot Framework\n\n机器人是一种能够以对话方式与用户交互的应用程序 [1]。它可以是一个非常简单的、支持对话和基本问题的应用程序，也可以是能够理解语言的复杂应用程序。在\
+  \ Microsoft Azure 中，可以使用 C# 或 Node.js 创建机器人。您可以使用 .NET SDK [2] 创建机器人，并通过模拟器 [3]\
+  \ 等工具进行测试。此外，一些机器人组件可帮助您添加更多功能 [4]。本章将介绍一个使用 Azure 组件的非常简单的机器人。首先，将展示如何在 Azure 中创建机器人服务，然后介绍如何创建一个用于问答的简单机器人，以及一个更复杂的机器人。\n\
+  \n## 在 Azure 中创建机器人\n\n登录您的 Azure 帐户并创建一个新服务名称：Web 应用机器人（图 19-1）。\n\n创建新的机器人服务时，您必须提供一些信息，例如机器人名称、订阅、资源组、位置等。您需要在开始时选择的主要字段之一是机器人模板。默认选项是基本\
+  \ (C#)。在我们的场景中，我们将把默认选项更改为“表单”，这有助于我们创建一个引导最终用户的机器人应用程序。\n\n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig1_HTML.jpg](img/463840_1_En_19_Fig1_HTML.jpg)\n\
+  \n图 19-1\n\nAzure 中的 Web 应用机器人服务\n\n如图 19-2 所示，应选择“表单”选项。\n\n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig2_HTML.jpg](img/463840_1_En_19_Fig2_HTML.jpg)\n\
+  \n图 19-2\n\n用于问答的 Bot Framework\n\n完成机器人应用程序后，生成的服务包含三个主要类别：机器人管理、应用服务设置以及支持和故障排除。首先，检查所创建机器人的输出。转到“机器人管理”\
+  \ ➤ “在网络聊天中测试”。\n\n要查看 Bot Framework 的默认结果，请单击“在网络聊天中测试”并输入“Hi”。结果将显示为“欢迎使用简单的三明治点单机器人！”，然后列出三明治选项（图\
+  \ 19-3）。\n\n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig3_HTML.jpg](img/463840_1_En_19_Fig3_HTML.jpg)\n\
+  \n图 19-3\n\nBot Framework 测试\n\n在“机器人管理”部分下，第一个选项是“生成”，它提供了创建机器人框架的所有源代码。第一个选项是“打开在线代码编辑器”。使用此选项，开发人员可以在在线代码编辑器中查看代码。\n\
+  \n如图 19-4 所示，在“在线代码编辑器”下，显示了机器人背后的代码。\n\n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig4_HTML.jpg](img/463840_1_En_19_Fig4_HTML.jpg)\n\
+  \n图 19-4\n\nBot Framework 的“生成”部分\n\n要查看代码，请单击“打开在线代码编辑器”。将显示 Web 应用机器人框架的代码（图 19-5）。如图\
+  \ 19-5 所示，在“模型”文件夹下的 `Sandwiches` 文件中，显示了用户可能询问的对话框列表。\n\n此外，在图 19-5 中，每个问题和可能性都按照*枚举*数据结构表示。每个枚举定义了在与最终用户的对话中可能出现的不同问题。您可以在线更改代码中的问题和产品类型。例如，您可以将三明治选项更改为鸡肉、火腿、羊肉、猪肉或素食。\n\
+  \n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig5_HTML.jpg](img/463840_1_En_19_Fig5_HTML.jpg)\n\
+  \n图 19-5\n\n对话框机器人框架的在线编辑器\n\n对文件的更改将被保存。您必须在 .NET 应用程序中构建和编译它们。要构建文件，请单击“打开控制台”并输入“build.cmd”（图\
+  \ 19-6）。\n\n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig6_HTML.jpg](img/463840_1_En_19_Fig6_HTML.jpg)\n\
+  \n图 19-6\n\n构建机器人在线编辑器\n\n现在，我们必须在“在网络聊天中测试”中测试并检查更改。在构建框架后，首次输入“Hi”。如图 19-7 所示，关于三明治类型的第一个选项已更改。\n\
+  \n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig7_HTML.jpg](img/463840_1_En_19_Fig7_HTML.jpg)\n\
+  \n图 19-7\n\n机器人框架更改的结果\n```\n\n\n现在，当你选择“火腿”选项时，下一个三明治选项将会显示，这是一个关于选择三明治长度的问题。可以将代码嵌入到频道中，例如\
+  \ Facebook、Telegram、Skype 等（图 19-8）*。*\n\n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig8_HTML.jpg](img/463840_1_En_19_Fig8_HTML.jpg)\n\
+  \n图 19-8\n聊天机器人中的频道\n\n点击“频道”，注意在不同频道中嵌入机器人的不同方式。其中一种方式是在 Web 应用程序中嵌入机器人，即使用“获取机器人嵌入代码”。如果你想将代码嵌入到\
+  \ HTML 页面中，必须复制嵌入代码，并用上方窗口中显示的密钥替换掉秘密代码（图 19-9）。\n\n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig9_HTML.jpg](img/463840_1_En_19_Fig9_HTML.jpg)\n\
+  \n图 19-9\n频道中的嵌入代码\n\n现在你有了一个使用密钥的代码，如下所示。\n\n```\nNow you can embed the code in\
+  \ any web site. In the following section\nI will show how to create a question-and-answer\
+  \ chatbot and embed it in\nanother web site.\n```\n\n问答聊天机器人\n\n问答（QnA）聊天机器人可用于任何网站，以引导用户。创建聊天机器人的步骤与上一节相同。首先，我们创建一个\
+  \ Web 应用机器人服务，并选择“问答机器人”模板（图 19-10）。\n\n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig10_HTML.jpg](img/463840_1_En_19_Fig10_HTML.jpg)\n\
+  \n图 19-10\n用于 QnA 聊天机器人的 Web 应用机器人\n\n创建 QnA 聊天机器人后，如图 19-10 所示，我们必须在“Web 聊天中测试”中进行测试。测试聊天机器人时，你会收到一条错误消息（图\
+  \ 19-11），要求你设置一些参数，例如 `QnAKnowledgebaseId`、`QnAAuthKey` 和 `QnAEndpointHostName`*。*\n\
+  \n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig11_HTML.jpg](img/463840_1_En_19_Fig11_HTML.jpg)\n\
+  \n图 19-11\n测试 Web QnA 聊天机器人\n\n要设置这些参数，我们必须在 Azure 中创建一个 QnA Maker 服务。在你的 Azure\
+  \ 账户中，设置 QnA Maker 服务（图 19-12）。\n\n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig12_HTML.jpg](img/463840_1_En_19_Fig12_HTML.jpg)\n\
+  \n图 19-12\nQnA Maker\n\n在 Azure 中创建 QnA Maker 后，你必须设置一个知识数据库 [5]。使用你的 Azure 账户，登录到\
+  \ qnmaker.ai 网站（图 19-13）。\n\n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig13_HTML.jpg](img/463840_1_En_19_Fig13_HTML.jpg)\n\
+  \n图 19-13\nQnA Maker 网站\n\n点击页面顶部的“创建知识库”（图 19-13）。第一步是创建一个 QnA 服务（与上一节相同）。第二步是将知识服务连接到\
+  \ Azure 中的 QnA 组件。第三步是选择相关的 Azure 目录 ID、Azure 订阅名称和 Azure QnA 服务。然后，你必须为知识库选择一个名称（图\
+  \ 19-14）。\n\n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig14_HTML.jpg](img/463840_1_En_19_Fig14_HTML.jpg)\n\
+  \n图 19-14\n将知识库（KB）与 Azure 连接\n\n接下来，我们必须以 URL 或文件格式（`.et`、`.pdf`、`.doc`、`.docx`、`.xlsx`）上传一些知识库。该文件包含一些常见问题解答（FAQ）。我创建了一个包含某会议常见问题解答的\
+  \ Word 文件（图 19-15）。\n\n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig15_HTML.jpg](img/463840_1_En_19_Fig15_HTML.jpg)\n\
+  \n\n\n图 19-15\n常见问题解答\n\n现在，你必须将文件上传到网站并创建知识库（图 19-16）。\n\n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig16_HTML.jpg](img/463840_1_En_19_Fig16_HTML.jpg)\n\
+  \n图 19-16\n创建知识库\n\n创建知识库后，你可以通过点击`添加` `QnA 对`来扩展知识库问题（图 19-17）。此外，还可以添加更多的问题和答案。\n\
+  \n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig17_HTML.jpg](img/463840_1_En_19_Fig17_HTML.jpg)\n\
+  \n图 19-17\n添加 QnA 对\n\n上传并添加问题后，你必须“保存并训练”知识库。训练模型后，点击“测试”。输入“Conference”，知识库将返回结果（图\
+  \ 19-18）。\n\n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig18_HTML.jpg](img/463840_1_En_19_Fig18_HTML.jpg)\n\
+  \n图 19-18\n测试知识库\n\n测试知识库后，我们必须将其发布。发布知识库后，将构建一个 HTTP 请求。创建的请求包含所有必需的信息，例如知识库 ID、终结点链接和身份验证密钥（图\
+  \ 19-19）。\n\n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig19_HTML.jpg](img/463840_1_En_19_Fig19_HTML.jpg)\n\
+  \n图 19-19\n创建 HTTP 请求\n\n这些参数可以在图 19-11 中查看。在 webappqnabook（图 19-20）中，点击“应用程序设置”，并使用\
+  \ HTTP 请求参数填充这些参数（图 19-20）。\n\n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig20_HTML.jpg](img/463840_1_En_19_Fig20_HTML.jpg)\n\
+  \n图 19-20\n应用程序设置参数\n\n现在，我们必须测试聊天机器人。在 Web Chat 中点击“测试”，然后输入“Conference”。输出将显示在测试窗口中（图\
+  \ 19-21）。\n\n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig21_HTML.jpg](img/463840_1_En_19_Fig21_HTML.jpg)\n\
+  \n图 19-21\n测试聊天机器人\n\n你可以将问题和答案嵌入到任何页面和渠道中。在此示例中，该聊天机器人已嵌入到会议网站中，以引导用户。要将聊天机器人嵌入网站，我们必须获取嵌入代码。要获取嵌入代码，请遵循与图\
+  \ 19-9 相关的相同步骤。\n\n接下来，复制代码并将其放入网页中（图 19-22）。\n\n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig22_HTML.jpg](img/463840_1_En_19_Fig22_HTML.jpg)\n\
+  \n图 19-22\n在网页中复制嵌入代码\n\n测试代码，你将看到网页上的聊天机器人（图 19-23）。\n\n![../images/463840_1_En_19_Chapter/463840_1_En_19_Fig23_HTML.jpg](img/463840_1_En_19_Fig23_HTML.jpg)\n\
+  \n图 19-23\n嵌入网页的聊天机器人\n\n总结\n本章解释了创建聊天机器人的一般步骤。\n\n参考文献\n\n1.  Kamran Iqbal 等，“关于\
+  \ Azure 机器人服务”，Microsoft Azure，\n    [`https://docs.microsoft.com/en-us/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-3.0`](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-overview-introduction%253Fview%253Dazure-bot-service-3.0)，2019\
+  \ 年 4 月 17 日。\n\n2.  Bot Builder，[`https://marketplace.visualstudio.com/items?itemName=SkillBotBuilder.SkillBotBuilder`](https://marketplace.visualstudio.com/items%253FitemName%253DSkillBotBuilder.SkillBotBuilder)。\n\
+  \n3.  Tony Anziano，“Bot Framework-Emulator”，GitHub，[`https://github.com/Microsoft/BotFramework-Emulator/releases`](https://github.com/Microsoft/BotFramework-Emulator/releases)，2019\
+  \ 年。\n\n4.  Microsoft Visual Studio，下载，[`https://visualstudio.microsoft.com/downloads/`](https://visualstudio.microsoft.com/downloads/)，2019\
+  \ 年。\n\n5.  Microsoft QnA Maker，[`www.qnamaker.ai/`](http://www.qnamaker.ai/)，2019\
+  \ 年。\n\n20. Microsoft 机器学习工具概述\n\n前 19 章概述了如何使用不同的 Microsoft 产品进行机器学习。首先，介绍了机器学习方法，例如描述性分析、预测性分析和规范性分析。然后讨论了作为机器学习主要语言之一的\
+  \ R 语言。接着简要说明了如何使用 Power BI、Azure ML Studio、SQL Server 等工具进行机器学习。本章总结了机器学习技术以及使用特定方法时的最佳实践。\n\
+  \nMicrosoft 机器学习技术概述\n人工智能（AI），特别是机器学习，可以为企业带来诸多好处。多年来，许多人一直在使用 Microsoft 数据平台工具。Microsoft\
+  \ 运用机器学习创建了 Xbox、必应搜索等产品。然而，从 2014 年开始，Microsoft 开始为高级用户和最终用户提供将机器学习嵌入其报告和软件的功能。\n\
+  \n前面的章节根据机器学习的使用方式对相关的 Microsoft 工具进行了分类。在本章中，技术根据以下内容进行分类：\n\n*   是否需要编写 R 或 Python\
+  \ 代码\n*   云计算还是本地计算\n\n第一种分类基于这些工具的易用性和准确性程度。\n\n我们可以将相关产品分为两大类：\n\n*   *预构建 AI*：无需编写任何\
+  \ R 或 Python 代码即可生成机器学习场景的 Microsoft 机器学习工具。\n*   *自定义 AI*：需要了解如何编写 R 或 Python 代码的\
+  \ Microsoft 机器学习工具。\n\n第一组易于使用，你只需遵循提供的说明即可。使用预构建 AI 工具的主要好处是无需了解机器学习概念，或者至少了解一些概念，大多数人都能够创建\
+  \ AI 应用程序。预构建 AI 工具可以解决一般问题，但对于某些业务问题，其他类别的工具（例如，用于编写 R 或 Python 代码的工具）更有效。在本书中，认知服务（第\
+  \ 18 章）和机器人框架（第 19 章）是你可以嵌入到 Power BI、Windows 或其他 Web 应用程序中而无需编写任何 R 或 Python 代码的工具。正如相关章节所述，没有直接方法可以访问预构建自定义\
+  \ AI 工具背后的代码，因此无法更改该代码和算法。\n\n相比之下，使用自定义 AI 工具需要了解如何编码以及如何为机器学习目的编写代码。然而，对于某些工具，例如\
+  \ Azure ML Studio，可以在不编写 R 或 Python 代码的情况下进行机器学习，尽管至少需要对机器学习的工作原理有一定的了解。一些自定义 AI\
+  \ 工具涉及在其他 Microsoft 工具内部编写 R 或 Python 代码，例如在以下工具中使用 R 或 Python：\n\n*   Power BI（第\
+  \ 6、7 和 8 章）\n*   SQL Server 2016 的 R Services 和 SQL Server 2017 的机器学习（ML）Services（第\
+  \ 9 章）\n*   Azure Data Lake Analytics（第 11 章）\n*   Azure Databricks（第 10 章）\n* \
+  \  Azure HDInsight（第 15 章）\n\n\n\n*   .NET 应用程序（第 13 章）\n\n*   以及其他\n\n对于 Azure\
+  \ 机器学习工具，也可以编写 R 或 Python 代码。此外，拖放式环境也非常易于使用。\n第二种分类是关于云端与本地 AI 工具。许多公司仍然倾向于将工具保留在本地，而另一些公司则更愿意将所有业务产品迁移到云端。介于两者之间，有些公司同时拥有云端和本地工具。\n\
+  如果一家公司的主要策略是将所有内容保留在本地，那么使用 Power BI 或 SQL Server 来编写 R 或 Python 可能更合适。然而，如果倾向于在云端进行机器学习，那么\
+  \ Azure ML Studio（第 12 章）、用于在 Databricks 上编写 R 或 Python 的工具以及 Azure Data Analytics\
+  \ 将最有帮助。\n\n第三类工具旨在解决业务问题。在选择特定工具时，问题的性质以及我们希望用 AI 增强的场景也很重要，例如：\n\n*   在物联网（IoT）用例场景中应用机器学习\n\
+  *   使用文本分析、语音、图像等进行分析\n*   将机器学习应用于 ETL（提取、转换、加载）项目\n*   使用 Azure Machine Studio\
+  \ 为客户快速构建原型\n\n物联网场景\n分析实时数据的需求已由诸如事件中心、流分析（第 13 章）、Databricks（第 10 章）等 Microsoft\
+  \ 工具解决。借助 Power BI，可以根据来自传感器、应用程序等的真实数据创建实时流报告。\n在此类场景中，大多数情况下需要识别数据中的异常或将预期数据分类到不同的组中。通过将\
+  \ Azure 机器学习与流分析或 Databricks 结合使用，我们可以将机器学习应用于物联网场景。\n\n图像、文本和语音分析\n在 Microsoft\
+  \ 技术栈中，有用于图像、文本和语音分析的不同工具。认知服务（第 18 章）是用于文本、语音和图像分析的流行工具之一，它提供了可在其他应用程序中使用的 API。\n\
+  然而，也可以使用 CNTK 平台进行图像处理和语音识别，这将在第 17 章中介绍。这些 Microsoft 包和库为开发人员提供了便利，使他们能够采用深度学习方法执行机器学习。\n\
+  \nETL 上的机器学习\n另一个可能的需求是将机器学习应用于已加载和转换的数据，以实现可视化和创建报告。在将数据展示给最终用户之前，通常需要对其应用一些描述性或预测性分析。因此，使用\
+  \ Power BI 自助式 BI 的用户可以利用机器学习，使用 R 和 Python 脚本使报告更具洞察力。\n另一种方法是在 SQL Server 2016\
+  \ 或 2017 中使用 R 或 Python。此外，如果数据在云端，则可以同时使用 Databricks 进行 ETL 和机器学习。\n\n机器学习原型\n\
+  对于首次希望在其数据上使用机器学习的公司来说，Azure 机器学习工作室是一个很好的工具，它展示了从收集数据到训练和测试模型的完整机器学习过程。此外，管理人员和利益相关者能够快速跟进机器学习过程，并了解它如何作为\
+  \ API 在其他应用程序或简单的 Excel 文件中使用。\n总而言之，机器学习工具的选择取决于所使用的架构、愿意在编程上投入多少精力以及将要实施的具体场景。与第一个需求相关的工具基于预构建\
+  \ AI 和自定义 AI。与第二个需求相关的工具取决于当前的架构（本地或云端）。最后，需要考虑的最后一个需求是与要实施的特定场景（例如物联网、ETL 或原型创建）相关的合适工具。\n\
+  \n索引\n\nA\n\n激活函数\n\nApache Spark\n\n应用程序编程接口 (API)\n\n人工智能 (AI)\n\n自动化机器学习\n\n\
+  高级编辑器\n\n关联规则\n\n属性\n\n癌症数据集\n\n调用分类函数\n\n预测结果\n\n已更改类型\n\nChiclet 切片器\n\n创建函数，Power\
+  \ Query\n\n客户购买行为\n\n数据集，转换\n\n重复数据集\n\n最终代码\n\n导入数据集\n\n参数设置\n\n权限请求\n\nPower Query\
+  \ 编辑器\n\nPower Query 筛选值\n\n预测分析\n\n报告\n\n结果分析\n\nrpart 库\n\nR 脚本编辑器\n\nRStudio\n\
+  \n运行 R 脚本\n\n选择列\n\n泰坦尼克号数据集\n\nAzure Databricks\n\n图表选项\n\n集群页面\n\n环境模块\n\n导入数据\n\
+  \n启动工作区\n\n创建新单元格\n\n创建 R 笔记本\n\n运行代码\n\nScala 语言\n\n调度进程\n\nAzure Data Lake\n\n\
+  分析示例脚本\n\n创建资源\n\n创建分析资源\n\n数据资源管理器选项\n\n定义\n\nMicrosoft 云组件\n\nU-SQL 语言中的 R 脚本\n\
+  \n导入 RStudio\n\nActive Directory，创建连接\n\nAzure Active Directory，应用程序注册\n\nAzure\
+  \ Active Directory，创建\n\nAzure Active Directory，目录 ID（租户 ID）\n\nAzure Active Directory，获取客户端密钥\
+  \ ID\n\nadlsbook 中的鸢尾花数据\n\nU-SQL\n\nAzure Data Lake Analytics\n\nAzure Data Lake\
+  \ Store (ADLS)，*参见* Azure Data Lake\n\nAzure 机器学习 (AML)\n\nAPI 模型\n\n包\n\nAzure\
+  \ ML Studio\n\n创建 Web 服务\n\nExcel 中的 API\n\n信息页面\n\n输入和输出\n\n示例代码\n\n测试\n\n泰坦尼克号问题\n\
+  \n环境\n\n执行 R 脚本\n\n实验\n\n算法\n\n清理缺失数据\n\n创建\n\n导入数据\n\n评分模型输出\n\n设置\n\n拆分数据\n\n\
+  可视化数据集\n\n特性\n\nAzure ML workbench\n\n*对比* Azure ML Studio\n\n组件\n\n创建工作区\n\n定义\n\
+  \n导入数据\n\n鸢尾花分类结果\n\n鸢尾花数据（文本文件）\n\nJupyter Notebook\n\n选项\n\n安装\n\n鸢尾花分类项目\n\n\
+  模型主页\n\nAzure SQL 数据库\n\nAzure 存储资源管理器\n\nAzure 流分析\n\n分析作业\n\n应用程序\n\nAzure ML\n\
+  \n访问密钥和 URL\n\n模型\n\n创建 Web 服务\n\n组件\n\n创建函数\n\n创建\n\n定义\n\n事件中心服务\n\n初始化\n\nPower\
+  \ BI 中的实时数据\n\n输出\n\n设置配置\n\n共享访问策略\n\nVisual Studio\n\nB\n\nBlob 存储\n\n机器人创建，Azure\n\
+  \n构建部分\n\n频道\n\n表单选项\n\n.NET 应用程序\n\n在线代码编辑器\n\n测试更改\n\nWeb 应用机器人\n\nWeb 聊天\n\n\
+  商业智能 (BI)\n\n业务问题\n\n分析与信息\n\n机器学习（*参见* 机器学习 (ML)）\n\nC\n\n聚类分析\n\n聚类\n\n自定义视觉对象\n\
+  \nk-means\n\nPower Query\n\n比较数据\n\n数据清洗\n\n漏斗图选项\n\n家庭用电数据集\n\n可视化窗格\n\n认知服务\n\n\
+  Azure 账户\n\n类别\n\n特性\n\n语言类别\n\n协同过滤\n\n基于内容的系统\n\n自定义视觉对象，Power BI\n\n创建命令提示符\n\
+  \nJSON 文件\n\npbiviz 命令\n\n在 Power BI 中\n\n账户登录\n\n分析时间序列\n\n预测\n\n导入数据\n\n导入视觉对象\n\
+  \nRADACAD 网站\n\nR 代码\n\n脚本文件\n\nD\n\n数据采集\n\nDatabricks 环境，Azure，*参见* Azure Databricks\n\
+  \n数据挖掘方法\n\n数据科学虚拟机 (DSVM)\n\n创建\n\n环境\n\nJupyter Notebook\n\n身份验证密钥，Azure ML Studio\n\
+  \n获取工作区 ID\n\n模型创建\n\nR 代码\n\nR ML 代码发布\n\nWeb 服务\n\n\n\n概述\n\nR 与 Python 工具\n\n\
+  RDP 文件\n\nRStudio\n\n设置\n\n大小\n\n数据集变量\n\n数据转换，Power Query\n\n更改数据类型\n\n分组依据\n\n\
+  使用 R 脚本\n\n数据仓库\n\n数据整理\n\nETL\n\n合并\n\n重塑\n\n选择\n\n决策过程\n\n决策树\n\n分析\n\n自定义视觉对象，Power\
+  \ BI\n\nPower BI 账户\n\nPower Query 筛选值\n\n预测分析\n\n根节点\n\n树分支\n\n可视化面板\n\n深度学习\n\n\
+  部署\n\n描述性分析\n\n数据挖掘方法\n\n运营报告\n\n统计分析\n\n离散类标签\n\n拖放环境\n\nE\n\n模拟器\n\n事件中心\n\n提取、转换和加载\
+  \ (ETL)\n\nF, G\n\n人脸识别\n\nAPI 密钥\n\nAzure\n\nBrowseButton 函数\n\n代码，更改\n\n人脸描述\n\
+  \n人脸情绪\n\n图像情绪\n\n安装人脸 API\n\n视觉类别\n\nWindows 应用程序\n\n力导向图\n\nH\n\nHDInsight\n\n\
+  基于云的服务\n\n集群\n\nAzure Data Lake Store Gen1\n\n创建\n\n环境\n\nJupyter Notebook\n\n设置\n\
+  \nI, J\n\n集成开发环境 (IDE)\n\n物联网 (IoT)\n\nK\n\n关键绩效指标 (KPI)\n\nK 近邻算法 (KNN)\n\nL\n\n\
+  lapply 函数\n\nM\n\n机器学习 (ML)\n\n人工智能\n\n方法\n\n监督学习\n\n无监督学习\n\n描述性分析\n\n语言与平台\n\n\
+  生命周期\n\n预测分析\n\n规范性分析\n\nMatplotlib\n\nmerge 函数\n\n微软认知工具包 (CNTK)\n\n案例研究\n\n实际数据\n\
+  \nDSVM\n\nJupyter Notebook\n\n随机数据\n\n定义\n\n神经网络\n\n激活函数\n\n数据分类\n\n深度学习\n\nDSVM\
+  \ 环境\n\n模型\n\n突触\n\n拓扑结构\n\n设置\n\n微软机器学习\n\n自定义 AI 工具\n\n数据平台工具\n\nETL\n\n物联网\n\n\
+  预构建 AI 工具\n\n原型\n\n语音分析\n\nN, O\n\n神经网络\n\n计算机系统架构\n\n具体数据集\n\n包库命令\n\n使用 R 进行机器学习\n\
+  \n登山，比较\n\n归一化\n\n输出数据集\n\nPower BI 报表\n\n预测结果\n\nPython 代码，数据透视\n\n结构\n\n训练数据集\n\
+  \n归一化\n\nMinMax 方法\n\n归一化数据\n\nR 脚本\n\nNuGet 包\n\nP\n\n包，R\n\n安装\n\n机器学习\n\nPower\
+  \ BI\n\n数据可视化\n\nR 代码\n\nCSV 文件，导入\n\nggplot 函数\n\nmpg 数据集\n\nPython 环境\n\n散点图结果\n\
+  \n脚本编辑器\n\n空白区域\n\n设置 R\n\nPower Query 编辑器\n\n数据资源\n\n数据转换\n\n主页选项卡\n\nPower BI\n\
+  \nR 脚本\n\nPower Query 筛选值\n\n预测分析\n\n分类分析\n\n回归分析\n\n时间序列预测\n\n规范性分析\n\nPyCharm\n\
+  \nPython\n\n维度\n\nIDE\n\n机器学习\n\n包安装\n\n统计分布\n\n可视化\n\nQ\n\n查询编辑器\n\n问答聊天机器人\n\n\
+  嵌入代码\n\n常见问题解答\n\nHTTP 请求\n\n知识库\n\nMaker 服务\n\n问答对\n\nqnmaker.ai 网站\n\n测试\n\nWeb\
+  \ 应用机器人服务\n\nR\n\nRADACAD 网站\n\nR，数据结构\n\n数据框\n\n列表\n\n向量——C()\n\n回归方法\n\n远程桌面协议\
+  \ (RDP)\n\n重塑数据\n\n数据表，创建\n\n手动输入数据\n\n数据透视\n\n数据透视表\n\n指定类型/值\n\n类型列透视选项\n\nRevoScaleR\
+  \ 包\n\nRodeo\n\nrpart 包\n\nR 脚本\n\n配置选项\n\n创建视觉对象\n\nSSRS 中的图表\n\n输入数据\n\n库路径\n\n\
+  R 代码部分\n\n返回数据\n\nSSRS\n\n包\n\nAzure ML\n\nRevoScaleR\n\nrxLinMode\n\n运行\n\n在 SQL\
+  \ Server 2016 中\n\n在 SQL Server 2017 中\n\nRStudio，安装\n\nR 可视化\n\n自定义视觉对象（*参见* 自定义视觉对象，Power\
+  \ BI）\n\n功能\n\nRStudio\n\n切片和切块\n\nPower BI\n\nrxLinMode 包\n\nS\n\n切片和切块\n\nSpyder\n\
+  \nSQL 脚本语言\n\nSQL 服务器\n\nSQL Server Reporting Services (SSRS)\n\n统计分析，R\n\n监督学习\n\
+  \n支持向量机 (SVM)\n\nT\n\n团队数据科学过程 (TDSP)\n\n文本分析\n\n创建函数\n\n空白查询\n\nPower BI 查询编辑器\n\
+  \n情感分析\n\n数据集\n\n定价层\n\n设置\n\nURL 和密钥\n\nU\n\nUCI 机器学习库\n\n用户界面 (UI)\n\nV, W, X,\
+  \ Y, Z\n\n可视化，R\n\n```\n```"
