@@ -92,3 +92,4 @@
 +   [数据流与自动机器学习的交易型机器学习](docs/transactional-machine-learning-with-data-streams-and-automl/README.md)
 +   [算法偏见理解、管理与预防指南](docs/understand-manage-and-prevent-algorithmic-bias/README.md)
 +   [对抗性机器学习](docs/对抗性机器学习/README.md)
++   [机器学习范式](docs/机器学习范式/README.md)
