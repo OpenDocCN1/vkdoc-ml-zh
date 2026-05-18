@@ -4,4 +4,3 @@
 +   [3. 解决时间和内存限制](hyperparameter-optimization-in-machine-learning_3.md)
 +   [4. 贝叶斯优化](hyperparameter-optimization-in-machine-learning_4.md)
 +   [5. Optuna 与 AutoML](hyperparameter-optimization-in-machine-learning_5.md)
-+   [加载数据集并将其分割为训练集和测试集。](hyperparameter-optimization-in-machine-learning_6.md)
