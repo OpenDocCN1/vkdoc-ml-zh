@@ -1,5 +1,5 @@
 +   [Tiny Machine Learning 快速启动指南](README.md)
-+   [关于本书](tiny-machine-learning-quickstart_0.md)
++   [前言](tiny-machine-learning-quickstart_0.md)
 +   [1. Tiny 机器学习](tiny-machine-learning-quickstart_1.md)
 +   [2. 表格数据分类](tiny-machine-learning-quickstart_2.md)
 +   [3. 表格数据回归](tiny-machine-learning-quickstart_3.md)
