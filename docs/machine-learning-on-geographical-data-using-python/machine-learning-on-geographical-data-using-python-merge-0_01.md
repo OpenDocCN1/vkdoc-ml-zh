@@ -48,8 +48,6 @@
 
 一个二维欧几里得空间。作者自绘
 
-
-
 ### 笛卡尔坐标系
 
 要在欧几里得空间中定位点，我们可以使用笛卡尔坐标系。该坐标系通过一对数值坐标来唯一地指定每个点。例如，请看图 1-2 中的坐标系，其中定位了两个点：一个正方形和一个三角形。
@@ -141,8 +139,6 @@ GIS，即地理信息系统，是一种特殊类型的数据库系统，专门�
 由 ESRI 开发的 ArcGIS，可以说是用于处理地理信息系统的最著名的软件包。它拥有非常多的功能，可以通过用户友好的点击按钮系统访问，但也允许对地理数据处理流程进行可视化编程。对于有特定任务且 ArcGIS 中没有现成工具的用户，甚至可以集成 Python。其工具还包括人工智能和数据科学选项。
 
 ArcGIS 是处理地理数据的优秀软件。然而，它有一个很大的缺点，那就是它是一个付费的专有软件。因此，只有那些能够轻松支付相当高昂价格的公司或个人才能使用。尽管它可能物有所值，但你需要能够支付得起，或者说服你的公司购买此类软件。不幸的是，情况往往并非如此。
-
-
 
 #### QGIS 及其他开源 ArcGIS 替代方案
 
@@ -248,8 +244,6 @@ shapefile.plot()
 
 代码块 1-2 生成的地图。图片来源：作者。数据来源：DINSIC 部。原始数据下载自 [*https://geo.data.gouv.fr/en/datasets/8fadd7040c4b94f2c318a0971e8faedb7b5675d6*](https://geo.data.gouv.fr/en/datasets/8fadd7040c4b94f2c318a0971e8faedb7b5675d6)，更新于 2016 年 7 月 1 日。开放许可 2.0 ([*www.etalab.gouv.fr/wp-content/uploads/2018/11/open-licence.pdf*](https://www.etalab.gouv.fr/wp-content/uploads/2018/11/open-licence.pdf))
 
-
-
 ### Google KML 文件
 
 你可能对 Google 地球很熟悉：它是当今主流的基于地图的应用程序之一。谷歌推广了用于地理数据的 KML 文件。它是一种基于 XML 的文本文件，可以包含几何数据。
@@ -315,8 +309,6 @@ kmlfile.plot()
 代码块 1-4 生成的绘图。作者截图 数据来源：DINSIC 部。原始数据下载自 [*https://geo.data.gouv.fr/en/datasets/8fadd7040c4b94f2c318a0971e8faedb7b5675d6*](https://geo.data.gouv.fr/en/datasets/8fadd7040c4b94f2c318a0971e8faedb7b5675d6)，更新于 2016 年 7 月 1 日。开放许可 2.0 ([*www.etalab.gouv.fr/wp-content/uploads/2018/11/open-licence.pdf*](https://www.etalab.gouv.fr/wp-content/uploads/2018/11/open-licence.pdf))
 
 这里有趣的一点是，这些坐标与从 shapefile 生成的地图并不对应。如果你已经阅读了本章的第一部分，你可能对这是由坐标系引起的有所了解。我们将在第 2 章中更详细地讨论这一点。
-
-
 
 ### GeoJSON
 
@@ -436,8 +428,6 @@ show(img)
 由代码块 1-7 生成的图形。图片来源：作者。数据来源：DINSIC 部。原始数据下载自 [*https://geo.data.gouv.fr/en/datasets/b0a420b9e003d45aaf0670446f0d600df14430cb*](https://geo.data.gouv.fr/en/datasets/b0a420b9e003d45aaf0670446f0d600df14430cb)，更新于“未知”。开放许可 2.0 ([*www.etalab.gouv.fr/wp-content/uploads/2018/11/open-licence.pdf*](https://www.etalab.gouv.fr/wp-content/uploads/2018/11/open-licence.pdf))
 
 有趣的是，查看坐标可以发现，这个文件的坐标值相对接近第一个文件。
-
-
 
 ### CSV/TXT/Excel
 

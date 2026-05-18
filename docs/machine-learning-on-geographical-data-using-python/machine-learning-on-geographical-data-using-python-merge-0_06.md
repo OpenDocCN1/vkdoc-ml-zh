@@ -67,9 +67,6 @@
 
 另一个截然不同的用例是，你收集的数据点不太可靠。例如，假设它们是手机提供的 GPS 位置。如果你知道数据点存在多少不确定性，你可以在数据点周围创建缓冲区，表明缓冲区内的所有位置都可能是该特定手机用户访问过的。这对于营销或广告推荐等场景非常有用。
 
-
-
-
 #### 线数据的缓冲区
 
 现在我们来考虑将缓冲区应用于线数据的情况。前面已经给出了第一个示意图示例。在该示例中，存在一个线数据集，但需要将其转换为多边形，以便用于相交分析。
@@ -116,8 +113,6 @@
 
 让我们从第一个条件开始，在一些地铁站周围创建缓冲区。
 
-
-
 ### 在 Python 中为点创建缓冲区
 
 首先，我们导入 `.kml` 数据。在前几章中已经多次执行此操作，现在这应该已经成为一种习惯。导入数据的代码如代码块 6-1 所示。
@@ -125,6 +120,7 @@
 ```
 import geopandas as gpd
 import fiona
+
 # 导入巴黎地铁站数据
 gpd.io.file.fiona.drvsupport.supported_drivers['KML'] = 'rw'
 data = gpd.read_file('Paris_Metro_Stations.kml')
@@ -166,16 +162,21 @@ data.plot()
 我们可以清楚地想象这些点是地铁线路的站点。这个绘图不太直观。如果你想在视觉效果上下功夫，可以随意添加第 4 章中的一些代码来创建背景视觉效果。你也可以使用 `contextily` 库，这是一个可以非常轻松地创建背景地图的 Python 包。代码块 6-3 中的代码展示了如何操作。它使用了第 5 章的示例数据来创建一个范围更大的背景地图。
 
 ```
+
 # !pip install contextily
 import contextily as cx
+
 # 导入巴黎地铁站数据
 gpd.io.file.fiona.drvsupport.supported_drivers['KML'] = 'rw'
 paris = gpd.read_file('ParisSeineData.kml')
 paris = paris.loc[1:,:]
+
 # 使用巴黎数据设置范围，但保持不可见
 ax = paris.plot(figsize=(15,15), color="None")
+
 # 添加数据
 data.plot(ax=ax)
+
 # 添加背景地图
 cx.add_basemap(ax, crs=data.crs)
 代码块 6-3
@@ -220,14 +221,18 @@ data.buffer(0.01)
 
 ```
 import contextily as cx
+
 # 导入巴黎地铁站数据
 gpd.io.file.fiona.drvsupport.supported_drivers['KML'] = 'rw'
 paris = gpd.read_file('ParisSeineData.kml')
 paris = paris.loc[1:,:]
+
 # 使用巴黎数据设置范围，但保持不可见
 ax = paris.plot(figsize=(15,15), color="None")
+
 # 添加数据
 data.buffer(0.01).plot(ax=ax, edgecolor='black', color='None')
+
 # 添加背景地图
 cx.add_basemap(ax, crs=data.crs)
 代码块 6-5
@@ -245,8 +250,6 @@ cx.add_basemap(ax, crs=data.crs)
 由代码块 6-5 生成的绘图。作者提供的图片，使用了 contextily 源数据及图片中引用的图像
 
 有了这个结果，我们成功创建了一个空间图层，以帮助我们筛选要选择的房屋。现在，让我们继续使用缓冲区来实现以下两个标准。
-
-
 
 ### 在 Python 中为线要素创建缓冲区
 
@@ -301,12 +304,16 @@ gdf
 
 ```
 import contextily as cx
+
 # 使用巴黎数据设置范围，但保持不可见
 ax = paris.plot(figsize=(15,15), color="None")
+
 # 添加点数据
 data.buffer(0.01).plot(ax=ax, edgecolor='black', color='None')
+
 # 添加线数据
 gdf.plot(ax = ax, color = 'black')
+
 # 添加底图
 cx.add_basemap(ax, crs=data.crs)
 代码块 6-8
@@ -343,16 +350,21 @@ gdf.buffer(0.001)
 
 ```
 import contextily as cx
+
 # 使用巴黎数据设置范围，但保持不可见
 ax = paris.plot(figsize=(15,15), color="None")
+
 # 添加点数据
 data.buffer(0.01).plot(ax=ax, edgecolor='black', color='green', alpha=0.5)
+
 # 添加线数据
 gdf.buffer(0.001).plot(ax = ax, edgecolor='black', color = 'red', alpha = 0.5)
+
 # 添加底图
 cx.add_basemap(ax, crs=data.crs)
 代码块 6-10
 改进绘图
+```
 
 你将获得如图 6-14 所示的中间结果。
 
@@ -366,10 +378,201 @@ cx.add_basemap(ax, crs=data.crs)
 
 这显示了巴黎的地图，其中最适合使用的圆圈以绿色标记，而红色多边形区域应避免，因为它距离地铁线路太近。在下一节中，我们将在地图上添加第三个标准：靠近公园。这将通过为多边形创建缓冲区来完成。
 
-
-
 ### 在 Python 中为多边形创建缓冲区
 
 房屋选择的第三个标准是靠近公园。在 `Paris_Parks.kml` 数据集中，你可以找到巴黎的一些公园。这些数据仅用于示例，远非完美，但足以完成本次练习。你可以使用代码块 6-11 中的代码导入数据。
 
 ```
+
+# 导入巴黎公园数据
+gpd.io.file.fiona.drvsupport.supported_drivers['KML'] = 'rw'
+parks = gpd.read_file('Paris_Parks.kml')
+parks
+代码块 6-11
+导入公园数据
+```
+
+在图 6-15 中，你会看到该数据集中有 18 个公园，全部以多边形形式标识。
+
+![](img/526781_1_En_6_Fig15_HTML.jpg)
+
+来自代码块 6-11 的数据表。列标题为名称、描述和几何图形。行条目为公园 1 至 18 及其多边形 Z 坐标。
+
+图 6-15
+
+来自代码块 6-11 的数据。作者提供的图片
+
+你可以通过代码块 6-12 中的方式，将这些数据直接添加到地图中进行可视化。
+
+```
+import contextily as cx
+
+# 使用巴黎数据设置范围，但保持不可见
+ax = paris.plot(figsize=(15,15), color="None")
+
+# 添加点数据
+data.buffer(0.01).plot(ax=ax, edgecolor='black', color='green', alpha=0.5)
+
+# 添加线数据
+gdf.buffer(0.001).plot(ax = ax, edgecolor='black', color = 'red', alpha = 0.5)
+
+# 添加公园数据
+parks.plot(ax=ax, edgecolor='black', color="none")
+
+# 添加底图
+cx.add_basemap(ax, crs=data.crs)
+代码块 6-12
+在地图中直接可视化数据
+```
+
+公园在地图中显示为黑色轮廓线。尚未创建任何缓冲区。这个中间结果如图 6-16 所示。
+
+![](img/526781_1_En_6_Fig16_HTML.jpg)
+
+一张添加了公园的地图。地图上的图形相同，此次图形分布在地图的左右两侧。
+
+图 6-16
+
+添加了公园的地图。作者使用 contextily 源数据和图像作为参考提供的图片
+
+当然，你不太可能在公园内找到房子，因此我们需要将搜索区域设定为包含公园周边的边界。同样，这可以通过为多边形数据添加缓冲区来实现。缓冲区操作与之前一样，通过调用带有距离参数的 `buffer` 方法完成。代码块 6-13 展示了这一过程。
+
+```
+parks.buffer(0.01)
+代码块 6-13
+为公园添加缓冲区
+```
+
+结果如图 6-17 所示。
+
+![](img/526781_1_En_6_Fig17_HTML.jpg)
+
+缓冲区操作结果数据表。18 行条目包含多边形及其坐标。
+
+图 6-17
+
+来自代码块 6-13 的结果数据
+
+缓冲区操作后，你得到的是多边形数据，与之前相同。但多边形的尺寸现在变大了，因为它包含了原始多边形周围的缓冲区。现在，我们将此结果添加到图形中，看看它如何影响我们寻找房屋的区域。代码块 6-14 展示了这一过程。
+
+```
+import contextily as cx
+
+# 使用巴黎数据设置范围，但保持不可见
+ax = paris.plot(figsize=(15,15), color="None")
+
+# 添加点数据
+data.buffer(0.01).plot(ax=ax, edgecolor='none', color='yellow', alpha=0.5, zorder=2)
+
+# 添加线数据
+gdf.buffer(0.001).plot(ax = ax, edgecolor='black', color = 'red', alpha = 1, zorder=3)
+
+# 添加公园数据
+parks.buffer(0.01).plot(ax=ax, edgecolor='none', color="green", alpha = 0.5)
+
+# 添加底图
+cx.add_basemap(ax, crs=data.crs)
+代码块 6-14
+将所有数据整合在一起
+```
+
+颜色和“zorder”（叠加顺序）已稍作调整，以使地图更易读。毕竟，它开始包含大量要素。你将看到如图 6-18 所示的结果。
+
+![](img/526781_1_En_6_Fig18_HTML.jpg)
+
+来自代码块 6 至 14 的结果图。多边形的尺寸现在变大了，因为它包含了原始多边形周围的缓冲区。
+
+图 6-18
+
+来自代码块 6-14 的结果图。作者使用 contextily 源数据和图像作为参考提供的图片
+
+这张地图是一个你可以使用的初步结果。当然，你还可以更进一步，将其与第 5 章的理论相结合，在该章中你学习了如何使用集合论中的运算来组合不同形状。让我们看看如何实现这一点，最终目标是获得一个数据框，该数据框仅包含基于引言中所有三个标准我们想要寻找房屋的区域。
+
+## 组合缓冲区与集合运算
+
+要将三个缓冲区组合在一起，我们需要执行多个操作。首先，我们需要对“地铁站邻近区域”和“公园邻近区域”进行交集运算。毕竟，我们希望同时拥有两者，而不能只满足于其中之一。正如你在前一章所见，交集运算正是实现这一目标的正确操作。
+
+代码块 6-15 中的代码在两个缓冲数据框之间创建了一个交集图层。它们首先被分别赋值给各自的数据框变量，以便创建更易于使用的对象。
+
+```
+station_buffer = data.buffer(0.01)
+rails_buffer = gdf.buffer(0.001)
+park_buffer = parks.buffer(0.01)
+A = gpd.GeoDataFrame({'geometry': station_buffer})
+B = gpd.GeoDataFrame({'geometry': park_buffer})
+C = gpd.GeoDataFrame({'geometry': rails_buffer})
+代码块 6-15
+准备创建交集图层
+```
+
+然后，使用交集参数应用叠加方法，如代码块 6-16 所示。
+
+```
+A_and_B = A.overlay(B, how='intersection')
+A_and_B
+代码块 6-16
+创建交集图层
+```
+
+你将获得一个类似于图 6-19 所示的数据集。
+
+![](img/526781_1_En_6_Fig19_HTML.jpg)
+
+代码块 6 至 16 生成的数据表。列标题为 geometry。11 行条目包括多边形及其坐标。
+
+图 6-19
+
+代码块 6-16 生成的数据。图片由作者提供
+
+有了这个车站和公园的交集，我们现在需要移除所有离地铁线路太近的位置，因为正如引言中所述，这些地方预计会过于嘈杂。
+
+为此，我们也可以使用叠加方法，但这次我们不需要集合论中的交集运算，因为交集运算会保留所有同时靠近车站、公园和铁路的位置。然而，我们想要的是靠近车站和公园，但不靠近铁路的位置。为此，我们需要使用集合论中的差集运算。代码块 6-17 中的代码展示了如何实现这一点。
+
+```
+A_and_B_not_C = A_and_B.overlay(C, how='difference')
+A_and_B_not_C
+代码块 6-17
+创建差集
+```
+
+数据看起来仍然和之前的数据框类似。唯一的变化是，随着每一步操作，数据变得复杂得多，因为我们可接受位置的形状变得越来越不规则。让我们使用代码块 6-18 绘制最终对象的地图。
+
+```
+import contextily as cx
+
+# 使用巴黎数据设置范围，但保持不可见
+ax = paris.plot(figsize=(15,15), edgecolor="none", color="none")
+A_and_B_not_C.plot(ax=ax, edgecolor='none', color='green', alpha=0.8)
+
+# 添加背景地图
+cx.add_basemap(ax, crs=data.crs)
+代码块 6-18
+创建最终对象的地图
+```
+
+![](img/526781_1_En_6_Fig20_HTML.jpg)
+
+练习的最终地图。绿色区域现在是一个过滤器，用于根据坐标确定房屋位置。所有表示都绘制在地图上。
+
+图 6-20
+
+练习的最终地图。图片由作者使用 contextily 源数据及图像中引用的图像创建
+
+如图 6-20 所示，绿色区域现在是一个过滤器，我们可以用它来根据坐标选择房屋。这回答了练习中提出的问题，同时也生成了一张有趣的地图。如果你想进一步进行此练习，可以创建一个包含房屋点数据的小型数据集。然后，要查找某个房屋（点数据坐标）是否在多边形内部，可以使用称为“contains”或“within”的操作。相关文档可在此处找到：
+
+*   [`https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoSeries.within.html`](https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoSeries.within.html)
+
+*   [`https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoSeries.contains.html`](https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoSeries.contains.html)
+
+此操作留作练习，因为它超出了本章重点——缓冲区操作演示的范围。
+
+## 关键要点
+
+1.  有许多基本的地理数据操作，这些操作在大多数地理数据工具中都是标准实现的。它们乍看之下可能很简单，但将其应用于地理数据可能会带来一些困难。
+
+2.  缓冲区操作为矢量对象添加一个多边形。无论初始对象是点、线还是多边形，结果始终是一个多边形。
+
+3.  应用缓冲区时，可以选择缓冲区边界到初始对象的距离。选择完全取决于具体用例。
+
+4.  一旦计算出缓冲区，它们可用于制图目的，或用于进一步的地理空间操作。
+

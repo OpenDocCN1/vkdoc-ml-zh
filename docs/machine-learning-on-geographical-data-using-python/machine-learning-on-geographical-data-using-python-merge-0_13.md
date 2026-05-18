@@ -1,136 +1,3 @@
-# 尝试不同的设置
-one_person_points_df = pd.DataFrame(
-[x.strip('(').strip(')').strip('0').strip(' ').split(' ')
-for x in str(one_person.loc[0, 'geometry'])[13:].split(',')],
-columns=['long','lat']
-)
-one_person_points_df = one_person_points_df.astype(float)
-clustering = OPTICS(
-min_samples = 10,
-max_eps=2.,
-min_cluster_size=8,
-xi = 0.05,
-metric='haversine')
-one_person_points_df.loc[:,'cluster'] = clustering.fit_predict(
-np.radians(one_person_points_df[['lat', 'long']]))
-one_person_points_df =
-one_person_points_df[one_person_points_df['cluster'] != -1]
-medians_of_POI = one_person_points_df.groupby(['cluster'])[['lat', 'long']].median().reset_index(drop=False)
-print(medians_of_POI)
-medians_of_POI_gdf = gpd.GeoDataFrame(medians_of_POI,
-geometry=
-[Point(x) for x in
-zip(
-list(medians_of_POI['long']),
-list(medians_of_POI['lat'])
-)
-])
-ax = one_person.plot(figsize=(15,15))
-medians_of_POI_gdf.plot(ax=ax,markersize=128)
-cx.add_basemap(ax, crs = one_person.crs)
-代码块 12-13
-使用不同设置应用 OPTICS
-```
-
-这次新聚类的结果如图 12-13 所示。
-
-![](img/526781_1_En_12_Fig13_HTML.jpg)
-
-基于前一张图改进后的地图。这个调整后的模型或地图是代码块 12-13 中代码的结果。
-
-图 12-13
-
-由代码块 12-13 生成的地图。图片由作者使用 contextily 数据和图像作为参考绘制
-
-如您所见，模型正确识别了两个点（左上角和右下角），并且没有其他点。因此，至少对于这个人来说，模型是成功的。在下一节中，我们也将把这个模型应用于其他数据，看看新的聚类设置是否也能为它们提供正确的结果。
-
-## 将模型应用于所有数据
-
-现在，让我们遍历数据集中的三个人，并对每个人应用相同的聚类方法。对于每个人，聚类质心将被打印出来，并绘制在与原始轨迹相对的地图上。这将使我们能够检查结果是否正确。执行所有这些操作的代码如代码块 12-14 所示。
-
-```
-import matplotlib.pyplot as plt
-for i,row in geodata.iterrows():
-print(row)
-one_person_points_df = pd.DataFrame(
-[x.strip('(').strip(')').strip('0').strip(' ').split(' ')
-for x in str(row['geometry'])[13:].split(',')],
-columns=['long','lat']
-)
-one_person_points_df = one_person_points_df.astype(float)
-clustering = OPTICS(
-min_samples = 10,
-max_eps=2.,
-min_cluster_size=8,
-xi = 0.05,
-metric='haversine')
-one_person_points_df.loc[:,'cluster'] = clustering.fit_predict(
-np.radians(one_person_points_df[['lat', 'long']]))
-one_person_points_df =
-one_person_points_df[one_person_points_df['cluster'] != -1]
-medians_of_POI =
-one_person_points_df.groupby(['cluster'])[['lat', 'long']].median().reset_index(drop=False)
-print(medians_of_POI)
-medians_of_POI_gdf = gpd.GeoDataFrame(medians_of_POI,
-geometry=
-[Point(x) for x in
-zip(
-list(medians_of_POI['long']),
-list(medians_of_POI['lat'])
-)
-])
-ax = gpd.GeoDataFrame([row],
-geometry=[row['geometry']]).plot(figsize=(15,15))
-medians_of_POI_gdf.plot(ax=ax,markersize=128)
-plt.show()
-代码块 12-14
-将模型应用于所有数据
-```
-
-生成的输出和图表将依次在图 12-14、12-15 和 12-16 中展示。
-
-![](img/526781_1_En_12_Fig14_HTML.jpg)
-
-人物一的聚类质心和原始轨迹图。获取此图的代码来自代码块 12-14。
-
-图 12-14
-
-人物一轨迹上的中心点。图片由作者绘制
-
-第一张图显示了我们之前已经使用过的结果。确实，对于人物一，OPTICS 模型正确识别了两个兴趣点。图 12-15 显示了人物二的结果。
-
-![](img/526781_1_En_12_Fig15_HTML.jpg)
-
-人物二的聚类质心和原始轨迹图。获取此图的代码来自代码块 12-14。
-
-图 12-15
-
-人物二的三个中心点及其轨迹。图片由作者绘制
-
-对于人物二，我们可以看到有三个兴趣点，并且 OPTICS 模型正确识别了这三个质心。因此，该模型在此人身上被认为是成功的。现在，让我们在图 12-16 中检查第三个人的输出。
-
-![](img/526781_1_En_12_Fig16_HTML.jpg)
-
-人物三的聚类质心和原始轨迹图。获取此图的代码来自代码块 12-14。
-
-图 12-16
-
-人物三的两个质心及其轨迹
-
-人物三的结果也是成功的。人物三的轨迹中有两个兴趣点，并且 OPTICS 模型正确识别了这两个点。
-
-
-
-## 核心要点
-
-1.  无监督机器学习是监督式机器学习的对应概念。在监督式机器学习中，存在一个带有目标变量的真实基准。而在无监督机器学习中，则没有目标变量。
-
-2.  特征缩减是无监督机器学习中的一类方法，其目标是重新定义变量。在空间应用场景中应用特征缩减，其差异并不显著。
-
-3.  聚类是无监督机器学习中的一类方法，专注于寻找彼此相当相似的观测值分组。在处理空间数据时，进行聚类需要考虑一些特定因素。
-
-4.  使用基于哈弗辛距离的 OPTICS 聚类模型，识别了布鲁塞尔三人轨迹中的兴趣点。尽管默认的 OPTICS 模型未能正确找到这些兴趣点，但通过手动调参，最终得到了一个能够正确识别数据中观察到的三人各自兴趣点的模型。
-
 # 13. 结论
 
 通过本书的 12 个章节，你已经深入了解了三个主要主题。本书首先介绍了空间数据的一般概念、空间数据工具以及高效处理空间数据所需的特定知识。
@@ -196,7 +63,6 @@ plt.show()
 
 为你的项目选择数据类型将完全取决于你的用例。尽管数据类型之间的转换有时可能不太容易定义，但必要的转换情况确实会发生，通常你可以使用一些 GIS 空间工具来完成。
 
-
 ### 第 4 章回顾 – 创建地图
 
 第 4 章深入探讨了如何使用 Python 制作地图。由于 Python 是一种开源语言，有许多贡献者维护着用于制作地图的库。最终，你可以选择你喜欢的库，但本章涵盖了多种方法。
@@ -259,8 +125,6 @@ Plotly 被作为使用 Python 进行地图绘制的第三种选择提出。Plotl
 
 关于分类的 Python 示例涵盖了一个用例，其中我们使用了购物中心顾客的移动数据，并利用这些数据拟合了一个预测模型，该模型旨在根据一个人的移动模式预测他是否会对某个产品感兴趣。这个示例使用了前面章节中的空间操作来为模型进行数据预处理。
 
-
-
 ### 第 11 章回顾 – 回归
 
 回归是分类问题的监督式机器学习对应方法。在分类问题中目标变量是类别型，而在回归问题中目标变量是数值型。你已经看到了许多可用于回归场景的评估指标和机器学习模型。
@@ -321,8 +185,6 @@ Plotly 被作为使用 Python 进行地图绘制的第三种选择提出。Plotl
     2.  通过更详细地研究机器学习理论和实践，专攻机器学习。
     3.  进入高级地球观测用例，并将其与计算机视觉领域的研究相结合。
     4.  其他思路包括专注于长期高效存储地理数据的数据工程，或任何其他具有大量空间数据成分的领域，如气象学、水文学等。
-
-
 
 索引  
 A  

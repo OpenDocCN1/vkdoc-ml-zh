@@ -38,8 +38,6 @@
 
 栅格数据必须在每个像素中都有一个值，这使得它特别适用于表示不局限于特定空间的现实世界现象。一个很好的例子是高程图：地球上的每个位置都有特定的高度。通过将世界切割成像素，你可以为每个位置分配高度（相对于海平面）。这将为你提供一张极好的地形图。其他连续型用例也存在，例如绘制地球上的温度分布、污染值分布等等。
 
-
-
 ### 处理矢量和栅格中的属性
 
 坐标通常不是您想了解的关于多边形或栅格的唯一信息。在收集地理数据时，您通常希望了解有关位置的更多信息，而不仅仅是它们的位置。附加信息存储在我们称之为数据集属性的内容中。
@@ -139,8 +137,6 @@ kmlfile.crs
 
 您可以使用代码块 3-3 中的代码绘制地图，以在地图上查看松鼠观察点。目前看起来不太美观，但更多的可视化技术将在第 4 章中讨论。现在，让我们使用代码块 3-3 专注于数据格式。
 
-
-
 ```
 import matplotlib.pyplot as plt
 kmlfile.plot()
@@ -193,6 +189,7 @@ kmlfile.columns
 import xml.etree.ElementTree as ET
 tree = ET.parse("2018 Central Park Squirrel Census – Squirrel Data.kml")
 root = tree.getroot()
+
 # 循环遍历 xml，逐数据点进行解析
 df = []
 for datapoint_i in range(1,3023):
@@ -201,8 +198,10 @@ df_row = []
 for x in elementdata:
 df_row.append(x[0].text)
 df.append(df_row)
+
 # 获取列名
 column_names = [x.attrib[‘name’] for x in elementdata]
+
 # 转换为数据框并打印
 import pandas as pd
 data = pd.DataFrame(df, columns = column_names)
@@ -272,8 +271,6 @@ plt.title('PM squirrels')
 
 线由多个线段组成，因此可以呈现不同的形状，由直线段和多个点构成。因此，地理数据中的线除了表示长度外，还可以表示要素的形状。
 
-
-
 ### Python 中的线数据集示例
 
 在本示例中，你将通过从一个仅包含坐标的开放数据集创建线数据集，来学习如何处理线数据。你可以在 [`www.kaggle.com/usdot/flight-delays/data?select=flights.csv;`](http://www.kaggle.com/usdot/flight-delays/data%253Fselect%253Dflights.csv%3B) 找到本示例的两个数据文件；该数据集属于许可的公共领域。
@@ -320,7 +317,9 @@ geolookup
 让我们首先将纬度和经度变量转换为一个点，以便在后续操作中能够识别几何图形。以下代码循环遍历数据框的行以生成一个新变量。整个操作执行两次，以生成一个“到/目的地”查找数据框和一个“从/来源”查找数据框。如代码块 3-11 所示。
 
 ```
+
 # 将地理查找的坐标转换为点
+
 # 为“到”和“从”连接创建“到”和“从”数据集
 from shapely.geometry import Point
 from_geo_lookup = geolookup[['IATA_CODE', 'LATITUDE', 'LONGITUDE']]
@@ -336,6 +335,7 @@ to_geo_lookup = to_geo_lookup[['IATA_CODE','geometry_to' ]]
 由于数据类型不一致，这里最简单的技巧是将所有数字转换为字符串。存在一些缺失的代码，最好通过检查数据质量问题来解决，但对于这个入门示例，字符串转换已经足够。你还可以看到这里删除了一些列。这在代码块 3-12 中完成。
 
 ```
+
 # 为连接对齐数据类型
 from_geo_lookup['IATA_CODE'] = from_geo_lookup['IATA_CODE'].map(str)
 to_geo_lookup['IATA_CODE'] = to_geo_lookup['IATA_CODE'].map(str)
@@ -370,6 +370,7 @@ flights_data
 转换过程的最后一步是根据这些起点和终点点创建线。可以使用 `LineString` 函数完成，如代码块 3-14 所示。
 
 ```
+
 # 将点转换为线
 from shapely.geometry import LineString
 lines = []
@@ -379,6 +380,7 @@ point_from = row['geometry_from']
 point_to = row['geometry_to']
 lines.append(LineString([point_from, point_to]))
 except:
+
 # 一些数据行有错误，因此我们忽略它们
 pass
 geodf = gpd.GeoDataFrame(lines, columns=[‘geometry’])
@@ -400,6 +402,7 @@ geodf
 现在你已经创建了自己的线数据集，让我们作为最后一步进行快速可视化。和之前一样，你可以简单地使用绘图功能来生成线的基本图。如代码块 3-15 所示。
 
 ```
+
 # 绘制线
 import matplotlib.pyplot as plt
 geodf.plot(figsize=(12,12))
@@ -417,8 +420,6 @@ plt.title('世界航线轨迹线')
 图 3-16
 
 代码块 3-15 生成的绘图。图片来源：作者 数据来源：[*www.kaggle.com/usdot/flight-delays*](https://www.kaggle.com/usdot/flight-delays)，公共领域
-
-
 
 ## 多边形
 
@@ -523,8 +524,6 @@ geojsonfile.sort_values('length', ascending=False).head(10)
 网格或栅格，是由均匀分布的水平线和垂直线组成的网络，它将一个空间切割成许多小方格。在图像中，我们通常将每个小方格称为像素。在数学中，网格还有许多其他用途，因此像素并非通用术语。
 
 网格地理数据是每个“像素”或单元格包含一个值的网格，因此最终会形成大量数值填充一个方形区域。如果你不熟悉这种方法，可能觉得这不太可能转换成有用的东西，但一旦为这些数值分配了颜色刻度，这实际上就是图像生成的方式。对于栅格/网格地图来说，情况也是如此。
-
-
 
 ### 在 Python 中导入栅格数据集
 

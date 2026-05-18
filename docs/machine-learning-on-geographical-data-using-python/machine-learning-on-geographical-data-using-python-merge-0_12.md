@@ -1,39 +1,3 @@
-# 构建模型
-dt_reg_5 = DecisionTreeRegressor(max_depth=3)
-dt_reg_5.fit(X2_train, y_train)
-plt.figure(figsize=(15,15))
-tree.plot_tree(dt_reg_5, feature_names=X2_train.columns)
-plt.show()
-代码块 11-26
-生成树状图
-```
-
-结果如图 11-17 所示。
-
-![](img/526781_1_En_11_Fig17_HTML.jpg)
-
-代码块 11-26 结果的树状图。数据包含：长小于符号等于 4.903，平方下划线误差等于 324.688，样本数等于 40，值等于 133.75。该数据分为两个主分支、四个子分支以及六个不同的平方下划线误差、样本数和值的取值。
-
-图 11-17
-
-由代码块 11-26 生成的树状图。图片来源：作者
-
-我们可以清晰地看到哪些节点学习了哪些趋势。可以看到，模型多次使用了纬度和经度，这使得模型能够在地图上划分出价格较低或较高的特定区域。
-
-由于这是当前用例的最终模型，并且我们知道 R2 分数表明该模型的估算效果远优于仅使用平均价格，因此我们有信心，使用决策树模型为我们的 Airbnb 定价将为公寓得出更合适的价格。
-
-因此，本用例的目标已经达成：我们创建了一个回归模型，利用空间数据和公寓数据，为阿姆斯特丹的 Airbnb 做出尽可能最优的价格估算。
-
-## 关键要点
-
-1.  回归是监督式机器学习的一个领域，涉及学习如何使用自变量来预测数值型目标变量的模型。
-
-2.  特征工程、空间数据和其他数据可用于为回归模型提供输入。
-
-3.  R2 分数是可用于评估回归模型的指标。
-
-4.  线性回归是最常见的回归模型之一，但许多其他模型，包括决策树、随机森林或提升方法，都可以在模型基准测试中挑战其性能。
-
 # 12. 聚类
 
 在机器学习这第四个也是最后一个章节中，我们将介绍聚类。为了正确理解这项技术，让我们先简要回顾一下到目前为止所学的机器学习内容。
@@ -89,8 +53,6 @@ plt.show()
 3.  小额支出者：总体花费不多的客户群体。
 
 超市可以利用这种聚类的一个例子是，向那些他们知道会感兴趣的客户发送个性化广告或折扣券。
-
-
 
 ## 不同的聚类模型
 
@@ -186,8 +148,6 @@ cx.add_basemap(ax, crs = geodata.crs)
 由代码块 12-3 生成的地图。作者使用 contextily 源数据和图像（如图中引用所示）提供的图片
 
 这三条轨迹都位于布鲁塞尔市。对于每条轨迹，你都可以直观地识别出相似的模式：存在一些聚集的部分，这些部分在同一邻域内有多个点，表明是兴趣点。此外，还有一些部分呈现出真正的线状模式，这表示从一个兴趣点到另一个兴趣点的移动。
-
-
 
 ## 单人聚类模型
 
@@ -299,3 +259,228 @@ OPTICS 聚类的结果。图片由作者提供
 现在，如前所述，聚类簇 –1 标识了异常值。让我们使用代码块 12-9 中的代码将它们从数据中删除。
 
 ```
+
+# 移除所有聚类簇为 -1（异常值）的观测值
+one_person_points_df = one_person_points_df[one_person_points_df[‘cluster’] != -1]
+代码块 12-9
+移除异常值聚类簇
+```
+
+现在，我们可以通过使用 `groupby` 操作计算中位数点来得到每个聚类簇的中心点。这在代码块 12-10 中完成。
+
+```
+medians_of_POI = one_person_points_df.groupby(['cluster'])[['lat', 'long']].median().reset_index(drop=False)
+medians_of_POI
+代码块 12-10
+计算聚类簇的中位数
+```
+
+图 12-10 显示了聚类簇 0、1 和 2 的中位数坐标。
+
+![](img/526781_1_En_12_Fig10_HTML.jpg)
+
+一个包含三列三行、由不同数值组成的表格。列标题为 cluster、lat 和 long。行标签为 0、1、2 和 3。
+
+图 12-10
+
+生成的聚类簇。图片由作者提供
+
+让我们使用代码块 12-11 中的代码将这些中心坐标绘制在地图上。
+
+```
+from shapely.geometry.point import Point
+medians_of_POI_gdf = gpd.GeoDataFrame(medians_of_POI, geometry=[Point(x) for x in zip( list(medians_of_POI['long']), list(medians_of_POI['lat']))])
+medians_of_POI_gdf.plot()
+代码块 12-11
+绘制人员 1 的中心坐标
+```
+
+包含三个中心点的基本图如图 12-11 所示。
+
+![](img/526781_1_En_12_Fig11_HTML.jpg)
+
+显示人员 1 三个中心点的图表。用于绘制这些中心坐标的代码是代码块 12-11。这三个点位于 (4.32, 50.867)、(4.35, 50.859) 和 (4.38, 50.840)。数值为近似值。
+
+图 12-11
+
+显示人员 1 三个中心点的图。图片由作者提供
+
+让我们使用代码块 12-12 中的代码为这张地图添加更多背景信息。
+
+```
+ax = one_person.plot(figsize=(15,15))
+medians_of_POI_gdf.plot(ax=ax,markersize=128)
+cx.add_basemap(ax, crs = one_person.crs)
+代码块 12-12
+在中心点背后绘制底图
+```
+
+结果如图 12-12 所示。
+
+![](img/526781_1_En_12_Fig12_HTML.jpg)
+
+一张包含中心点绘制的地图。该地图使用代码块 12-12 中的代码生成。地图描绘了一个额外的质心，该质心并非兴趣点。
+
+图 12-12
+
+将中心点绘制到背景地图上。图片由作者使用 contextily 源数据和图像作为参考绘制
+
+这张地图显示聚类并不完全成功。左上角的聚类质心正确识别了一个兴趣点，右下角的质心也正确识别了一个。然而，中间还有一个额外的质心，它本不应被识别为兴趣点。在下一节中，我们将调整模型以改进这一结果。
+
+## 调整聚类模型
+
+在无监督模型中调整模型比在有监督模型中复杂得多。毕竟，我们没有带注释的数据集：真正的兴趣点是未知的。最好的方法是进行一些手动检查，并牢记你的目标是什么。在当前案例中，我们希望找到质心，并且只找兴趣点的质心。
+
+在以下代码中，为 OPTICS 模型设置了不同的参数：
+
+*   `Min_samples` 设置为 10。
+
+一个点被视为核心点所需的邻域内样本数量。
+
+*   `Max_eps` 设置为 2。
+
+此超参数表示一个点与聚类质心之间允许的最大距离，超过该距离则不再被视为该聚类的一部分。
+
+*   `Min_cluster_size` 设置为 8。
+
+一个聚类若要保留，其中必须包含的最少数据点数量。
+
+*   `Xi` 设置为 0.05。
+
+    有助于调整聚类的数量。
+
+这些超参数值是通过尝试不同的设置，然后观察识别出的质心是否与地图上的兴趣点重合而获得的。代码如代码块 12-13 所示。
+
+```
+
+# 尝试不同的设置
+one_person_points_df = pd.DataFrame(
+[x.strip('(').strip(')').strip('0').strip(' ').split(' ')
+for x in str(one_person.loc[0, 'geometry'])[13:].split(',')],
+columns=['long','lat']
+)
+one_person_points_df = one_person_points_df.astype(float)
+clustering = OPTICS(
+min_samples = 10,
+max_eps=2.,
+min_cluster_size=8,
+xi = 0.05,
+metric='haversine')
+one_person_points_df.loc[:,'cluster'] = clustering.fit_predict(
+np.radians(one_person_points_df[['lat', 'long']]))
+one_person_points_df =
+one_person_points_df[one_person_points_df['cluster'] != -1]
+medians_of_POI = one_person_points_df.groupby(['cluster'])[['lat', 'long']].median().reset_index(drop=False)
+print(medians_of_POI)
+medians_of_POI_gdf = gpd.GeoDataFrame(medians_of_POI,
+geometry=
+[Point(x) for x in
+zip(
+list(medians_of_POI['long']),
+list(medians_of_POI['lat'])
+)
+])
+ax = one_person.plot(figsize=(15,15))
+medians_of_POI_gdf.plot(ax=ax,markersize=128)
+cx.add_basemap(ax, crs = one_person.crs)
+代码块 12-13
+使用不同设置应用 OPTICS
+```
+
+这次新聚类的结果如图 12-13 所示。
+
+![](img/526781_1_En_12_Fig13_HTML.jpg)
+
+基于前一张图改进后的地图。这个调整后的模型或地图是代码块 12-13 中代码的结果。
+
+图 12-13
+
+由代码块 12-13 生成的地图。图片由作者使用 contextily 数据和图像作为参考绘制
+
+如您所见，模型正确识别了两个点（左上角和右下角），并且没有其他点。因此，至少对于这个人来说，模型是成功的。在下一节中，我们也将把这个模型应用于其他数据，看看新的聚类设置是否也能为它们提供正确的结果。
+
+## 将模型应用于所有数据
+
+现在，让我们遍历数据集中的三个人，并对每个人应用相同的聚类方法。对于每个人，聚类质心将被打印出来，并绘制在与原始轨迹相对的地图上。这将使我们能够检查结果是否正确。执行所有这些操作的代码如代码块 12-14 所示。
+
+```
+import matplotlib.pyplot as plt
+for i,row in geodata.iterrows():
+print(row)
+one_person_points_df = pd.DataFrame(
+[x.strip('(').strip(')').strip('0').strip(' ').split(' ')
+for x in str(row['geometry'])[13:].split(',')],
+columns=['long','lat']
+)
+one_person_points_df = one_person_points_df.astype(float)
+clustering = OPTICS(
+min_samples = 10,
+max_eps=2.,
+min_cluster_size=8,
+xi = 0.05,
+metric='haversine')
+one_person_points_df.loc[:,'cluster'] = clustering.fit_predict(
+np.radians(one_person_points_df[['lat', 'long']]))
+one_person_points_df =
+one_person_points_df[one_person_points_df['cluster'] != -1]
+medians_of_POI =
+one_person_points_df.groupby(['cluster'])[['lat', 'long']].median().reset_index(drop=False)
+print(medians_of_POI)
+medians_of_POI_gdf = gpd.GeoDataFrame(medians_of_POI,
+geometry=
+[Point(x) for x in
+zip(
+list(medians_of_POI['long']),
+list(medians_of_POI['lat'])
+)
+])
+ax = gpd.GeoDataFrame([row],
+geometry=[row['geometry']]).plot(figsize=(15,15))
+medians_of_POI_gdf.plot(ax=ax,markersize=128)
+plt.show()
+代码块 12-14
+将模型应用于所有数据
+```
+
+生成的输出和图表将依次在图 12-14、12-15 和 12-16 中展示。
+
+![](img/526781_1_En_12_Fig14_HTML.jpg)
+
+人物一的聚类质心和原始轨迹图。获取此图的代码来自代码块 12-14。
+
+图 12-14
+
+人物一轨迹上的中心点。图片由作者绘制
+
+第一张图显示了我们之前已经使用过的结果。确实，对于人物一，OPTICS 模型正确识别了两个兴趣点。图 12-15 显示了人物二的结果。
+
+![](img/526781_1_En_12_Fig15_HTML.jpg)
+
+人物二的聚类质心和原始轨迹图。获取此图的代码来自代码块 12-14。
+
+图 12-15
+
+人物二的三个中心点及其轨迹。图片由作者绘制
+
+对于人物二，我们可以看到有三个兴趣点，并且 OPTICS 模型正确识别了这三个质心。因此，该模型在此人身上被认为是成功的。现在，让我们在图 12-16 中检查第三个人的输出。
+
+![](img/526781_1_En_12_Fig16_HTML.jpg)
+
+人物三的聚类质心和原始轨迹图。获取此图的代码来自代码块 12-14。
+
+图 12-16
+
+人物三的两个质心及其轨迹
+
+人物三的结果也是成功的。人物三的轨迹中有两个兴趣点，并且 OPTICS 模型正确识别了这两个点。
+
+## 核心要点
+
+1.  无监督机器学习是监督式机器学习的对应概念。在监督式机器学习中，存在一个带有目标变量的真实基准。而在无监督机器学习中，则没有目标变量。
+
+2.  特征缩减是无监督机器学习中的一类方法，其目标是重新定义变量。在空间应用场景中应用特征缩减，其差异并不显著。
+
+3.  聚类是无监督机器学习中的一类方法，专注于寻找彼此相当相似的观测值分组。在处理空间数据时，进行聚类需要考虑一些特定因素。
+
+4.  使用基于哈弗辛距离的 OPTICS 聚类模型，识别了布鲁塞尔三人轨迹中的兴趣点。尽管默认的 OPTICS 模型未能正确找到这些兴趣点，但通过手动调参，最终得到了一个能够正确识别数据中观察到的三人各自兴趣点的模型。
+
