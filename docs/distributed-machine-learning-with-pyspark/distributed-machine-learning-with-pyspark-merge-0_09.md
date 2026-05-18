@@ -14,8 +14,6 @@
 
 Scikit-Learn 和 PySpark 都提供了用于构建、训练和评估随机森林算法的工具。首先，让我们在分别使用这两个库创建模型之前，先比较一下这些工具。
 
-
-
 ### Scikit-Learn 与 PySpark 在随机森林上的相似之处
 
 下表展示了在构建随机森林分类器时，Scikit-Learn 所使用的类与函数，以及它们在 PySpark 中的对应项：
@@ -150,13 +148,17 @@ print(f"{y_pred[i]}\t\t{y_test[i]}")
 最后，我们可以使用 Scikit-Learn 中的 `feature_importances_` 属性来识别模型预测的主要驱动因素。运行以下代码可以发现，花瓣的长度和宽度是模型预测的主要贡献因素：
 
 ```
+
 # 获取特征重要性及其对应的名称
 feature_importances = rf_classifier.feature_importances_
 feature_names = load_iris().feature_names
+
 # 创建 (特征名称, 重要性) 元组列表
 feature_importance_tuples = [(feature_name, importance) for feature_name, importance in zip(feature_names, feature_importances)]
+
 # 按重要性降序排序列表
 sorted_feature_importance_tuples = sorted(feature_importance_tuples, key=lambda x: x[1], reverse=True)
+
 # 打印排序后的特征重要性
 for feature_name, importance in sorted_feature_importance_tuples:
 print(f"{feature_name}: {importance}")
@@ -166,8 +168,6 @@ petal width (cm): 0.42
 sepal length (cm): 0.09
 sepal width (cm): 0.03
 ```
-
-
 
 ### 使用 PySpark 实现随机森林
 
@@ -320,13 +320,17 @@ print(results)
 最后，我们可以利用 PySpark 中的 `featureImportances` 属性来确定对达到此准确率贡献最大的特征。
 
 ```
+
 # 获取特征重要性及其对应的名称
 [In]: feature_importances = model.featureImportances.toArray()
 [In]: feature_names = data.columns[:-1]
+
 # 创建 (特征名称, 重要性) 元组列表
 [In]: feature_importance_tuples = [(feature_name, importance) for feature_name, importance in zip(feature_names, feature_importances)]
+
 # 按重要性降序排序列表
 [In]: sorted_feature_importance_tuples = sorted(feature_importance_tuples, key=lambda x: x[1], reverse=True)
+
 # 打印排序后的特征重要性
 [In]: for feature_name, importance in sorted_feature_importance_tuples:
 print(f"{feature_name}: {importance}")
@@ -342,8 +346,6 @@ sepal width (cm): 0.02
 ## 整合所有代码
 
 在本章前面的部分中，我们提供了分别说明每个建模步骤的代码示例。然而，在本节中，我们的目标是将这些步骤中的所有相关代码整合到一个代码块中。这使得数据科学家能够将代码作为一个整体来执行。
-
-
 
 ### Scikit-Learn
 
@@ -388,16 +390,22 @@ float: 分类器在测试数据上的准确率。
 y_pred = rf_classifier.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 return accuracy
+
 # 加载鸢尾花数据集
 [In]: X, y = load_iris_dataset()
+
 # 将数据集拆分为训练集和测试集
 [In]: X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
 # 构建随机森林模型
 [In]: rf = build_random_forest(X_train, y_train)
+
 # 评估模型
 [In]: accuracy = evaluate_model(rf_classifier, X_test, y_test)
+
 # 打印准确率
 [In]: print("Accuracy:", accuracy)
+
 # 打印前 5 行真实标签和预测标签
 [In]: y_pred = rf_classifier.predict(X_test)
 [In]: print("Predicted\tActual")
@@ -463,32 +471,44 @@ None
 results = predictions.select("label",
 "prediction").limit(n_rows).toPandas()
 print(results)
+
 # 加载鸢尾花数据集
 [In]: iris = load_iris()
+
 # 访问特征数据 (X) 和目标标签 (y)
 [In]: X = iris.data
 [In]: y = iris.target
+
 # 定义列名
 [In]: feature_names = iris.feature_names
 [In]: target_names = iris.target_names
+
 # 创建一个带有列名的 DataFrame
 [In]: df = pd.DataFrame(X, columns=feature_names)
 [In]: df['label'] = y
+
 # 创建一个 SparkSession
 [In]: spark = SparkSession.builder.appName("IrisRandomForest").getOrCreate()
+
 # 将 Pandas DataFrame 转换为 PySpark DataFrame
 [In]: data = convert_to_spark_df(df, spark)
+
 # 准备特征向量
 [In]: assembler = VectorAssembler(inputCols=data.columns[:-1], outputCol="features")
 [In]: transformed_data = assembler.transform(data)
+
 # 将数据集拆分为训练集和测试集
 [In]: train_data, test_data = transformed_data.randomSplit([0.8, 0.2], seed=42)
+
 # 构建随机森林模型
 [In]: model = build_random_forest(train_data)
+
 # 评估模型并获取预测结果
 [In]: accuracy, predictions = evaluate_model(model, test_data)
+
 # 打印准确率
 [In]: print("Accuracy:", accuracy)
+
 # 打印前 5 行真实标签与预测标签的对比
 [In]: print_actual_vs_predicted(predictions, n_rows=5)
 ```
@@ -498,6 +518,4 @@ print(results)
 本章介绍了使用随机森林算法对鸢尾花数据进行分类。它使用了 Pandas、Scikit-Learn 和 PySpark 库进行数据预处理和模型构建。本章表明，尽管语法可能不同，但 Scikit-Learn 和 PySpark 在建模步骤上是一致的。与逻辑回归和决策树分类章节类似，本章演示了以模块化格式构建分类模型。代码被组织成函数，以便直观地执行和跟进。
 
 本章还强调了随机森林相对于决策树的优势，特别是在减少过拟合方面。我们观察到，与决策树分类器相比，随机森林确实改进了分类效果。在下一章中，我们将继续讨论分类，并介绍一种新算法：支持向量机。
-
-
 

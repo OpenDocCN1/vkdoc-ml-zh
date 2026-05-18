@@ -10,8 +10,6 @@
 
 为了说明 MLP 分类器的用法，我们将使用手写数字数据集，这是一个著名的数字识别基准数据。该数据集包含代表手写数字（0`–`9）的图像及其对应的标签。通过在此数据集上训练 MLP 分类器，我们的目标是基于像素表示准确地对这些手写数字进行分类。我们将使用 Scikit-Learn 和 PySpark 库实现分类器，并利用 Pandas 和 PySpark 进行数据处理和探索。
 
-
-
 ## 数据集
 
 `load_digits` 是 Scikit-Learn 中的一个内置数据集。它是一个多类别分类数据集，包含手写数字（0`–`9）的图像。每个数字图像表示为一个 8`×`8 的像素值矩阵，数据集中包含相应的标签，指示每个图像的真实数字。每个像素被视为一个特征，总共 64 个像素，对应数据集中的 64 个特征。目标变量包含一个标签数组，对应于数据集中的每个图像，每个标签代表从 0 到 9 的数字值。
@@ -160,8 +158,6 @@ ax.axis('off')
 [Out]: (1797, 65)
 ```
 
-
-
 这表明该数据集包含 1,797 行和 65 列（64 个特征，即 8`×`8 像素，以及一个目标变量，即取值范围为 0 到 9 的手写数字）。
 
 接下来，我们将打印列名：
@@ -242,8 +238,6 @@ only showing top 5 rows
 *   **拆分数据**：将数据集拆分为训练集和测试集。这种划分使我们能够在部分数据上训练 MLP 分类器，并在未见过的数据上评估其性能。通常，大约 80% 的数据用于训练，其余 20% 用于测试。
 
 *   **创建并训练 MLP 分类器**：初始化一个 MLP 分类器，并配置所需的隐藏层数量以及每层中的神经元数量。使用训练数据训练 MLP 分类器，在此过程中模型学习识别输入特征与其对应目标标签之间的模式和关联。
-
-
 
 *   **预测数字**：将训练好的 MLP 分类器应用于测试集进行预测。模型将接收输入特征（手写数字的像素值），并为每个样本分配一个预测标签。
 
@@ -333,8 +327,6 @@ Scikit-Learn 和 PySpark 在深度学习实现上遵循相似的指导原则，�
 
 执行代码后，我们得到以下结果：
 
-
-
 ```
 [Out]:
 Accuracy: 0.98
@@ -385,9 +377,7 @@ Confusion Matrix:
 
 *   第 10 行对应类别 9。第十列中的值 39 表示有 39 个类别 9 的实例被正确预测为类别 9。第八列中的值 1 表示有一个类别 9 的实例被错误分类为其他类别。
 
-
 好的，作为高级文档工程师和翻译员，我将严格遵循您的注意事项和示例格式，将给定的英文文本翻译成中文。
-
 
 ### 使用 PySpark 进行 MLP 分类
 
@@ -615,8 +605,6 @@ F1 Score: 0.95
     *   第 8 行：在真实标签为 8 的实例中，有 28 个被正确预测为 8，而有 1 个实例被错误地预测为 3。
     *   第 9 行：在真实标签为 9 的实例中，有 30 个被正确预测为 9，1 个被错误地预测为 3，1 个被错误分类为 7。
 
-
-
 ## 整合所有代码
 
 在本节中，我们将前面步骤中所有相关代码整合到一个代码块中。这样读者就可以将代码作为一个整体来执行。
@@ -660,9 +648,11 @@ F1 Score: 0.95
 步骤 6：计算并打印评估指标
 
 ```
+
 # 计算并打印准确率
 [In]: accuracy = accuracy_score(y_test, y_pred)
 [In]: print("Accuracy:", accuracy)
+
 # 计算并打印精确率、召回率和 F1 分数：
 [In]: precision = precision_score(y_test, y_pred, average='weighted')
 [In]: recall = recall_score(y_test, y_pred, average='weighted')
@@ -670,6 +660,7 @@ F1 Score: 0.95
 [In]: print("Precision:", precision)
 [In]: print("Recall:", recall)
 [In]: print("F1 Score:", f1)
+
 # 计算并打印混淆矩阵
 [In]: confusion_mat = confusion_matrix(y_test, y_pred)
 [In]: print("Confusion Matrix:")
@@ -704,8 +695,10 @@ F1 Score: 0.95
 步骤 4：使用 Pandas 从数据创建 DataFrame
 
 ```
+
 # 创建特征
 [In]: df = pd.DataFrame(data=dataset.data, columns=dataset.feature_names)
+
 # 添加目标列
 [In]: df['label'] = dataset.target
 ```
@@ -725,10 +718,13 @@ F1 Score: 0.95
 步骤 7：将特征组合成一个向量列
 
 ```
+
 # 定义输入特征列名
 [In]: input_features = spark_df.columns[:-1]
+
 # 创建一个 VectorAssembler 将特征组合成一个向量列
 [In]: assembler = VectorAssembler(inputCols=input_features, outputCol="features")
+
 # 使用 VectorAssembler 转换训练和测试数据
 [In]: train_transformed = assembler.transform(train)
 [In]: test_transformed = assembler.transform(test)
@@ -737,8 +733,10 @@ F1 Score: 0.95
 步骤 8：创建神经网络
 
 ```
+
 # 定义神经网络的层
 [In]: layers = [len(input_features), 64, 64, len(dataset.target_names)]
+
 # 创建 MultilayerPerceptronClassifier
 [In]: classifier = MultilayerPerceptronClassifier(layers=layers, seed=42, labelCol="label")
 ```
@@ -758,10 +756,12 @@ F1 Score: 0.95
 步骤 11：评估模型的准确率
 
 ```
+
 # 计算准确率
 [In]: evaluator = MulticlassClassificationEvaluator(metricName="accuracy")
 [In]: accuracy = evaluator.evaluate(predictions)
 [In]: print("Accuracy:", accuracy)
+
 # 计算并打印精确率、召回率和 F1 分数
 [In]: evaluator_precision = MulticlassClassificationEvaluator(metricName="weightedPrecision")
 [In]: precision = evaluator_precision.evaluate(predictions)
@@ -772,6 +772,7 @@ F1 Score: 0.95
 [In]: print("Precision:", precision)
 [In]: print("Recall:", recall)
 [In]: print("F1 Score:", f1)
+
 # 计算并打印混淆矩阵
 [In]: confusion_matrix = predictions.groupBy("label").pivot("prediction").count().fillna(0).orderBy("label")
 [In]: confusion_matrix.show(truncate=False)
@@ -784,6 +785,4 @@ F1 Score: 0.95
 本章通过手写数字数据集，演示了 MLP 分类器的使用方法。我们使用 Scikit-Learn 和 PySpark 库实现了分类器，并利用 Pandas 和 PySpark 进行数据处理和探索。训练后的模型达到了非常高的准确率，从而能够准确预测手写数字。我们强调，由于 Scikit-Learn 和 PySpark 遵循相同的深度学习指导原则，因此转向 PySpark 以利用其分布式计算能力是值得的。我们还解释了 PySpark 可以补充 TensorFlow、Keras 和 PyTorch 等深度学习框架的重要方式。
 
 本章结束了我们的分类之旅。在下一章中，我们将转向另一种机器学习技术：推荐系统。这些算法在当今的数字环境中至关重要，因为它们能够提升用户体验并推动业务成功。通过分析用户偏好和行为，推荐系统可以提供个性化推荐，改善内容发现，提高用户参与度，并促进销售和客户满意度。它们在电子商务、内容流媒体和各种在线平台中扮演着关键角色，帮助用户在信息丰富的数字世界中找到相关的产品、服务或内容。
-
-
 

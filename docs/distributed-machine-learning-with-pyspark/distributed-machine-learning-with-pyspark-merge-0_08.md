@@ -78,8 +78,6 @@ return spark_df
 [In]: spark_df = convert_to_spark_df(pandas_df)
 ```
 
-
-
 我们可以探索两个 DataFrame（`pandas_df` 和 `spark_df`），以更深入地了解数据集的结构、内容和特征。首先，我们展示 DataFrame 的前五行。
 
 在 Pandas 中，我们可以使用 `head()` 方法：
@@ -228,8 +226,6 @@ PySpark 代码首先利用 `select()` 方法作用于 `spark_df` DataFrame。在
 
 Pandas 和 PySpark 的输出都表明鸢尾花数据集中没有缺失记录。
 
-
-
 ## 决策树分类
 
 在本节中，我们将使用鸢尾花数据集构建、训练并评估一个决策树分类器。该数据集包含三种鸢尾花（山鸢尾、维吉尼亚鸢尾和变色鸢尾）各 50 个样本的四个特征（花萼和花瓣的长度与宽度）。由于这些特征采用相同的测量单位（厘米），因此无需进行缩放。无论是否缩放，决策树都能同样出色地执行。
@@ -281,8 +277,6 @@ Pandas 和 PySpark 的输出都表明鸢尾花数据集中没有缺失记录。
 然而，在本书中，我们的重点是 ML 库而非 RDD 的 mllib，因为 RDD 使用较少，并且可能在某个时候被弃用。
 
 在本节的后续小节中，我们将把这些建模步骤转化为代码。值得注意的是，我们使用默认超参数构建模型，这意味着 Scikit-Learn 和 PySpark 的结果可能会有所不同。我们将在第 16 章中演示如何微调模型的超参数。
-
-
 
 ### 使用 Scikit-Learn 进行决策树分类
 
@@ -447,8 +441,6 @@ sepal width: 0.0000
 ```
 
 然而，我们需要添加特征名称并按降序对重要性进行排序。代码首先定义一个列表 `feature_names`，其中包含鸢尾花数据集中四个特征的名称。然后，它提取由训练好的决策树分类器 `clf` 计算出的特征重要性。属性 `feature_importances_` 提供了分类器分配给每个特征的重要性分数。
-
-
 
 进入下一步，代码使用 `zip` 函数将 `feature_names` 列表和 `feature_importances` 数组组合成一个元组列表。然后，代码使用 `sorted` 函数，并设置 `reverse=True` 参数，根据重要性分数（其中 `x[1]` 指每个元组的第二个元素，即重要性分数）对元组列表（`importances_with_names`）进行降序排序。
 
@@ -641,8 +633,6 @@ return accuracy, predictions
 
 **步骤 1：导入必要的库**
 
-
-
 在此步骤中，我们导入代码中将要使用的必要库和模块。这些库包括 Pandas、用于分布式数据处理的 PySpark，以及用于机器学习任务（如创建特征向量和训练决策树分类器）的特定模块。我们还从 Scikit-Learn 导入了 `load_iris` 函数，用于加载鸢尾花数据集。
 
 步骤 2：创建 PySpark DataFrame
@@ -773,8 +763,6 @@ return accuracy
 [In]: accuracy = evaluate_model(clf, X_test, y_test)
 [In]: print("Accuracy:", accuracy)
 ```
-
-
 
 ### PySpark
 

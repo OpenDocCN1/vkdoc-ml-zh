@@ -14,8 +14,6 @@
 
 在本章中，我们将展示 Scikit-Learn 和 PySpark 在建模步骤上的相似性，即使语法有所不同。我们将利用这两个库对相同的房价数据集进行预测。此外，我们还将通过评估性能指标，比较迄今为止使用的所有基于树的模型（决策树、随机森林和梯度提升树）的性能。此外，我们将重点介绍 Pandas 和 PySpark 在数据加载和探索方面采用的并行方法。
 
-
-
 ## 数据集
 
 在本章的项目中，我们将使用与前两章决策树和随机森林建模时相同的房价数据集。这样做的理由是，使用相同的数据集能让读者更容易跟上进度，并比较最后三章的结果。
@@ -146,8 +144,6 @@ Unique values in furnishingstatus: ['semi-furnished', 'unfurnished', 'furnished'
 
 现在我们已经回顾了房价数据集的主要属性，可以继续构建梯度提升树（GBT）回归模型了。
 
-
-
 ## 梯度提升树（GBT）回归
 
 正如本章引言所述，梯度提升是一种集成学习技术，它结合多个弱学习模型（决策树）来创建一个强大的单一学习模型。梯度提升的核心思想是迭代地向模型添加新树，每棵树都用于纠正前一棵树的错误。在每次迭代中，模型都会拟合一棵新树来预测上一次迭代的残差。最终的预测结果是模型中所有树预测结果的加权和。分配给每棵树的权重取决于其在训练集上的表现以及模型中的树的数量。GBT 中的“梯度”一词指的是该算法使用梯度下降优化来最小化模型的损失函数，对于回归问题，该损失函数通常是均方误差。
@@ -185,8 +181,6 @@ Scikit-Learn 和 PySpark 在执行梯度提升树回归时遵循相似的建模�
     PySpark：在 PySpark 框架中，训练好的模型的 `transform` 函数可以对新的数据实例进行预测。这需要提供一个包含特征的 DataFrame（`test_data`），从而创建一个新的列（`prediction`）。需要使用 `VectorAssembler` 步骤将特征组装成适合准确预测的格式。
 
 上述比较表明，尽管由于 Scikit-Learn 基于 Python 而 PySpark 是构建在 Apache Spark 之上的分布式计算框架，导致两者的语法和实现存在差异，但 Scikit-Learn 和 PySpark 的建模步骤在很大程度上是相似的。
-
-
 
 ### 使用 Scikit-Learn 实现 GBT
 
@@ -308,8 +302,6 @@ return pd.read_csv(url)
 
 与前几章中的决策树和随机森林一样，梯度提升树算法允许我们提取特征重要性列表。我们可以通过以下代码实现这一点：
 
-
-
 ```
 [In]: importances = gbt_regressor.feature_importances_
 [In]: feature_names = X.columns
@@ -391,8 +383,6 @@ hotwaterheating_yes : 0.0023
 我们可以看到，梯度提升树回归模型的性能优于随机森林和决策树回归模型，因为它的 RMSE 更低，r2 更高。然而，这种性能差异可能归因于默认超参数的不同，我们将在第 16 章详细探讨这一主题。例如，Scikit-Learn 中随机森林的默认最大深度设置为 None，允许树扩展到任意深度。这与梯度提升中默认最大深度为 3 形成对比，表明该模型可以更浅。正如本章引言中提到的，较浅的 GBT 往往比深的 GBT 表现更好，通常能产生更稳健和泛化能力更强的结果。
 
 性能差异也可能意味着我们正在处理的特定数据集具有 GBT 特别擅长捕捉的模式和关系。GBT 具有顺序性质，旨在纠正先前树的错误，这在处理数据中的复杂关系时可能具有优势。
-
-
 
 ### 使用 PySpark 实现 GBT
 
@@ -510,8 +500,6 @@ spark_df = indexer.fit(spark_df).transform(spark_df)
 
 所有相关的特征列，包括编码后的分类列，都使用 `VectorAssembler` 组合成一个单一的特征向量。此步骤对于模型训练是必要的。
 
-
-
 第一行代码定义了一个名为 `feature_cols` 的列表，其中包含将用于建模的特征名称。这些特征包括面积、卧室数、浴室数、楼层数和停车位等数值属性。此外，列表推导式还添加了经过编码的分类列的名称，每个列名后都附加了 `_encoded`。这些编码列是在上一步中使用 `OneHotEncoder` 技术生成的。
 
 第二行代码初始化了一个 `VectorAssembler` 实例。这个转换器接收 `feature_cols` 列表中指定的输入列，并将它们合并成一个名为 `features` 的单一向量列，该列名在 `outputCol` 参数中指定。
@@ -611,8 +599,6 @@ only showing top 5 rows
 
 该输出表明模型既高估也低估了房产价格。它低估价格的频率往往高于高估。
 
-
-
 对于实际价格为 6,930,000 美元的第一处房产，模型预测值为 5,365,539 美元。该预测值低于实际价格，表明模型存在低估。同样，实际价格为 7,070,000 美元的第二处房产，预测值为 5,303,199 美元，也低于实际价格，同样表明低估。实际价格为 7,210,000 美元的第三处房产，预测值为 7,355,716 美元，略高于实际价格，表明存在高估。对于实际价格为 7,350,000 美元的第四处房产，模型预测值为 5,057,867 美元，反映了低估。最后，实际价格为 7,455,000 美元的第五处房产，预测值为 2,507,188 美元，显著低于实际价格，表明存在严重低估。
 
 **步骤 5：评估模型**
@@ -656,6 +642,7 @@ only showing top 5 rows
 在本小节中，我们将用于准备数据、构建和训练 GBT 回归模型、进行预测以及评估模型性能的所有 Scikit-Learn 代码片段组合在一起。
 
 ```
+
 # 导入必要的库
 [In]: from sklearn.ensemble import GradientBoostingRegressor
 [In]: from sklearn.model_selection import train_test_split
@@ -663,16 +650,20 @@ only showing top 5 rows
 [In]: from sklearn.preprocessing import OneHotEncoder
 [In]: import pandas as pd
 [In]: import numpy as np
+
 # 定义加载数据的函数
 [In]: def load_housing_data():
 url = ('https://raw.githubusercontent.com/abdelaziztestas/'
 'spark_book/main/housing.csv')
 return pd.read_csv(url)
+
 # 通过调用函数创建 Pandas DataFrame：
 [In]: pandas_df = load_housing_data()
+
 # 将数据拆分为特征和目标变量
 [In]: X = pandas_df.drop('price', axis=1)
 [In]: y = pandas_df['price']
+
 # 对分类变量执行独热编码
 [In]: cat_cols = ['mainroad', 'guestroom', 'basement', 'hotwaterheating', 'airconditioning', 'prefarea', 'furnishingstatus']
 [In]: onehot_encoder = OneHotEncoder(sparse=False)
@@ -680,15 +671,20 @@ return pd.read_csv(url)
 [In]: X_encoded_df = pd.DataFrame(X_encoded, columns=onehot_encoder.get_feature_names_out(cat_cols))
 [In]: X.drop(cat_cols, axis=1, inplace=True)
 [In]: X = pd.concat([X, X_encoded_df], axis=1)
+
 # 将数据拆分为训练集和测试集
 [In]: X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
 # 训练梯度提升树回归模型
 [In]: gbt_regressor = GradientBoostingRegressor()
 [In]: gbt_regressor.fit(X_train, y_train)
+
 # 打印提升阶段的数量
 [In]: print("Number of boosting stages:", gbt_regressor.n_estimators_)
+
 # 打印树的最大深度
 [In]: print("Maximum tree depth:", gbt_regressor.max_depth)
+
 # 打印特征重要性
 [In]: importances = gbt_regressor.feature_importances_
 [In]: feature_names = X.columns
@@ -696,26 +692,29 @@ return pd.read_csv(url)
 [In]: print('Feature importances:')
 [In]: for i in indices:
 print(feature_names[i], ':', importances[i])
+
 # 对测试集进行预测
 [In]: y_pred = gbt_regressor.predict(X_test)
+
 # 打印实际值和预测值
 [In]: results_df = pd.DataFrame({'Price': y_test, 'Prediction': y_pred})
 [In]: print(results_df.head())
+
 # 计算评估指标
 [In]: r2 = r2_score(y_test, y_pred)
 [In]: rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+
 # 打印评估指标
 [In]: print('R-squared score:', r2)
 [In]: print('Root mean squared error:', rmse)
 ```
-
-
 
 ### PySpark
 
 在本小节中，我们将使用 PySpark 代码完成相同的任务：整合所有用于准备房价数据、构建并训练 GBT 回归模型、进行预测以及评估模型性能的代码片段。
 
 ```
+
 # 导入必要的库
 [In]: from pyspark.sql import SparkSession
 [In]: from pyspark.ml.feature import StringIndexer, OneHotEncoder, VectorAssembler
@@ -723,59 +722,77 @@ print(feature_names[i], ':', importances[i])
 [In]: from pyspark.ml.evaluation import RegressionEvaluator
 [In]: import pandas as pd
 [In]: import numpy as np
+
 # 创建 Spark 会话
 [In]: spark = SparkSession.builder.appName("GBTRegressorExample").getOrCreate()
 [In]: def load_housing_data():
 url = ('https://raw.githubusercontent.com/abdelaziztestas/'
 'spark_book/main/housing.csv')
 return pd.read_csv(url)
+
 # 加载数据并创建 Spark DataFrame
 [In]: pandas_df = load_housing_data()
 [In]: spark_df = spark.createDataFrame(pandas_df)
+
 # 对分类列进行标签编码
 [In]: cat_columns = ['mainroad', 'guestroom', 'basement', 'hotwaterheating', 'airconditioning', 'prefarea', 'furnishingstatus']
 [In]: indexers = [StringIndexer(inputCol=col, outputCol=col+'_label', handleInvalid='keep') for col in cat_columns]
 [In]: for indexer in indexers:
 spark_df = indexer.fit(spark_df).transform(spark_df)
+
 # 对所有分类列进行独热编码
 [In]: encoder = OneHotEncoder(inputCols=[col+'_label' for col in cat_columns], outputCols=[col+'_encoded' for col in cat_columns])
 [In]: spark_df = encoder.fit(spark_df).transform(spark_df)
+
 # 将所有特征组合成一个特征向量
 [In]: feature_cols = ['area', 'bedrooms', 'bathrooms', 'stories', 'parking'] + [col+'_encoded' for col in cat_columns]
 [In]: assembler = VectorAssembler(inputCols=feature_cols, outputCol='features')
 [In]: spark_df = assembler.transform(spark_df)
+
 # 将数据拆分为训练集和测试集
 [In]: (training_data, test_data) = spark_df.randomSplit([0.8, 0.2], seed=42)
+
 # 训练梯度提升树回归模型
 [In]: gbt = GBTRegressor(featuresCol='features', labelCol='price')
 [In]: spark_model = gbt.fit(training_data)
+
 # 从 GBT 模型中获取树的数量和最大深度
 [In]: num_trees = spark_model.getNumTrees
 [In]: max_depth = spark_model._java_obj.getMaxDepth()
+
 # 打印树的数量和最大深度
 [In]: print("Number of Trees:", num_trees)
 [In]: print("Maximum Depth:", max_depth)
+
 # 从 GBT 模型中获取特征重要性
 [In]: feature_importances = spark_model.featureImportances.toArray()
+
 # 从 feature_cols 获取列名
 [In]: feature_names = feature_cols
+
 # 将特征名称和重要性组合成元组列表
 [In]: feature_importance_tuples = list(zip(feature_names, feature_importances))
+
 # 按重要性降序排列元组列表
 [In]: sorted_feature_importance = sorted(feature_importance_tuples, key=lambda x: x[1], reverse=True)
+
 # 打印排序后的特征重要性及其名称
 [In]: print("Sorted Feature Importances:")
 [In]: for feature_name, importance in sorted_feature_importance:
 print(f"Feature '{feature_name}': {importance:.4f}")
+
 # 对测试数据进行预测
 [In]: predictions = spark_model.transform(test_data)
+
 # 打印实际值和预测值
 [In]: predictions.select('price', 'prediction').show(5)
+
 # 使用 RMSE 和 R2 评估模型
 [In]: evaluator_rmse = RegressionEvaluator(labelCol='price', predictionCol='prediction', metricName='rmse')
 [In]: rmse = evaluator_rmse.evaluate(predictions)
 [In]: evaluator_r2 = RegressionEvaluator(labelCol='price', predictionCol='prediction', metricName='r2')
 [In]: r2 = evaluator_r2.evaluate(predictions)
+
 # 打印 RMSE 和 R2 值
 [In]: print(f"RMSE: {rmse}")
 [In]: print(f"R2: {r2}")
@@ -788,6 +805,4 @@ print(f"Feature '{feature_name}': {importance:.4f}")
 此外，本章还将 GBT 回归模型的性能与其他两种基于树的算法（决策树和随机森林）的性能进行了比较。关键结论是，即使在这三种模型中表现最佳的模型，仍然可以通过进一步的超参数优化和降维来提升性能。
 
 在下一章中，我们将重点介绍分类，这是一种独特的监督学习形式。我们的目标是构建、训练和评估一个逻辑回归模型，然后使用它来预测患糖尿病的可能性。目的是证明尽管语法和函数名称存在差异，但在 Scikit-Learn 和 PySpark 中进行逻辑回归的基本流程是相似的。此外，我们还将展示 Pandas 和 PySpark 在处理数据加载和操作方面共享类似的方法，这简化了诸如读取和探索数据等任务。
-
-
 

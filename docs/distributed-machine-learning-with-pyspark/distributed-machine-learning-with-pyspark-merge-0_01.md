@@ -110,8 +110,6 @@ PySpark DataFrame 可以通过使用 `toPandas()` 方法转换为 Pandas DataFra
 
 在本节中，我们将举例说明 PySpark 代码与 Pandas 和 Scikit-Learn 的相似之处，从而帮助数据科学家在这些工具之间轻松过渡。
 
-
-
 ## 加载数据
 
 让我们从加载和读取数据开始。我们可以使用 Pandas 中的 `read_csv()` 函数来加载一个名为 data.csv 的 CSV 文件：
@@ -223,8 +221,6 @@ PySpark 中的 `show()` 方法用于显示 DataFrame 的结果，而 Pandas 没�
 ```
 
 尽管 `select()` 和 `filter()` 方法执行的具体操作不同，但生成的对象都有一个共同特点：它们都包含原始 DataFrame 数据的一个子集。
-
-
 
 ## 数据聚合
 
@@ -451,8 +447,6 @@ spark_df = spark.createDataFrame(spark_data, ['movie', 'revenue'])
 
 前面的示例表明，Pandas 和 PySpark 都提供了多种数据过滤方法，并且在很大程度上，它们各自的方法具有相似性。
 
-
-
 ## 连接数据
 
 在 Pandas 和 PySpark 中，连接两个 DataFrame 都需要指定两个 DataFrame 之间的公共列以及要执行的连接类型（内连接、外连接、左连接、右连接）。Pandas 和 PySpark 中连接 DataFrame 的代码语法可能相似，如下例所示。这里，我们将演示内连接，但其他连接类型的语法保持不变；只需修改连接类型即可。
@@ -581,8 +575,6 @@ Pandas 和 PySpark 都提供了将 DataFrame 内容保存/写入 CSV 文件的�
 注意
 
 在 PySpark 中写入 CSV 文件时，数据会被分割成多个 CSV 文件并写入到一个目录中。指定的输出文件名是目录的名称，而不是文件本身。
-
-
 
 ## 建模步骤
 
@@ -734,6 +726,4 @@ ModelStep()
 在本章中，我们探讨了有助于从小数据工具（Pandas 和 Scikit-Learn）平滑过渡到使用 PySpark 进行大数据处理的因素。具体来说，我们重点介绍了 PySpark 与 Pandas 之间的集成，以及 PySpark、Pandas 和 Scikit-Learn 在语法上的相似之处。我们还展示了这两个库如何使用相似的建模和流水线步骤，尽管在具体语法和使用的类上存在差异。
 
 在下一章中，我们将开启机器学习之旅，这也是本书的核心内容。我们将介绍 k 折交叉验证，这是一种帮助我们在一系列不同算法中选择性能最佳模型的技术。使用这种方法，我们可以筛选出表现最佳的模型，以便进行进一步的评估和测试。
-
-
 

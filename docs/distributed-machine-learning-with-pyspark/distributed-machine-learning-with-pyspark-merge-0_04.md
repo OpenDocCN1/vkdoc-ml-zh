@@ -6,8 +6,6 @@
 
 我们将使用一个从 Kaggle 网站获取的开源数据集。正如我们在上一章中所做的那样，我们将首先读取数据集，然后深入研究它，以更好地理解特征和目标变量。
 
-
-
 ## 数据集
 
 我们在 Scikit-Learn 和 PySpark 中用于训练和评估决策树回归模型的数据集，通常被称为房价数据集。该数据集包含 545 条记录和 12 个特征，每条记录代表一所房屋，目标变量表示其价格。特征代表了房屋的属性，包括其总面积、卧室数量、浴室数量、楼层数和停车位数量，以及房屋是否连接主干道、是否有客房、地下室、热水供暖系统和空调系统，是否位于优选区域，以及是精装修、半装修还是毛坯房。
@@ -176,8 +174,6 @@ dtype: int64
 
 PySpark 不会自动从计算中排除分类变量，而是将它们显示为空。我们可以专门选择数值特征，如下所示：
 
-
-
 | 统计量 | 价格 | 面积 | 卧室数 | 浴室数 | 楼层数 | 停车位数 |
 | --- | --- | --- | --- | --- | --- | --- |
 | **计数** | 545 | 545 | 545 | 545 | 545 | 545 |
@@ -264,8 +260,6 @@ PySpark：在 PySpark 中，可以对 DataFrame 执行类似的操作。使用 `
 2.  模型训练：
 
 Scikit-Learn：对于决策树回归，您可以创建一个 `DecisionTreeRegressor` 模型，并通过提供特征矩阵（X_train）和目标变量（y_train）来使用 `fit` 方法。
-
-
 
 PySpark：使用 `DecisionTreeRegressor` 模型及其 `fit` 方法。提供一个包含特征和目标变量列的 DataFrame（`train_data`）。请记住，在训练模型之前，需要应用 `VectorAssembler` 步骤。
 
@@ -390,8 +384,6 @@ return pd.read_csv(url)
 
 就本项目而言，Scikit-Learn 中的数据准备有两个子步骤。在第一个子步骤中，使用 `OneHotEncoder` 对 `cat_cols`（`mainroad`、`guestroom`、`basement`、`hotwaterheating`、`airconditioning`、`prefarea` 和 `furnishingstatus`）中指定的分类列进行独热编码。我们首先将 `sparse` 参数设置为 `False` 来初始化该类。这意味着生成的编码矩阵将包含编码类别的所有 1 和 0，而如果我们将参数设置为 `True`，则只会包含 1。
 
-
-
 接下来的步骤涉及对特征数据 X 中选定的分类列应用编码器的 `fit_transform` 方法。编码后的分类特征存储在 X_encoded 这个 DataFrame 中。列中的每个唯一类别都被转换为一个独立的二进制列，其中值为 1 表示该类别存在于特定行中。然后，这个 DataFrame 被转换为 X_encoded_df，其中编码后的列使用 `get_feature_names_out` 方法进行标记。Scikit-Learn 的 `OneHotEncoder` 类的这个方法会检索独热编码过程中生成的新二进制列的名称，每个名称对应原始分类特征中的一个唯一类别。
 
 独热编码之后，X 中原始的分类列就不再需要了。因此，我们使用 `drop` 方法来移除它们（指定的 axis = 1 表示我们删除的是列，而不是行，而参数 inplace=True 用于指示该操作应直接修改原始 DataFrame X，而不创建新的 DataFrame）。
@@ -488,8 +480,6 @@ furnishingstatus 看起来可能稍微复杂一些，因为它有三个值，而
 在此步骤中，使用 `DecisionTreeRegressor()` 创建一个决策树回归模型。该模型使用 `fit()` 方法在训练数据上进行训练。
 
 模型训练完成后，我们可以按如下方式打印其每个特征的重要性：
-
-
 
 ```
 [In]: importances = scikit_model.feature_importances_
@@ -607,8 +597,6 @@ R 平方（也称为决定系数）是一个统计指标，用于衡量模型预
 
 **步骤 2：定义一个函数来绘制学习曲线**
 
-
-
 ```
 [In]: def plot_learning_curve(estimator, title, X, y, ylim=None,
 cv=None,
@@ -683,8 +671,6 @@ y 轴表示 R² 得分，该指标衡量模型能够解释的目标变量方差�
 *   **不同的模型**：我们也可以考虑尝试决策树之外的不同算法，比如随机森林和梯度提升树。不同的算法有不同的优缺点，其中一种可能更适合我们的特定数据。我们将在接下来的两章中探讨这个选项，届时我们将深入研究使用随机森林和梯度提升树进行回归。
 
 *   **特征选择**：过拟合的一个潜在原因是模型过于复杂。这里很可能就是这种情况，因为我们的模型样本量相对较小（545 个观测值），却有 20 个特征，其中大部分对模型的预测贡献甚微。仔细选择相关特征有助于减少过拟合。在此示例中，一个有效的特征选择方法是利用 `feature_importances_` 属性。正如我们在本节前面所看到的，决策树实现允许我们使用此属性来衡量每个特征的重要性。正如我们所看到的，只有少数特征，如房屋面积和浴室数量，驱动着决策树的预测。消除一些弱特征可以提升模型的性能。
-
-
 
 *   **异常值**：识别并处理数据中的异常值也会影响模型性能。有三种常见的方法来识别和移除异常值：
     *   **Z-score（Z 分数）**：该方法计算每个数据点的 Z 分数，并根据指定的阈值识别异常值。Z 分数大于某个特定值（通常为 2 或 3）的数据点被视为异常值。
@@ -812,7 +798,6 @@ spark_df = indexer.fit(spark_df).transform(spark_df)
 
 以下是使用 `mainroad` 分类列作为示例的索引数据的样子：
 
-
 ```
 [In]: spark_df.select("mainroad", "mainroad_label").distinct().show()
 [Out]:
@@ -906,7 +891,7 @@ spark_df = indexer.fit(spark_df).transform(spark_df)
 
 3.  打印排序后的特征重要性及其名称。
 
-```
+    ```
     [In]: print("Sorted Feature Importances:")
     [In]: for feature_name, importance in sorted_feature_importances:
     print(f"Feature '{feature_name}': {importance}")
@@ -966,8 +951,6 @@ only showing top 5 rows
 [Out]: RMSE: 1463511.73 R2: 0.31
 ```
 
-
-
 从 r2 的值我们可以观察到，目标变量（价格）的变异中，仅有约 30% 可由预测变量的变异解释。RMSE（1,463,512）也超过了实际价格变量均值（4,766,729）的 10%，这表明模型的性能相当一般。
 
 根据我们之前的调查（比较测试集和训练集的 r2，以及 Scikit-Learn 中的学习曲线），这很可能是由于特征数量相对较多而样本量相对较小，导致模型过拟合。
@@ -995,6 +978,7 @@ only showing top 5 rows
 以下代码演示了如何使用开源住房数据集在 Scikit-Learn 中执行决策树回归：
 
 ```
+
 # 导入必要的库
 [In]: import pandas as pd
 [In]: from sklearn.tree import DecisionTreeRegressor
@@ -1002,16 +986,20 @@ only showing top 5 rows
 [In]: from sklearn.metrics import r2_score, mean_squared_error
 [In]: from sklearn.preprocessing import OneHotEncoder
 [In]: import numpy as np
+
 # 定义加载数据的函数
 [In]: def load_housing_data():
 url = ('https://raw.githubusercontent.com/abdelaziztestas/'
 'spark_book/main/housing.csv')
 return pd.read_csv(url)
+
 # 通过调用函数创建 Pandas DataFrame：
 [In]: pandas_df = load_housing_data()
+
 # 将数据拆分为特征和目标变量
 [In]: X = pandas_df.drop('price', axis=1)
 [In]: y = pandas_df['price']
+
 # 对分类变量执行独热编码
 [In]: cat_cols = ['mainroad', 'guestroom', 'basement', 'hotwaterheating', 'airconditioning', 'prefarea', 'furnishingstatus']
 [In]: onehot_encoder = OneHotEncoder(sparse=False)
@@ -1019,11 +1007,14 @@ return pd.read_csv(url)
 [In]: X_encoded_df = pd.DataFrame(X_encoded, columns=onehot_encoder.get_feature_names_out(cat_cols))
 [In]: X.drop(cat_cols, axis=1, inplace=True)
 [In]: X = pd.concat([X, X_encoded_df], axis=1)
+
 # 将数据拆分为训练集和测试集
 [In]: X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
 # 训练模型
 [In]: scikit_model = DecisionTreeRegressor()
 [In]: scikit_model.fit(X_train, y_train)
+
 # 打印特征重要性
 [In]: importances = scikit_model.feature_importances_
 [In]: feature_names = X.columns
@@ -1031,14 +1022,18 @@ return pd.read_csv(url)
 [In]: print('Feature importances:')
 [In]: for i in indices:
 print(feature_names[i], ':', importances[i])
+
 # 对测试集进行预测
 [In]: y_pred = scikit_model.predict(X_test)
+
 # 打印实际值和预测值
 [In]: results_df = pd.DataFrame({'Price': y_test, 'Prediction': y_pred})
 [In]: print(results_df.head())
+
 # 计算评估指标
 [In]: r2 = r2_score(y_test, y_pred)
 [In]: rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+
 # 打印评估指标
 [In]: print('R-squared score:', r2)
 [In]: print('Root mean squared error:', rmse)
@@ -1049,6 +1044,7 @@ print(feature_names[i], ':', importances[i])
 以下代码展示了如何使用与训练 Scikit-Learn 决策树回归器相同的开源住房数据集，在 PySpark 中执行决策树回归：
 
 ```
+
 # 导入必要的库
 [In]: from pyspark.sql import SparkSession
 [In]: from pyspark.ml.feature import StringIndexer, OneHotEncoder, VectorAssembler
@@ -1056,6 +1052,7 @@ print(feature_names[i], ':', importances[i])
 [In]: from pyspark.ml.evaluation import RegressionEvaluator
 [In]: import pandas as pd
 [In]: import numpy as np
+
 # 创建 Spark 会话
 [In]: spark = SparkSession.builder.appName("DecisionTreeRegressorExample").getOrCreate()
 [In]: def load_housing_data():
@@ -1064,55 +1061,68 @@ url = ('https://raw.githubusercontent.com/abdelaziztestas/'
 return pd.read_csv(url)
 [In]: pandas_df = load_housing_data()
 [In]: spark_df = spark.createDataFrame(pandas_df)
+
 # 对分类列进行标签编码
 [In]: cat_columns = ['mainroad', 'guestroom', 'basement', 'hotwaterheating', 'airconditioning', 'prefarea', 'furnishingstatus']
 [In]: indexers = [StringIndexer(inputCol=col, outputCol=col+'_label', handleInvalid='keep') for col in cat_columns]
 [In]: for indexer in indexers:
 spark_df = indexer.fit(spark_df).transform(spark_df)
+
 # 对所有分类列进行独热编码
 [In]: encoder = OneHotEncoder(inputCols=[col+'_label' for col in cat_columns], outputCols=[col+'_encoded' for col in cat_columns])
 [In]: spark_df = encoder.fit(spark_df).transform(spark_df)
+
 # 将所有特征组合成一个特征向量
 [In]: feature_cols = ['area', 'bedrooms', 'bathrooms', 'stories', 'parking'] + [col+'_encoded' for col in cat_columns]
 [In]: assembler = VectorAssembler(inputCols=feature_cols, outputCol='features')
 [In]: spark_df = assembler.transform(spark_df)
+
 # 将数据拆分为训练集和测试集
 [In]: (training_data, test_data) = spark_df.randomSplit([0.8, 0.2], seed=42)
+
 # 训练模型
 [In]: dt = DecisionTreeRegressor(featuresCol='features', labelCol='price')
 [In]: spark_model = dt.fit(training_data)
+
 # 打印特征重要性
+
 # i. 获取特征重要性
 [In]: feature_importances = spark_model.featureImportances
+
 # ii. 从 feature_cols 获取列名
 [In]: feature_names = feature_cols
+
 # iii. 创建一个字典，将特征重要性与其名称对应存储
 [In]: feature_importances_dict = {}
 [In]: for i in range(len(feature_names)):
 feature_name = feature_names[i]
 importance = feature_importances[i]
 feature_importances_dict[feature_name] = importance
+
 # iv. 按重要性值降序对特征重要性字典进行排序
 [In]: sorted_feature_importances = sorted(feature_importances_dict.items(), key=lambda x: x[1], reverse=True)
+
 # v. 打印排序后的特征重要性及其名称
 [In]: print("Sorted Feature Importances:")
 [In]: for feature_name, importance in sorted_feature_importances:
 print(f"Feature '{feature_name}': {importance}")
+
 # 对测试数据进行预测
 [In]: predictions = spark_model.transform(test_data)
+
 # 打印实际值和预测值
 [In]: predictions.select('price', 'prediction').show(5)
+
 # 使用 RMSE 和 R2 评估模型
 [In]: evaluator_rmse = RegressionEvaluator(labelCol='price', predictionCol='prediction', metricName='rmse')
 [In]: rmse = evaluator_rmse.evaluate(predictions)
 [In]: evaluator_r2 = RegressionEvaluator(labelCol='price', predictionCol='prediction', metricName='r2')
 [In]: r2 = evaluator_r2.evaluate(predictions)
+
 # 打印 RMSE 和 R2 值
 [In]: print(f"RMSE: {rmse}")
 [In]: print(f"R2: {r2}")
 ```
-
-
 
 ## 总结
 

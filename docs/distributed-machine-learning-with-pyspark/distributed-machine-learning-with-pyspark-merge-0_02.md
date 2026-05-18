@@ -80,8 +80,6 @@ return pd.read_csv(url)
 [Out]:
 ```
 
-
-
 从 Pandas 和 PySpark 的输出中，我们可以看到共有九个列（八个属性和一个结果变量）。Pregnancies 指的是女性怀孕的次数。Glucose 是口服葡萄糖耐量测试两小时后血液中的葡萄糖浓度。BloodPressure 表示舒张压，单位为毫米汞柱（mm Hg）。SkinThickness 是肱三头肌皮褶厚度，单位为毫米。Insulin 代表两小时后的血清胰岛素水平，单位为微国际单位每毫升（mu U/ml）。BMI，即身体质量指数，通过体重（公斤）除以身高（米）的平方计算得出，用于反映身体成分。DiabetesPedigreeFunction 根据家族史评估患糖尿病的可能性，并给出一个分数。Age 表示个人的年龄（岁）。最后，Outcome 是一个分类变量，取值为 0 或 1，表示是否存在某种特定状况。
 
 我们可以使用 Pandas 的 `info()` 方法来显示 `pandas_df` 的摘要信息，包括每列的非空值数量和数据类型：
@@ -92,6 +90,7 @@ return pd.read_csv(url)
 
 RangeIndex: 768 entries, 0 to 767
 Data columns (total 9 columns):
+
 #   Column                    Non-Null Count  Dtype
 ---  ------                    --------------  -----
 0   Pregnancies               768 non-null    int64
@@ -219,8 +218,6 @@ dtype: int64
 | --- | --- | --- | --- | --- | --- | --- |
 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 
-
-
 ```
 [In]: from pyspark.sql.functions import sum, col
 [In]: spark_df.select([sum(col(c).isNull().cast("int")).alias(c) for c in spark_df.columns]).show()
@@ -326,8 +323,6 @@ x_scaled = (x - mean(x)) / std(x)
 在本章中，我们将使用默认超参数。虽然 Scikit-Learn 和 PySpark 都为其模型提供了默认超参数，但这些默认值并不总是相同的。我们将在第 16 章中演示如何使用网格搜索来微调这些超参数，以改进模型性能。
 
 Scikit-Learn 和 PySpark 之间还有其他差异。首先，Scikit-Learn 将交叉验证与超参数调优分开，而 PySpark 默认将它们结合在一起。其次，PySpark 将特征组合成一个向量，而 Scikit-Learn 则不会。
-
-
 
 ### Scikit-Learn
 
@@ -486,8 +481,6 @@ method="predict_proba"
 
 步骤 5：绘制 ROC 曲线
 
-
-
 ```
 [In]: plt.figure()
 [In]: plt.plot(fpr_decision_tree, tpr_decision_tree, color='darkorange', lw=2, label='Decision Tree (area = %0.2f)' % roc_auc_decision_tree)
@@ -589,8 +582,6 @@ method="predict_proba"
 [Out]:
 ```
 
-
-
 从上述向量组装输出可以看出，特征已被合并为一个名为 features 的单一向量。例如，第一行将怀孕次数、血糖、血压、BMI、糖尿病遗传函数和年龄的各自数值组合成了数值向量 [6,148,72,33.6,0.627,50]。
 
 请注意，标签列（Outcome）并未包含在此组装过程中，因为向量组装专门针对特征，排除了目标变量。
@@ -678,6 +669,7 @@ LinearSVC mean: 0.84
 ## Scikit-Learn
 
 ```
+
 # 导入必要的包
 [In]: from sklearn.preprocessing import StandardScaler
 [In]: from sklearn.model_selection import cross_val_score
@@ -686,9 +678,11 @@ LinearSVC mean: 0.84
 [In]: from sklearn.ensemble import RandomForestClassifier
 [In]: from sklearn.svm import LinearSVC
 [In]: import pandas as pd
+
 # 读取 csv 文件并创建 Pandas 数据框
 [In]: url = 'https://raw.githubusercontent.com/abdelaziztestas/spark_book/main/diabetes.csv'
 [In]: pandas_df = pd.read_csv(url)
+
 # 过滤掉无效记录
 [In]: pandas_df = pandas_df.loc[(pandas_df['Glucose'] != 0)
 & (pandas_df['BloodPressure'] != 0)
@@ -700,6 +694,7 @@ LinearSVC mean: 0.84
 'DiabetesPedigreeFunction',
 'Age',
 'Outcome']]
+
 # 定义特征列和目标列
 [In]: x_cols = ['Pregnancies',
 'Glucose',
@@ -709,9 +704,11 @@ LinearSVC mean: 0.84
 'Age']
 [In]: x = pandas_df[x_cols]
 [In]: y = pandas_df["Outcome"]
+
 # 使用 StandardScaler 对象标准化特征
 [In]: scaler = StandardScaler()
 [In]: x_scaled = scaler.fit_transform(x)
+
 # 定义用于交叉验证的模型列表
 [In]: classifiers = [
 LogisticRegression(),
@@ -719,6 +716,7 @@ DecisionTreeClassifier(),
 RandomForestClassifier(),
 LinearSVC(max_iter=1500)])
 ]
+
 # 对每个模型执行 10 折交叉验证并打印平均准确率
 [In]: for classifier in classifiers:
 result = cross_val_score(
@@ -728,12 +726,11 @@ y,
 cv=10,
 scoring= "roc_auc"  #"accuracy"
 )
+
 # 打印模型名称、平均准确率和准确率标准差
 print(f"{classifier.__class__.__name__} mean:
 {result.mean():.2f}")
 ```
-
-
 
 ## PySpark
 
@@ -745,11 +742,13 @@ print(f"{classifier.__class__.__name__} mean:
 [In]: from pyspark.ml.tuning import CrossValidator, ParamGridBuilder
 [In]: from pyspark.sql.functions import col
 [In]: import pandas as pd
+
 # 从 CSV 文件读取数据并创建 Pandas 数据框
 [In]: url = 'https://raw.githubusercontent.com/abdelaziztestas/spark_book/main/diabetes.csv'
 [In]: pandas_df = pd.read_csv(url)
 [In]: spark = SparkSession.builder.appName("diabetes_data").getOrCreate()
 [In]: spark_df = spark.createDataFrame(pandas_df)
+
 # 过滤无效记录
 [In]: spark_df = spark_df.filter((col('Glucose') != 0)
 & (col('BloodPressure') != 0)
@@ -761,6 +760,7 @@ print(f"{classifier.__class__.__name__} mean:
 'DiabetesPedigreeFunction',
 'Age',
 'Outcome'])
+
 # 将特征列合并为单个向量列
 [In]: assembler = VectorAssembler(inputCols=[
 'Pregnancies',
@@ -770,31 +770,40 @@ print(f"{classifier.__class__.__name__} mean:
 'DiabetesPedigreeFunction',
 'Age'], outputCol="features")
 [In]: data = assembler.transform(spark_df)
+
 # 指定标签列的名称
 [In]: data = data.withColumnRenamed("Outcome", "label")
+
 # 对特征列进行标准化
 [In]: scaler = StandardScaler(inputCol="features", outputCol="scaled_features")
 [In]: data = scaler.fit(data).transform(data)
+
 # 定义要评估的分类模型
 [In]: classifiers = [
 LogisticRegression(),
 DecisionTreeClassifier(),
 RandomForestClassifier(),
 LinearSVC(maxIter=1500)]
+
 # 定义模型的参数网格
 [In]: paramGrid = ParamGridBuilder().build()
+
 # 定义评估器
 [In]: evaluator = BinaryClassificationEvaluator(labelCol="label", rawPredictionCol="rawPrediction", metricName="areaUnderROC")
+
 # 对每个模型执行交叉验证
 [In]: for classifier in classifiers:
+
 # 定义交叉验证器
 cv = CrossValidator(estimator=classifier,
 estimatorParamMaps=paramGrid,
 evaluator=evaluator, numFolds=10)
+
 # 使用交叉验证评估模型
 cvModel = cv.fit(data)
 results = cvModel.transform(data)
 accuracy = evaluator.evaluate(results)
+
 # 打印结果
 print(f"{classifier.__class__.__name__} 均值:
 {accuracy:.2f}")

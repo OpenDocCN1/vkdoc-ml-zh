@@ -23,8 +23,6 @@
 
 此外，我们还利用 Pandas 和 PySpark 进行数据处理和探索。通过比较 Pandas 和 PySpark 库中的实现，我们可以深入了解它们的相似之处。这有助于旨在从 Pandas 迁移到 PySpark 的数据科学家，使他们能够利用后者强大的分布式计算 API。
 
-
-
 ## 数据集
 
 本项目使用的数据集是一个开源数据集，包含加州大学圣地亚哥分校计算机科学系提供的各种亚马逊电子产品评分，可通过以下链接获取：
@@ -207,8 +205,6 @@ product_id  count
 
 我们可以按如下方式显示 `spark_df` 的前五行：
 
-
-
 ```
 [In]: spark_df.show(5)
 [Out]:
@@ -336,8 +332,6 @@ only showing top 5 rows
 
 在本节中，我们将使用亚马逊电子产品数据集构建、训练并评估一个协同过滤推荐系统。然后，该模型可以根据用户对其他产品的历史评分，向可能尚未见过这些产品的用户推荐部分产品。我们将演示如何在 Surprise 和 PySpark 中实现这一过程。
 
-
-
 ## 使用 Surprise 构建推荐系统
 
 我们首先使用 Python 的 Surprise 库来构建一个推荐系统。Surprise 提供了简单便捷的 API，用于实现协同过滤算法、矩阵分解技术以及各种推荐算法。它常用于电影推荐、图书推荐以及其他个性化推荐系统等任务。
@@ -394,8 +388,6 @@ Surprise 可以通过以下命令安装：
 此步骤的目的是创建一个 `Dataset` 对象，该对象稍后将用于在 Surprise 中训练和评估推荐系统模型。我们可以将其分解为两个步骤：
 
 1.  使用第一行代码创建 Surprise 库中 `Reader` 类的一个实例，即 `reader = Reader(rating_scale=(1, 5))`。`Reader` 类用于指定输入数据的格式。我们将 `rating_scale` 参数设置为 `(1, 5)`，因为亚马逊电子产品数据中的评分变量范围是 1 到 5。这一步是必要的，因为 Surprise 期望数据采用特定格式，而使用 `Reader` 类有助于定义该格式。
-
-
 
 2.  通过第二行代码，即 `data = Dataset.load_from_df(pandas_df[[‘user_id’, ‘product_id’, ‘rating’]], reader)`，从 pandas_df 加载数据来创建一个 Surprise `Dataset` 对象。`load_from_df` 方法由 Surprise 中的 `Dataset` 类提供，用于将数据加载为所需格式。在同一行代码中，`pandas_df[[‘user_id’, ‘product_id’, ‘rating’]]` 从 pandas_df 数据框中选择 `user_id`、`product_id` 和 `rating` 列。这个子集包含了推荐系统所需的数据。`reader` 对象作为参数传递给 `load_from_df`，用于指定数据的格式。
 
@@ -478,8 +470,6 @@ Predicted Rating for User AK6PVIKDN83MW and Product B660005667RX: 3.79
 我们首先定义了一个 `existing_user_id` 和一个 `new_product_id`，分别代表我们想要为其进行预测的特定用户和产品。然后，使用训练好的推荐模型（`model`），调用 `predict` 方法，并将用户和产品 ID 作为参数传入。存储在 `predicted_rating` 中的预测结果随后通过 `print()` 打印出来。
 
 在这个例子中，模型预测用户 `AK6PVIKDN83MW` 对新产品 `B660005667RX` 的评分为 3.79。这个预测值代表了模型认为该用户会给这个新产品打出的估计评分或分数。由于预测评分较高（表明用户喜欢该产品的可能性很大），我们可能会将 `B660005667RX` 作为个性化推荐推荐给该用户。
-
-
 
 ### 基于 PySpark 的推荐系统
 
@@ -568,8 +558,6 @@ Predicted Rating for User AK6PVIKDN83MW and Product B660005667RX: 3.79
 ```
 
 这行代码用于在训练数据集（train）上训练 ALS（交替最小二乘法）模型。它调用了 `als` 对象上的 `fit()` 方法，该对象是 PySpark 中 ALS 算法的一个实例。`fit()` 方法使用训练数据集训练 ALS 模型。
-
-
 
 在训练过程中，ALS 算法会优化模型参数，以最小化预测评分与训练数据集中实际评分之间的差异。该算法采用迭代方法，交替更新用户因子和物品因子，以找到能够捕捉数据中潜在模式的最优值。训练过程完成后，`fit()` 方法会返回一个训练好的 ALS 模型，并将其赋值给变量 `model`。这个训练好的模型随后可用于对新的、未见过的数据进行预测，或基于用户-物品交互生成推荐。
 
@@ -765,8 +753,6 @@ f"Predicted Rating: {rounded_prediction}")
 ```
 [In]: predictions.select("user_id", "product_id", "rating", "prediction").show(5)
 ```
-
-
 
 ## 总结
 

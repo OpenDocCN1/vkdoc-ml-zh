@@ -107,8 +107,6 @@ Index(['mean radius', 'mean texture', 'mean perimeter', 'mean area', 'mean smoot
 
 PySpark 没有像 Pandas 那样的内置 `shape` 属性来获取 spark_df 的维度（行数和列数）。因此，我们需要执行两个操作：`count()` 和 `len()` 来分别返回行数和列数：
 
-
-
 ```
 [In]: spark_df_shape = (spark_df.count(), len(spark_df.columns))
 [In]: print(spark_df_shape)
@@ -216,8 +214,6 @@ PySpark 没有像 Pandas 那样的内置 `shape` 属性来获取 spark_df 的维
 [In]: svm.fit(X_train_scaled, y_train)
 ```
 
-
-
 在这段代码中，创建了一个 SVM 分类器，并在标准化后的训练数据上对其进行训练。首先，从 Scikit-Learn 库中创建一个 SVC 类的实例，并将其赋值给变量 `svm`。SVC 类代表 SVM 分类器。`kernel` 参数设置为 `linear`，表示 SVM 将使用线性核函数。`random_state` 参数设置为 42，通过固定 SVM 的随机种子来确保结果的可复现性。
 
 接下来，在 `svm` 对象上调用 `fit()` 方法，传入标准化后的训练数据 (`X_train_scaled`) 和对应的目标值 (`y_train`) 作为参数。该方法在提供的数据上训练 SVM 分类器。
@@ -295,8 +291,6 @@ Confusion Matrix:
 [假负例 真正例]]
 
 在此例中，SVM 分类器预测了 41 个真负例、2 个假正例、3 个假负例和 68 个真正例。
-
-
 
 ### 使用 PySpark 实现线性 SVM
 
@@ -407,9 +401,7 @@ Confusion Matrix:
 
 *   **计算其他评估指标：**
 
-
-
-```
+    ```
     [In]: tp = predictions.filter("label = 1 AND prediction = 1").count()
     [In]: fp = predictions.filter("label = 0 AND prediction = 1").count()
     [In]: tn = predictions.filter("label = 0 AND prediction = 0").count()
@@ -490,8 +482,6 @@ Confusion Matrix:
 ## 整合所有步骤
 
 在本章前面的部分中，我们分别展示了每个建模步骤的代码示例。然而，在本节中，我们的目标是将所有这些步骤中的相关代码整合到一个代码块中。这使得读者能够将代码作为一个整体来执行。
-
-
 
 ### Scikit-Learn
 

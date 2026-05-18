@@ -6,8 +6,6 @@
 
 在本章中，我们将探讨朴素贝叶斯的概念及其在多分类任务中的应用。该算法估计每个标签下特征的概率分布，并利用贝叶斯定理来确定给定特征下每个标签的概率。为了实施和评估朴素贝叶斯分类器，我们使用了 Scikit-Learn 和 PySpark 库。分析将突出这两个库之间的相似性，从而实现从 Scikit-Learn 到 PySpark 的无缝过渡，并利用 PySpark 提供的分布式计算能力。此外，我们还将对比 Pandas 和 PySpark 的功能，表明 PySpark 是在大数据项目中处理大规模数据的可行选择。
 
-
-
 ## 数据集
 
 在本节中，我们将为多分类任务创建一个模拟数据集。首先，我们生成一个适用于 Scikit-Learn 的 Pandas DataFrame，然后将其转换为 PySpark DataFrame。我们使用内置函数 `make_classification` 来创建数据集：
@@ -167,8 +165,6 @@ random_state=42
 
 在本节中，我们将使用 Scikit-Learn 和 PySpark 库构建、训练并评估一个朴素贝叶斯分类器。代码使用了我们在上一节生成的分类数据集，并将其划分为训练集和测试集。训练一个朴素贝叶斯分类器，然后用于对测试集进行预测。计算包括准确率、精确率、召回率和 F1 分数在内的各种评估指标，以评估模型的性能。
 
-
-
 ## 使用 Scikit-Learn 实现朴素贝叶斯
 
 步骤 1：导入必要的库
@@ -264,8 +260,6 @@ F1-score: 0.43
 *   F1 分数（0.43）：F1 分数是精确率和召回率的加权平均值。它是一个单一指标，平衡了精确率和召回率之间的权衡。较高的 F1 分数表明精确率和召回率之间取得了更好的平衡。在本例中，F1 分数为 0.43。
 
 总体而言，模型的性能一般，考虑到我们使用的是模拟数据集，这并不令人意外。
-
-
 
 ### 使用 PySpark 实现朴素贝叶斯
 
@@ -423,8 +417,10 @@ random_state=42
 步骤 4：训练模型
 
 ```
+
 # 创建一个高斯朴素贝叶斯分类器
 [In]: nb = GaussianNB()
+
 # 将模型拟合到训练数据
 [In]: nb.fit(X_train, y_train)
 ```
@@ -438,6 +434,7 @@ random_state=42
 步骤 6：计算并打印评估指标
 
 ```
+
 # 计算指标
 [In]: accuracy = accuracy_score(y_test, y_pred)
 [In]: precision = precision_score(y_test, y_pred, average='weighted')
@@ -448,8 +445,6 @@ random_state=42
 [In]: print("Recall:", recall)
 [In]: print("F1-score:", f1)
 ```
-
-
 
 ### PySpark
 
@@ -484,8 +479,10 @@ weights=[0.3, 0.3, 0.4],
 flip_y=0.1,
 random_state=42
 )
+
 # 确保特征值为非负
 [In]: X = np.abs(X)
+
 # 从 NumPy 数组创建 DataFrame
 [In]: data = [(Vectors.dense(x.tolist()), float(label)) for x, label in zip(X, y)]
 [In]: spark_df = spark.createDataFrame(data, ["features", "label"])
@@ -500,8 +497,10 @@ random_state=42
 步骤 5：训练模型
 
 ```
+
 # 为多类分类创建朴素贝叶斯分类器
 [In]: nb = NaiveBayes(featuresCol="features", labelCol="label", modelType="multinomial")
+
 # 将模型拟合到训练数据
 [In]: nb_model = nb.fit(train_df)
 ```
@@ -515,8 +514,10 @@ random_state=42
 步骤 7：使用各种指标评估模型
 
 ```
+
 # 创建 MulticlassClassificationEvaluator 来评估模型
 [In]: evaluator = MulticlassClassificationEvaluator(metricName="accuracy")
+
 # 计算指标
 [In]: accuracy = evaluator.evaluate(predictions)
 [In]: evaluator = MulticlassClassificationEvaluator(metricName="weightedPrecision")
@@ -525,6 +526,7 @@ random_state=42
 [In]: recall = evaluator.evaluate(predictions)
 [In]: evaluator = MulticlassClassificationEvaluator(metricName="f1")
 [In]: f1 = evaluator.evaluate(predictions)
+
 # 打印指标
 [In]: print("Accuracy:", accuracy)
 [In]: print("Precision:", precision)

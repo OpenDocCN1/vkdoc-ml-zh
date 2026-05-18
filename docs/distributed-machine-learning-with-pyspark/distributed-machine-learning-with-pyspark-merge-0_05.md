@@ -116,8 +116,6 @@ furnishingstatus string
 
 Pandas:
 
-
-
 ```
 [In]: for col in ['mainroad', 'guestroom', 'basement', 'hotwaterheating', 'airconditioning', 'prefarea', 'furnishingstatus']:
 unique_values = pandas_df[col].unique()
@@ -185,8 +183,6 @@ Scikit-Learn 和 PySpark 在机器学习方面采用的方法相似，因为它�
     PySpark：在 PySpark 中，训练模型的 `transform` 方法可对新数据实例生成预测。提供一个包含特征的 DataFrame（`test_data`），预测结果将存储在新列（`prediction`）中。确保应用 `VectorAssembler` 步骤以维持必要的特征向量结构。
 
 从前面的比较可以看出，Scikit-Learn 和 PySpark 之间的建模步骤惊人地相似。然而，正如我们将在下一小节中看到的，由于 Scikit-Learn 基于 Python，而 PySpark 是构建在 Apache Spark 之上的分布式计算框架，因此实现细节和语法可能会有所不同。
-
-
 
 ### 使用 Scikit-Learn 的随机森林
 
@@ -339,8 +335,6 @@ mainroad_yes: 0.0049
 Depth of each tree: [16, 18, 17, 19, 16, 18, 15, 15, 18, 15, 18, 17, 17, 18, 18, 15, 19, 17, 17, 16, 19, 19, 18, 17, 16, 15, 17, 15, 19, 18, 16, 19, 17, 16, 14, 14, 17, 17, 15, 18, 18, 16, 19, 14, 17, 16, 18, 18, 19, 17, 15, 19, 18, 18, 17, 16, 17, 18, 16, 17, 15, 17, 16, 19, 20, 17, 15, 18, 17, 19, 16, 15, 17, 17, 17, 15, 16, 17, 16, 14, 20, 17, 17, 16, 14, 17, 19, 15, 14, 17, 18, 16, 17, 18, 17, 20, 19, 18, 16, 17]
 ```
 
-
-
 输出结果代表了随机森林模型中 100 棵独立决策树各自的最大深度。决策树的深度指的是其结构中分裂层级的数量。每一层级代表一个基于特征做出的决策点，而树的叶节点则保存最终的预测结果。
 
 上述输出中有七个不同的数值（14、15、16、17、18、19、20），这意味着多棵树共享相同的数值。在 Scikit-Learn 中，各决策树的最大深度通常设置为 `None`，这意味着树会不断扩展，直到其包含的样本数少于分裂一个节点所需的最小样本数。这与 PySpark 形成对比（我们将在下一小节看到），因为 PySpark 中树的默认最大深度设置为 5。
@@ -394,8 +388,6 @@ Depth of each tree: [16, 18, 17, 19, 16, 18, 15, 15, 18, 15, 18, 17, 17, 18, 18,
 这一结果并不令人意外，因为随机森林结合了多棵决策树，利用它们的集体预测能力来提供更准确、更稳健的结果。
 
 然而，即使随机森林模型的 r2 达到 62%，也仍然不算高。这表明，尽管该模型显著缓解了决策树模型的过拟合问题，但在实际场景中，还需要采取更多步骤来改进模型，例如通过特征提取或特征选择来降低其复杂度。正如我们将在第 16 章中看到的，微调模型的超参数以找到最优的参数组合是另一种提升其性能的方法。
-
-
 
 ### 使用 PySpark 的随机森林
 
@@ -521,8 +513,6 @@ furnishingstatus 列显示此特征的原始分类值（furnished、semi-furnish
 
 furnishingstatus_encoded 列表示 furnishingstatus 特征的独热编码版本。这是通过在子步骤 2.2 中将 `OneHotEncoder` 应用于索引特征而获得的。独热编码将分类值转换为二进制向量，其中每个向量在对应类别的位置为 1，在其他所有位置为 0。这种格式更适合机器学习算法。符号 (3,[2],[1.0]) 表示该向量的长度为 3（反映了家具状况列的三个类别），并且在对应于标签 2（代表 furnished）的位置上值为 1.0。类似地，(3,[0],[1.0]) 代表 semi-furnished，(3,[1],[1.0]) 代表 unfurnished。
 
-
-
 2.3 将所有特征合并为单一特征向量
 
 为了满足 PySpark 的要求，经过独热编码的分类特征会被合并成一个单一的数值向量。此任务使用 `VectorAssembler` 类来完成。指定的输入列被连接起来，以创建一个名为 features 的新列。
@@ -637,8 +627,6 @@ RMSE 相对较大（1,237,365），而 R² 相对较小（0.50），表明 PySpa
 | 随机森林 | 1,237,365 | 0.50 |
 | 决策树 | 1,463,512 | 0.32 |
 
-
-
 ## 整合所有步骤
 
 在本章前面的小节中，我们通过代码片段分别演示了建模过程的每一步。然而，在本节中，我们将把这些步骤中的所有相关代码整合到一个代码块中。这将使数据科学家能够看到所有代码片段如何协同工作，并将代码作为一个整体来执行。将每一步的代码合并到一个代码块中，也便于数据科学家修改代码，并尝试不同的参数或配置。
@@ -648,6 +636,7 @@ RMSE 相对较大（1,237,365），而 R² 相对较小（0.50），表明 PySpa
 以下是准备数据、构建和训练模型以及评估其性能的代码：
 
 ```
+
 # 导入必要的库
 [In]: import pandas as pd
 [In]: from sklearn.ensemble import RandomForestRegressor
@@ -655,16 +644,20 @@ RMSE 相对较大（1,237,365），而 R² 相对较小（0.50），表明 PySpa
 [In]: from sklearn.metrics import r2_score, mean_squared_error
 [In]: from sklearn.preprocessing import OneHotEncoder
 [In]: import numpy as np
+
 # 定义加载数据的函数
 [In]: def load_housing_data():
 url = ('https://raw.githubusercontent.com/abdelaziztestas/'
 'spark_book/main/housing.csv')
 return pd.read_csv(url)
+
 # 通过调用函数创建一个 Pandas DataFrame：
 [In]: pandas_df = load_housing_data()
+
 # 将数据拆分为特征和目标变量
 [In]: X = pandas_df.drop('price', axis=1)
 [In]: y = pandas_df['price']
+
 # 对分类变量执行独热编码
 [In]: cat_cols = ['mainroad', 'guestroom', 'basement', 'hotwaterheating', 'airconditioning', 'prefarea', 'furnishingstatus']
 [In]: onehot_encoder = OneHotEncoder(sparse=False)
@@ -672,13 +665,17 @@ return pd.read_csv(url)
 [In]: X_encoded_df = pd.DataFrame(X_encoded, columns=onehot_encoder.get_feature_names_out(cat_cols))
 [In]: X.drop(cat_cols, axis=1, inplace=True)
 [In]: X = pd.concat([X, X_encoded_df], axis=1)
+
 # 将数据拆分为训练集和测试集
 [In]: X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
 # 训练随机森林模型
 [In]: random_forest_model = RandomForestRegressor()
 [In]: random_forest_model.fit(X_train, y_train)
+
 # 打印森林中树的数量
 [In]: print("随机森林中树的数量:", random_forest_model.n_estimators)
+
 # 打印特征重要性
 [In]: importances = random_forest_model.feature_importances_
 [In]: feature_names = X.columns
@@ -686,17 +683,22 @@ return pd.read_csv(url)
 [In]: print('特征重要性:')
 [In]: for i in indices:
 print(feature_names[i], ':', importances[i])
+
 # 打印每棵树的深度
 [In]: tree_depths = [estimator.tree_.max_depth for estimator in random_forest_model.estimators_]
 [In]: print('每棵树的深度:', tree_depths)
+
 # 对测试集进行预测
 [In]: y_pred = random_forest_model.predict(X_test)
+
 # 打印实际值和预测值
 [In]: results_df = pd.DataFrame({'价格': y_test, '预测值': y_pred})
 [In]: print(results_df.head())
+
 # 计算评估指标
 [In]: r2 = r2_score(y_test, y_pred)
 [In]: rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+
 # 打印评估指标
 [In]: print('R-squared 分数:', r2)
 [In]: print('均方根误差:', rmse)
@@ -707,6 +709,7 @@ print(feature_names[i], ':', importances[i])
 以下是准备数据、在 PySpark 中构建和训练随机森林模型以及评估其性能的代码：
 
 ```
+
 # 导入必要的库
 [In]: from pyspark.sql import SparkSession
 [In]: from pyspark.ml.feature import StringIndexer, OneHotEncoder, VectorAssembler
@@ -714,70 +717,88 @@ print(feature_names[i], ':', importances[i])
 [In]: from pyspark.ml.evaluation import RegressionEvaluator
 [In]: import pandas as pd
 [In]: import numpy as np
+
 # 创建一个 Spark 会话
 [In]: spark = SparkSession.builder.appName("RandomForestRegressorExample").getOrCreate()
 [In]: def load_housing_data():
 url = ('https://raw.githubusercontent.com/abdelaziztestas/'
 'spark_book/main/housing.csv')
 return pd.read_csv(url)
+
 # 加载数据并创建 Spark DataFrame
 [In]: pandas_df = load_housing_data()
 [In]: spark_df = spark.createDataFrame(pandas_df)
+
 # 对分类列进行标签编码
 [In]: cat_columns = ['mainroad', 'guestroom', 'basement', 'hotwaterheating', 'airconditioning', 'prefarea', 'furnishingstatus']
 [In]: indexers = [StringIndexer(inputCol=col, outputCol=col+'_label', handleInvalid='keep') for col in cat_columns]
 [In]: for indexer in indexers:
 spark_df = indexer.fit(spark_df).transform(spark_df)
+
 # 对所有分类列进行独热编码
 [In]: encoder = OneHotEncoder(inputCols=[col+'_label' for col in cat_columns], outputCols=[col+'_encoded' for col in cat_columns])
 [In]: spark_df = encoder.fit(spark_df).transform(spark_df)
+
 # 将所有特征组合成一个特征向量
 [In]: feature_cols = ['area', 'bedrooms', 'bathrooms', 'stories', 'parking'] + [col+'_encoded' for col in cat_columns]
 [In]: assembler = VectorAssembler(inputCols=feature_cols, outputCol='features')
 [In]: spark_df = assembler.transform(spark_df)
+
 # 将数据拆分为训练集和测试集
 [In]: (training_data, test_data) = spark_df.randomSplit([0.8, 0.2], seed=42)
+
 # 训练随机森林模型
 [In]: rf = RandomForestRegressor(featuresCol='features', labelCol='price')
 [In]: spark_model = rf.fit(training_data)
+
 # 从随机森林模型中访问各个决策树
 [In]: individual_trees = spark_model.trees
+
 # 初始化一个空列表来存储树的深度
 [In]: tree_depths = []
+
 # 遍历每棵树并获取其深度
 [In]: for tree in individual_trees:
 depth = tree.depth
 tree_depths.append(depth)
+
 # 打印树的深度
 [In]: print("树的深度:", tree_depths)
+
 # 直接从随机森林模型打印特征重要性
 [In]: feature_importances = spark_model.featureImportances.toArray()
+
 # 从 feature_cols 获取列名
 [In]: feature_names = feature_cols
+
 # 将特征名称和重要性组合成元组列表
 [In]: feature_importance_tuples = list(zip(feature_names, feature_importances))
+
 # 按重要性降序对元组列表进行排序
 [In]: sorted_feature_importance = sorted(feature_importance_tuples, key=lambda x: x[1], reverse=True)
+
 # 打印排序后的特征重要性及其名称
 [In]: print("排序后的特征重要性:")
 [In]: for feature_name, importance in sorted_feature_importance:
 print(f"特征 '{feature_name}': {importance:.4f}")
+
 # 对测试数据进行预测
 [In]: predictions = spark_model.transform(test_data)
+
 # 打印实际值和预测值
 [In]: predictions.select('price', 'prediction').show(5)
+
 # 使用 RMSE 和 R2 评估模型
 [In]: evaluator_rmse = RegressionEvaluator(labelCol='price', predictionCol='prediction', metricName='rmse')
 [In]: rmse = evaluator_rmse.evaluate(predictions)
 [In]: evaluator_r2 = RegressionEvaluator(labelCol='price',
 [In]: predictionCol = 'prediction', metricName='r2')
 [In]: r2 = evaluator_r2.evaluate(predictions)
+
 # 打印 RMSE 和 R2 值
 [In]: print(f"RMSE: {rmse}")
 [In]: print(f"R2: {r2}")
 ```
-
-
 
 ## 总结
 

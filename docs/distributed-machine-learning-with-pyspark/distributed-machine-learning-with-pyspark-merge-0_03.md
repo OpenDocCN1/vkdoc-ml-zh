@@ -8,8 +8,6 @@
 
 就本书而言，如前一章所述，测试代码的两种最简单的方法是：注册一个在线 Databricks Community Edition 帐户并创建工作空间，或者通过 Google Colab。这两个平台默认都提供 PySpark。在 Google Colab 上，可以通过 `!pip install pyspark` 命令进行安装。PySpark 代码也可以通过使用相同的命令在本地机器上安装 PySpark 来本地运行。
 
-
-
 ## 数据集
 
 我们项目的第一步是生成一些数据，以演示如何使用 Pandas 和 PySpark 进行数据探索，接着使用 Scikit-Learn 和 PySpark 进行多元线性回归的机器学习。
@@ -144,6 +142,7 @@ Pandas 中的 `info()` 方法可用于提供 `pandas_df` 的摘要，包括其�
 
 RangeIndex: 100 entries, 0 to 99
 Data columns (total 3 columns):
+
 #   Column     Non-Null Count  Dtype
 ---  ------     --------------  -----
 0   Feature 1  100 non-null    float64
@@ -153,8 +152,6 @@ dtypes: float64(3)
 ```
 
 共有 3 列和 100 个实例，所有列都是十进制数据类型，并且都不包含空值。
-
-
 
 在 PySpark 中，我们可以使用 `printSchema()` 方法实现类似的功能，其中 double 数据类型等同于 Pandas 的 float64：
 
@@ -258,8 +255,6 @@ Scikit-Learn：模型具有用于对新数据生成预测的 `predict()` 方法�
 PySpark：模型具有用于对新数据生成预测的 `transform()` 方法，您需要提供一个包含特征的 DataFrame（test_data），并在新列（prediction）中获得预测值。在进行预测之前，需要使用 `VectorAssembler` 步骤，以确保新数据具有相同的特征向量结构。
 
 现在，让我们编写一些代码，将这些描述性步骤付诸实践，首先从 Scikit-Learn 开始。
-
-
 
 ### 使用 Scikit-Learn 进行多元线性回归
 
@@ -399,8 +394,6 @@ R 平方，也称为决定系数，是一个统计度量，表示模型中自变
 new_data 变量表示我们希望获得预测的输入特征值列表。new_data 中的每个内部列表对应一组不同的输入特征。在我们的示例中，有三组输入特征：[1.0, 2.0]、[3.0, 4.0] 和 [5.0, 6.0]。
 
 通过调用 `predict()` 方法，我们将 new_data 传递给训练好的模型，以获得每组输入特征的预测值。得到的预测值 [233.71, 553.67, 873.63] 存储在 new_predictions 变量中，然后使用 `print()` 函数打印到屏幕上。
-
-
 
 ### 使用 PySpark 进行多元线性回归
 
@@ -551,8 +544,6 @@ new_data 变量表示我们希望获得预测的输入特征值列表。new_data
 [In]: actual_vs_pred.show(5)
 [Out]:
 ```
-
-
 
 从上述输出中我们可以观察到，实际目标值与预测值之间存在差异，且多数差异相当显著。然而，为了更深入地理解模型性能，我们需要关注诸如 MSE 和 r2 等指标，这些指标利用了全部样本数据。
 

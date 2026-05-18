@@ -69,8 +69,6 @@ f'{selected_df.describe().round(2)}\n')
 
 现在，我们可以调用 `explore_pandas_df()` 函数来查看输出：
 
-
-
 |   | 怀孕次数 | 血糖 | 血压 | 身体质量指数 | 糖尿病遗传函数 | 年龄 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 0 | 6 | 148 | 72 | 33.6 | 0.627 | 50 |
@@ -102,6 +100,7 @@ f'{selected_df.describe().round(2)}\n')
 
 Int64Index: 724 个条目，从 0 到 767
 数据列 (共 6 列):
+
 #   列名                      非空计数    数据类型
 ---  ------                    --------------  -----
 0   怀孕次数 (Pregnancies)               724 非空    int64
@@ -183,8 +182,6 @@ Pandas 和 PySpark 代码的输出是可比的，糖尿病数据集有 724 行�
 
 输出中未显示的目标变量表示皮马女性是否患有糖尿病（赋值为 1）或未患有糖尿病（赋值为 0）。该变量是我们预测的重点。
 
-
-
 ## 逻辑回归
 
 在本节中，我们将构建、训练并评估一个逻辑回归模型，并利用它根据一组预测变量来预测皮马印第安女性患糖尿病的可能性。我们使用六个特征：怀孕次数、血压、BMI、血糖水平、糖尿病遗传函数和年龄。这些特征是预测糖尿病患病情况的重要因素。
@@ -224,8 +221,6 @@ Scikit-Learn 模型使用 `predict()` 方法，利用特征（X_test）对新数
 类似地，PySpark 模型使用 `transform()` 方法生成预测。该方法使用包含特征的 DataFrame（test_data），并将预测结果存储在新列（prediction）中。与训练时一样，`VectorAssembler` 确保新数据的特征向量格式统一。
 
 这些比较表明，尽管 Scikit-Learn 和 PySpark 在语法、函数和类上偶尔存在差异，但基本的建模步骤在很大程度上是一致的。在接下来的小节中，我们将把这些步骤转化为代码。从一开始就需要注意，我们使用的是默认超参数构建模型。这意味着，由于两个框架的默认参数不同，模型的概率和评估指标可能会有所差异。在第 16 章中，我们将演示如何微调和对齐这些参数。
-
-
 
 ## 使用 Scikit-Learn 进行逻辑回归
 
@@ -452,8 +447,6 @@ F1 分数: 0.64
 *   y：与每个数据点相关的因变量。
 *   test_size：指定分配给测试集的数据集比例。默认值为 0.2，对应 20% 的分配比例。
 
-
-
 *   `random_state`：设置随机数生成器的种子，确保数据划分的可重复性。默认值为 42。
 
 在 `split_data()` 函数内部，使用 `train_test_split()` 函数执行划分操作。该函数接收特征矩阵 X 和目标变量 y，以及指定的 `test_size` 和 `random_state` 值。它返回四个独立的数据集：
@@ -523,8 +516,6 @@ F1 分数: 0.64
 *   **召回率 (0.63)**：召回率，也称为灵敏度或真正例率，是正确预测的正类实例（真正例）与所有实际正类实例（真正例 + 假负例）的比率。在此示例中，模型的召回率约为 63%，表明它正确识别了大约 63% 的实际正类实例。
 *   **F1 分数 (0.64)**：F1 分数是精确率和召回率的加权平均值。它在精确率和召回率之间提供了平衡。在此示例中，F1 分数约为 64%。
 *   **混淆矩阵**：这是一个表格，显示了真正例（左上角）、真负例（右下角）、假正例（右上角）和假负例（左下角）的数量。在此示例中，有 88 个真负例（正确预测为负类的实例）、27 个真正例（正确预测为正类的实例）、14 个假正例（错误预测为正类的实例）和 16 个假负例（错误预测为负类的实例）。
-
-
 
 *   **实际值与预测值**：表格展示了前五个实例的实际标签与预测标签的对比。在五个实例中，有四个（即 80%）模型的预测结果与实际标签（0 和 1）相符。这一准确率略高于考虑了所有样本（而不仅仅是前五行）的总体准确率 79%。
 
@@ -634,8 +625,6 @@ scaler_model.transform(test_data)
 **步骤 5：模型训练**
 
 在此步骤中，我们定义一个函数，该函数使用 `LogisticRegression` 在训练数据集上训练逻辑回归模型。
-
-
 
 ```
 [In]: def train_model(train_data):
@@ -807,8 +796,6 @@ F1 分数: 0.59
 
 *   `inputCol`：设置为 `features`，表示包含需要缩放的特征的列的名称。
 
-
-
 *   `outputCol`：设置为 `scaled_features`，这是存储缩放后特征的新列的名称。
 
 函数内部的 `scaler.fit(train_data)` 行使用训练数据拟合缩放器模型。这会计算缩放特征所需的均值和标准差。然后，对 `scaler_model` 应用 `transform()` 方法，分别处理 `train_data` 和 `test_data` 两个 DataFrame。此转换会缩放 `features` 列中的特征，并将缩放后的值存储在 `scaled_features` 列中。
@@ -891,8 +878,6 @@ F1 分数: 0.59
 ### Scikit-Learn
 
 在本小节中，提供了使用皮马印第安人糖尿病数据集准备数据、构建和训练逻辑回归模型以及在测试数据上对其进行评估的完整 Scikit-Learn 代码：
-
-
 
 ```
 [In]: import pandas as pd
@@ -979,29 +964,39 @@ print(f'混淆矩阵:\n{confusion}')
 result_df = pd.DataFrame({'实际值': y_test, '预测值':
 y_pred})
 print(result_df.head())
+
 # 使用这些函数
+
 # 定义数据集的 URL
 [In]: url = ('https://raw.githubusercontent.com/abdelaziztestas/'
 'spark_book/main/diabetes.csv')
+
 # 调用 load_diabetes_csv() 函数读取数据集
 [In]: pandas_df = load_diabetes_csv(url)
+
 # 指定感兴趣的列
 [In]: columns = ['Pregnancies', 'Glucose', 'BloodPressure',
 'BMI', 'DiabetesPedigreeFunction', 'Age', 'Outcome']
+
 # 仅选择指定的列，并过滤掉关键特征中值为零的行
 [In]: pandas_df = pandas_df[columns]
 [In]: pandas_df = pandas_df.loc[(pandas_df['Glucose'] != 0)
 & (pandas_df['BloodPressure'] != 0)
 & (pandas_df['BMI'] != 0)]
+
 # 分离特征 (X) 和目标变量 (y)
 [In]: X = pandas_df.drop('Outcome', axis=1)
 [In]: y = pandas_df['Outcome']
+
 # 将数据拆分为训练集和测试集
 [In]: X_train, X_test, y_train, y_test = split_data(X, y)
+
 # 对训练集和测试集中的特征进行缩放
 [In]: X_train_scaled, X_test_scaled = scale_data(X_train, X_test)
+
 # 在缩放后的训练数据上训练逻辑回归模型
 [In]: model = train_lr(X_train_scaled, y_train)
+
 # 在缩放后的测试数据上评估模型
 [In]: evaluate_model(model, X_test_scaled, y_test)
 ```
@@ -1009,8 +1004,6 @@ print(result_df.head())
 ### PySpark
 
 在本小节中，我们提供与 Scikit-Learn 代码等效的 PySpark 代码，用于准备数据、构建和训练逻辑回归模型，并使用皮马印第安人糖尿病数据集对其进行评估。
-
-
 
 ```
 [In]: from pyspark.sql import SparkSession
@@ -1085,6 +1078,7 @@ train_data (pyspark.sql.DataFrame)：训练集 Spark DataFrame。
 返回：
 pyspark.ml.classification.LogisticRegressionModel：训练好的逻辑回归模型。
 """
+
 # 设置随机种子以确保可重复性
 spark.conf.set("spark.seed", "42")
 lr = LogisticRegression(labelCol='Outcome',
@@ -1117,6 +1111,7 @@ prec = tp / (tp + fp)
 rec = tp / (tp + fn)
 f1 = 2 * prec * rec / (prec + rec)
 confusion = [[tp, fp], [fn, tn]]
+
 # 打印评估指标
 print(f'准确率: {acc:.2f}')
 print(f'精确率: {prec:.2f}')
@@ -1146,5 +1141,4 @@ predictions.select('Outcome', 'prediction').show(5)
 本章介绍了逻辑回归，并演示了如何在 Scikit-Learn 和 PySpark 中使用逻辑回归算法构建分类模型。此外，本章还讨论了逻辑回归的优缺点，并深入探讨了标准评估指标，包括准确率、精确率、召回率、F1 分数和混淆矩阵。同时，还使用 Pandas 和 PySpark 代码来比较这两个库在处理数据操作和探索方面的异同。
 
 在下一章中，我们将继续监督学习中分类算法的学习之旅。具体来说，我们将介绍一种基于决策树的逻辑回归替代分类模型。我们将演示如何准备数据、构建、训练和评估模型，并对新的、未见过的数据进行预测。届时将同时使用 Scikit-Learn 和 PySpark，并对 Pandas 和 PySpark 进行比较。
-
 
