@@ -15,8 +15,6 @@
 
 本章的代码示例、Jupyter 笔记本和示例数据集可在本书的 GitHub 仓库中找到，地址为 [`https://github.com/dipanjanS/practical-machine-learning-with-python`](https://github.com/dipanjanS/practical-machine-learning-with-python)，位于第三章的目录/文件夹下。
 
-
-
 ## 数据收集
 
 数据收集是一切工作的起点。尽管它被列为业务理解与问题定义之后的步骤，但数据收集常常是并行进行的。这样做是为了在形成完整的用例并着手处理之前，通过可用性、潜在价值等事实来辅助增强业务理解过程。当然，一旦问题陈述被定义且项目启动，数据收集就会以更正式、更完善的形式展开。
@@ -53,12 +51,15 @@ csv_reader = csv.reader(open(file_name, 'rb'), delimiter=',')
 csv_rows = list()
 csv_attr_dict = dict()
 csv_reader = None
+
 # 读取 csv
 csv_reader = csv.reader(open(file_name, 'rb'), delimiter=delimiter)
+
 # 迭代并提取数据
 for row in csv_reader:
 print(row)
 csv_rows.append(row)
+
 # 迭代并将数据添加到属性列表
 for row in csv_rows[1:]:
 csv_attr_dict['sno'].append(row[0])
@@ -107,7 +108,6 @@ sno      fruit   color   price
 `pandas` 让读取 CSV 文件的过程变得轻而易举，然而，当我们需要更多灵活性时，`csv` 模块就派上了用场。例如，并非每个用例都需要表格形式的数据，或者数据格式可能不一致，这时就需要像 `csv` 这样灵活的库来启用自定义逻辑以处理此类数据。
 
 同样地，来自包含非逗号分隔符（如制表符或分号）的平面文件的数据，也可以使用这两个模块轻松处理。在后续章节处理特定用例时，我们将使用这些工具；在此之前，鼓励大家探索并尝试使用它们，以便更好地理解。
-
 
 ### JSON
 
@@ -236,8 +236,6 @@ print("{0}tag data:{1}".format("\t"*indent_level,
 child.text))
 ```
 
-
-
 使用 `ElementTree` 解析 XML 后生成的最终输出如下。我们使用了一个自定义的打印工具来让输出更易读，该工具的代码可在仓库中找到。
 
 ```
@@ -335,8 +333,6 @@ HTML has been rendered
 
 浏览器使用标记标签来理解特殊指令，如文本格式、定位、超链接等，但仅向最终用户渲染内容以供查看。对于数据/信息存在于 HTML 页面中的用例，我们需要特殊的技术来提取这些内容。
 
-
-
 #### 网页抓取
 
 网页抓取是一种从网络（尤其是网页）中抓取或提取数据的技术。网页抓取可能涉及手动复制数据，或使用自动化工具来爬取、解析和提取网页中的信息。在大多数情况下，网页抓取指的是自动爬取特定网站或网络的一部分，以提取和解析信息，这些信息随后可用于分析或其他用途。一个典型的网页抓取流程可概括如下：
@@ -415,8 +411,6 @@ return post_detail_list
 
 上述函数首先创建一个 `BeautifulSoup` 对象，并指定 `lxml` 作为其解析器。然后，它使用 `h3` 标签和基于正则表达式的搜索来提取所需的标签列表（我们通过之前使用的相同检查元素方法找到了 `h3` 标签）。接下来的任务就是简单地遍历 `h3` 标签列表，并利用 `BeautifulSoup` 的 `get_text()` 实用函数来获取博文标题及其对应的 URL。该函数返回的列表如下所示。
 
-
-
 ```
 [{'title': u"WannaCry：为何这只是开始，以及如何为后续威胁做好准备",
 'url': '/in/blog/all-blog-posts/wannacry-how-to-prepare/12302194'},
@@ -487,8 +481,6 @@ Python 生态系统主要通过两种方式处理来自数据库的数据。第�
 需要注意的是，标准的数学运算（如加法、减法、乘法等）对类别变量没有意义，即使它们在语法上可能允许（例如用数字表示的类别变量）。因此，谨慎处理类别变量非常重要，我们将在下一节中介绍几种处理类别数据的方法。
 
 不同的数据类型构成了算法处理当前数据时所使用的特征基础。在接下来的章节中，特别是第 4 章：特征工程与选择，您将学习更多关于如何处理特定数据类型的内容。
-
-
 
 ## 数据整理
 
@@ -602,8 +594,6 @@ min       2.830000     0.000000            0.000000    -1.000000  -101.000000
 max    5840.370000  1099.000000           41.000000  2000.000000  6001.000000
 ```
 
-
-
 ### 数据过滤
 
 我们已经完成了对现有数据集的初步检查，了解了它包含什么以及缺少什么。下一阶段是数据清洗。清洗数据集涉及诸如删除/处理错误或缺失数据、处理异常值等任务。清洗还包括标准化属性列名，使其更具可读性、更直观，并符合某些标准，以便所有相关人员理解。为了执行此任务，我们编写一个小函数，并利用 `pandas` 的 `rename()` 工具来完成这一步。`rename()` 函数接受一个 `dict`，其中键代表旧列名，值指向新列名。我们还可以通过适当设置 `inplace` 标志来决定是修改现有数据框还是生成一个新的。以下代码片段展示了这个函数。
@@ -694,8 +684,6 @@ user_id                        int32
 user_type                     object
 dtype: object
 ```
-
-
 
 ### 转换
 
@@ -802,8 +790,6 @@ df_dropped.drop_duplicates(subset=['serial_no'],inplace=True)
 
 具有重复 serial_no 值的数据框
 
-
-
 ### 处理分类数据
 
 正如“数据描述”一节所讨论的，分类属性由可取有限数量值（尽管并非总是如此）的数据组成。在我们的数据集中，属性 `user_type` 是一个分类变量，它只能从允许的集合 {a, b, c, d} 中取有限数量的值。我们在后续章节中将学习和使用的算法大多处理数值数据，而分类变量可能会带来一些问题。使用 `pandas`，我们可以通过几种不同的方式处理分类变量。第一种是使用 `map()` 函数，我们只需将允许集合中的每个值映射到一个数值。尽管这可能有用，但这种方法需要谨慎处理并注意其局限性。例如，像加法、均值等统计操作，虽然在语法上是有效的，但出于显而易见的原因应避免使用（更多内容将在后续章节中讨论）。第二种方法是使用 `get_dummies()` 函数将分类变量转换为指示变量。该函数只是一个包装器，用于为所考虑的变量生成独热编码。独热编码和其他编码也可以使用像 `sklearn` 这样的库来处理（我们将在后续章节中看到更多示例）。
@@ -811,10 +797,12 @@ df_dropped.drop_duplicates(subset=['serial_no'],inplace=True)
 以下代码片段展示了前面讨论的两种方法，分别使用了 `map()` 和 `get_dummies()`。
 
 ```
+
 # 使用 map 进行虚拟编码
 type_map={'a':0,'b':1,'c':2,'d':3,np.NAN:-1}
 df['encoded_user_type'] = df.user_type.map(type_map)
 print(df.head())
+
 # 使用 get_dummies 进行独热编码
 print(pd.get_dummies(df,columns=['user_type']).head())
 ```
@@ -868,8 +856,6 @@ price 的原始值和归一化值
 
 除了前面提到的三个常见步骤外，还有其他操作，如词性标注、哈希、索引等。这些操作都需要根据数据和手头的问题陈述进行调整和优化。请继续关注后续章节中关于这些内容的更多细节。
 
-
-
 ## 数据汇总
 
 数据汇总是指为手头的原始数据准备紧凑表示形式的过程。该过程涉及使用不同的统计、数学及其他方法对数据进行聚合。汇总有助于可视化、压缩原始数据以及更好地理解其属性。
@@ -900,12 +886,15 @@ Name: quantity_purchased, dtype: int32
 `groupby()` 函数是一个强大的接口，允许我们执行复杂的分组和聚合操作。在前面的示例中，我们仅对单个属性进行了分组，并执行了单个聚合（即求和）。使用 `groupby()`，我们可以执行多属性分组，并在不同属性上应用多个聚合函数。以下代码片段展示了 `groupby()` 的三种使用变体及其对应的输出。
 
 ```
+
 # 变体 1：对单个属性进行多种聚合
 df.groupby(['user_class'])['quantity_purchased'].agg([np.sum, np.mean,
 np.count_nonzero])
+
 # 变体 2：为每个属性指定不同的聚合函数
 df.groupby(['user_class','user_type']).agg({'price':np.mean,
 'quantity_purchased':np.max})
+
 # 变体 3
 df.groupby(['user_class','user_type']).agg({'price':{'total_price':np.sum,
 'mean_price':np.mean,
@@ -973,8 +962,6 @@ df.groupby(['user_class','user_type']).agg({'price':{'total_price':np.sum,
 我们整理数据集以清理列名，将属性转换为正确的数据类型，并推导出额外的属性 `user_class` 和 `purchase_week`，如上一节所述。
 
 `pandas` 是一个非常流行且强大的库，我们在本章中已经看到了许多例子。可视化是 `pandas` 另一个重要且广泛使用的特性。它通过绘图接口暴露其可视化能力，并紧密遵循 `matplotlib` 风格的可视化语法。
-
-
 
 #### 折线图
 
@@ -1084,8 +1071,6 @@ plt.show()
 
 图 3-27 中的图表明确指出，新用户占据了总交易份额的 50% 以上，而 `existing` 和 `loyal_existing` 用户则占据了剩余部分。我们不建议使用饼图，尤其是在类别超过三或四个时。请改用条形图。
 
-
-
 #### 箱线图
 
 箱线图是重要的可视化工具，有助于我们理解数值数据的四分位数分布。箱线图（或称箱须图）是一种简洁的表示方式，用于理解数据中的不同四分位数、偏度、离散程度和异常值。
@@ -1175,8 +1160,6 @@ plt.title('Purchase Week Vs Price Per User Class Based on Tx')
 
 在上一节中，我们简要介绍了不同的可视化图表，并看到了一些调整它们的方法。由于 `pandas` 的可视化源自 `matplotlib` 本身，我们将涵盖 `matplotlib` 的额外概念和功能。这将使您不仅能够轻松使用 `matplotlib`，还能掌握一些技巧来改进使用 `pandas` 生成的可视化效果。
 
-
-
 #### 图形与子图
 
 首先，任何 `matplotlib` 风格的可视化基础都始于图形和子图对象。`figure` 模块帮助 `matplotlib` 生成绘图窗口对象及其相关元素。简而言之，它是所有可视化组件的顶层容器。在 `matplotlib` 语法中，图形是最顶层的容器，在一个图形内，我们可以灵活地可视化多个图表。因此，子图就是位于这个高层图形容器内部的图表。
@@ -1186,6 +1169,7 @@ plt.title('Purchase Week Vs Price Per User Class Based on Tx')
 ```
 import numpy as np
 import matplotlib.pyplot as plt
+
 # 示例绘图
 x = np.linspace(-10, 10, 50)
 y=np.sin(x)
@@ -1206,12 +1190,14 @@ plt.ylabel('y 轴')
 现在我们已经完成了一个示例图表，让我们看看不同对象在 `matplotlib` 世界中是如何交互的。如前所述，`figure` 对象是所有元素的顶层容器。在把事情复杂化之前，我们首先绘制不同的图形，即每个图形只包含一个图表。以下代码片段使用 `numpy` 和 `matplotlib` 在两个不同的图形中绘制了正弦波和余弦波。
 
 ```
+
 # 第一个图形
 plt.figure(1)
 plt.plot(x,y)
 plt.title('图 1: 正弦曲线')
 plt.xlabel('x 轴')
 plt.ylabel('y 轴')
+
 # 第二个图形
 plt.figure(2)
 y=np.cos(x)
@@ -1297,8 +1283,6 @@ plt.plot(x, z,'r')
 
 使用 subplot2grid() 创建的子图
 
-
-
 #### 图表格式化
 
 图表格式化是数据叙事中另一个重要方面，`matplotlib` 在这方面提供了丰富的功能。从更改颜色到标记点等，`matplotlib` 都提供了易于使用的直观接口。
@@ -1315,10 +1299,12 @@ plt.plot(x, z,'r')
 
 ```
 y = x
+
 # 颜色
 ax1 = plt.subplot(321)
 plt.plot(x,y,color='green')
 ax1.set_title('线条颜色')
+
 # 透明度
 ax2 = plt.subplot(322,sharex=ax1)
 alpha = plt.plot(x,y)
@@ -1336,12 +1322,16 @@ plt.setp(ax2.get_yticklabels(), visible=False)
 设置图表的标记点和线条样式属性
 
 ```
+
 # 标记点
+
 # 标记点 -> '+', 'o', '*', 's', ',', '.', 等
 ax3 = plt.subplot(323,sharex=ax1)
 plt.plot(x,y,marker='*')
 ax3.set_title('点标记')
+
 # 线条样式
+
 # 线条样式 -> '-','--','-.', ':', 'steps'
 ax4 = plt.subplot(324,sharex=ax1)
 plt.plot(x,y,linestyle='--')
@@ -1352,11 +1342,13 @@ plt.setp(ax4.get_yticklabels(), visible=False)
 尽管还有更多微调选项可用，但我们鼓励您查阅文档以获取详细信息。我们以最后两个技巧来结束格式化部分：线条宽度以及一种可以快速完成所有设置的简写符号，如下面的代码片段所示。
 
 ```
+
 # 线条宽度
 ax5 = plt.subplot(325,sharex=ax1)
 line = plt.plot(x,y)
 line[0].set_linewidth(3.0)
 ax5.set_title('线条宽度')
+
 # 组合线条样式
 ax6 = plt.subplot(326,sharex=ax1)
 plt.plot(x,y,'b^')
@@ -1400,6 +1392,7 @@ plt.title('图例示例')
 带有 LaTEX 格式化图例的示例图表
 
 ```
+
 # 带有 LaTEX 格式的图例
 plt.plot(x,y,'g',label='$y = x²$')
 plt.plot(x,z,'b:',linewidth=3,label='$y = x²$')
@@ -1407,14 +1400,14 @@ plt.legend(loc="best",fontsize='x-large')
 plt.title('带有 $LaTEX$ 格式的图例')
 ```
 
-
-
 #### 坐标轴控制
 
 `matplotlib` 的另一个功能是能够控制绘图的 x 轴和 y 轴。除了使用 `set_xlabel()` 和 `set_ylabel()` 方法设置轴标签和颜色等基本功能外，还可以进行更精细的控制。我们先来看看如何添加辅助 y 轴。在很多场景下，我们需要在同一张图上绘制与不同特征（数值尺度不同）相关的数据。为了正确理解，通常将两个特征放在不同的 y 轴上（每个轴缩放到各自的范围内）会有所帮助。要获取额外的 y 轴，我们使用通过 `axes` 对象暴露的 `twinx()` 函数。以下代码片段概述了这种情况。
 
 ```
+
 ## 坐标轴控制
+
 # 辅助 y 轴
 fig, ax1 = plt.subplots()
 ax1.plot(x,y,'g')
@@ -1436,6 +1429,7 @@ plt.title('辅助 Y 轴')
 默认情况下，`matplotlib` 会识别所绘制数据的范围，并调整 x 轴和 y 轴的刻度及范围。它还提供了通过 `axis()` 函数手动设置这些值的能力。通过此函数，我们可以使用预定义的关键字（如 `tight`、`scaled` 和 `equal`）来设置轴范围，也可以传递一个列表，使其标记值为 [xmin, xmax, ymin, ymax]。以下代码片段展示了如何手动调整轴范围。
 
 ```
+
 # 手动
 y = np.log(x)
 z = np.log2(x)
@@ -1456,6 +1450,7 @@ plt.title('手动轴范围')
 现在我们已经了解了如何设置轴范围，接下来将快速介绍如何手动设置刻度或轴标记。对于轴刻度，我们有两个独立的函数可用，一个用于设置刻度的范围，另一个用于设置刻度标签。这两个函数直观地命名为 `set_ticks()` 和 `set_ticklabels()`。在下面的示例中，我们为 x 轴设置要标记的刻度，而对于 y 轴，我们使用相应的函数同时设置刻度范围和标签。
 
 ```
+
 # 手动刻度
 plt.plot(x, y)
 ax = plt.gca()
@@ -1483,9 +1478,11 @@ plt.title("x 轴上的手动刻度")
 展示对数缩放 y 轴的图
 
 ```
+
 # 缩放
 plt.plot(x, y)
 ax = plt.gca()
+
 # 值: log, logit, symlog
 ax.set_yscale("log")
 plt.grid(True)
@@ -1497,6 +1494,7 @@ plt.title("对数缩放轴")
 `pyplot` 模块中的 `text()` 接口暴露了 `matplotlib` 的注释功能。我们可以使用此接口注释图形/绘图/子图的任何部分。它接受 x 和 y 坐标、要显示的文本、对齐方式和字体大小参数作为输入，以将注释放置在绘图上的所需位置。以下代码片段注释了抛物线图的最小值。
 
 ```
+
 # 注释
 y = x**2
 min_x = 0
@@ -1522,6 +1520,7 @@ plt.title("带注释的图")
 为了保持一致性，我们通常尝试在整个可视化故事中保持绘图大小、字体和颜色相同。设置每个这些属性会增加代码库维护的复杂性和难度。为了克服这些问题，我们可以全局设置格式化设置，如下面的代码片段所示。
 
 ```
+
 # 全局格式化参数
 params = {'legend.fontsize': 'large',
 'figure.figsize': (10, 10),
@@ -1543,8 +1542,6 @@ plt.rcParams.update(params)
 为了解决这些问题并提供高级接口以及与当前 Python 生态系统协同工作的能力，Python 领域有相当多的可视化库可供选择。一些最流行和强大的库包括 `bokeh`、`seaborn`、`ggplot` 和 `plotly`。这些库中的每一个都建立在 `matplotlib` 的理解和功能集之上，同时提供自己的一套功能和易于使用的包装器来弥补差距。
 
 建议您探索这些库并了解它们的差异。我们将在后续章节中根据需要介绍其中的一些。尽管不同，但大多数库都基于与 `matplotlib` 相似的概念，因此如果您精通 `matplotlib`，学习曲线会更短。
-
-
 
 ## 总结
 
