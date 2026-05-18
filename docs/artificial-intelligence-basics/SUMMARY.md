@@ -1,5 +1,5 @@
 +   [人工智能基础](README.md)
-+   [配套材料](artificial-intelligence-basics_00.md)
++   [引言](artificial-intelligence-basics_00.md)
 +   [1. 人工智能基础](artificial-intelligence-basics_01.md)
 +   [2. 数据](artificial-intelligence-basics_02.md)
 +   [3. 机器学习](artificial-intelligence-basics_03.md)
