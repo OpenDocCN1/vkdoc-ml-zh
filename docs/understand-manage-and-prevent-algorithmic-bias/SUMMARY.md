@@ -1,5 +1,5 @@
 +   [算法偏见理解、管理与预防指南](README.md)
-+   [本书读者对象](understand-manage-and-prevent-algorithmic-bias_00.md)
++   [前言](understand-manage-and-prevent-algorithmic-bias_00.md)
 +   [第一部分 偏见与算法导论](understand-manage-and-prevent-algorithmic-bias_01.md)
 +   [1. 引言](understand-manage-and-prevent-algorithmic-bias_02.md)
 +   [2. 人类决策中的偏见](understand-manage-and-prevent-algorithmic-bias_03.md)
