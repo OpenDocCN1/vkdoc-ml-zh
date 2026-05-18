@@ -7,6 +7,5 @@
 +   [6. 深度学习在物体检测中的应用](building-computer-vision-applications-using-artificial-neura_06.md)
 +   [7. 实践示例：视频中的目标跟踪](building-computer-vision-applications-using-artificial-neura_07.md)
 +   [8. 实践示例：人脸识别](building-computer-vision-applications-using-artificial-neura_08.md)
-+   [9. 工业应用：工业制造中的实时缺陷检测](building-computer-vision-applications-using-artificial-neura_09.md)
-+   [下载 Open MPI](building-computer-vision-applications-using-artificial-neura_10.md)
-+   [解压缩](building-computer-vision-applications-using-artificial-neura_11.md)
++   [9. 工业应用：工业制造中的实时缺陷检测](building-computer-vision-applications-using-artificial-neura_09_0.md)
++   [10. 云端计算机视觉建模](building-computer-vision-applications-using-artificial-neura_09_1.md)
