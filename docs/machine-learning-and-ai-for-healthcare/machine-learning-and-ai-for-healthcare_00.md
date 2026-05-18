@@ -1,12 +1,13 @@
-
+<!--
 
 ![](img/978-1-4842-6537-6_CoverFigure.jpg)
 
 ISBN 978-1-4842-6536-9 e-ISBN 978-1-4842-6537-6 [`doi.org/10.1007/978-1-4842-6537-6`](https://doi.org/10.1007/978-1-4842-6537-6) © Arjun Panesar 2021 标准 Apress 版本。本出版物中使用的通用描述性名称、注册商标、商标、服务标志等，即使未作明确声明，也不意味着这些名称不受相关保护法律和法规的约束，因此可自由用于一般用途。出版商、作者和编辑可以假定，本书中的建议和信息在出版之日是真实准确的。出版商、作者或编辑均不对本书所含材料或可能存在的任何错误或遗漏提供明示或暗示的担保。本书通过 Springer Science+Business Media New York 在全球图书贸易中发行，地址：1 New York Plaza, Suite 4600, New York, NY 10004-1562, USA。电话：1-800-SPRINGER，传真：(201) 348-4505，电子邮件：orders-ny@springer-sbm.com，或访问 www.springeronline.com。Apress Media, LLC 是一家加利福尼亚有限责任公司，其唯一成员（所有者）是 Springer Science + Business Media Finance Inc (SSBM Finance Inc)。SSBM Finance Inc 是一家特拉华州公司。
 
 *谨以此书献给 Kirpa、Ananta 和 Charlotte 的无限威严。*
+-->
 
-引言
+# 引言
 
 世界正在发生变化。全球手机数量已超过人口总数，且互联程度日益加深。人们使用虚拟助手、自动驾驶汽车，通过数字应用寻找伴侣，并在网络上搜索任何健康不佳的症状。每一个数字事件都会留下数字尾气，正如我们所知，这正在将生活数据化。从谷歌到优步，从 Alexa 到 Netflix，许多全球最受欢迎服务的成功，都建立在**大数据**、**人工智能（AI）** 和**优化**的基础之上。
 
