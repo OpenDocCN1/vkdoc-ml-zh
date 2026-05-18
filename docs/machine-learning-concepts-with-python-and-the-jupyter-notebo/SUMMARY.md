@@ -1,5 +1,5 @@
 +   [Python 与 Jupyter Notebook 环境下的机器学习概念](README.md)
-+   [人工智能的简单示例](machine-learning-concepts-with-python-and-the-jupyter-notebo_00.md)
++   [引言](machine-learning-concepts-with-python-and-the-jupyter-notebo_00.md)
 +   [第一部分 人工智能、机器学习与深度学习](machine-learning-concepts-with-python-and-the-jupyter-notebo_01.md)
 +   [1. 人工智能概述](machine-learning-concepts-with-python-and-the-jupyter-notebo_02.md)
 +   [2. 机器学习概述](machine-learning-concepts-with-python-and-the-jupyter-notebo_03.md)
