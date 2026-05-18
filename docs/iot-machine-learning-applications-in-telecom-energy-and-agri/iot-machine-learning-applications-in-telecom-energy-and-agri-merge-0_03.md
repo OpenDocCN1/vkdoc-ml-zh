@@ -72,8 +72,6 @@ df=pd.DataFrame()
 print("Pandas loaded")
 ```
 
-
-
 运行 pandas 加载测试后，你可以确认 pandas 的 Python 安装没有问题。现在你需要测试机器学习库 scikit-learn，这是你在本书的解决方案练习中用于实现机器学习的库。运行以下代码来测试在树莓派上加载 scikit-learn。输出结果如图 3-6 所示。
 
 ![../images/484167_1_En_3_Chapter/484167_1_En_3_Fig6_HTML.jpg](img/484167_1_En_3_Fig6_HTML.jpg)
@@ -142,8 +140,6 @@ Arduino “Hello world” 程序
 
 在继续之前，你需要了解在 Arduino IDE 中编译和运行程序的过程。首先，编写草图代码并将其保存为扩展名为 `∗.ino` 的文件。保存后，转到“工具 ➤ 板”并悬停以打开支持的 Arduino 微控制器板列表。从列表中选择 Arduino Mega 2560。你必须记住每次打开 Arduino IDE 时都要检查，以免在编译中出现错误。图 3-10 显示了如何执行此操作。
 
-
-
 ![../images/484167_1_En_3_Chapter/484167_1_En_3_Fig10_HTML.jpg](img/484167_1_En_3_Fig10_HTML.jpg)
 
 图 3-10
@@ -210,8 +206,6 @@ Arduino IDE 上的“完成编译”消息
 
 如你所见，面包板的顶部和底部有两条导轨，其内部嵌有正极和负极孔。中间的分区各有五列和六十四行，用于连接 LED、物联网传感器或电机等设备。关于此面包板，需要注意的关键点是，在塑料涂层下面是一个电路网格，它将每一行连接在一起。因此，如果你将 LED 的一个引脚放在该行的任何中间位置，你应该能够通过将另一根导线放在同一行上来连接到它。你无需将导线插入与插入任何设备引脚的同一个孔中。面包板的这一特性使其使用起来非常方便，并且无需焊接电路（在使用印刷电路板时需要焊接）。由于此板的性质是整个电路基于孔且不是永久性的，因此你不能将其用于生产级工作。
 
-
-
 ### 整合所有环节
 
 现在，让我们在 Raspberry Pi 3 Model B+ 板上连接一个物联网传感器，并编写一个 Python 程序来获取其数据。在本章下一节中，你将学习如何将物联网传感器数据存储到数据库中。
@@ -261,8 +255,6 @@ GPIO 引脚 1 必须连接到 LDR 模块上标记为 VCC 的引脚。同样，�
 图 3-20
 
 Raspberry Pi GPIO 引脚与 LDR 模块的连接
-
-
 
 ### 对物联网传感器 LDR 模块进行编程
 
@@ -314,6 +306,7 @@ pi@raspberrypi:~/ python ldr.py
 现在是夜晚时间
 清单 3-4
 LDR Python 程序的输出
+```
 
 输出是 LDR Python 程序的一次试运行，它通过输出接近 1 的浮点数来工作，这意味着运行此程序时环境是黑暗的，或者 LDR 传感器模块周围是黑暗的（它可能被物体遮挡了）。如果你在 LDR 模块的光敏电阻上方点亮手电筒或灯泡，它就会开始输出 0 值，表明其周围有光。你可以通过调整 LDR 模块 PCB 顶部的蓝色方形电位器来测试这一点并提高灵敏度。至此，你已经完成了本节的学习，因为你已经能够从物联网传感器获取数据了。
 
@@ -366,8 +359,6 @@ sqlite>
 清单 3-6
 SQLite3 数据库信息代码
 ```
-
-
 
 ### 创建数据库结构
 
@@ -440,8 +431,6 @@ ldrdb.py 的程序执行结果
 接下来，我将向你展示一个完整的 Python 程序，它使用树莓派内部的 CPU 来测量其温度并将其存储在数据库中。该程序将模拟从工业设备或物联网传感器测量数据并将其存储在数据库中的过程。之后，通过一个单独的程序，它将创建一个图表来显示数据，就像你在现实世界的物联网应用中所做的那样。在下一节中，你将应用并构建一个机器学习模型。当你从树莓派单板计算机（SBC）板获取这些数据，然后将其存储在数据库中供以后在机器学习模型中使用时，这将会非常令人兴奋。让我们开始吧。
 
 用于实现机器学习的程序如代码清单 3-9 所示。
-
-
 
 ```
 #初始化 Python 库
@@ -546,7 +535,6 @@ counter=counter+1
 
 现在，预警系统包括针对红色温度的声音警报以及使用 LED 针对 CPU 温度的视觉警报。在实际应用中，你将需要这些警报系统以及其他系统，例如短信或电子邮件警报，为此你可能需要在树莓派上配置邮件和短信网关服务器。我们不会这样做，因为我们正在进行概念验证级别的代码，这超出了本书的范围。
 
-
 现在你需要在 25 号引脚初始化 LDR（光敏传感器模块），这在本章前面的部分已经完成。之后，你需要初始化 pandas 数据框（dataframe）来在内存中存储数据。使用 pandas 的原因是它能给数据提供结构，并允许你根据需求在 Python 中操作和分析数据。接下来是一个无限`while`循环，首先你通过`cpu.temperature`获取 CPU 温度并存储在一个变量中。下一步是检查温度值。如果温度大于 60，屏幕上会显示一条警报信息：“RED ALERT CPU EXCEEDING HIGH TEMPERATURE”（红色警报：CPU 温度过高），随后程序中使用`redled.on()`函数点亮红色 LED。当此事件发生时，其他 LED（绿色和黄色）应被关闭，因此你为这些 LED 对象使用`off()`函数，以避免对 CPU 温度状态产生混淆。你不希望所有 LED 都亮起；此时只有红色 LED 应亮起以显示危急状态。使用 pygame 通过`pygame.mixer.music.play()`函数从树莓派扬声器播放警报音。类似地，还有另外两个条件。下一个条件是当 CPU 温度值介于 55 到 60 度之间时，屏幕上显示状态信息“YELLOW ALERT CPU NEARING HIGH-TEMPERATURE THRESHOLD”（黄色警报：CPU 接近高温阈值），并使用`on()`函数点亮黄色 LED，同时使用各自的`off()`函数关闭红色和绿色 LED。此时不播放声音，因为这不是危急情况；只有当温度达到 60 度的临界极限时才会播放声音。你可能会好奇我是如何得出 60 摄氏度这个数值的。我只是参考了树莓派附带的官方手册，其中提到了 30 到 60 摄氏度的范围。下一个是绿色状态，此时 CPU 安全，无需任何警报，但对于观看屏幕的人来说，会显示一条信息“TEMPERATURE IS NORMAL”（温度正常）。使用其`on()`函数点亮绿色 LED，并使用各自的`off()`函数关闭黄色和红色 LED。一旦你在变量`tempstatus`中获得了 CPU 系统的这个状态，就需要将其存储到 pandas 数据框中，这通过使用`datetime now()`函数将日期和时间存储到`df['date']`和`df['time']`列中来完成。`df['temperature']`存储来自`tem`变量的温度值。`df['tempstatus']`列存储的是你通过`if`条件对 tempstatus 变量进行判断后得到的值，即“GREEN”、“RED”或“YELLOW”。
 
 现在你需要准备将数据写入 SQLite3 数据库，这通过导入语句`import SQLite3`完成。然后你初始化连接到`machinemon.db`数据库的连接对象。之后创建一个`curr`游标对象，以便在需要时解析表。在写入数据框之前，它的一些列（如`cpu_percent`、`memory_percent`、`disk_percent`和`LDR value`）是空值。`cpu_percent`变量用于存储 CPU 百分比值，`memory_percent`变量用于存储内存百分比值，`disk_percent`用于存储磁盘百分比值，`ldrval`变量用于存储 LDR 模块的白天或夜晚值。
@@ -606,8 +594,6 @@ sqlite> pragma table_info(machinedata);
 7|outage|varchar|0||0
 8|ldrval|boolean|0||0
 sqlite> select count(∗) from machinedata;
-
-
 
 sqlite>
 列表 3-11
@@ -687,8 +673,6 @@ $crontab -e
 
 在本章的最后一节中，你将把机器学习模型应用于你在 SQLite3 数据库中收集的模拟传感器数据。
 
-
-
 ## 将机器学习模型应用于传感器数据
 
 为了进行机器学习并将其应用于上一节中 `machinemon.db` 数据库和 `machinedata` 表中的模拟传感器数据，你需要执行清单 3-13 中所示的代码。
@@ -730,3 +714,76 @@ x_train, x_test, y_train, y_test = train_test_split( features, target, test_size
 from sklearn.linear_model import LogisticRegression
 lr  = LogisticRegression()
 lr.fit(x_train, y_train)
+
+# Returns a NumPy Array
+
+# Predict for One Observation (image)
+lr.predict(x_test)
+predictions = lr.predict(x_test)
+
+# Use score method to get accuracy of model
+score = lr.score(x_test, y_test)
+print(score)
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn import metrics
+import numpy as np
+cm = metrics.confusion_matrix(y_test, predictions)
+print(cm)
+plt.figure(figsize=(9,9))
+sns.heatmap(cm, annot=True, fmt=".3f", linewidths=.5, square = True, cmap = 'Blues_r');
+plt.ylabel('Actual label');
+plt.xlabel('Predicted label');
+all_sample_title = 'Accuracy Score: {0}'.format(score)
+plt.title(all_sample_title, size = 15);
+plt.figure(figsize=(9,9))
+plt.imshow(cm, interpolation="nearest", cmap="Pastel1")
+plt.title('Confusion matrix', size = 15)
+plt.colorbar()
+tick_marks = np.arange(10)
+plt.xticks(tick_marks, ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"], rotation=45, size = 10)
+plt.yticks(tick_marks, ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"], size = 10)
+plt.tight_layout()
+plt.ylabel('Actual label', size = 15)
+plt.xlabel('Predicted label', size = 15)
+width, height = cm.shape
+for x in xrange(width):
+for y in xrange(height):
+plt.annotate(str(cm[x][y]), xy=(y, x),
+horizontalalignment='center',
+verticalalignment='center')
+plt.show()
+清单 3-13
+在模拟传感器数据上应用机器学习
+```
+
+从代码中可以看出，它首先导入稍后将在程序中使用的 Python 库，例如 `pandas` 和 `SQLite3`。然后初始化与 `machinemon.db` 数据库的连接，并为连接对象创建一个游标。这次，你没有使用查询字符串来创建查询，而是使用 pandas 对象 `pd` 及其下的函数 `read_sql_query()`，通过传递 SQL 查询和 `conn` 对象，通过 SQLite3 驱动程序连接到你的数据库。使用代码 `df = pd.read_sql_query("select ∗ from machinedata;", conn)` 将 `machinemon.db` 数据库中的整个 `machinedata` 表传输到 pandas 数据框 `df` 中。
+
+下一部分是探索性数据分析（EDA），你使用 `df.columns` 和 `df.size` 语句查看数据框 `df` 的大小和形状。在代码的下一部分，你使用 `astype()` 函数将 `outage` 列转换为整数，因为它包含的值中，1 表示发生中断，0 表示未发生中断。`tempstatus` 列包含非数值（RED、GREEN 和 YELLOW）；需要将它们映射为 0 表示绿色，1 表示橙色或黄色，2 表示红色。你需要这样做，因为 Python 中的机器学习库无法处理非数值，需要数值数据来进行计算。这种转换也称为创建虚拟变量，通过代码中的语句 `df['tempstatus'] = df['tempstatus'].map({'RED':2, 'ORANGE':1, 'GREEN':0})` 实现。
+
+代码的下一部分是检查是否存在任何缺失值，但这里没有缺失值，因为你有自己的程序将值输入数据库，并且在此过程中没有人工干预。
+
+你使用 pandas 数据框对象 `df` 的 `df.describe()` 函数进行探索性数据分析。完成此操作后，你将查看变量之间的相关性，以检查是否存在任何强关系。确定之后，你将数据框划分为目标变量和特征变量。目标变量是你想要预测的内容。在你的案例中，它是中断（outage）。你想要预测中断并查看其发生时间。你将 `outage` 从特征变量中删除，因为它是你的预测目标。
+
+现在你可以开始创建训练集和测试集。为此，你使用 sklearn 库中的 `train_test_split` 函数。你知道，你的预测目标 `outage` 的值可以是 1 或 0。1 表示发生中断，0 表示未发生中断。所以这是一个分类问题。你使用一个简单的分类算法：逻辑回归。你也可以使用其他算法，如朴素贝叶斯或支持向量机（SVM），来观察预测准确率是否会提高。
+
+你使用 `x_train` 和 `y_train` 数据集训练逻辑回归模型，然后使用 `x_test` 进行预测。预测结果存储在 `predictions` 变量中。为了获得模型的准确率，你使用 `score()` 函数，并将 `x_test` 和 `y_test` 数据集输入其中。一旦知道预测的得分，你就可以使用预测结果来可视化混淆矩阵。这是通过语句 `cm = metrics.confusion_matrix(y_test, predictions)` 完成的。接下来的几行代码初始化 `matplotlib` 对象，并通过将 `cm`（混淆矩阵）对象输入其中来创建图形热力图。你将在本节中看到两个图形可视化：第一个是准确率得分，第二个是输入到 `plt.title()` 函数中的混淆矩阵。最后，`plt.show()` 将两个图形显示在屏幕上。如果你在 Raspbian 命令行窗口中运行此代码，它将自动在桌面上弹出一个包含两个图形的窗口，看起来非常像图 3-26 和图 3-27。
+
+![../images/484167_1_En_3_Chapter/484167_1_En_3_Fig27_HTML.jpg](img/484167_1_En_3_Fig27_HTML.jpg)
+
+图 3-27
+
+混淆矩阵
+
+![../images/484167_1_En_3_Chapter/484167_1_En_3_Fig26_HTML.jpg](img/484167_1_En_3_Fig26_HTML.jpg)
+
+图 3-26
+
+准确率得分热力图
+
+## 总结
+
+在本章中，你了解了使用 Python 的树莓派以及该物联网监控应用的整体框图。你通过编写一个 Python 树莓派 Hello world 程序测试了你的系统。接着，你测试了诸如 scikit-learn 和 pandas 等所有 Python 库是否都能完美加载。然后，你使用 Python 测试了 Arduino 设置，以确认其硬件配置完成后能否正常通信。你通过将第一个草图刷写到 Arduino 的内存中运行了它。接下来，你了解了如何通过首先配置树莓派的 GPIO 引脚，然后使用面包板电路进行硬件设置，从而从树莓派的示例代码中获取物联网传感器数据。接着，你学习了通过一个 Python 程序对物联网传感器光敏电阻模块进行编程，以检测白天和黑夜。该程序的另一个重要部分是通过配置 SQLite3 等数据库并创建数据库结构来存储物联网数据。然后，你运行了一个 Python 程序，从 LDR 模块获取数据并将其存储在 SQLite3 数据库中。接着，你创建了一个基于 Python 的实用物联网应用，该应用基于温度和光照状态数据具备高级预警能力，使你能够为其创建一个监控代理。然后，你通过使用逻辑回归算法，根据物联网传感器的读数对温度状态进行分类，将机器学习应用于从温度和 LDR 模块收集的数据之上。你通过使用 Seaborn Python 库构建混淆矩阵，创建了分类模型的可视化，并确定了预测模型的准确性。
+
+通过准确率分数和混淆矩阵的可视化，我在此结束本节及本章的内容。你现在已经对如何利用物联网传感器数据应用机器学习以获得业务成果有了实质性的理解。在第五章中，你将了解使用 Python 执行物联网和工业物联网应用所需的设置和安装。
+
