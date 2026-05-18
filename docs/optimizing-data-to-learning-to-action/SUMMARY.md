@@ -1,5 +1,5 @@
 +   [数据到学习到行动的优化指南](README.md)
-+   [那么，它是什么？](optimizing-data-to-learning-to-action_00.md)
++   [引言](optimizing-data-to-learning-to-action_00.md)
 +   [1. 行动的理由](optimizing-data-to-learning-to-action_01.md)
 +   [2. 新方法的根源](optimizing-data-to-learning-to-action_02.md)
 +   [3. 从数据到学习再到行动](optimizing-data-to-learning-to-action_03.md)
