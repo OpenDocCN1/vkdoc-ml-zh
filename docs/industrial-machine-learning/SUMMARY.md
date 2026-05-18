@@ -1,5 +1,5 @@
 +   [工业机器学习](README.md)
-+   [关于作者与技术审稿人](industrial-machine-learning_00.md)
++   [致谢](industrial-machine-learning_00.md)
 +   [1. 引言](industrial-machine-learning_01.md)
 +   [2. 背景知识](industrial-machine-learning_02.md)
 +   [3. 经典机器学习](industrial-machine-learning_03.md)
