@@ -1,4 +1,4 @@
-
+<!--
 
 ![](img/A978-1-4302-5990-9_CoverFigure_HTML.jpg)
 
@@ -50,8 +50,9 @@ ApressOpen 版权声明：您有权出于非商业目的，完整复制、使用
 *   ApressOpen 电子书可供全球免费非商业使用。
 *   ApressOpen 电子书提供 PDF、ePub 和 Mobi 格式。
 *   用户友好的 ApressOpen 免费电子书许可协议见本书版权页。
+-->
 
-致谢
+# 致谢
 
 衷心感谢 Yara Rizk（第 7 章）、Nadine Hajj（第 8 章）、Nicolas Mitri（第 9 章）和 Obada Al Zoubi（第 9 章）对本书的贡献。
 
