@@ -1,5 +1,5 @@
 +   [iOS 机器学习入门指南](README.md)
-+   [关于作者与关于技术审阅者](beginning-machine-learning-in-ios_0.md)
++   [致谢](beginning-machine-learning-in-ios_0.md)
 +   [1. 机器学习简介](beginning-machine-learning-in-ios_1.md)
 +   [2. Core ML 框架简介](beginning-machine-learning-in-ios_2.md)
 +   [3. 使用 Turi Create 创建自定义 Core ML 模型](beginning-machine-learning-in-ios_3.md)
