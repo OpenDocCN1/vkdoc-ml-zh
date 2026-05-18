@@ -49,8 +49,6 @@ my_custom_dataframe.expect_column_values_to_be_in_set (
 
 检查点是 Great Expectations 框架在生产管道中验证数据的方式。检查点提供了一个框架，用于将一个或多个数据批次组合在一起，并针对所述批次数据执行期望。一个检查点接收一个或多个批次，并将它们提供给验证器模块。验证器模块生成结果，然后将这些结果传递给一系列验证操作。验证结果告诉你数据相对于定义的期望处于何种状态以及处于何处。最后一步是验证操作，这些操作可以根据你的需求完全配置。操作包括发送电子邮件、更新数据文档等。
 
-
-
 ## 安装与设置
 
 Great Expectations 建议使用虚拟环境来创建项目。因此，我们将采用虚拟环境进行设置。
@@ -310,8 +308,6 @@ print(gender_exp)
 }
 ```
 
-
-
 ## Great Expectations 中的数据验证工作流
 
 到目前为止，我们已经了解了如何通过命令行界面入门，遵循各种选项和设置，并创建了一个非常简单的“Hello World”式的 Great Expectations 项目。上一节的目的在于让你熟悉 Great Expectations 的功能和环境，因为它与创建 Pydantic 模型类或 Pandera 模式验证有所不同。
@@ -549,8 +545,6 @@ print(expectation_notnull)
 ```
 
 这将返回
-
-
 
 ```
 Calculating Metrics:   0%|          | 0/6 [00:00<?, ?it/s]
@@ -844,8 +838,6 @@ mv path-to/my_expectation_suite.json destination-path/shared_expectations/
 图 6-7
 
 Great Expectations 中的期望存储
-
-
 
 ## 结论
 

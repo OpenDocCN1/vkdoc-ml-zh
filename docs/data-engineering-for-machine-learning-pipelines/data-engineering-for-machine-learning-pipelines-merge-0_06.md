@@ -24,8 +24,6 @@
 
 随着我们现已进入完全成熟的机器学习和分析开发阶段，先进的数据验证技术已成为数据质量措施的一部分。数据质量是数据管理过程的重要组成部分。
 
-
-
 ### 优质数据的必要性
 
 整个机器学习建模和数据分析过程都建立在若干假设之上。就像通用线性模型假设底层数据呈正态分布一样，机器学习模型和数据分析也基于对数据的假设。在我们的项目中，此类假设可能如下所示：
@@ -105,8 +103,6 @@ Pydantic 是用于执行数据验证的最流行的 Python 库。它的工作方
 
 Pydantic 提供了一种相对简单的方法来声明传入数据的模式并验证 Pydantic 模型。请注意，当您将数据加载到 Pydantic 模型时，验证会自动发生。Pydantic 会自动捕获错误并对传入数据强制执行约束。在我们深入探讨 Pydantic 的精彩世界之前，让我们先回顾一下 Python 中类型注解的概念。
 
-
-
 ### 类型注解速览
 
 在 Python 编程实践中，类型注解或类型提示是一项可选功能，用于指定输入参数的类型或给定函数返回的变量类型。类型注解是一种最佳实践，它能告知开发者应向函数传递何种类型的数据，以及当函数返回变量或值时，应期望得到何种类型的数据。Python 类型注解仅指定函数、变量、方法等预期的数据类型。Python 并不会强制执行这些注解。因此，默认情况下，仅凭类型注解无法进行类型检查。不过，类型注解确实能提升代码的可读性和文档质量。
@@ -127,7 +123,7 @@ print(myVariable)
 执行 print 函数后，myVariable 的值将是：
 
 ```
-1
+
 ```
 
 现在，我们再进一步：
@@ -161,7 +157,7 @@ addition(33,44)
 我们会得到：
 
 ```
-77
+
 ```
 
 请注意，指定这个 addition 函数返回 float 类型，同时在函数内部显式定义了一个整数，这并不是一个好的编程实践。这里只是想说明 Python 不会强制执行数据类型。
@@ -360,7 +356,9 @@ class Stu(pydantic.BaseModel):
     interests: List[Interests]
 
 print(Stu.schema_json(indent=3))
+
 # 如果 BaseModel 类中的 schema_json 方法
+
 # 已弃用，请改用 model_json_schema 方法：
 #print(Stu.model_json_schema(indent=3))
 ```
@@ -434,8 +432,6 @@ class Person(BaseModel):
     age: conint(ge=30)
     blood_sugar_level: confloat(gt=4, lt=10)
 ```
-
-
 
 ### Pydantic 中的验证器
 
@@ -703,8 +699,6 @@ Name: 0, dtype: object
 
 因此，整数值已被强制转换为字符串。
 
-
-
 ### Pandera 中的检查（Checks）
 
 Pandera 中的检查类似于 Pydantic 中的约束类型和字段条件指定。检查用于指定数据框、序列等各种对象的属性，这些属性会通过 Pandera 方法进行验证。为了方便阅读代码，可以提前将检查定义为一个变量，然后在 `DataFrameSchema` 对象中调用该变量。
@@ -903,8 +897,6 @@ SchemaError:  failed series or dataframe validator 0:
 
 正如我们之前讨论的，目前没有足够的数据来判断我们的主张是否正确，并且我们的结论大约有 98% 的准确度。置信度由一个名为“alpha”的参数指定。
 
-
-
 ### 惰性验证
 
 到目前为止，我们看到当调用“validate”方法时，一旦模式中指定的某个假设被证伪，就会立即引发 SchemaError。因此，程序会停止执行后续提供的其他指令。在许多情况下，查看在不同列和检查上引发的所有错误可能更有用。惰性验证正是实现这一点的选项。我们在之前的章节中已经看到了代码的惰性求值。惰性求值是指代码仅在真正需要时才执行。
@@ -921,10 +913,12 @@ Check,
 DataFrameSchema,
 DateTime,
 errors)
+
 # 定义约束条件
 check_ge_3 = Check(lambda x: x > 3)
 check_le_15 = Check(lambda x: x  0.0)
 check_gpa_4 = Check(lambda x: x <= 4.0)
+
 # 模式
 schema = DataFrameSchema(
 columns={
@@ -1147,8 +1141,6 @@ failure cases:
 index  failure_case
 0      4            19
 ```
-
-
 
 ## 结论
 

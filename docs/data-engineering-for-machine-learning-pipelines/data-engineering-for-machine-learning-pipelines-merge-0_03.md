@@ -1,7 +1,5 @@
 # 2. 使用 Pandas 进行数据整理
 
-
-
 ## 引言
 
 数据整理是将来自不同数据源的数据集进行转换、操作和准备的过程。数据清洗和数据操作是描述同一过程的其他术语。在本章中，我们将介绍最古老的 Python 数据分析库 Pandas。我由衷地认为，Pandas 库在 Python 语言被广泛用于数据分析和操作任务方面发挥了重要作用。在本章中，我们将探讨 Pandas 2.0（Pandas 的一个主要版本），研究其数据结构、处理缺失值、执行数据转换、组合多个数据对象以及其他相关主题。
@@ -110,8 +108,6 @@ c  169  13
 ## 索引
 
 索引简单来说就是 DataFrame 中的行引用。索引有助于标识 Pandas 数据结构。也可以说，索引是一种引用指针的方式，该指针标识 Pandas DataFrame 中的特定行或行子集。这是一种提高数据检索性能的方法。
-
-
 
 ### 基本索引方法
 
@@ -307,8 +303,6 @@ Out[107]: 'melon'
 idx_series.iloc[1]
 Out[108]: 'caramel'
 ```
-
-
 
 ### 多重索引
 
@@ -536,7 +530,7 @@ series_a['0 days 00:27:36']
 将得到
 
 ```
-46
+
 ```
 
 以下是查看时间范围内数据子集的方法：
@@ -581,8 +575,6 @@ Freq: 36S, dtype: int64
 ## 数据提取与加载
 
 Pandas 的强大功能之一是其能够以多种格式导入和导出数据。这也是介绍各种数据格式的好时机。数据格式和文件格式已经发展到满足大数据日益增长的需求。当前估计表明，全球每月以各种格式创建、消费和复制约 10 ZB 的数据。
-
-
 
 ### CSV
 
@@ -752,7 +744,9 @@ unpkl_df = pd.read_pickle("location to file.pkl")
 import pandas as pd
 df = pd.DataFrame()
 partition: int = 5000
+
 # specifying partition chunks as 5000 rows
+
 # will load every 5000 rows at every iteration
 file = "/location-to-folder/filepath.csv"
 for chunk in pd.read_csv(file, chunksize=partition):
@@ -760,8 +754,6 @@ df = pd.concat(chunk,ignore_index=True)
 ```
 
 ## 缺失值
-
-
 
 ### 背景
 
@@ -907,8 +899,6 @@ interpolate()
 ## 数据转换
 
 数据转换是为机器学习管道构建高质量数据集时最关键的操作之一。广义上讲，它可以被视为将数据从一种形态转换为另一种形态的过程。数据转换的目标是为下游消费准备数据或创建数据集。
-
-
 
 ### 数据探索
 
@@ -1178,8 +1168,6 @@ ID     Name  DeptID   DeptName
 ```
 
 在右连接的情况下，右侧的表保持不变。将扫描左侧的表以根据部门 ID 列识别匹配信息。然后，匹配的列将被提取出来并附加到右侧的表中。
-
-
 
 #### 外连接
 
@@ -1461,8 +1449,6 @@ Product B  2023-Q1     80
 ```
 
 结果数据框包含一个之前是列字段的索引。现在，结果数据框有两个索引：一个是产品类型，另一个是销售季度列。
-
-
 
 ### unstack( )
 
@@ -1747,8 +1733,6 @@ Person      Likes  Likes_Coded
 3       4      Parks            2
 4       5      Parks            2
 ```
-
-
 
 ### compare( )
 

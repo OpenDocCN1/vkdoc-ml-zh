@@ -25,8 +25,6 @@ Python 中 Polars 库的语法与 Pandas 库相比可能看起来非常相似。
 
 Polars 库同时支持惰性求值和即时求值，而 Python 仅支持即时求值。Polars 会自动优化查询计划，并找到最佳利用内存的机会，同时加速查询的执行。
 
-
-
 ### 惰性求值 vs. 主动求值
 
 为了有效理解和使用 Polars 库，了解编程中的惰性求值和主动求值可能会有所帮助。
@@ -298,8 +296,6 @@ DF ["a", "b"]; PROJECT */2 COLUMNS; SELECTION: None
 也可以将 Pandas 数据框覆盖为惰性数据框。
 
 ## 数据提取与加载
-
-
 
 ### CSV
 
@@ -618,8 +614,6 @@ print(df1_lazy)
 naive plan: (run LazyFrame.explain(optimized=True) to see the optimized plan)
 DF ["Region", "Product", "Sales"]; PROJECT */3 COLUMNS; SELECTION: None
 ```
-
-
 
 ### 基本操作
 
@@ -944,8 +938,6 @@ shape: (4, 4)
 └────┴───────┴──────┴────────┘
 ```
 
-
-
 ### 半连接
 
 半连接会筛选出在右侧表中有匹配项的行：
@@ -1170,8 +1162,6 @@ shape: (51, 6)
 └────────────────┴─────────┴──────────┴──────┴────────────┴──────┘
 ```
 
-
-
 ## Polars/SQL 交互
 
 虽然 Polars 库没有底层的 SQL 引擎，但它支持使用类似 SQL 的语句与数据对象进行交互。因此，当你向 Polars 数据对象发出类似 SQL 的语句时，Polars 会将其转换为相应的表达式，并继续为你提供快速的结果（一如既往）。你可以在平面文件、JSON 文件甚至 Pandas 数据对象上执行“SQL 查询”。让我们看一个包含随机健康数据的数据集的示例。
@@ -1329,8 +1319,6 @@ shape: (10, 3)
 注意
 
 你可能已经注意到在 SQL 上下文中执行 SQL 查询时使用了“`eager=True`”。你也可以将该选项设置为 False 以启用惰性执行。这将返回一个 Polars 惰性数据框。你可以继续在下游数据处理任务中使用该惰性数据框。
-
-
 
 ## Polars 命令行界面
 
