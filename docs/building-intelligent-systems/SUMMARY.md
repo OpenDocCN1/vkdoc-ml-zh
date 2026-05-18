@@ -1,5 +1,5 @@
 +   [智能系统构建指南](README.md)
-+   [本书适合读者](building-intelligent-systems_00.md)
++   [引言](building-intelligent-systems_00.md)
 +   [第一部分](building-intelligent-systems_01.md)
 +   [1. 智能系统入门](building-intelligent-systems_02.md)
 +   [2. 判断何时使用智能系统](building-intelligent-systems_03.md)
