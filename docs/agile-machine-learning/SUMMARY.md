@@ -1,5 +1,5 @@
 +   [敏捷机器学习](README.md)
-+   [关于作者与技术审校](agile-machine-learning_00.md)
++   [引言](agile-machine-learning_00_1.md)
 +   [1. 尽早交付](agile-machine-learning_01.md)
 +   [2. 变更的需求](agile-machine-learning_02.md)
 +   [3. 持续交付](agile-machine-learning_03.md)
