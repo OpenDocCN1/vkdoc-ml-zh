@@ -32,8 +32,6 @@ Google Analytics 流程与注册
 
 最后，点击页面底部的蓝色按钮“**Get Tracking ID**”，并接受服务条款。
 
-
-
 ## JavaScript 跟踪器
 
 登录 Google Analytics 控制面板后，您首先会看到“**管理**”选项卡，其中包含跟踪网页所需的关键 JavaScript 代码片段（清单 13-1）。这是跟踪系统的核心。您只需在“**<<添加您的 Google Analytics 跟踪 ID>>**”处添加您的 API 密钥，并将其放置在所有页面上即可。

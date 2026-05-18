@@ -16,8 +16,6 @@
 
 通过访问 [`www.apress.com/9781484238721`](http://www.apress.com/9781484238721) 并点击源代码按钮，下载第 8 章的文件。打开 Jupyter notebook “**chapter8.ipynb**” 以跟随本章内容进行学习。
 
-
-
 ## MNIST 数据集
 
 MNIST 数据库包含 60,000 张训练图像和 10,000 张测试图像。它是图像识别分类领域的“**Hello World**”。该数据集由高中生和美国人口普查局的员工手写的“**0**”到“**9**”之间的单个数字组成。理解这些数据的最佳方式是查看一些示例。将本章的文件下载到一个名为“**chapter-8**”的目录中，并打开 Jupyter notebook 跟随操作。当你安装 TensorFlow 时，你将能够直接从“**tensorflow.examples.tutorials.mnist**”库中的“**input_data()**”函数下载 MNIST 数据集。这将使训练我们的模型变得容易得多，因为它们已经将数据分成了训练集和测试集。让我们将 MNIST 加载到内存中并提取一些样本（清单 8-1）。
@@ -166,8 +164,6 @@ cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_
 ```
 
 文档指出该函数将在后续版本中被弃用（并且要习惯这一点——这在 TensorFlow 和 Python 的大多数库中都会发生），因此我们将使用一种更通用的类似方法（详情请参阅 Jupyter notebook）。
-
-
 
 ### 实例化会话
 
@@ -330,8 +326,6 @@ model.ckpt.index
 
 代码部分基于 [`https://stackoverflow.com/questions/2368784/draw-on-html5-canvas-using-a-mouse`](https://stackoverflow.com/questions/2368784/draw-on-html5-canvas-using-a-mouse) 上找到的一个优秀代码片段。每当你遇到编码问题或需要解决方案时，StackOverflow.com 应该是你的首选！
 
-
-
 ## 在新手写数字上进行测试
 
 这是我们流程（以及 Web 应用程序）的关键部分。我们需要能够将新的手写数字传递给模型进行预测。
@@ -351,8 +345,10 @@ img = Image.open('my-own-4.png')
 
 ```
 img = img.resize([28,28])
+
 # 添加白色背景
 corrected_img = Image.new("RGBA", (28, 28), "white")
+
 # 将两张图像合并
 corrected_img.paste(img, (0,0), img)
 清单 8-21
@@ -362,10 +358,13 @@ corrected_img.paste(img, (0,0), img)
 接下来，我们将图像转换为数组，移除此处不需要的额外颜色维度（因为我们处理的是黑白图像），最后反转整个图像，使空白像素变为零（清单 8-22）。
 
 ```
+
 # 移除颜色维度
 corrected_img = np.asarray(corrected_img)
+
 # 移除颜色层
 corrected_img = corrected_img[:, :, 0]
+
 # 反转颜色
 corrected_img = np.invert(corrected_img)
 清单 8-22
@@ -382,6 +381,7 @@ corrected_img = np.invert(corrected_img)
 
 ```
 corrected_img = corrected_img.reshape([784])
+
 # 居中在 0-1 之间
 img = np.asarray(corrected_img, dtype=np.float32) / 255.
 清单 8-23
@@ -500,8 +500,6 @@ disk_size_gb: 10
 图 8-10
 
 通过 Google Cloud Shell 上传文件
-
-
 
 ### 步骤 3：在 Google Cloud 上创建工作目录并解压文件
 

@@ -180,8 +180,6 @@ IMPAIRED    150807
 新类别的计数
 ```
 
-
-
 ## 按星期几进行探索
 
 让我们按星期几来细分其中一些类别。盗窃案在周五发生得最为频繁，其次是周六（代码清单 6-9 和图 6-3）。
@@ -270,9 +268,11 @@ Reported Crime Counts by Month
 
 ```
 Input:
+
 # create AM, AFT, NT
 crime_df["Hour"] = [int(hr.split(":")[0]) for hr in crime_df['Time']]
 crime_df["Hour"]
+
 # create new groups
 selections = [
 (crime_df['Hour'] > 5) & (crime_df['Hour']  13) & (crime_df['Hour']  18) & (crime_df['Hour'] <= 5)]
@@ -333,8 +333,6 @@ Plotting Crime by Longitude and Latitude
 图 6-11
 
 来自谷歌地图的同一区域对比卫星图（来源：谷歌地图）
-
-
 
 ### 对地理坐标进行四舍五入以创建区域桶
 
@@ -513,8 +511,6 @@ Google Building 41, 1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA
 如果你的 API 密钥有效且 URL 格式正确，你应该会看到包含类似数据的较长 XML 响应
 ```
 
-
-
 ### 热力图图层
 
 热力图是一种通过强度来可视化信息的方式。这是一种非常实用的工具，可以叠加在地图上，因为它能显示哪些地方事件发生频繁，哪些地方发生较少——非常适合用于报告犯罪情况！
@@ -574,6 +570,7 @@ crime_horizon_df_tmp = crime_horizon_df[
 (crime_horizon_df['Day_of_month'] == Day_of_month) &
 (crime_horizon_df['Month_of_year'] == Month_of_year) &
 (crime_horizon_df['Day_Segment'] == Day_Segment)]
+
 # 为谷歌地图构建 latlng 字符串
 LatLngString = "
 for index, row in crime_horizon_df_tmp.iterrows():
@@ -663,8 +660,6 @@ $ python3 main.py
 图 6-23
 
 运行我们 Web 应用程序的本地版本
-
-
 
 ## 适用于 Azure 的 Git
 
@@ -857,13 +852,12 @@ $ az webapp create --resource-group myResourceGroup --plan myAppServicePlan --na
 
 “**webapp create**”命令及其生成的“**deploymentLocalGitUrl**”值
 
-
-
 ### 第 6 步：将 Git 代码推送到 Azure
 
 现在你已经有了一个占位网站，需要将 Git 代码推送到 Azure（清单 6-41）。
 
 ```
+
 # 如果 git remote 已存在，请运行 'git remote remove azure'
 $ git remote add azure https://flaskuser10@amunateguicrime.scm.azurewebsites.net/amunateguicrime.git
 清单 6-41

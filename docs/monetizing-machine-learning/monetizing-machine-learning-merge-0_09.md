@@ -16,8 +16,6 @@
 
 通过访问 [`www.apress.com/9781484238721`](http://www.apress.com/9781484238721) 并点击源代码按钮，下载第 9 章的文件。打开 Jupyter notebook “**chapter9.ipynb**” 以跟随本章内容。
 
-
-
 ## 使用 Matplotlib 创建股票图表
 
 让我们开始吧；将本章的文件下载到一个名为“**chapter-9**”的文件夹中，并打开 Jupyter notebook 跟随操作。这是我们在前几章中使用过并将继续使用的方法。这种方法允许我们使用 Matplotlib 创建图像，然后将它们转换为字符串，以便 HTML 解释器能够动态接收并理解它们。
@@ -72,6 +70,7 @@ x 轴已旋转但仍不可读的原始图表
 fig, ax = plt.subplots()
 ax.plot(temp_series1.index , long_trade_df)
 plt.suptitle('过度看跌 - 买入: ' + weakest_symbol[0])
+
 # 旋转日期
 myLocator = mticker.MultipleLocator(2)
 ax.xaxis.set_major_locator(myLocator)
@@ -190,8 +189,6 @@ Listing 9-8
 ```
 
 以通常的方式运行 Web 应用程序，并确保其按预期工作。第一次运行时可能会有点慢，但之后应该会变得更流畅。同时尝试页面上的各种选项，确保一切功能正常。
-
-
 
 ## 移动端友好的表格
 

@@ -55,8 +55,6 @@ $ pip3 install Flask
 安装 Flask
 ```
 
-
-
 ### 第 4 步：运行 Web 应用程序
 
 打开命令/终端窗口，在 Mac 或 Windows 上输入以下命令（列表 1-4 和 1-5）。
@@ -230,8 +228,6 @@ $ git commit -am "Intro to Cloud Azure commit"
 ```
 
 所有需要的文件都在本地仓库中。有关 Git 部署到 Azure 应用服务的更多信息，请访问 [`https://docs.microsoft.com/en-us/azure/app-service/app-service-deploy-local-git`](https://docs.microsoft.com/en-us/azure/app-service/app-service-deploy-local-git) 。
-
-
 
 ### 步骤 4：打开 Azure Cloud Shell
 
@@ -420,8 +416,6 @@ $ git push azure master
 最终代码推送到 Azure
 ```
 
-
-
 ### 第 10 步：在浏览器中查看
 
 大功告成！您可以返回占位浏览器页面并点击刷新（或打开新浏览器页面，输入 `http://<<REPLACE-WITH-YOUR-APP-NAME>>.azurewebsites.net`），应该就能看到“**Hello World！**”；如图 1-9 所示。
@@ -517,6 +511,7 @@ version: latest
 
 ```
 from google.appengine.ext import vendor
+
 # 添加安装在“lib”文件夹中的任何库
 vendor.add('lib')
 清单 1-30
@@ -562,8 +557,6 @@ $ cd GoogleCloudFlaskIntro
 在 GCP 中创建目录
 ```
 
-
-
 ### 第 4 步：将 Flask 文件上传至 Google Cloud
 
 有多种方法可供选择：你可以逐个上传文件、克隆 GitHub 仓库，或者将它们压缩成一个归档文件后一次性上传。我们将采用后者。因此，请仅将以下四个文件：“**app.yaml**”、“**appengine_config.py**”、“**main.py**”和“**requirements.txt**”压缩成一个归档文件（图 1-13）。
@@ -597,6 +590,7 @@ $ unzip Archive.zip
 $ sudo pip3 install -t lib -r requirements.txt
 列表 1-35
 用必要的 Python 库填充 lib 目录
+```
 
 此时，如果你运行“**ls**”命令，云中的文件夹目录应如下所示（列表 1-36）。
 
@@ -759,8 +753,6 @@ serverless-hosting-on-amazon-aws/
 列表 1-45
 AWS Elastic Beanstalk 上 Web 应用程序所需的所有文件
 ```
-
-
 
 ### 步骤 3：为 Elastic Beanstalk 创建访问账户
 
@@ -932,8 +924,6 @@ $ deactivate
 
 有关更多信息，请参阅 Amazon AWS 文档中题为“**将 Flask 应用程序部署到 AWS Elastic Beanstalk**”的便捷文章，网址为 [`https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create-deploy-python-flask.html`](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create-deploy-python-flask.html) 。
 
-
-
 ## 在 PythonAnywhere 上托管简介
 
 PythonAnywhere 是在互联网上快速原型化你的 Python 交互式想法和模型的绝佳方式。它专为 Python 相关的一切而集成和设计！它并非传统意义上的无服务器，但它是一个专用的 Python 框架，注册无需信用卡，并且可以快速构建概念验证（图 1-28）。
@@ -990,298 +980,3 @@ PythonAnywhere 可能不是一个 100% 的无服务器云提供商，但它提�
 
 脚注 1
 
-# 2. 在 Azure 上使用回归系数的客户端智能
-
-让我们构建一个交互式 Web 应用，使用 Microsoft Azure 上的回归系数来理解自行车租赁需求。
-
-对于我们的第一个项目，我们将使用回归建模来模拟来自 Capital Bikeshare 系统的自行车共享数据集，并了解温度、风和时间等变量如何影响美国中大西洋地区的自行车租赁（图 2-1）。
-
-![images/468330_1_En_2_Fig1_HTML.jpg](img/468330_1_En_2_Fig1_HTML.jpg)
-
-图 2-1
-
-本章的最终 Web 应用
-
-该数据由加州大学欧文分校的 UCI 机器学习库慷慨提供（ [`https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset`](https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset) ）。
-
-### 注意
-
-通过访问 [`www.apress.com/9781484238721`](http://www.apress.com/9781484238721) 并点击源代码按钮，下载第 2 章的文件。打开 Jupyter notebook “**chapter2.ipynb**” 以跟随本章内容。
-
-## 使用回归系数理解自行车租赁需求
-
-我们将构建一种简单且视觉直观的方式来与不同的环境因素进行交互，并观察它们如何影响自行车租赁。这对于用户来说是一种很好的方式，可以确认他们对什么因素会促使人们骑自行车或不骑自行车的直观假设，并且在某些情况下，也会让他们感到惊讶（比如看到冬季的骑行者比夏季多`——`但我让你自己去发现这一点）。
-
-这个 Web 应用背后的“**大脑**”是一个线性回归模型。它能够找到结果变量与历史数据之间的线性关系。我们将利用这一能力，让它学习不同环境因素下随时间变化的自行车租赁需求，并看看它是否能帮助我们预测未来的需求。
-
-每当你将一个 Python 模型扩展到 Web 时，在添加构建 Web 应用所需的额外层之前，先在本地解决所有问题和错误至关重要。在将任何内容迁移到云端之前，先解决所有简单的问题！遵循这条建议将为你省去很多麻烦。
-
-## 探索自行车共享数据集
-
-自行车共享非常流行，尽管它仍然新颖且处于实验阶段。骑行者可以使用手机在线注册、下载手机应用、定位自行车并租用一辆。这种模式创建了一个完整的生态系统，任何人都无需当面交谈或会面即可开始享受这项服务。根据人工智能与决策支持实验室的 Hadi Fanaee-T（摘自 UCI 机器学习库数据集信息的附注）：
-
-> *与公共汽车或地铁等其他交通服务不同，这些系统会明确记录行程的持续时间、出发和到达位置。这一特性将*[*一个*]*自行车共享系统转变为一个虚拟传感器网络，可用于感知城市中的移动性。因此，预计城市中的大多数*[*重要*]*事件都可以通过监测这些数据来检测到。*^(⁵)
-
-下载内容包含两个数据集：“**hour.csv**”和“**day.csv**”。特征详情见表 2.1。^(⁶)
-
-表 2-1
-
-自行车共享数据图例
-
-| 特征名称 | 描述 |
-| --- | --- |
-| **instant** | 记录索引 |
-| **dteday** | 日期 |
-| **season** | 季节 (1: 春季, 2: 夏季, 3: 秋季, 4: 冬季) |
-| **yr** | 年份 (0: 2011, 1:2012) |
-| **mnth** | 月份 (1 到 12) |
-| **hr** | 小时 (0 到 23) |
-| **holiday** | 是否为节假日 |
-| **weekday** | 星期几 |
-| **workingday** | 如果当天既不是周末也不是节假日则为 1，否则为 0。 |
-| **weathersit** | 1. 晴朗，少云，局部多云 2. 薄雾 + 多云，薄雾 + 碎云，薄雾 + 少云，薄雾 3. 小雪，小雨 + 雷暴 + 疏云，小雨 + 疏云 4. 大雨 + 冰雹 + 雷暴 + 薄雾，雪 + 雾 |
-| **temp** | 归一化摄氏温度。值通过 (t-t_min)/(t_max-t_min) 计算得出，t_min = -8, t_max = +39（仅限小时尺度）。 |
-| **atemp** | 归一化体感摄氏温度。值通过 (t-t_min)/(t_max-t_min) 计算得出，t_min = -16, t_max = +50（仅限小时尺度）。 |
-| **hum** | 归一化湿度。值除以 100（最大值）。 |
-| **windspeed** | 归一化风速。值除以 67（最大值）。 |
-| **casual** | 临时用户数量 |
-| **registered** | 注册用户数量 |
-| **cnt** | 包括临时用户和注册用户在内的总租赁自行车数量 |
-
-
-
-### 从 UCI 机器学习库下载数据
-
-该数据集可以直接使用 Python 从 UCI 的存储库下载，或手动访问：[`https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset`](https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset) 进行下载。下载内容包含以下三个文件：
-
-*   day.csv
-*   hour.csv
-*   Readme.txt
-
-每日自行车租赁数据集包含 731 行，每小时数据集包含 17,379 条记录。
-
-### 使用 Jupyter Notebook
-
-每个章节都对应一个 Jupyter notebook。让我们先了解一些基础知识，以便开始使用本章的 notebook。下载源文件，打开一个终端窗口，并导航到该文件夹。在该文件夹中，你应该能找到两个文件和一个文件夹（图 2-2）。
-
-![images/468330_1_En_2_Fig2_HTML.jpg](img/468330_1_En_2_Fig2_HTML.jpg)
-
-图 2-2
-
-终端窗口
-
-“**requirements_jupyter.txt**” 文件包含了运行本章 Jupyter notebook 所需的 Python 库。你可以通过运行 “**pip3**” 命令快速安装它们（列表 2-1）。
-
-```
-$ pip3 install -r requirements_jupyter.txt
-列表 2-1
-安装运行 Notebook 所需的文件
-```
-
-名为 “**chapter2.ipynb**” 的文件是本章实际的 Jupyter notebook。启动 notebook 有多种方法，其中一种常用方法是使用 “**jupyter notebook**” 命令（列表 2-2）。如果此方法对你无效，请参考官方 Jupyter 文档。
-
-```
-$ jupyter notebook
-列表 2-2
-启动本章的 Jupyter notebook
-```
-
-这将打开一个浏览器窗口，其中包含一个文件浏览器仪表板，指向启动该命令的同一文件夹。继续点击 “**chapter2.ipynb**” 链接（图 2-3）。
-
-![images/468330_1_En_2_Fig3_HTML.png](img/468330_1_En_2_Fig3_HTML.png)
-
-图 2-3
-
-Jupyter 的文件浏览器，显示本章的 notebook 链接
-
-这将打开一个新标签页以及相应的 notebook，其中包含跟随本章内容所需的所有探索性代码。本书中的所有代码均假定使用 Python 3.x；如果你使用其他版本，可能需要对代码的某些部分进行调整。打开 notebook 后，你就可以开始操作了。高亮第一个代码框，然后点击播放按钮运行该部分代码（图 2-4）。如果看到错误，请在继续之前解决它们，因为每个代码片段都建立在前一个代码片段之上（错误可能与 Python 版本兼容性问题或需要安装的缺失库有关）。
-
-![images/468330_1_En_2_Fig4_HTML.png](img/468330_1_En_2_Fig4_HTML.png)
-
-图 2-4
-
-Jupyter notebook，代码已高亮并准备运行
-
-本章对应的 Jupyter notebook 展示了一种直接使用 Python 下载和解压数据的方法（如果遇到防火墙问题，请手动下载）。
-
-### 探索数据
-
-Python Pandas 的 “**head()**” 函数可以让我们快速查看数据的前几行，如列表 2-3 和图 2-5 所示。
-
-![images/468330_1_En_2_Fig5_HTML.jpg](img/468330_1_En_2_Fig5_HTML.jpg)
-
-图 2-5
-
-bike_df.head() 的输出
-
-```
-bikes_hour_df_raw.head()
-列表 2-3
-数据集的前几行
-```
-
-使用 “**head()**” 函数，我们了解到数据中包含日期、整数和浮点数。我们还看到一些冗余特征，例如日期（dteday）已经通过 “**season**”、“**yr**”、“**mnth**”、“**hr**” 等进行了分类。因此，“**dteday**” 特征很容易被舍弃（不过为了探索需要，我们会暂时保留它）。其他一些特征似乎也是冗余的，例如 “**temp**” 和 “**atemp**”，可能需要进一步检查。我们还删除了 “**casual**” 和 “**registered**” 特征，因为这些特征无助于我们从单个用户的角度来建模需求，而这正是我们 Web 应用的目标。这些特征可能会成为根据季节、天气等预测注册量的有趣结果变量。但由于它们不符合我们当前的需求范围，我们将删除它们。
-
-我们只保留真正需要的特征，因为这样可以消除杂乱，为我们实现数据科学和 Web 应用目标提供额外的清晰度和理解（列表 2-4）。
-
-```
-bikes_hour_df = bikes_hour_df_raw.drop(['casual', 'registered'], axis=1)
-列表 2-4
-移除对我们目标无用的特征
-```
-
-Pandas 的 “**info()**” 函数也是查看数据中包含的数据类型、数量和空值计数的绝佳方法（列表 2-5）。
-
-```
-输入:
-bikes_hour_df.info()
-输出:
-RangeIndex: 17379 entries, 0 to 17378
-Data columns (total 15 columns):
-instant       17379 non-null int64
-dteday        17379 non-null object
-season        17379 non-null int64
-yr            17379 non-null int64
-mnth          17379 non-null int64
-hr            17379 non-null int64
-holiday       17379 non-null int64
-weekday       17379 non-null int64
-workingday    17379 non-null int64
-weathersit    17379 non-null int64
-temp          17379 non-null float64
-atemp         17379 non-null float64
-hum           17379 non-null float64
-windspeed     17379 non-null float64
-cnt           17379 non-null int64
-列表 2-5
-获取特征信息
-```
-
-使用 “**info()**” 函数，我们看到当前存储在内存中的所有数据要么是浮点数，要么是整数，并且没有空值。如果我们确实发现了空值、日期数据类型或文本数据类型，则需要在进入建模之前处理它们。现有的大多数模型都需要数值数据，而我们正好拥有这些数据，所以目前看来情况不错。
-
-## 深入观察我们的结果变量
-
-让我们看看将用于训练模型的结果变量 “**cnt**”，即总租赁自行车数量。Pandas 的 “**describe()**” 函数是理解定量数据的另一个常用工具。让我们将其应用于我们的结果变量（也称为模型的标签），如列表 2-6 所示。
-
-```
-输入:
-bikes_hour_df['cnt'].describe()
-输出:
-count    17379.000000
-mean       189.463088
-std        181.387599
-min          1.000000
-25%         40.000000
-50%        142.000000
-75%        281.000000
-max        977.000000
-Name: cnt, dtype: float64
-列表 2-6
-自行车租赁数量 “cnt” 特征的数值摘要
-```
-
-我们看到特征 “**cnt**” 的范围介于最小值 1 和最大值 977 之间。这意味着每个记录的小时内，最少有 1 次自行车租赁，最多有 977 次自行车租赁。我们还看到平均租赁次数为 189.5。
-
-我们确认正在处理一个连续数值变量，线性回归（或类似线性回归的模型）是训练和预测自行车租赁数量的正确选择。让我们绘制这个特征以更好地理解数据（列表 2-7 和图 2-6）。
-
-![images/468330_1_En_2_Fig6_HTML.jpg](img/468330_1_En_2_Fig6_HTML.jpg)
-
-图 2-6
-
-排序后的自行车租赁数量显示，大多数租赁发生在 0 到 400 的范围内；高于此值的数值要么是罕见情况，要么是异常值
-
-```
-fig,ax = plt.subplots(1)
-ax.plot(sorted(bikes_hour_df['cnt']), color="blue")
-ax.set_xlabel("行索引", fontsize=12)
-ax.set_ylabel("排序后的租赁数量", fontsize=12)
-ax.set_ylabel("排序后的租赁数量", fontsize=12)
-fig.suptitle('结果变量 - cnt - 租赁数量')
-plt.show()
-列表 2-7
-自行车租赁数量 “cnt” 特征的数值摘要
-```
-
-
-
-## 数值特征与租赁数量
-
-让我们为所有浮点数据类型创建散点图。我们将它们与租赁数量进行对比绘制，以可视化潜在的关系（图 2-7 和 2-8）。
-
-![images/468330_1_En_2_Fig8_HTML.jpg](img/468330_1_En_2_Fig8_HTML.jpg)
-
-图 2-8
-
-所有自行车租赁数量与“**atemp**”特征的关系
-
-![images/468330_1_En_2_Fig7_HTML.jpg](img/468330_1_En_2_Fig7_HTML.jpg)
-
-图 2-7
-
-所有自行车租赁数量与“**temp**”特征的关系
-
-我们可以看到，自行车租赁数量与温度之间存在一定的线性关系；天气越暖和，租出的自行车就越多。我们还注意到，这两个特征——“**temp**”和“**atemp**”——具有相似的分布，可能存在冗余甚至多重共线性。为了保持简洁，我们将删除“**atemp**”特征（图 2-9 和 2-10）。
-
-![images/468330_1_En_2_Fig10_HTML.jpg](img/468330_1_En_2_Fig10_HTML.jpg)
-
-图 2-10
-
-所有自行车租赁数量与“**windspeed**”特征的关系
-
-![images/468330_1_En_2_Fig9_HTML.jpg](img/468330_1_En_2_Fig9_HTML.jpg)
-
-图 2-9
-
-所有自行车租赁数量与“**hum**”特征的关系
-
-“**hum**”特征（即湿度）看起来像一个大团块，尽管边缘确实显示出一些稀疏性。“**windspeed**”特征则显示出与租赁数量的反比线性关系；风力过大似乎不利于自行车租赁。
-
-## 让我们看看分类特征
-
-在这个数据集中，除了自行车租赁数量“**cnt**”之外，整数数据都是分类特征。通过直方图（分布图；图 2-11）查看分类数据时，会发现许多有趣的线索。
-
-![images/468330_1_En_2_Fig11_HTML.jpg](img/468330_1_En_2_Fig11_HTML.jpg)
-
-图 2-11
-
-按“**season**”和“**weathersit**”划分的自行车租赁数量
-
-“**weathersit**”特征显示，人们在天气好的时候会租更多的自行车；而“**season**”特征显示，秋季是租赁自行车的最佳季节。
-
-最后，“**hr**”特征（即租赁小时）清晰地显示出，上班通勤高峰时段和下午骑行是非常受欢迎的自行车租赁时间，而凌晨 4 点是最不受欢迎的骑行时间（图 2-12）。
-
-![images/468330_1_En_2_Fig12_HTML.jpg](img/468330_1_En_2_Fig12_HTML.jpg)
-
-图 2-12
-
-按小时统计的自行车总租赁数量
-
-尽管通过目测图表我们可以学到很多东西，但要就保留哪些特征和删除哪些特征得出决定性结论，还需要进行更全面、更系统的测试。
-
-## 为建模准备数据
-
-在大多数数据科学项目中，都有一个数据整理阶段，在此阶段对数据进行评估和清洗，使其达到“**模型就绪**”的状态。在本例中，我们已经删除了一些无用的特征，没有需要处理的空值，并且我们不必担心相关性或多重共线性，因为我们最终模型只打算使用四个简单的特征。
-
-### 回归建模
-
-在统计分析中，回归模型试图预测变量之间的关系。它会分析自变量如何与因变量相关联。拟合后的模型可用于预测新的因变量。
-
-### 简单线性回归
-
-线性回归可能是最简单的建模算法。它试图解释一个因变量与一个或多个自变量之间的关系。参见图 2-13 中的基本回归方程。
-
-![images/468330_1_En_2_Fig13_HTML.jpg](img/468330_1_En_2_Fig13_HTML.jpg)
-
-图 2-13
-
-基本线性回归方程
-
-在方程中，y = 估计的因变量得分，β0 = 常数，β_1 = 回归系数，x = 自变量的得分。
-
-### 一个简单模型
-
-让我们从一个简单的多元线性回归模型开始，我们将所有变量输入，并得到一个基础的均方根误差（RMSE）。RMSE 以与结果变量（也称为 y 标签）相同的单位来表示误差，因此很容易看出模型在学习/预测自行车租赁方面的表现如何，而误差则成为一种置信区间形式。我们希望获得尽可能低的 RMSE 分数，因此目标是不断调整数据和模型，直到分数不再下降。本章中的所有建模工作都将基于 Python 的 scikit-learn/sklearn 库。^(⁷) 这是一个出色的库，应该能够满足大多数 Python 用户的建模需求。
-
-尽管我们只打算运行一个简单的线性回归，但我们将利用 sklearn 库中的三个函数：“**train_test_split**”用于从原始数据中创建两个随机数据集，并将特征与结果分开；“**linear_model**”用于运行我们的模型；以及“**mean_squared_error**”用于评估模型的学习效果（代码清单 2-8）。
-
-```

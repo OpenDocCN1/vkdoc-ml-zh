@@ -14,8 +14,6 @@
 
 通过访问 [`www.apress.com/9781484238721`](http://www.apress.com/9781484238721) 并点击源代码按钮，下载第 7 章的文件。打开 Jupyter 笔记本“**chapter7.ipynb**”以跟随本章内容。
 
-
-
 ## 探索数据集
 
 请将本章的文件下载到一个名为“**chapter-7**”的文件夹中。打开 Jupyter notebook 以便跟随操作。
@@ -109,8 +107,6 @@ array([[  9.99994910e-01,   5.09005696e-06],
 ```
 
 显然，你可以使用其中任何一个值；只需记住每个值的含义。在我们的案例中，我们将使用第二个值，因为我们对于不打高尔夫球的概率与打高尔夫球的概率相比，兴趣不大。这两个数字之和为 1。
-
-
 
 ## 实时 OpenWeatherMap
 
@@ -211,8 +207,6 @@ http://api.openweathermap.org/data/2.5/forecast?q=Barcelona&APPID=>
 
 键值对“**dt_txt**”是所包含天气预报的开始时间。因此，在这个例子中，对于巴塞罗那 4 月 24 日下午 6 点到 9 点之间，将是疏云天气。能够访问三小时预报为我们的高尔夫预测提供了很好的粒度。有关提取特定日期的方法，请参阅相应的 Jupyter notebook。
 
-
-
 ### 将 OpenWeatherMap 转换为“高尔夫|天气数据”
 
 为了将“**OpenWeatherMap**”数据转换为正确的“**高尔夫|天气数据集**”格式，需要进行一些数据转换。接下来，我们将调整一些量纲，并修正一些分类数据。
@@ -255,8 +249,10 @@ http://api.openweathermap.org/data/2.5/forecast?q=Barcelona&APPID=>
 
 ```
 def GetWeatherOutlookAndWeatherIcon(main_weather_icon):
+
 # 截取第三个字符 - 不需要白天或夜晚标识
 main_weather_icon = main_weather_icon[0:2]
+
 # 返回 "高尔夫|天气数据" 变量和白天图标
 if (main_weather_icon in ["01", "02"]):
 return("sunny", main_weather_icon + "d.png")
@@ -372,8 +368,6 @@ return(False)
 像往常一样，我们希望我们的应用程序直观、可视化且有趣。这将成为全世界所有高尔夫球手的首选应用程序（没错！）。它也是一个强大的应用程序，将使用来自世界任何地方的实时天气预报，同时保持极其简单的构建方式。这就是贝叶斯模型的魅力所在：它简单、快速，并且为 Web 应用程序提供了一个出色的实时且可扩展的建模选项。
 
 我们的网页只需要两个输入框，以便用户可以输入他们想要打高尔夫的位置和明天的具体时间。该应用程序将尝试查找该位置和时间的天气预报，将“**OpenWeatherMap**”的 JSON 数据转换为所需的“**高尔夫|天气数据集**”格式，并针对“**明天我会打高尔夫吗**”这个问题返回“**是**”或“**否**”。非常简单，对吧？
-
-
 
 ### 下载 Web 应用程序
 
@@ -520,8 +514,6 @@ $ eb open willigolftomorrow
 
 在 Elastic Beanstalk 上运行的“***明天我会打高尔夫吗？***”Web 应用程序
 
-
-
 ### 别忘了关闭它！
 
 最后，我们需要终止 Beanstalk 实例，以免产生额外费用。这是一个重要的提醒：大多数云服务都不是免费的（如果提示名称不匹配，请重试）。系统会要求你确认操作（清单 7-28）。
@@ -603,6 +595,7 @@ weather_json = json.load(urlopen(openweathermap_url))
 try:
 weather_json = requests.get(openweathermap_url).json()
 except:
+
 # 找不到位置
 e = sys.exc_info()[0]
 message = "找不到该位置，请重试"

@@ -28,8 +28,6 @@
 
 让我们看看 MovieLens 数据。根据 MovieLens 关于 ml-latest-small 数据集的说明^(⁴⁵)，该数据集包含 671 位用户在 1995 年至 2016 年间对 9,125 部电影创建的 100,004 条评分。
 
-
-
 ### 更多来自 MovieLens 数据集的内页注释
 
 **评分数据文件结构（“ratings.csv”）：**
@@ -198,8 +196,6 @@ movies_df.describe()
 对“movies_df”运行函数“describe()”
 ```
 
-
-
 ## 理解评论与评论文化
 
 现在我们已经对两个数据框有了基本了解，接下来将重点关注它们包含的内容。首先从每个用户 ID 的评论数量开始（代码清单 10-8 和图 10-6）。
@@ -285,8 +281,6 @@ plt.show()
 ```
 
 “**剧情片**”是最常见的类型，其中穿插着一些“**喜剧片**”，这并不令人意外。2000 年似乎是“**剧情片**”电影表现不错的一年。
-
-
 
 ## 获取推荐
 
@@ -399,8 +393,10 @@ matrix([[ 0\. ],
 distances_to_movie = []
 for other_movies in mat.T:
 distances_to_movie.append(scipy.spatial.distance.euclidean(movie_toy_story, other_movies.tolist()))
+
 # 创建包含电影及其与《玩具总动员》距离分数的数据框
 distances_to_movie = pd.DataFrame({'movie':movies_df['title'],'distance':distances_to_movie})
+
 # 按距离升序排序（即最接近 movie_toy_story）
 distances_to_movie = distances_to_movie.sort_values('distance')
 distances_to_movie.head(10)
@@ -426,8 +422,10 @@ distances_to_movie.head(10)
 distances_to_movie = []
 for other_movies in mat.T:
 distances_to_movie.append(scipy.spatial.distance.cosine(movie_toy_story, other_movies.tolist()))
+
 # 创建包含电影及其与《玩具总动员》距离分数的数据框
 distances_to_movie = pd.DataFrame({'movie':movies_df['title'],'distance':distances_to_movie})
+
 # 按距离升序排序（即最接近 movie_toy_story）
 distances_to_movie = distances_to_movie.sort_values('distance')
 distances_to_movie.head(10)
@@ -436,8 +434,6 @@ distances_to_movie.head(10)
 ```
 
 余弦距离将《玩具总动员》与“**玩具总动员 2**”以及其他家庭电影关联起来。有趣的是，余弦距离得出的列表与欧几里得距离不同。
-
-
 
 ## 奇异值分解
 
@@ -473,18 +469,23 @@ ratings_mat_centered = ratings_mat - user_ratings_mean.reshape(-1, 1)
 让我们的推荐器处理新数据的一种方法是将访问者的电影品味作为一个新的“**UserId**”添加到矩阵中。然后，我们使用“**压缩稀疏行矩阵**”函数“**sps.csr_matrix()**”重建矩阵，该函数会将矩阵转换为 SVD 友好的格式，同时考虑新访问者的信息（代码清单 10-19）。
 
 ```
+
 # 创建一个新的用户 ID - 在当前最大 ID 上加 1
 new_user_id = np.max(ratings_df_cp['userId']) + 1
+
 # 将电影偏好添加到矩阵中，并为所有电影分配 5 星评分
 new_user_movie_ids = user_history_movie_ids
 new_user_ratings = [5] * len(new_user_movie_ids)
+
 # 将索引设置为以 userId 和 movieId 为多级索引
 ratings_df_cp.set_index(['userId', 'movieId'], inplace=True)
+
 # 将新的电影评分作为 pandas 序列添加，并在 ratings_df_cp 末尾插入新行
 for idx in range(len(new_user_movie_ids)):
 row_to_append = pd.Series([new_user_ratings[idx]])
 cols = ['rating']
 ratings_df_cp.loc[(new_user_id, new_user_movie_ids[idx]), cols] =         row_to_append.values
+
 # 创建新的评分矩阵
 ratings_matrix_plus = sps.csr_matrix((ratings_df_cp.rating,
 (ratings_df_cp.index.labels[0], ratings_df_cp.index.labels[1]))).todense()
@@ -535,8 +536,6 @@ predictions_df.head()
 为新用户排序后的推荐结果
 
 显然，我们不会向这个用户推荐“**辛德勒的名单**”，因为这是他们已经看过的电影；相反，我们推荐“**阿甘正传**”、“**拯救大兵瑞恩**”和“**肖申克的救赎**”。好了，代码部分就到这里；让我们来构建这个系统吧！
-
-
 
 ## 在本地下载并运行“接下来看什么？”代码
 
@@ -629,8 +628,6 @@ MOVIE_GENRES = ["Action", "Adventure", "Animation", "Children", "Comedy", "Crime
 
 *   **background_process()**
     *   此函数与“**index.html**”中的前端 AJAX 函数相关联。每当用户点击三部推荐电影链接之一时，它就会被调用。它获取电影名称并将其传递给“**GetWikipediaData()**”函数，就像“**ready()**”函数所做的那样。这会获取当前焦点电影的描述片段和海报图片。
-
-
 
 ## index.html
 
@@ -820,8 +817,6 @@ $ deactivate
 清单 10-35
 停用虚拟环境
 ```
-
-
 
 ## 结论
 

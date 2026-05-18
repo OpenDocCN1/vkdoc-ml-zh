@@ -32,8 +32,6 @@ A/B 测试的目标是向公众展示不同的产品并衡量他们的反应。�
 
 图片一
 
-
-
 ### 追踪用户
 
 追踪匿名访客有多种方式。常见方法包括使用 Cookie 和数据库。每种方法都有其优势和用途。Cookie 的优势在于，无论用户是否关闭浏览器或关闭电脑，都能在较长时间内追踪用户。网页可以轻松检查访客电脑上之前的 Cookie，并与数据库中的信息进行比对，以判断该访客是否为重复访客。
@@ -150,8 +148,6 @@ mysql> CREATE DATABASE ABTesting;
 列表 14-7
 创建数据库
 ```
-
-
 
 ### 创建表
 
@@ -277,8 +273,6 @@ cnx.close()
 清单 14-15
 使用游标的 SQL “INSERT” 语句
 ```
-
-
 
 ### UPDATE SQL 语句
 
@@ -452,8 +446,6 @@ Create Table Command and PythonAnywhere Confirming That the Table “tblFrontPag
 ```
 
 这就是我们需要在控制台中做的所有事情；其余所有操作都将通过 Python 完成。
-
-
 
 ## 在 PythonAnywhere 上进行 A/B 测试
 

@@ -74,8 +74,6 @@ $ python3 authentication-simple.py
 运行本地 Flask 脚本“authentication-simple.py”
 ```
 
-
-
 ### 摘要认证示例
 
 为了获得经过身份验证的会话（即，允许用户在域内页面间导航而无需在每个页面都登录），你需要使用一种经过身份验证的 cookie。一旦会话的用户通过身份验证，你只需在任何 Flask 函数前加上“**@auth.login_required**”，如果访问者已通过身份验证，会话才会继续；否则，将弹出登录框。相关代码可在脚本“**authentication-digest.py**”（清单 15-3）中找到。
@@ -220,8 +218,6 @@ Memberful 是我们将要使用和实现的插件。我个人喜欢 Memberful^(�
 
 让我们创建一个非常简单的测试网页（无需 Flask）来放置我们的购买链接。完成后，点击它并进行那个虚假购买。你可以使用帮助文档中列出的任何虚假测试信用卡号，或者直接使用“**4242 4242 4242 4242**”。
 
-
-
 ### 创建一个销售虚拟产品的真实网页
 
 构建清单 15-8 中所示的简单 HTML，并确保将购买链接替换为你自己的链接（即使用有效账户）。你可以在本章目录中找到名为“**memberful-purchase.html**”的基础脚本。编辑并运行它，你应该会看到类似图 15-7 的页面。
@@ -343,6 +339,7 @@ def index():
 return render_template('index.html', key=stripe_keys['publishable_key'])
 @app.route('/charge', methods=['POST'])
 def charge():
+
 # 金额以美分为单位
 amount = 500
 customer = stripe.Customer.create(
@@ -396,8 +393,6 @@ margin: 15px 0;
 清单 15-14
 用于“layout.html”和变量“key”的 Jinja2 标签
 ```
-
-
 
 在 [`Stripe.com`](http://stripe.com) 上创建一个免费账户，并按照之前所示导出你的 API 密钥。然后运行示例代码（你可以在本章的下载文件中找到它，原文件名是“**stripe-payments**”）。继续在本地运行代码（清单 15-15 和图 15-13）。
 

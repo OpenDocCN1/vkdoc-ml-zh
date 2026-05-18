@@ -124,8 +124,6 @@ stock_data.head()
 
 这将使得处理这些数据以及将每个股票代码与指数进行比较的自动化工作变得容易得多。
 
-
-
 ## 缩放价格市场数据
 
 为了比较不同价格资产之间的变动，我们需要对数据进行归一化处理。本质上，我们要将所有价格重新调整到一个共同的尺度上。实现这一目标的方法有很多，在本网络应用中，我们将使用百分比变化和累积求和。
@@ -193,9 +191,11 @@ stock1 = '^DJI'
 last_distance_from_index = {}
 temp_series1 = stock_data[stock1].pct_change().cumsum()
 for stock2 in list(stock_data):
+
 # 无需处理自身
 if (stock2 != stock1):
 temp_series2 = stock_data[stock2].pct_change().cumsum()
+
 # 我们用股票减去指数，如果股票相对于指数表现强劲，结果将为正值
 diff = list(temp_series2 - temp_series1)
 last_distance_from_index[stock2] = diff[-1]
@@ -274,8 +274,6 @@ print('最强股票代码: %s' % strongest_symbol[0])
 1.  买入“**MMM**”
 
 2.  做空“**BA**”
-
-
 
 ## 计算交易股数
 
@@ -443,8 +441,6 @@ Bootstrap 字段验证
 
 我们将在接下来的章节中继续构建“**配对交易平台**”Web 应用，所以请保留好代码。
 
-
-
 ## 在 PythonAnywhere 上运行
 
 登录你在第 1 章中使用的 PythonAnywhere 账户。导航到仪表盘右上角的“**文件**”按钮。在 PythonAnywhere 上创建一个名为“**pair-trading-booth**”的新文件夹。点击顶部菜单栏中的“**文件**”链接，然后在目录文本框中输入“**pair-trading-booth**”，并点击“**新建目录**”（图 5-16）。
@@ -577,16 +573,22 @@ PythonAnywhere 上的文件结构
 需要对此文件进行两处编辑。更新“**project_home**”变量以包含你的账户名（这应该会自动完成），并将文件夹名称改为“**pair-trading-booth**”。这通知 Web 服务器，“**pair-trading-booth**”文件夹是它找到服务 Web 应用所需所有文件的地方。接下来，更新脚本的最后一行，使其从“**main**”（main.py 的简称）导入，如代码清单 5-25 所示。
 
 ```
+
 # 此文件包含提供您的
+
 # Web 应用程序所需的 WSGI 配置，网址为 http://.pythonanywhere.com/
+
 # 它通过将变量 'application' 设置为某个 WSGI 处理程序来工作。
+
 #
 # 以下内容已为您的 Flask 项目自动生成
 import sys
+
 # 将您的项目目录添加到 sys.path
 project_home = u'/home//pair-trading-booth'
 if project_home not in sys.path:
 sys.path = [project_home] + sys.path
+
 # 导入 flask 应用，但需要将其命名为 "application" 以便 WSGI 工作
 from main import app as application
 代码清单 5-25
@@ -638,6 +640,4 @@ from main import app as application
 我会不厌其烦地提醒你在每章结束后关闭服务。
 
 脚注 1
-
-
 

@@ -54,8 +54,6 @@ print('清理后发现的重复项：%i ' % sum(sms_df.duplicated()))
 移除重复行
 ```
 
-
-
 ## 基于文本的特征工程
 
 请务必记住，目前大多数模型（包括 NLP 模型）只能处理定量数据。这意味着我们需要将这些文本形式的短信数据转换为数字。我们将使用各种已知的技巧，例如统计单词数和字符数。
@@ -153,8 +151,6 @@ sms_df["sms_clean"].head()
 我们最终得到了一些看起来有点滑稽的句子，至少对人类来说不太容易阅读。
 
 在数据整理方面，我们可以做的其他事情还有很多。尽管我们在这里不会用到它们，但很好的后续步骤是“**词干提取**”和“**词形还原**”，以进一步将单词缩减为共同的词根。例如，如果你输入单词“**organize**”、“**organizes**”和“**organizing**”，它们都会被缩减为“**organi**”。^((54)) 我们离将清洗后的数据输入 TFIDF 和 RF 越来越近了，但在建模之前，我们还有一个更容易的胜利可以争取。
-
-
 
 ## 使用外部典型垃圾词列表
 
@@ -277,8 +273,6 @@ prediction_probas = rf_model.predict_proba(X_test)
 获取垃圾邮件与正常邮件的概率
 ```
 
-
-
 ### 衡量模型性能
 
 sklearn.metrics 库提供了大量函数来帮助我们衡量模型的性能。我们将从“**classification_report**”（列表 11-14）开始。
@@ -380,8 +374,6 @@ prediction_tmp = [1 if x >= 0.3 else 0 for x in prediction_probas[:, 1]]
 
 当阈值截断值为 0.3 时，模型没有将任何正常邮件错误地标记为垃圾邮件！但代价是，我们将错误标记为正常邮件的垃圾邮件数量从 182 封增加到了 284 封（即，广告邮件进入了用户的收件箱）。而垃圾邮件文件夹只收到了 10 封正确标记的垃圾邮件，而不是 120 封。你看，*这就是代价*。在像正常邮件与垃圾邮件这样的场景中，这个代价是微不足道的，因为没有人愿意丢失任何个人邮件，并且为了实现这个目标，他们愿意容忍大量的垃圾邮件。
 
-
-
 ## 与网页图形交互
 
 我们将在此实现一个很棒的功能：允许用户点击 AUC 图像来试验模型的阈值。这是一种非常直观的方式，能让用户与网页及本章涉及的概念进行交互。使用 JavaScript 捕获用户的点击事件很容易，通过捕获“**事件偏移量**”（代码基于 Emanuele Feronato 的文章；有关此方法的更多信息，请参阅[`http://www.emanueleferonato.com/2006/09/02/click-image-and-get-coordinates-with-javascript/`](http://www.emanueleferonato.com/2006/09/02/click-image-and-get-coordinates-with-javascript/)），并将其传回 Flask 进行处理（代码清单 11-18）。
@@ -404,6 +396,7 @@ fetchdata(cur_x_coord, cur_y_coord)
 x_image_coord = int(request.args.get('new_x_coord'))
 y_image_coord = int(request.args.get('new_y_coord'))
 new_thres = 0.0
+
 # 将坐标转换为阈值
 if (y_image_coord >= 360 and y_image_coord = 340 and y_image_coord = 290 and y_image_coord = 260 and y_image_coord = 220 and y_image_coord = 185 and y_image_coord = 150 and y_image_coord = 115 and y_image_coord = 75 and y_image_coord < 115):
 new_thres = 0.9
@@ -607,8 +600,6 @@ Git 提交
 
 ### azure-cli 命令行界面工具
 
-
-
 ### 步骤 1：登录
 
 创建一个“**az**”会话（清单 11-29 和图 11-14）。
@@ -704,6 +695,7 @@ $ az webapp create --resource-group myResourceGroup --plan myAppServicePlan --na
 现在你有了一个占位网站，需要将你的 Git 代码推送到 Azure（清单 11-35）。
 
 ```
+
 # 如果 git remote 已存在，请运行 'git remote remove azure'
 $ git remote add azure "https://flaskuser30@amunateguihamspam.scm.azurewebsites.net/amunateguihamspam.git"
 清单 11-35
@@ -754,8 +746,6 @@ $ deactivate hamspamenv
 清单 11-39
 如果之前没有结束，请结束你的虚拟会话
 ```
-
-
 
 ## 故障排除
 

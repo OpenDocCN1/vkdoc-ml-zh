@@ -96,8 +96,6 @@ $ pip3 install Flask-SSLify --user
 安装额外的库
 ```
 
-
-
 ## Memberful 身份验证
 
 Memberful 支持使用 OAuth 2.0 协议进行身份验证，但由于它要求您将应用程序直接绑定到您的 Memberful 账户，因此创建付费墙比您自己实现要容易得多。更多信息，请参考 Memberful 官方文档：[`https://memberful.com/help/integrate/advanced/memberful-api/`](https://memberful.com/help/integrate/advanced/memberful-api/)。
@@ -152,6 +150,7 @@ https://>.memberful.com/api/graphql/member?access_token=999999999
 
 ```
 def IsSubscriberLoggedIn(code):
+
 # 构建访问令牌字典
 access_token_req = {
 "code": code,
@@ -159,11 +158,13 @@ access_token_req = {
 "client_secret": MEMBERFUL_SECRET,
 "redirect_uri": redirect_uri,
 "grant_type": "authorization_code" }
+
 # 构建 oauth/token 以访问访客数据
 content_length=len(urlencode(access_token_req))
 access_token_req['content-length'] = str(content_length)
 r = requests.post(MEMBERFUL_SITE + '/oauth/token', data=access_token_req)
 data = json.loads(r.text)
+
 # 构建 graphql 查询以查询所需的具体值
 r = requests.get(MEMBERFUL_SITE + '/api/graphql/member?access_token=' +             data['access_token'] +                                           '&query={%20currentMember%20{%20fullName%20subscriptions%20{%20active%20expiresAt%20}%20}%20}')
 清单 16-8
@@ -227,8 +228,6 @@ query={%20currentMember%20{%20fullName%20subscriptions%20{%20active%20expiresAt%
 清单 16-11
 如果我们运行它并查看 graphQL 响应，我们会得到
 ```
-
-
 
 ### 调用 Memberful 函数
 
@@ -408,8 +407,6 @@ PYTHONANYWHERE_SITE = '>'
 图 16-15
 
 两个新按钮：一个用于退出登录，一个用于访问账户信息
-
-
 
 ## 结论
 

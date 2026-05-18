@@ -122,8 +122,6 @@ JavaScript, xxvii, xxxiii–xxxvi JavaScript 事件 JavaScript 追踪器 Jinja2,
 
 词形还原
 
-
-
 ### M
 
 机器学习，xxiii–xxix 邮件列表，xxxvii main.py Matplotlib Memberful，xxxv，xxxvi Memberful 认证 /account /auth/sign_in /auth/sign_out /checkout flask 会话机制 graphql 会员平台，xxxv–xxxvi 留言板，xxxvi 微软 Azure，xxxvii Azure-cli MNIST 数据集 移动端 Web 应用 Bootstrap 流体容器 form-validation 建模 交叉验证 梯度提升 线性回归 linear_regression() 逻辑回归 模型系数 非线性回归 PolynomialFeatures() 多项式回归 预测生存率 RMSE sklearn 时间序列 train_test_split() 使用梯度提升建模 混淆矩阵 评估模型 梯度提升分类器 真实值 学习率 持久化模型 精确率 对新数据进行预测 模型性能 曲线下面积 混淆矩阵 f1 分数 模型阈值 精确率 召回率 接收者操作特征 电影类型 MovieLens 数据集 movieId 评分 userId MySQL 命令行监视器 create database create table create user drop table mysql.connector connect() INSERT SELECT UPDATE
@@ -167,3 +165,5 @@ templates/index.html TensorFlow 准确率 checkpoint conv2d() 卷积神经网络
 ### W, X, Y, Z
 
 天气预报 Web 应用 awscli awsebcli eb eb open Elastic Beanstalk HTML 表格 沙盒，xxxviii，xxxix 虚拟环境，xxxviii–xxxix WSGIApplicationGroup Web 插件，xxix，xxxv 维基百科 API 葡萄酒质量数据集 info() value_counts() 词频统计
+
+![](images/cover.jpg)
