@@ -41,8 +41,6 @@ R 开源项目的详细信息可在 [`www.R-project.org`](http://www.r-project.o
 | [统计](https://cran.r-project.org/web/views/Graphics.html)学习 | 基于统计和概率的各种算法，用于数据挖掘、推理和预测 |
 | [杂项](https://cran.r-project.org/web/views/HighPerformanceComputing.html) | 模型选择和验证算法、量化测试模式类别的证据分类器、用于确定和处理缺失值和数值数据的分类模型、用于预测响应变量的基于特征和基于图的数据 |
 
-
-
 ### Oracle 的 R 技术
 
 Oracle 的 R 技术包含以下组件：
@@ -143,8 +141,6 @@ conn <- dbConnect(drvr, username = "myusername", password = "mypassword", dbname
 drvr <- Oracle()
 ```
 
-
-
 此外，还可以设置另外两个参数 `SYSDBA` 和 `external_credentials`，分别用于以 `SYSDBA` 身份连接和进行外部身份验证。它们的指定方式为 `SYSDBA = TRUE|FALSE` 和 `external_credentials=TRUE|FALSE`。这些功能在 ROracle 1-1.11 版本中受支持。
 
 清单 3-2 给出了将数据从 R 的 `data.frame` 写入 Oracle 表，随后从同一表中读取数据到 R 的 `data.frame` 并显示的示例代码。
@@ -160,11 +156,13 @@ eff_start_date <- "2017-01-01";
 eff_start_date <- as.POSIXct(eff_start_date);
 eff_end_date <- "2017-12-31";
 eff_end_date <- as.POSIXct(eff_end_date);
+
 # The TZ env variable in R must be set as also the corresponding ORA_SDTZ # env var to the same value
 Sys.setenv(TZ = "EST")  # EST value is obtained from SESSIONTIMEZONE value # in Oracle
 Sys.setenv(ORA_SDTZ = "EST")
 dbGetQuery(conn, insertStr, data.frame(cd, descr, eff_start_date, eff_end_date));
 dbCommit(conn)
+
 # Selecting data into R data.frame and displaying it
 select_resultset <- dbSendQuery(conn, "select * from testr.temp_tab")
 data <- fetch(select_resultset)
@@ -216,6 +214,7 @@ library(ROracle)
 drvr <- dbDriver("Oracle")
 conn <- dbConnect(drvr, username = "testr", password = "testr", dbname="orcl")
 dbListTables(conn)
+
 # Selecting data based on code value CODE13 into R data.frame and displaying it
 select_resultset <- dbSendQuery(conn, "select * from testr.temp_tab where cd = :1", data = data.frame(cd='CODE13'))
 data1 <- fetch(select_resultset)
@@ -271,8 +270,6 @@ ORAAH 支持的主要机器学习算法
 关于 ORAAH 的更多信息，包括支持的各种算法和基准测试，可在 Oracle 网站上找到：[`www.oracle.com/technetwork/database/database-technologies/bdc/r-advanalytics-for-hadoop/overview/index.html`](http://www.oracle.com/technetwork/database/database-technologies/bdc/r-advanalytics-for-hadoop/overview/index.html)。
 
 使用 Hive 和 ORAAH 实现其中一些算法的实际用例示例，可在 [`https://blogs.oracle.com/R/entry/oracle_r_advanced_analytics_for`](https://blogs.oracle.com/R/entry/oracle_r_advanced_analytics_for) 找到。
-
-
 
 #### Oracle R Enterprise
 
@@ -335,8 +332,6 @@ ORE 嵌入式执行 API（适用于 R 接口和 SQL 接口）
 OREeda 包含数据库启用的 ORE 版本的 R 模型，用于并行执行线性回归和逐步回归、广义线性模型、神经网络和随机森林分类。它通过以下函数暴露这些功能：`ore.lm()` 用于线性回归和最小二乘回归，`ore.stepwise()` 用于逐步最小二乘回归，`ore.glm` 用于广义线性模型和逻辑回归，`ore.neural()` 用于模式识别的神经网络模型，以及 `ore.randomForest()` 用于分类。所有这些都基于 `ore.frame` 中的数据工作，并可用于基于 Oracle 数据库中的数据创建 R 模型。
 
 OREdm 拥有与实现分类、回归、聚类、属性重要性、关联规则、特征提取和异常检测等效的 Oracle 数据挖掘算法。这些算法可用于使用 Oracle 表中的数据构建模型。以下是算法列表：
-
-
 
 *   分类
     *   决策树
@@ -411,8 +406,6 @@ OBIEE 与 R 图形的集成还包括参数控件，可用于自定义图形，�
 关于决策树和随机森林的详细解释，请参见 [`https://medium.com/towards-data-science/decision-trees-and-random-forests-df0c3123f991`](https://medium.com/towards-data-science/decision-trees-and-random-forests-df0c3123f991) 和 [`https://medium.com/towards-data-science/decision-trees-and-random-forests-for-classification-and-regression-pt-1-dbb65a458df`](https://medium.com/towards-data-science/decision-trees-and-random-forests-for-classification-and-regression-pt-1-dbb65a458df) 。决策树和随机森林的比较使用，请参见 [`http://whrc.org/wp-content/uploads/2016/02/DecisionTrees_RandomForest_v2.pdf`](http://whrc.org/wp-content/uploads/2016/02/DecisionTrees_RandomForest_v2.pdf) 。
 
 清单 3-4 给出了示例代码。它构建了 R 模型，随后在测试数据上测试构建的模型，以根据 `Wine` 类别预测葡萄酒的产地。它输出一个预测结果表，以及一个显示预测葡萄酒产地输出与输出表对比的 PNG 图形。其源数据包括修改从 [`https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data`](https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data) 获取的葡萄酒数据集。此外，还参考了 [`https://datascienceplus.com/predicting-wine-quality-using-random-forests/`](https://datascienceplus.com/predicting-wine-quality-using-random-forests/) 上的文章作为示例。
-
-
 
 ```
 > library(randomForest)
@@ -490,6 +483,7 @@ library(ORE)
 ore.connect(user="testr", sid="orcl", host="localhost", password="testr")
 ore.doEval(function () {
 library(randomForest)
+
 # 文件 winedata.csv 位于调用 ORE 接口时的工作目录中
 winedata <- read.csv("winedata.csv", header=TRUE, sep=',')
 head(winedata)
@@ -531,8 +525,6 @@ pairs(table(origin_pred, test_data$origin), main="葡萄酒产地预测器")
 
 以下是清单 3-5 中代码的输出：
 
-
-
 ```
 > library(ORE)
 Loading required package: OREbase
@@ -572,6 +564,7 @@ library(ORE)
 ore.connect(user="testr", sid="orcl", host="localhost", password="testr")
 ore.is.connected()
 ore.doEval(function () { library(randomForest)
+
 # The file winedata.csv is in the working directory from where the ORE # interface was invoked
 winedata <- read.csv("winedata.csv", header=TRUE, sep=',')
 head(winedata)
@@ -709,8 +702,6 @@ pairs(table(origin_pred, test_data$origin), main=“葡萄酒产地预测器”)
 
 plot(margin(wine.rf, test_data$origin)) 的输出
 
-
-
 ### 使用 `ore.randomForest` 替代 R 的 randomForest 模型
 
 本小节演示了如何使用 ORE 的 `ore.randomForest` 函数来构建和评分随机森林模型，以预测葡萄酒产地。我们对清单 3-4 中的代码进行了修改，以使用 `ore.randomForest`；清单 3-7 提供了修改后的代码，其执行输出显示在该清单之后的代码中。
@@ -719,6 +710,7 @@ plot(margin(wine.rf, test_data$origin)) 的输出
 library(ORE)
 ore.connect("testr","orcl","localhost","testr")
 library(OREmodels)
+
 # 文件 winedata.csv 位于调用 ORE 接口时的工作目录中
 winedata <- read.csv("winedata.csv", header=TRUE, sep=',')
 head(winedata)
@@ -880,8 +872,6 @@ Origin3       0       0     111
 >
 ```
 
-
-
 ![A439668_1_En_3_Fig8_HTML.jpg](img/A439668_1_En_3_Fig8_HTML.jpg)
 
 图 3-8.
@@ -968,8 +958,6 @@ SQL> select * from table(rqEval(NULL, 'XML', 'rTestRF'));
 NAME
 
 VALUE
-
-
 
 Origin1Origin1140Origin2Origin10Origin3Origin10Origin1Origin20Origin2Origin2162Origin3Origin20Origin1Origin30Origin2Origin30Origin3Origin3111
 SQL>
@@ -1075,8 +1063,6 @@ Origin1Origin1140Origin2Origin10Origin3Origin10Origin1Origin20Origin2Origin2162O
 图 3-11.
 
 清单 3-13 中修改后的 VALUE 列的 XML 输出
-
-
 
 ### 使用 ORE SQL 接口生成 PNG 图并集成到 OBIEE 仪表盘
 
@@ -1231,8 +1217,6 @@ SQL>
     ```
 
     RPD 被下载为 `obieenew.rpd` 文件。
-
-
 
 #### 自定义下载的 SampleAppLite RPD 以集成 ORE 返回的 PNG 图形
 
@@ -1400,8 +1384,6 @@ image 列的查找表达式生成器
 
 BMM 关系图——TESTR 模式的完整关系图
 
-
-
 ##### 创建表示层
 
 以下是创建表示层的步骤：
@@ -1510,8 +1492,6 @@ TRENDLINE("Calculated Facts"."Full Quarter Revenue", ("Time"."Per Name Qtr") BY 
 图 3-32 到 3-35 展示了使用上述函数为 `TRENDLINE` 创建的分析以及获得的输出。图 3-36 显示了相应的仪表盘视图。
 
 以下是所需的步骤：
-
-
 
 1.  登录 OBIEE 演示服务，在 SampleSales 主题区域下选择“分析”。
 2.  选择“订单”，然后选择“订单类型”。将其拖放到右侧的空白区域。

@@ -1,3 +1,719 @@
+# 6. 在 OBIEE 12c 中实现机器学习
+
+第 3 章重点介绍了机器学习模型（即 `randomForest` 算法）的使用，以预测葡萄酒产地的业务用例为例，并将其结果与 OBIEE 12c 集成。它解释了如何使用 R 和 Oracle R Enterprise (ORE) 实现这一点，然后将其图形输出与 OBIEE 仪表板集成以用于商业智能目的。第 5 章讨论了在 OBIEE 中利用机器学习的其他业务用例，这些用例有助于构建决策支持解决方案。其中一个用例扩展了葡萄酒产地预测用例，以根据葡萄酒的产地预测购买倾向。此类现实世界的决策支持解决方案在提供更好的业务成果和商业价值方面大有裨益，并提高了企业竞争情报的门槛。
+
+本章重点介绍如何使用基于 R 和 ORE 的算法在 Oracle 12c 中实现上述业务案例，以构建和评分模型，然后将输出以可视化或其他方式整合到 OBIEE 12c 中。最后，它描述了如何通过基于动态用户输入的方式，根据机器学习输出构建交互式仪表板的步骤。
+
+## 业务用例问题描述与解决方案
+
+葡萄酒产地预测用例根据每种葡萄酒的类别和其他属性，将葡萄酒的产地分为 `Origin1`、`Origin2` 或 `Origin3`。根据产地，当前需要解决的问题是预测购买特定葡萄酒的倾向。后者作为四个示例用例之一被提出，这些用例是与葡萄酒产地相关的现实世界业务问题及其结果。这一点在第 5 章中已强调，同时还包括使用机器学习和/或基于 OBIEE 的功能来解决每个问题的方法。
+
+### 技术视角
+
+从数据科学的角度分析上述业务用例，预测购买倾向的问题具有二元结果：1 或 0。结果为 1 表示客户会从该来源购买葡萄酒，结果为 0 则表示客户不会购买该葡萄酒。虽然这听起来像是一个分类问题，但实际上更有意义的是将其视为根据葡萄酒来源预测客户购买特定葡萄酒的概率。
+
+解决该问题的方法同时存在于 R 和 ORE 中，本章将深入讨论这些方法。在深入探讨编程和图形部分之前，我们将先介绍用于解决此类预测（即涉及概率二元结果）的机器学习算法背后的基础原理。这需要对模型背后的数学概念以及为预测输出进行模型评分做出一些解释。
+
+注意
+
+在众多可用的机器学习算法中，最适用于预测概率（二元结果）的是广义线性模型，也称为逻辑回归。它输出的概率值介于 0 和 1 之间，因此在预测方面较为准确。对此问题使用线性回归等线性模型，可能导致预测概率低于 0 或高于 1。相比之下，逻辑回归的结果被限制在 [0,1] 的区间内，这些并非实际值，而是概率值，因此可以直接作为概率进行解释。
+
+### 解决方案的第一部分
+
+我们用例中的葡萄酒 `Source` 变量被称为分类变量，而购买倾向则被称为响应变量。我们使用逻辑回归的机器学习模型预测一个介于 0 和 1 之间的概率，该概率可以通过设定某个阈值转换为二元响应。例如，如果 p >= 0.5，则概率为 1；否则为 0，其中 p 是预测的概率值。
+
+清单 6-1 展示了预测葡萄酒来源的代码（类似于第 3 章的清单）。它使用 `ore.randomForest` 机器学习算法来预测葡萄酒产地，并将预测的产地列命名为 `Source`。
+
+```
+library(ORE)
+ore.connect("testr","orcl","localhost","testr")
+library(OREmodels)
+winedata <- read.csv("winedata.csv", header=TRUE, row.names = NULL, sep=',')
+head(winedata)
+winedata$origin <- ifelse(winedata$class == 1, 'Origin1',
+ifelse(winedata$class == 2, 'Origin2',
+ifelse(winedata$class == 3, 'Origin3', '')))
+class(winedata$origin)
+winedata$origin <- as.factor(winedata$origin)
+class(winedata$origin)
+head(winedata$origin)
+table(winedata$origin)
+set.seed(123)
+sample_size <- 0.70 * nrow(winedata)
+sampledata <-sample(seq_len(nrow(winedata)), sample_size)
+training_data <- winedata[sampledata, ]
+class(training_data)
+TRAINING_DATA <- ore.push(training_data)
+class(TRAINING_DATA)
+test_data <- winedata[-sampledata, ]
+TEST_DATA <- ore.push(test_data)
+class(TEST_DATA)
+head(TRAINING_DATA)
+head(TEST_DATA)
+wine.rf <- ore.randomForest(origin ∼ . - class, TRAINING_DATA)
+class(wine.rf)
+tree15 = grabTree(wine.rf, k = 15, labelVar = TRUE)
+origin_pred <- predict(wine.rf, TEST_DATA, type = "all", supplemental.cols="origin")
+res <- table(origin_pred$origin, origin_pred$prediction)
+library(AppliedPredictiveModeling)
+transparentTheme(trans = .4)
+pairs(table(origin_pred$origin, origin_pred$prediction), main="Wine Origin Predictors")
+test_data$id <- seq_len(nrow(test_data))
+row.names(test_data) <- test_data$id
+head(test_data[,c(16,1,15)])
+origin_pred2 <- ore.pull(origin_pred)
+origin_pred2$id <- seq_len(nrow(origin_pred2))
+head(origin_pred2)
+row.names(origin_pred2) <- origin_pred2$id
+head(test_data)
+head(origin_pred2)
+head(origin_pred2[,c(6,5,4)])
+df1 <- test_data[,c(16,15,1:14)]
+df2 <- origin_pred2[, c(1:6)]
+class(df1)
+df1_new <- df1[order(df1$origin),]
+head(df1_new)
+df2_new <- df2[order(df2$origin),]
+head(df2_new)
+nrow(df1_new)
+nrow(df2_new)
+data_set <- data.frame(df1_new, df2_new)
+nrow(data_set)
+head(data_set)
+colnames(data_set)[20] <- "Source"
+head(data_set)
+data_set$propensity_to_buy <- ifelse((data_set$Source == 'Origin1'), 1,
+ifelse((data_set$Source == 'Origin2'), 0,
+ifelse((data_set$Source == 'Origin3'), 1, '')))
+class(data_set)
+nrow(data_set)
+head(data_set)
+write.csv(data_set, "Wineptobuy.csv", row.names=FALSE)
+清单 6-1.
+使用 ore.randomForest 预测葡萄酒产地
+```
+
+清单 6-1 的输出如下所示，其中插入了注释以解释代码：
+
+```
+> library(ORE)  # 加载 ORE 库，这是 Oracle R Enterprise 执行的主要库
+Loading required package: OREbase
+Loading required package: OREcommon
+Attaching package: 'OREbase'
+The following objects are masked from 'package:base':
+cbind, data.frame, eval, interaction, order, paste, pmax, pmin,
+rbind, table
+Loading required package: OREembed
+Loading required package: OREstats
+Loading required package: MASS
+Loading required package: OREgraphics
+Loading required package: OREeda
+Loading required package: OREmodels
+Loading required package: OREdm
+Loading required package: lattice
+Loading required package: OREpredict
+Loading required package: ORExml
+> ore.connect("testr","orcl","localhost","testr") # 通过调用 ore.connect 连接到数据库
+> library(OREmodels) # 加载 OREmodels 库，用于调用 ORE 机器学习模型
+> winedata  head(winedata) # 显示输入数据框中的前 6 行。这显示了包含预测变量和属性的各个列
+class Alcohol Malic.acid  Ash Alcanility.of.ash Magnesium Total.phenols
+1     1   14.23       1.71 2.43              15.6       127          2.80
+2     1   13.20       1.78 2.14              11.2       100          2.65
+3     1   13.16       2.36 2.67              18.6       101          2.80
+4     1   14.37       1.95 2.50              16.8       113          3.85
+5     1   13.24       2.59 2.87              21.0       118          2.80
+6     1   14.20       1.76 2.45              15.2       112          3.27
+Flavanoids Nonflavanoid.phenols Proanthocyanins Color.intensity    Hue
+1       3.06                 0.28            2.29            5.64    1.04
+2       2.76                 0.26            1.28            4.38    1.05
+3       3.24                 0.30            2.81            5.68    1.03
+4       3.49                 0.24            2.18            7.80    0.86
+5       2.69                 0.39            1.82            4.32    1.04
+6       3.39                 0.34            1.97            6.75    1.05
+OD280.OD315.of.diluted.wines Proline
+1                         3.92    1065
+2                         3.40    1050
+3                         3.17    1185
+4                         3.45    1480
+5                         2.93     735
+6                         2.85    1450
+> winedata$origin  class(winedata$origin) # 显示新创建的 'origin' 列的 R 类
+[1] "character"
+> winedata$origin  class(winedata$origin) # 显示转换后的 'origin' 列的 R 类
+[1] "factor"
+> head(winedata$origin) # 显示 'origin' 的不同类别数量，作为 'origin' 预测变量的水平
+[1] Origin1 Origin1 Origin1 Origin1 Origin1 Origin1
+Levels: Origin1 Origin2 Origin3
+> table(winedata$origin) # 显示每个不同 'origin' 值的计数
+Origin1 Origin2 Origin3
+489     549     336
+> set.seed(123) # 设置随机种子，用于对输入 winedata 数据集进行采样
+> sample_size  sampledata  training_data  class(training_data) # 显示 training_data 的 R 类
+[1] "data.frame"
+> TRAINING_DATA  class(TRAINING_DATA)
+[1] "ore.frame"
+attr(,"package")
+[1] "OREbase"
+> test_data  TEST_DATA  class(TEST_DATA)
+[1] "ore.frame"
+attr(,"package")
+[1] "OREbase"
+> head(TRAINING_DATA) # 显示 TRAINING_DATA 数据集的前 6 行。注意它包含一个额外的 'origin' 列
+class Alcohol Malic.acid  Ash Alcanility.of.ash Magnesium Total.phenols
+396      3   12.60       2.46 2.20              18.5        94          1.62
+1083     3   13.45       3.70 2.60              23.0       111          1.70
+562      2   11.82       1.72 1.88              19.5        86          2.50
+1211     2   11.82       1.47 1.99              20.8        86          1.98
+1289     3   12.70       3.55 2.36              21.5       106          1.70
+63       2   13.67       1.25 1.92              18.0        94          2.10
+Flavanoids Nonflavanoid.phenols Proanthocyanins Color.intensity    Hue
+396        0.66                 0.63            0.94            7.10   0.73
+1083       0.92                 0.43            1.46           10.68   0.85
+562        1.64                 0.37            1.42            2.06   0.94
+1211       1.60                 0.30            1.53            1.95   0.95
+1289       1.20                 0.17            0.84            5.00   0.78
+63         1.79                 0.32            0.73            3.80   1.23
+OD280.OD315.of.diluted.wines Proline  origin
+396                          1.58     695 Origin3
+1083                         1.56     695 Origin3
+562                          2.44     415 Origin2
+1211                         3.33     495 Origin2
+1289                         1.29     600 Origin3
+63                           2.46     630 Origin2 # 这也包含一个额外的 'origin' 列
+> head(TEST_DATA) # 显示 TEST_DATA 数据集的前 6 行
+class Alcohol Malic.acid  Ash Alcanility.of.ash Magnesium Total.phenols
+4      1   14.37       1.95 2.50              16.8       113          3.85
+6      1   14.20       1.76 2.45              15.2       112          3.27
+8      1   14.06       2.15 2.61              17.6       121          2.60
+20     1   13.64       3.10 2.56              15.2       116          2.70
+21     1   14.06       1.63 2.28              16.0       126          3.00
+24     1   12.85       1.60 2.52              17.8        95          2.48
+Flavanoids Nonflavanoid.phenols Proanthocyanins Color.intensity  Hue
+4        3.49                 0.24            2.18            7.80 0.86
+6        3.39                 0.34            1.97            6.75 1.05
+8        2.51                 0.31            1.25            5.05 1.06
+20       3.03                 0.17            1.66            5.10 0.96
+21       3.17                 0.24            2.10            5.65 1.09
+24       2.37                 0.26            1.46            3.93 1.09
+OD280.OD315.of.diluted.wines Proline  origin
+4                          3.45    1480 Origin1
+6                          2.85    1450 Origin1
+8                          3.58    1295 Origin1
+20                         3.36     845 Origin1
+21                         3.71     780 Origin1
+24                         3.63    1015 Origin1
+```
+
+输出的下一部分展示了通过调用 `ore.randomForest()` 函数构建随机森林模型的过程，该模型使用 `class` 作为预测变量，`origin` 作为响应变量，并在 `TRAINING_DATA` 数据集上运行。它会生成特定数量的决策树，对它们的输出进行平均，并利用这些信息得出分类结果。
+
+```markdown
+> wine.rf  class(wine.rf) # 显示构建模型返回对象的类别。该对象属于 "ore.model" 类。
+[1] "ore.randomForest" "ore.model"
+
+# grabTree() 提取特定的决策树，k 表示使用哪棵树。labelVar 设置为 TRUE 意味着输出框中的 'split var' 和
+
+# 'prediction' 列会被赋予有意义的标签。
+> tree15 = grabTree(wine.rf, k = 15, labelVar = TRUE)
+
+# 通过调用 predict() 对 TEST_DATA 进行模型评分。type="all" 指定在输出中同时返回预测值和投票计数矩阵。
+
+# supplemental.cols="origin" 指定预测结果中必须包含 TEST_DATA 数据集中的 'origin' 列。
+> origin_pred  res  library(AppliedPredictiveModeling)
+Warning message:
+package 'AppliedPredictiveModeling' was built under R version 3.2.5
+> transparentTheme(trans = .4)
+
+# 绘制上述表格的散点图矩阵，标题为 'Wine Origin Predictors'
+> pairs(table(origin_pred$origin, origin_pred$prediction), main="Wine Origin Predictors")
+
+# 创建一个新列 id，并将其分配给 test_data 数据集的每一行。Seq_len() 创建一个序列，长度等于 test_data 的行数。
+> test_data$id  row.names(test_data)  head(test_data[,c(16,1,15)]) # 显示 test_data 中 id 为 1 到 6 的 6 行数据的第 16、1 和 15 列。
+id class  origin
+1  1     1 Origin1
+2  2     1 Origin1
+3  3     1 Origin1
+4  4     1 Origin1
+5  5     1 Origin1
+6  6     1 Origin1
+> origin_pred2  origin_pred2$id  head(origin_pred2) # 显示 origin_pred2 数据中 id 为 1 到 6 的 6 行数据。
+Origin1 Origin2 Origin3 prediction  origin id
+1   1.000   0.000   0.000    Origin1 Origin1  1
+2   0.994   0.004   0.002    Origin1 Origin1  2
+3   1.000   0.000   0.000    Origin1 Origin1  3
+4   1.000   0.000   0.000    Origin1 Origin1  4
+5   1.000   0.000   0.000    Origin1 Origin1  5
+6   1.000   0.000   0.000    Origin1 Origin1  6
+> row.names(origin_pred2)  head(test_data) # 显示添加了 'origin' 和 'id' 列后的 test_data 的 6 行数据。
+class Alcohol Malic.acid  Ash Alcanility.of.ash Magnesium Total.phenols
+1     1   14.37       1.95 2.50              16.8       113          3.85
+2     1   14.20       1.76 2.45              15.2       112          3.27
+3     1   14.06       2.15 2.61              17.6       121          2.60
+4     1   13.64       3.10 2.56              15.2       116          2.70
+5     1   14.06       1.63 2.28              16.0       126          3.00
+6     1   12.85       1.60 2.52              17.8        95          2.48
+Flavanoids Nonflavanoid.phenols Proanthocyanins Color.intensity    Hue
+1       3.49                 0.24            2.18            7.80   0.86
+2       3.39                 0.34            1.97            6.75   1.05
+3       2.51                 0.31            1.25            5.05   1.06
+4       3.03                 0.17            1.66            5.10   0.96
+5       3.17                 0.24            2.10            5.65   1.09
+6       2.37                 0.26            1.46            3.93   1.09
+OD280.OD315.of.diluted.wines Proline  origin id
+1                         3.45    1480 Origin1  1
+2                         2.85    1450 Origin1  2
+3                         3.58    1295 Origin1  3
+4                         3.36     845 Origin1  4
+5                         3.71     780 Origin1  5
+6                         3.63    1015 Origin1  6
+> head(origin_pred2) # 显示 origin_pred2 的 6 行数据以及 id 列。
+Origin1 Origin2 Origin3 prediction  origin id
+1   1.000   0.000   0.000    Origin1 Origin1  1
+2   0.994   0.004   0.002    Origin1 Origin1  2
+3   1.000   0.000   0.000    Origin1 Origin1  3
+4   1.000   0.000   0.000    Origin1 Origin1  4
+5   1.000   0.000   0.000    Origin1 Origin1  5
+6   1.000   0.000   0.000    Origin1 Origin1  6
+> head(origin_pred2[,c(6,5,4)]) # 显示 origin_pred2 中仅包含第 6、5 和 4 列的 6 行数据。
+id  origin prediction
+1  1 Origin1    Origin1
+2  2 Origin1    Origin1
+3  3 Origin1    Origin1
+4  4 Origin1    Origin1
+5  5 Origin1    Origin1
+6  6 Origin1    Origin1
+> df1  df2  class(df1)
+[1] "data.frame"
+> df1_new  head(df1_new) # 显示 df1_new 中排序后的 6 行数据。
+id  origin class Alcohol Malic.acid  Ash Alcanility.of.ash Magnesium
+1  1 Origin1     1   14.37       1.95 2.50              16.8       113
+2  2 Origin1     1   14.20       1.76 2.45              15.2       112
+3  3 Origin1     1   14.06       2.15 2.61              17.6       121
+4  4 Origin1     1   13.64       3.10 2.56              15.2       116
+5  5 Origin1     1   14.06       1.63 2.28              16.0       126
+6  6 Origin1     1   12.85       1.60 2.52              17.8        95
+Total.phenols Flavanoids Nonflavanoid.phenols Proanthocyanins Color.intensity
+1          3.85       3.49              0.24            2.18            7.80
+2          3.27       3.39              0.34            1.97            6.75
+3          2.60       2.51              0.31            1.25            5.05
+4          2.70       3.03              0.17            1.66            5.10
+5          3.00       3.17              0.24            2.10            5.65
+6          2.48       2.37              0.26            1.46            3.93
+Hue OD280.OD315.of.diluted.
+
+wines Proline
+1 0.86                         3.45    1480
+2 1.05                         2.85    1450
+3 1.06                         3.58    1295
+4 0.96                         3.36     845
+5 1.09                         3.71     780
+6 1.09                         3.63    1015
+> df2_new  head(df2_new) # 显示 df2_new 排序后数据框的 6 行数据。
+Origin1 Origin2 Origin3 prediction  origin id
+1   1.000   0.000   0.000    Origin1 Origin1  1
+2   0.994   0.004   0.002    Origin1 Origin1  2
+3   1.000   0.000   0.000    Origin1 Origin1  3
+4   1.000   0.000   0.000    Origin1 Origin1  4
+5   1.000   0.000   0.000    Origin1 Origin1  5
+6   1.000   0.000   0.000    Origin1 Origin1  6
+> nrow(df1_new) # 显示 df1_new 的行数。
+[1] 413
+> nrow(df2_new) # 显示 df2_new 的行数。
+[1] 413
+> data_set  nrow(data_set) # 显示 data_set 的行数。
+[1] 413
+> head(data_set) # 显示 data_set 的 6 行数据。
+id  origin class Alcohol Malic.acid  Ash Alcanility.of.ash Magnesium
+1  1 Origin1     1   14.37       1.95 2.50              16.8       113
+2  2 Origin1     1   14.20       1.76 2.45              15.2       112
+3  3 Origin1     1   14.06       2.15 2.61              17.6       121
+4  4 Origin1     1   13.64       3.10 2.56              15.2       116
+5  5 Origin1     1   14.06       1.63 2.28              16.0       126
+6  6 Origin1     1   12.85       1.60 2.52              17.8        95
+Total.phenols Flavanoids Nonflavanoid.phenols Proanthocyanins Color.intensity
+1          3.85       3.49              0.24            2.18            7.80
+2          3.27       3.39              0.34            1.97            6.75
+3          2.60       2.51              0.31            1.25            5.05
+4          2.70       3.03              0.17            1.66            5.10
+5          3.00       3.17              0.24            2.10            5.65
+6          2.48       2.37              0.26            1.46            3.93
+Hue OD280.OD315.of.diluted.wines Proline Origin1 Origin2 Origin3 prediction
+1 0.86                      3.45    1480   1.000   0.000   0.000    Origin1
+2 1.05                      2.85    1450   0.994   0.004   0.002    Origin1
+3 1.06                      3.58    1295   1.000   0.000   0.000    Origin1
+4 0.96                      3.36     845   1.000   0.000   0.000    Origin1
+5 1.09                      3.71     780   1.000   0.000   0.000    Origin1
+6 1.09                      3.63    1015   1.000   0.000   0.000    Origin1
+origin.1 id.1
+1  Origin1    1
+2  Origin1    2
+3  Origin1    3
+4  Origin1    4
+5  Origin1    5
+6  Origin1    6
+> colnames(data_set)[20]  head(data_set)
+id  origin class Alcohol Malic.acid  Ash Alcanility.of.ash Magnesium
+1  1 Origin1     1   14.37       1.95 2.50              16.8       113
+2  2 Origin1     1   14.20       1.76 2.45              15.2       112
+3  3 Origin1     1   14.06       2.15 2.61              17.6       121
+4  4 Origin1     1   13.64       3.10 2.56              15.2       116
+5  5 Origin1     1   14.06       1.63 2.28              16.0       126
+6  6 Origin1     1   12.85       1.60 2.52              17.8        95
+Total.phenols Flavanoids Nonflavanoid.phenols Proanthocyanins Color.intensity
+1          3.85       3.49              0.24            2.18            7.80
+2          3.27       3.39              0.34            1.97            6.75
+3          2.60       2.51              0.31            1.25            5.05
+4          2.70       3.03              0.17            1.66            5.10
+5          3.00       3.17              0.24            2.10            5.65
+6          2.48       2.37              0.26            1.46            3.93
+Hue OD280.OD315.of.diluted.wines Proline Origin1 Origin2 Origin3  Source
+1 0.86                         3.45    1480   1.000   0.000   0.000 Origin1
+2 1.05                         2.85    1450   0.994   0.004   0.002 Origin1
+3 1.06                         3.58    1295   1.000   0.000   0.000 Origin1
+4 0.96                         3.36     845   1.000   0.000   0.000 Origin1
+5 1.
+
+09                         3.71     780   1.000   0.000   0.000 Origin1
+6 1.09                         3.63    1015   1.000   0.000   0.000 Origin1
+origin.1 id.1
+1  Origin1    1
+2  Origin1    2
+3  Origin1    3
+4  Origin1    4
+5  Origin1    5
+6  Origin1    6
+> data_set$propensity_to_buy  class(data_set) # 显示最终 data_set 的类别。
+[1] "data.frame"
+> nrow(data_set) # 显示最终 data_set 的行数。
+[1] 413
+> head(data_set) # 显示最终 data_set 的 6 行数据。
+id  origin class Alcohol Malic.acid  Ash Alcanility.of.ash Magnesium
+1  1 Origin1     1   14.37       1.95 2.50              16.8       113
+2  2 Origin1     1   14.20       1.76 2.45              15.2       112
+3  3 Origin1     1   14.06       2.15 2.61              17.6       121
+4  4 Origin1     1   13.64       3.10 2.56              15.2       116
+5  5 Origin1     1   14.06       1.63 2.28              16.0       126
+6  6 Origin1     1   12.85       1.60 2.52              17.8        95
+Total.phenols Flavanoids Nonflavanoid.phenols Proanthocyanins Color.intensity
+1          3.85       3.49              0.24            2.18            7.80
+2          3.27       3.39              0.34            1.97            6.75
+3          2.60       2.51              0.31            1.25            5.05
+4          2.70       3.03              0.17            1.66            5.10
+5          3.00       3.17              0.24            2.10            5.65
+6          2.48       2.37              0.26            1.46            3.93
+Hue OD280.OD315.of.diluted.wines Proline Origin1 Origin2 Origin3  Source
+1 0.86                         3.45    1480   1.000   0.000   0.000 Origin1
+2 1.05                         2.85    1450   0.994   0.004   0.002 Origin1
+3 1.06                         3.58    1295   1.000   0.000   0.000 Origin1
+4 0.96                         3.36     845   1.000   0.000   0.000 Origin1
+5 1.09                         3.71     780   1.000   0.000   0.000 Origin1
+6 1.09                         3.63    1015   1.000   0.000   0.000 Origin1
+origin.1 id.1 propensity_to_buy
+1  Origin1    1                 1
+2  Origin1    2                 1
+3  Origin1    3                 1
+4  Origin1    4                 1
+5  Origin1    5                 1
+6  Origin1    6                 1
+> write.csv(data_set, "Wineptobuy.csv", row.names=FALSE) # 将 data_set 中包含的数据写入工作目录下的一个新 .csv 文件中。
+>
+```
+
+### 解决方案的第二部分
+
+现在我们已经预测了葡萄酒产地，并创建了一个包含 `Source` 列的新数据集，接下来需要利用它来预测购买倾向。如本节开头所述，我们将使用逻辑回归机器学习算法，该算法通过应用广义线性模型来拟合数据。使用的预测变量是 `Source`，响应变量是 `propensity_to_buy`。清单 6-2 展示了相关代码。
+
+```
+library(ORE)
+ore.connect("testr","orcl","localhost","testr")
+library(OREmodels)
+winedata  0.5,1,0)
+misClasificError <- mean(test_set$p_to_buyPred != test_set$propensity_to_buy)
+print(paste('Accuracy',1-misClasificError))
+
+####
+library(ROCR)
+class(test_set$p_to_buyPred)
+pr1 <- prediction(test_set$p_to_buyPred, test_set$propensity_to_buy)
+class(pr1)
+prf1 <- performance(pr1, measure = "tpr", x.measure = "fpr")
+class(prf1)
+pdf("plot_prf1.pdf")
+plot(prf1, colorize = TRUE) # , text.adj = c(-0.2,1.7)
+dev.off()
+auc1 <- performance(pr1, measure = "auc")
+auc1 <- auc1@y.values[[1]]
+auc1
+
+####
+library(ROCR)
+p <- predict(logitM, newdata= data.frame(test_set[,c(1:19)]), type="response")
+class(p)
+pr <- prediction(p, test_set$propensity_to_buy)
+class(pr)
+prf <- performance(pr, measure = "tpr", x.measure = "fpr")
+class(prf)
+plot(prf, colorize = TRUE) # , text.adj = c(-0.2,1.7)
+auc <- performance(pr, measure = "auc")
+auc <- auc@y.values[[1]]
+auc
+test_set2 <- data.frame(test_set[,c(1:19)])
+test_set3 <- cbind(test_set2, predict(logitM, newdata=test_set2, type = "link", se = TRUE))
+test_set3 <- within(test_set3, {
+PredictedProb <- plogis(fit)
+LL <- plogis(fit - (1.96 * se.fit))
+UL <- plogis(fit + (1.96 * se.fit))
+})
+head(test_set3)
+清单 6-2.
+使用逻辑回归根据葡萄酒产地确定购买倾向
+```
+
+下一部分展示了 `ggplot2` 函数。关于 `ggplot` 的描述见第 5 章“图形输出分析：根据葡萄酒产地预测购买倾向”一节。
+
+```
+library(ggplot2)
+pdf("test_set3_ribbon.pdf")
+ggplot(test_set3, aes(x = Source, y = PredictedProb, group=PredictedProb)) +
+geom_line(aes(colour = PredictedProb), size = 1) + geom_point() +
+geom_ribbon(aes(ymin = LL, ymax = UL, fill = PredictedProb), alpha = 0.25)  +
+scale_fill_gradient(low="red", high="green") +
+ggtitle("Predicting Propensity to buy based on Wine Source") +
+ylab("Predicted Probability - p_to_buyPred")
+dev.off()
+fillc_train <- train_set$Source # c("Origin1", "Origin2", "Origin3")
+train_set <- cbind(train_set, fillc_train)
+library(ggplot2)
+pdf("WineOriginTrainingDataGLMPlot_test_bar.pdf")
+ggplot(data=train_set, aes(x=Source, y=propensity_to_buy, fill = Source)) +
+geom_bar(stat="identity", width=0.25) +
+scale_fill_manual("legend", values = c("Origin1" = "green", "Origin2" = "orange", "Origin3" = "blue"))
+dev.off()
+fillc_test <- test_set$Source
+test_set <- cbind(test_set, fillc_test)
+library(ggplot2)
+pdf("WineOriginTestDataGLMPlot_test_bar.pdf")
+ggplot(data=test_set, aes(x=Source, y=p_to_buyPred, fill = Source)) +
+geom_bar(stat="identity", width=0.25)  +
+scale_fill_manual("legend", values = c("Origin1" = "green", "Origin2" = "orange", "Origin3" = "blue"))
+dev.off()
+library(ggplot2)
+pdf("WineOriginTrainingDataGLMPlot_test_lineNpoint.pdf")
+ggplot(data=train_set, aes(x=Source, y=propensity_to_buy, group=1)) +
+geom_line(aes(colour = propensity_to_buy), size = 1) + geom_point() +
+stat_smooth(method="glm", family="binomial", se=FALSE)
+dev.off()
+library(ggplot2)
+pdf("WineOriginTestDataGLMPlot_test_lineNpoint.pdf")
+ggplot(data=test_set, aes(x=Source, y=p_to_buyPred, group=1)) +
+geom_line(aes(colour = p_to_buyPred), size = 1) + geom_point() +
+stat_smooth(method="glm", family="binomial", se=FALSE)
+dev.off()
+```
+
+以下是执行清单 6-2 中代码的输出结果：
+
+```
+> library(ORE) # 加载 ORE 库，这是 Oracle R Enterprise 执行的主要库
+Loading required package: OREbase
+Loading required package: OREcommon
+Attaching package: 'OREbase'
+The following objects are masked from 'package:base':
+cbind, data.frame, eval, interaction, order, paste, pmax, pmin,
+rbind, table
+Loading required package: OREembed
+Loading required package: OREstats
+Loading required package: MASS
+Loading required package: OREgraphics
+Loading required package: OREeda
+Loading required package: OREmodels
+Loading required package: OREdm
+Loading required package: lattice
+Loading required package: OREpredict
+Loading required package: ORExml
+> ore.connect("testr","orcl","localhost","testr") # 使用 ORE 需要连接到 Oracle 数据库
+> library(OREmodels) # 加载 OREmodels 库以调用 ORE 机器学习模型
+
+# 假设文件 Wineptobuy.csv 位于调用 ORE CLI 时的工作目录中
+> winedata  head(winedata) # 显示数据框 winedata 中的前 6 行数据
+id  origin class Alcohol Malic.acid  Ash Alcanility.of.ash Magnesium
+1  1 Origin1     1   14.37       1.95 2.50              16.8       113
+2  2 Origin1     1   14.20       1.76 2.45              15.2       112
+3  3 Origin1     1   14.06       2.15 2.61              17.6       121
+4  4 Origin1     1   13.64       3.10 2.56              15.2       116
+5  5 Origin1     1   14.06       1.63 2.28              16.0       126
+6  6 Origin1     1   12.85       1.60 2.52              17.8        95
+Total.phenols Flavanoids Nonflavanoid.phenols Proanthocyanins Color.intensity
+1          3.85       3.49              0.24            2.18            7.80
+2          3.27       3.39              0.34            1.97            6.75
+3          2.60       2.51              0.31            1.25            5.05
+4          2.70       3.03              0.17            1.66            5.10
+5          3.00       3.17              0.24            2.10            5.65
+6          2.48       2.37              0.26            1.46            3.93
+Hue OD280.OD315.of.diluted.wines Proline Origin1 Origin2 Origin3  Source
+1 0.86                         3.45    1480   1.000   0.000   0.000 Origin1
+2 1.05                         2.85    1450   0.994   0.004   0.002 Origin1
+3 1.06                         3.58    1295   1.000   0.000   0.000 Origin1
+4 0.96                         3.36     845   1.000   0.000   0.000 Origin1
+5 1.09                         3.71     780   1.000   0.000   0.000 Origin1
+6 1.09                         3.63    1015   1.000   0.000   0.000 Origin1
+origin.1 id.1 propensity_to_buy
+1  Origin1    1                 1
+2  Origin1    2                 1
+3  Origin1    3                 1
+4  Origin1    4                 1
+5  Origin1    5                 1
+6  Origin1    6                 1
+> summary(winedata) # 给出 winedata 数据框中数据的统计摘要，如下所示，针对每个变量/属性
+id          origin        class         Alcohol        Malic.acid
+Min.   :  1   Origin1:140   Min.   :1.00   Min.   :11.03   Min.   :0.740
+1st Qu.:104   Origin2:162   1st Qu.:1.00   1st Qu.:12.37   1st Qu.:1.530
+Median :207   Origin3:111   Median :2.00   Median :13.05   Median :1.830
+Mean   :207                 Mean   :1.93   Mean   :13.00   Mean   :2.343
+3rd Qu.:310                 3rd Qu.:3.00   3rd Qu.:13.67   3rd Qu.:3.100
+Max.   :413                 Max.   :3.00   Max.   :14.75   Max.   :5.800
+Ash        Alcanility.of.ash   Magnesium      Total.phenols
+Min.   :1.360   Min.   :10.60     Min.   : 70.00   Min.   :0.980
+1st Qu.:2.210   1st Qu.:17.00     1st Qu.: 89.00   1st Qu.:1.740
+Median :2.360   Median :19.00     Median : 97.00   Median :2.230
+Mean   :2.366   Mean   :19.43     Mean   : 99.58   Mean   :2.276
+3rd Qu.:2.580   3rd Qu.:21.50     3rd Qu.:107.00   3rd Qu.:2.800
+Max.   :3.230   Max.   :30.00     Max.   :162.00   Max.   :3.880
+Flavanoids    Nonflavanoid.phenols Proanthocyanins Color.intensity
+Min.   :0.340   Min.   :0.1300       Min.   :0.410   Min.   : 1.280
+1st Qu.:1.200   1st Qu.:0.2700       1st Qu.:1.140   1st Qu.: 3.300
+Median :2.140   Median :0.3400       Median :1.460   Median : 4.600
+Mean   :2.011   Mean   :0.3658       Mean   :1.538   Mean   : 4.934
+3rd Qu.:2.780   3rd Qu.:0.4500       3rd Qu.:1.870   3rd Qu.: 5.850
+Max.   :5.080   Max.   :0.6600       Max.   :3.580   Max.   :13.000
+Hue         OD280.OD315.of.diluted.wines    Proline
+Min.   :0.5400   Min.   :1.270                Min.   : 278.0
+1st Qu.:0.7600   1st Qu.:1.830                1st Qu.: 510.0
+Median :0.9600   Median :2.780                Median : 678.0
+Mean   :0.9618   Mean   :2.587                Mean   : 749.5
+3rd Qu.:1.1300   3rd Qu.:3.140                3rd Qu.: 985.0
+Max.   :1.7100   Max.   :4.000                Max.   :1680.0
+Origin1          Origin2        Origin3           Source       origin.1
+Min.   :0.0000   Min.   :0.0000  Min.   :0.0000   Origin1:140   Origin1:140
+1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000   Origin2:162   Origin2:162
+Median :0.0000   Median :0.0020  Median :0.0000   Origin3:111   Origin3:111
+Mean   :0.3395   Mean   :0.3922   Mean   :0.2683
+3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:0.9760
+Max.   :1.0000   Max.   :1.0000   Max.   :1.0000
+id.1     propensity_to_buy
+Min.   :  1   Min.   :0.0000
+1st Qu.:104   1st Qu.:0.0000
+Median :207   Median :1.0000
+Mean   :207   Mean   :0.6077
+3rd Qu.:310   3rd Qu.:1.0000
+Max.   :413   Max.   :1.0000
+> sapply(winedata, sd) # 对数据集 winedata 中的每个变量应用标准差函数 sd
+id                       origin
+119.3670809                    0.7773550
+class                      Alcohol
+0.7773550                    0.7667311
+Malic.acid                          Ash
+1.1720914                    0.2931987
+Alcanility.of.ash                    Magnesium
+3.4096871                   14.2594176
+Total.phenols                   Flavanoids
+0.6270436                    0.9700433
+Nonflavanoid.phenols              Proanthocyanins
+0.1293551                    0.5520653
+Color.intensity                          Hue
+2.1460253                    0.2289449
+OD280.OD315.of.diluted.wines                      Proline
+0.7162199                  311.4138632
+Origin1                      Origin2
+0.4731436                    0.4869368
+Origin3                       Source
+0.4421105                    0.7773550
+origin.1                         id.1
+0.7773550                  119.3670809
+propensity_to_buy
+0.4888445
+```
+
+以下两行代码分别显示了响应变量 `propensity_to_buy` 与预测变量 `Source` 和 `origin` 的二维列联表，以确保 `winedata` 数据集中不存在零单元格。换句话说，`xtabs` 函数将分类变量各水平的频数或计数以矩阵或表格形式显示出来——即交叉制表，揭示了 `propensity_to_buy` 与 `Source` 之间，以及 `propensity_to_buy` 与 `origin` 之间的关系。
+
+```
+> xtabs(∼propensity_to_buy +Source, data=winedata)
+Source
+propensity_to_buy Origin1 Origin2 Origin3
+0       0     162       0
+1     140       0     111
+> xtabs(∼propensity_to_buy +origin, data=winedata)
+origin
+propensity_to_buy Origin1 Origin2 Origin3
+0       0     162       0
+1     140       0     111
+> label  head(label)
+[1] 1 1 1 1 1 1
+> library(caTools)
+Warning message:
+package 'caTools' was built under R version 3.2.5
+> s  train_set  test_set  head(train_set) # 显示 train_set 中的前 6 行
+origin class Alcohol Malic.acid  Ash Alcanility.of.ash Magnesium
+1 Origin1     1   14.37       1.95 2.50              16.8       113
+3 Origin1     1   14.06       2.15 2.61              17.6       121
+4 Origin1     1   13.64       3.10 2.56              15.2       116
+5 Origin1     1   14.06       1.63 2.28              16.0       126
+6 Origin1     1   12.85       1.60 2.52              17.8        95
+7 Origin1     1   13.87       1.90 2.80              19.4       107
+Total.phenols Flavanoids Nonflavanoid.phenols Proanthocyanins Color.intensity
+1          3.85       3.49              0.24            2.18            7.80
+3          2.60       2.51              0.31            1.25            5.05
+4          2.70       3.03              0.17            1.66            5.10
+5          3.00       3.17              0.24            2.10            5.65
+6          2.48       2.37              0.26            1.46            3.93
+7          2.95       2.97              0.37            1.76            4.50
+Hue OD280.OD315.of.diluted.wines Proline Origin1 Origin2 Origin3  Source
+1 0.86                         3.45    1480   1.000   0.000       0 Origin1
+3 1.06                         3.58    1295   1.000   0.000       0 Origin1
+4 0.96                         3.36     845   1.000   0.000       0 Origin1
+5 1.09                         3.71     780   1.000   0.000       0 Origin1
+6 1.09                         3.63    1015   1.000   0.000       0 Origin1
+7 1.25                         3.40     915   0.996   0.004       0 Origin1
+propensity_to_buy
+1                 1
+3                 1
+4                 1
+5                 1
+6                 1
+7                 1
+> nrow(train_set) # 显示训练集的行数
+[1] 310
+> head(test_set) # 显示 test_set 中的前 6 行
+origin class Alcohol Malic.acid  Ash Alcanility.of.ash Magnesium
+2  Origin1     1   14.20       1.76 2.45              15.2       112
+9  Origin1     1   13.51       1.80 2.65              19.0       110
+10 Origin1     1   13.05       1.65 2.55              18.0        98
+11 Origin1     1   13.88       1.89 2.59              15.0       101
+13 Origin1     1   14.38       3.59 2.28              16.0       102
+17 Origin1     1   13.83       1.65 2.60              17.2        94
+Total.phenols Flavanoids Nonflavanoid.phenols Proanthocyanins
+2           3.27       3.39                 0.34            1.97
+9           2.35       2.53                 0.29            1.54
+10          2.45       2.43                 0.29            1.44
+11          3.25       3.56                 0.17            1.70
+13          3.25       3.17                 0.27            2.19
+17          2.45       2.99                 0.22            2.29
+Color.intensity  Hue OD280.OD315.of.diluted.wines Proline Origin1 Origin2
+2             6.75 1.05                         2.85    1450   0.994   0.004
+9             4.20 1.10                         2.87    1095   1.000   0.000
+10            4.25 1.12                         2.51    1105   1.000   0.000
+11            5.43 0.88                         3.56    1095   0.996   0.002
+13            4.90 1.04                         3.44    1065   1.000   0.000
+17            5.60 1.24                         3.37    1265   1.000   0.000
+Origin3  Source propensity_to_buy
+2    0.002 Origin1                 1
+9    0.000 Origin1                 1
+10   0.000 Origin1                 1
+11   0.002 Origin1                 1
+13   0.000 Origin1                 1
+17   0.000 Origin1                 1
+> nrow(test_set) # 显示测试集的行数
+[1] 103
+
 # 将 train_set 中 Source 和 propensity_to_buy 列的数据加载到矩阵 # sp.tab 中
 > sp.tab  sp.tab # 显示上述矩阵
 0   1
@@ -6,7 +722,6 @@ Origin2 122   0
 Origin3   0  84
 > train_set$Source <- factor(train_set$Source) # 将 Source 视为分类变量
 ```
-
 
 我们使用 R 语言中的 `glm` 机器学习算法构建了一个逻辑回归模型，其中响应变量为 `propensity_to_buy`，预测变量为 `Source`，使用的数据集是 `train_set`。glm 模型的族函数为 `"binomial"`（表明该模型是二项式模型），链接函数为 `logit`，最大迭代次数设置为 100：
 
@@ -126,8 +841,6 @@ Hue OD280.OD315.of.diluted.wines Proline Origin1 Origin2 Origin3  Source
 [1] 103
 ```
 
-
-
 我们在 R 中使用 `predict()` 函数来预测新数据集上的购买倾向，该数据集包含 `test_set` 中所有行以及第 1 到第 19 列，这表明预测变量的值来自此 `test_set`，并且 `test_set$p_to_buyPred` 的值必须使用 `predict()` 进行预测。这被称为`对模型进行评分`。响应类型为 `response`，表示预测类型是预测概率，而非实际值。请注意，在对模型进行评分时，原始列 `propensity_to_buy` 已从新数据集（`test_set`）中移除。它输出一组落在闭区间 `[0,1]` 内的概率（而非实际值）。这些概率存储在 `test_set` 中新建的列 `p_to_buyPred` 中。
 
 ```
@@ -235,8 +948,6 @@ attr(,"package")
 ```
 
 R 函数 `within` 使用 `test_set3` 数据集作为其参数，并生成一个用于带状图层数据的 `data.frame`。`within` 内部的第一行生成预测概率及其标准误差，这有助于绘制置信区间。参数 `se` 用于指定是否显示要使用的置信区间（默认为 0.95），并且还使我们能够绘制置信区间。`type="link"` 给出链接尺度上的估计值。其余行将预测值和置信区间都反变换为概率。`cbind` 将数据框 `test_set2` 与由 `predict` 函数评分的预测结果列按列绑定，该函数作为第二个参数传递给 `cbind`。对于逻辑回归模型，置信区间基于剖析的`对数似然`函数。`lower` 和 `upper` 分别表示置信下限和置信上限。
-
-
 
 ```
 > test_set3  test_set3  head(test_set3)
@@ -386,8 +1097,6 @@ Origin3  0 29
 
 系数是模型的估计值，其值处于对数几率尺度上。
 
-
-
 ### Logit 模型概要
 
 上述 `summary(logitM)` 命令的输出如下：
@@ -507,8 +1216,6 @@ logit(p) = l0g(p/(1-p))
 
 注意
 
-
-
 在数值分析中，牛顿法（也称为牛顿-拉夫逊法，以艾萨克·牛顿和约瑟夫·拉夫逊命名）是一种用于寻找实值函数根（或零点）的逐次逼近方法。它是求根算法的一个例子，也是之前描述的费舍尔评分法的一种替代方案。关于此方法的进一步讨论，可参见[`www.math.ubc.ca/∼anstee/math104/104newtonmethod.pdf`](http://www.math.ubc.ca/%E2%88%BCanstee/math104/104newtonmethod.pdf)。
 
 ```
@@ -611,8 +1318,6 @@ NULL                     309     415.59
 Source  2   415.59       307       0.00
 ```
 
-
-
 ### 使用 ORE SQL 接口实现解决方案
 
 现在我们有了初步的解决方案，接下来通过 ORE SQL 接口将其实现，以便与 OBIEE 12c 集成。实现步骤如下：
@@ -687,7 +1392,7 @@ SQL>
 
 4.  创建一个 R 函数，调用上述 `BuildandScoreptobuy` 函数，使其在由 Oracle 12c 数据库清单生成的 ORE 引擎中执行，以输出根据葡萄酒源预测的购买倾向概率。清单 6-5 展示了代码。
 
-```
+    ```
     begin
     sys.rqScriptDrop('CallPtoBuy');
     sys.rqScriptCreate('CallPtoBuy',
@@ -813,8 +1518,8 @@ Origin2
 Origin2
 
 ......
-        已选择 103 行。
-        ```
+已选择 103 行。
+```
 
 3.  输出 PNG 图形：
 
@@ -831,8 +1536,6 @@ Origin2
         ----------
         IMAGE
         ----------------------------------------------------------------------------
-
-
 
 89504E470D0A1A0A0000000D49484452000001E0000001E008060000007DD4BE9500002000494441
         54789CECDD6B701BE79A27F67F032078274851574A962C8B775D6C89B22D03E3736AB333734269C5
@@ -885,6 +1588,7 @@ Origin2
         4444066002262222320013301111910198808988880CC0044C444464002660222222033001131111
         198009988888C8004CC044444406600226222232405E12F0E5CB97313030A079DDD9B367D1D1D181
         4F3FFD34E5......
+```
 
 当上述 `SELECT` 语句执行后，在 Oracle SQL Developer 中查看其输出，即可得到图 6-7 所示的图形。该图基于 ggplot 图形，绘制了来源与预测概率（`p_to_buyPred`）的关系。
 
@@ -958,8 +1662,6 @@ AUC 曲线呈现倒 L 形，这意味着所构建和评分的 GLM 模型非常�
 
 逻辑回归模型的 PNG 输出，显示了根据葡萄酒来源预测购买倾向的 AUC
 
-
-
 ## 将 PNG 输出与 OBIEE 仪表盘集成
 
 按照第 3 章“将 PNG 图形与 OBIEE 集成”小节中概述的步骤，可以将图 6-7 所示的 PNG 图像与 OBIEE 集成。图像集成后，即可在 OBIEE 中创建分析及后续的仪表盘。此处列出了所涉及的主要步骤；其中部分步骤已在第 3 章中提供：
@@ -972,7 +1674,7 @@ AUC 曲线呈现倒 L 形，这意味着所构建和评分的 GLM 模型非常�
 
 在 OBIEE RPD 中为“购买倾向”PNG 图形创建的物理表属性，以便与 OBIEE12c 集成
 
-```
+    ```
     datamodel.cmd downloadrpd -O obieenew.rpd -W Admin123 -U weblogic -P  -SI ssi -S localhost -N 9502 -Y
     ```
 
@@ -992,11 +1694,11 @@ AUC 曲线呈现倒 L 形，这意味着所构建和评分的 GLM 模型非常�
 
 ```
     lookup("orcl_db".""."TESTR"."CallPtoBuy"."IMAGE", "orcl_db".""."TESTR"."CallPtoBuy"."ID")
-    ```
+```
 
 3.  需要使用以下命令将修改后的 RPD 上传到 WebLogic 服务器：
 
-```
+    ```
     datamodel.cmd uploadrpd -I obieenew08062017.rpd -W Admin123 -U weblogic -P  -SI ssi -S localhost -N 9502
     Service Instance: ssi
     Operation successful.
@@ -1036,7 +1738,5 @@ AUC 曲线呈现倒 L 形，这意味着所构建和评分的 GLM 模型非常�
 ## 总结
 
 本章介绍了在 OBIEE 12c 中实现机器学习的内容。从简要描述业务问题和解决方案开始，详细说明了如何利用基于 GLM 模型的逻辑回归机器学习算法，根据葡萄酒产地预测购买倾向。然后，本章展示了模型输出的各种形式，包括 XML、结构化表格结果和 PNG 图形。最后，概述了如何将 PNG 图像与 OBIEE 仪表盘集成，并与葡萄酒产地预测图合并，最终形成一个并排显示两者的仪表盘。在必要之处提供了可执行代码及其执行输出。
-
-
 
 索引 A 可执行情报 赤池信息量准则（AIC） 歧义性 anova 函数 曲线下面积（AUC） 人工智能（AI） 可执行情报 先进企业 定义 学习方面 主流预测任务 数学原理 软件应用 技术 B 后端供应商 大数据分析 vs. 商业智能 要素 目标 服务改进 BuildandScoreptobuyAUC BuildandScoreptobuy 函数 BuildandScoreRF 商业案例 AIC AUC 曲线 anova 函数 GLM 图 ROC 分类变量 ggplot2 函数 逻辑回归 logitM 模型 logit 模型 AIC anova(logitM) 系数与显著性 混淆矩阵 常数 偏差残差 离散参数 估计列 Fisher 评分 glm 模型 logit(p) 零偏差 残差偏差 显著性代码 训练数据 ORE SQL 接口 BuildandScoreptobuy 函数 基于 GLM 的逻辑回归模型 输入.csv 文件 PNG 图 R 函数 SELECT 语句 XML 输出 性能函数 PNG 图 参见 PNG 图 predict()函数 prediction()函数 预测葡萄酒产地 购买倾向与来源 响应变量 ROC 来源 vs. 倾向 test_set2 test_set3 数据 test_set3_ribbon.pdf train_set 数据 wald.test 函数 葡萄酒产地 WineOriginTestDataGLMPlot_test_bar.pdf WineOriginTestDataGLMPlot_test_lineNpoint.pdf WineOriginTrainingDataGLMPlot_test_bar.pdf WineOriginTrainingDataGLMPlot_test_lineNpoint.pdf 商业智能（BI） vs. 大数据分析 云优势 云客户 商业对象 C 云优势 云客户 聚类 Cognos 逗号分隔值（CSV） CRAN 视图 D 数据操作语言（DML） 数据建模 数据准备 数据可视化 决策支持系统（DSS） 决策树 E 企业数据仓库（EDW） 提取、转换、加载（ETL） F Fisher 评分算法 G 高斯混合模型 广义线性模型（GLM） ggplot()函数 H Hadoop 分布式文件系统（HDFS） 基于 Hive 的 Hibernate 查询语言（HQL） Hyperion I, J, K 首次公开募股（IPO） L 最小绝对收缩与选择算子（LASSO） 线性回归 逻辑回归 Logit 模型 AIC anova(logitM) 系数与显著性 混淆矩阵 常数 偏差残差 离散参数 估计列 Fisher 评分 glm 模型 GLM 模型输出 logit(p) 零偏差 残差偏差 显著性代码 训练数据 logitM 模型 对数似然函数 低秩矩阵分解（LMF） M 机器学习（ML） 算法 诞生与历史 CRAN 任务视图 定义 EDW 全季度收入 函数 线性和指数视图 预测结果 强化学习 监督学习 Trellis 图 TRENDLINE 函数 无监督学习 供应商 现代数据仓库 多层感知器 N Newton-Raphson 方法 非负矩阵分解（NMF） O OBIEE 12c 商业案例 参见商业案例 Oracle R PNG 图输出 葡萄酒产地 参见葡萄酒产地 在线分析处理（OLAP） 在线事务处理（OLTP） Oracle 分析云 Oracle 优化引擎（OBOE） Oracle 大数据 SQL Oracle 商业智能企业版（OBIEE） 演变 机器学习的诞生与历史 函数 Oracle 云 Oracle 商业智能移动版 Oracle 调用接口（OCI）库 Oracle 云 Oracle 数据库 18c Oracle 数据集成器（ODI） Oracle R 高级分析 Hadoop 版（ORAAH） Oracle R 发行版 Oracle R 企业版（ORE） 算法 架构 构建与测试 randomForest()模型 定义 嵌入式执行 API 嵌入式 R 执行 生成结构化表输出 无人值守处理 修改捕获图像生成 修改 VALUE 列 OBIEE 分析与仪表盘 OREpredict 算法 ore.randomForest 包 PNG 图 BMM 图 BuildandScoreRF 脚本 业务模型与映射层 重复项 validateRF Id 列 对话框 图像列 对话框 IMAGE 列输出 键对话框 逻辑列对话框 查找表达式构建器 OBIEE 管理工具 OBIEE 12c 集成 Oracle 连接池 物理层与 BMM 层 物理图窗口 物理层 物理表对话框 表示层 设置排序顺序与描述符 基于 SQL 的查询 TESTR 模式 validateRF 输出 validateRF 脚本 预测分析 主要包 R randomForest 模型 SQL 接口 透明性 VALUE 列 Oracle R 技术的 XML 输出 dbDriver(“Oracle”) 开源 R ORAAH Oracle 数据库表 Oracle R 发行版 ORE 参见 Oracle R 企业版（ORE） R 数据框 ROracle ore.randomForest()函数 ORE SQL 接口 BuildandScoreptobuy 函数 基于 GLM 的逻辑回归模型 输入.csv 文件 PNG 图 R 函数 SELECT 语句 XML 输出 P 模式识别 性能函数 绘制回归斜率 PNG 图 逻辑列属性 逻辑表达式 配对图 物理层 RPD WebLogic 服务器 葡萄酒来源 vs. 预测概率 PowerBI 预测分析 主成分分析（PCA） 数学原理 Q Qlikview R 随机森林 基于 R 的算法 参见葡萄酒产地 接收者操作特征（ROC） 强化学习 残差偏差 弹性分布式数据集（RDD） R 语言 ROracle R 表输出 S scale_fill_gradient()函数 自助式分析 自助式 BI stat_smooth()函数 监督学习 支持向量机 T Tableau 事务系统 TRENDLINE 函数 U 不确定性 非结构化数据 无监督学习 V validateRF 可视化分析 W, X, Y, Z wald.test 函数 WebLogic 服务器 葡萄酒产地 代码段 仪表盘可视化 决策支持解决方案 扩展 BI geom_ribbon() 图输出 ggplot 配对图 预测分析 购买倾向 基于 R 的机器学习模型 scale_fill_gradient()函数 test_set2 test_set3

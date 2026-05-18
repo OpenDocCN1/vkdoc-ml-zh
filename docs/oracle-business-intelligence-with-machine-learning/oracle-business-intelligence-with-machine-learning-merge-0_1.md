@@ -49,8 +49,6 @@
 
 人工智能的学习方面决定了知识是被给定的还是被习得的。如果知识是被习得的，那么我们就进入了人工智能的一个子类别，称为机器学习。[2]
 
-
-
 ### 机器学习概述
 
 机器学习融合了计算机科学与统计学等多个学科。简单来说，人工智能处理的是从数据中提取特征并形成统计信息，以解决预测任务的问题。而机器学习则采用了一种独特的方法来实现这一目标。它致力于设计一种机器学习智能体，使其能够在没有明确、简洁指令的情况下进行预测。
@@ -84,8 +82,6 @@
 我们可以推断，这种相似度足以让我们对这幅画做出有根据的猜测，而机器则无法捕捉到这种模式来学习和识别其相似之处。然后，我们就可以开始理解机器究竟是如何学习的，以及模式识别是如何成为这种能力的关键。
 
 机器学习主要可以分为三种类型。其中两大类是监督学习和无监督学习。它们对于当今的大数据最为适用和贴切。
-
-
 
 在无监督学习中，智能体能够从提供的输入中识别出模式。此外，没有明确的反馈或指令给出。最常见的无监督学习任务是**聚类**，它涉及检测输入示例中可能有用的簇。[1] 让我们将这个概念应用到人类身上。儿童不需要被告知某物是花，就能将其识别为一种独特的东西；当反复看到时，花就会在儿童的大脑中作为视觉模式被记录下来。在没有具体指导的情况下，儿童能够识别出花是属于某一类的事物。与“花”这个词的关联是后来建立的，它只是对儿童大脑中已经归类的这个事物进行的一个分类。只要有足够覆盖所有可能性的数据，就可以进行分组。聚类是最常见的分组类型。
 
@@ -128,8 +124,6 @@ OBIEE 与 Oracle Essbase 相结合，提供了一个整体解决方案，能够�
 
 后续章节将探讨 Oracle 的数据可视化和数据准备工具、技术以及人工智能组件的进步，如何改变我们在当今高级分析世界中处理和利用数据的方式。
 
-
-
 ### 适用于 Oracle BI 的 R 语言
 
 当今分析领域最大的推动者和变革者，或许就是将用于统计的 R 语言引入各种商业智能和分析产品。从 2012 年开始，Oracle 在人工智能领域迈出了一大步，当时它宣布推出用于大数据的 Oracle 高级分析。该软件包将 R 统计编程语言集成到 Oracle 数据库（当时为 11g 版本）中，并将 Oracle R Enterprise 与 Oracle Data Mining 捆绑在一起。自那时起，Oracle 持续在其 BI 工具套件中添加 R 语言及其功能。Oracle 还致力于将其用于机器学习，以微调和改进自身产品，包括其旗舰数据库产品，该产品被称为自愈数据库系统。
@@ -147,18 +141,4 @@ R 语言于 1995 年作为开源项目推出，已被数百万用户用于统计
 能够发现趋势和基本模式的机器学习应用算法，恰好符合 EDW 的精确焦点和目的。OBIEE 是面向未来企业商业和商业世界的完美人工智能驱动技术。
 
 借助 Oracle 的 OBIEE 套件，功能现已进入人工智能领域。本书提供了设置 R 语言和机器学习的逐步说明。此外，本书还提供了一个案例研究，作为将机器学习应用于商业世界的示例。
-
-## 参考文献
-
-Russell, S. J., & Norving, P. (2010). 人工智能：一种现代方法. 新泽西州: Pearson. [1]
-
-[人工智能：计算智能体基础](http://artint.info) 作者：David L. Poole 和 Alan K. Mackworth [电子教科书] [`http://artint.info/html/ArtInt.html#cicontents`](http://artint.info/html/ArtInt.html#cicontents) [2]
-
-[`https://www.forbes.com/sites/mikhailnaumov/2016/12/30/2017-guide-for-deep-learning-business-applications/#6a0217147b84`](https://www.forbes.com/sites/mikhailnaumov/2016/12/30/2017-guide-for-deep-learning-business-applications/#6a0217147b84) [3]
-
-[`https://journalofbigdata.springeropen.com/articles/10.1186/s40537-014-0007-7`](https://journalofbigdata.springeropen.com/articles/10.1186/s40537-014-0007-7) [4]
-
-[`http://docs.aws.amazon.com/machine-learning/latest/dg/training-ml-models.html`](http://docs.aws.amazon.com/machine-learning/latest/dg/training-ml-models.html) [5]
-
-Rainbird, 2016 年 8 月 12 日, 人工智能（AI）的历史, AI - 认知推理平台 [6]
 

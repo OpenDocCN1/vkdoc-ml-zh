@@ -1,3 +1,238 @@
+# 5. 用例：OBIEE 12c 中的机器学习
+
+我们已经介绍了机器学习以及大数据和云计算在 BI 方面的相关性。您已经了解了主要的 R 技术和 Oracle R Enterprise，它们描述了如何将基于 R 的算法用于在 Oracle 12c 中构建模型。在 OBIEE 仪表板中使用这些算法，让您在机器学习和 OBIEE 方面有了一个快速起步。所有这些，再加上第 4 章（该章阐述了在 OBIEE 中使用机器学习的“原因”），回答了 BI 中最受关注的问题：为什么以及如何将机器学习作为解决业务问题的完美方案，并将其用于 OBIEE 中以提供可操作的决策支持？
+
+本章首先概述了一些实际用例，这些用例扩展了第 3 章中描述的用例（预测葡萄酒产地）。本章详细描述了一个利用 OBIEE 中的机器学习来构建高级决策解决方案的用例。本章的主要焦点是描述所选的实际用例，以及如何将其与预测葡萄酒产地的用例结合使用，以构建一个整体的决策解决方案。上述用例的逐步实施细节将在下一章中讨论。此类实际决策支持解决方案在提供更好的业务成果和业务价值方面大有裨益，并提升了企业的竞争情报水平。
+
+## 实际用例
+
+本节介绍的实际用例大致可分为两大类：
+
+*   预测葡萄酒产地
+*   将该产地作为预测分析的基础，以预测购买该葡萄酒的倾向
+
+### 预测葡萄酒产地：使用机器学习分类模型
+
+此用例预测葡萄酒的产地。根据每种葡萄酒的类别和其他属性，将葡萄酒分类为三个产地之一。预测结果以配对图的形式呈现，该图随后集成到 OBIEE 仪表板中。
+
+### 使用分类后的葡萄酒产地作为预测分析的基础——利用 OBIEE 中的机器学习技术扩展 BI
+
+通过使用分类后的葡萄酒产地，此用例预测购买该特定葡萄酒的倾向。此预测不同于预测葡萄酒产地；现在我们预测的是消费者根据葡萄酒来源购买该葡萄酒的概率。这意味着概率始终介于 0 和 1 之间，其中 0 表示消费者不会（或者更准确地说，不太可能）根据产地购买该葡萄酒，而 1 表示消费者极有可能根据产地购买该葡萄酒。请注意，在葡萄酒产地预测用例中，输出是三个不同的值：`Origin1`、`Origin2` 和 `Origin3`。相比之下，此处的输出是介于 0 和 1（含）之间的数值分数。
+
+注意
+
+通过在 OBIEE 分析和仪表板中使用葡萄酒产地预测模型和购买倾向模型的输出，业务分析师或 BI 用户可以做出支持采取适当行动以加速业务流程的决策。通过这种方式，BI 可以扩展到由 Oracle 12c 和 OBIEE 中的 R/ORE 驱动的机器学习支持的预测分析领域。
+
+### 使用 BI 仪表盘进行可操作决策
+
+在 OBIEE 中，利用葡萄酒产地预测来构建决策支持解决方案的用例有很多。主要用例列举如下：
+
+*   影响购买倾向（如前一小节所述）
+*   根据产地预测产量
+*   预测葡萄酒品质
+*   推荐用途
+
+你可以使用与 OBIEE 集成的基于 R 语言的机器学习模型，或者直接使用 OBIEE，具体操作如下：
+
+*   购买倾向可以通过名为逻辑回归或广义线性模型（GLM）的机器学习算法进行预测。在 OBIEE 中，这可以通过使用内置的回归分析函数，或者使用基于 R 或 ORE 的逻辑回归模型，然后利用概率值来确定结果。
+*   产量预测也可以在 OBIEE 中直接完成，方法是结合过去的购买趋势与时间序列分析，或者使用 `Evaluate_Script` 分析函数配合基于 SQL 的模型对模型进行评分。也可以使用类似于预测葡萄酒产地的 R 或 ORE 函数。
+*   品质预测可以通过使用相同的、基于产地或来源预测变量的随机森林机器学习模型来完成。
+*   用途推荐可以通过使用推荐引擎常用的机器学习算法，并将其集成到 OBIEE 仪表盘中来实现。
+
+注意
+
+预测购买倾向可以通过以下方式辅助决策支持：
+
+1.  葡萄酒的需求量
+2.  每位消费者带来的收入和利润
+3.  提升葡萄酒品质
+
+## 用例的技术与功能分析
+
+无论业务用例和所使用的机器学习模型是什么，使用基于 AI 的机器学习模型（OBIEE 可利用这些模型构建可操作的决策支持解决方案）都可以分解为以下步骤：
+
+1.  在 Oracle 中使用 R 语言构建基于 AI 的机器学习模型。
+2.  在业务数据集上对模型进行评分，以生成图形输出或进行预测分析。
+3.  将前述输出与 OBIEE 集成，用于可视化和决策支持。这可以是一个可在 OBIEE 中利用的基于 SQL 的脚本，也可以是 PNG 格式的输出。
+    1.  交互式图表可以根据用户输入的参数或控件动态驱动。
+    2.  SQL 和基于图表的输出可以组合起来与 OBIEE 集成。前者可供技术用户调整关键绩效指标（KPI），后者可供技术/业务用户创建更详细的可视化内容，以支持面向最终用户的分析。
+
+图 5-1 展示了 OBIEE 仪表盘的可视化效果，该效果结合了葡萄酒产地预测的初始用例与购买倾向预测用例。这些看起来可能过于简单，但重要的是要知道，当它们被启用为交互式或基于 SQL 的控件时，它们能够驱动用户操作，如前文步骤所述。
+
+![A439668_1_En_5_Fig1_HTML.jpg](img/A439668_1_En_5_Fig1_HTML.jpg)
+
+图 5-1.
+
+仪表盘展示了预测葡萄酒产地的配对图，并利用该结果基于葡萄酒产地（来源）预测购买倾向
+
+### 图形输出分析：使用随机森林预测葡萄酒产地的配对图
+
+该配对图展示了 `table(origin_pred, test_set$origin)` 的图形。以下是 `table(origin_pred, test_data$origin)` 的输出：
+
+```
+> table(origin_pred, test_data$origin)
+origin_pred Origin1 Origin2 Origin3
+Origin1     140       0       0
+Origin2       0     162       0
+Origin3       0       0     111
+```
+
+以下是 R 语言中调用配对图的代码：
+
+```
+pairs(table(origin_pred, test_set$origin), main="Wine Origin Predictors")
+```
+
+响应变量以对角线形式呈现，从左上到右下。这些是结果 `Origin1`、`Origin2` 和 `Origin3`。然后每个变量与其他变量进行绘图。这里，我们使用 `table`（或矩阵）输出，将 `origin_pred` 的值与 `test_data$origin` 的值进行绘图。第一列中间的图是 `Origin1` 与 `Origin2` 的单个配对图——同样以 `table` 输出形式呈现。这对应于前面表格输出中的第一行。
+
+同样的图形在顶部中间行重复出现。如您所见，这对应于前面表格中的第二行。左上角没有数据，因为那将是一条绘制产地与产地关系的直线对角线，而不是 `origin_pred` 与 `origin` 的关系。
+
+其他单个图形可以类似地进行分析，以对应前面表格输出中的相应行。
+
+### 图表输出分析：基于葡萄酒来源预测购买倾向
+
+`ggplot` 是一个属于 `ggplot2` R 库的图形可视化函数。使用 `ggplot`，图表或图形由以下部分组成：
+
+数据 + 美学映射 + 几何对象
+
+其中，数据是一个 R 数据框。美学映射表示 x 和 y 变量，以及/或者图表元素（点、线、带状区域、条形等）的类型、颜色和大小。几何对象是图表的类型；例如点图、线图、条形图、带状图、箱线图和密度图。创建自定义图表的主要函数是 `ggplot()`，它允许组合点、线、带状等元素。参数 `group` 在这里很重要。`ggplot` 调用的规范设置了图表画布，并将响应变量放在 y 轴上。
+
+注意
+
+关于 `ggplot` 及其函数调用、签名和示例的详细介绍，请访问 [`www.r-bloggers.com/part-3a-plotting-with-ggplot2/`](https://www.r-bloggers.com/part-3a-plotting-with-ggplot2/) 。
+
+以下是我们示例用例中用于绘制基于葡萄酒来源预测购买倾向的 `ggplot()` 函数调用：
+
+```
+library(ggplot2)
+gg_plot <- ggplot(data=test_set, aes(x=Source, y=p_to_buyPred, group=1)) +
+geom_line(aes(colour = p_to_buyPred), size = 1) + geom_point() +
+stat_smooth(method="glm", family="binomial", se=FALSE) +
+ggtitle("Predicting Propensity to buy based on Wine Source") +
+labs(x="Source", y="Predicted Probability - p_to_buyPred")
+plot(gg_plot)
+```
+
+注意
+
+`geom_line` 和 `stat_smooth` 连接属于同一组的数据点。通过指定 `group=1`，我们告诉 `ggplot` 所有数据点都属于组 1。因此，我们得到一条单一的（V 形）线，它将 `geom_point()` 绘制的三个数据点连接在一起。此外，如下所述，回归线也会出现在图表中。
+
+对 `geom_line()` 的调用包含 `colour=p_to_buyPred`，这意味着线条颜色由 `p_to_buyPred` 变量的水平（预测概率）自动控制；`size = 1` 表示线条大小为 1 个单位。如前所述，`aes` 表示线条的美学映射。`stat_smooth()` 函数基于原始数据通过 `link = "binomial"` 的 GLM 模型转换，在 `geom_line` 和 `geom_point` 几何对象上生成并拟合一条平滑线（回归线或最佳拟合线）作为图层。这也被称为绘制回归斜率。这通过参数 `method = "glm"`、`family="binomial"` 传递。参数 `se` 指示是否显示要使用的置信区间（默认为 0.95）。`method` 参数是要使用的平滑方法（在此代码中指定为 `glm`，因为我们使用了逻辑回归模型），`formula` 是平滑函数中要使用的公式。平滑函数有助于识别何时发生过绘制。在图 5-1 中，这显示为图表中间分割 V 形线的线。
+
+对 `geom_point()` 的调用不带任何参数意味着使用默认的点形状（即圆点）和颜色（即黑色）。此函数调用绘制实际数据点。
+
+`ggtitle` 打印其参数中给出的图表标题。`labs` 指示图表的 x 轴和 y 轴标签，分别为 `"Source"` 和 `"Predicted Probability - p_to_buyPred"`。可以通过更改与透明度、颜色、线型和大小相对应的参数来自定义 ggplot。
+
+### 更详细层面的分析
+
+在更详细的层面上，可以通过使用 `geom_ribbon()` 几何对象的带状图进一步分析购买倾向的用例。我们首先通过从 `Wineptobuy.csv` 文件中采样原始数据获得的 tsetse 数据集中省略 `propensity_to_buy` 列来推导测试数据。我们将此数据加载到一个名为 `test_set2` 的数据框中。然后，我们使用 `test_set2` 推导出 `test_set3`。清单 5-1 显示了此分析的完整代码。
+
+```markdown
+
+```
+library(ORE)
+ore.connect("testr","orcl","localhost","testr")
+library(OREmodels)
+
+# 假设 Wineptobuy.csv 文件位于调用 ORE CLI 时的工作目录中
+winedata <- read.csv("Wineptobuy.csv", header = TRUE)
+head(winedata)
+
+# 将数据拆分为训练集和测试集
+ind <- sample(2, nrow(winedata), replace = TRUE, prob = c(0.7, 0.3))
+train_set <- winedata[ind == 1, ]
+test_set <- winedata[ind == 2, ]
+
+# 使用训练集拟合逻辑回归模型
+logitM <- glm(formula = propensity_to_buy ~ Source, family = binomial, data = train_set)
+summary(logitM)
+
+# 使用测试集进行预测
+logitPredict <- predict(logitM, newdata = test_set, type = "response")
+head(logitPredict)
+
+# 将预测概率转换为类别（1 或 0）
+p_to_buyPred <- ifelse(logitPredict > 0.5, 1, 0) # 将概率量化为值 1 和 0
+misClasificError <- mean(p_to_buyPred != test_set$propensity_to_buy)
+print(paste('准确率', 1 - misClasificError))
+
+# 对于 p>0.5，ROC 总结了所有可能值的预测情况
+
+# 曲线下面积（AUC）是 ROC 的最佳性能指标，AUC 值越高越好
+
+# 该模型（glm）的预测效果也越好。
+
+# 该包能够使用 prediction、performance 和 plot 函数可视化评分分类器的性能。
+
+# 其定义可在 http://rocr.bioinf.mpi-sb.mpg.de/ 找到
+library(ROCR)
+class(test_set$p_to_buyPred) # 显示 test_set 中预测值 p_to_buyPred 的 R 类
+
+# 使用 GLM 的 R 语言 prediction() 函数将包含预测的输入数据转换为标准格式
+
+# 此处转换由 p_to_buyPred（预测值）和 propensity_to_buy 给出的两列数据为标准格式
+
+# 并返回一个类为 prediction 的对象。
+pr1 <- prediction(test_set$p_to_buyPred, test_set$propensity_to_buy)
+class(pr1) # 这会将类显示为 "prediction"
+
+# performance 函数用于执行预测器评估。其签名为
+
+# performance(prediction.obj, measure, x.measure)。它作用于一个 prediction 对象（本例中为 pr1），
+
+# measure 是用于评估的性能度量（本例中为 "tpr" 或真阳性率），
+
+# x.measure 是第二个性能度量（"fpr" 或假阳性率）。measure 绘制在 y 轴，
+
+# x.measure 绘制在 x 轴，从而形成一条二维曲线。也可以传递其他度量，例如 "auc"（ROC 曲线下面积）、
+
+# "acc"（准确率）、"err"（错误率）等。
+prf1 <- performance(pr1, measure = "tpr", x.measure = "fpr")
+class(prf1) # 这会将类显示为 "performance"
+pdf("plot_prf1.pdf") # 这会将绘制的图形保存为工作目录中的 PDF 文件
+
+# 这会绘制一个类为 performance 的对象，本例中为 prf1。colorize 指定曲线是否
+
+# 根据截止点进行着色。
+plot(prf1, colorize = TRUE) # , text.adj = c(-0.2,1.7)
+dev.off()
+
+# 这会对 performance() 函数进行不同的调用，要评估的度量设为 "auc" 或 ROC 曲线下面积。
+
+# 这会返回上述预测以 "auc" 作为评估度量的性能。Auc 是 ROC 曲线下的面积。
+auc1 <- performance(pr1, measure = "auc")
+auc1 <- auc1@y.values[[1]]
+auc1 # "auc" 越接近 1 或等于 1 表示模型拟合优度好，预测性能更佳
+library(ROCR)
+p <- predict(logitM, newdata= data.frame(test_set[,c(1:19)]), type="response")
+class(p)
+pr <- prediction(p, test_set$propensity_to_buy)
+class(pr)
+prf <- performance(pr, measure = "tpr", x.measure = "fpr")
+class(prf)
+plot(prf, colorize = TRUE) # , text.adj = c(-0.2,1.7)
+auc <- performance(pr, measure = "auc")
+auc <- auc@y.values[[1]]
+auc
+test_set2 <- data.frame(test_set[,c(1:19)])
+head(test_set2)
+
+# R 语言内部的 within 函数使用 test_set3 数据集作为其参数，并生成一个用于
+
+# 带状图层数据的 data.frame。within 内部的第一行生成预测概率以及
+
+# 有助于绘制置信区间的标准误差。参数 se 用于指定是否
+
+# 显示要使用的置信区间（默认为 0.95），并且还可以绘制置信区间。
+
+# type="link" 给出链接尺度上的估计值。
+
+# 剩余的行将预测值和置信区间都反向转换为概率。
+
+# cbind 对数据框 test_set2 与 predict 函数评分的预测结果列进行按列绑定，
+
+# 该预测结果列作为第二个参数传递给 cbind。对于逻辑回归模型，置信区间
+
 # 基于剖面似然函数。lower 和 upper 表示置信下限和上限。
 test_set3 <- cbind(test_set2, predict(logitM, newdata=test_set2, type = "link", se = TRUE))
 test_set3 <- within(test_set3, {
@@ -20,7 +255,6 @@ dev.off()
 ```
 
 ```
-
 
 `scale_fill_gradient()` 函数用于定义连续的颜色标度。在我们的案例中，高值将填充为绿色，低概率值将填充为红色。该图是一个带状图（连续型），因此添加 `scale_fill_gradient()` 图层会使其成为一个带有彩色带状填充的连续标度——绿色代表高值，红色代表低值。
 
@@ -124,8 +358,6 @@ ylab("预测概率 - p_to_buyPred")
 dev.off()
 ```
 
-
-
 主要图形是通过将美学映射指定为 x 轴的葡萄酒`Source`，以及按`PredictedProb`自身分组的 y 轴（从代码清单 5-1 中获得的`PredictedProb`）而得到的 ggplot 图形。该图形绘制为一条连接 Origin1 和 Origin3 两个点的单线，因为这两个点对应的概率值为 1。带状图层本身以绿色绘制，这是由`fill = PredictedProb`以及对`scale_fill_gradient()`函数的调用（该函数设置了`low="red"`和`high="green"`）所指定的。由于`PredictedProb`的最大值为 1，因此带状图的填充色为绿色，而`Origin2`对应的红色则被该图层本身所掩盖。`geom_line()`和`geom_ribbon()`的测量尺度或图例作为图形的一部分，与带状图和线条一同显示。alpha 值决定了带状图的透明度级别。`scale_fill_gradient()`与`geom_ribbon()`配合使用，生成了图 5-2 中的复合图形。整个图形以 PDF 格式保存为图像文件。
 
 ![A439668_1_En_5_Fig2_HTML.jpg](img/A439668_1_En_5_Fig2_HTML.jpg)
@@ -158,8 +390,11 @@ library(ggplot2)
 g <- ggplot(test_set3, aes(x = Source, y = PredictedProb, group=PredictedProb)) +
 geom_line(aes(colour = PredictedProb), size = 1) + geom_point() +
 geom_ribbon(aes(ymin = lower, ymax = upper, fill = PredictedProb), alpha = 0.25)
+
 # ggplot_build 函数返回一个数据框列表（每个图层一个）和一个面板对象，
+
 # 其中包含关于当前上下文中图形实际 x 轴和 y 轴范围的信息。
+
 # 在我们的例子中，这是带状图
 res <- ggplot_build(g)
 bottom <- res[[2]]$panel_ranges[[1]]$y.range[1] # 设置 ggplot2（带状图）的 y 轴绘图范围下限
@@ -180,8 +415,6 @@ geom_point() + geom_line()
 当此输出与 OBIEE 集成时，可以通过提供参数和操作过滤器等控件，使上述结论变得可操作，用户可以利用这些控件来支持业务决策。
 
 以下是代码清单 5-1 和 5-2 中代码组合的输出结果：
-
-
 
 ```
 > ore.connect("testr","orcl","localhost","testr")
@@ -396,7 +629,6 @@ Warning message:
 package 'aod' was built under R version 3.2.5
 > wald.test(b = coef(logitM), Sigma = vcov(logitM), Terms =  1:2)
 Wald test:
-```
 
 
 卡方检验：
@@ -527,8 +759,6 @@ attr(,"package")
 > dev.off()
 null device
 
-
-
 > auc1  auc1  auc1
 [ 1] 1
 > ####
@@ -611,219 +841,3 @@ package 'ggplot2' was built under R version 3.2.5
 
 本章简要讨论了预测葡萄酒产地的主要用例，以及通过预测基于产地购买特定葡萄酒的倾向来扩展预测分析的用途。它解释了在这两种情况下绘制输出的多种选项；我们创建了配对图以及包含线条、点和色带的复合图。你还了解了如何将回归线拟合到生成的图形中。
 
-# 6. 在 OBIEE 12c 中实现机器学习
-
-第 3 章重点介绍了机器学习模型（即 `randomForest` 算法）的使用，以预测葡萄酒产地的业务用例为例，并将其结果与 OBIEE 12c 集成。它解释了如何使用 R 和 Oracle R Enterprise (ORE) 实现这一点，然后将其图形输出与 OBIEE 仪表板集成以用于商业智能目的。第 5 章讨论了在 OBIEE 中利用机器学习的其他业务用例，这些用例有助于构建决策支持解决方案。其中一个用例扩展了葡萄酒产地预测用例，以根据葡萄酒的产地预测购买倾向。此类现实世界的决策支持解决方案在提供更好的业务成果和商业价值方面大有裨益，并提高了企业竞争情报的门槛。
-
-本章重点介绍如何使用基于 R 和 ORE 的算法在 Oracle 12c 中实现上述业务案例，以构建和评分模型，然后将输出以可视化或其他方式整合到 OBIEE 12c 中。最后，它描述了如何通过基于动态用户输入的方式，根据机器学习输出构建交互式仪表板的步骤。
-
-## 业务用例问题描述与解决方案
-
-葡萄酒产地预测用例根据每种葡萄酒的类别和其他属性，将葡萄酒的产地分为 `Origin1`、`Origin2` 或 `Origin3`。根据产地，当前需要解决的问题是预测购买特定葡萄酒的倾向。后者作为四个示例用例之一被提出，这些用例是与葡萄酒产地相关的现实世界业务问题及其结果。这一点在第 5 章中已强调，同时还包括使用机器学习和/或基于 OBIEE 的功能来解决每个问题的方法。
-
-
-
-### 技术视角
-
-从数据科学的角度分析上述业务用例，预测购买倾向的问题具有二元结果：1 或 0。结果为 1 表示客户会从该来源购买葡萄酒，结果为 0 则表示客户不会购买该葡萄酒。虽然这听起来像是一个分类问题，但实际上更有意义的是将其视为根据葡萄酒来源预测客户购买特定葡萄酒的概率。
-
-解决该问题的方法同时存在于 R 和 ORE 中，本章将深入讨论这些方法。在深入探讨编程和图形部分之前，我们将先介绍用于解决此类预测（即涉及概率二元结果）的机器学习算法背后的基础原理。这需要对模型背后的数学概念以及为预测输出进行模型评分做出一些解释。
-
-注意
-
-在众多可用的机器学习算法中，最适用于预测概率（二元结果）的是广义线性模型，也称为逻辑回归。它输出的概率值介于 0 和 1 之间，因此在预测方面较为准确。对此问题使用线性回归等线性模型，可能导致预测概率低于 0 或高于 1。相比之下，逻辑回归的结果被限制在 [0,1] 的区间内，这些并非实际值，而是概率值，因此可以直接作为概率进行解释。
-
-### 解决方案的第一部分
-
-我们用例中的葡萄酒 `Source` 变量被称为分类变量，而购买倾向则被称为响应变量。我们使用逻辑回归的机器学习模型预测一个介于 0 和 1 之间的概率，该概率可以通过设定某个阈值转换为二元响应。例如，如果 p >= 0.5，则概率为 1；否则为 0，其中 p 是预测的概率值。
-
-清单 6-1 展示了预测葡萄酒来源的代码（类似于第 3 章的清单）。它使用 `ore.randomForest` 机器学习算法来预测葡萄酒产地，并将预测的产地列命名为 `Source`。
-
-```
-library(ORE)
-ore.connect("testr","orcl","localhost","testr")
-library(OREmodels)
-winedata <- read.csv("winedata.csv", header=TRUE, row.names = NULL, sep=',')
-head(winedata)
-winedata$origin <- ifelse(winedata$class == 1, 'Origin1',
-ifelse(winedata$class == 2, 'Origin2',
-ifelse(winedata$class == 3, 'Origin3', '')))
-class(winedata$origin)
-winedata$origin <- as.factor(winedata$origin)
-class(winedata$origin)
-head(winedata$origin)
-table(winedata$origin)
-set.seed(123)
-sample_size <- 0.70 * nrow(winedata)
-sampledata <-sample(seq_len(nrow(winedata)), sample_size)
-training_data <- winedata[sampledata, ]
-class(training_data)
-TRAINING_DATA <- ore.push(training_data)
-class(TRAINING_DATA)
-test_data <- winedata[-sampledata, ]
-TEST_DATA <- ore.push(test_data)
-class(TEST_DATA)
-head(TRAINING_DATA)
-head(TEST_DATA)
-wine.rf <- ore.randomForest(origin ∼ . - class, TRAINING_DATA)
-class(wine.rf)
-tree15 = grabTree(wine.rf, k = 15, labelVar = TRUE)
-origin_pred <- predict(wine.rf, TEST_DATA, type = "all", supplemental.cols="origin")
-res <- table(origin_pred$origin, origin_pred$prediction)
-library(AppliedPredictiveModeling)
-transparentTheme(trans = .4)
-pairs(table(origin_pred$origin, origin_pred$prediction), main="Wine Origin Predictors")
-test_data$id <- seq_len(nrow(test_data))
-row.names(test_data) <- test_data$id
-head(test_data[,c(16,1,15)])
-origin_pred2 <- ore.pull(origin_pred)
-origin_pred2$id <- seq_len(nrow(origin_pred2))
-head(origin_pred2)
-row.names(origin_pred2) <- origin_pred2$id
-head(test_data)
-head(origin_pred2)
-head(origin_pred2[,c(6,5,4)])
-df1 <- test_data[,c(16,15,1:14)]
-df2 <- origin_pred2[, c(1:6)]
-class(df1)
-df1_new <- df1[order(df1$origin),]
-head(df1_new)
-df2_new <- df2[order(df2$origin),]
-head(df2_new)
-nrow(df1_new)
-nrow(df2_new)
-data_set <- data.frame(df1_new, df2_new)
-nrow(data_set)
-head(data_set)
-colnames(data_set)[20] <- "Source"
-head(data_set)
-data_set$propensity_to_buy <- ifelse((data_set$Source == 'Origin1'), 1,
-ifelse((data_set$Source == 'Origin2'), 0,
-ifelse((data_set$Source == 'Origin3'), 1, '')))
-class(data_set)
-nrow(data_set)
-head(data_set)
-write.csv(data_set, "Wineptobuy.csv", row.names=FALSE)
-清单 6-1.
-使用 ore.randomForest 预测葡萄酒产地
-```
-
-清单 6-1 的输出如下所示，其中插入了注释以解释代码：
-
-
-
-```
-> library(ORE)  # 加载 ORE 库，这是 Oracle R Enterprise 执行的主要库
-Loading required package: OREbase
-Loading required package: OREcommon
-Attaching package: 'OREbase'
-The following objects are masked from 'package:base':
-cbind, data.frame, eval, interaction, order, paste, pmax, pmin,
-rbind, table
-Loading required package: OREembed
-Loading required package: OREstats
-Loading required package: MASS
-Loading required package: OREgraphics
-Loading required package: OREeda
-Loading required package: OREmodels
-Loading required package: OREdm
-Loading required package: lattice
-Loading required package: OREpredict
-Loading required package: ORExml
-> ore.connect("testr","orcl","localhost","testr") # 通过调用 ore.connect 连接到数据库
-> library(OREmodels) # 加载 OREmodels 库，用于调用 ORE 机器学习模型
-> winedata  head(winedata) # 显示输入数据框中的前 6 行。这显示了包含预测变量和属性的各个列
-class Alcohol Malic.acid  Ash Alcanility.of.ash Magnesium Total.phenols
-1     1   14.23       1.71 2.43              15.6       127          2.80
-2     1   13.20       1.78 2.14              11.2       100          2.65
-3     1   13.16       2.36 2.67              18.6       101          2.80
-4     1   14.37       1.95 2.50              16.8       113          3.85
-5     1   13.24       2.59 2.87              21.0       118          2.80
-6     1   14.20       1.76 2.45              15.2       112          3.27
-Flavanoids Nonflavanoid.phenols Proanthocyanins Color.intensity    Hue
-1       3.06                 0.28            2.29            5.64    1.04
-2       2.76                 0.26            1.28            4.38    1.05
-3       3.24                 0.30            2.81            5.68    1.03
-4       3.49                 0.24            2.18            7.80    0.86
-5       2.69                 0.39            1.82            4.32    1.04
-6       3.39                 0.34            1.97            6.75    1.05
-OD280.OD315.of.diluted.wines Proline
-1                         3.92    1065
-2                         3.40    1050
-3                         3.17    1185
-4                         3.45    1480
-5                         2.93     735
-6                         2.85    1450
-> winedata$origin  class(winedata$origin) # 显示新创建的 'origin' 列的 R 类
-[1] "character"
-> winedata$origin  class(winedata$origin) # 显示转换后的 'origin' 列的 R 类
-[1] "factor"
-> head(winedata$origin) # 显示 'origin' 的不同类别数量，作为 'origin' 预测变量的水平
-[1] Origin1 Origin1 Origin1 Origin1 Origin1 Origin1
-Levels: Origin1 Origin2 Origin3
-> table(winedata$origin) # 显示每个不同 'origin' 值的计数
-Origin1 Origin2 Origin3
-489     549     336
-> set.seed(123) # 设置随机种子，用于对输入 winedata 数据集进行采样
-> sample_size  sampledata  training_data  class(training_data) # 显示 training_data 的 R 类
-[1] "data.frame"
-> TRAINING_DATA  class(TRAINING_DATA)
-[1] "ore.frame"
-attr(,"package")
-[1] "OREbase"
-> test_data  TEST_DATA  class(TEST_DATA)
-[1] "ore.frame"
-attr(,"package")
-[1] "OREbase"
-> head(TRAINING_DATA) # 显示 TRAINING_DATA 数据集的前 6 行。注意它包含一个额外的 'origin' 列
-class Alcohol Malic.acid  Ash Alcanility.of.ash Magnesium Total.phenols
-396      3   12.60       2.46 2.20              18.5        94          1.62
-1083     3   13.45       3.70 2.60              23.0       111          1.70
-562      2   11.82       1.72 1.88              19.5        86          2.50
-1211     2   11.82       1.47 1.99              20.8        86          1.98
-1289     3   12.70       3.55 2.36              21.5       106          1.70
-63       2   13.67       1.25 1.92              18.0        94          2.10
-Flavanoids Nonflavanoid.phenols Proanthocyanins Color.intensity    Hue
-396        0.66                 0.63            0.94            7.10   0.73
-1083       0.92                 0.43            1.46           10.68   0.85
-562        1.64                 0.37            1.42            2.06   0.94
-1211       1.60                 0.30            1.53            1.95   0.95
-1289       1.20                 0.17            0.84            5.00   0.78
-63         1.79                 0.32            0.73            3.80   1.23
-OD280.OD315.of.diluted.wines Proline  origin
-396                          1.58     695 Origin3
-1083                         1.56     695 Origin3
-562                          2.44     415 Origin2
-1211                         3.33     495 Origin2
-1289                         1.29     600 Origin3
-63                           2.46     630 Origin2 # 这也包含一个额外的 'origin' 列
-> head(TEST_DATA) # 显示 TEST_DATA 数据集的前 6 行
-class Alcohol Malic.acid  Ash Alcanility.of.ash Magnesium Total.phenols
-4      1   14.37       1.95 2.50              16.8       113          3.85
-6      1   14.20       1.76 2.45              15.2       112          3.27
-8      1   14.06       2.15 2.61              17.6       121          2.60
-20     1   13.64       3.10 2.56              15.2       116          2.70
-21     1   14.06       1.63 2.28              16.0       126          3.00
-24     1   12.85       1.60 2.52              17.8        95          2.48
-Flavanoids Nonflavanoid.phenols Proanthocyanins Color.intensity  Hue
-4        3.49                 0.24            2.18            7.80 0.86
-6        3.39                 0.34            1.97            6.75 1.05
-8        2.51                 0.31            1.25            5.05 1.06
-20       3.03                 0.17            1.66            5.10 0.96
-21       3.17                 0.24            2.10            5.65 1.09
-24       2.37                 0.26            1.46            3.93 1.09
-OD280.OD315.of.diluted.wines Proline  origin
-4                          3.45    1480 Origin1
-6                          2.85    1450 Origin1
-8                          3.58    1295 Origin1
-20                         3.36     845 Origin1
-21                         3.71     780 Origin1
-24                         3.63    1015 Origin1
-```
-
-输出的下一部分展示了通过调用 `ore.randomForest()` 函数构建随机森林模型的过程，该模型使用 `class` 作为预测变量，`origin` 作为响应变量，并在 `TRAINING_DATA` 数据集上运行。它会生成特定数量的决策树，对它们的输出进行平均，并利用这些信息得出分类结果。
-
-
-```markdown
-> wine.rf  class(wine.rf) # 显示构建模型返回对象的类别。该对象属于 "ore.model" 类。
-[1] "ore.randomForest" "ore.model"
