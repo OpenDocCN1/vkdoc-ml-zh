@@ -4,8 +4,6 @@
 
 在本章中，我们将研究 NLP 中的不同问题陈述，并理解用于解决这些特定问题的技术。首先，我们将了解句子分类。然后，我们将看到如何对文本语料库执行命名实体识别。最后，我们将学习如何创建一个意图推理引擎来支持一个良好的聊天机器人。这些问题将使用具有代表性的数据集进行描述。
 
-
-
 ## 5.1 句子分类
 
 为了在 Rust 中实现句子分类，我们将使用 fastText 库。FastText 是 Facebook 开发的一个库，用于高效学习词向量表示和句子分类。其前提是利用浅层神经网络构建分布式和分布式的词向量。首先，让我们看看如何对语料库进行句子分类。
@@ -159,8 +157,6 @@ let lc_text = text.to_lowercase();
 chapter5/fasttext-model/src/main.rs
 ```
 
-
-
 传统计算设备通常将文档存储为字符序列。即便是 Rust，也会将随机文档存储为 `Vec<u8>`。但这种格式无法为机器学习算法提供任何信息。因此，文档需要被分解为**具有语言学意义的单元**。这一过程被称为分词。由于不同语言在意义组织方式上存在差异，我们需要为不同语言创建不同的分词库。通常，在英语中，意义存在于由空格分隔的单词中，因此相对而言，英语比中文或日语等语言更容易处理，因为这些语言的书写系统中可能没有空格来分隔“单词”或“标记”。即使在英语中，也需要小心处理；例如，“New Delhi”需要作为一个整体来理解其含义。在 Rust 中，如果我们尝试对英文句子进行分词，可以使用 `vtext` crate（代码清单 5-11）。
 
 ```
@@ -294,8 +290,6 @@ ft_model.train(&args).unwrap();
 chapter5/fasttext-model/src/main.rs
 ```
 
-
-
 因此，一旦模型创建完成，我们就可以检查其准确率并保存模型。具体做法是：对 `test_data` 中的每个元素调用 fastText 模型的 `predict` 方法，创建向量 `preds`；再对 `test_data` 中的每个元素调用 `into_labels` 方法，创建另一个变量 `test_labels`。然后，在一个 for 循环中逐一比较这两个向量，如果相同，则变量 `correct_hits` 自增。对于 `preds` 中的所有值，变量 `hits` 都会自增，以获取总数值的计数。最后计算这两个值的比值，得到准确率参数（列表 5-20）。
 
 ```
@@ -366,6 +360,7 @@ __label__EAP
 $
 列表 5-23
 使用官方二进制文件进行 fastText 预测
+```
 
 要编译并创建上述 fasttext 二进制文件，请遵循 fasttext 网页上的说明：[`https://github.com/facebookresearch/fastText#building-fasttext-using-make-preferred`](https://github.com/facebookresearch/fastText%2523building-fasttext-using-make-preferred)`。
 
@@ -409,8 +404,6 @@ $
 *   prev-prev-shape - 句子中当前标记前第 2 个位置标记的形状
 *   prev-prev-word - 句子中当前标记前第 2 个位置的标记
 *   prev-shape - 前一个（当前标记前 -1 位置）标记的形状
-
-
 
 *   `prev-word` 前一个词（当前令牌的前一个位置）
 
@@ -476,3 +469,609 @@ use csv;
 use rand;
 use rand::thread_rng;
 use rand::seq::SliceRandom;
+
+# 以下是新的且对 NER 有用的模块
+use crfsuite::{Model, Attribute, CrfError};
+use crfsuite::{Trainer, Algorithm, GraphicalModel};
+清单 5-27
+chapter5/crfsuite-model/src/main.rs
+```
+
+与我们之前看到的类似，我们现在可以创建一个函数，从标准输入读取数据，并将其存储在我们拥有的数据结构向量中，在本例中为 `Vec<NER>`。请参见清单 5-28。
+
+```
+fn get_data() -> Result, Box> {
+let mut rdr = csv::Reader::from_reader(io::stdin());
+let mut data = Vec::new();
+for result in rdr.deserialize() {
+let r: NER = result?;
+data.push(r);
+}
+data.shuffle(&mut thread_rng());
+Ok(data)
+}
+清单 5-28
+chapter5/crfsuite-model/src/main.rs
+```
+
+既然我们已经有了数据，就应该能够将数据拆分为训练集和测试集，以便我们能够检查模型在样本外数据上的准确率。这与我们在其他模块和章节中看到的代码相同（清单 5-29）。
+
+```
+fn split_test_train(data: &[NER],
+test_size: f32)
+-> (Vec, Vec) {
+let test_size: f32 = data.len() as f32 ∗ test_size;
+let test_size = test_size.round() as usize;
+let (test_data, train_data) = data.split_at(test_size);
+(test_data.to_vec(), train_data.to_vec())
+}
+清单 5-29
+chapter5/crfsuite-model/src/main.rs
+```
+
+现在到了有趣的部分。给定数据，我们需要将数据中的每个条目提取到 `crf_suite` crate 提供的 `Attributes` 向量中，以便训练模块能够在数据集上进行训练。这个 `Attribute` 将包含令牌及其值，即该令牌在序列中的权重。在清单 5-30 中，目标词的权重为 1.0，下一个词的权重为 0.5，但你可以调整这些权重，看看哪个能带来更好的结果。标签可以按预期使用 `Vec<String>`。
+
+```
+fn create_xseq_yseq(
+data: &[NER])
+-> (Vec>, Vec) {
+let mut xseq = vec![];
+let mut yseq = vec![];
+for item in data {
+let seq = vec![Attribute::new(item.lemma.clone(), 1.0),
+Attribute::new(item.next_lemma.clone(), 0.5)]; // 主词的权重更高。
+xseq.push(seq);
+yseq.push(item.tag.clone());
+}
+(xseq, yseq)
+}
+清单 5-30
+chapter5/crfsuite-model/src/main.rs
+```
+
+我们现在可以创建一个函数，根据 x 序列和 y 序列进行模型预测。在这种情况下，训练完成后，模型会保存到由 `model_name` 指定的文件中（清单 5-31）。
+
+```
+fn crfmodel_training(xseq: Vec>,
+yseq: Vec,
+model_name: &str)
+-> Result> {
+let mut trainer = Trainer::new(true); // 开启详细输出
+trainer.select(Algorithm::AROW, GraphicalModel::CRF1D)?;
+trainer.append(&xseq, &yseq, 0i32)?;
+trainer.train(model_name, -1i32)?; // 使用所有实例进行训练。
+Ok(())
+}
+清单 5-31
+chapter5/crfsuite-model/src/main.rs
+```
+
+在清单 5-31 中，我们使用了自适应正则化权重向量（AROW）。我们可以使用的不同算法如下：
+
+*   使用 L-BFGS 方法的梯度下降：这是一种寻找目标函数局部最小值的方法，利用了目标函数值及其梯度。
+
+*   带 L2 正则化项的随机梯度下降：它将随机梯度下降与损失函数相结合，损失函数中增加了权重的平方项。这应该能避免模型对数据过拟合。
+
+*   平均感知机：这是一种二元分类方法，使用了标准感知机算法的平均权重和偏置。
+
+*   被动攻击算法：如果数据来自不同的样本，该算法会缓慢地遗忘旧分布。如果分类正确，则表现为“被动”；如果分类错误，则表现为“攻击性”，即权重发生变化。
+
+*   自适应正则化权重向量：该算法结合了大间隔训练、置信度加权以及处理不可分数据的能力。AROW 在每次看到新实例时都会对预测函数进行自适应正则化，使其在存在标签噪声的情况下表现尤为出色。
+
+训练完成后，我们可以从文件中加载模型并对其进行预测（清单 5-32）。
+
+```
+fn model_prediction(xtest: Vec>,
+model_name: &str)
+-> Result, Box>{
+let model = Model::from_file(model_name)?;
+let mut tagger = model.tagger()?;
+let preds = tagger.tag(&xtest)?;
+Ok(preds)
+}
+清单 5-32
+chapter5/crfsuite-model/src/main.rs
+```
+
+我们可以使用这个 `model_prediction` 函数，看看我们的模型在测试数据上的表现如何。为此，我们需要使用准确率函数。这里的准确率函数与我们在前几章中看到的相同。请参见清单 5-33。
+
+```
+fn check_accuracy(preds: &[String], actual: &[String]) {
+let mut hits = 0;
+let mut correct_hits = 0;
+for (predicted, actual) in preds.iter().zip(actual) {
+if actual != "O" { // 不考虑其他类别，因为会虚增准确率
+if predicted == actual && actual != "O" {
+correct_hits += 1;
+}
+hits += 1;
+}
+}
+println!("accuracy={} ({}/{} correct)",
+correct_hits as f32 / hits as f32,
+correct_hits,
+hits);
+}
+代码清单 5-33
+chapter5/crfsuite-model/src/main.rs
+```
+
+请注意其中的区别：我们不考虑实际值为“O”的情况。这是因为该标签表示“其他”，而大多数标签都属于其他类别。因此，如果将其纳入准确率计算，会虚增准确率，使结果优于实际水平。更通用的 CRF 模型准确率评估方法是使用精确率、召回率和 F1 分数，这些指标同样可以在 Rust 中以类似方式实现。
+
+现在我们已经拥有了所有相关函数，可以在主函数中整合它们（代码清单 5-34）。
+
+```
+fn main() {
+let data = get_data().unwrap();
+let (test_data, train_data) = split_test_train(
+&data, 0.2);
+let (xseq_train, yseq_train) = create_xseq_yseq(
+&train_data);
+let (xseq_test, yseq_test) = create_xseq_yseq(
+&test_data);
+crfmodel_training(xseq_train,
+yseq_train,
+"rustml.crfsuite").unwrap();
+let preds = model_prediction(xseq_test,
+"rustml.crfsuite").unwrap();
+check_accuracy(&preds, &yseq_test);
+}
+代码清单 5-34
+chapter5/crfsuite-model/src/main.rs
+```
+
+运行代码清单 5-34 中的代码，输出应类似于代码清单 5-35 所示。
+
+```
+$ cd chapter5/crfsuite-model
+$ cargo run < data/ner.csv
+Finished dev [unoptimized + debuginfo] target(s) in 0.03s
+Running `target/debug/crfsuite-model`
+Feature generation
+type: CRF1d
+feature.minfreq: 0.000000
+feature.possible_states: 0
+feature.possible_transitions: 0
+0....1....2....3....4....5....6....7....8....9....10
+Number of features: 3137
+Seconds required: 0.013
+Adaptive Regularization of Weights (AROW)
+variance: 1.000000
+gamma: 1.000000
+max_iterations: 100
+epsilon: 0.000000
+***** Iteration #1 *****
+Loss: 1210.000000
+Feature norm: 0.526780
+Seconds required for this iteration: 0.012
+**** Intermediate iterations
+***** Iteration #100 *****
+Loss: 369.217403
+Feature norm: 296.558922
+Seconds required for this iteration: 0.012
+Total seconds required for training: 1.226
+Storing the model
+Number of active features: 3116 (3137)
+Number of active attributes: 2067 (2088)
+Number of active labels: 17 (17)
+Writing labels
+Writing attributes
+Writing feature references for transitions
+Writing feature references for attributes
+Seconds required: 0.014
+accuracy=0.5551948 (171/308 correct)
+$
+代码清单 5-35
+crfsuite-model 输出
+```
+
+模型应已创建在目录中（代码清单 5-36）。
+
+```
+$ ls -ltr rustml.crfsuite
+-rw-r--r--  1 joydeepbhattacharjee  staff  168196 Aug 20 09:10 rustml.crfsuite
+代码清单 5-36
+模型输出文件
+```
+
+如代码清单 5-35 所示，准确率相当低。这是因为为了简化，我们只使用了三个特征。尝试使用更多特征，看看准确率是否会提升。
+
+命名实体识别是自然语言处理中重要且有趣的一类问题，而 `crfsuite` 是用于创建 NER 的 CRF 模型的优秀 crate。
+
+在本节中，我们探讨了如何在 Rust 中使用 `crfsuite` 创建 NER 的 CRF 模型。我们还研究了如何对输入数据集进行预处理，使其适用于 CRF 套件模型。最后，我们介绍了一种评估 CRF 模型准确率的方法。
+
+## 5.3 聊天机器人与自然语言理解（NLU）
+
+虽然聊天机器人是一个复杂的主题，涉及生产系统中的大量集成和工程工作，但其核心驱动力之一是底层系统具备一定程度的自然语言理解能力。NLU 用于确定用户意图、从话语中提取信息，并与用户进行对话以执行和完成任务。
+
+**意图识别** 大多数意图是简单的离散任务，例如“查找产品”、“转账”、“预订航班”，通常由动词和名词组合描述。这类意图会启动与用户的对话，以获取更多信息、从远程系统获取和更新数据，并向用户反馈进度。
+
+意图识别的目标是将用户话语与其正确对应的任务或问题匹配起来。在 Rust 中，可以使用 `snips-nlu-lib` crate 对用户话语进行意图解析。但需要注意的是，该库仅可用于推理部分，训练仍需在 Python 中完成。
+
+在继续之前，请确保你的机器已安装 clang。对于 Ubuntu 机器，可以使用代码清单 5-37 所示的命令安装 clang。
+
+```
+$ sudo apt update
+$ sudo apt install clang
+
+# 如果出现提示，输入 yes 并回车
+$
+代码清单 5-37
+Ubuntu 安装 clang
+```
+
+如果你使用的是 Mac，它应该已预装 clang，或者你可以通过 Xcode 安装。^(²⁴)
+
+接下来，我们讨论如何创建 snips 模型。由于 snips 模型是 Python 模型，我们可以创建一个虚拟环境并安装该包（代码清单 5-38）。
+
+```
+$ python3 -m venv venv
+$ source venv/bin/activate
+(venv) $ pip install snips-nlu
+(venv) $
+代码清单 5-38
+创建 Python 虚拟环境
+```
+
+要下载模型，我们需要下载英文模型。截至撰写本文时，其他可用模型包括德语、西班牙语、法语、意大利语、日语、韩语和葡萄牙语（巴西方言和葡萄牙方言各一个）。^(²⁵) 实现不同语言涉及大量仓库的修改，过程并不简单，因此 snips 团队正在努力简化整个流程。^(²⁶) 如果下载英文模型在后续步骤中无法正常工作，我们也可以下载所有资源并重试（代码清单 5-39）。
+
+```
+(venv) $ python -m snips_nlu download en
+
+# 或者可以尝试
+(venv) $ python -m snips-nlu download-all-languages
+(venv) $
+代码清单 5-39
+下载英文模型
+```
+
+现在，我们可以为不同类型的用户话语创建一个 `dataset.yaml` 文件。参见代码清单 5-40。
+
+```
+$ cat dataset.yaml
+
+# turnLightOn 意图
+
+type: intent
+name: turnLightOn
+slots:
+- name: room
+entity: room
+utterances:
+- Turn on the lights in the room
+- give me some light in the room please
+- Can you light up the room ?
+- switch the room's lights on please
+
+# turnLightOff 意图
+
+type: intent
+name: turnLightOff
+slots:
+- name: room
+entity: room
+utterances:
+- Turn off the lights in the room
+- turn the room's light out please
+- switch off the light the room, will you?
+- Switch the room's lights off please
+
+# setTemperature 意图
+
+type: intent
+name: setTemperature
+slots:
+- name: room
+entity: room
+- name: roomTemperature
+entity: snips/temperature
+utterances:
+- Set the temperature to roomTemperature in the room
+- please set the room's temperature to roomTemperature
+- I want roomTemperature in the room please
+- Can you increase the temperature to roomTemperature ?
+
+# room 实体
+
+类型: 实体
+名称: 房间
+自动扩展: 否
+值:
+- 卧室
+- [客厅, 主厅, 休息室]
+- [花园, 庭院, 后院]
+$
+清单 5-40
+dataset.yaml 的内容
+```
+
+现在我们需要根据话语 yaml 文件创建 `dataset.json` 文件（清单 5-41）。
+
+```
+(venv) $ snips-nlu generate-dataset en dataset.yaml > dataset.json
+(venv) $
+清单 5-41
+创建 dataset.json
+```
+
+一旦 `dataset.json` 文件创建完成，我们就可以训练模型了（清单 5-42）。
+
+```
+(venv) $ snips-nlu train dataset.json snips.model -v
+(venv) $
+清单 5-42
+snips 训练
+```
+
+清单 5-42 中命令的输出应类似于清单 5-43 所示的内容。
+
+```
+Create and train the engine...
+[INFO][21:55:51.091][snips_nlu.intent_parser.deterministic_intent_parser]: Fitting deterministic parser...
+[INFO][21:55:51.103][snips_nlu.intent_parser.deterministic_intent_parser]: Fitted deterministic parser in 0:00:00.011588
+[INFO][21:55:51.103][snips_nlu.intent_parser.probabilistic_intent_parser]: Fitting probabilistic intent parser...
+[DEBUG][21:55:51.103][snips_nlu.intent_classifier.log_reg_classifier]: Fitting LogRegIntentClassifier...
+[DEBUG][21:55:51.616][snips_nlu.intent_classifier.log_reg_classifier]: Top 50 features weights by intent:
+
+...
+
+[DEBUG][21:55:57.292][snips_nlu.slot_filler.crf_slot_filler]: Fitted CRFSlotFiller in 0:00:01.482648
+[DEBUG][21:55:57.293][snips_nlu.intent_parser.probabilistic_intent_parser]: Fitted slot fillers in 0:00:05.671146
+[INFO][21:55:57.294][snips_nlu.intent_parser.probabilistic_intent_parser]: Fitted probabilistic intent parser in 0:00:06.190487
+[INFO][21:55:57.294][snips_nlu.nlu_engine.nlu_engine]: Fitted NLU engine in 0:00:07.315197
+Persisting the engine...
+Saved the trained engine
+清单 5-43
+snips 训练输出
+```
+
+### 5.3.1 构建推理引擎
+
+训练完成后，我们应该能够在应用程序中使用该模型。作为示例应用程序，我们将创建一个简单的 API，该 API 接收一个句子作为输入，并提供句子中解析出的意图。
+
+至于依赖项，我们将使用 `snips-nlu-lib` crate 进行 snips 模型推理。`serde`、`serde_json` 和 `serde_derive` 将用于序列化和反序列化传入的请求。为了创建 Web 应用程序，我们将使用 rocket Web 框架。Rocket 框架的 API 灵感来源于 Rails、Flask、Bottle 和 Yesod 等优秀的 Web 框架；因此，在 Rocket 中创建应用程序非常有趣。为了构建推理引擎并使用这些依赖项，我们现在需要使用 cargo 创建一个 Rust 项目（清单 5-44）。
+
+```
+$ cd chapter5
+$ cargo new snips-model –bin
+清单 5-44
+创建 snips-model Rust 项目
+```
+
+这将在目录中创建 main.rs 和 Cargo.toml 文件，我们应该能够更新 Cargo 文件，使其类似于清单 5-45 所示。crate `serde-json` 将用于解析 json 文件，`serde` 和 `serde-derive` 将为此提供帮助。crate `rocket` 和 `rocket-contrib` 将用于创建 Web API，而 `snips-nlu-lib` 是提供 NLU 功能的主要 crate。
+
+```
+[package]
+name = "snips-model"
+version = "0.1.0"
+edition = "2018"
+[dependencies]
+snips-nlu-lib = { git = "https://github.com/snipsco/snips-nlu-rs", branch = "master" }
+rocket = "0.4.0"
+rocket_contrib = "0.4.0"
+serde = "1.0"
+serde_json = "1.0"
+serde_derive = "1.0"
+清单 5-45
+chapter5/snips-model/Cargo.toml
+```
+
+请注意，我们直接使用了 snips 库的 github 链接，因为这是目前最有效的方式。
+
+现在，我们可以在主文件中从依赖项中导入相关模块（清单 5-46）。
+
+```
+#![feature(proc_macro_hygiene, decl_macro)]
+#[macro_use] extern crate rocket;
+#[macro_use] extern crate rocket_contrib;
+#[macro_use] extern crate serde_derive;
+extern crate snips_nlu_lib;
+use std::sync::Mutex;
+use snips_nlu_lib::SnipsNluEngine;
+use rocket::{Rocket, State};
+use rocket_contrib::json::Json;
+清单 5-46
+chapter5/snips-model/src/main.rs
+```
+
+现在我们可以编写一个小函数来检查到目前为止的设置是否正常工作（清单 5-47）。
+
+```
+#[get("/")]
+fn hello() -> &'static str {
+"Hello, from snips model inference!"
+}
+清单 5-47
+chapter5/snips-model/src/main.rs
+```
+
+要激活此端点，我们需要进行一些设置并启动应用程序（清单 5-48）。
+
+```
+fn rocket() -> Rocket {
+rocket::ignite()
+.mount("/", routes![hello])
+}
+fn main() {
+rocket().launch();
+}
+清单 5-48
+chapter5/snips-model/src/main.rs
+```
+
+使用 `cargo run` 运行应用程序。这将构建所有依赖项，如果到目前为止一切正常，您应该能够运行 Web 应用程序并看到清单 5-49 中所示的输出。
+
+```
+$ cd chapter5/snips-model
+$ cargo run
+Compiling snips-model v0.1.0 (...)
+Finished dev [unoptimized + debuginfo] target(s) in 1m 39s
+Running `target/debug/snips-model`
+Loading the nlu engine...
+Configured for development.
+=> address: localhost
+=> port: 8000
+=> log: normal
+=> workers: 8
+=> secret key: generated
+=> limits: forms = 32KiB
+=> keep-alive: 5s
+=> tls: disabled
+Mounting /:
+=> GET / (hello)
+清单 5-49
+运行 snips 模型推理
+```
+
+Rocket 已从 http://localhost:8000 启动
+
+```
+$
+```
+
+现在我们应该能够向 Web 服务器发出一个简单的请求（清单 5-50）。
+
+```
+$ curl localhost:8000/
+Hello, from snips model inference!
+$
+清单 5-50
+向 snips nlu 引擎发送 curl 请求
+```
+
+现在我们将进入主要的推理部分。我们将尝试创建一个函数来处理 POST 请求。为此，我们将创建一个结构体 `Message` 来保存传入的请求数据，以及一个函数 `infer` 来处理推理部分。因此，编写处理传入函数的代码将类似于清单 5-51 所示。
+
+```
+#[derive(Serialize, Deserialize)]
+struct Message {
+contents: String
+}
+#[post("/infer", format = "json", data = "")]
+fn infer(message: Json,
+) -> OutputType {
+let query = message.0.contents; // 从传入数据中获取查询
+// 剩余代码 ...
+}
+fn rocket() -> Rocket {
+// 让 Rocket 管理引擎，以便传递给函数。
+rocket::ignite()
+.mount("/", routes![hello, infer])
+}
+fn main() {
+rocket().launch();
+}
+清单 5-51
+chapter5/snips-model/src/main.rs
+```
+
+现在我们需要加载引擎，即一个 `SnipsNluEngine` 类型的对象，根据传入的查询运行推理，并返回结果。由于这依赖于用户的查询语句，一种简单的方法是将所有代码放在 `infer` 函数中。然而，这并不理想，因为从模型创建引擎的开销很大，并且为每个请求都重复执行此操作并不理想。因此，我们需要一种机制，在应用启动时加载模型并创建引擎一次，然后在每个请求的推理周期中使用同一个模型。由于这个模型将在 Rocket 应用的线程之间共享，我们不能简单地创建一个全局变量或类似的东西。一个优雅的解决方案是使用 Rust 的互斥锁。^(²⁷) 这是一个非常有用的互斥原语，以结构体的形式实现，用于保护共享数据。
+
+因此，我们将引擎包装成一个互斥锁（清单 5-52）。
+
+```
+type Engine = Mutex;
+清单 5-52
+chapter5/snips-model/src/main.rs
+```
+
+我们将定义一个不同的函数来创建引擎。这个函数将在初始化 Rocket 应用之前被调用，并且引擎对象将被传递给 Rocket 应用，由其进行管理（清单 5-53）。
+
+```
+fn init_engine() -> SnipsNluEngine {
+let engine_dir = "path to snips model/snips.model";
+println!("\n 正在加载 nlu 引擎...");
+let engine = SnipsNluEngine::from_path(engine_dir).unwrap();
+engine
+}
+fn rocket() -> Rocket {
+// 加载 snips 推理引擎。
+let engine = init_engine();
+// 让 Rocket 管理引擎，以便传递给函数。
+rocket::ignite()
+// 让 rocket 管理引擎的状态
+.manage(Mutex::new(engine))
+.mount("/", routes![hello, infer])
+}
+清单 5-53
+chapter5/snips-model/src/main.rs
+```
+
+一旦我们的 Rocket 应用可以访问引擎对象，我们就可以在我们的函数（本例中为 `infer`）中调用它，并从用户提供的文档中获取意图（清单 5-54）。
+
+```
+#[post("/infer", format = "json", data = "")]
+fn infer(message: Json, engine: State) -> String {
+let query = message.0.contents;
+// 锁定互斥锁，以便其他线程无法更改它，
+// 我们可以利用底层资源
+let engine = engine.lock().unwrap();
+// 获取意图
+let result = engine.get_intents(query.trim()).unwrap();
+// 将结果序列化为 JSON 字符串。
+let result_json = serde_json::to_string_pretty(
+&result).unwrap();
+result_json
+}
+清单 5-54
+chapter5/snips-model/src/main.rs
+```
+
+意图推理的构建已经完成。我们现在可以使用 `cargo run` 运行应用，如清单 5-55 所示。因此，除了之前运行应用时看到的其他输出之外，我们还应该看到 `infer` 端点也被加载了。我们还应该看到一条打印语句，告诉我们模型已从 `init_engine` 函数加载。
+
+```
+$ cd chapter5/snips-model
+$ cargo run
+Compiling snips-model v0.1.0 (...)
+Finished dev [unoptimized + debuginfo] target(s) in 1m 39s
+Running `target/debug/snips-model`
+正在加载 nlu 引擎...
+// 其他输出...
+Mounting /:
+=> GET / (hello)
+=> POST /infer application/json (infer)
+Rocket has launched from http://localhost:8000
+$
+清单 5-55
+启动 nlu 引擎
+```
+
+如果 `infer` 端点正确加载，我们现在应该能够向应用发送请求并获取结果（清单 5-56）。
+
+```
+$ curl --header "Content-Type: application/json" \
+--request POST \
+--data '{"contents":"set the temperature to 23 degrees in the bedroom"}' \
+localhost:8000/infer
+[
+{
+"intentName": "setTemperature",
+"confidenceScore": 1.0
+},
+{
+"intentName": null,
+"confidenceScore": 0.291604
+},
+{
+"intentName": "turnLightOn",
+"confidenceScore": 0.08828778
+},
+{
+"intentName": "turnLightOff",
+"confidenceScore": 0.070788406
+}
+]
+$
+清单 5-56
+在另一个终端中 nlu 引擎的输出
+```
+
+NLP 中的一个重要问题领域是聊天机器人，要构建聊天机器人，我们需要一个良好的意图推理引擎。在本节中，我们了解了如何训练一个 snips 模型，并在一个简单的 Web 应用中使用该模型来推理用户指定查询中的意图。
+
+## 5.4 结论
+
+本章向你介绍了 NLP 中不同的有趣问题。本章从文本分类以及如何使用 fasttext 算法构建分类器开始。它还介绍了可以在 Rust 中执行的常见文本预处理步骤。然后，本章继续探讨了如何在语料库上执行命名实体识别，以及如何使用 `crfsuite` crate 创建 CRF 模型来执行 NER 任务。最后，我们研究了如何使用 snips 库创建一个意图推理 Web 应用。
+
+在下一章中，你将学习如何创建计算机视觉模型和运行图像分类器。
+
+脚注 1   2   3   4   5   6   7
+

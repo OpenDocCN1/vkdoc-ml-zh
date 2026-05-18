@@ -99,8 +99,6 @@ kmeans 的类别数: 30
 rust-machine-learning/chapter3/rusty_machine_unsupervised/src/main.rs 输出
 ```
 
-
-
 ## 3.2 高斯混合模型
 
 在执行无监督学习时，**k-means** 算法通常是首选算法，因为它的训练和理解相对简单。但 k-means 的简单特性在实际应用中也带来了挑战。在本节中，我们将介绍高斯混合模型（简称 GMM），它是 k-means 的更通用版本。GMM 为 k-means 提供了更坚实的理论和数学基础 [3]。
@@ -170,8 +168,6 @@ rust-machine-learning/chapter3/rusty_machine_unsupervised/src/main.rs
 
 除了 `Diagonal`，我们还可以使用 `Full` 和 `Regularized` 选项。上述模型的输出如列表 3-6 所示。
 
-
-
 ```
 训练混合模型
 模型均值：Some(Matrix { rows: 3, cols: 4, data: [5.00999871185655, 3.4275000972153493, 5.00999871185655, 0.24749396211890054, 6.661363633497823, 3.010315328597311, 6.661363633497823, 1.9381371828096539, 5.685719344467794, 2.670276005506212, 5.685719344467794, 1.3354911643349907] })
@@ -217,8 +213,6 @@ rusty_machine_unsupervised
 ```
 
 除了 `DBSCAN::new`，我们还可以使用 `DBSCAN::default`。初始化的默认值是 eps 为 0.5，最小点数为 5。
-
-
 
 ## 3.4 主成分分析
 
@@ -313,8 +307,6 @@ ml-utils/src/unsup_metrics.rs
 
 **杰卡德指数** 与兰德指数类似，我们还有杰卡德指数。它定义为交集大小除以并集大小。
 
-
-
 ![$$ J\left(A,B\right)=\frac{\left|A\cap B\right|}{\left|A\cup B\right|} $$](img/482357_1_En_3_Chapter_TeX_Equ3.png)
 
 (3)
@@ -394,8 +386,6 @@ chapter3/rsrl_custom/src/main.rs
 ```
 
 并且我们需要根据当前状态的范围以及施加力时会发生什么来定义环境（代码清单 3-16）。
-
-
 
 ```
 impl CartPole {
@@ -573,8 +563,6 @@ chapter3/rsrl_custom/src/main.rs
 ```
 
 一旦创建完成，我们就可以继续训练系统以找到最优策略。在这种情况下，我们可以通过 1,000 个回合来获得最优策略（清单 3-24）。
-
-
 
 ```
 fn main() {
