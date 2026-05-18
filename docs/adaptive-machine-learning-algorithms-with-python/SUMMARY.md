@@ -1,5 +1,5 @@
 +   [Python 自适应机器学习算法](README.md)
-+   [检测特征漂移](adaptive-machine-learning-algorithms-with-python_0.md)
++   [前言](adaptive-machine-learning-algorithms-with-python_0_1.md)
 +   [1. 引言](adaptive-machine-learning-algorithms-with-python_1.md)
 +   [2. 通用理论与符号](adaptive-machine-learning-algorithms-with-python_2.md)
 +   [3. 平方根与逆平方根](adaptive-machine-learning-algorithms-with-python_3.md)
