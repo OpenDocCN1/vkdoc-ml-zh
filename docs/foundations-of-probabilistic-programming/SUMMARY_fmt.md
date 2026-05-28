@@ -1,0 +1,21 @@
+
+# 概率编程基础
+
++   [`README.md`](README.md)
++   [`foundations-of-probabilistic-programming_2_00.md`](foundations-of-probabilistic-programming_2_00.md)
++   [`foundations-of-probabilistic-programming_2_01.md`](foundations-of-probabilistic-programming_2_01.md)
++   [`foundations-of-probabilistic-programming_2_02.md`](foundations-of-probabilistic-programming_2_02.md)
++   [`foundations-of-probabilistic-programming_2_03.md`](foundations-of-probabilistic-programming_2_03.md)
++   [`foundations-of-probabilistic-programming_2_04.md`](foundations-of-probabilistic-programming_2_04.md)
++   [`foundations-of-probabilistic-programming_2_05.md`](foundations-of-probabilistic-programming_2_05.md)
++   [`foundations-of-probabilistic-programming_2_06.md`](foundations-of-probabilistic-programming_2_06.md)
++   [`foundations-of-probabilistic-programming_2_07.md`](foundations-of-probabilistic-programming_2_07.md)
++   [`foundations-of-probabilistic-programming_2_08.md`](foundations-of-probabilistic-programming_2_08.md)
++   [`foundations-of-probabilistic-programming_2_09.md`](foundations-of-probabilistic-programming_2_09.md)
++   [`foundations-of-probabilistic-programming_2_10.md`](foundations-of-probabilistic-programming_2_10.md)
++   [`foundations-of-probabilistic-programming_2_11.md`](foundations-of-probabilistic-programming_2_11.md)
++   [`foundations-of-probabilistic-programming_2_12.md`](foundations-of-probabilistic-programming_2_12.md)
++   [`foundations-of-probabilistic-programming_2_13.md`](foundations-of-probabilistic-programming_2_13.md)
++   [`foundations-of-probabilistic-programming_2_14.md`](foundations-of-probabilistic-programming_2_14.md)
++   [`foundations-of-probabilistic-programming_2_15.md`](foundations-of-probabilistic-programming_2_15.md)
++   [`foundations-of-probabilistic-programming_2_16.md`](foundations-of-probabilistic-programming_2_16.md)
