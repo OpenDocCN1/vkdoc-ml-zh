@@ -1,0 +1,40 @@
+# 算法偏见理解、管理与预防指南
+
+## 前言
+
+- [前言](understand-manage-and-prevent-algorithmic-bias_00.md)
+
+## 第一部分 偏见与算法导论
+
+- [1. 引言](understand-manage-and-prevent-algorithmic-bias_02.md)
+- [2. 人类决策中的偏见](understand-manage-and-prevent-algorithmic-bias_03.md)
+- [3. 算法如何消除决策中的偏见](understand-manage-and-prevent-algorithmic-bias_04.md)
+- [4. 模型开发过程](understand-manage-and-prevent-algorithmic-bias_05.md)
+- [5. 机器学习速览](understand-manage-and-prevent-algorithmic-bias_06.md)
+
+## 第二部分 算法偏见从何而来？
+
+- [6. 现实世界的偏见如何被算法所映射](understand-manage-and-prevent-algorithmic-bias_08.md)
+- [7. 数据科学家的偏见](understand-manage-and-prevent-algorithmic-bias_09.md)
+- [8. 数据如何引入偏见](understand-manage-and-prevent-algorithmic-bias_10.md)
+- [9. 算法的稳定性偏差](understand-manage-and-prevent-algorithmic-bias_11.md)
+- [10. 算法自身引入的偏差](understand-manage-and-prevent-algorithmic-bias_12.md)
+- [11. 算法偏见与社交媒体](understand-manage-and-prevent-algorithmic-bias_13.md)
+
+## 第三部分 从用户角度应对算法偏见
+
+- [12. 决策的多种选择](understand-manage-and-prevent-algorithmic-bias_15.md)
+- [13. 评估算法偏差的风险](understand-manage-and-prevent-algorithmic-bias_16.md)
+- [14. 如何安全使用算法](understand-manage-and-prevent-algorithmic-bias_17.md)
+- [15. 如何检测算法偏差](understand-manage-and-prevent-algorithmic-bias_18.md)
+- [16. 纠正算法偏见的管理策略](understand-manage-and-prevent-algorithmic-bias_19.md)
+- [17. 如何生成无偏见数据](understand-manage-and-prevent-algorithmic-bias_20.md)
+
+## 第四部分 从数据科学家的角度应对算法偏差
+
+- [18. 数据科学家在克服算法偏见中的角色](understand-manage-and-prevent-algorithmic-bias_22.md)
+- [19. 数据的 X 光检查](understand-manage-and-prevent-algorithmic-bias_23.md)
+- [20. 何时使用机器学习](understand-manage-and-prevent-algorithmic-bias_24.md)
+- [21. 如何将机器学习与传统方法相结合](understand-manage-and-prevent-algorithmic-bias_25.md)
+- [22. 如何防止自我改进模型中的偏见](understand-manage-and-prevent-algorithmic-bias_26.md)
+- [23. 如何将去偏机制制度化](understand-manage-and-prevent-algorithmic-bias_27.md)
