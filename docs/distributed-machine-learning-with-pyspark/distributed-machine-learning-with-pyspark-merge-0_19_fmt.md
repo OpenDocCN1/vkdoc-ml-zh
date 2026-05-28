@@ -1,0 +1,261 @@
+# 索引
+
+# 机器学习相关术语与函数
+
+## 算法与模型
+- `accuracy_score()` 函数
+- 交替最小二乘法（ALS）
+- “黑箱”算法
+- 黑箱模型
+- 基于内容的过滤
+- 决策树分类
+- 决策树回归
+- 决策树分类器
+- `DecisionTreeRegressor()`
+- 决策树
+- 梯度提升树（GBT）
+- 可比过程
+- 深度学习框架
+- 多个预测模型
+- 神经网络
+- `MLP` 分类器
+- 多层感知器（MLP）
+- 多项式朴素贝叶斯算法
+- 多项式朴素贝叶斯模型
+- 多元线性回归模型
+- 朴素贝叶斯
+- 朴素贝叶斯分类
+- `LinearRegression` 模型
+- 线性回归模型
+- `LinearSVC` 模型
+- 逻辑回归
+- 随机森林分类
+- 随机森林分类器
+- 随机森林回归
+- 基于树的机器学习
+- 基于树的模型
+- 基于树的回归算法
+- 支持向量分类器
+- 支持向量机（SVM）
+- 监督分类算法
+- 监督学习
+- `K` 均值聚类
+- 协同过滤
+- 推荐系统
+- 混合推荐系统
+- 自然语言处理（NLP）
+- 商业应用
+
+## 工具与库
+- 亚马逊云服务（AWS）
+- 谷歌云平台（GCP）
+- 微软 Azure
+- `Apache Airflow`
+- `Apache Hadoop`
+- `Apache Hadoop YARN`
+- `Apache Mesos`
+- `Apache Spark`
+- `Databricks`
+- `Docker`
+- `Kubernetes`
+- `Google Colab`
+- `Colab` 笔记本
+- 集成开发环境（IDE）
+- `Jupyter` 笔记本
+- 机器学习库（`MLlib`）
+- `Scikit-Learn`
+- `PySpark`
+- `Pandas`
+- `NumPy`
+- `PySpark` 代码库
+- `Scikit-Learn` 代码
+- `PySpark` 库
+- `Scikit-Learn` 库
+- `Python Surprise` 库
+- `自然语言工具包（NLTK）`
+- `深度学习框架`
+- `开源数据集`
+- `内置的 print() 函数`
+- `pip install pyspark` 命令
+
+## 函数与方法
+- `accuracy_score()`
+- `build()`
+- `build_random_forest()`
+- `col()`
+- `collect()`
+- `confusion_matrix()`
+- `count()`
+- `createDataFrame()`
+- `create_pandas_dataframe()`
+- `describe()`
+- `distinct()`
+- `drop()`
+- `evaluate()`
+- `evaluate_model()`
+- `explore_pandas_df()`
+- `explore_spark_df()`
+- `feature_importances_`
+- `filter()`
+- `fit()`
+- `fit_transform()`
+- `float()`
+- `f1_score()`
+- `get_feature_names_out()`
+- `getMaxDepth()`
+- `getMinInstancesPerNode()`
+- `getOrCreate()`
+- `groupBy()`
+- `head()`
+- `info()`
+- `isNull()`
+- `sum()`
+- `len()`
+- `load_diabetes_csv()`
+- `load_diabetes_data()`
+- `load_digits()`
+- `load()`
+- `load_housing_data()`
+- `load_iris()`
+- `load_iris_dataset()`
+- `lower()`
+- `make_classification`
+- `make_regression`
+- `mean_squared_error()`
+- `merge()`
+- `nunique()`
+- `orderBy()`
+- `overwrite()`
+- `read_csv()`
+- `recall_score()`
+- `re.sub()`
+- `roc_auc_score()`
+- `r2_score()`
+- `save()`
+- `scale_data()`
+- `scale_features()`
+- `selectExpr()`
+- `select()`
+- `setK()`
+- `setSeed()`
+- `show()`
+- `silhouette_score()`
+- `spark.read.csv()`
+- `SparkSession.builder.appName()`
+- `SparkSession.builder.getOrCreate()`
+- `split_data()`
+- `subplots()`
+- `sum()`
+- `summary()`
+- `toPandas()`
+- `train_model()`
+- `train_test_split()`
+- `transform()`
+- `unique()`
+- `value_counts()`
+- `vectorize_features()`
+- `write()`
+- `z-score` 归一化
+
+## 评估指标
+- 曲线下面积（AUC）
+- 假阳性率（FPR）
+- 真阳性率（TPR）
+- 均方误差（MSE）
+- 均方根误差（RMSE）
+- 误差平方和（SSE）
+- 决定系数
+- 受试者工作特征（ROC）曲线
+- 反曲率（`ROC`）曲线
+- 奇异值分解（SVD）
+- 逆文档频率（IDF）
+- 词频-逆文档频率（TF-IDF）
+- `BoW` 向量
+- 混淆矩阵
+- `StandardScaler`
+- `VectorAssembler`
+- `RegressionEvaluator`
+- `LabelEncoder`
+- 学习曲线
+- 评估指标
+- 标准评估指标
+- 模型评估
+
+## 数据与特性
+- 威斯康星州乳腺癌数据集
+- `Iris` 数据集
+- `Iris` 花 数据集
+- 房价数据集
+- 数字数据集
+- 手写数字数据集
+- 不平衡数据集
+- 数据集
+- 特征
+- 特征功能
+- 分类列
+- `mainroad` 分类列
+- 独热编码
+- 独热编码过程
+- `float()` 函数
+- 特征缩放
+- 独立特征
+- 因变量
+- 系数
+- `数据预处理`
+- `清洗/分词/向量化`
+
+## 概念与过程
+- 基于云的部署
+- 交叉验证模型
+- 交叉验证器
+- 超参数调优
+- 超参数
+- 参数网格
+- 网格搜索算法
+- 过拟合
+- 数据准备
+- 数据划分
+- 训练/测试
+- 监督机器学习技术
+- 建模过程
+- 建模步骤
+- `向量化`
+- 分割分析
+- 测试准确率
+- 模型部署
+- `API` 服务
+- `真实场景`
+- 工作流
+- 分布式计算
+- 分布式数据处理框架
+- 大数据处理框架
+- `SparkSession`
+- `Spark Session`
+- 集群环境
+- `Databricks`
+- `语法`
+- `Pandas` 集成
+- 管道
+- `功能`
+- `基本流程`
+- `机器学习函数`
+- `机器学习`
+- `模型输出`
+- `关键参数`
+- `指标`
+- `库`
+- `输出`
+- `预测值`
+- `回归系数`
+- `评估模型`
+- `拟合过程`
+- `函数/类`
+- `参数`
+- `数据科学家`
+- 可维护性
+- 稳健/可扩展模型
+
+## 示例代码
+```
+if (condVar > someVal) {console.log("xxx")}
+```
