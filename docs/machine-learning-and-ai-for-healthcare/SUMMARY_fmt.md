@@ -1,0 +1,15 @@
+
+
+# 医疗保健的机器学习和人工智能
+
++   [引言](machine-learning-and-ai-for-healthcare_00.md)
++   [1. 什么是人工智能？](machine-learning-and-ai-for-healthcare_01.md)
++   [2. 数据](machine-learning-and-ai-for-healthcare_02.md)
++   [3. 什么是机器学习？](machine-learning-and-ai-for-healthcare_03.md)
++   [4. 机器学习算法](machine-learning-and-ai-for-healthcare_04.md)
++   [5. 如何执行机器学习](machine-learning-and-ai-for-healthcare_05.md)
++   [6. 准备数据](machine-learning-and-ai-for-healthcare_06.md)
++   [7. 评估机器学习模型](machine-learning-and-ai-for-healthcare_07.md)
++   [8. 机器学习与人工智能伦理](machine-learning-and-ai-for-healthcare_08.md)
++   [9. 医疗保健的未来是什么？](machine-learning-and-ai-for-healthcare_09.md)
++   [10. 案例研究](machine-learning-and-ai-for-healthcare_10.md)
