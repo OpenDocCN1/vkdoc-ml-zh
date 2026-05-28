@@ -1,0 +1,52 @@
+# 人工智能 实战指南
+
+## 1. 逻辑与人工智能
+[practical-artificial-intelligence_01.md](practical-artificial-intelligence_01.md)
+
+## 2. 自动定理证明与一阶逻辑
+[practical-artificial-intelligence_02.md](practical-artificial-intelligence_02.md)
+
+## 3. 智能体
+[practical-artificial-intelligence_03.md](practical-artificial-intelligence_03.md)
+
+## 4. 火星车
+[practical-artificial-intelligence_04.md](practical-artificial-intelligence_04.md)
+
+## 5. 多智能体系统
+[practical-artificial-intelligence_05.md](practical-artificial-intelligence_05.md)
+
+## 6. 使用 WCF 的多智能体系统通信
+[practical-artificial-intelligence_06.md](practical-artificial-intelligence_06.md)
+
+## 7. 清洁代理：一个多智能体系统问题
+[practical-artificial-intelligence_07.md](practical-artificial-intelligence_07.md)
+
+## 8. 模拟
+[practical-artificial-intelligence_08.md](practical-artificial-intelligence_08.md)
+
+## 9. 支持向量机
+[practical-artificial-intelligence_09.md](practical-artificial-intelligence_09.md)
+
+## 10. 决策树
+[practical-artificial-intelligence_10.md](practical-artificial-intelligence_10.md)
+
+## 11. 神经网络
+[practical-artificial-intelligence_11.md](practical-artificial-intelligence_11.md)
+
+## 12. 手写数字识别
+[practical-artificial-intelligence_12.md](practical-artificial-intelligence_12.md)
+
+## 13. 聚类与多目标聚类
+[practical-artificial-intelligence_13.md](practical-artificial-intelligence_13.md)
+
+## 14. 启发式算法与元启发式算法
+[practical-artificial-intelligence_14.md](practical-artificial-intelligence_14.md)
+
+## 15. 游戏编程
+[practical-artificial-intelligence_15.md](practical-artificial-intelligence_15.md)
+
+## 16. 博弈论：对抗性搜索与黑白棋
+[practical-artificial-intelligence_16.md](practical-artificial-intelligence_16.md)
+
+## 17. 强化学习
+[practical-artificial-intelligence_17.md](practical-artificial-intelligence_17.md)
