@@ -1,7 +1,7 @@
 +   [UiPath StudioX 的机器人流程自动化使用指南](README.md)
 +   [致谢](robotic-process-automation-using-uipath-studiox_00_fmt.md)
 +   [第一部分 概述](robotic-process-automation-using-uipath-studiox_01_fmt.md)
-+   [机器人流程自动化：概述](robotic-process-automation-using-uipath-studiox_02_fmt.md)
++   [1. 机器人流程自动化：概述](robotic-process-automation-using-uipath-studiox_02_fmt.md)
 +   [2. UiPath StudioX](robotic-process-automation-using-uipath-studiox_03_fmt.md)
 +   [第二部分构建块](robotic-process-automation-using-uipath-studiox_04_fmt.md)
 +   [3. 通用概念](robotic-process-automation-using-uipath-studiox_05_fmt.md)
