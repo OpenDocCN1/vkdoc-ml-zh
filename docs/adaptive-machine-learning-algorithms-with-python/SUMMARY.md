@@ -4,7 +4,7 @@
 +   [2. 通用理论与符号](adaptive-machine-learning-algorithms-with-python_2_fmt.md)
 +   [3. 平方根与逆平方根](adaptive-machine-learning-algorithms-with-python_3_fmt.md)
 +   [4. 第一主特征向量](adaptive-machine-learning-algorithms-with-python_4_fmt.md)
-+   [主特征向量与次特征向量](adaptive-machine-learning-algorithms-with-python_5_fmt.md)
++   [5. 主特征向量与次特征向量](adaptive-machine-learning-algorithms-with-python_5_fmt.md)
 +   [6. 特征向量的加速计算](adaptive-machine-learning-algorithms-with-python_6_fmt.md)
 +   [7. 广义特征向量](adaptive-machine-learning-algorithms-with-python_7_fmt.md)
 +   [8. 自适应线性算法的实际应用](adaptive-machine-learning-algorithms-with-python_8_fmt.md)
