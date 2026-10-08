@@ -9,5 +9,5 @@
 +   [7. 特征检测与匹配](industrial-vision-systems-with-raspberry-pi_07_fmt.md)
 +   [8. 图像分割](industrial-vision-systems-with-raspberry-pi_08_fmt.md)
 +   [9. `OCR`](industrial-vision-systems-with-raspberry-pi_09_fmt.md)
-+   [面向视觉应用的机器学习技术](industrial-vision-systems-with-raspberry-pi_10_fmt.md)
++   [10. 面向视觉应用的机器学习技术](industrial-vision-systems-with-raspberry-pi_10_fmt.md)
 +   [11. 工业视觉系统应用](industrial-vision-systems-with-raspberry-pi_11_fmt.md)
