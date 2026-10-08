@@ -3,6 +3,6 @@
 +   [1. 为什么需要集成技术](ensemble-learning-for-ai-developers_1_fmt.md)
 +   [2. 混合训练数据](ensemble-learning-for-ai-developers_2_fmt.md)
 +   [3. 混合模型](ensemble-learning-for-ai-developers_3_fmt.md)
-+   [混合组合](ensemble-learning-for-ai-developers_4_fmt.md)
++   [4. 混合组合](ensemble-learning-for-ai-developers_4_fmt.md)
 +   [5. 使用集成学习库](ensemble-learning-for-ai-developers_5_fmt.md)
 +   [6. 技巧与最佳实践](ensemble-learning-for-ai-developers_6_fmt.md)
