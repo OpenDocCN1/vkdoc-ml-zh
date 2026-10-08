@@ -4,7 +4,7 @@
 +   [2. 自动定理证明与一阶逻辑](practical-artificial-intelligence_02_fmt.md)
 +   [3. 智能体](practical-artificial-intelligence_03_fmt.md)
 +   [4. 火星车](practical-artificial-intelligence_04_fmt.md)
-+   [多智能体系统](practical-artificial-intelligence_05_fmt.md)
++   [5. 多智能体系统](practical-artificial-intelligence_05_fmt.md)
 +   [6. 使用 WCF 的多智能体系统通信](practical-artificial-intelligence_06_fmt.md)
 +   [7. 清洁代理：一个多智能体系统问题](practical-artificial-intelligence_07_fmt.md)
 +   [8. 模拟](practical-artificial-intelligence_08_fmt.md)
