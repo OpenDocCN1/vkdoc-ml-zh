@@ -3,7 +3,7 @@
 +   [1. 地理数据导论](machine-learning-on-geographical-data-using-python-merge-0_01_fmt.md)
 +   [2. 坐标系与投影](machine-learning-on-geographical-data-using-python-merge-0_02_fmt.md)
 +   [3. 地理数据数据类型](machine-learning-on-geographical-data-using-python-merge-0_03_fmt.md)
-+   [创建地图](machine-learning-on-geographical-data-using-python-merge-0_04_fmt.md)
++   [4. 创建地图](machine-learning-on-geographical-data-using-python-merge-0_04_fmt.md)
 +   [5. 裁剪与相交](machine-learning-on-geographical-data-using-python-merge-0_05_fmt.md)
 +   [6. 缓冲区](machine-learning-on-geographical-data-using-python-merge-0_06_fmt.md)
 +   [7. 合并与融合](machine-learning-on-geographical-data-using-python-merge-0_07_fmt.md)
