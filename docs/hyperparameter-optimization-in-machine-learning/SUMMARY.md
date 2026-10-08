@@ -1,6 +1,6 @@
 +   [机器学习中的超参数优化](README.md)
 +   [序言 1](hyperparameter-optimization-in-machine-learning_0_fmt.md)
-+   [超参数简介](hyperparameter-optimization-in-machine-learning_1_fmt.md)
++   [1. 超参数简介](hyperparameter-optimization-in-machine-learning_1_fmt.md)
 +   [2. 使用 Scikit-Learn 进行超参数优化](hyperparameter-optimization-in-machine-learning_2_fmt.md)
 +   [3. 解决时间和内存限制](hyperparameter-optimization-in-machine-learning_3_fmt.md)
 +   [4. 贝叶斯优化](hyperparameter-optimization-in-machine-learning_4_fmt.md)
