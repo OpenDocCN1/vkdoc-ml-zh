@@ -11,7 +11,7 @@
 +   [九、利用深度学习分类手写数字](09_fmt.md)
 +   [十、分类的集成方法](10_fmt.md)
 +   [十一、使用超参数调整选择正确的模型](11_fmt.md)
-+   [将 OpenVINO 与 OpenCV 一起使用](12_fmt.md)
++   [十二、将 OpenVINO 与 OpenCV 一起使用](12_fmt.md)
 +   [十三、总结](13_fmt.md)
 +   [第一部分：机器学习和 OpenCV 的基础](sec1_fmt.md)
 +   [第二部分：使用 OpenCV 的操作](sec2_fmt.md)
