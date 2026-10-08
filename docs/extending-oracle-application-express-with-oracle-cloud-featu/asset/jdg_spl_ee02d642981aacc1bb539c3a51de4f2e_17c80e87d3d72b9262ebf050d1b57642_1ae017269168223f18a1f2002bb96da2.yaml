@@ -1,0 +1,29 @@
+chapter_starts:
+- 'no': 6139
+  confidence: 0.98
+  final_reason: 双方一致认定为第10章起始。格式符合'第 X 章'最高层级特征，序号承接第9章，语义开启新主题。
+  accepted_evidence:
+  - 判断方：标题为'第 10 章 视觉'，符合最高层级大章特征，序号连贯。
+  - 复核方：推翻概率低，确认前文第9章已有总结，序号9->10连贯，无反驳证据。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 6610
+  confidence: 0.98
+  final_reason: 双方一致认定为第11章起始。格式符合'第 X 章'最高层级特征，序号承接第10章，语义开启新主题。
+  accepted_evidence:
+  - 判断方：标题为'第 11 章 电子邮件投递服务'，符合最高层级大章特征，序号连贯。
+  - 复核方：推翻概率低，确认前文第10章已结束，序号10->11连贯，无反驳证据。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 7165
+  confidence: 0.95
+  final_reason: 双方一致认定为索引章起始。根据规则，文末索引应划分为一章，且后续内容为典型的索引条目。
+  accepted_evidence:
+  - 判断方：标题为'索引'，位于文末，规则规定索引划分为一章。
+  - 复核方：确认后续内容为A-Z排列的关键词和页码，符合索引特征，无反驳证据。
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines:
+- 'no': 5923
+  reason: 复核方有力反驳：该行为Markdown二级标题（##），属于第9章下的子节（Section），而非全书最高层级大章（Chapter）。判断方在理由中已承认其非最高层级，但结论误判为分章。根据规则，子层级不划分新章。
+  need_human_review: false

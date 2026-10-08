@@ -1,0 +1,42 @@
+chapter_starts:
+- 'no': 4
+  confidence: 0.98
+  final_reason: 双方一致：该行是全书标题/前置部分（Front Matter）的起始。根据规则，前言、目录、关于作者等正文之前的内容统一划分为一章。
+  accepted_evidence:
+  - 行4为书名标题，后续行包含作者、ISBN、版权页、目录、引言等，均属于正文之前的前置内容。
+  - 复核方确认该行是前置部分的开始，符合“统一划分为一章”的规则。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 391
+  confidence: 0.99
+  final_reason: 双方一致：明确的“第 1 章”序号，格式标准，位于引言结束后，是正文第一章的起始。
+  accepted_evidence:
+  - 行391为“# 第 1 章”，行392为具体章名“## 为 APEX 构建安全基础设施”。
+  - 上下文符合章节起始特征（前置内容为引言）。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 899
+  confidence: 0.99
+  final_reason: 双方一致：明确的“第 2 章”序号，承接第1章，格式标准。
+  accepted_evidence:
+  - 行899为“# 第 2 章 使用对象存储存储大对象”。
+  - 序号连贯，后续内容为该章正文。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 1524
+  confidence: 0.99
+  final_reason: 双方一致：明确的“第 3 章”序号，承接第2章，格式标准。
+  accepted_evidence:
+  - 行1524为“# 第 3 章 使用 Oracle 云函数”。
+  - 序号连贯，后续内容为该章正文。
+  rejected_evidence: []
+  need_human_review: false
+- 'no': 2694
+  confidence: 0.99
+  final_reason: 双方一致：明确的“第 4 章”序号，承接第3章，格式标准。
+  accepted_evidence:
+  - 行2694为“# 第 4 章 使用 API 网关暴露功能”。
+  - 序号连贯，后续内容为该章正文。
+  rejected_evidence: []
+  need_human_review: false
+rejected_lines: []
