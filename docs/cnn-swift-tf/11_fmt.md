@@ -1,4 +1,4 @@
-# MobileNetV3
+# 十一、MobileNetV3
 
 在本章中，我们将了解 MobileNetV3，它通过降低网络的复杂性，在移动硬件上提供了 EfficientNet 的优化版本。该模型主要基于 EfficientNet 的搜索策略，具有特定于移动设备的参数空间目标。
 
