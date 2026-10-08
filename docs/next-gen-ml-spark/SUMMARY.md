@@ -2,7 +2,7 @@
 +   [一、机器学习导论](1_fmt.md)
 +   [二、Spark 和 Spark MLlib 简介](2_fmt.md)
 +   [三、监督学习](3_fmt.md)
-+   [无监督学习](4_fmt.md)
++   [四、无监督学习](4_fmt.md)
 +   [五、推荐](5_fmt.md)
 +   [六、图分析](6_fmt.md)
 +   [七、深度学习](7_fmt.md)
